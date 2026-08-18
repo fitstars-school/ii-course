@@ -259,7 +259,7 @@ a{color:inherit}
   background:radial-gradient(circle,rgba(230,25,140,.5),transparent 70%)}
 .ctaband h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;margin-bottom:8px;position:relative;z-index:1}
 .ctaband p{color:#CFC6D6;max-width:460px;position:relative;z-index:1}
-.ctaband .side{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.ctaband .side{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
 .ctaband .fine{color:#B4AAC0;opacity:1}
 @media(max-width:900px){.ctaband{padding:28px 24px}.ctaband .btn{width:100%}}
 
@@ -294,10 +294,10 @@ a{color:inherit}
 .t-old{font-size:15px;opacity:.5;text-decoration:line-through;margin:6px 0 4px}
 .t-seats{font-weight:700;color:var(--pink-strong);font-size:14px;margin-bottom:18px}
 .t-feats{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:0;flex:1}
-.t-feats li{display:flex;gap:11px;font-size:15.5px}
-.t-feats li::before{content:"✓";color:var(--pink);font-weight:800;flex-shrink:0}
+.t-feats li{display:block;position:relative;padding-left:27px;font-size:15.5px}
+.t-feats li::before{content:"✓";position:absolute;left:0;top:0;color:var(--pink);font-weight:800}
 .t-feats li.no{opacity:.55}
-.t-feats li.no::before{content:"✕";color:#B9AFC2;font-weight:800}
+.t-feats li.no::before{content:"✕";color:#B9AFC2}
 .t-feats li.no span{text-decoration:line-through;text-decoration-thickness:1px}
 .tbtn{width:100%}
 
@@ -351,6 +351,8 @@ a{color:inherit}
 /* финал */
 .final{background:var(--dark);color:#fff;border-radius:var(--radius-lg);padding:56px 48px;text-align:center;
   position:relative;overflow:hidden}
+.final .date-pill{color:var(--ink)}
+
 .final::after{content:"";position:absolute;right:-90px;top:-90px;width:320px;height:320px;border-radius:50%;
   background:radial-gradient(circle,rgba(230,25,140,.5),transparent 70%)}
 .final > *{position:relative;z-index:1}
