@@ -181,7 +181,9 @@ a{color:inherit}
 /* программа: 4 модуля сразу, карточки 2×2 */
 .mods{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .mod{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;
-  box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
+  box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0;
+  transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease}
+.mod:hover{transform:translateY(-4px);border-color:#F3A9D4;box-shadow:0 26px 60px -26px rgba(230,25,140,.4)}
 .mod .mod-n{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
 .mod-lock{background:var(--dark);color:#fff;border-radius:999px;padding:4px 11px;font-size:10.5px;
@@ -204,6 +206,12 @@ a{color:inherit}
 .kit2-h span{color:var(--pink)}
 .kit2-row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5}
 .kit2-row + .kit2-row{margin-top:7px}
+.kit2-note{font-size:13px;font-weight:600;margin-bottom:10px;opacity:.72}
+.kit2-note b{color:var(--pink-strong)}
+.kit2-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.kit2-list li{display:flex;gap:9px;font-size:14px;line-height:1.5}
+.kit2-list li::before{content:"•";color:var(--pink);font-weight:800;flex-shrink:0}
+.kit2-list .k2tag{display:inline-block;margin-left:2px;vertical-align:2px}
 .k2tag{flex-shrink:0;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
   padding:3px 9px;border-radius:999px;background:#fff;border:1px solid #F3D3E8;color:var(--ink);margin-top:3px;white-space:nowrap}
 .k2tag.plus{background:linear-gradient(100deg,#E6198C 0%,#B23AE0 52%,#FF6B57 100%);color:#fff;border:none}
@@ -540,8 +548,12 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <div class="wpill">🎙 <b>Живой практикум · неделя 1</b> – вводный, по работе с нейросетями · тарифы «Система» и «Масштаб»</div>
         <div class="kit2">
           <div class="kit2-h">Бонусы <span>«Быстрые победы»</span></div>
-          <div class="kit2-row"><span class="k2tag">Старт</span><span>Помощник «Как превратить сумбурную задачу в промпт»</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«Что делать, если ИИ отвечает не то: 12 поломок и что нажать» · «Топ-30 быстрых побед: личные задачи, которые ИИ решает за 10 минут»</span></div>
+          <div class="kit2-note">Весь набор – в тарифах <b>«Система»</b> и <b>«Масштаб»</b></div>
+          <ul class="kit2-list">
+            <li><span><b>Помощник</b> «Как превратить сумбурную задачу в промпт» <span class="k2tag">и в «Старте»</span></span></li>
+            <li><span>«Что делать, если ИИ отвечает не то: <b>12 поломок</b> и что нажать»</span></li>
+            <li><span>«<b>Топ-30 быстрых побед</b>: личные задачи, которые ИИ решает за 10 минут»</span></li>
+          </ul>
         </div>
       </div>
 
@@ -557,8 +569,12 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         </ul>
         <div class="kit2">
           <div class="kit2-h">Бонусы <span>«Учимся быстрее и эффективнее»</span></div>
-          <div class="kit2-row"><span class="k2tag">Старт</span><span>ИИ-тьютор: объясни мне сложное простыми словами</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«Конспект из чего угодно: книга, статья, видео, длинный урок» · «Топ-20 способов учиться с ИИ»</span></div>
+          <div class="kit2-note">Весь набор – в тарифах <b>«Система»</b> и <b>«Масштаб»</b></div>
+          <ul class="kit2-list">
+            <li><span><b>ИИ-тьютор</b>: объясни мне сложное простыми словами <span class="k2tag">и в «Старте»</span></span></li>
+            <li><span>«<b>Конспект из чего угодно</b>: книга, статья, видео, длинный урок»</span></li>
+            <li><span>«<b>Топ-20 способов</b> учиться с ИИ»</span></li>
+          </ul>
         </div>
       </div>
 
@@ -576,8 +592,12 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <div class="wpill">🎙 <b>Живой практикум · неделя 3</b> – разбираем и решаем реальные задачи участников · тарифы «Система» и «Масштаб»</div>
         <div class="kit2">
           <div class="kit2-h">Бонусы <span>«ИИ для жизни и семьи»</span></div>
-          <div class="kit2-row"><span class="k2tag">Старт</span><span>Помощник «Семейная неделя и быт»: расписание, меню, покупки, кто что делает</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Помощник по обучению детей · «Топ-20: как с помощью ИИ организовать семейную и личную жизнь»</span></div>
+          <div class="kit2-note">Весь набор – в тарифах <b>«Система»</b> и <b>«Масштаб»</b></div>
+          <ul class="kit2-list">
+            <li><span><b>Помощник «Семейная неделя и быт»</b>: расписание, меню, покупки, кто что делает <span class="k2tag">и в «Старте»</span></span></li>
+            <li><span><b>Помощник по обучению детей</b></span></li>
+            <li><span>«<b>Топ-20</b>: как с помощью ИИ организовать семейную и личную жизнь»</span></li>
+          </ul>
         </div>
       </div>
 
@@ -594,17 +614,17 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         </ul>
         <div class="kit2">
           <div class="kit2-h">Бонусы <span>«Контент и продукты»</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Система работы с контентом: папка, инструкции и помощники · Редактор каруселей и десять дизайн-стилей · «20 мини-продуктов, на которых можно зарабатывать: примеры и промпты»</span></div>
+          <div class="kit2-note">Набор – в тарифах <b>«Система»</b> и <b>«Масштаб»</b></div>
+          <ul class="kit2-list">
+            <li><span><b>Система работы с контентом</b>: папка, инструкции и помощники</span></li>
+            <li><span><b>Редактор каруселей</b> и десять дизайн-стилей</span></li>
+            <li><span>«<b>20 мини-продуктов</b>, на которых можно зарабатывать: примеры и промпты»</span></li>
+          </ul>
         </div>
       </div>
 
     </div>
 
-    <div class="lv-tags reveal">
-      <span class="tag-pill">🎙 Живые практикумы – тарифы «Система» и «Масштаб»</span>
-      <span class="tag-pill">🤖 ИИ-тьютор в подарок</span>
-      <span class="tag-pill">👤 Личные встречи – тариф «Масштаб»</span>
-    </div>
   </div>
 </section>
 
