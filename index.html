@@ -329,8 +329,6 @@ a{color:inherit}
 .t-full{margin:14px 0 0;text-align:center}
 .t-full s{display:block;font-size:15px;opacity:.45;font-weight:600;margin-bottom:4px}
 .t-full b{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height:1}
-.t-full s{opacity:.45;margin-right:9px;font-weight:500}
-.t-full b{font-weight:800;font-size:18px}
 
 /* гарантия */
 .guarantee{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
@@ -371,7 +369,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 .foot-col h4{color:#fff;font-size:var(--label);letter-spacing:.08em;text-transform:uppercase;margin-bottom:15px;font-weight:700}
 .foot-col a{display:block;margin-bottom:10px;text-decoration:none;opacity:.82;transition:opacity .15s ease,color .15s ease}
 .foot-col a:hover{opacity:1;color:#FF8FC0}
-.fc{display:flex;align-items:center;gap:12px;margin-bottom:14px;opacity:1;text-decoration:none}
+.foot-col a.fc{display:flex;align-items:center;gap:12px;margin-bottom:14px;opacity:1;text-decoration:none}
 .fc-ic{flex-shrink:0;width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:17px}
 .fc:hover .fc-ic{background:rgba(230,25,140,.22)}
@@ -467,6 +465,10 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   .author{grid-template-columns:1fr;text-align:center;justify-items:center}
   .hdr .when{display:none}
   .foot-legal{flex-direction:column}
+  .final .date-pill{display:block;width:100%;text-align:center;white-space:normal;font-size:14px;padding:12px 16px}
+  .final .date-pill .dot{display:none}
+  .final h2{font-size:21px;line-height:1.25}
+  .final{padding:40px 22px}
   .cookie{flex-direction:column;align-items:stretch}
   .cookie .btn{width:100%}
 }
@@ -794,7 +796,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
       <details><summary>Что если не потяну оплату?</summary><div class="ans">Старт от <b>4 900 ₽</b> за тариф «Нейро-Старт». Это полноценные 3 модуля, с которыми уже можно работать.</div></details>
       <details><summary>Нужен VPN или зарубежная карта?</summary><div class="ans">Нет. В первом модуле отдельный бонус: <b>доступ и оплата ИИ из России без VPN</b>. Покажем и зарубежные, и отечественные нейросети.<p class="ans-note">Рекомендация приведена исключительно в целях обеспечения технической доступности веб-интерфейса и корректной маршрутизации сетевых пакетов. Напоминаем о необходимости соблюдения действующего законодательства и внутренних правил информационной безопасности вашей организации при настройке сетевых соединений.</p></div></details>
       <details><summary>Что в самом дорогом тарифе?</summary><div class="ans">«Нейро-Масштаб» – это всё из «Нейро-Системы» плюс <b>2 личные встречи с экспертом</b>, индивидуальный чат, доступ 6 месяцев и <b>курс «Блогер с нуля» в подарок</b>. Мест всего 3.</div></details>
-      <details><summary>Будут домашние задания?</summary><div class="ans">Нет. Фокус на живых разборах реальных задач – вы работаете со своим проектом, а не сдаёте учебные упражнения.</div></details>
+      <details><summary>Будут домашние задания?</summary><div class="ans">Нет. Фокус на живых разборах реальных задач – вы работаете со своим проектом, а не сдаёте учебные упражнения. При этом в тарифах <b>«Система»</b> и <b>«Масштаб»</b> у вас будет <b>чат с куратором</b>: задавайте вопросы, присылайте то, что получается, и обсуждайте это на практических встречах вместе с коллегами – возможностей для обратной связи гораздо больше.</div></details>
     </div>
   </div>
 </section>
