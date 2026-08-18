@@ -116,6 +116,13 @@ a{color:inherit}
 .hero-lead{max-width:560px;margin-bottom:28px;text-shadow:0 1px 0 rgba(255,255,255,.7)}
 .hero-cta{display:flex;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap}
 
+
+/* название курса в герое */
+.course-name{font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:-.01em;
+  font-size:clamp(19px,2.3vw,27px);line-height:1.15;margin-bottom:12px}
+.course-sub{font-size:15.5px;font-weight:600;color:var(--pink-strong);margin:-8px 0 18px;line-height:1.4}
+@media(max-width:900px){.course-name{font-size:19px}.course-sub{font-size:14.5px}}
+
 /* карточки-списки */
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .cards.c3{grid-template-columns:repeat(3,1fr)}
@@ -253,6 +260,13 @@ a{color:inherit}
 .t-feats li.no span{text-decoration:line-through;text-decoration-thickness:1px}
 .tbtn{width:100%;margin-top:auto}
 
+
+
+/* пункты бонусов вне базового пакета */
+.kit li.off{opacity:.42}
+.kit li.off span,.kit li.off{text-decoration:line-through;text-decoration-thickness:1px}
+.kit-safe{margin-top:12px;padding-top:10px;border-top:1px dashed #F0D5E6;font-size:13.5px;line-height:1.45;color:#7A7185}
+.lessons.locked{position:relative;opacity:.42;filter:grayscale(.5)}
 
 /* дедлайн цены */
 .deadline{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;text-align:center;
@@ -424,7 +438,9 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   <div class="wrap hero-grid">
     <div>
       <span class="label">Курс · 4 недели · 4 модуля</span>
+      <div class="course-name">Нейро-<span class="accent">архитектор</span></div>
       <h1>ИИ перестанет быть болталкой <span class="accent">и станет твоим рабочим инструментом</span></h1>
+      <p class="course-sub">«ИИ для жизни и дела: от первого промпта до автономного помощника»</p>
       <p class="hero-lead">От первого запроса без страха – до агентного ИИ, который ведёт твою рутину на потоке. Не про промпты, а про систему, которая работает вместо тебя.</p>
       <div class="hero-cta">
         <span class="date-pill"><span class="dot"></span>Ориентировочный старт <b>28 сентября</b></span>
@@ -481,7 +497,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <div class="lv-body" data-body="1">
           <h3>01 · База работы с ИИ</h3>
           <div class="res">Первый результат в день 1: знаешь, какой ИИ выбрать и как собрать запрос</div>
-          <ul>
+          <ul class="lessons">
             <li>С какого ИИ начать и как выбрать под свою задачу</li>
             <li>Первый рабочий запрос: из потока идей – в чёткий промпт</li>
             <li>Карта применений: где ИИ приносит пользу и заработок именно вам</li>
@@ -499,8 +515,8 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
             <div class="kit-note">Бонусы · тарифы «Система» и «Масштаб»</div>
             <div class="kit-h">Бонусы <span>«Быстрый старт»</span></div>
             <ul>
-              <li>«Как выбрать нейросеть под свою задачу»</li>
-              <li>«Как пользоваться ИИ из России»</li>
+              <li class="basic">«Как выбрать нейросеть под свою задачу»</li>
+              <li class="basic">«Как пользоваться ИИ из России»</li>
               <li>«Первый полезный запрос за 15 минут»</li>
               <li>«Голос вместо клавиатуры: как надиктовывать задачи»</li>
             </ul>
@@ -510,7 +526,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <div class="lv-body" data-body="2" hidden>
           <h3>02 · Надёжные помощники под себя</h3>
           <div class="res">Результат звучит «как ты», умеешь ловить ИИ на вранье</div>
-          <ul>
+          <ul class="lessons">
             <li>Настраиваю ИИ под себя: формат работы и взаимодействия</li>
             <li>Собираю своего помощника по своим инструкциям</li>
             <li>Свой голос: ИИ пишет как я – плюс приём «Критик»</li>
@@ -523,7 +539,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
               <li>«ИИ-тьютор: объясни мне сложное простыми словами»</li>
               <li>«Как превратить книгу, статью или урок в понятный конспект»</li>
               <li>«Как проверить себя: тесты, вопросы и тренажёры»</li>
-              <li>«Как составить персональный план обучения»</li>
+              <li class="basic">«Как составить персональный план обучения»</li>
             </ul>
           </div>
 
@@ -531,7 +547,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <div class="lv-body" data-body="3" hidden>
           <h3>03 · Кейсы применения</h3>
           <div class="res">Довёл минимум один кейс: визуал, посты, документы, таблицы или мини-сайт</div>
-          <ul>
+          <ul class="lessons">
             <li>Документы под задачу: исследования, коммерческие предложения, конспекты</li>
             <li>Таблицы и данные: расчёты, заполнение, поиск ошибок</li>
             <li>Интерактивные материалы и мини-сайт за вечер</li>
@@ -550,7 +566,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
             <div class="kit-note">Бонусы · тарифы «Система» и «Масштаб»</div>
             <div class="kit-h">Бонусы <span>«ИИ для жизни и семьи»</span></div>
             <ul>
-              <li>Планирование семейной недели</li>
+              <li class="basic">Планирование семейной недели</li>
               <li>Меню и список покупок из того, что уже есть дома</li>
               <li>Объяснение школьной темы ребёнку по возрасту</li>
               <li>Викторины, квесты и развивающие игры</li>
@@ -559,13 +575,14 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
               <li>Сказки и истории с нужным смыслом</li>
               <li>Распределение бытовых задач в семье</li>
             </ul>
+            <div class="kit-safe">Важно: не загружайте персональные данные ребёнка, медицинские документы и другую чувствительную информацию.</div>
           </div>
 
         </div>
         <div class="lv-body" data-body="4" hidden>
           <h3>04 · Своя система работы</h3>
           <div class="res">Понимаешь агентный ИИ, ставишь рутину на поток, видишь систему целиком</div>
-          <ul>
+          <ul class="lessons">
             <li>Агентный ИИ с нуля: доступ к папкам – что можно и что нельзя</li>
             <li>Порядок под свои цели: 5 файлов, которые важно иметь каждому</li>
             <li>Регулярные задачи на потоке: агент выполняет работу – на примере блога</li>
@@ -576,7 +593,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
             <div class="kit-note">Бонусы · тарифы «Система» и «Масштаб»</div>
             <div class="kit-h">Бонусы <span>«Контент и продукты»</span></div>
             <ul>
-              <li>Шаблон папки «Мой стиль»</li>
+              <li class="basic">Шаблон папки «Мой стиль»</li>
               <li>Помощник для поиска тем</li>
               <li>Пост из голосового сообщения</li>
               <li>Десять дизайн-стилей для каруселей</li>
@@ -677,11 +694,9 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <ul class="t-feats">
           <li>3 модуля курса</li>
           <li>Доступ 1 месяц</li>
-          <li>Бонусы «Быстрый старт»</li>
-          <li>Бонусы «Учимся быстрее»</li>
-          <li>Бонусы «ИИ для жизни и семьи»</li>
+          <li><b>Бонусы — базовый пакет</b> (5 материалов)</li>
           <li class="no"><span>Модуль 4 «Своя система работы»</span></li>
-          <li class="no"><span>Бонусы «Контент и продукты»</span></li>
+          <li class="no"><span>Бонусы — расширенный пакет (23 материала)</span></li>
           <li class="no"><span>Два живых практикума</span></li>
           <li class="no"><span>Чат с куратором</span></li>
           <li class="no"><span>Две личные встречи с экспертом</span></li>
@@ -700,10 +715,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <ul class="t-feats">
           <li>Все 4 модуля курса</li>
           <li>Доступ 3 месяца</li>
-          <li>Бонусы «Быстрый старт»</li>
-          <li>Бонусы «Учимся быстрее»</li>
-          <li>Бонусы «ИИ для жизни и семьи»</li>
-          <li>Бонусы «Контент и продукты»</li>
+          <li><b>Бонусы — расширенный пакет</b> (все 23 материала)</li>
           <li><b>Два живых практикума</b> – недели 1 и 3</li>
           <li><b>Чат с куратором</b></li>
           <li class="no"><span>Две личные встречи с экспертом</span></li>
@@ -722,7 +734,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <ul class="t-feats">
           <li>Все 4 модуля курса</li>
           <li>Доступ 6 месяцев</li>
-          <li>Все четыре набора бонусов</li>
+          <li><b>Бонусы — расширенный пакет</b> (все 23 материала)</li>
           <li>Два живых практикума – недели 1 и 3</li>
           <li><b>Индивидуальный чат</b></li>
           <li><b>Две личные встречи с экспертом</b></li>
@@ -897,9 +909,20 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
     wrap.setAttribute('data-tariff',t);
     var start = (t==='start');
     wrap.querySelectorAll('.wshop').forEach(function(el){ el.classList.toggle('locked', start) });
-    wrap.querySelectorAll('.kit').forEach(function(el){
-      var inM4 = !!el.closest('[data-body="4"]');
-      el.classList.toggle('locked', start && inM4);
+    // уроки 4-го модуля недоступны в «Старте»
+    wrap.querySelectorAll('.lessons').forEach(function(el){
+      el.classList.toggle('locked', start && !!el.closest('[data-body="4"]'));
+    });
+    // бонусы: в «Старте» — базовый пакет, в остальных — расширенный
+    wrap.querySelectorAll('.kit').forEach(function(k){
+      k.classList.remove('locked');
+      var note=k.querySelector('.kit-note');
+      if(note) note.textContent = start
+        ? 'Бонусы · базовый пакет'
+        : 'Бонусы · расширенный пакет – тарифы «Система» и «Масштаб»';
+      k.querySelectorAll('li').forEach(function(li){
+        li.classList.toggle('off', start && !li.classList.contains('basic'));
+      });
     });
     var tab4=wrap.querySelector('.lv-tab[data-lv="4"]');
     if(tab4) tab4.classList.toggle('locked', start);
