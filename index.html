@@ -120,7 +120,8 @@ a{color:inherit}
 /* название курса в герое */
 .course-name{font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:-.01em;
   font-size:clamp(19px,2.3vw,27px);line-height:1.15;margin-bottom:6px;white-space:nowrap}
-.course-sub{font-size:15.5px;font-weight:600;color:var(--pink-strong);margin:0 0 26px;line-height:1.4;max-width:560px}
+.course-plate{display:inline-block;background:rgba(255,255,255,.78);backdrop-filter:blur(10px);border:1px solid #F3D3E8;border-radius:18px;padding:14px 20px 15px;margin:0 0 24px;box-shadow:var(--shadow)}
+.course-sub{font-size:15.5px;font-weight:600;color:var(--pink-strong);margin:0;line-height:1.4;max-width:560px}
 @media(max-width:900px){.course-name{font-size:clamp(17px,5vw,19px)}.course-sub{font-size:14.5px}}
 
 /* карточки-списки */
@@ -189,7 +190,8 @@ a{color:inherit}
 .mod .res{color:var(--pink-strong);font-weight:700;font-size:15px;margin-bottom:14px}
 .mod .lessons{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0;font-size:15px}
 .mod .lessons li{display:flex;gap:10px}
-.mod .lessons li::before{content:"–";color:var(--pink);font-weight:800;flex-shrink:0}
+.mod .lessons{counter-reset:lesson}
+.mod .lessons li::before{counter-increment:lesson;content:"Урок " counter(lesson);color:var(--pink);font-weight:800;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;width:56px;margin-top:3px}
 .wpill{margin-top:14px;padding:12px 16px;border-radius:14px;background:var(--wash);border:1px solid var(--line);
   font-size:13.5px;line-height:1.45}
 .kit2{margin-top:14px;padding:16px 18px;border-radius:14px;background:linear-gradient(160deg,#FFF3FA,#F6EDFE);
@@ -478,8 +480,10 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   <div class="wrap hero-grid">
     <div>
       <span class="label">Курс · 4 недели · 4 модуля</span>
-      <div class="course-name">Нейро-<span class="accent">архитектор</span></div>
-      <p class="course-sub">«ИИ для жизни и дела: от первого промпта до автономного помощника»</p>
+      <div class="course-plate">
+        <div class="course-name">Нейро-<span class="accent">архитектор</span></div>
+        <p class="course-sub">«ИИ для жизни и дела: от первого промпта до автономного помощника»</p>
+      </div>
       <h1>ИИ перестанет быть болталкой <span class="accent">и станет твоим рабочим инструментом</span></h1>
       <p class="hero-lead">От первого запроса без страха – до агентного ИИ, который ведёт твою рутину на потоке. Не про промпты, а про систему, которая работает вместо тебя.</p>
       <div class="hero-cta">
@@ -535,9 +539,9 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         </ul>
         <div class="wpill">🎙 <b>Живой практикум · неделя 1</b> – вводный, по работе с нейросетями · тарифы «Система» и «Масштаб»</div>
         <div class="kit2">
-          <div class="kit2-h">Бонусы <span>«Быстрый старт»</span></div>
-          <div class="kit2-row"><span class="k2tag">Старт</span><span>«Как выбрать нейросеть под свою задачу» · «Как пользоваться ИИ из России»</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«Первый полезный запрос за 15 минут» · «Голос вместо клавиатуры: как надиктовывать задачи»</span></div>
+          <div class="kit2-h">Бонусы <span>«Быстрые победы»</span></div>
+          <div class="kit2-row"><span class="k2tag">Старт</span><span>Помощник «Как превратить сумбурную задачу в промпт»</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«Что делать, если ИИ отвечает не то: 12 поломок и что нажать» · «Топ-30 быстрых побед: личные задачи, которые ИИ решает за 10 минут»</span></div>
         </div>
       </div>
 
@@ -552,9 +556,9 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li>Фактчекинг: ловлю галлюцинации, не тащу ошибки в работу</li>
         </ul>
         <div class="kit2">
-          <div class="kit2-h">Бонусы <span>«Учимся быстрее»</span></div>
-          <div class="kit2-row"><span class="k2tag">Старт</span><span>«Как составить персональный план обучения»</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«ИИ-тьютор: объясни мне сложное простыми словами» · «Как превратить книгу, статью или урок в понятный конспект» · «Как проверить себя: тесты, вопросы и тренажёры»</span></div>
+          <div class="kit2-h">Бонусы <span>«Учимся быстрее и эффективнее»</span></div>
+          <div class="kit2-row"><span class="k2tag">Старт</span><span>ИИ-тьютор: объясни мне сложное простыми словами</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«Конспект из чего угодно: книга, статья, видео, длинный урок» · «Топ-20 способов учиться с ИИ»</span></div>
         </div>
       </div>
 
@@ -572,9 +576,8 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <div class="wpill">🎙 <b>Живой практикум · неделя 3</b> – разбираем и решаем реальные задачи участников · тарифы «Система» и «Масштаб»</div>
         <div class="kit2">
           <div class="kit2-h">Бонусы <span>«ИИ для жизни и семьи»</span></div>
-          <div class="kit2-row"><span class="k2tag">Старт</span><span>Планирование семейной недели</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Меню и список покупок из того, что уже есть дома · Объяснение школьной темы ребёнку по возрасту · Викторины, квесты и развивающие игры · Планирование поездки или семейного выходного · Подготовка к сложному разговору · Сказки и истории с нужным смыслом · Распределение бытовых задач в семье</span></div>
-          <div class="kit2-safe">Важно: не загружайте персональные данные ребёнка, медицинские документы и другую чувствительную информацию.</div>
+          <div class="kit2-row"><span class="k2tag">Старт</span><span>Помощник «Семейная неделя и быт»: расписание, меню, покупки, кто что делает</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Помощник по обучению детей · «Топ-20: как с помощью ИИ организовать семейную и личную жизнь»</span></div>
         </div>
       </div>
 
@@ -591,8 +594,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         </ul>
         <div class="kit2">
           <div class="kit2-h">Бонусы <span>«Контент и продукты»</span></div>
-          <div class="kit2-row"><span class="k2tag">Старт</span><span>Шаблон папки «Мой стиль»</span></div>
-          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Помощник для поиска тем · Пост из голосового сообщения · Десять дизайн-стилей для каруселей · Паспорт мини-продукта · Шаблон гайда или рабочей тетради · Карта «Как превратить свою задачу в услугу»</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Система работы с контентом: папка, инструкции и помощники · Редактор каруселей и десять дизайн-стилей · «20 мини-продуктов, на которых можно зарабатывать: примеры и промпты»</span></div>
         </div>
       </div>
 
@@ -688,9 +690,9 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <ul class="t-feats">
           <li>3 модуля курса</li>
           <li>Доступ 1 месяц</li>
-          <li><b>Бонусы — базовый пакет</b> (5 материалов)</li>
+          <li><b>Бонусы – 3 готовых ИИ-помощника</b></li>
           <li class="no"><span>Модуль 4 «Своя система работы»</span></li>
-          <li class="no"><span>Бонусы — расширенный пакет (23 материала)</span></li>
+          <li class="no"><span>Бонусы – 4 набора по 3 материала, более 90 сценариев внутри</span></li>
           <li class="no"><span>Два живых практикума</span></li>
           <li class="no"><span>Чат с куратором</span></li>
           <li class="no"><span>Две личные встречи с экспертом</span></li>
@@ -710,7 +712,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <ul class="t-feats">
           <li>Все 4 модуля курса</li>
           <li>Доступ 3 месяца</li>
-          <li><b>Бонусы — расширенный пакет</b> (все 23 материала)</li>
+          <li><b>Бонусы – все 4 набора</b>, более 90 сценариев внутри</li>
           <li><b>Два живых практикума</b> – недели 1 и 3</li>
           <li><b>Чат с куратором</b></li>
           <li class="no"><span>Две личные встречи с экспертом</span></li>
@@ -730,7 +732,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <ul class="t-feats">
           <li>Все 4 модуля курса</li>
           <li>Доступ 6 месяцев</li>
-          <li><b>Бонусы — расширенный пакет</b> (все 23 материала)</li>
+          <li><b>Бонусы – все 4 набора</b>, более 90 сценариев внутри</li>
           <li>Два живых практикума – недели 1 и 3</li>
           <li><b>Индивидуальный чат</b></li>
           <li><b>Две личные встречи с экспертом</b></li>
