@@ -293,7 +293,7 @@ a{color:inherit}
 .t-posyl{font-size:15px;opacity:.78;margin:10px 0 18px;min-height:66px}
 .t-price{font-family:'Unbounded',sans-serif;font-size:36px;font-weight:700;line-height:1}
 .t-old{font-size:15px;opacity:.5;text-decoration:line-through;margin:6px 0 4px}
-.t-seats{font-weight:700;color:var(--pink-strong);font-size:14px;margin:16px 0 18px}
+.t-seats{font-weight:700;color:var(--pink-strong);font-size:14px;margin:0 0 16px}
 .t-feats{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:0;flex:1}
 .t-feats li{display:block;position:relative;padding-left:27px;font-size:15.5px}
 .t-feats li::before{content:"✓";position:absolute;left:0;top:0;color:var(--pink);font-weight:800}
@@ -322,12 +322,13 @@ a{color:inherit}
 
 
 /* рассрочка в карточке тарифа */
-.t-monthly{font-size:14px;font-weight:600;opacity:.7;margin:6px 0 16px;text-align:center}
+.t-monthly{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height:1;text-align:center;margin:20px 0 16px}
+.t-monthly span{font-size:15px;font-weight:600;font-family:'Manrope',sans-serif;opacity:.6}
 .t-monthly span{font-size:16px;font-weight:600;opacity:.55;font-family:'Manrope',sans-serif}
 .t-inst{font-size:13.5px;opacity:.68;margin:7px 0 16px;font-weight:600}
-.t-full{margin:2px 0 0;text-align:center}
-.t-full s{font-size:15px;opacity:.45;font-weight:600;margin-right:10px}
-.t-full b{font-family:'Unbounded',sans-serif;font-weight:700;font-size:30px;line-height:1}
+.t-full{margin:14px 0 0;text-align:center}
+.t-full s{display:block;font-size:15px;opacity:.45;font-weight:600;margin-bottom:4px}
+.t-full b{font-family:'Unbounded',sans-serif;font-weight:700;font-size:28px;line-height:1}
 .t-full s{opacity:.45;margin-right:9px;font-weight:500}
 .t-full b{font-weight:800;font-size:18px}
 
@@ -704,9 +705,6 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 
         <div class="t-name">Нейро-Старт</div>
         <div class="t-posyl">Быстрый вход в тему ИИ и база для тех, кто хочет попробовать</div>
-        <div class="t-full"><s>12 750 ₽</s><b>4 900 ₽</b></div>
-        <div class="t-monthly">от 816 ₽<span>/мес</span></div>
-        <button type="button" class="btn btn-ghost tbtn" data-modal="m-start">Выбрать Старт</button>
         <div class="t-seats">Без ограничения по местам</div>
         <ul class="t-feats">
           <li>3 модуля курса</li>
@@ -719,15 +717,15 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li class="no"><span>Две личные встречи с экспертом</span></li>
           <li class="no"><span>Курс «Блогер с нуля» в подарок</span></li>
         </ul>
+        <div class="t-monthly">от 816 ₽<span>/мес</span></div>
+        <button type="button" class="btn btn-ghost tbtn" data-modal="m-start">Выбрать Старт</button>
+        <div class="t-full"><s>12 750 ₽</s><b>4 900 ₽</b></div>
               </div>
 
       <div class="tcard best reveal">
         <span class="ribbon">Выбор большинства</span>
         <div class="t-name">Нейро-Система</div>
         <div class="t-posyl">Полная сборка твоего рабочего процесса под присмотром куратора</div>
-        <div class="t-full"><s>27 000 ₽</s><b>12 900 ₽</b></div>
-        <div class="t-monthly">от 1 075 ₽<span>/мес</span></div>
-        <button type="button" class="btn tbtn" data-modal="m-sistema">Выбрать Систему</button>
         <div class="t-seats">Количество мест ограничено · 50</div>
         <ul class="t-feats">
           <li>Все 4 модуля курса</li>
@@ -738,15 +736,15 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li class="no"><span>Две личные встречи с экспертом</span></li>
           <li class="no"><span>Курс «Блогер с нуля» в подарок</span></li>
         </ul>
+        <div class="t-monthly">от 1 075 ₽<span>/мес</span></div>
+        <button type="button" class="btn tbtn" data-modal="m-sistema">Выбрать Систему</button>
+        <div class="t-full"><s>27 000 ₽</s><b>12 900 ₽</b></div>
               </div>
 
       <div class="tcard reveal">
 
         <div class="t-name">Нейро-Масштаб</div>
         <div class="t-posyl">Максимальное ускорение и выход на новый уровень дохода вместе с экспертом</div>
-        <div class="t-full"><s>71 300 ₽</s><b>47 900 ₽</b></div>
-        <div class="t-monthly">от 3 991 ₽<span>/мес</span></div>
-        <button type="button" class="btn btn-ghost tbtn" data-modal="m-masshtab">Выбрать Масштаб</button>
         <div class="t-seats">Количество мест ограничено · 3</div>
         <ul class="t-feats">
           <li>Все 4 модуля курса</li>
@@ -757,6 +755,9 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li><b>Две личные встречи с экспертом</b></li>
           <li><b>Курс «Блогер с нуля» в подарок</b></li>
         </ul>
+        <div class="t-monthly">от 3 991 ₽<span>/мес</span></div>
+        <button type="button" class="btn btn-ghost tbtn" data-modal="m-masshtab">Выбрать Масштаб</button>
+        <div class="t-full"><s>71 300 ₽</s><b>47 900 ₽</b></div>
               </div>
     </div>
 
