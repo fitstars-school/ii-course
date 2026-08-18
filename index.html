@@ -177,6 +177,37 @@ a{color:inherit}
 .kit li::before{content:"•";color:var(--pink);font-weight:800;flex-shrink:0}
 
 
+/* программа: 4 модуля сразу, карточки 2×2 */
+.mods{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
+.mod .mod-n{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.mod-lock{background:var(--dark);color:#fff;border-radius:999px;padding:4px 11px;font-size:10.5px;
+  letter-spacing:.04em;text-transform:none;font-weight:700;white-space:nowrap}
+.mod h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:21px;margin-bottom:6px}
+.mod .res{color:var(--pink-strong);font-weight:700;font-size:15px;margin-bottom:14px}
+.mod .lessons{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0;font-size:15px}
+.mod .lessons li{display:flex;gap:10px}
+.mod .lessons li::before{content:"–";color:var(--pink);font-weight:800;flex-shrink:0}
+.wpill{margin-top:14px;padding:12px 16px;border-radius:14px;background:var(--wash);border:1px solid var(--line);
+  font-size:13.5px;line-height:1.45}
+.kit2{margin-top:14px;padding:16px 18px;border-radius:14px;background:linear-gradient(160deg,#FFF3FA,#F6EDFE);
+  border:1px solid #F3D3E8}
+.mod .kit2{margin-top:auto}
+.mod .wpill + .kit2{margin-top:14px}
+.mod .lessons + .wpill,.mod .lessons + .kit2{margin-top:auto}
+.mod .lessons{margin-bottom:14px}
+.kit2-h{font-weight:800;font-size:14.5px;margin-bottom:9px}
+.kit2-h span{color:var(--pink)}
+.kit2-row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5}
+.kit2-row + .kit2-row{margin-top:7px}
+.k2tag{flex-shrink:0;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+  padding:3px 9px;border-radius:999px;background:#fff;border:1px solid #F3D3E8;color:var(--ink);margin-top:3px;white-space:nowrap}
+.k2tag.plus{background:linear-gradient(100deg,#E6198C 0%,#B23AE0 52%,#FF6B57 100%);color:#fff;border:none}
+.kit2-safe{margin-top:9px;font-size:12px;opacity:.65}
+@media(max-width:900px){.mods{grid-template-columns:1fr}.mod{padding:22px 20px}}
+
 /* фильтр по тарифам в программе */
 .tfilter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
 .tf-lab{font-weight:700;font-size:14px;opacity:.7;margin-right:4px}
@@ -487,134 +518,86 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
     <div class="sec-head reveal">
       <span class="label">Что внутри</span>
       <h2>4 уровня – <span class="accent">от страха до своей системы</span>:</h2>
-      <p>Курс ведёт по ступеням: уверенный старт без страха → доверие к результату «в своём голосе» → практика на реальных кейсах → своя рабочая система с агентным ИИ.</p>
+      <p>Курс ведёт по ступеням: уверенный старт без страха → доверие к результату «в своём голосе» → практика на реальных кейсах → своя рабочая система с агентным ИИ. Вся программа – перед тобой:</p>
     </div>
-    <div class="tfilter reveal">
-      <span class="tf-lab">Что входит в тариф:</span>
-      <button type="button" class="tf" data-t="start">Нейро-Старт</button>
-      <button type="button" class="tf active" data-t="sistema">Нейро-Система</button>
-      <button type="button" class="tf" data-t="masshtab">Нейро-Масштаб</button>
-    </div>
-    <div class="levels reveal" data-tariff="sistema">
-      <div class="lv-tabs" role="tablist">
-        <button class="lv-tab active" data-lv="1"><span class="n">УРОВЕНЬ 01</span>Старт</button>
-        <button class="lv-tab" data-lv="2"><span class="n">УРОВЕНЬ 02</span>Надёжность</button>
-        <button class="lv-tab" data-lv="3"><span class="n">УРОВЕНЬ 03</span>Кейсы</button>
-        <button class="lv-tab" data-lv="4"><span class="n">УРОВЕНЬ 04</span>Система</button>
-      </div>
-      <div class="lv-panel">
-        <div class="lv-body" data-body="1">
-          <h3>01 · База работы с ИИ</h3>
-          <div class="res">Первый результат в день 1: знаешь, какой ИИ выбрать и как собрать запрос</div>
-          <ul class="lessons">
-            <li>С какого ИИ начать и как выбрать под свою задачу</li>
-            <li>Первый рабочий запрос: из потока идей – в чёткий промпт</li>
-            <li>Карта применений: где ИИ приносит пользу и заработок именно вам</li>
-            <li>Как расти в ИИ поэтапно: принципы и мышление</li>
-          </ul>
-          <div class="wshop">
-            <div class="w-ic">🎙</div>
-            <div>
-              <div class="w-h">Живой практикум · неделя 1</div>
-              <div class="w-p">Вводный практикум по работе с нейросетями – разбираемся вместе, в прямом эфире.</div>
-            </div>
-          </div>
 
-          <div class="kit">
-            <div class="kit-note">Бонусы · тарифы «Система» и «Масштаб»</div>
-            <div class="kit-h">Бонусы <span>«Быстрый старт»</span></div>
-            <ul>
-              <li class="basic">«Как выбрать нейросеть под свою задачу»</li>
-              <li class="basic">«Как пользоваться ИИ из России»</li>
-              <li>«Первый полезный запрос за 15 минут»</li>
-              <li>«Голос вместо клавиатуры: как надиктовывать задачи»</li>
-            </ul>
-          </div>
+    <div class="mods">
 
-        </div>
-        <div class="lv-body" data-body="2" hidden>
-          <h3>02 · Надёжные помощники под себя</h3>
-          <div class="res">Результат звучит «как ты», умеешь ловить ИИ на вранье</div>
-          <ul class="lessons">
-            <li>Настраиваю ИИ под себя: формат работы и взаимодействия</li>
-            <li>Собираю своего помощника по своим инструкциям</li>
-            <li>Свой голос: ИИ пишет как я – плюс приём «Критик»</li>
-            <li>Фактчекинг: ловлю галлюцинации, не тащу ошибки в работу</li>
-          </ul>
-          <div class="kit">
-            <div class="kit-note">Бонусы · тарифы «Система» и «Масштаб»</div>
-            <div class="kit-h">Бонусы <span>«Учимся быстрее»</span></div>
-            <ul>
-              <li>«ИИ-тьютор: объясни мне сложное простыми словами»</li>
-              <li>«Как превратить книгу, статью или урок в понятный конспект»</li>
-              <li>«Как проверить себя: тесты, вопросы и тренажёры»</li>
-              <li class="basic">«Как составить персональный план обучения»</li>
-            </ul>
-          </div>
-
-        </div>
-        <div class="lv-body" data-body="3" hidden>
-          <h3>03 · Кейсы применения</h3>
-          <div class="res">Довёл минимум один кейс: визуал, посты, документы, таблицы или мини-сайт</div>
-          <ul class="lessons">
-            <li>Документы под задачу: исследования, коммерческие предложения, конспекты</li>
-            <li>Таблицы и данные: расчёты, заполнение, поиск ошибок</li>
-            <li>Интерактивные материалы и мини-сайт за вечер</li>
-            <li>Визуал для недизайнеров: фирменный стиль и картинки под задачу</li>
-            <li>Фото и видео-аватары</li>
-          </ul>
-          <div class="wshop">
-            <div class="w-ic">🎙</div>
-            <div>
-              <div class="w-h">Живой практикум · неделя 3</div>
-              <div class="w-p">Живая отработка: разбираем реальные задачи участников и решаем их прямо на встрече.</div>
-            </div>
-          </div>
-
-          <div class="kit">
-            <div class="kit-note">Бонусы · тарифы «Система» и «Масштаб»</div>
-            <div class="kit-h">Бонусы <span>«ИИ для жизни и семьи»</span></div>
-            <ul>
-              <li class="basic">Планирование семейной недели</li>
-              <li>Меню и список покупок из того, что уже есть дома</li>
-              <li>Объяснение школьной темы ребёнку по возрасту</li>
-              <li>Викторины, квесты и развивающие игры</li>
-              <li>Планирование поездки или семейного выходного</li>
-              <li>Подготовка к сложному разговору</li>
-              <li>Сказки и истории с нужным смыслом</li>
-              <li>Распределение бытовых задач в семье</li>
-            </ul>
-            <div class="kit-safe">Важно: не загружайте персональные данные ребёнка, медицинские документы и другую чувствительную информацию.</div>
-          </div>
-
-        </div>
-        <div class="lv-body" data-body="4" hidden>
-          <h3>04 · Своя система работы</h3>
-          <div class="res">Понимаешь агентный ИИ, ставишь рутину на поток, видишь систему целиком</div>
-          <ul class="lessons">
-            <li>Агентный ИИ с нуля: доступ к папкам – что можно и что нельзя</li>
-            <li>Порядок под свои цели: 5 файлов, которые важно иметь каждому</li>
-            <li>Регулярные задачи на потоке: агент выполняет работу – на примере блога</li>
-            <li>5 применений агентного ИИ для работы и заработка – с кейсами</li>
-            <li>Итоги и завершение</li>
-          </ul>
-          <div class="kit">
-            <div class="kit-note">Бонусы · тарифы «Система» и «Масштаб»</div>
-            <div class="kit-h">Бонусы <span>«Контент и продукты»</span></div>
-            <ul>
-              <li class="basic">Шаблон папки «Мой стиль»</li>
-              <li>Помощник для поиска тем</li>
-              <li>Пост из голосового сообщения</li>
-              <li>Десять дизайн-стилей для каруселей</li>
-              <li>Паспорт мини-продукта</li>
-              <li>Шаблон гайда или рабочей тетради</li>
-              <li>Карта «Как превратить свою задачу в услугу»</li>
-            </ul>
-          </div>
-
+      <div class="mod reveal">
+        <span class="mod-n">Модуль 01 · неделя 1</span>
+        <h3>База работы с ИИ</h3>
+        <div class="res">Первый результат в день 1: знаешь, какой ИИ выбрать и как собрать запрос</div>
+        <ul class="lessons">
+          <li>С какого ИИ начать и как выбрать под свою задачу</li>
+          <li>Первый рабочий запрос: из потока идей – в чёткий промпт</li>
+          <li>Карта применений: где ИИ приносит пользу и заработок именно вам</li>
+          <li>Как расти в ИИ поэтапно: принципы и мышление</li>
+        </ul>
+        <div class="wpill">🎙 <b>Живой практикум · неделя 1</b> – вводный, по работе с нейросетями · тарифы «Система» и «Масштаб»</div>
+        <div class="kit2">
+          <div class="kit2-h">Бонусы <span>«Быстрый старт»</span></div>
+          <div class="kit2-row"><span class="k2tag">Старт</span><span>«Как выбрать нейросеть под свою задачу» · «Как пользоваться ИИ из России»</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«Первый полезный запрос за 15 минут» · «Голос вместо клавиатуры: как надиктовывать задачи»</span></div>
         </div>
       </div>
+
+      <div class="mod reveal">
+        <span class="mod-n">Модуль 02 · неделя 2</span>
+        <h3>Надёжные помощники под себя</h3>
+        <div class="res">Результат звучит «как ты», умеешь ловить ИИ на вранье</div>
+        <ul class="lessons">
+          <li>Настраиваю ИИ под себя: формат работы и взаимодействия</li>
+          <li>Собираю своего помощника по своим инструкциям</li>
+          <li>Свой голос: ИИ пишет как я – плюс приём «Критик»</li>
+          <li>Фактчекинг: ловлю галлюцинации, не тащу ошибки в работу</li>
+        </ul>
+        <div class="kit2">
+          <div class="kit2-h">Бонусы <span>«Учимся быстрее»</span></div>
+          <div class="kit2-row"><span class="k2tag">Старт</span><span>«Как составить персональный план обучения»</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>«ИИ-тьютор: объясни мне сложное простыми словами» · «Как превратить книгу, статью или урок в понятный конспект» · «Как проверить себя: тесты, вопросы и тренажёры»</span></div>
+        </div>
+      </div>
+
+      <div class="mod reveal">
+        <span class="mod-n">Модуль 03 · неделя 3</span>
+        <h3>Кейсы применения</h3>
+        <div class="res">Довёл минимум один кейс: визуал, посты, документы, таблицы или мини-сайт</div>
+        <ul class="lessons">
+          <li>Документы под задачу: исследования, коммерческие предложения, конспекты</li>
+          <li>Таблицы и данные: расчёты, заполнение, поиск ошибок</li>
+          <li>Интерактивные материалы и мини-сайт за вечер</li>
+          <li>Визуал для недизайнеров: фирменный стиль и картинки под задачу</li>
+          <li>Фото и видео-аватары</li>
+        </ul>
+        <div class="wpill">🎙 <b>Живой практикум · неделя 3</b> – разбираем и решаем реальные задачи участников · тарифы «Система» и «Масштаб»</div>
+        <div class="kit2">
+          <div class="kit2-h">Бонусы <span>«ИИ для жизни и семьи»</span></div>
+          <div class="kit2-row"><span class="k2tag">Старт</span><span>Планирование семейной недели</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Меню и список покупок из того, что уже есть дома · Объяснение школьной темы ребёнку по возрасту · Викторины, квесты и развивающие игры · Планирование поездки или семейного выходного · Подготовка к сложному разговору · Сказки и истории с нужным смыслом · Распределение бытовых задач в семье</span></div>
+          <div class="kit2-safe">Важно: не загружайте персональные данные ребёнка, медицинские документы и другую чувствительную информацию.</div>
+        </div>
+      </div>
+
+      <div class="mod reveal">
+        <span class="mod-n">Модуль 04 · неделя 4 <span class="mod-lock">тарифы «Система» и «Масштаб»</span></span>
+        <h3>Своя система работы</h3>
+        <div class="res">Понимаешь агентный ИИ, ставишь рутину на поток, видишь систему целиком</div>
+        <ul class="lessons">
+          <li>Агентный ИИ с нуля: доступ к папкам – что можно и что нельзя</li>
+          <li>Порядок под свои цели: 5 файлов, которые важно иметь каждому</li>
+          <li>Регулярные задачи на потоке: агент выполняет работу – на примере блога</li>
+          <li>5 применений агентного ИИ для работы и заработка – с кейсами</li>
+          <li>Итоги и завершение</li>
+        </ul>
+        <div class="kit2">
+          <div class="kit2-h">Бонусы <span>«Контент и продукты»</span></div>
+          <div class="kit2-row"><span class="k2tag">Старт</span><span>Шаблон папки «Мой стиль»</span></div>
+          <div class="kit2-row"><span class="k2tag plus">Система+</span><span>Помощник для поиска тем · Пост из голосового сообщения · Десять дизайн-стилей для каруселей · Паспорт мини-продукта · Шаблон гайда или рабочей тетради · Карта «Как превратить свою задачу в услугу»</span></div>
+        </div>
+      </div>
+
     </div>
+
     <div class="lv-tags reveal">
       <span class="tag-pill">🎙 Живые практикумы – тарифы «Система» и «Масштаб»</span>
       <span class="tag-pill">🤖 ИИ-тьютор в подарок</span>
@@ -896,57 +879,6 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},
     {threshold:.12,rootMargin:'0px 0px -7% 0px'});
   els.forEach(function(e){io.observe(e)});
-})();
-
-// навигатор по уровням
-(function(){
-  var tabs=document.querySelectorAll('.lv-tab'), bodies=document.querySelectorAll('.lv-body');
-  tabs.forEach(function(t){
-    t.addEventListener('click',function(){
-      tabs.forEach(function(x){x.classList.remove('active')});
-      t.classList.add('active');
-      var lv=t.getAttribute('data-lv');
-      bodies.forEach(function(b){b.hidden = b.getAttribute('data-body')!==lv});
-      if(typeof ym==='function'){try{ym(111314883,'reachGoal','level_view')}catch(e){}}
-    });
-  });
-})();
-
-
-// фильтр программы по тарифу
-(function(){
-  var wrap=document.querySelector('.levels'); if(!wrap) return;
-  var btns=document.querySelectorAll('.tf');
-  function apply(t){
-    wrap.setAttribute('data-tariff',t);
-    var start = (t==='start');
-    wrap.querySelectorAll('.wshop').forEach(function(el){ el.classList.toggle('locked', start) });
-    // уроки 4-го модуля недоступны в «Старте»
-    wrap.querySelectorAll('.lessons').forEach(function(el){
-      el.classList.toggle('locked', start && !!el.closest('[data-body="4"]'));
-    });
-    // бонусы: в «Старте» — базовый пакет, в остальных — расширенный
-    wrap.querySelectorAll('.kit').forEach(function(k){
-      k.classList.remove('locked');
-      var note=k.querySelector('.kit-note');
-      if(note) note.textContent = start
-        ? 'Бонусы · базовый пакет'
-        : 'Бонусы · расширенный пакет – тарифы «Система» и «Масштаб»';
-      k.querySelectorAll('li').forEach(function(li){
-        li.classList.toggle('off', start && !li.classList.contains('basic'));
-      });
-    });
-    var tab4=wrap.querySelector('.lv-tab[data-lv="4"]');
-    if(tab4) tab4.classList.toggle('locked', start);
-    if(typeof ym==='function'){try{ym(111314883,'reachGoal','tariff_filter')}catch(e){}}
-  }
-  btns.forEach(function(b){
-    b.addEventListener('click',function(){
-      btns.forEach(function(x){x.classList.remove('active')});
-      b.classList.add('active');
-      apply(b.getAttribute('data-t'));
-    });
-  });
 })();
 
 // модалки тарифов
