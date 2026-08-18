@@ -407,10 +407,15 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   background:rgba(255,255,255,.1);color:#fff;font-size:17px;line-height:1}
 .sb-close:hover{background:rgba(255,255,255,.2)}
 @media(max-width:900px){
-  .sticky-bar{flex-wrap:wrap;gap:10px;padding:12px 14px;left:8px;right:8px;bottom:8px}
-  .sb-h{font-size:13.5px} .sb-p{display:none}
-  .sb-btn{width:100%;order:3} .sb-time{gap:6px} .sb-u{min-width:44px;padding:5px 7px}
-  .sb-u b{font-size:15px}
+  .sticky-bar{flex-wrap:wrap;gap:8px;padding:12px 14px;left:8px;right:8px;bottom:8px}
+  .sb-dot{display:none}
+  .sb-h{font-size:13px} .sb-p{display:none}
+  .sb-txt{flex:1 1 0}
+  .sb-time{order:2;width:100%;justify-content:center;gap:12px}
+  .sb-u{background:none;border:none;padding:0;min-width:0;display:flex;align-items:baseline;gap:3px}
+  .sb-u b{font-size:18px}
+  .sb-u span{margin-top:0}
+  .sb-btn{width:100%;order:3;min-height:42px}
 }
 
 /* модалка виджета */
@@ -948,8 +953,13 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   tick(); setInterval(tick,1000);
   var hidden=false; try{hidden=sessionStorage.getItem('fsai_bar_hidden')==='1'}catch(e){}
   if(!hidden && Date.now()<target){
+    var tEl=document.getElementById('tariffs'), lastY=window.scrollY, revealed=false;
     var onScroll=function(){
-      if(window.scrollY>420){ bar.classList.add('show'); window.removeEventListener('scroll',onScroll) }
+      var y=window.scrollY, down=y>lastY+4, up=y<lastY-4; lastY=y;
+      var past = tEl ? tEl.getBoundingClientRect().top < window.innerHeight : y>420;
+      if(!past){ bar.classList.remove('show'); revealed=false; return }
+      if(!revealed){ bar.classList.add('show'); revealed=true; return }
+      if(down){ bar.classList.remove('show') } else if(up){ bar.classList.add('show') }
     };
     window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
   }
