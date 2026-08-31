@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Контент и продукты · Бонусы курса «Нейро-архитектор»</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#211829;--pink:#E6198C;--pink-strong:#C0116E;
+--grad:linear-gradient(100deg,#E6198C 0%,#B23AE0 52%,#FF6B57 100%);
+--line:#ECE1EC;--surface:#FFFFFF;--wash:#FBF4F8;--dark:#1B1420;--radius:20px;--radius-lg:26px;
+--shadow:0 18px 44px -26px rgba(120,20,90,.24)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',-apple-system,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);
+font-weight:500;background:#FFF9FC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+h1,h2{font-family:'Unbounded',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
+h1{font-size:clamp(28px,4.6vw,44px)}
+h2{font-size:clamp(22px,3.2vw,30px);margin-bottom:14px}
+h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.accent{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+b{font-weight:700}
+a{color:var(--pink-strong)}
+.label{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+header.hero{padding:40px 0 44px;background:
+radial-gradient(900px 420px at 90% -10%,#FCE1EF 0%,rgba(252,225,239,0) 60%),
+radial-gradient(700px 500px at 0% 0%,#EEE6FF 0%,rgba(238,230,255,0) 55%),#FFF9FC;
+border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:12px;flex-wrap:wrap}
+.back{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--surface);
+border:1px solid var(--line);font-weight:700;font-size:14px;text-decoration:none;color:var(--ink)}
+.back:hover{border-color:#E6A8CF}
+.brand{font-weight:800;font-size:14px}
+.brand span{color:var(--pink)}
+header .label{display:block;margin-bottom:12px}
+.lead{margin-top:14px;max-width:680px;opacity:.85}
+section{padding:44px 0 6px}
+.sec-note{opacity:.75;max-width:700px;margin-bottom:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:14px}
+.card.tint{background:linear-gradient(120deg,#FFF1F8,#F4ECFE);border-color:#F1D9EC}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 .card{margin-bottom:0}
+.steps{counter-reset:st;list-style:none;display:flex;flex-direction:column;gap:12px;margin:14px 0}
+.steps li{position:relative;padding-left:44px}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:0;width:30px;height:30px;
+border-radius:10px;background:#FCE6F1;border:1px solid #F6CFE2;color:var(--pink);font-weight:800;font-size:14px;
+display:flex;align-items:center;justify-content:center}
+.promptbox{position:relative;background:var(--dark);color:#F2EDF6;border-radius:16px;padding:18px 20px;margin:14px 0;
+font-size:14.5px;line-height:1.6;white-space:pre-wrap;font-family:'JetBrains Mono',ui-monospace,monospace}
+.promptbox .pb-h{font-family:'Manrope',sans-serif;font-size:11px;font-weight:800;letter-spacing:.12em;
+text-transform:uppercase;color:#FF8FC0;margin-bottom:10px}
+.copybtn{position:absolute;top:12px;right:12px;width:38px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.2);
+background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:15px}
+.copybtn:hover{background:rgba(230,25,140,.35)}
+.tip{display:flex;gap:12px;align-items:flex-start;background:var(--wash);border:1px solid var(--line);
+border-radius:14px;padding:14px 16px;margin:12px 0;font-size:15px}
+.tip .ic{flex-shrink:0}
+ul.plain{list-style:none;display:flex;flex-direction:column;gap:9px;margin:10px 0}
+ul.plain li{display:flex;gap:10px}
+ul.plain li::before{content:"–";color:var(--pink);font-weight:800;flex-shrink:0}
+/* --- интерактив «поломки»: облачка + панель --- */
+.fix-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+.fix-cloud{display:flex;flex-wrap:wrap;gap:10px}
+.fix-chip{cursor:pointer;font-family:inherit;font-weight:600;font-size:14.5px;padding:11px 16px;border-radius:999px;
+background:var(--surface);border:1.5px solid var(--line);color:var(--ink);transition:all .15s ease;text-align:left}
+.fix-chip:hover{border-color:#E6A8CF;transform:translateY(-1px)}
+.fix-chip.on{border-color:var(--pink);background:linear-gradient(120deg,#FFF1F8,#F4ECFE);font-weight:700}
+.fix-panel{position:sticky;top:16px;background:var(--surface);border:1.5px solid var(--pink);border-radius:var(--radius);
+padding:22px 24px;box-shadow:var(--shadow);min-height:150px}
+.fix-panel .fp-q{font-weight:800;margin-bottom:10px}
+.fix-panel .fp-a{font-size:15.5px}
+.fix-panel .fp-hint{opacity:.6;font-size:14.5px}
+/* --- топ-30 / списки побед --- */
+.win-cat{margin:20px 0 8px}
+.wins{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.win{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 16px;font-size:14.5px}
+.win b{display:block;margin-bottom:3px}
+.win span{opacity:.85}
+/* --- лента стилей каруселей --- */
+.styles-strip{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 16px;-webkit-overflow-scrolling:touch;
+scroll-snap-type:x mandatory}
+.stylecard{flex:0 0 190px;scroll-snap-align:start;border-radius:16px;border:1px solid var(--line);overflow:hidden;background:#fff}
+.stylecard .prev{height:120px;display:flex;flex-direction:column;justify-content:center;padding:14px;gap:6px}
+.stylecard .prev .l1{font-weight:800;font-size:13px}
+.stylecard .prev .l2{height:6px;border-radius:3px;width:75%}
+.stylecard .prev .l3{height:6px;border-radius:3px;width:50%}
+.stylecard .nm{padding:10px 14px;font-size:13px;font-weight:700;border-top:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;min-height:48px;padding:0 26px;
+border-radius:999px;background:var(--grad);color:#fff;text-decoration:none;border:none;cursor:pointer}
+.btn:hover{opacity:.92}
+footer{margin-top:52px;padding:26px 0 34px;border-top:1px solid var(--line);font-size:13px;opacity:.65}
+@media(max-width:760px){
+.grid2,.wins{grid-template-columns:1fr}
+.fix-wrap{grid-template-columns:1fr}
+.fix-panel{position:static}
+section{padding:34px 0 4px}
+}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="top">
+    <a class="back" href="../">← Все бонусы</a>
+    <div class="brand">FitStars · курс <span>«Нейро-архитектор»</span></div>
+  </div>
+  <span class="label">Бонусный набор 04 · модуль 4</span>
+  <h1>Контент <span class="accent">и продукты</span></h1>
+  <p class="lead">Система работы с контентом, карусели в десяти дизайн-стилях, мини-продукты, на которых можно зарабатывать, и свой бот в Telegram – всё прикладно, с промптами.</p>
+</div></header>
+
+<section><div class="wrap">
+  <span class="label">Часть 1</span>
+  <h2>Система работы с контентом: <span class="accent">папка, инструкции, помощники</span></h2>
+  <p class="sec-note">Контент перестаёт быть мучением, когда у него есть дом. Заведи одну папку – и три файла в ней:</p>
+  <ol class="steps">
+    <li><b>«Мой стиль»</b> – паспорт голоса (собираем в модуле 2) + 3–5 лучших твоих текстов как образцы.</li>
+    <li><b>«Темы»</b> – живой список идей. Пополняется голосом: «добавь в темы: …» – и никогда не начинаешь с чистого листа.</li>
+    <li><b>«Правила»</b> – что можно и что нельзя: длина постов, слова-запреты, форматы, площадки.</li>
+  </ol>
+  <div class="promptbox"><div class="pb-h">Промпт · собери помощника по контенту</div>Ты – мой помощник по контенту. Вот мой паспорт стиля: [вставь или приложи].
+Вот правила: [длина, площадки, что нельзя].
+
+Работаем так: я приношу тему или голосовое – ты предлагаешь 2 варианта поста в моём стиле, спрашиваешь, что поправить, и дорабатываешь. Никогда не публикуешь «универсальным» тоном – только моим. Начнём: вот тема: [тема]</div>
+  <div class="tip"><span class="ic">📁</span><span>В модуле 4 мы подключаем к этой папке агентный ИИ – и рутина «пост из голосового» начинает работать почти без тебя. Папка, собранная сейчас, – фундамент.</span></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="label">Часть 2</span>
+  <h2>Карусели: <span class="accent">10 стилей на выбор</span></h2>
+  <p class="sec-note">Дизайнов – не один и не два. Полистай стили: у каждого своё настроение. Правило простое – <b>попроси собрать один макет в 3 разных стилях</b> и выбери глазами, а не угадывай заранее.</p>
+  <div class="styles-strip"><div class="stylecard"><div class="prev" style="background:#FFFFFF">
+ <div class="l1" style="color:#211829">Светлый воздух</div>
+ <div class="l2" style="background:#E6198C"></div><div class="l3" style="background:#F2E8F5;opacity:.8"></div></div>
+ <div class="nm">Светлый воздух</div></div>
+<div class="stylecard"><div class="prev" style="background:#1B1420">
+ <div class="l1" style="color:#FFFFFF">Тёмный минимализм</div>
+ <div class="l2" style="background:#FF6AB0"></div><div class="l3" style="background:#2A2133;opacity:.8"></div></div>
+ <div class="nm">Тёмный минимализм</div></div>
+<div class="stylecard"><div class="prev" style="background:#12101A">
+ <div class="l1" style="color:#F5F2FF">Неон на тёмном</div>
+ <div class="l2" style="background:#7CF2C4"></div><div class="l3" style="background:#241F33;opacity:.8"></div></div>
+ <div class="nm">Неон на тёмном</div></div>
+<div class="stylecard"><div class="prev" style="background:#FDF3F0">
+ <div class="l1" style="color:#4A3B36">Пастель и мягкость</div>
+ <div class="l2" style="background:#D98356"></div><div class="l3" style="background:#F7E3DC;opacity:.8"></div></div>
+ <div class="nm">Пастель и мягкость</div></div>
+<div class="stylecard"><div class="prev" style="background:#F7F5F0">
+ <div class="l1" style="color:#1E1B16">Журнальный</div>
+ <div class="l2" style="background:#B33B2E"></div><div class="l3" style="background:#FFFFFF;opacity:.8"></div></div>
+ <div class="nm">Журнальный</div></div>
+<div class="stylecard"><div class="prev" style="background:#F4F7FB">
+ <div class="l1" style="color:#152238">Деловой синий</div>
+ <div class="l2" style="background:#2456C4"></div><div class="l3" style="background:#FFFFFF;opacity:.8"></div></div>
+ <div class="nm">Деловой синий</div></div>
+<div class="stylecard"><div class="prev" style="background:#F4F1E8">
+ <div class="l1" style="color:#111111">Газетный</div>
+ <div class="l2" style="background:#111111"></div><div class="l3" style="background:#FFFFFF;opacity:.8"></div></div>
+ <div class="nm">Газетный</div></div>
+<div class="stylecard"><div class="prev" style="background:#FFD84D">
+ <div class="l1" style="color:#211829">Яркие плашки</div>
+ <div class="l2" style="background:#211829"></div><div class="l3" style="background:#FF7A59;opacity:.8"></div></div>
+ <div class="nm">Яркие плашки</div></div>
+<div class="stylecard"><div class="prev" style="background:#EFF4EC">
+ <div class="l1" style="color:#243026">Природный</div>
+ <div class="l2" style="background:#3E7C4F"></div><div class="l3" style="background:#FFFFFF;opacity:.8"></div></div>
+ <div class="nm">Природный</div></div>
+<div class="stylecard"><div class="prev" style="background:#F5F5F5">
+ <div class="l1" style="color:#191919">Монохром + один акцент</div>
+ <div class="l2" style="background:#E6198C"></div><div class="l3" style="background:#FFFFFF;opacity:.8"></div></div>
+ <div class="nm">Монохром + один акцент</div></div></div>
+  <div class="promptbox"><div class="pb-h">Промпт · карусель в выбранном стиле</div>Собери карусель из этого текста: [текст поста].
+6–8 слайдов: первый – цепляющий заголовок, дальше по одной мысли на слайд, последний – призыв [подписаться / написать в директ / сохранить].
+
+Стиль: [название из ленты выше – например «тёмный минимализм» или «пастель и мягкость»]: опиши фон, цвет акцентов, шрифтовую пару. Сделай этот же макет ещё в двух других стилях – я сравню.</div>
+  <ul class="plain">
+    <li><b>Наш редактор каруселей</b> – собирает слайды и выгружает картинки: <a href="../../carousel/">открыть редактор</a></li>
+    <li><b>Как искать крутые дизайны:</b> попроси ИИ «найди референсы каруселей в стиле [минимализм / журнальный]», сохрани скрин понравившегося и покажи ИИ: «повтори приёмы этого дизайна в моей карусели» – работает отлично</li>
+    <li>Свои 10 дизайн-стилей можно вести прямо в папке «Мой стиль» – как меню, из которого выбираешь под настроение поста</li>
+  </ul>
+</div></section>
+
+<section><div class="wrap">
+  <span class="label">Часть 3</span>
+  <h2>Мини-продукты, на которых <span class="accent">можно зарабатывать</span></h2>
+  <p class="sec-note">Мини-продукт – это твоя экспертиза, упакованная в файл, который можно отдать или продать: чек-лист, гайд, шаблон, рабочая тетрадь, разбор. Делается за вечер – мы проходили это на практикуме.</p>
+  <div class="grid2">
+    <div class="card"><h3>💡 20 идей под разные экспертизы</h3>
+      <ul class="plain">
+        <li>Чек-лист «N шагов к [результату]»</li>
+        <li>Гайд «Как выбрать [подрядчика / технику / услугу] и не пожалеть»</li>
+        <li>Шаблон [документа / таблицы / плана], который ты делаешь для себя</li>
+        <li>Рабочая тетрадь с заданиями по твоей теме</li>
+        <li>Разбор типовых ошибок «Почему у вас не получается [X]»</li>
+        <li>Мини-курс из 5 писем или постов</li>
+        <li>База ссылок и инструментов «Всё для [задачи]» – и ещё 13 идей в промпте ниже</li>
+      </ul>
+    </div>
+    <div class="card"><div class="promptbox"><div class="pb-h">Промпт · найди мой мини-продукт</div>Я – [кто ты, чем занимаешься, в чём сильна].
+Люди чаще всего спрашивают меня про: [вопросы].
+
+Предложи 20 идей мини-продуктов на моей экспертизе: от простого чек-листа до платного гайда. Для каждой – название, кому нужна, что внутри (3 пункта), сколько может стоить. Отметь 3 идеи, с которых проще начать, и для лучшей собери структуру продукта по разделам.</div></div>
+  </div>
+  <div class="promptbox"><div class="pb-h">Промпт · собери сам продукт</div>Собираем мини-продукт: [название и суть, можно из прошлого промпта].
+Аудитория: [кто]. Результат для человека: [что у него будет после].
+
+Собери полный текст продукта: обложка (название + подзаголовок), введение на 5 строк, разделы с практическими шагами, в конце – чек-лист самопроверки и мягкий переход «что дальше» с приглашением ко мне: [твоя услуга].
+Пиши в моём стиле: [паспорт стиля].</div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="label">Часть 4</span>
+  <h2>Свой бот в Telegram – <span class="accent">без программиста</span></h2>
+  <p class="sec-note">Бот – это автоответчик на максималках: выдаёт материалы, отвечает на частые вопросы, собирает заявки, пока ты занята. Собирается за вечер.</p>
+  <ol class="steps">
+    <li><b>Создай бота у BotFather.</b> В Telegram найди @BotFather → команда /newbot → придумай имя → получи токен (длинный код). Токен – это ключ от бота, никому его не показывай.</li>
+    <li><b>Спроектируй сценарий с ИИ</b> – до всякой техники: промпт ниже.</li>
+    <li><b>Выбери путь сборки.</b> Без кода: конструкторы ботов (спроси ИИ: «сравни популярные конструкторы Telegram-ботов для новичка, что выбрать под мой сценарий»). Или с кодом, который напишет ИИ, – промпт ниже.</li>
+    <li><b>Проверь на себе и одном друге</b>, потом давай ссылку аудитории.</li>
+  </ol>
+  <div class="grid2">
+    <div class="card"><div class="promptbox"><div class="pb-h">Промпт · сценарий бота</div>Проектируем моего Telegram-бота.
+Задача бота: [выдавать лид-магнит / отвечать на частые вопросы / записывать на консультацию].
+Аудитория: [кто пишет].
+
+Помоги спроектировать: какие кнопки в меню, что бот отвечает на каждую, куда ведёт человека шаг за шагом, где бот зовёт живого меня. Нарисуй схему диалога текстом и напиши тексты всех сообщений в моём стиле: [паспорт стиля].</div></div>
+    <div class="card"><div class="promptbox"><div class="pb-h">Промпт · собери бота кодом</div>Напиши простого Telegram-бота на Python (aiogram) под этот сценарий: [вставь сценарий из прошлого промпта].
+
+Я не программист. Дай: 1) полный код одним файлом с комментариями, 2) пошаговую инструкцию для новичка: как запустить на моём компьютере [Windows/Mac] и как потом – чтобы работал без включённого компьютера, 3) куда вставить токен. Веди меня по шагам и жди подтверждения после каждого.</div></div>
+  </div>
+  <div class="tip"><span class="ic">🤖</span><span>Первая версия должна быть маленькой: одна кнопка – один материал. Усложнишь потом, когда увидишь, что люди реально нажимают.</span></div>
+</div></section>
+
+<footer><div class="wrap">Бонус курса Нейро-архитектор «ИИ для жизни и дела» · FitStars. Материал для участников курса – пожалуйста, не передавайте ссылку дальше.</div></footer>
+<script>
+document.querySelectorAll('.promptbox').forEach(function(p){
+  var b=document.createElement('button');b.className='copybtn';b.textContent='⧉';b.title='Скопировать';
+  b.addEventListener('click',function(){
+    var t=p.innerText.replace(/^.*?\n/,'').replace('⧉','').trim();
+    navigator.clipboard.writeText(t).then(function(){b.textContent='✓';setTimeout(function(){b.textContent='⧉'},1200)});
+  });p.appendChild(b);
+});
+</script>
+</body>
+</html>
