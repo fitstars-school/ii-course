@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Бонусы курса «Нейро-архитектор»</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#211829;--pink:#E6198C;--pink-strong:#C0116E;
+--grad:linear-gradient(100deg,#E6198C 0%,#B23AE0 52%,#FF6B57 100%);
+--line:#ECE1EC;--surface:#FFFFFF;--wash:#FBF4F8;--dark:#1B1420;--radius:20px;--radius-lg:26px;
+--shadow:0 18px 44px -26px rgba(120,20,90,.24)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',-apple-system,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);
+font-weight:500;background:#FFF9FC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+h1,h2{font-family:'Unbounded',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
+h1{font-size:clamp(28px,4.6vw,44px)}
+h2{font-size:clamp(22px,3.2vw,30px);margin-bottom:14px}
+h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.accent{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+b{font-weight:700}
+a{color:var(--pink-strong)}
+.label{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+header.hero{padding:40px 0 44px;background:
+radial-gradient(900px 420px at 90% -10%,#FCE1EF 0%,rgba(252,225,239,0) 60%),
+radial-gradient(700px 500px at 0% 0%,#EEE6FF 0%,rgba(238,230,255,0) 55%),#FFF9FC;
+border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:12px;flex-wrap:wrap}
+.back{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--surface);
+border:1px solid var(--line);font-weight:700;font-size:14px;text-decoration:none;color:var(--ink)}
+.back:hover{border-color:#E6A8CF}
+.brand{font-weight:800;font-size:14px}
+.brand span{color:var(--pink)}
+header .label{display:block;margin-bottom:12px}
+.lead{margin-top:14px;max-width:680px;opacity:.85}
+section{padding:44px 0 6px}
+.sec-note{opacity:.75;max-width:700px;margin-bottom:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:14px}
+.card.tint{background:linear-gradient(120deg,#FFF1F8,#F4ECFE);border-color:#F1D9EC}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 .card{margin-bottom:0}
+.steps{counter-reset:st;list-style:none;display:flex;flex-direction:column;gap:12px;margin:14px 0}
+.steps li{position:relative;padding-left:44px}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:0;width:30px;height:30px;
+border-radius:10px;background:#FCE6F1;border:1px solid #F6CFE2;color:var(--pink);font-weight:800;font-size:14px;
+display:flex;align-items:center;justify-content:center}
+.promptbox{position:relative;background:var(--dark);color:#F2EDF6;border-radius:16px;padding:18px 20px;margin:14px 0;
+font-size:14.5px;line-height:1.6;white-space:pre-wrap;font-family:'JetBrains Mono',ui-monospace,monospace}
+.promptbox .pb-h{font-family:'Manrope',sans-serif;font-size:11px;font-weight:800;letter-spacing:.12em;
+text-transform:uppercase;color:#FF8FC0;margin-bottom:10px}
+.copybtn{position:absolute;top:12px;right:12px;width:38px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.2);
+background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:15px}
+.copybtn:hover{background:rgba(230,25,140,.35)}
+.tip{display:flex;gap:12px;align-items:flex-start;background:var(--wash);border:1px solid var(--line);
+border-radius:14px;padding:14px 16px;margin:12px 0;font-size:15px}
+.tip .ic{flex-shrink:0}
+ul.plain{list-style:none;display:flex;flex-direction:column;gap:9px;margin:10px 0}
+ul.plain li{display:flex;gap:10px}
+ul.plain li::before{content:"–";color:var(--pink);font-weight:800;flex-shrink:0}
+/* --- интерактив «поломки»: облачка + панель --- */
+.fix-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+.fix-cloud{display:flex;flex-wrap:wrap;gap:10px}
+.fix-chip{cursor:pointer;font-family:inherit;font-weight:600;font-size:14.5px;padding:11px 16px;border-radius:999px;
+background:var(--surface);border:1.5px solid var(--line);color:var(--ink);transition:all .15s ease;text-align:left}
+.fix-chip:hover{border-color:#E6A8CF;transform:translateY(-1px)}
+.fix-chip.on{border-color:var(--pink);background:linear-gradient(120deg,#FFF1F8,#F4ECFE);font-weight:700}
+.fix-panel{position:sticky;top:16px;background:var(--surface);border:1.5px solid var(--pink);border-radius:var(--radius);
+padding:22px 24px;box-shadow:var(--shadow);min-height:150px}
+.fix-panel .fp-q{font-weight:800;margin-bottom:10px}
+.fix-panel .fp-a{font-size:15.5px}
+.fix-panel .fp-hint{opacity:.6;font-size:14.5px}
+/* --- топ-30 / списки побед --- */
+.win-cat{margin:20px 0 8px}
+.wins{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.win{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 16px;font-size:14.5px}
+.win b{display:block;margin-bottom:3px}
+.win span{opacity:.85}
+/* --- лента стилей каруселей --- */
+.styles-strip{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 16px;-webkit-overflow-scrolling:touch;
+scroll-snap-type:x mandatory}
+.stylecard{flex:0 0 190px;scroll-snap-align:start;border-radius:16px;border:1px solid var(--line);overflow:hidden;background:#fff}
+.stylecard .prev{height:120px;display:flex;flex-direction:column;justify-content:center;padding:14px;gap:6px}
+.stylecard .prev .l1{font-weight:800;font-size:13px}
+.stylecard .prev .l2{height:6px;border-radius:3px;width:75%}
+.stylecard .prev .l3{height:6px;border-radius:3px;width:50%}
+.stylecard .nm{padding:10px 14px;font-size:13px;font-weight:700;border-top:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;min-height:48px;padding:0 26px;
+border-radius:999px;background:var(--grad);color:#fff;text-decoration:none;border:none;cursor:pointer}
+.btn:hover{opacity:.92}
+footer{margin-top:52px;padding:26px 0 34px;border-top:1px solid var(--line);font-size:13px;opacity:.65}
+@media(max-width:760px){
+.grid2,.wins{grid-template-columns:1fr}
+.fix-wrap{grid-template-columns:1fr}
+.fix-panel{position:static}
+section{padding:34px 0 4px}
+}
+
+.hublist{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.hub{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+padding:26px;text-decoration:none;color:var(--ink);transition:all .18s ease}
+.hub:hover{transform:translateY(-3px);border-color:#F3A9D4;box-shadow:var(--shadow)}
+.hub .n{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--pink);text-transform:uppercase}
+.hub h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;margin:8px 0 8px}
+.hub p{font-size:14.5px;opacity:.8}
+@media(max-width:760px){.hublist{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="top"><div class="brand">FitStars · курс <span>«Нейро-архитектор»</span></div></div>
+  <span class="label">Бонусы курса</span>
+  <h1>4 бонусных набора – <span class="accent">выбирай свой</span></h1>
+  <p class="lead">Каждый набор – самостоятельная страница с приёмами, готовыми промптами и интерактивом. Совет: не открывай всё сразу – один набор за раз, и сразу пробуй на своей задаче.</p>
+</div></header>
+<section><div class="wrap"><div class="hublist">
+  <a class="hub" href="pobedy/"><span class="n">Набор 01 · модуль 1</span><h3>Быстрые победы</h3><p>Сумбур в промпт, 12 поломок с подсказками по клику и топ-30 задач, которые ИИ решает за 10 минут.</p></a>
+  <a class="hub" href="uchimsya/"><span class="n">Набор 02 · модуль 2</span><h3>Учимся быстрее и эффективнее</h3><p>ИИ-тьютор: конспект из чего угодно, приземление на свои примеры, дайджесты и глубокие исследования.</p></a>
+  <a class="hub" href="semya/"><span class="n">Набор 03 · модуль 3</span><h3>ИИ для жизни и семьи</h3><p>Обучение детей, расписание семьи голосом, меню на неделю – и поиск системы, которую не бросишь.</p></a>
+  <a class="hub" href="kontent/"><span class="n">Набор 04 · модуль 4</span><h3>Контент и продукты</h3><p>Система контента, карусели в 10 стилях, мини-продукты для заработка и свой бот в Telegram.</p></a>
+</div></div></section>
+<footer><div class="wrap">Бонусы курса Нейро-архитектор «ИИ для жизни и дела» · FitStars. Материалы для участников курса.</div></footer>
+</body>
+</html>
