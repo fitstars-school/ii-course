@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Быстрые победы · Бонусы курса «Нейро-архитектор»</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#211829;--pink:#E6198C;--pink-strong:#C0116E;
+--grad:linear-gradient(100deg,#E6198C 0%,#B23AE0 52%,#FF6B57 100%);
+--line:#ECE1EC;--surface:#FFFFFF;--wash:#FBF4F8;--dark:#1B1420;--radius:20px;--radius-lg:26px;
+--shadow:0 18px 44px -26px rgba(120,20,90,.24)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',-apple-system,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);
+font-weight:500;background:#FFF9FC;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+h1,h2{font-family:'Unbounded',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
+h1{font-size:clamp(28px,4.6vw,44px)}
+h2{font-size:clamp(22px,3.2vw,30px);margin-bottom:14px}
+h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.accent{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+b{font-weight:700}
+a{color:var(--pink-strong)}
+.label{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+header.hero{padding:40px 0 44px;background:
+radial-gradient(900px 420px at 90% -10%,#FCE1EF 0%,rgba(252,225,239,0) 60%),
+radial-gradient(700px 500px at 0% 0%,#EEE6FF 0%,rgba(238,230,255,0) 55%),#FFF9FC;
+border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:12px;flex-wrap:wrap}
+.back{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--surface);
+border:1px solid var(--line);font-weight:700;font-size:14px;text-decoration:none;color:var(--ink)}
+.back:hover{border-color:#E6A8CF}
+.brand{font-weight:800;font-size:14px}
+.brand span{color:var(--pink)}
+header .label{display:block;margin-bottom:12px}
+.lead{margin-top:14px;max-width:680px;opacity:.85}
+section{padding:44px 0 6px}
+.sec-note{opacity:.75;max-width:700px;margin-bottom:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:14px}
+.card.tint{background:linear-gradient(120deg,#FFF1F8,#F4ECFE);border-color:#F1D9EC}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 .card{margin-bottom:0}
+.steps{counter-reset:st;list-style:none;display:flex;flex-direction:column;gap:12px;margin:14px 0}
+.steps li{position:relative;padding-left:44px}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:0;width:30px;height:30px;
+border-radius:10px;background:#FCE6F1;border:1px solid #F6CFE2;color:var(--pink);font-weight:800;font-size:14px;
+display:flex;align-items:center;justify-content:center}
+.promptbox{position:relative;background:var(--dark);color:#F2EDF6;border-radius:16px;padding:18px 20px;margin:14px 0;
+font-size:14.5px;line-height:1.6;white-space:pre-wrap;font-family:'JetBrains Mono',ui-monospace,monospace}
+.promptbox .pb-h{font-family:'Manrope',sans-serif;font-size:11px;font-weight:800;letter-spacing:.12em;
+text-transform:uppercase;color:#FF8FC0;margin-bottom:10px}
+.copybtn{position:absolute;top:12px;right:12px;width:38px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.2);
+background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:15px}
+.copybtn:hover{background:rgba(230,25,140,.35)}
+.tip{display:flex;gap:12px;align-items:flex-start;background:var(--wash);border:1px solid var(--line);
+border-radius:14px;padding:14px 16px;margin:12px 0;font-size:15px}
+.tip .ic{flex-shrink:0}
+ul.plain{list-style:none;display:flex;flex-direction:column;gap:9px;margin:10px 0}
+ul.plain li{display:flex;gap:10px}
+ul.plain li::before{content:"–";color:var(--pink);font-weight:800;flex-shrink:0}
+/* --- интерактив «поломки»: облачка + панель --- */
+.fix-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+.fix-cloud{display:flex;flex-wrap:wrap;gap:10px}
+.fix-chip{cursor:pointer;font-family:inherit;font-weight:600;font-size:14.5px;padding:11px 16px;border-radius:999px;
+background:var(--surface);border:1.5px solid var(--line);color:var(--ink);transition:all .15s ease;text-align:left}
+.fix-chip:hover{border-color:#E6A8CF;transform:translateY(-1px)}
+.fix-chip.on{border-color:var(--pink);background:linear-gradient(120deg,#FFF1F8,#F4ECFE);font-weight:700}
+.fix-panel{position:sticky;top:16px;background:var(--surface);border:1.5px solid var(--pink);border-radius:var(--radius);
+padding:22px 24px;box-shadow:var(--shadow);min-height:150px}
+.fix-panel .fp-q{font-weight:800;margin-bottom:10px}
+.fix-panel .fp-a{font-size:15.5px}
+.fix-panel .fp-hint{opacity:.6;font-size:14.5px}
+/* --- топ-30 / списки побед --- */
+.win-cat{margin:20px 0 8px}
+.wins{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.win{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 16px;font-size:14.5px}
+.win b{display:block;margin-bottom:3px}
+.win span{opacity:.85}
+/* --- лента стилей каруселей --- */
+.styles-strip{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 16px;-webkit-overflow-scrolling:touch;
+scroll-snap-type:x mandatory}
+.stylecard{flex:0 0 190px;scroll-snap-align:start;border-radius:16px;border:1px solid var(--line);overflow:hidden;background:#fff}
+.stylecard .prev{height:120px;display:flex;flex-direction:column;justify-content:center;padding:14px;gap:6px}
+.stylecard .prev .l1{font-weight:800;font-size:13px}
+.stylecard .prev .l2{height:6px;border-radius:3px;width:75%}
+.stylecard .prev .l3{height:6px;border-radius:3px;width:50%}
+.stylecard .nm{padding:10px 14px;font-size:13px;font-weight:700;border-top:1px solid var(--line)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;min-height:48px;padding:0 26px;
+border-radius:999px;background:var(--grad);color:#fff;text-decoration:none;border:none;cursor:pointer}
+.btn:hover{opacity:.92}
+footer{margin-top:52px;padding:26px 0 34px;border-top:1px solid var(--line);font-size:13px;opacity:.65}
+@media(max-width:760px){
+.grid2,.wins{grid-template-columns:1fr}
+.fix-wrap{grid-template-columns:1fr}
+.fix-panel{position:static}
+section{padding:34px 0 4px}
+}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="top">
+    <a class="back" href="../">← Все бонусы</a>
+    <div class="brand">FitStars · курс <span>«Нейро-архитектор»</span></div>
+  </div>
+  <span class="label">Бонусный набор 01 · модуль 1</span>
+  <h1>Быстрые <span class="accent">победы</span></h1>
+  <p class="lead">Три инструмента на каждый день: как превращать сумбур в чёткую задачу, что нажать, когда ИИ «сломался», и 30 маленьких побед за 10 минут каждая.</p>
+</div></header>
+
+<section><div class="wrap">
+  <span class="label">Помощник · часть 1</span>
+  <h2>Не знаешь, чего хочешь? <span class="accent">Это идеальный запрос</span></h2>
+  <p class="sec-note">Самая полезная привычка из всех: как только чувствуешь «я запутался и не знаю, с чего начать» – <b>иди и говори это ИИ прямо</b>. Включи голосовой ввод и наговори честно, без подготовки: «Я не знаю, чего хочу. Помоги разобраться. Я вот здесь запуталась…». Формулировать красиво не нужно – это работа нейросети, а не твоя.</p>
+  <div class="promptbox"><div class="pb-h">Промпт · сумбур в задачу – копируй целиком</div>Сейчас я наговорю сумбурный поток мыслей – без структуры, как есть.
+
+Твоя задача:
+1. Коротко отрази, что ты услышал, – своими словами.
+2. Задай уточняющие вопросы, по одному за раз, не больше пяти.
+3. Собери из моих ответов чёткую задачу: цель, что уже есть, что хочу получить, как пойму, что готово.
+4. В конце выдай готовую формулировку задачи – такую, чтобы её можно было отдать исполнителю или другому ИИ.
+
+Начинаю: [говори голосом всё, что в голове]</div>
+  <div class="tip"><span class="ic">💡</span><span><b>Секретный приём.</b> Добавь в конце: «Задай мне вопросы, которые задал бы человек, которому я делегирую эту задачу». ИИ мгновенно находит дыры в постановке – сроки, бюджет, границы, критерии готовности, – о которых ты не подумал.</span></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="label">Помощник · часть 2</span>
+  <h2>Три живые ситуации – <span class="accent">разбор на примерах</span></h2>
+  <div class="grid2">
+    <div class="card"><h3>🤝 Надо делегировать, но непонятно, как отдать</h3>
+      <p>Задача вроде есть, а передать её страшно: не объяснишь – сделают не то.</p>
+      <div class="promptbox"><div class="pb-h">Промпт</div>Мне нужно передать задачу [кому: сотруднику / подрядчику / близкому].
+Вот задача, как я её понимаю: [сумбурно, как есть].
+
+Помоги упаковать её для передачи: контекст, что именно сделать, критерии готовности, срок, что человек может решать сам без меня. Потом задай вопросы, которые задал бы исполнитель, – я отвечу, и ты доработаешь постановку.</div>
+    </div>
+    <div class="card"><h3>🧩 Непонятная тема, в которой надо разобраться</h3>
+      <p>Все обсуждают, а ты киваешь. Пора закрыть пробел – за один разговор.</p>
+      <div class="promptbox"><div class="pb-h">Промпт</div>Мне нужно разобраться в теме: [тема].
+Я в ней: [ничего не понимаю / знаю поверхностно].
+Зачем мне это: [причина].
+
+Объясни простыми словами и по шагам: что это, как работает, что мне важно знать под мою цель, а что можно пропустить. После объяснения задай мне 3 вопроса – проверь, что я понял.</div>
+    </div>
+    <div class="card"><h3>🌪 Сижу в хаосе, не знаю, за что хвататься</h3>
+      <p>Дел столько, что не начинается ни одно. Отдай хаос целиком.</p>
+      <div class="promptbox"><div class="pb-h">Промпт</div>У меня завал, и я не знаю, за что хвататься. Наговорю всё подряд – дела, тревоги, обрывки.
+
+Разложи это на: 1) срочное и важное – с чего начать прямо сейчас, 2) важное, но не срочное – когда этим заняться, 3) что можно делегировать или отменить вообще. Для первого пункта распиши первый маленький шаг на 10 минут.
+
+Начинаю: [голосом всё, что в голове]</div>
+    </div>
+    <div class="card tint"><h3>🎯 Куда ещё это приложить</h3>
+      <ul class="plain">
+        <li>Написать сложное сообщение – наговори, что хочешь сказать, пусть соберёт</li>
+        <li>Подготовка к встрече – «вот что знаю, помоги собрать план разговора»</li>
+        <li>Любое «надо бы, но не знаю как» – начинай с честного «не знаю»</li>
+      </ul>
+      <p style="margin-top:8px">Правило одно: <b>сумбур – это нормальный вход.</b> Структура – работа ИИ.</p>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="label">12 поломок</span>
+  <h2>Что-то пошло не так? <span class="accent">Нажми на свою ситуацию</span></h2>
+  <p class="sec-note">Никаких длинных списков: нажми облачко с тем, что у тебя случилось, – справа появится подсказка, что делать.</p>
+  <div class="fix-wrap">
+    <div class="fix-cloud"><button class="fix-chip" data-i="0">Отвечает не то, что я просил</button>
+<button class="fix-chip" data-i="1">Пишет слишком длинно и водянисто</button>
+<button class="fix-chip" data-i="2">Выдумывает факты</button>
+<button class="fix-chip" data-i="3">Забыл, о чём договаривались выше</button>
+<button class="fix-chip" data-i="4">Оборвался на полуслове</button>
+<button class="fix-chip" data-i="5">Не читает мой файл</button>
+<button class="fix-chip" data-i="6">Пишет «пластиково», не моим голосом</button>
+<button class="fix-chip" data-i="7">Не знаю, как сформулировать запрос</button>
+<button class="fix-chip" data-i="8">Ответ верный, но бесполезный – слишком общий</button>
+<button class="fix-chip" data-i="9">Боюсь нажать что-то не то</button>
+<button class="fix-chip" data-i="10">Чат завис или пропал интернет</button>
+<button class="fix-chip" data-i="11">Закончился лимит бесплатных сообщений</button></div>
+    <div class="fix-panel" id="fixPanel">
+      <div class="fp-q" id="fp-q">Выбери ситуацию слева</div>
+      <div class="fp-a fp-hint" id="fp-a">Нажми на облачко – здесь появится подсказка, что делать.</div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="label">Топ-30 быстрых побед</span>
+  <h2>Задачи, которые ИИ решает <span class="accent">за 10 минут</span></h2>
+  <p class="sec-note">Не изучай – просто выбери ситуацию из жизни и скажи ИИ фразу из карточки (своими словами – ещё лучше). Каждая из них – маленькая победа за один запрос.</p>
+  <h3 class="win-cat">Работа и учёба – самый сезон</h3><div class="wins"><div class="win"><b>Письмо, которое неловко писать</b><span>«Напиши вежливо, но твёрдо: [ситуация]. Дай 2 варианта – мягкий и короткий»</span></div>
+<div class="win"><b>Каша задач перед дедлайном</b><span>«Вот всё, что надо сделать до пятницы: … Разложи по дням, начни с самого важного»</span></div>
+<div class="win"><b>Полтора часа совещания</b><span>«Вот заметки со встречи – сделай протокол: решения, задачи, кто и до когда»</span></div>
+<div class="win"><b>Непонятный документ</b><span>«Объясни простыми словами, что здесь написано и что от меня требуется»</span></div>
+<div class="win"><b>Отчёт из таблички</b><span>«Вот данные – собери короткую сводку: что выросло, что просело, 3 вывода»</span></div>
+<div class="win"><b>Вкат в осенний сезон</b><span>«Составь мягкий план первой рабочей недели после лета – без героизма»</span></div>
+<div class="win"><b>Разговор с руководителем</b><span>«Помоги подготовиться: мои аргументы, его возможные возражения, мои ответы»</span></div>
+<div class="win"><b>Школа началась</b><span>«Собери чек-лист к учебному году и расписание кружков ребёнка по дням»</span></div>
+<div class="win"><b>Надо освоить новую программу</b><span>«Составь план: 2 недели по 20 минут в день, от простого к сложному»</span></div>
+<div class="win"><b>Отклик на вакансию</b><span>«Перепиши мой опыт под эту вакансию: [текст вакансии + твой опыт]»</span></div></div><h3 class="win-cat">Дом и быт</h3><div class="wins"><div class="win"><b>Что приготовить сегодня</b><span>«Вот что есть в холодильнике: … Дай 3 варианта ужина на 30 минут»</span></div>
+<div class="win"><b>Меню на неделю</b><span>«Составь меню на неделю для семьи из [N] человек + список покупок по отделам»</span></div>
+<div class="win"><b>Выходные с детьми</b><span>«План на субботу: детям 5 и 9 лет, бюджет [X], запасной вариант на дождь»</span></div>
+<div class="win"><b>Подарок коллеге</b><span>«10 идей подарка до 2 000 ₽ для человека, который любит …»</span></div>
+<div class="win"><b>Расхламление</b><span>«Помоги разобрать шкаф: разбей на подходы по 15 минут и скажи, с чего начать»</span></div>
+<div class="win"><b>Куда уходят деньги</b><span>«Вот мои траты за месяц – разложи по категориям и покажи, где просело»</span></div>
+<div class="win"><b>Приходит мастер</b><span>«Что спросить у мастера по [задаче], чтобы понять, что мне не накручивают?»</span></div>
+<div class="win"><b>Техника мигает лампочкой</b><span>Сфотографируй и приложи: «Почему мигает и что нажать?»</span></div>
+<div class="win"><b>Письмо учителю</b><span>«Сформулируй вежливое сообщение классному руководителю: [ситуация]»</span></div>
+<div class="win"><b>Всё держу в голове</b><span>Голосом: «Наговорю всё, что накопилось, – разложи по срочности и напомни, что я забыл»</span></div></div><h3 class="win-cat">Для настроения – можно и повеселиться</h3><div class="wins"><div class="win"><b>Выговориться</b><span>«Побудь внимательным консультантом: выслушай, задай вопросы, помоги разложить по полочкам. Начинаю: …»</span></div>
+<div class="win"><b>Гороскоп на неделю</b><span>«Составь добрый шуточный гороскоп на мою неделю – вот список моих дел»</span></div>
+<div class="win"><b>Юбилей у тёщи</b><span>«Придумай тост: тёплый, короткий, без банальностей. Вот 3 факта о человеке: …»</span></div>
+<div class="win"><b>Не могу выбрать</b><span>«Задай мне 5 вопросов по очереди и помоги принять решение между А и Б»</span></div>
+<div class="win"><b>Спина затекла</b><span>«Собери разминку на 15 минут без инвентаря, я сижу за компьютером весь день»</span></div>
+<div class="win"><b>Нечего смотреть</b><span>«Вот 3 фильма, которые зашли: … Посоветуй похожее на вечер»</span></div>
+<div class="win"><b>Вернуться к хобби</b><span>«Хочу снова рисовать. Составь мягкий план на месяц по 20 минут в день»</span></div>
+<div class="win"><b>Сложный разговор с близким</b><span>«Помоги подобрать слова без обвинений: хочу сказать, что …»</span></div>
+<div class="win"><b>Итог дня за минуту</b><span>«Вот как прошёл день: … Скажи, что я сделал хорошо, и дай один совет на завтра»</span></div>
+<div class="win"><b>Просто поржать</b><span>«Придумай 5 очень убедительных оправданий, почему я опять отложил дела на завтра»</span></div></div>
+  <div class="tip"><span class="ic">🍂</span><span>Сентябрь – лучший месяц для этого списка: учебный год, рабочий сезон, все системы перезапускаются. Выбери три победы на эту неделю – по одной в день.</span></div>
+</div></section>
+
+<footer><div class="wrap">Бонус курса Нейро-архитектор «ИИ для жизни и дела» · FitStars. Материал для участников курса – пожалуйста, не передавайте ссылку дальше.</div></footer>
+<script>
+document.querySelectorAll('.promptbox').forEach(function(p){
+  var b=document.createElement('button');b.className='copybtn';b.textContent='⧉';b.title='Скопировать';
+  b.addEventListener('click',function(){
+    var t=p.innerText.replace(/^.*?\n/,'').replace('⧉','').trim();
+    navigator.clipboard.writeText(t).then(function(){b.textContent='✓';setTimeout(function(){b.textContent='⧉'},1200)});
+  });p.appendChild(b);
+});
+var FIXES=[[\u0027Отвечает не то, что я просил\u0027, \u0027Попроси: «Перечитай мой запрос, скажи, как ты его понял, и задай вопросы, если что-то неясно». Дальше сузь задачу и покажи пример ответа, который тебе нужен, – после этого попадание резко улучшается.\u0027], [\u0027Пишет слишком длинно и водянисто\u0027, \u0027Скажи: «Сократи до 5 пунктов, без вступлений и выводов». А на будущее задавай формат заранее: «ответ – списком, не длиннее 10 строк» или «только таблица».\u0027], [\u0027Выдумывает факты\u0027, \u0027Добавь в запрос: «Если не уверен или нет данных – скажи прямо, не придумывай. Отметь места, где сомневаешься». Важное перепроверяй вторым запросом: «Найди ошибки и сомнительные места в этом тексте».\u0027], [\u0027Забыл, о чём договаривались выше\u0027, \u0027В длинном чате напомни коротко: «Напомню контекст: …». Полезная привычка – попросить: «Зафиксируй наши договорённости одним списком», и в новом чате начинать с этого списка.\u0027], [\u0027Оборвался на полуслове\u0027, \u0027Напиши: «Продолжи ровно с места, где остановился». Если ответ большой – попроси разбить: «Давай по частям: сначала раздел 1, я скажу, когда продолжать».\u0027], [\u0027Не читает мой файл\u0027, \u0027Проверь формат и размер: надёжнее всего PDF и обычный текст. Если файл не берёт – вставь текст прямо в чат кусками и скажи, какой фрагмент главный. Скриншот тоже работает: сфотографируй и приложи.\u0027], [\u0027Пишет «пластиково», не моим голосом\u0027, \u0027Покажи 2–3 своих текста: «Вот как я пишу. Разбери мой стиль и пиши в нём». Полный разбор своего голоса мы делаем в модуле 2 – там из этого получается «паспорт стиля».\u0027], [\u0027Не знаю, как сформулировать запрос\u0027, \u0027Это не поломка – это нормальное начало. Включи голосовой ввод и наговори как есть: «Я не знаю, чего хочу, помоги разобраться, я запутался вот в этом…». Первый раздел этой страницы – ровно про это.\u0027], [\u0027Ответ верный, но бесполезный – слишком общий\u0027, \u0027Дай контекст: кто ты, для кого делаешь, что уже пробовал. И добавь: «Без общих советов – только конкретные шаги под мою ситуацию».\u0027], [\u0027Боюсь нажать что-то не то\u0027, \u0027Сломать нейросеть невозможно. Худшее, что случится, – неудачный ответ. Любой чат можно просто закрыть и начать новый, история никуда не денется. Смело нажимай.\u0027], [\u0027Чат завис или пропал интернет\u0027, \u0027Обнови страницу или перезайди в приложение – переписка сохраняется. Повтори последнее сообщение. Если завис именно ответ – напиши «продолжи».\u0027], [\u0027Закончился лимит бесплатных сообщений\u0027, \u0027Лимит обновляется через несколько часов – можно просто подождать. А можно продолжить в другой нейросети: попроси перед уходом «Собери резюме нашего диалога», скопируй и вставь его в новый чат.\u0027]];
+var chips=document.querySelectorAll('.fix-chip'),fq=document.getElementById('fp-q'),fa=document.getElementById('fp-a');
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(o){o.classList.remove('on')});c.classList.add('on');
+  var d=FIXES[+c.dataset.i];fq.textContent='«'+d[0]+'»';fa.innerHTML=d[1];
+  if(window.innerWidth<760){document.getElementById('fixPanel').scrollIntoView({behavior:'smooth',block:'nearest'})}
+})});
+</script>
+</body>
+</html>
