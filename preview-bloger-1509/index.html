@@ -153,7 +153,14 @@ a{color:inherit}
 .quote-card .who{font-weight:700;font-size:15px;line-height:1.3}
 .quote-card .who span{display:block;font-weight:500;color:#B9BDB3;font-size:13px}
 
-/* ---------- плашка регистрации + таймер (тёмный блок) ---------- */
+/* ---------- таймер на первом экране ---------- */
+.hero-clock{margin-top:30px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.hc-label{font-weight:700;font-size:15px}
+.hero-clock .unit{background:var(--surface);border:1px solid var(--line);min-width:70px}
+.hero-clock .unit b{color:var(--ink)}
+.hero-clock .unit span{color:var(--ink-3)}
+
+/* ---------- плашка регистрации (тёмный блок) ---------- */
 .reg-timer{margin-top:44px;background:var(--dark);color:#fff;border-radius:var(--radius-lg);padding:40px 44px;
   display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden}
 .reg-timer::before{content:"";position:absolute;right:-4%;top:-40%;width:520px;height:520px;border-radius:50%;
@@ -162,7 +169,7 @@ a{color:inherit}
 .rt-right{position:relative;z-index:1;padding-left:44px;border-left:1px solid rgba(255,255,255,.12)}
 .rt-when{font-weight:700;font-size:18px}
 .rt-when b{color:var(--accent)}
-.rt-sub{font-size:15px;color:#B9BDB3;margin:5px 0 20px}
+.rt-sub{font-size:15px;color:#B9BDB3;margin:5px 0 18px}
 .clock{display:flex;gap:12px}
 .unit{min-width:74px;text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
   border-radius:15px;padding:12px 8px;animation:pulse 2.6s ease-in-out infinite}
@@ -239,8 +246,8 @@ a{color:inherit}
 .sp-facts li{display:flex;gap:12px;align-items:flex-start;color:#D9DCD3}
 .sp-facts .mk{flex-shrink:0;width:24px;height:24px;border-radius:8px;background:rgba(196,245,66,.14);border:1px solid rgba(196,245,66,.35);
   color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:2px}
-.sp-accent{margin-top:22px;display:block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
-  border-radius:14px;padding:14px 20px;font-weight:700}
+
+
 
 /* ---------- что получат ---------- */
 .gifts{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -353,6 +360,7 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
   .rt-left{padding-right:0;padding-bottom:24px}
   .rt-right{padding-left:0;padding-top:24px;border-left:none;border-top:1px solid rgba(255,255,255,.12)}
   .clock{width:100%;justify-content:space-between}
+  .hero-clock{flex-direction:column;align-items:flex-start;gap:10px}
   .unit{min-width:0;flex:1}
   .pains,.cards,.gifts,.foot-grid{grid-template-columns:1fr}
   .speaker{grid-template-columns:1fr;text-align:center;justify-items:center}
@@ -380,6 +388,8 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
 </head>
 <body>
 
+<!-- ТЕСТ «Твоя платформа-2026» (подарок после регистрации): https://bloger-s-nulya.github.io/test-drive/quiz.html
+     На лендинге ссылку не показываем – её отдаёт GetCourse на странице «спасибо» и в письме после регистрации. -->
 <!-- ===== липкая шапка ===== -->
 <header class="hdr" id="hdr">
   <div class="wrap hdr-in">
@@ -415,6 +425,15 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
           <button type="button" class="btn" data-modal="modal-reg">Забронировать место <span class="arw">→</span></button>
           <span class="fine">Бесплатно · регистрация за 30 секунд</span>
         </div>
+        <div class="hero-clock">
+          <span class="hc-label">До начала эфира</span>
+          <div class="clock" aria-live="off">
+            <div class="unit"><b class="cd-d">00</b><span>дней</span></div>
+            <div class="unit"><b class="cd-h">00</b><span>часов</span></div>
+            <div class="unit"><b class="cd-m">00</b><span>минут</span></div>
+            <div class="unit"><b class="cd-s">00</b><span>секунд</span></div>
+          </div>
+        </div>
       </div>
       <figure class="quote-card reveal in">
         <span class="qm">«</span>
@@ -430,13 +449,8 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
     <div class="reg-timer reveal">
       <div class="rt-left">
         <div class="rt-when">Вебинар пройдёт <b>15 сентября в 15:00 (мск)</b></div>
-        <div class="rt-sub">До начала эфира осталось</div>
-        <div class="clock" aria-live="off">
-          <div class="unit"><b class="cd-d">00</b><span>дней</span></div>
-          <div class="unit"><b class="cd-h">00</b><span>часов</span></div>
-          <div class="unit"><b class="cd-m">00</b><span>минут</span></div>
-          <div class="unit"><b class="cd-s">00</b><span>секунд</span></div>
-        </div>
+        <div class="rt-sub">Бесплатно · вторник · прямой эфир с Викторией Ложниковой</div>
+        <ul class="reg-fields"><li>Имя</li><li>Email</li><li>Телефон</li></ul>
       </div>
       <div class="rt-right">
         <h2>Забронируй место</h2>
@@ -520,7 +534,6 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
         <li><span class="mk">✓</span><span>Создаёт успешные стратегии продвижения <b>для брендов и экспертов</b></span></li>
         <li><span class="mk">✓</span><span>Выступает с лекциями и мастер-классами по эффективному ведению блога как <b>член Ассоциации спикеров СНГ</b></span></li>
       </ul>
-      <div class="sp-accent">«Блог – это не талант, а алгоритм. <span class="mark">Представьте себя через год</span>: вы всё ещё думаете или уже начали?»</div>
     </div>
   </div>
 </section>
