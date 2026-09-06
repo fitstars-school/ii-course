@@ -40,7 +40,7 @@
   --radius-lg:26px;
   --shadow:0 18px 44px -26px rgba(16,18,20,.28);
   --maxw:1120px;
-  --h1:clamp(30px,3.3vw,42px);
+  --h1:clamp(36px,4.6vw,58px);
   --h2:clamp(27px,3.4vw,40px);
   --sub:20px;
   --text:17px;
@@ -134,10 +134,9 @@ a{color:inherit}
 .hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:44px;align-items:center}
 .hero .label{margin-bottom:18px}
 .hero h1{margin-bottom:22px}
-.hero h1 .pre{display:block;font-size:.62em;font-weight:700;color:var(--ink-2);margin-bottom:10px;letter-spacing:0}
-.hero-lead{max-width:560px;margin-bottom:6px;color:var(--ink)}
-.hero-meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin:18px 0 0;list-style:none}
-.hero-meta li{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+.hero-sub{font-size:22px;line-height:1.4;font-weight:500;color:var(--ink);max-width:600px;text-wrap:balance}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin:22px 0 0;list-style:none}
+.hero-meta li{display:flex;align-items:center;gap:8px;font-weight:500;font-size:16px;color:var(--ink-2)}
 .hero-meta li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
 .hero-cta{display:flex;align-items:center;gap:16px;margin-top:30px;flex-wrap:wrap}
 /* цитата-крючок */
@@ -146,7 +145,7 @@ a{color:inherit}
 .quote-card::after{content:"";position:absolute;right:-70px;bottom:-90px;width:260px;height:260px;border-radius:50%;
   background:radial-gradient(circle,rgba(196,245,66,.28),transparent 70%);pointer-events:none}
 .quote-card .qm{font-family:'Unbounded',sans-serif;font-weight:800;font-size:64px;line-height:1;color:var(--accent);display:block;margin:-10px 0 6px}
-.quote-card blockquote{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(20px,2vw,25px);line-height:1.28;letter-spacing:-.01em;position:relative;z-index:1}
+.quote-card blockquote{font-weight:600;font-size:clamp(19px,1.7vw,23px);line-height:1.42;position:relative;z-index:1}
 .quote-card figcaption{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;align-items:center;gap:12px;position:relative;z-index:1}
 .quote-card .av{width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--accent-ink);
   display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0}
@@ -169,7 +168,7 @@ a{color:inherit}
 .rt-right{position:relative;z-index:1;padding-left:44px;border-left:1px solid rgba(255,255,255,.12)}
 .rt-when{font-weight:700;font-size:18px}
 .rt-when b{color:var(--accent)}
-.rt-sub{font-size:15px;color:#B9BDB3;margin:5px 0 18px}
+.rt-sub{font-size:15px;color:#B9BDB3;margin:5px 0 0}
 .clock{display:flex;gap:12px}
 .unit{min-width:74px;text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
   border-radius:15px;padding:12px 8px;animation:pulse 2.6s ease-in-out infinite}
@@ -349,7 +348,8 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
   .hdr-gift{display:none}
   .hero{padding:34px 0 56px}
   .sec{padding:60px 0}
-  h1{font-size:clamp(26px,7vw,36px)}
+  h1{font-size:clamp(32px,9vw,42px)}
+  .hero-sub{font-size:19px}
   .nw{white-space:normal}
   .hero-grid{grid-template-columns:1fr;gap:30px}
   .hero-cta{width:100%;gap:12px}
@@ -403,7 +403,7 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
     </div>
     <div class="hdr-cta">
       <button type="button" class="btn btn-sm" data-modal="modal-reg">Забронировать место <span class="arw">→</span></button>
-      <span class="hdr-gift">🎁 После регистрации – интерактивный тест <b>«Твоя платформа 2026»</b></span>
+      <span class="hdr-gift">🎁 В подарок – интерактивный тест «Твоя платформа-2026»</span>
     </div>
   </div>
 </header>
@@ -414,12 +414,11 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
     <div class="hero-grid">
       <div>
         <span class="label">Бесплатный онлайн-вебинар</span>
-        <h1><span class="pre">Блогер с нуля:</span>как перестать ждать идеального момента, победить самозванца и построить систему, которая <span class="mark">приносит деньги</span> на любой площадке</h1>
-        <p class="hero-lead">Прямой эфир с Викторией Ложниковой – экспертом с аудиторией 100 000+ и руководителем SMM-агентства «Контент-кухня».</p>
+        <h1>Блогер с нуля</h1>
+        <p class="hero-sub">Как перестать ждать идеального момента, победить самозванца и построить систему, которая приносит деньги на любой площадке</p>
         <ul class="hero-meta">
-          <li>15 сентября, вторник</li>
-          <li>15:00 мск</li>
-          <li>Бесплатно</li>
+          <li>15 сентября, вторник, 15:00 мск</li>
+          <li>Спикер – Виктория Ложникова</li>
         </ul>
         <div class="hero-cta">
           <button type="button" class="btn" data-modal="modal-reg">Забронировать место <span class="arw">→</span></button>
@@ -449,14 +448,13 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
     <div class="reg-timer reveal">
       <div class="rt-left">
         <div class="rt-when">Вебинар пройдёт <b>15 сентября в 15:00 (мск)</b></div>
-        <div class="rt-sub">Бесплатно · вторник · прямой эфир с Викторией Ложниковой</div>
-        <ul class="reg-fields"><li>Имя</li><li>Email</li><li>Телефон</li></ul>
+        <div class="rt-sub">Бесплатно · прямой эфир с Викторией Ложниковой · запись планируется</div>
       </div>
       <div class="rt-right">
         <h2>Забронируй место</h2>
-        <p>Имя, почта и телефон – регистрация занимает 30 секунд. Ссылка на эфир придёт на почту и в мессенджер.</p>
+        <p>Регистрация занимает 30 секунд. Ссылка на эфир придёт на почту и в мессенджер.</p>
         <button type="button" class="btn" data-modal="modal-reg">Забронировать место <span class="arw">→</span></button>
-        <span class="fine">🎁 Сразу после регистрации – интерактивный тест <b>«Твоя платформа 2026»</b></span>
+        <span class="fine">🎁 В подарок – интерактивный тест «Твоя платформа-2026»</span>
       </div>
     </div>
   </div>
@@ -565,9 +563,8 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
         <p>15 сентября, вторник, 15:00 мск. Бесплатно. Запись планируется, но вопросы спикеру можно задать только в прямом эфире.</p>
       </div>
       <div class="reg-side">
-        <ul class="reg-fields"><li>Имя</li><li>Email</li><li>Телефон</li></ul>
         <button type="button" class="btn" data-modal="modal-reg">Забронировать место <span class="arw">→</span></button>
-        <span class="fine">🎁 После регистрации – интерактивный тест <b>«Твоя платформа 2026»</b></span>
+        <span class="fine">🎁 В подарок – интерактивный тест «Твоя платформа-2026»</span>
       </div>
     </div>
   </div>
@@ -665,7 +662,7 @@ footer{background:var(--dark);color:#CFD3C8;padding:56px 0 34px}
       <!-- GetCourse widget: регистрация на вебинар «Блогер с нуля» -->
       <script id="6e4e156ceff13b7f8250259b0c6117900eee58e2" src="https://influencerexpert.ru/pl/lite/widget/script?id=1652223"></script>
     </div>
-    <div class="modal-foot">🎁 После регистрации – интерактивный тест <b>«Твоя платформа 2026»</b> и ссылка на эфир</div>
+    <div class="modal-foot">🎁 В подарок после регистрации – интерактивный тест «Твоя платформа-2026»</div>
   </div>
 </div>
 
