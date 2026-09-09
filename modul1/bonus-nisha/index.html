@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ИИ в моей профессии · Бонус модуля 1 · Нейро-архитектор</title>
+<meta name="description" content="Карта применений ИИ по четырём уровням для десяти профессиональных ролей: 200 примеров и готовые запросы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel,.dark .plabel{color:var(--pink-soft)}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:13px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.rtabs{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;padding-bottom:24px;border-bottom:1px solid var(--ink)}
+.rtab{font-family:var(--sans);font-size:16px;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:0 0 3px;cursor:pointer;transition:color .2s,border-color .2s}
+.rtab:hover{color:var(--ink)}
+.rtab.on{color:var(--ink);border-bottom-color:var(--pink)}
+.rolepanel{display:none}
+.rolepanel.on{display:block}
+.rintro{font-family:var(--serif);font-size:clamp(19px,2vw,23px);line-height:1.34;margin:34px 0 0;max-width:52ch;color:#3B3143}
+.levtabs{display:flex;flex-wrap:wrap;gap:0;margin:34px 0 0;border-bottom:1px solid var(--line)}
+.ltab{font-family:var(--sans);font-size:14.5px;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:0 22px 14px 0;margin-right:8px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:color .2s,border-color .2s}
+.ltab:hover{color:var(--ink)}
+.ltab.on{color:var(--ink);border-bottom-color:var(--pink)}
+.lnum{font-family:var(--serif);font-size:22px;line-height:1;color:var(--faint)}
+.ltab.on .lnum{color:var(--pink)}
+.pane{display:none}
+.pane.on{display:block}
+.lnote{font-size:16px;color:var(--muted);margin:26px 0 30px;max-width:64ch}
+.lnote.soon{border-left:2px solid var(--pink);padding-left:20px}
+.soonmark{display:block;font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:7px}
+.rowhead{display:grid;grid-template-columns:64px 1fr 1fr;gap:14px;padding:0 0 12px;border-bottom:1px solid var(--ink);font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.row{display:grid;grid-template-columns:64px 1fr 1fr;gap:14px;padding:22px 0;border-bottom:1px solid var(--line);align-items:start}
+.num.sm{font-size:27px}
+.rtask{font-size:17px;font-weight:600;line-height:1.45}
+.rres{font-size:16px;color:var(--muted);line-height:1.45}
+.qlist{counter-reset:q;margin-top:18px}
+.qlist li{position:relative;padding-left:34px;margin-bottom:11px;list-style:none}
+.qlist li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:-2px;font-family:var(--serif);font-size:21px;color:var(--pink);background:none;width:auto;height:auto}
+.ldef{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.ldef:last-child{border-bottom:none}
+.ldnum{font-family:var(--serif);font-size:38px;line-height:1;color:var(--pink-soft)}
+.ldef h3{font-family:var(--sans);font-size:18px;font-weight:700;margin-bottom:6px;color:#fff}
+.ldef p{font-size:16px;color:#CFC4D4;line-height:1.55}
+.form{margin-top:34px}
+.pblock{padding:30px 0;border-top:1px solid var(--line)}
+.phead{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:center;margin-bottom:20px}
+.phead .ldnum{color:var(--pink)}
+.phead h3{font-family:var(--sans);font-size:18px;font-weight:700}
+.fld{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:center;margin-bottom:11px}
+.fld.wide{grid-template-columns:1fr;gap:7px;margin-top:22px;margin-left:74px}
+.fnum{font-family:var(--mono);font-size:12px;color:var(--faint);text-align:right}
+.flab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.form input{font-family:var(--sans);font-size:16px;font-weight:500;color:var(--ink);background:none;border:none;border-bottom:1px solid var(--line);padding:9px 2px;width:100%;transition:border-color .2s}
+.form input:focus{outline:none;border-bottom-color:var(--pink)}
+.form input::placeholder{color:var(--faint)}
+.saved{font-family:var(--mono);font-size:12px;color:var(--faint);margin-left:2px}
+@media (max-width:760px){
+  .rowhead{display:none}
+  .row{grid-template-columns:40px 1fr;gap:10px}
+  .rres{grid-column:2}
+  .num.sm{font-size:23px}
+  .ldef,.phead,.fld{grid-template-columns:38px 1fr;gap:12px}
+  .fld.wide{margin-left:50px;grid-template-columns:1fr}
+  .ldnum{font-size:29px}
+  .rtabs{gap:8px 18px}
+  .rtab{font-size:15px}
+  .ltab{padding-right:16px;font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · бонус</span></div>
+  <div class="hero">
+    <div class="hgrid">
+      <h1>ИИ в моей <span class="it">профессии</span></h1>
+      <p class="hlead">Карта применений по четырём уровням. Двести примеров для десяти профессиональных ролей.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap lede">
+  <div class="col">
+      <p>ИИ можно использовать не только для текстов и поиска идей. Он способен помогать с решениями, повторяющимися задачами, передачей информации между сервисами и работой с файлами на компьютере.</p>
+      <p>На этой странице собраны 200 примеров для десяти профессиональных ролей. Не нужно внедрять всё. Задай себе два вопроса:</p>
+    <ol class="qlist">
+        <li>Что из этого уже сейчас снимет с меня небольшую, но раздражающую задачу?</li>
+        <li>К какому уровню работы с ИИ я хочу прийти дальше?</li>
+    </ol>
+  </div>
+</section>
+
+<div class="dark">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Как устроена карта</p>
+    <h2 style="margin:14px 0 26px;max-width:16ch">Четыре уровня работы с ИИ</h2>
+      <div class="ldef"><span class="ldnum">1</span><div><h3>Чат-болталка</h3><p>Ты приходишь в чат с одной задачей, рассказываешь контекст и получаешь ответ. Это разовая помощь: разобрать ситуацию, придумать варианты, собрать структуру, подготовить вопросы.</p></div></div>
+      <div class="ldef"><span class="ldnum">2</span><div><h3>ИИ-помощник</h3><p>У помощника есть постоянная роль, правила и нужный контекст. Тебе не приходится каждый раз заново объяснять, кто ты, как работаешь и каким должен быть результат.</p></div></div>
+      <div class="ldef"><span class="ldnum">3</span><div><h3>Интеграции</h3><p>ИИ становится частью процесса и получает информацию из других сервисов: форм, календаря, почты, таблиц, системы задач или базы клиентов. Данные меньше приходится переносить вручную.</p></div></div>
+      <div class="ldef"><span class="ldnum">4</span><div><h3>Работа на компьютере</h3><p>ИИ работает с файлами, папками и программами на компьютере: собирает документы, обновляет таблицы и презентации, сравнивает версии, приводит материалы в порядок. Такие действия всегда требуют понятных границ и проверки результата человеком.</p></div></div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="lede" style="padding-top:52px">
+    <div class="col">
+      <p class="label">Как пользоваться картой</p>
+      <ol class="qlist" style="margin-top:20px">
+        <li>Выбери роль, которая ближе всего к твоей работе.</li>
+        <li>Начни с первого уровня и отметь одну задачу, которую хотите попробовать сейчас.</li>
+        <li>Посмотри уровни 2-4 как карту будущих возможностей. Пока не нужно понимать, как всё это настроить.</li>
+        <li>В конце заполни личную карту и выбери один следующий шаг.</li>
+      </ol>
+      <p style="margin-top:20px;color:var(--muted)">Если твоей профессии нет в списке, выбери похожую по типу работы. Например, фотографу может подойти карта эксперта, владельцу небольшой студии – карта индивидуального предпринимателя, а администратору – карта специалиста в найме.</p>
+    </div>
+  </div>
+
+  <p class="label" style="margin-top:56px">Выбери свою роль</p>
+  <div class="rtabs">
+      <button class="rtab on" type="button" data-role="r1">Индивидуальный предприниматель</button>
+      <button class="rtab" type="button" data-role="r2">Руководитель</button>
+      <button class="rtab" type="button" data-role="r3">Эксперт консультант или коуч</button>
+      <button class="rtab" type="button" data-role="r4">Специалист в найме</button>
+      <button class="rtab" type="button" data-role="r5">Преподаватель или репетитор</button>
+      <button class="rtab" type="button" data-role="r6">Блогер или автор контента</button>
+      <button class="rtab" type="button" data-role="r7">Риелтор</button>
+      <button class="rtab" type="button" data-role="r8">Специалист сферы красоты</button>
+      <button class="rtab" type="button" data-role="r9">Финансист бухгалтер или экономист</button>
+      <button class="rtab" type="button" data-role="r10">Юрист</button>
+  </div>
+
+    <div class="rolepanel on" data-panel="r1">
+      <p class="rintro">Ты работаешь на себя и одновременно отвечаешь за клиентов, деньги, продажи, документы и организацию работы.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Разобрать завал задач</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я работаю на себя и сейчас перечислю все задачи, обязательства и незакрытые вопросы. Помоги разделить их на срочные, важные и те, которые можно отложить. Затем предложи три приоритета на ближайший рабочий день с учётом моего времени.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Подготовить ответ клиенту</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я расскажу, что произошло в общении с клиентом и какой результат мне нужен. Помоги написать спокойный и ясный ответ. Сохрани мои условия, не обещай того, чего я не говорила, и убери лишнюю официальность.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Проверить логику цены</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я опишу услугу, объём работы, сроки и свои расходы. Помоги разложить, из чего складывается цена, какие факторы я могла не учесть и что стоит объяснить клиенту. Не называй рыночную цену без проверенных данных.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Собрать рабочую неделю</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот мои встречи, сроки, личные ограничения и список задач на неделю. Помоги составить реалистичный план без попытки уместить всё. Отдельно оставь время на непредвиденные задачи и восстановление.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Найти задачу для разгрузки</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Задай мне до семи вопросов по одному о том, что в моей работе повторяется, раздражает и отнимает время. Затем предложи пять задач, которые можно упростить с помощью ИИ, начиная с самой лёгкой.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Операционный помощник держит список обязательств, оплат и сроков</p><p class="rres">Меньше задач теряется между проектами и сообщениями</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Финансовый помощник ведёт план-факт и помогает готовиться к платежам</p><p class="rres">Появляется регулярное понимание, сколько денег есть и на что они нужны</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по работе с клиентами готовит ответы в твоём тоне</p><p class="rres">Переписка занимает меньше времени и остаётся последовательной</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по услугам собирает обратную связь и замечает повторяющиеся запросы</p><p class="rres">Проще улучшать продукт на основе реальных вопросов клиентов</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по приоритетам проводит короткую ежедневную сверку</p><p class="rres">День начинается с выбора главного, а не с тушения всего подряд</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Новая заявка автоматически появляется в списке клиентов</p><p class="rres">Форма на сайте, таблица или база клиентов</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">После записи клиент получает подтверждение и напоминание</p><p class="rres">Форма записи, календарь и почта или мессенджер</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Поступления и обязательные платежи попадают в финансовую таблицу</p><p class="rres">Платёжные уведомления и система учёта</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Итоги встречи превращаются в задачи со сроками</p><p class="rres">Заметки, календарь и система задач</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Раз в неделю собирается короткая сводка по проектам</p><p class="rres">Таблицы, календарь, список задач и клиентская база</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Разложить клиентские материалы по папкам и единообразно назвать файлы</p><p class="rres">Понятный архив по клиентам и проектам</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Собрать коммерческое предложение из утверждённого шаблона</p><p class="rres">Готовый черновик документа для проверки</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Обновить финансовую таблицу по подготовленным данным</p><p class="rres">Актуальный план-факт без ручного переноса каждой строки</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Сравнить две версии договора или предложения</p><p class="rres">Список изменений и спорных мест</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Собрать ежемесячный отчёт из рабочих документов</p><p class="rres">Один структурированный файл вместо нескольких разрозненных источников</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r2">
+      <p class="rintro">Ты отвечаешь не только за собственные задачи, но и за решения, коммуникацию, людей и общий результат команды.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Подготовиться к сложному разговору</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне предстоит разговор с сотрудником о следующей ситуации: <span class="tok">[опишите]</span>. Помоги определить цель разговора, факты, которые важно назвать, вопросы сотруднику и формулировки без обвинений. Не решай ситуацию за меня.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Поставить понятную задачу</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я сейчас своими словами опишу задачу для сотрудника. Собери её в структуру: зачем это нужно, какой результат ожидается, срок, ограничения и критерии готовности. Отдельно покажи, чего в постановке не хватает.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Подготовить вопросы к совещанию</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Тема совещания: <span class="tok">[тема]</span>. Участники: <span class="tok">[кто]</span>. Решение, к которому нужно прийти: <span class="tok">[результат]</span>. Составь короткую повестку и вопросы, которые не дадут разговору уйти в пересказ новостей.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Дать развивающую обратную связь</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот факты о работе сотрудника: <span class="tok">[факты]</span>. Помоги подготовить обратную связь, отделяя наблюдения от моих интерпретаций. Добавь вопросы, которые помогут сотруднику самому увидеть следующий шаг.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Посмотреть на решение с разных сторон</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я выбираю между вариантами: <span class="tok">[варианты]</span>. Рассмотри решение с позиции результата, команды, рисков, ресурсов и долгосрочных последствий. Сначала уточни, какие ограничения для меня обязательны.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Управленческий собеседник помогает разбирать сложные ситуации</p><p class="rres">Решения проверяются до разговора с командой</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Помощник по делегированию превращает замысел в понятную постановку задачи</p><p class="rres">Сотрудникам реже приходится угадывать ожидаемый результат</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по обратной связи хранит выбранные принципы коммуникации</p><p class="rres">Сложные разговоры становятся последовательнее</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по совещаниям готовит повестки и фиксирует решения</p><p class="rres">Меньше встреч заканчивается без следующих шагов</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по развитию команды помогает готовить вопросы для встреч один на один</p><p class="rres">Разговоры не сводятся к текущим проблемам и статусам</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Решения совещания автоматически превращаются в задачи</p><p class="rres">Заметки о встрече и система управления проектами</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Перед встречей собирается краткая справка по проекту</p><p class="rres">Календарь, задачи, документы и отчёты</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Просроченные задачи попадают в управленческую сводку</p><p class="rres">Система задач и почта или мессенджер</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Ответы команды из формы собираются в обзор рисков</p><p class="rres">Формы, таблицы и отчёт для руководителя</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Из разных каналов формируется единый список запросов на решение</p><p class="rres">Почта, рабочие чаты и система задач</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Собрать недельный отчёт из файлов подразделений</p><p class="rres">Единая сводка с вопросами и отклонениями</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Обновить презентацию к совещанию по свежим данным</p><p class="rres">Черновик слайдов в утверждённой структуре</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Сравнить планы и фактические результаты в таблицах</p><p class="rres">Список расхождений для управленческого решения</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Привести в порядок папку проекта</p><p class="rres">Понятная структура, названия и список недостающих материалов</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Собрать проект решения из нескольких документов</p><p class="rres">Один документ с вариантами, аргументами и открытыми вопросами</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r3">
+      <p class="rintro">Ты продаёте знания, опыт или сопровождение и много работаете с мыслями, разговорами, методикой и индивидуальными запросами клиентов.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Прояснить ценность услуги</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я опишу, с кем работаю, что происходит в работе и какой результат получают клиенты. Помоги выделить конкретную ценность услуги без громких обещаний. Сначала задай мне до пяти вопросов по одному.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Подготовить структуру встречи</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>У меня встреча с клиентом на тему <span class="tok">[тема]</span>. Цель встречи: <span class="tok">[цель]</span>. Помоги собрать структуру разговора, ключевые вопросы и возможные развилки. Не придумывай ответы клиента.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Превратить поток мыслей в план материала</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я наговорю свои мысли по теме <span class="tok">[тема]</span>. Собери их в логичный план статьи, выступления или урока. Сохрани мои идеи и формулировки, а свои дополнения пометь отдельно.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Объяснить сложную идею клиенту</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне нужно объяснить клиенту <span class="tok">[идея]</span>. Предложи три простых объяснения с разными бытовыми примерами. Не упрощай смысл до искажения.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Подготовить вопросы для диагностики</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне нужно понять ситуацию клиента перед работой над <span class="tok">[задача]</span>. Составь вопросы, которые помогут выяснить исходную точку, желаемый результат, ограничения и прошлые попытки. Не превращай вопросы в продажу.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Методический помощник помогает собирать программы по твоим принципам</p><p class="rres">Материалы сохраняют общую логику и не превращаются в набор тем</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Помощник по стилю знает особенности твоего голоса</p><p class="rres">Черновики требуют меньше стилистической переделки</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по подготовке сессий учитывает формат и твои рабочие рамки</p><p class="rres">Подготовка начинается не с пустого листа</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Рефлексивный помощник помогает разбирать завершённую работу</p><p class="rres">Наблюдения превращаются в решения для следующих проектов</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по вопросам клиентов собирает повторяющиеся темы</p><p class="rres">Проще создавать полезные материалы и улучшать услуги</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Ответы из анкеты превращаются в краткую подготовку к встрече</p><p class="rres">Форма клиента, календарь и рабочие заметки</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">После записи отправляются инструкции и напоминания</p><p class="rres">Сервис записи, календарь и почта</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Итоги встречи попадают в карточку клиента и список следующих шагов</p><p class="rres">Заметки, клиентская база и система задач</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Вопросы аудитории автоматически собираются в тематические группы</p><p class="rres">Формы, комментарии и база идей</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Новые материалы распределяются по рассылке и контент-плану</p><p class="rres">База материалов, календарь публикаций и рассылка</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Собрать рабочую тетрадь из утверждённых упражнений</p><p class="rres">Единый документ с последовательностью и инструкциями</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Обновить материалы курса после изменений в программе</p><p class="rres">Согласованные версии уроков, заданий и памяток</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Найти нужные идеи в личной библиотеке материалов</p><p class="rres">Подборка источников и фрагментов по заданной теме</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Подготовить клиентскую папку по утверждённому шаблону</p><p class="rres">Структура файлов, формы и рабочие документы</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Сравнить несколько версий программы или текста</p><p class="rres">Карта изменений без потери авторских решений</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r4">
+      <p class="rintro">Ты работаешь внутри компании, выполняете профессиональные задачи, взаимодействуете с коллегами и зависите от внутренних правил и процессов.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Расшифровать непонятную задачу</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне поставили такую задачу: <span class="tok">[текст]</span>. Объясни простыми словами, какой результат от меня ожидают. Раздели ответ на то, что уже понятно, возможные скрытые ожидания и вопросы, которые стоит задать руководителю.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Подготовить статус по работе</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот что было запланировано, что сделано, что не получилось и почему: <span class="tok">[данные]</span>. Собери короткий статус для руководителя без оправданий и лишних подробностей. Отдельно сформулируй, какое решение или помощь мне нужны.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Написать рабочее письмо</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я расскажу смысл письма и отношения с получателем. Напиши ясный черновик с конкретной просьбой или следующим шагом. Не добавляй факты и обязательства, которых я не называла.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Подготовиться к новой задаче</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне нужно впервые сделать <span class="tok">[задача]</span>. Помоги составить план старта: что узнать, у кого запросить данные, какие риски проверить и какой первый результат показать.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Собрать план профессионального развития</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я хочу лучше справляться с <span class="tok">[задача или роль]</span>. Сначала выясни мою текущую ситуацию, затем предложи один навык для развития и короткий план практики на две недели.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Личный планировщик помогает выбирать приоритеты внутри рабочей недели</p><p class="rres">Срочное меньше вытесняет важное</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Профессиональный помощник знает термины и типовые задачи твоей роли</p><p class="rres">Не приходится каждый раз объяснять рабочий контекст</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по деловой переписке учитывает нормы компании</p><p class="rres">Письма и сообщения готовятся быстрее</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по совещаниям помогает готовить позицию и вопросы</p><p class="rres">Участие во встречах становится содержательнее</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по развитию фиксирует практику и обратную связь</p><p class="rres">Обучение связывается с реальной работой</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Письма с поручениями попадают в систему задач</p><p class="rres">Почта и рабочий планировщик</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Перед встречей появляется краткое напоминание о контексте</p><p class="rres">Календарь, документы и заметки</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Ответы коллег из формы собираются в общую таблицу</p><p class="rres">Форма и рабочая таблица</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">При изменении показателей приходит уведомление</p><p class="rres">Отчёт или таблица и рабочий чат</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Учёт времени связывается с задачами и проектами</p><p class="rres">Календарь, таймер и система задач</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Собрать отчёт из утверждённых таблиц</p><p class="rres">Черновик отчёта с показателями и пояснениями</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Обновить документ по замечаниям коллег</p><p class="rres">Новая версия с сохранённой структурой</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Подготовить презентацию по готовому плану и данным</p><p class="rres">Черновик слайдов для проверки специалистом</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Сопоставить несколько версий одного файла</p><p class="rres">Список расхождений и актуальная версия</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Навести порядок в папке проекта</p><p class="rres">Единые названия, структура и перечень недостающих файлов</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r5">
+      <p class="rintro">Ты объясняете, создаёте задания, проверяете понимание и адаптируете обучение под разных учеников.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Объяснить тему несколькими способами</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне нужно объяснить ученику <span class="tok">[возраст или уровень]</span> тему <span class="tok">[тема]</span>. Предложи три объяснения: через бытовой пример, через наглядную аналогию и через короткую практику. Не заменяй объяснение правильным ответом.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Создать тренировочное задание</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Составь пять заданий на тренировку навыка <span class="tok">[навык]</span>. Начни с простого и постепенно усложняй. После заданий отдельно дай ответы и короткое объяснение типичных ошибок.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Подготовить план занятия</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Помоги составить занятие на <span class="tok">[время]</span> по теме <span class="tok">[тема]</span>. Ученик уже умеет <span class="tok">[что]</span>, затрудняется в <span class="tok">[что]</span>. Включи короткое объяснение, практику, проверку понимания и итог.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Адаптировать материал под ученика</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот содержание, которое нужно освоить: <span class="tok">[текст]</span>. Адаптируй его для ученика <span class="tok">[возраст, особенности, интересы]</span>. Сохрани обязательные факты и предложи понятный пример.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Проверить понимание без контрольной</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Составь семь вопросов по теме <span class="tok">[тема]</span>, которые проверяют не запоминание слов, а понимание. Добавь признаки сильного, частичного и ошибочного ответа для преподавателя.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Помощник по конкретному классу или ученику учитывает уровень и цели</p><p class="rres">Материалы точнее попадают в реальные трудности</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Методический помощник собирает занятия по выбранной структуре</p><p class="rres">Подготовка становится последовательнее</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по заданиям создаёт варианты нужной сложности</p><p class="rres">Проще давать дополнительную практику без копирования одного упражнения</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по обратной связи следует заданным критериям</p><p class="rres">Комментарии становятся понятнее и полезнее для ученика</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по общению с родителями переводит наблюдения в ясные сообщения</p><p class="rres">Разговор строится вокруг прогресса и следующих шагов</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Ответы учеников из формы собираются в обзор затруднений</p><p class="rres">Форма и таблица результатов</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Домашние задания и напоминания отправляются по расписанию</p><p class="rres">Календарь, учебная платформа и почта</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Посещаемость обновляется в общей таблице</p><p class="rres">Форма отметки и журнал</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Вопросы учеников попадают в список тем для повторения</p><p class="rres">Учебный чат и база вопросов</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Расписание занятий синхронизируется с личным календарём</p><p class="rres">Сервис записи и календарь</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Собрать рабочий лист из утверждённых заданий</p><p class="rres">Готовый документ для занятия</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Обновить презентацию урока под новую группу</p><p class="rres">Версия с подходящими примерами и заданиями</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Разложить материалы по темам и уровням</p><p class="rres">Понятная библиотека без дубликатов</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Собрать отчёт о прогрессе из записей преподавателя</p><p class="rres">Черновик с наблюдениями и следующими целями</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Сделать несколько версий проверочной работы</p><p class="rres">Комплекты одинаковой сложности с ключами для проверки</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r6">
+      <p class="rintro">Ты работаешь с идеями, текстами и форматами, но содержание и авторская позиция должны оставаться твоими.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Собрать идею из голосового потока</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я расскажу историю или мысль так, как рассказала бы знакомому человеку. Сначала выдели главную мысль и живые детали, затем предложи структуру публикации. Не пиши финальный текст и не добавляй нейросетевые формулировки.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Найти разные углы одной темы</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Тема: <span class="tok">[тема]</span>. Аудитория уже знает следующее: <span class="tok">[что]</span>. Предложи десять разных вопросов или жизненных ситуаций, через которые можно раскрыть тему без повторения базовой теории.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Собрать сценарный план</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я хочу записать короткое видео о <span class="tok">[тема]</span>. Помоги построить ход мысли от конкретной ситуации к выводу. Не придумывай искусственный конфликт и не пиши рубленые фразы ради драматизма.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Развернуть одну мысль в несколько форматов</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот моя исходная мысль: <span class="tok">[текст]</span>. Покажи, как её можно раскрыть в коротком посте, серии сторис, вопросе аудитории и плане видео. Смысл во всех форматах должен остаться одним.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Увидеть, где текст не работает</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Прочитай мой текст как внимательный редактор. Отметь, где мысль повторяется, звучит слишком общей или требует примера. Не переписывай текст целиком, пока я не выберу, что менять.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Помощник по авторскому голосу знает удачные примеры и запреты</p><p class="rres">Черновики меньше похожи на усреднённый текст из интернета</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Редакционный помощник хранит темы, рубрики и аудиторию</p><p class="rres">Новые идеи связываются с общей линией контента</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по интервью вытаскивает фактуру вопросами по одному</p><p class="rres">Личный опыт не теряется за гладкими формулировками</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по повторному использованию материала предлагает новые форматы</p><p class="rres">Одна сильная идея работает дольше</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по обратной связи анализирует вопросы аудитории</p><p class="rres">Контент отвечает на реальные затруднения людей</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Вопросы из комментариев попадают в банк идей</p><p class="rres">Социальные сети и база контента</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Утверждённые публикации появляются в календаре</p><p class="rres">База материалов и календарь публикаций</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Заявки из контента попадают в список контактов</p><p class="rres">Форма или сообщения и клиентская база</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Показатели публикаций собираются в одну таблицу</p><p class="rres">Площадки и аналитическая таблица</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Новая публикация запускает подготовленные уведомления</p><p class="rres">Система публикации, рассылка и рабочий чат</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Разложить архив контента по темам и форматам</p><p class="rres">Библиотека, в которой легко найти старую идею</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Подготовить черновики материалов по утверждённым планам</p><p class="rres">Набор файлов для редакторской работы</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Обновить контент-календарь по выбранным публикациям</p><p class="rres">Актуальный план без ручного переноса каждой позиции</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Переименовать и распределить изображения и видео</p><p class="rres">Порядок в медиапапках и понятные названия</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Собрать пакет материалов для публикации</p><p class="rres">Текст, заголовки, описание и служебные элементы в одном месте</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r7">
+      <p class="rintro">Ты работаешь с запросами клиентов, объектами, показами, сравнением вариантов и большим количеством уточнений.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Прояснить запрос клиента</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот что клиент рассказал о поиске недвижимости: <span class="tok">[текст]</span>. Раздели информацию на обязательные условия, пожелания, ограничения и противоречия. Затем предложи вопросы для следующего разговора.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Подготовить описание объекта</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот проверенные характеристики объекта: <span class="tok">[данные]</span>. Собери ясное описание для объявления. Не добавляй преимуществ, которых нет в исходных данных, и не используй пустые слова вроде «уникальный» без объяснения.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Подготовиться к показу</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я показываю объект с такими особенностями: <span class="tok">[данные]</span>. Клиент ищет: <span class="tok">[запрос]</span>. Помоги составить план показа, вопросы клиенту и честные ответы на вероятные сомнения.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Отработать возражение без давления</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Клиент говорит: <span class="tok">[возражение]</span>. Предложи несколько спокойных ответов, которые сначала уточняют причину сомнения, а затем дают фактическую информацию. Не используй манипуляции и ложную срочность.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Сравнить районы или объекты</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Я дам проверенные данные о нескольких вариантах. Составь таблицу сравнения по критериям клиента и отдельно отметь, каких данных не хватает. Не додумывай цены, расстояния и характеристики.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Помощник по покупателям хранит критерии и историю поиска</p><p class="rres">Каждый новый вариант оценивается по одним правилам</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Помощник по продавцам помогает готовить коммуникацию и материалы</p><p class="rres">Работа с объектом становится последовательнее</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по показам готовит вопросы и план встречи</p><p class="rres">Меньше важных деталей выясняется уже после показа</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по возражениям опирается на честные факты об объекте</p><p class="rres">Ответы не превращаются в давление на клиента</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по сопровождению напоминает о следующих шагах</p><p class="rres">Клиент понимает, что происходит на каждом этапе</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Новая заявка создаёт карточку клиента</p><p class="rres">Форма, объявления и клиентская база</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Показ автоматически появляется в календаре участников</p><p class="rres">База клиентов и календарь</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Изменение статуса объекта обновляется в рабочей системе</p><p class="rres">База объектов и клиентские подборки</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Клиент получает подготовленное напоминание перед показом</p><p class="rres">Календарь и мессенджер или почта</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Раз в неделю формируется сводка по активным клиентам</p><p class="rres">Клиентская база, календарь и список задач</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Разложить фотографии и документы по объектам</p><p class="rres">Понятные папки без смешанных материалов</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Собрать сравнительную таблицу по выбранным объектам</p><p class="rres">Один файл с проверенными критериями клиента</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Подготовить презентацию объекта из утверждённых данных</p><p class="rres">Черновик презентации для проверки риелтором</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Проверить комплектность рабочей папки сделки</p><p class="rres">Список имеющихся и недостающих документов без юридической оценки</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Обновить клиентскую подборку после изменения условий</p><p class="rres">Актуальная версия без неподходящих объектов</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r8">
+      <p class="rintro">Ты работаешь с клиентами, записью, услугами, материалами и повторными визитами. Если услуга связана со здоровьем, медицинские решения остаются за квалифицированным специалистом.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Объяснить услугу понятным языком</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот проверенная информация о моей услуге: <span class="tok">[данные]</span>. Объясни её простыми словами для клиента: что происходит, сколько занимает времени, что человек почувствует и какие ограничения я указала. Не добавляй медицинских обещаний.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Подготовить вопросы перед записью</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне нужно до записи уточнить у клиента информацию о <span class="tok">[услуга]</span>. Составь короткий список вопросов человеческим языком. Не ставь диагнозы и отдельно отметь случаи, когда решение должен принимать специалист.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Написать напоминание клиенту</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Подготовь тёплое и короткое напоминание о записи на <span class="tok">[услуга]</span> с датой, временем, адресом и правилами отмены. Не добавляй рекламных предложений.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Найти свободные окна в расписании</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот моё расписание и ограничения: <span class="tok">[данные]</span>. Покажи свободные окна, которые подходят для услуг разной длительности. Ничего не переставляй без моего подтверждения.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Составить список материалов</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Для услуги <span class="tok">[название]</span> я использую: <span class="tok">[перечень]</span>. Помоги сделать чек-лист подготовки рабочего места и расходных материалов. Не добавляй препараты или процедуры от себя.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Помощник администратора отвечает по утверждённым правилам</p><p class="rres">Клиенты быстрее получают точную информацию</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Помощник по записи знает длительность услуг и рабочие ограничения</p><p class="rres">В расписании становится меньше неудобных разрывов</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по материалам помогает следить за расходниками</p><p class="rres">Закупки планируются до того, как что-то закончится</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по описанию услуг использует только подтверждённые формулировки</p><p class="rres">Коммуникация остаётся понятной и безопасной</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Контент-помощник превращает реальные вопросы клиентов в темы</p><p class="rres">Публикации отвечают на то, что действительно волнует людей</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Запись клиента автоматически появляется в календаре</p><p class="rres">Сервис записи и календарь</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Перед визитом отправляется подтверждение и памятка</p><p class="rres">Запись и мессенджер или почта</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">При снижении запаса появляется напоминание о закупке</p><p class="rres">Таблица расходников и список задач</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Отзывы собираются в обзор повторяющихся тем</p><p class="rres">Форма обратной связи и таблица</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Доход и загрузка отображаются в простой сводке</p><p class="rres">Система записи и финансовая таблица</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Обновить прайс по утверждённым данным</p><p class="rres">Актуальный документ без ручной правки каждой позиции</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Привести в порядок клиентские карточки</p><p class="rres">Единая структура записей с соблюдением правил конфиденциальности</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Разложить фотографии работ с подтверждённым согласием клиентов</p><p class="rres">Папки по услугам и датам без смешивания материалов</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Собрать отчёт по загрузке и услугам</p><p class="rres">Таблица с показателями для анализа владельцем</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Подготовить комплект информационных памяток</p><p class="rres">Проверенные документы для отправки клиентам</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r9">
+      <p class="rintro">Ты работаешь с цифрами, правилами, документами и высокой ценой ошибки. ИИ здесь помогает готовить черновики, искать расхождения и объяснять данные, но расчёты, источники и решения проверяет специалист.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Объяснить показатель простым языком</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Объясни показатель <span class="tok">[название]</span> человеку без финансового образования. Используй один простой пример, затем дай точное определение и перечисли, какие выводы из этого показателя делать нельзя.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Собрать структуру отчёта</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне нужно подготовить отчёт для <span class="tok">[получатель]</span> о <span class="tok">[тема]</span>. Цель решения: <span class="tok">[цель]</span>. Помоги составить структуру отчёта и список данных для каждого раздела. Не придумывай значения и выводы.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Проверить арифметику</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот исходные числа и моя формула: <span class="tok">[данные]</span>. Пересчитай пошагово, покажи промежуточные значения и отметь возможные расхождения. Не заменяй этим профессиональную проверку исходных данных.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Подготовить вопросы к заказчику</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Мне поручили финансовый расчёт с таким описанием: <span class="tok">[текст]</span>. Перечисли, какие исходные данные, допущения, периоды и критерии нужно уточнить до начала работы.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Сравнить сценарии</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Есть три сценария: <span class="tok">[данные]</span>. Составь таблицу сравнения по стоимости, срокам, рискам и условиям. Используй только мои данные, явно покажи допущения и не выбирай вариант за меня.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Помощник по ежемесячному закрытию ведёт постоянный чек-лист</p><p class="rres">Повторяющиеся проверки не зависят от памяти</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Помощник по отчётам знает структуру и адресатов</p><p class="rres">Черновики сразу собираются под нужное решение</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по отклонениям помогает формулировать пояснения</p><p class="rres">Цифры быстрее превращаются в понятный управленческий комментарий</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по запросам клиентов переводит вопросы в список исходных данных</p><p class="rres">Меньше расчётов начинается с неполной постановки</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по правилам работает только с утверждённой базой документов</p><p class="rres">Ответы можно проследить до конкретного внутреннего источника</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Платёжный календарь обновляется из подтверждённых заявок</p><p class="rres">Система заявок и финансовая таблица</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Напоминания о недостающих документах отправляются ответственным</p><p class="rres">Реестр документов, задачи и почта</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">При отклонении показателя приходит уведомление</p><p class="rres">Финансовая модель или отчёт и рабочий чат</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Данные из утверждённых форм попадают в сводную таблицу</p><p class="rres">Формы и финансовый учёт</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Периодическая управленческая сводка собирается по расписанию</p><p class="rres">Таблицы, календарь и канал отчётности</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Объединить несколько таблиц одинаковой структуры</p><p class="rres">Сводный файл с сохранением исходных данных</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Сопоставить две версии расчёта</p><p class="rres">Список изменённых формул, значений и допущений</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Найти необычные отклонения для проверки специалистом</p><p class="rres">Перечень строк и показателей, требующих внимания</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Собрать отчёт из утверждённого набора файлов</p><p class="rres">Черновик с таблицами и пояснениями</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Подготовить комплект документов по заданному реестру</p><p class="rres">Упорядоченная папка и список недостающих позиций</p></div>
+        </div>
+    </div>
+    <div class="rolepanel" data-panel="r10">
+      <p class="rintro">Ты работаешь с формулировками, фактами, сроками и актуальностью права. ИИ может ускорять подготовку, но не заменяет проверку юристом и работу с действующими источниками.</p>
+      <div class="levtabs">
+          <button class="ltab on" type="button" data-lev="1"><span class="lnum">1</span>Чат-болталка</button>
+          <button class="ltab" type="button" data-lev="2"><span class="lnum">2</span>ИИ-помощник</button>
+          <button class="ltab" type="button" data-lev="3"><span class="lnum">3</span>Интеграции</button>
+          <button class="ltab" type="button" data-lev="4"><span class="lnum">4</span>Работа на компьютере</button>
+      </div>
+        <div class="pane on" data-pane="1">
+          <p class="lnote">Пять задач, которые можно попробовать сегодня. Раскрой задачу, скопируй запрос и добавь свои подробности.</p>
+            <details class="task">
+              <summary><span class="num">01</span><span class="tname">Объяснить сложный пункт простыми словами</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Объясни этот фрагмент простым языком: <span class="tok">[текст]</span>. Сначала передай буквальный смысл, затем возможные практические последствия. Не делай выводов о законности и отметь неоднозначные формулировки.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">02</span><span class="tname">Собрать хронологию ситуации</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Вот мои заметки о событиях: <span class="tok">[текст]</span>. Расположи факты по датам, отдели подтверждённое от предположений и перечисли пробелы. Не добавляй события, которых нет в исходном рассказе.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">03</span><span class="tname">Подготовить вопросы клиенту</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Клиент описал ситуацию так: <span class="tok">[текст]</span>. Составь вопросы для уточнения фактов, документов, участников, сроков и желаемого результата. Пока не предлагай юридическое решение.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">04</span><span class="tname">Составить список документов</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Для работы по ситуации <span class="tok">[описание]</span> помоги составить предварительный перечень документов и сведений, которые стоит запросить. Раздели обязательное, возможное и зависящее от обстоятельств.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+            <details class="task">
+              <summary><span class="num">05</span><span class="tname">Сравнить две формулировки</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+              <div class="body">
+                <div class="promptbox"><p class="plabel">Запрос</p><pre>Сравни два варианта пункта: <span class="tok">[вариант 1]</span> и <span class="tok">[вариант 2]</span>. Покажи различия в обязанностях, сроках, условиях и рисках. Не ссылайся на нормы права без проверки актуальных источников.</pre></div>
+                <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать запрос</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+              </div>
+            </details>
+        </div>
+        <div class="pane" data-pane="2">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что меняется</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Помощник по первичному интервью собирает факты по заданной схеме</p><p class="rres">На консультации меньше времени уходит на восстановление базовой картины</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Помощник по договорам проверяет текст по утверждённому чек-листу</p><p class="rres">Типовые риски не зависят от памяти и спешки</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Помощник по юридическому письму использует согласованный стиль</p><p class="rres">Черновики становятся единообразнее</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Помощник по базе знаний отвечает с указанием источника</p><p class="rres">Юрист видит, на каком документе основан черновой ответ</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Помощник по подготовке позиции помогает отделять факты от аргументов</p><p class="rres">Логика дела становится прозрачнее до написания документа</p></div>
+        </div>
+        <div class="pane" data-pane="3">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Что связывается</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Данные первичной анкеты создают карточку дела</p><p class="rres">Форма клиента и рабочая база</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Процессуальные и договорные сроки появляются в календаре</p><p class="rres">Карточка дела, календарь и напоминания</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Новые документы распределяются по папкам дела</p><p class="rres">Канал получения документов и файловое хранилище</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Клиент получает подготовленные уведомления о статусе</p><p class="rres">База дел и почта или мессенджер</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Изменения в выбранных источниках попадают в обзор для проверки</p><p class="rres">Правовая база, список наблюдения и рабочая почта</p></div>
+        </div>
+        <div class="pane" data-pane="4">
+          <p class="lnote soon"><span class="soonmark">Будем осваивать дальше на курсе</span> Пока это карта возможностей – смотри её как направление, а не как инструкцию. Настраивать ничего не нужно.</p>
+          <div class="rowhead"><span></span><span>Возможная задача</span><span>Результат</span></div>
+            <div class="row"><span class="num sm">01</span><p class="rtask">Сравнить версии договора</p><p class="rres">Список добавленных, удалённых и изменённых условий</p></div>
+            <div class="row"><span class="num sm">02</span><p class="rtask">Извлечь из пакета документов даты, стороны и обязательства</p><p class="rres">Рабочая таблица для проверки юристом</p></div>
+            <div class="row"><span class="num sm">03</span><p class="rtask">Привести в порядок папку дела</p><p class="rres">Структура по типам документов, датам и версиям</p></div>
+            <div class="row"><span class="num sm">04</span><p class="rtask">Собрать приложения по утверждённому перечню</p><p class="rres">Упорядоченный комплект и список недостающих файлов</p></div>
+            <div class="row"><span class="num sm">05</span><p class="rtask">Подготовить черновик письма по утверждённому шаблону</p><p class="rres">Документ с подставленными проверенными данными для финальной проверки</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="wrap" style="padding-top:64px">
+  <div class="lede" style="padding-top:0">
+    <div class="col">
+      <p class="label">Моя карта применения ИИ</p>
+      <h2 style="margin:16px 0 18px">Перенеси идеи в свою работу</h2>
+      <p>Теперь перенеси идеи в свою работу. Не пытайся заполнить всё сразу. Сначала запиши то, что приходит в голову, затем выбери самое полезное.</p>
+      <p class="saved" style="margin-top:14px">Ответы сохраняются в этом браузере автоматически. <button class="linkbtn" data-clear type="button" style="background:none;border:none;cursor:pointer;font-family:var(--sans)">Очистить</button></p>
+    </div>
+  </div>
+
+  <div class="form">
+      <div class="pblock">
+        <div class="phead"><span class="ldnum">1</span><h3>Что я могу попробовать в чате уже сейчас</h3></div>
+          <label class="fld"><span class="fnum">1</span><input type="text" data-save="p1i0" placeholder="Задача"></label>
+          <label class="fld"><span class="fnum">2</span><input type="text" data-save="p1i1" placeholder="Задача"></label>
+          <label class="fld"><span class="fnum">3</span><input type="text" data-save="p1i2" placeholder="Задача"></label>
+          <label class="fld"><span class="fnum">4</span><input type="text" data-save="p1i3" placeholder="Задача"></label>
+          <label class="fld"><span class="fnum">5</span><input type="text" data-save="p1i4" placeholder="Задача"></label>
+          <label class="fld wide"><span class="flab">Что я попробую первым</span><input type="text" data-save="p1f0"></label>
+          <label class="fld wide"><span class="flab">Какой результат хочу получить за 10-20 минут</span><input type="text" data-save="p1f1"></label>
+      </div>
+      <div class="pblock">
+        <div class="phead"><span class="ldnum">2</span><h3>Какого постоянного помощника я хочу</h3></div>
+          <label class="fld"><span class="fnum">1</span><input type="text" data-save="p2i0" placeholder="Помощник для"></label>
+          <label class="fld"><span class="fnum">2</span><input type="text" data-save="p2i1" placeholder="Помощник для"></label>
+          <label class="fld"><span class="fnum">3</span><input type="text" data-save="p2i2" placeholder="Помощник для"></label>
+          <label class="fld"><span class="fnum">4</span><input type="text" data-save="p2i3" placeholder="Помощник для"></label>
+          <label class="fld"><span class="fnum">5</span><input type="text" data-save="p2i4" placeholder="Помощник для"></label>
+          <label class="fld wide"><span class="flab">Какой помощник нужнее всего</span><input type="text" data-save="p2f0"></label>
+          <label class="fld wide"><span class="flab">Что ему важно знать обо мне и моей работе</span><input type="text" data-save="p2f1"></label>
+      </div>
+      <div class="pblock">
+        <div class="phead"><span class="ldnum">3</span><h3>Что я хочу перестать переносить между сервисами вручную</h3></div>
+          <label class="fld"><span class="fnum">1</span><input type="text" data-save="p3i0" placeholder="Процесс"></label>
+          <label class="fld"><span class="fnum">2</span><input type="text" data-save="p3i1" placeholder="Процесс"></label>
+          <label class="fld"><span class="fnum">3</span><input type="text" data-save="p3i2" placeholder="Процесс"></label>
+          <label class="fld"><span class="fnum">4</span><input type="text" data-save="p3i3" placeholder="Процесс"></label>
+          <label class="fld"><span class="fnum">5</span><input type="text" data-save="p3i4" placeholder="Процесс"></label>
+          <label class="fld wide"><span class="flab">Какая связка сэкономит больше всего времени</span><input type="text" data-save="p3f0"></label>
+          <label class="fld wide"><span class="flab">Какие сервисы участвуют</span><input type="text" data-save="p3f1"></label>
+      </div>
+      <div class="pblock">
+        <div class="phead"><span class="ldnum">4</span><h3>Что я хочу поручать ИИ на компьютере</h3></div>
+          <label class="fld"><span class="fnum">1</span><input type="text" data-save="p4i0" placeholder="Задача с файлами или программами"></label>
+          <label class="fld"><span class="fnum">2</span><input type="text" data-save="p4i1" placeholder="Задача с файлами или программами"></label>
+          <label class="fld"><span class="fnum">3</span><input type="text" data-save="p4i2" placeholder="Задача с файлами или программами"></label>
+          <label class="fld"><span class="fnum">4</span><input type="text" data-save="p4i3" placeholder="Задача с файлами или программами"></label>
+          <label class="fld"><span class="fnum">5</span><input type="text" data-save="p4i4" placeholder="Задача с файлами или программами"></label>
+          <label class="fld wide"><span class="flab">Какой результат должен появиться</span><input type="text" data-save="p4f0"></label>
+          <label class="fld wide"><span class="flab">Что ИИ не должен делать без моего подтверждения</span><input type="text" data-save="p4f1"></label>
+      </div>
+  </div>
+
+  <div class="btns" style="margin-top:30px">
+    <button class="btn" data-copymap type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать мою карту</button>
+    <span class="linkbtn" style="border:none;cursor:default">Вставь её в свою папку курса</span>
+  </div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>С чего начать</h2>
+    <div class="dcol">
+      <p>Не начинай с самой сложной автоматизации. Выбери одну небольшую задачу первого уровня, которая:</p>
+      <ul>
+        <li>повторяется;</li>
+        <li>раздражает;</li>
+        <li>требует учесть несколько условий;</li>
+        <li>не связана с высокой ценой ошибки;</li>
+        <li>имеет понятный результат.</li>
+      </ul>
+      <p style="margin-top:18px">Попробуй решить её в чате. Если ответ получится слишком общим, не начинай новый запрос с нуля. Скажи:</p>
+      <div class="promptbox" style="margin-top:16px"><p class="plabel">Запрос</p><pre>Пока ответ не подходит. Задай мне до пяти уточняющих вопросов по одному, чтобы учесть мою реальную ситуацию. После этого предложи новую версию.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button" style="background:var(--pink)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <p style="margin-top:24px"><b>Твоя цель на первом уровне не автоматизировать всю работу, а увидеть одну задачу, которую теперь можно решать вместе с ИИ.</b></p>
+    </div>
+  </div>
+</div>
+
+<div class="dark" style="margin-top:0;border-top:1px solid rgba(255,255,255,.12)">
+  <div class="wrap dgrid">
+    <h2>Важные границы</h2>
+    <div class="dcol">
+      <ul>
+        <li>Не отправляй в чат персональные данные, пароли, реквизиты, медицинскую тайну, коммерческие секреты и документы, которые тебе нельзя передавать третьим лицам.</li>
+        <li>Проверяй цифры, юридические формулировки, медицинские рекомендации и другую информацию с высокой ценой ошибки.</li>
+        <li>Не подключай сервисы и не разрешай действия на компьютере, пока не понимаешь, какие данные будут доступны ИИ.</li>
+        <li>Любые сообщения, документы, расчёты и решения, которые уходят клиенту, сотруднику или руководителю, сначала проверяет человек.</li>
+      </ul>
+      <p style="margin-top:18px"><b>ИИ хорошо снимает рутину, помогает думать и готовит черновики. Ответственность за профессиональное решение остаётся у тебя.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный материал модуля 1</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  function flash(btn,label){
+    var old=btn.innerHTML;btn.textContent=label;btn.classList.add('done');
+    setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+  }
+
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.body')||btn.closest('.dcol')||btn.closest('.col');
+    var pre=box?box.querySelector('.promptbox pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      flash(btn,'Скопировано');say('Запрос скопирован. Вставь его в чат');
+    }).catch(function(){say('Не вышло скопировать – выдели текст вручную');});
+  });
+
+  document.querySelectorAll('.rtab').forEach(function(t){
+    t.addEventListener('click',function(){
+      var id=t.dataset.role;
+      document.querySelectorAll('.rtab').forEach(function(x){x.classList.toggle('on',x===t);});
+      document.querySelectorAll('.rolepanel').forEach(function(p){p.classList.toggle('on',p.dataset.panel===id);});
+      var top=document.querySelector('.rtabs').getBoundingClientRect().top+window.pageYOffset-20;
+      if(window.pageYOffset>top)window.scrollTo({top:top,behavior:'smooth'});
+    });
+  });
+
+  document.querySelectorAll('.ltab').forEach(function(t){
+    t.addEventListener('click',function(){
+      var panel=t.closest('.rolepanel'),n=t.dataset.lev;
+      panel.querySelectorAll('.ltab').forEach(function(x){x.classList.toggle('on',x===t);});
+      panel.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on',p.dataset.pane===n);});
+    });
+  });
+
+  var KEY='nisha-map-v1';
+  function store(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}}
+  var saved=store();
+  document.querySelectorAll('[data-save]').forEach(function(inp){
+    var k=inp.dataset.save;
+    if(saved[k])inp.value=saved[k];
+    inp.addEventListener('input',function(){
+      try{var s=store();s[k]=inp.value;localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
+    });
+  });
+  var clr=document.querySelector('[data-clear]');
+  if(clr)clr.addEventListener('click',function(){
+    try{localStorage.removeItem(KEY);}catch(e){}
+    document.querySelectorAll('[data-save]').forEach(function(i){i.value='';});
+    say('Карта очищена');
+  });
+  var cm=document.querySelector('[data-copymap]');
+  if(cm)cm.addEventListener('click',function(){
+    var out=['МОЯ КАРТА ПРИМЕНЕНИЯ ИИ',''];
+    document.querySelectorAll('.pblock').forEach(function(b){
+      out.push('УРОВЕНЬ '+b.querySelector('.ldnum').textContent+'. '+b.querySelector('h3').textContent);
+      b.querySelectorAll('.fld').forEach(function(f){
+        var inp=f.querySelector('input'),v=inp.value.trim();
+        if(!v)return;
+        var lab=f.querySelector('.flab');
+        out.push(lab?lab.textContent+': '+v:'– '+v);
+      });
+      out.push('');
+    });
+    copy(out.join('\n')).then(function(){flash(cm,'Скопировано');say('Карта скопирована');})
+      .catch(function(){say('Не вышло скопировать');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
