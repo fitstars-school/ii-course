@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Топ-30 быстрых побед · Бонус модуля 1 · Нейро-архитектор</title>
+<meta name="description" content="Тридцать задач, которые ИИ помогает решить за десять минут. Готовые запросы для быта, работы, учёбы, денег и себя.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel,.dark .plabel{color:var(--pink-soft)}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:13px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · бонус</span></div>
+  <div class="hero">
+    <div class="hgrid">
+      <h1>Топ-30<br>быстрых <span class="it">побед</span></h1>
+      <p class="hlead">Задачи, которые ИИ помогает решить за десять минут. Выбери ту, что раздражает прямо сейчас.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap lede">
+  <div class="col">
+    <p>Иногда больше всего выматывают не большие проекты, а мелкие задачи, которые неделями висят в голове. Нужно придумать меню, разобраться в непонятном счёте, спланировать поездку, собрать мысли для отчёта. Каждая задача вроде бы небольшая, но требует учесть столько условий, что проще ещё немного её не замечать.</p>
+    <p>В таких случаях не нужен идеальный промпт. Достаточно рассказать ИИ, что происходит, перечислить ограничения и попросить помочь разобраться.</p>
+  </div>
+</section>
+
+<div class="dark">
+  <div class="wrap dgrid">
+    <h2>Что считается победой</h2>
+    <div class="dcol">
+      <p>Быстрая победа – это не всегда полностью законченная задача. Иногда за десять минут ты получаешь:</p>
+      <ul>
+        <li>понятный план;</li>
+        <li>список покупок;</li>
+        <li>первый черновик;</li>
+        <li>несколько подходящих вариантов;</li>
+        <li>вопросы, которые нужно задать;</li>
+        <li>первый шаг, после которого задача перестаёт висеть в голове.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="lede" style="padding-top:52px">
+    <div class="col">
+      <p class="label">Как пользоваться списком</p>
+      <h2 style="margin:16px 0 20px">Выбери то, что раздражает прямо сейчас</h2>
+      <p>Скопируй подходящий запрос и добавь свои подробности. Если писать долго, включи голосовой ввод и просто расскажи всё как есть – структурировать рассказ заранее не нужно.</p>
+      <p style="margin-top:22px">Если ИИ отвечает слишком общо, добавь:</p>
+      <div class="promptbox" style="margin-top:16px"><p class="plabel">Промпт</p><pre>Пока не предлагай решение. Сначала задай мне до пяти уточняющих вопросов по одному, чтобы учесть мою реальную ситуацию.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать</button></div>
+    </div>
+  </div>
+
+  <nav class="nav" aria-label="Разделы" style="margin-top:52px">
+    <a class="navlink" href="#byt">Быт и дом</a>
+    <a class="navlink" href="#rabota">Работа</a>
+    <a class="navlink" href="#ucheba">Учёба и дети</a>
+    <a class="navlink" href="#dengi">Деньги и документы</a>
+    <a class="navlink" href="#sebe">Для себя и семьи</a>
+  </nav>
+
+    <section class="group reveal" id="byt">
+      <div class="ghead"><p class="glabel">Быт и дом</p><span class="grange">01 – 06</span></div>
+      <details class="task">
+        <summary><span class="num">01</span><span class="tname">Составить меню на неделю</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги составить меню на неделю для моей семьи. Сначала по одному спроси, кто что любит, чего не ест, сколько времени я готова тратить на готовку, какие продукты уже есть и какие ещё есть ограничения. Затем предложи меню без необходимости готовить каждому отдельное блюдо.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">02</span><span class="tname">Получить список покупок</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>На основе этого меню составь один список покупок. Сгруппируй продукты по отделам магазина и укажи примерное количество. Отдельно перечисли, что стоит проверить дома перед покупкой.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">03</span><span class="tname">Придумать блюда из того, что уже есть</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>У меня дома есть: <span class="tok">[ПЕРЕЧИСЛИ ПРОДУКТЫ]</span>. Предложи несколько простых блюд без редких дополнительных ингредиентов. Сначала используй продукты, которые быстрее испортятся.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">04</span><span class="tname">Решить раздражающую бытовую головоломку</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне мешает <span class="tok">[СУШИЛКА, КОРОБКИ, ПРОВОДА, ВЕЩИ В ПРИХОЖЕЙ]</span>. Помоги найти удобное решение. Сначала спроси про размеры, свободные места и то, как часто я этим пользуюсь. Затем предложи три реалистичных варианта.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">05</span><span class="tname">Упростить повторяющуюся домашнюю рутину</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Меня регулярно утомляет <span class="tok">[ГОТОВКА, УБОРКА, СТИРКА, СБОР ВЕЩЕЙ]</span>. Помоги придумать более простую систему. Учти мой режим и предложи минимальный вариант, который можно попробовать уже на этой неделе.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">06</span><span class="tname">Собрать вещи в поездку</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Составь список вещей для поездки. Я еду <span class="tok">[КУДА]</span>, на <span class="tok">[СРОК]</span>, со мной <span class="tok">[КТО]</span>, планы примерно такие: <span class="tok">[ПЛАНЫ]</span>. Учти погоду, дорогу и вещи, которые обычно забывают. Не добавляй лишнего.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="group reveal" id="rabota">
+      <div class="ghead"><p class="glabel">Работа</p><span class="grange">07 – 12</span></div>
+      <details class="task">
+        <summary><span class="num">07</span><span class="tname">Собрать разрозненные мысли в структуру</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я сейчас расскажу всё, что думаю по поводу <span class="tok">[ОТЧЁТА, ПРОЕКТА, ПРЕДЛОЖЕНИЯ]</span>. В моём рассказе может быть хаос. Сначала выслушай меня, затем собери мысли в логичную структуру. Ничего содержательно нового не добавляй.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">08</span><span class="tname">Понять непонятную задачу</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне поставили такую задачу: <span class="tok">[ТЕКСТ]</span>. Объясни простыми словами, какой результат от меня, скорее всего, ожидают. Отдельно перечисли, что уже понятно и какие вопросы нужно уточнить у заказчика.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">09</span><span class="tname">Разобрать завал задач</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Вот всё, что у меня сейчас висит: <span class="tok">[СПИСОК]</span>. Помоги разделить задачи на срочные, важные и те, которые можно отложить. Затем предложи три приоритета на сегодня с учётом моего свободного времени.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">10</span><span class="tname">Подготовиться к разговору или встрече</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне предстоит разговор с <span class="tok">[КЕМ]</span> о <span class="tok">[ЧЁМ]</span>. Помоги составить короткий план: чего я хочу добиться, что важно сказать, какие вопросы задать и где разговор может уйти в сторону.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">11</span><span class="tname">Написать понятное рабочее сообщение</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я сейчас своими словами расскажу, что хочу сообщить человеку. Преврати это в ясное и доброжелательное рабочее сообщение. Сохрани мой смысл, не добавляй канцелярит и лишнюю официальность.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">12</span><span class="tname">Создать чек-лист для повторяющейся задачи</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я регулярно делаю <span class="tok">[ЗАДАЧА]</span> и каждый раз что-нибудь забываю. Помоги создать короткий чек-лист. Сначала уточни последовательность моих действий, затем оставь только действительно важные пункты.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="group reveal" id="ucheba">
+      <div class="ghead"><p class="glabel">Учёба и дети</p><span class="grange">13 – 18</span></div>
+      <details class="task">
+        <summary><span class="num">13</span><span class="tname">Разобраться с домашним заданием</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Объясни, как решать такое задание: <span class="tok">[УСЛОВИЕ]</span>. Не давай сразу готовый ответ. Объясни принцип простыми словами и придумай похожий пример, на котором ребёнок сможет потренироваться.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">14</span><span class="tname">Объяснить сложную тему понятным языком</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Объясни мне <span class="tok">[ТЕМА]</span> так, будто я сталкиваюсь с ней впервые. Сначала дай простое объяснение, затем жизненный пример и только потом необходимые термины.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">15</span><span class="tname">Проверить, действительно ли тема понята</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я изучаю <span class="tok">[ТЕМА]</span>. Задай мне пять вопросов по одному, начиная с простых и постепенно усложняя. После каждого ответа коротко объясняй, что я поняла правильно и что стоит уточнить.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">16</span><span class="tname">Придумать короткое занятие для ребёнка</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Придумай занятие на 15 минут для ребёнка <span class="tok">[ВОЗРАСТ]</span>, чтобы потренировать <span class="tok">[НАВЫК]</span>. Используй то, что обычно есть дома. Объясни правила простыми словами.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">17</span><span class="tname">Превратить заметки в карточки для повторения</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Ниже мои заметки по теме. Сделай из них короткие карточки в формате «вопрос – ответ». Не добавляй факты, которых нет в моём тексте.
+
+<span class="tok">[ЗАМЕТКИ]</span></pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">18</span><span class="tname">Составить реалистичный план обучения</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я хочу разобраться в <span class="tok">[ТЕМА]</span>, но могу выделять только <span class="tok">[ВРЕМЯ]</span>. Составь план на одну неделю. На каждый день дай одну небольшую задачу и понятный результат.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="group reveal" id="dengi">
+      <div class="ghead"><p class="glabel">Деньги и документы</p><span class="grange">19 – 24</span></div>
+      <p class="note"><b>Про личные данные.</b> Перед отправкой убери имена, номера телефонов, реквизиты, адреса и другие личные данные. Пока работаем с текстом и цифрами, которые ты сама вводишь в чат. Работа с файлами будет дальше в курсе.</p>
+      <details class="task">
+        <summary><span class="num">19</span><span class="tname">Разложить расходы по категориям</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Вот список моих расходов: <span class="tok">[СПИСОК]</span>. Раздели их на понятные категории, посчитай суммы и покажи расчёты. Если какие-то расходы непонятны, сначала уточни их у меня.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">20</span><span class="tname">Подготовить отчёт об использовании денег</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне нужно подготовить отчёт по такой форме: <span class="tok">[СТРУКТУРА]</span>. Вот мои суммы и пояснения: <span class="tok">[ДАННЫЕ]</span>. Помоги распределить их по разделам и проверить арифметику. Ничего не додумывай и отдельно отметь данные, которых не хватает.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">21</span><span class="tname">Разобраться в непонятном счёте</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я получила счёт с такими позициями: <span class="tok">[ОБЕЗЛИЧЕННЫЙ ТЕКСТ]</span>. Объясни, из чего складывается сумма, где может быть несостыковка и какие вопросы стоит задать организации. Не делай окончательных выводов без проверки.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">22</span><span class="tname">Собрать бюджет на месяц</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги собрать простой бюджет на месяц. Сначала спроси про обязательные платежи, ожидаемые доходы, долги и крупные траты. Затем покажи, сколько денег остаётся и что требует внимания в первую очередь.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">23</span><span class="tname">Сравнить два варианта покупки</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я выбираю между <span class="tok">[ВАРИАНТ 1]</span> и <span class="tok">[ВАРИАНТ 2]</span>. Мои критерии: <span class="tok">[СПИСОК]</span>. Помоги составить таблицу сравнения только на основе данных, которые я дам. В конце покажи, какой вариант лучше соответствует каждому критерию.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">24</span><span class="tname">Рассчитать бюджет события или поездки</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги посчитать бюджет на <span class="tok">[ПОЕЗДКУ, ПРАЗДНИК, РЕМОНТ]</span>. Сначала собери обязательные и необязательные расходы, затем предложи минимальный, комфортный и расширенный варианты бюджета.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="group reveal" id="sebe">
+      <div class="ghead"><p class="glabel">Для себя и семьи</p><span class="grange">25 – 30</span></div>
+      <details class="task">
+        <summary><span class="num">25</span><span class="tname">Спланировать поездку</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я еду в <span class="tok">[ГОРОД]</span> на <span class="tok">[СРОК]</span> вместе с <span class="tok">[КЕМ]</span>. Билеты и жильё уже есть. Помоги составить удобный маршрут без беготни. Учти возраст участников, время на дорогу, отдых и наши интересы.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">26</span><span class="tname">Придумать план выходного</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги придумать план выходного для <span class="tok">[УЧАСТНИКИ]</span>. Один человек хочет <span class="tok">[ЖЕЛАНИЕ]</span>, другой – <span class="tok">[ЖЕЛАНИЕ]</span>, ограничения такие: <span class="tok">[УСЛОВИЯ]</span>. Предложи три варианта разной активности и стоимости.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">27</span><span class="tname">Собрать сезонный гардероб ребёнка</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги составить компактный список одежды для ребёнка на <span class="tok">[СЕЗОН]</span>. Учти возраст, климат, образ жизни, частоту стирки и то, что ребёнок любит или не любит носить. Укажи примерное количество каждой вещи.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">28</span><span class="tname">Принять небольшое решение</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я выбираю между несколькими вариантами: <span class="tok">[ВАРИАНТЫ]</span>. Сначала помоги сформулировать мои критерии, затем сравни варианты. Не решай за меня – покажи, что я выигрываю и чем жертвую в каждом случае.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">29</span><span class="tname">Выговориться и понять следующий шаг</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне сейчас нужно спокойно рассказать о ситуации без осуждения. Сначала просто помоги мне разложить происходящее по полочкам. Затем спроси, нужна ли мне поддержка, взгляд со стороны или конкретный следующий шаг.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">30</span><span class="tname">Сделать развлекательный разбор</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Сделай развлекательный разбор по моей дате рождения в системе <span class="tok">[АСТРОЛОГИЯ, НУМЕРОЛОГИЯ ИЛИ ДРУГАЯ СИСТЕМА]</span>. Объясни, что это интерпретация, а не научный вывод. Дай несколько вопросов для саморефлексии, а не предсказание будущего.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button><a class="linkbtn" href="https://chatgpt.com" target="_blank" rel="noopener">Открыть ChatGPT</a></div>
+        </div>
+      </details>
+    </section>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что обычно не получается закончить за 10 минут</h2>
+    <div class="dcol">
+      <p>Некоторые задачи выглядят короткими только снаружи:</p>
+      <ul>
+        <li>создать структуру полноценного курса;</li>
+        <li>составить содержательный контент-план;</li>
+        <li>написать готовый сценарий или пост в твоём голосе;</li>
+        <li>принять важное финансовое или профессиональное решение;</li>
+        <li>подготовить материал, в котором нужно проверять большое количество фактов.</li>
+      </ul>
+      <p style="margin-top:18px">ИИ может помочь получить первый каркас. Но чем важнее результат и чем сильнее он зависит от твоего опыта, позиции и стиля, тем больше потребуется уточнений и доработки.</p>
+      <p><b>Поэтому для первой быстрой победы выбирай не самую важную задачу в жизни, а ту, которая давно раздражает и которую приятно наконец сдвинуть с места.</b></p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap closing">
+  <div class="cgrid">
+    <div class="col">
+      <p class="pull">ИИ может быть местом, куда ты приходишь с хаосом, а уходишь с чуть большей ясностью. Иногда этого уже достаточно, чтобы выдохнуть и двинуться дальше.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный материал модуля 1</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function textOf(btn){
+    var box=btn.closest('.body')||btn.closest('.col');
+    var pre=box?box.querySelector('.promptbox pre'):null;
+    return pre?pre.innerText:'';
+  }
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      copy(textOf(btn)).then(function(){
+        var old=btn.innerHTML;
+        btn.textContent='Скопировано';btn.classList.add('done');
+        say('Промпт скопирован. Вставь его в чат');
+        setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+      }).catch(function(){say('Не вышло скопировать – выдели текст промпта вручную');});
+    });
+  });
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
