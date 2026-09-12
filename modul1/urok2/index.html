@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конспект урока 2 · От простого запроса к сильному результату · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 2 модуля 1: Проверить, что изменится, если объяснить задачу качественнее – и получить ответ, подходящий именно тебе.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel,.dark .plabel{color:var(--pink-soft)}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:13px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · урок 2</span></div>
+  <div class="kmark"><span class="kn">2</span><span class="kt">Конспект урока</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>От простого запроса к сильному результату</h1>
+      <p class="hlead">Проверить, что изменится, если объяснить задачу качественнее – и получить ответ, подходящий именно тебе.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Видео</span><span class="mv">около 17 минут</span></div>
+      <div><span class="mk">Практика</span><span class="mv">15–20 минут</span></div>
+      <div><span class="mk">Останется в папке</span><span class="mv">Запись урока 2</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>из урока</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Структура любого запроса: контекст, задача, результат.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Нейросеть не может залезть тебе в голову. «Подстриги меня красиво» у каждого своё – абстракции придётся расшифровывать.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Печатать всё это долго, поэтому основной способ – голосовой ввод: наговариваешь, держа в голове три пункта.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Есть семь приёмов-усилителей. Добавлять все сразу не нужно – бери один-два под ситуацию.</p></div>
+    </div>
+  </div>
+</div>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Формула</p>
+      <h2>Контекст → Задача → Результат</h2>
+      <p>Это скелет любого запроса. Дальше его можно усиливать, но начинается всё отсюда.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Контекст – что происходит</h3><p>Кто ты, для кого это, зачем нужно, какие есть важные ограничения.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Задача – что нужно сделать</h3><p>Не «помоги с презентацией», а конкретно: придумай структуру, сократи текст, найди слабые места, предложи варианты.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Результат – что хочешь получить</h3><p>Формат, объём, стиль, количество вариантов, критерии хорошего ответа.</p></div></div>
+      </div>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Разбор</p>
+      <h2>Что было не так в запросе из прошлого урока</h2>
+      <p class="quote">Мне нужно создать сценарий к рилсу на 1 минуту по типам привязанности для построения счастливых отношений с мужчиной. Помоги, пожалуйста, сделать 3 варианта.</p>
+      <p>Задача названа, но поверхностно. Результат назван, но общий. А контекста почти нет: кто я, что хочу, в какой подаче. Именно поэтому ответ выходит средним – он подходит кому угодно.</p>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Семь приёмов</p>
+      <h2>Чем усилить запрос</h2>
+      <p>Не обязательных каждый раз, а тех, которые добавляешь по ситуации.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Задай роль</h3><p>«Представь, что ты методолог / редактор / маркетолог / юрист / карьерный консультант». Это помогает выбрать нужную оптику.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Попроси взгляд с нескольких ролей</h3><p>«Оцени это как клиент, эксперт и маркетолог». Полезно, когда нужен объёмный взгляд, а не один ответ.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Попроси сначала задать вопросы</h3><p>«Прежде чем отвечать, задай мне 5 вопросов, которые помогут сделать результат точнее». Особенно для сложных, личных и неоднозначных задач.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Дай пример того, что нравится</h3><p>Вставь текст, письмо, пост и скажи: «Сделай в похожей логике и тоне, но не копируй содержание». Пример объясняет стиль лучше десяти прилагательных.</p></div></div>
+        <div class="def"><span class="dn">5</span><div><h3>Скажи, чего точно не надо</h3><p>«Без канцелярита, банальностей и длинного вступления». Ограничения иногда улучшают ответ сильнее, чем дополнительные пожелания.</p></div></div>
+        <div class="def"><span class="dn">6</span><div><h3>Попроси несколько вариантов</h3><p>«Дай 3 версии: спокойную, смелую и короткую». Тогда ты не зависишь от первого решения нейросети.</p></div></div>
+        <div class="def"><span class="dn">7</span><div><h3>Попроси проверить свой же ответ</h3><p>«После ответа проверь, что в нём слабого, и улучши». Или: «Назови 3 причины, почему этот вариант может не сработать».</p></div></div>
+      </div>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Честно</p>
+      <h2>Про роль – без магии</h2>
+      <p>Роль полезна, когда задаёт нужную точку зрения: например, посмотреть на письмо глазами занятого получателя. Но просьба «будь лучшим экспертом мира» не заменит отсутствующих данных и не сделает факты верными. Начинай с того, что действительно важно для результата.</p>
+      <p>Ещё один приём, который экономит время на длинных задачах: попроси согласовать задачу до того, как ИИ выдаст большой результат. Пусть коротко сформулирует, что предстоит сделать, и прочитай это как заказчик. Если уже здесь потерялось важное условие, исправить одну строку проще, чем потом переделывать всё.</p>
+      </div></div>
+    </section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <h2>Практика</h2>
+    <p class="pmeta">15–20 минут · поставь видео на паузу</p>
+    <p class="pintro">Возьми свою задачу – можно ту же, что делала в прошлом уроке. Работать можно в любой доступной нейросети.</p>
+    <div class="svcbar">
+      <p class="svclab">Где ты работаешь</p>
+      <div class="svcbtns">
+          <button class="svcbtn on" type="button" data-svcbtn="chatgpt">ChatGPT</button>
+          <button class="svcbtn" type="button" data-svcbtn="claude">Claude</button>
+          <button class="svcbtn" type="button" data-svcbtn="gemini">Gemini</button>
+          <button class="svcbtn" type="button" data-svcbtn="giga">GigaChat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+                <h3>Открой свою нейросеть и новый чат</h3>
+        <p>Подойдёт любая, к которой есть доступ. Если повторяешь за мной – ChatGPT.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+                <h3>Включи голосовой ввод</h3>
+        <p>Печатать контекст, задачу и результат каждый раз долго и муторно. Голосом получается быстрее и подробнее: наговариваются детали, которые руками ты бы не написала.</p>
+        <div class="hint">
+          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Кнопка микрофона рядом с полем ввода. В приложении на телефоне удобнее всего.</p></div>
+          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Своего голосового ввода может не быть – пользуйся системной диктовкой телефона или компьютера. Это надстройка, но работает так же.</p></div>
+          <div class="hs" data-svc="gemini"><p class="hlab">Gemini</p><p>Своя расшифровка речи – кнопка микрофона рядом с полем ввода.</p></div>
+          <div class="hs" data-svc="giga"><p class="hlab">GigaChat</p><p>Кнопка микрофона в приложении. Если её нет – системная диктовка телефона.</p></div>
+        </div>
+        <p class="snote">Если голосовой ввод неудобен или недоступен – не заставляй себя его полюбить. Напиши текстом, приёмы работают так же.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+                <h3>Наговори три пункта подряд</h3>
+        <p>Не причёсывай речь. Просто расскажи, держа в голове структуру: сначала контекст, потом задача, потом какой результат тебе нужен.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+                <h3>Добавь один-два приёма</h3>
+        <p>Не все семь сразу. Выбери то, что подходит твоей задаче: роль, просьбу задать вопросы, свой пример, запрет на канцелярит, несколько вариантов.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Прежде чем отвечать, задай мне 5 вопросов, которые помогут сделать результат точнее.</pre></div>
+              <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+                <h3>Сравни с прошлым ответом</h3>
+        <p>Открой ответ из первого урока и новый. Смотри не на «красивее», а на то, стал ли ответ подходящим именно тебе.</p>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+                <h3>Уточни, если не попал</h3>
+        <p>Не начинай новый запрос с нуля. Скажи, что именно ты имела в виду, и попроси переделать этот же ответ.</p>
+      </div></div>
+  </div>
+
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>Готово, когда у тебя есть два ответа на одну задачу – прежний и новый – и ты можешь назвать, чем новый лучше подходит.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p style="font-size:16px">Запись «У2 – мой запрос до и после»: прежний ответ, новый запрос голосом и результат.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что забрать<br>из урока</h2>
+    <div class="dcol">
+      <p>Из урока забираем простую структуру: контекст, задача, результат. И семь приёмов, которые её усиливают. На самом деле приёмы можно изобретать и самой – под свои задачи.</p>
+      <p style="margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase">Вопросы к себе</p>
+      <ul style="margin-top:12px">
+        <li>Увидела ли ты более качественный ответ?</li>
+        <li>Как было с голосовым вводом – удобно или мешало?</li>
+        <li>Какой из семи приёмов сработал у тебя лучше всего?</li>
+      </ul>
+      <p style="margin-top:26px"><b>В следующем уроке переходим к тому, как именно работает ИИ, на каких принципах – и какое твоё собственное мышление помогает работать с ним.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · конспект урока 2, модуль 1</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var pre=box?box.querySelector('.promptbox pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставь в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выдели текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
