@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Практика «Карта применения ИИ» · Модуль 1, урок 4 · Нейро-архитектор</title>
+<meta name="description" content="Практика урока 4 модуля 1: расскажите нейросети о своей жизни и работе и соберите личную карту применений ИИ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ШКАЛА – 4 роли, других размеров текста нет:
+   Р1 Заголовок   – Instrument Serif, h1 var(--h1) / h2 var(--h2)
+   Р2 Подзаголовок – Manrope 700, var(--sub)
+   Р3 Текст       – Manrope 500, var(--text), для всего остального (абзацы, кнопки, промпт, подписи)
+   Р4 Метка       – Manrope 700, var(--label), CAPS, разрядка
+   Курсива нет. Выделение – только жирностью. Крупные цифры шагов – декор. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --wash:#FBF4F8; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:820px;
+  --h1:clamp(38px,6.4vw,70px); --h2:clamp(28px,3.6vw,40px);
+  --sub:19px; --text:17px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+h3{font-size:var(--sub);font-weight:700;line-height:1.35}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:12px}
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding:30px 0 12px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{color:var(--muted);text-align:right}
+
+.hero{padding:44px 0 8px}
+.hero h1{margin:14px 0 22px}
+.lead{color:var(--muted)}
+
+ul.dash{list-style:none;margin-top:12px}
+ul.dash li{position:relative;padding-left:24px;margin-bottom:8px}
+ul.dash li::before{content:"";position:absolute;left:2px;top:13px;width:9px;height:1.5px;background:var(--pink)}
+
+.gets{margin-top:34px;padding:24px 26px;background:var(--wash);border-left:3px solid var(--pink)}
+.gets h3{margin-top:10px}
+.explain{margin-top:24px;color:var(--muted)}
+
+.same{margin-top:30px;display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;padding:18px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.same .ic{width:34px;height:34px;border-radius:50%;background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+
+.steps{padding:52px 0 8px}
+.steps>h2{margin:12px 0 6px}
+.step{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:30px 0;border-top:1px solid var(--line)}
+.step:first-of-type{border-top:1px solid var(--ink);margin-top:24px}
+.sn{font-family:var(--serif);font-size:54px;line-height:.9;color:var(--pink)}
+.step h3{margin-bottom:8px}
+.fine{color:var(--muted);margin-top:14px}
+
+.svc{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.svc a{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--ink);color:var(--ink);font-weight:700;transition:background .2s,color .2s,border-color .2s}
+.svc a:hover{background:var(--ink);color:#fff}
+.svc a svg{width:13px;height:13px;flex:none}
+
+.tip{margin-top:16px;padding:14px 18px;background:var(--wash)}
+
+details.fold{margin-top:16px;border:1px solid var(--line);background:#fff}
+details.fold summary{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;list-style:none;font-weight:700}
+details.fold summary::-webkit-details-marker{display:none}
+details.fold summary .chev{color:var(--faint);transition:transform .25s,color .2s;flex:none;display:flex}
+details.fold[open] summary .chev{transform:rotate(180deg);color:var(--pink)}
+details.fold summary:hover{color:var(--pink-strong)}
+.fold .fb{padding:0 18px 18px;color:var(--muted)}
+.fold .fb b{color:var(--ink)}
+
+.btn{font-family:var(--sans);font-size:var(--text);font-weight:700;border:none;border-radius:0;padding:15px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;text-align:center}
+.btn:hover{background:var(--pink);color:#fff}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.main{background:var(--pink)}
+.btn.main:hover{background:var(--pink-strong)}
+.btn.done{background:#1FA24E}
+.btn.done:hover{background:#1FA24E}
+.btnrow{margin-top:18px}
+
+.promptbox{margin-top:18px;background:var(--dark);border-left:3px solid var(--pink);padding:24px 26px}
+.promptbox .label{color:var(--pink-soft);display:block;margin-bottom:12px}
+.ptext{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;color:#E7E0EA;line-height:1.65;-webkit-user-select:text;user-select:text}
+.promptbox .btnrow{margin-top:20px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.promptbox .btn{background:#fff;color:var(--ink)}
+.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}
+.promptbox .btn.done{background:#1FA24E;color:#fff}
+.cmsg{color:var(--pink-soft)}
+.cmsg:empty{display:none}
+
+.dark{background:var(--dark);color:#CFC4D4;padding:52px 0;margin-top:48px}
+.dark h2{color:#fff;margin:12px 0 18px}
+.dark .label{color:var(--pink-soft)}
+.dark b{color:#fff}
+.dark .last{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);color:#fff;font-weight:700}
+
+.help{padding:44px 0 8px}
+.help details.fold summary{padding:18px 20px}
+.qa{border-top:1px solid var(--line);padding:14px 0}
+.qa:first-child{border-top:none;padding-top:0}
+.qa h3{color:var(--ink)}
+.qa p{margin-top:4px}
+.privacy{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted)}
+
+footer{background:var(--dark2);color:#8A7C90;padding:28px 0 36px;margin-top:52px}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+@media (max-width:640px){
+  .wrap{padding:0 18px}
+  .rubric{padding-top:22px}
+  .hero{padding-top:30px}
+  .gets{padding:20px 18px}
+  .step{grid-template-columns:1fr;gap:6px;padding:26px 0}
+  .sn{font-size:44px}
+  .svc{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .svc a{justify-content:center;padding:12px 10px}
+  .btn{width:100%}
+  .promptbox{padding:20px 18px;margin-left:-18px;margin-right:-18px}
+  .promptbox .btnrow{flex-direction:column;align-items:stretch}
+  .dark{padding:44px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · урок 4 · практика</span></div>
+
+  <header class="hero">
+    <div class="label">Карта применения ИИ</div>
+    <h1>Где ИИ может помочь именно вам?</h1>
+    <p class="lead">Расскажите нейросети о своей жизни и работе – и посмотрите, какие задачи она поможет упростить. Не нужно заранее знать её возможности или придумывать «правильные» запросы: начните с того, что занимает ваше время, утомляет или давно ждёт внимания.</p>
+  </header>
+
+  <div class="gets">
+    <div class="label">Что получится</div>
+    <ul class="dash">
+      <li>Личная карта применений ИИ с конкретными примерами из вашей жизни.</li>
+      <li>Возможность сохранить карту и вернуться к понравившимся идеям.</li>
+      <li>Первая небольшая проба: например, подборка новостей, трендов или полезных материалов по вашей теме.</li>
+    </ul>
+  </div>
+
+  <p class="explain">В этой практике мы задаём обычному чату свои правила работы. В файле описано, как провести интервью, помочь вам заметить возможности и перейти к практике. Промпт ниже запускает этот разговор.</p>
+
+  <div class="same">
+    <span class="ic" aria-hidden="true">!</span>
+    <p><b>Файл и промпт отправляйте в один и тот же разговор.</b> Сначала прикрепите файл, затем вставьте промпт в то же сообщение или следом в этот же чат.</p>
+  </div>
+</div>
+
+<main>
+<section class="steps">
+  <div class="wrap">
+    <div class="label">3 шага для старта</div>
+    <h2>Как начать</h2>
+
+    <!-- Шаг 1 -->
+    <div class="step" id="shag-1">
+      <div class="sn" aria-hidden="true">1</div>
+      <div>
+        <h3>Откройте свою нейросеть</h3>
+        <p>Выберите привычный сервис и начните новый чат.</p>
+        <nav class="svc" aria-label="Нейросети">
+          <a href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg></a>
+          <a href="https://claude.ai/" target="_blank" rel="noopener">Claude <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg></a>
+          <a href="https://gemini.google.com/" target="_blank" rel="noopener">Gemini <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg></a>
+          <a href="https://giga.chat/" target="_blank" rel="noopener">ГигаЧат <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg></a>
+          <a href="https://www.perplexity.ai/" target="_blank" rel="noopener">Perplexity <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 2h6v6M10 2 3 9"/></svg></a>
+        </nav>
+        <p class="fine">Для начала нужна возможность прикрепить текстовый файл. Создание Word-документа, поиск свежих материалов и подборки по расписанию зависят от функций вашего сервиса и аккаунта.</p>
+        <p class="tip"><b>В ГигаЧате</b> сначала загрузите файл: загрузка может открыть отдельный разговор. Промпт отправляйте в этот же разговор.</p>
+
+        <details class="fold">
+          <summary>Какую нейросеть выбрать?<span class="chev"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 6 5 5 5-5"/></svg></span></summary>
+          <div class="fb">
+            <p>Можно начать с ChatGPT, Claude или Gemini. Российский вариант – ГигаЧат: в нём тоже можно попробовать разговор и составление карты. Дополнительные действия могут потребовать другого сервиса.</p>
+            <p>Perplexity особенно удобен для первой пробы с подборкой: он ищет свежие материалы и показывает источники.</p>
+            <p>Если хотите затем получать подборки по расписанию, посмотрите доступность запланированных задач в ChatGPT, запланированных действий в Gemini, задач по расписанию в Perplexity или задач в Claude Cowork. У Claude эта возможность относится к Cowork и доступна на платных планах, у Perplexity – тоже на платном плане. Необязательно разбираться с расписанием до начала практики.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Шаг 2 -->
+    <div class="step" id="shag-2">
+      <div class="sn" aria-hidden="true">2</div>
+      <div>
+        <h3>Скачайте и прикрепите файл</h3>
+        <p>Скачайте материал и прикрепите его к сообщению в своей нейросети – через кнопку добавления файла или перетаскиванием.</p>
+        <div class="btnrow">
+          <a class="btn main" href="assets/Praktika_II.txt" download="Praktika_II.txt" data-file>
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M9 2v10M4.5 7.5 9 12l4.5-4.5M3 15.5h12"/></svg>
+            Скачать файл для практики
+          </a>
+        </div>
+        <p class="fine">Это готовые правила разговора и примеры. Читать и редактировать файл перед началом не нужно.</p>
+      </div>
+    </div>
+
+    <!-- Шаг 3 -->
+    <div class="step" id="shag-3">
+      <div class="sn" aria-hidden="true">3</div>
+      <div>
+        <h3>Скопируйте промпт и отправьте его в чат</h3>
+        <p>После прикрепления файла вставьте этот текст в поле сообщения и нажмите «Отправить».</p>
+        <div class="promptbox">
+          <span class="label">Промпт</span>
+          <div class="ptext" id="prompt">Хочу разобраться, как ИИ может быть полезен именно мне – в жизни и работе.
+
+Прочитай прикреплённый файл «Praktika_II.txt» и проведи меня через практику по его правилам. Не пересказывай файл: начни разговор со мной.
+
+Помоги рассказать о своих делах, заметить неожиданные возможности и попробовать что-нибудь полезное. Общайся естественно, реагируй на мои ответы и поправки. Мне важно чувствовать, что мы разбираемся вместе.
+
+Если файл недоступен, скажи об этом. Давай начнём.</div>
+          <div class="btnrow">
+            <button class="btn" type="button" id="copyBtn">
+              <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="6" width="9.5" height="9.5" rx="1.5"/><path d="M12 6V3.5A1.5 1.5 0 0 0 10.5 2h-7A1.5 1.5 0 0 0 2 3.5v7A1.5 1.5 0 0 0 3.5 12H6"/></svg>
+              <span>Скопировать промпт</span>
+            </button>
+            <span class="cmsg" id="cmsg" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <div class="label">После отправки</div>
+    <h2>Дальше – просто разговаривайте</h2>
+    <p>Нейросеть задаст вопросы. Отвечайте текстом или используйте голосовой ввод. Можно рассказывать вперемешку: работу, дом, мелочи, желания. Необязательно отвечать на всё.</p>
+    <p>Если нейросеть поняла вас неправильно – поправьте её. После разговора вы сможете выбрать, какие процессы рассмотреть, получить карту и перейти к первой пробе.</p>
+    <p class="last">Не останавливайтесь на списке идей: выберите что-нибудь небольшое и посмотрите, как это работает у вас.</p>
+  </div>
+</section>
+
+<section class="help">
+  <div class="wrap">
+    <details class="fold">
+      <summary>Если что-то не получилось<span class="chev"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 6 5 5 5-5"/></svg></span></summary>
+      <div class="fb">
+        <div class="qa">
+          <h3>Нейросеть не видит файл</h3>
+          <p>Проверьте, что файл прикреплён именно к этому разговору и загрузка завершена. При необходимости начните новый чат и прикрепите его повторно.</p>
+        </div>
+        <div class="qa">
+          <h3>Ответ получился слишком общим</h3>
+          <p>Напишите: «Покажи на конкретном примере из моего рассказа, что я могу сделать и какой результат получу».</p>
+        </div>
+        <div class="qa">
+          <h3>Ответ слишком сухой или длинный</h3>
+          <p>Напишите: «Давай проще, как в обычном разговоре. Помоги разобраться с одним примером и потом предложи следующий шаг».</p>
+        </div>
+        <div class="qa">
+          <h3>Не получается скачать карту в Word</h3>
+          <p>Попросите подготовить текст для копирования и сохраните его в документ самостоятельно.</p>
+        </div>
+        <div class="qa">
+          <h3>Нет задач по расписанию</h3>
+          <p>Карту и пробную подборку можно сделать без расписания. Для автоматического получения понадобится сервис, где эта функция доступна.</p>
+        </div>
+        <div class="qa">
+          <h3>Закончился лимит</h3>
+          <p>Продолжите после его обновления либо начните практику в другой доступной нейросети, снова прикрепив файл и промпт.</p>
+        </div>
+      </div>
+    </details>
+
+    <p class="privacy">Личные данные других людей и конфиденциальные рабочие сведения заменяйте или убирайте.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · практика урока 4, модуль 1</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  var btn=document.getElementById('copyBtn');
+  var box=document.getElementById('prompt');
+  var msg=document.getElementById('cmsg');
+  var label=btn.querySelector('span');
+  var timer;
+
+  function promptText(){return box.textContent.replace(/^\s+|\s+$/g,'');}
+
+  function legacyCopy(text){
+    var ta=document.createElement('textarea');
+    ta.value=text;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.top='0';ta.style.left='0';ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.focus();ta.select();ta.setSelectionRange(0,text.length);
+    var ok=false;
+    try{ok=document.execCommand('copy');}catch(e){ok=false;}
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function selectPrompt(){
+    try{
+      var r=document.createRange();r.selectNodeContents(box);
+      var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+    }catch(e){}
+  }
+
+  function success(){
+    clearTimeout(timer);
+    btn.classList.add('done');label.textContent='Скопировано';msg.textContent='';
+    timer=setTimeout(function(){btn.classList.remove('done');label.textContent='Скопировать промпт';},2600);
+  }
+  function fail(){
+    selectPrompt();
+    msg.textContent='Не получилось скопировать автоматически. Текст выделен – скопируйте его вручную.';
+  }
+
+  btn.addEventListener('click',function(){
+    var text=promptText();
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(text).then(success,function(){legacyCopy(text)?success():fail();});
+    }else{
+      legacyCopy(text)?success():fail();
+    }
+  });
+})();
+</script>
+
+<!-- Yandex.Metrika counter 112003701 (Курс ИИ) -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
