@@ -42,6 +42,7 @@ p+p{margin-top:12px}
 
 .rubric{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding:30px 0 12px}
 .rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric span:first-child{white-space:nowrap}
 .rubric .r2{color:var(--muted);text-align:right}
 
 .hero{padding:44px 0 8px}
@@ -98,7 +99,7 @@ details.fold summary:hover{color:var(--pink-strong)}
 .promptbox .btnrow{margin-top:20px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
 .promptbox .btn{background:#fff;color:var(--ink)}
 .promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}
-.promptbox .btn.done{background:#1FA24E;color:#fff}
+.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff;transition:none}
 .cmsg{color:var(--pink-soft)}
 .cmsg:empty{display:none}
 
