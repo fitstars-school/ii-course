@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Практика урока 1 · Собираю свой первый проект-помощник · Нейро-архитектор</title>
+<meta name="description" content="Пошаговая инструкция к практике первого урока второго модуля: собрать проект-помощник под одну повторяющуюся область работы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel,.dark .plabel{color:var(--pink-soft)}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:13px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+.roadbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.roadlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.roadbtns{display:flex;flex-wrap:wrap;gap:8px}
+.roadbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:11px 20px;cursor:pointer;transition:all .2s;text-align:left}
+.roadbtn:hover{border-color:var(--pink-soft);color:#fff}
+.roadbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+.road{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.road .rd{display:none}
+.road .rd.on{display:block}
+.road .rdlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.road p{font-size:16px;color:var(--muted)}
+.chk{margin-top:18px}
+.chkt{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.chk ul{margin:0}
+.chk li{position:relative;padding-left:28px;margin-bottom:8px;font-size:16px;color:#3B3143;list-style:none}
+.chk li::before{content:"";position:absolute;left:3px;top:9px;width:9px;height:9px;border:1.5px solid var(--pink);background:none}
+.areas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;margin-top:24px}
+.area{padding:18px 0;border-top:1px solid var(--line)}
+.area h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:4px}
+.area p{font-size:16px;color:var(--muted);line-height:1.5}
+.todo{margin-top:18px;background:#FFF4E5;border-left:3px solid #E08600;padding:16px 20px}
+.todo .tl{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9A5B00;margin-bottom:6px}
+.todo p{font-size:16px;color:#6B4200}
+@media (max-width:760px){.areas{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · урок 1</span></div>
+  <div class="kmark"><span class="kn">1</span><span class="kt">Инструкция к практике</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Собираю свой первый <span class="it">проект-помощник</span></h1>
+      <p class="hlead">Одна повторяющаяся область работы – одна комната, в которой ИИ уже знает твой контекст.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Практика</span><span class="mv">40–50 минут</span></div>
+      <div><span class="mk">Нужно заранее</span><span class="mv">Конструктор помощников</span></div>
+      <div><span class="mk">Останется в папке</span><span class="mv">Инструкция проекта</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Что получится<br>в конце</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Создан проект под одну повторяющуюся область.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Внутри лежит постоянная инструкция.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Добавлены один-три опорных материала.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Выполнена первая настоящая задача – не учебная.</p></div>
+      <div class="mline"><span class="mn">5</span><p>Ты увидела, чего в контексте пока не хватает.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Зачем это</p>
+  <h2>Проект – это комната</h2>
+  <p>В ней свои файлы, своя инструкция и вся история по теме. Один проект – про блог. Другой – про отчёты. Третий – про ремонт, почему нет.</p>
+  <p>Правило, которое управляет всем этим хозяйством: <b>объяснила нейросети что-то во второй раз – значит, пора унести это в настройки</b>. Не в третий, не в пятый – во второй. Так проект растёт из твоей реальной работы, а не из фантазий о том, как правильно.</p>
+  <p class="rulebox">В этом уроке мы не заканчиваем всю систему. Здесь ты создаёшь каркас и убеждаешься, что он работает. Голос, отдельные сценарии и регулярность будут наращиваться дальше.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Перед тем как начать</p>
+  <h2>Каким может быть твой проект</h2>
+  <p>Я показываю на блоге, потому что это моя повторяющаяся область. У тебя она может быть совсем другой – логика сборки одинаковая.</p>
+  </div></div>
+  <div class="areas">
+        <div class="area"><h3>Контент и блог</h3><p>Идеи, посты, карусели, сценарии. Пример, который я показываю в уроке.</p></div>
+        <div class="area"><h3>Клиенты и переписка</h3><p>Ответы на типовые вопросы, письма, напоминания, коммерческие предложения.</p></div>
+        <div class="area"><h3>Документы и отчёты</h3><p>Регулярные документы по своим шаблонам, сводки, протоколы встреч.</p></div>
+        <div class="area"><h3>Учёба и дети</h3><p>Объяснения тем, задания, подготовка к занятиям, конспекты.</p></div>
+        <div class="area"><h3>Быт и семья</h3><p>Меню, покупки, поездки, расписание – то, что повторяется каждую неделю.</p></div>
+        <div class="area"><h3>Продукты и услуги</h3><p>Описания, лендинги, прогревы, ответы на возражения.</p></div>
+  </div>
+  <p class="rulebox" style="margin-top:26px">Бери одну область, а не пять. Пять проектов, собранных за вечер, не работают ни один.</p>
+</section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <h2>Девять шагов</h2>
+    <p class="pmeta">40–50 минут · можно разбить на два захода</p>
+    <p class="pintro">Шаги идут по порядку: сначала Конструктор задаёт тебе вопросы, потом из ответов собирается проект, и только в конце ты даёшь ему настоящую задачу.</p>
+    <div class="roadbar">
+      <p class="roadlab">Как ты работаешь</p>
+      <div class="roadbtns">
+          <button class="roadbtn on" type="button" data-roadbtn="proj">У меня есть проекты</button>
+          <button class="roadbtn" type="button" data-roadbtn="text">Работаю без проектов</button>
+      </div>
+      <p class="road" style="border-color:rgba(255,255,255,.2);color:#9C8AA6;font-size:15px;margin-top:16px">Проекты есть в ChatGPT и Claude. Если их нет – ничего не теряется: инструкция помощника это просто текст, и она работает в любой нейросети.</p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Поставь себе Конструктор помощников</h3>
+        <p>Это отдельный помощник, который задаёт тебе вопросы и собирает из ответов готовую конструкцию проекта. Скачай инструкцию, создай для него отдельный чат или проект и вставь текст инструкции в начало.</p>
+        <div class="todo"><p class="tl">Света, это место ждёт тебя</p><p>СЮДА ВСТАВИТЬ ТЕКСТ ИНСТРУКЦИИ КОНСТРУКТОРА И ССЫЛКУ НА ФАЙЛ</p></div>
+        <div class="road">
+          <div class="rd on" data-road="proj"><p class="rdlab">У меня есть проекты</p><p>Создай проект «Конструктор помощников» и положи инструкцию в его настройки – тогда она будет действовать во всех чатах внутри.</p></div>
+          <div class="rd" data-road="text"><p class="rdlab">Работаю без проектов</p><p>Просто открой новый чат и вставь инструкцию первым сообщением. Работает так же, только вставлять придётся каждый раз.</p></div>
+        </div>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Выбери свою область</h3>
+        <p>Не всю работу сразу, а одну область, которая возвращается к тебе снова и снова. Правило простое: тема пришла второй раз – заводи ей комнату. Я показываю на блоге, но логика одинаковая для любой области.</p>
+        <p class="snote">Если сомневаешься между двумя – бери ту, где у тебя уже есть материалы. Собрать проект без исходников труднее.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Расскажи Конструктору свою задачу</h3>
+        <p>Открой Конструктор и опиши, что тебе нужно. Ниже – готовый запрос для блога: замени первый абзац на свою область, остальное оставь как есть.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Помоги мне создать минимальный проект-помощник для ведения блога. Я хочу складывать туда идеи, превращать исходные мысли в публикации, докручивать сценарии и рассказывать о своих продуктах.
+
+Не пиши инструкцию сразу. Сначала задай мне одной пачкой не больше семи вопросов, которые помогут понять: тему и цель блога, аудиторию, площадки, продукты, повторяющиеся задачи, желаемую подачу и имеющиеся материалы.
+
+После моих ответов подготовь:
+1. название проекта;
+2. короткую инструкцию для настроек проекта;
+3. список из 1–3 материалов, которые нужно добавить сейчас;
+4. первый проверочный запрос;
+5. критерии, по которым я проверю результат.
+
+Предлагай минимально достаточную конструкцию. Не добавляй отдельного GPT или помощника, если эту задачу может решить обычный проект.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <p class="snote">Обрати внимание на последние две строки запроса: они просят минимально достаточную конструкцию. Это важно – иначе тебе соберут систему из пяти помощников там, где хватит одного проекта.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>Ответь на вопросы голосом</h3>
+        <p>Конструктор задаст до семи вопросов: о чём область, для кого, что публикуешь или делаешь, какие продукты есть, какие задачи повторяются, какая подача нравится, какие материалы уже существуют.</p>
+        <p class="snote">Не изображай идеальную анкету. Смысл в том, что ты рассказываешь обычными словами, а структуру собирает Конструктор. Голосом получается быстрее и подробнее.</p>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <h3>Получи минимальную архитектуру</h3>
+        <p>На выходе должно появиться восемь вещей. Если чего-то не хватает – попроси дополнить.</p>
+        <div class="chk"><p class="chkt">Что должно быть</p><ul>
+          <li>название</li>
+          <li>назначение проекта</li>
+          <li>задачи, с которыми он помогает</li>
+          <li>правила взаимодействия</li>
+          <li>формат результата</li>
+          <li>ограничения</li>
+          <li>список нужных материалов</li>
+          <li>тестовый запрос</li>
+        </ul></div>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+        <h3>Создай проект и вставь инструкцию</h3>
+        <p>Теперь заводи комнату под свою область и клади в настройки короткие постоянные правила. Полные сведения храни отдельными файлами – не превращай поле инструкции в роман «Война, мир и tone of voice».</p>
+        <div class="promptbox stepprompt"><p class="plabel">Пример инструкции – мой, для блога</p><pre>Ты помогаешь мне вести экспертный блог. Используй мои исходные мысли, материалы и профессиональную позицию. Помогай находить угол публикации, структурировать содержание, создавать черновики постов, каруселей и сценариев. Не выдумывай факты, опыт и истории от моего имени. Не делай финальный текст без необходимости: сначала помоги выбрать задачу, формат и главную мысль. Учитывай аудиторию, продукты, примеры и ограничения из материалов проекта. Если данных не хватает, задай до трёх конкретных вопросов.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="chk"><p class="chkt">Хорошая короткая инструкция отвечает на восемь вопросов</p><ul>
+          <li>кто пользователь и чем занимается</li>
+          <li>о чём область работы</li>
+          <li>кто аудитория</li>
+          <li>какие задачи выполняет проект</li>
+          <li>как работать с исходной мыслью</li>
+          <li>что сначала уточнять</li>
+          <li>что нельзя придумывать</li>
+          <li>по каким признакам результат считается хорошим</li>
+        </ul></div>
+        <div class="road">
+          <div class="rd on" data-road="proj"><p class="rdlab">У меня есть проекты</p><p>Облачный проект: материалов пока немного, информация стабильная, идеи удобно добавлять с телефона. Локальная папка и техническая настройка тебе сейчас не нужны.</p></div>
+          <div class="rd" data-road="text"><p class="rdlab">Работаю без проектов</p><p>Проекта у тебя может не быть – тогда держи инструкцию отдельным документом и вставляй её в начало нового чата. Файлы придётся прикладывать руками, а память между чатами не сохранится. Сам помощник при этом работает полностью.</p></div>
+        </div>
+      </div></div>
+      <div class="step"><span class="snum">7</span><div>
+        <h3>Добавь один-три материала</h3>
+        <p>Для первого запуска достаточно трёх файлов. Больше сейчас не нужно – проект собирается не из объёма, а из точности.</p>
+        <div class="chk"><p class="chkt">Что должно быть</p><ul>
+          <li>кто я, о чём область и для кого работаю</li>
+          <li>продукты или услуги, о которых можно рассказывать</li>
+          <li>несколько примеров того, что мне нравится</li>
+        </ul></div>
+        <p class="snote">Антипримеры добавляй, если они уже есть. А вот глубокий разбор своего голоса оставь следующему уроку – иначе уроки начнут есть друг друга.</p>
+      </div></div>
+      <div class="step"><span class="snum">8</span><div>
+        <h3>Открой новый чат внутри проекта</h3>
+        <p>Это важный технический момент: чтобы проект использовал сохранённый контекст, новую задачу начинают именно внутри него, а не в общем чате. Дай настоящую задачу со своим исходником – не учебную.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Пример задачи – мой, для блога</p><pre>У меня есть мысль: люди пытаются заставить ИИ сразу писать за них, хотя сначала полезнее использовать его как собеседника, который помогает докрутить замысел. Предложи три разных угла для публикации в моём блоге. Пока не пиши сам пост.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="road">
+          <div class="rd on" data-road="proj"><p class="rdlab">У меня есть проекты</p><p>Новый чат создаётся внутри проекта, а не в общем списке. Проверь, что ты действительно внутри комнаты.</p></div>
+          <div class="rd" data-road="text"><p class="rdlab">Работаю без проектов</p><p>Вставь свою инструкцию первым сообщением, следом – задачу. Файлы приложи вручную.</p></div>
+        </div>
+      </div></div>
+      <div class="step"><span class="snum">9</span><div>
+        <h3>Проверь результат</h3>
+        <p>Проверка простая – пять вопросов к ответу.</p>
+        <div class="chk"><p class="chkt">Что должно быть</p><ul>
+          <li>понимает ли проект, кто автор</li>
+          <li>учитывает ли аудиторию</li>
+          <li>не придумывает ли лишнего</li>
+          <li>попадает ли в задачу</li>
+          <li>можно ли продолжить работу с минимальными пояснениями</li>
+        </ul></div>
+        <p class="snote">Хочешь увидеть эффект наглядно – отправь тот же запрос сначала в пустой чат, а потом внутри проекта. Сравнение покажет, зачем вся настройка вообще понадобилась.</p>
+      </div></div>
+  </div>
+
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>У тебя не «я посмотрела, где находится кнопка», а работающий каркас: проект создан, инструкция внутри, материалы добавлены, первая настоящая задача выполнена.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p style="font-size:16px">Инструкцию проекта – отдельным файлом в папку «Моя система работы с ИИ». Это один из самых ценных документов курса: твоя методика словами.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что дальше</h2>
+    <div class="dcol">
+      <p>Сейчас проект уже знает, о чём твоя область, для кого ты работаешь и с какими задачами ему помогать. Но он ещё не обязательно умеет звучать именно как ты.</p>
+      <p style="margin-top:18px"><b>В следующем уроке создадим навык «Мой голос» и добавим ему примеры и правила твоей подачи.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · практика урока 1, модуль 2</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col');
+    var pre=box?box.querySelector('.promptbox pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставь в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выдели текст вручную');});
+  });
+
+  var KEY='m2-road';
+  function setRoad(k){
+    document.querySelectorAll('[data-roadbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.roadbtn===k);});
+    document.querySelectorAll('.road').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.rd').forEach(function(s){
+        var m=s.dataset.road===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.rd');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-roadbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setRoad(b.dataset.roadbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setRoad(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
