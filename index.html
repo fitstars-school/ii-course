@@ -196,6 +196,9 @@ a{color:inherit}
 .mod .lessons li::before{counter-increment:lesson;content:"Урок " counter(lesson);color:var(--pink);font-weight:800;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;width:56px;margin-top:3px}
 .wpill{margin-top:14px;padding:12px 16px;border-radius:14px;background:var(--wash);border:1px solid var(--line);
   font-size:13.5px;line-height:1.45}
+/* плашка «портфолио» в карточке модуля – правка Татьяны 18.09 */
+.ppill{background:linear-gradient(160deg,#FFF3FA,#F6EDFE);border:1.5px solid var(--pink)}
+.ppill b{color:var(--pink-strong)}
 .kit2{margin-top:14px;padding:16px 18px;border-radius:14px;background:linear-gradient(160deg,#FFF3FA,#F6EDFE);
   border:1px solid #F3D3E8}
 .mod .kit2{margin-top:auto}
@@ -620,7 +623,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
       <div class="hero-cta">
         <a href="#tariffs" class="btn">Забронировать место <span class="arw">→</span></a>
       </div>
-      <p class="hero-micro">⚡ <b>Первый рабочий результат</b> – уже в день 1 Модуля 1</p>
+      <p class="hero-micro">⚡ <b>Первый навык для жизни</b> – уже на первом уроке</p>
     </div>
   </div>
 </section>
@@ -791,6 +794,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li>Регулярные задачи на потоке – на примере блога или проекта</li>
           <li>5 реальных кейсов использования агентного ИИ</li>
         </ul>
+        <div class="wpill ppill">🏆 <b>По итогу курса</b> – соберёшь своё первое портфолио на основе навыков, приобретённых на курсе</div>
       </div>
 
     </div>
@@ -873,7 +877,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
         <ul class="t-feats">
           <li>3 модуля программы (Модуль 1, 2 и 3)</li>
           <li>Обучение в собственном темпе (без чата и куратора)</li>
-          <li>Доступ к материалам: 1 месяц</li>
+          <li>Доступ к материалам: <b>2 месяца</b> с даты старта</li>
         </ul>
         <div class="t-monthly">от 1 150 ₽<span>/мес</span></div>
         <button type="button" class="btn btn-ghost tbtn" data-modal="m-start">Выбрать Старт</button>
@@ -889,7 +893,8 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li><b>Все 4 модуля программы</b> (включая агентный ИИ и систему)</li>
           <li><b>2 живых интерактивных онлайн-воркшопа</b> со Светланой Цыро</li>
           <li><b>Общий чат учеников</b> и поддержка куратора</li>
-          <li>Доступ к материалам: 3 месяца</li>
+          <li>Доступ к материалам: <b>6 месяцев</b> с даты старта</li>
+          <li>Обновления второго потока, если они будут (без доступа в чат)</li>
         </ul>
         <div class="t-monthly">от 1 325 ₽<span>/мес</span></div>
         <button type="button" class="btn tbtn" data-modal="m-sistema">Забрать Систему <span class="arw">→</span></button>
@@ -904,7 +909,8 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li>Все 4 модуля + 2 воркшопа + чат</li>
           <li class="crown"><b>2 личные индивидуальные встречи</b> со Светланой Цыро</li>
           <li class="crown"><b>Индивидуальный чат</b> со спикером</li>
-          <li>Доступ к материалам: 6 месяцев</li>
+          <li>Доступ к материалам: <b>6 месяцев</b> с даты старта</li>
+          <li>Обновления второго потока, если они будут (без доступа в чат)</li>
           <li class="gift"><b>Подарок:</b> курс «Блогер с нуля» (тариф Самостоятельный)</li>
         </ul>
         <div class="t-monthly">от 4 325 ₽<span>/мес</span></div>
@@ -931,14 +937,14 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
       <h2>Частые вопросы <span class="accent">новичков</span></h2>
     </div>
     <div class="faq reveal">
-      <details><summary>Я совсем не технарь, я справлюсь?</summary><div class="ans">Конечно! Курс создавался гуманитарием для гуманитариев. <b>Первый рабочий результат ты получишь уже в 1-й день Модуля 1.</b></div></details>
+      <details><summary>Я совсем не технарь, я справлюсь?</summary><div class="ans">Конечно! Курс создавался гуманитарием для гуманитариев. <b>Первый навык для жизни ты получишь уже на первом уроке.</b></div></details>
       <details><summary>Нужен ли VPN* или зарубежная карта?</summary><div class="ans">Нет, мы покажем, как комфортно работать с нейросетями из России без VPN и сторонних карт.<p class="ans-note">* Рекомендация приведена исключительно в целях обеспечения технической доступности веб-интерфейса и корректной маршрутизации сетевых пакетов. Напоминаем о необходимости соблюдения действующего законодательства и внутренних правил информационной безопасности вашей организации при настройке сетевых соединений.</p></div></details>
       <details><summary>Я уже пробовал ИИ для постов – почему тут будет иначе?</summary><div class="ans">Потому что мы настраиваем ИИ под <b>твой уникальный голос и контекст</b>, а не даём шаблонные промпты из интернета.</div></details>
       <details><summary>Как сработает мой депозит 490 ₽ с практикума?</summary><div class="ans">Сумма 490 ₽ уже начислена на твой баланс в GetCourse и <b>автоматически вычтется при оформлении заказа</b>.</div></details>
       <!-- ниже – вопросы из прежней версии, в новом ТЗ их нет; оставлены до решения -->
       <details><summary>Это подходит не только для блогинга?</summary><div class="ans">Да. Модуль 3 закрывает документы, таблицы, расчёты и данные – то, что нужно специалистам в найме и помогающим практикам, а не только блогерам.</div></details>
       <details><summary>Какие живые воркшопы и когда?</summary><div class="ans">Два живых воркшопа для тарифов «Нейро-Система» и «Нейро-Масштаб»: на <b>первой неделе</b> – вводный, по работе с нейросетями, на <b>третьей</b> – живая отработка реальных задач участников.</div></details>
-      <details><summary>Что в самом дорогом тарифе?</summary><div class="ans">«Нейро-Масштаб» – это всё из «Нейро-Системы» плюс <b>2 личные встречи со Светланой Цыро</b>, индивидуальный чат, доступ 6 месяцев и <b>курс «Блогер с нуля» в подарок</b> (тариф Самостоятельный). Мест всего 3.</div></details>
+      <details><summary>Что в самом дорогом тарифе?</summary><div class="ans">«Нейро-Масштаб» – это всё из «Нейро-Системы» плюс <b>2 личные встречи со Светланой Цыро</b>, индивидуальный чат, доступ 6 месяцев с даты старта и <b>курс «Блогер с нуля» в подарок</b> (тариф Самостоятельный). Мест всего 3.</div></details>
       <details><summary>Будут домашние задания?</summary><div class="ans">Фокус на реальных задачах: ты работаешь со своим проектом, а не сдаёшь учебные упражнения. В тарифах <b>«Система»</b> и <b>«Масштаб»</b> есть общий чат и поддержка куратора: задавай вопросы, присылай, что получается, и обсуждай это на воркшопах вместе с коллегами.</div></details>
     </div>
   </div>
