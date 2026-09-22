@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конспект урока 4 · Как найти свои задачи для ИИ · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 4 модуля 1: четыре уровня работы с нейросетью и как собрать свою карту применений ИИ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel,.dark .plabel{color:var(--pink-soft)}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:13px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+.bigcta{background:var(--dark);color:#F3EDF5;padding:46px 0;margin-top:56px}
+.bigcta h2{color:#fff;margin-bottom:14px}
+.bigcta p{color:#CFC4D4;max-width:56ch}
+.bigcta .btns{margin-top:26px}
+a.btn,a.btn:hover{color:#fff;text-decoration:none}
+.bigcta .btn{background:var(--pink)}
+.bigcta .btn:hover{background:#fff;color:var(--ink)}
+.lvl{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line)}
+.lvl .ln{font-family:var(--serif);font-size:38px;line-height:1;color:var(--pink)}
+.lvl h3{font-family:var(--sans);font-size:18px;font-weight:700;margin-bottom:6px}
+.lvl p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,26px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:26px 0}
+@media (max-width:760px){.lvl{grid-template-columns:40px 1fr;gap:14px}.lvl .ln{font-size:29px}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · урок 4</span></div>
+  <div class="kmark"><span class="kn">4</span><span class="kt">Конспект урока</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Как найти свои <span class="it">задачи</span> для ИИ</h1>
+      <p class="hlead">Разбираем, что из вашей работы и жизни можно отдать нейросети – и собираем личную карту применений.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Практика</span><span class="mv">20–30 минут</span></div>
+      <div><span class="mk">Нужно заранее</span><span class="mv">Чат с нейросетью</span></div>
+      <div><span class="mk">Останется в папке</span><span class="mv">Карта применений</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>из урока</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Чтобы что-то отдать нейросети, надо знать, что она умеет – как с человеком: не делегируешь, пока не понимаешь, на что он способен.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Отдавать стоит то, что съедает время, утомляет или давно откладывается. Критерии у каждого свои.</p></div>
+      <div class="mline"><span class="mn">3</span><p>ИИ не заменяет тебя, а становится партнёром по размышлению – вторым мозгом, об который можно подумать.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Карта применений – не теория, а чек-лист, который постепенно сбывается.</p></div>
+    </div>
+  </div>
+</div>
+
+  <section class="wrap blk reveal">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">С чего начинается урок</p>
+    <h2>Мы не знаем, что можно отдать</h2>
+    <p>Мы часто упираемся в то, что не понимаем возможностей нейросети. Как нельзя делегировать человеку, пока не знаешь, что он на самом деле может, – так же мы не знаем, что можем отдать ИИ.</p>
+    <p>Поэтому сначала вспоминаем четыре уровня работы с нейросетью из первого урока, а потом смотрим, что из своих задач хочется туда отправить.</p>
+    </div></div>
+  </section>
+
+  <section class="wrap blk reveal">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Главный вопрос</p>
+    <h2>Что мы на самом деле хотим отдать</h2>
+    <p>Мы хотим отдать то, что съедает время. То, что не нравится делать. То, чего, возможно, не понимаем. У каждого свои критерии.</p>
+    <p>Очень важно настроить простой навык: когда приходит задача, задавать себе вопрос.</p>
+    <p class="quote">А могу ли я что-то сделать с помощью нейросети для решения этой задачи?</p>
+    <p>Может быть, просто подготовить черновик. Может быть, подумать об неё. А может быть, полноценно закрывать процесс более автоматизированно. Вопрос «как я могу себе облегчить жизнь» оказывается очень полезным.</p>
+    </div></div>
+  </section>
+
+  <section class="wrap blk reveal">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Честно</p>
+    <h2>Облегчить – не значит перестать контролировать</h2>
+    <p>Я точно не хочу, чтобы материалы, которые я создаю, были некачественными. У меня большой процесс: курсы, программы, сценарии. Могу ли я полностью отдать это нейросети и не глядя отправить? Конечно, не могу. У меня есть свои принципы и подходы.</p>
+    <p>Но эту большую задачу я могу разбивать на маленькие: здесь подготовить план, здесь написать один урок, здесь покреативить, здесь подумать вместе. Это уже освобождает время – как будто рядом появляется второй мозг, об который я могу думать над своим курсом.</p>
+    <p>Нейросеть меня не заменяет. Она становится партнёром по размышлению.</p>
+    </div></div>
+  </section>
+
+  <section class="wrap blk reveal">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Что даёт карта</p>
+    <h2>Больше системы – больше воздуха</h2>
+    <p>Когда появляется ясность, что и на каком уровне можно отдать, ты растёшь поэтапно: что-то отдать, что-то автоматизировать, где-то создать помощника.</p>
+    <p>Это перестаёт быть беготнёй без понимания, что делать. В ежедневных действиях появляется система, в работе – воздух, пространство и свободное время.</p>
+    <p>У каждого свой эффект: скорость работы над проектами, новые навыки, а у кого-то и чек.</p>
+    </div></div>
+  </section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Вспоминаем из первого урока</p>
+  <h2>Четыре уровня работы с нейросетью</h2>
+  <p>Не нужно прыгать сразу на четвёртый. Важно видеть маршрут и понимать, на каком уровне решается конкретно ваша задача.</p>
+  </div></div>
+  <div style="margin-top:20px">
+      <div class="lvl"><span class="ln">1</span><div><h3>Диалог</h3><p>Обсуждаем, рождаем идеи, вытаскиваем тексты. Результаты переносим руками: копируем, вставляем. И каждый раз, приходя в чат, заново напоминаем, что хотим сделать, даём длинные инструкции, ругаемся, правим.</p></div></div>
+      <div class="lvl"><span class="ln">2</span><div><h3>Помощники</h3><p>Не хочется повторять одни и те же инструкции и хочется получать результат в нужном формате. Здесь работа начинает систематизироваться, а привычная задача ускоряется в несколько раз.</p></div></div>
+      <div class="lvl"><span class="ln">3</span><div><h3>Работа с файлами и системой</h3><p>Нейросеть работает с файлами на компьютере или облачном диске: складывает, раскладывает, создаёт презентации, заметки, правила. Ты начинаешь давать ей доступ – в том числе к программам.</p></div></div>
+      <div class="lvl"><span class="ln">4</span><div><h3>Создание сервисов</h3><p>Полноценные продукты, сайты, лендинги. Тем, кто запускает продукт, ИИ помогает решать сложные технические вопросы.</p></div></div>
+  </div>
+</section>
+
+<div class="bigcta">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <h2>Практика: карта применения ИИ</h2>
+    <p>Рассказываете нейросети о своей работе и жизни – она помогает увидеть, где может быть полезна. На выходе личная карта, сохранённый документ и первая небольшая проба.</p>
+    <div class="btns">
+      <a class="btn" href="karta/">Открыть инструкцию к практике</a>
+    </div>
+  </div>
+</div>
+
+<div class="dark" style="margin-top:0;border-top:1px solid rgba(255,255,255,.12)">
+  <div class="wrap dgrid">
+    <h2>Что забрать<br>из урока</h2>
+    <div class="dcol">
+      <p>Вернитесь к своей карте ещё раз через несколько дней – скорее всего, появятся новые идеи задач, которые можно отдать нейросети. И выберите, с чего начать: что болит больше.</p>
+      <p style="margin-top:22px;color:#fff;font-weight:700">Если кажется, что это не про вас</p>
+      <p>Ощущение «я не технарь, у меня такого никогда не получалось» – нормальное, когда на тебя сваливается куча новых возможностей. Мы будем учиться играть ими потихоньку и наращивать навыки пошагово. Это быстрее и легче, чем сейчас кажется.</p>
+      <p style="margin-top:22px;color:#fff;font-weight:700">Чему вы научились за первый модуль</p>
+      <p>Формулировать качественные запросы, давать обратную связь, собирать из диалога правила. И построили мостик к тому, чтобы перейти на уровень создания своих помощников.</p>
+      <p style="margin-top:22px;color:#fff;font-weight:700">Как это выглядит в жизни</p>
+      <p>Вместо того чтобы несколько часов руками забивать таблицу с чеками на весь класс, ты отдаёшь чеки нейросети – и она строит таблицу по твоим правилам, с формулами. Вместо того чтобы сохранять кучу рилсов и идей, получаешь регулярный отчёт и так расширяешь насмотренность.</p>
+      <p style="margin-top:26px"><b>В следующем модуле начинаем создавать помощников, которые работают по вашим инструкциям – и которым не нужно объяснять по сто пятьдесят раз, как писать текст и в каком формате отдавать файл.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · конспект урока 4, модуль 1</div>
+</footer>
+
+<script>
+(function(){
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
