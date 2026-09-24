@@ -222,6 +222,35 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 .ex p{font-size:16px;color:var(--muted);line-height:1.55}
 .ex p b{color:var(--ink)}
 @media (max-width:760px){.zitem{grid-template-columns:1fr;gap:6px}.dep{grid-template-columns:1fr}}
+/* ---- правки вёрстки 24.09 ---- */
+/* 1. секции больше не съедают боковые поля .wrap */
+.blk{padding:0 !important;padding-top:58px !important;padding-bottom:6px !important}
+section.wrap, header.wrap{padding-left:40px;padding-right:40px}
+/* 2. один левый край: колонка текста больше не сдвинута, но ограничена по мере чтения */
+.lede{display:block;padding-top:0}
+.lede .col{max-width:68ch}
+.blk h2{max-width:20ch}
+/* 3. мера строки в обычных абзацах */
+.blk > p, .blk .col p{max-width:68ch}
+/* 4. мета-строка не разваливается на узком экране */
+.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px}
+/* 5. воздух между блоками внутри секции */
+.zone{margin-top:34px}
+.tiplist,.dep,.numlist{margin-top:26px}
+@media (max-width:760px){
+  section.wrap, header.wrap{padding-left:20px;padding-right:20px}
+  .blk{padding-top:44px !important}
+  .meta{grid-template-columns:1fr 1fr;gap:16px 20px}
+  .zitem{gap:8px}
+  .blk h2{max-width:none}
+}
+/* 6. оглавление */
+.toc{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+.tocl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.toc nav{display:flex;flex-wrap:wrap;gap:10px 26px}
+.toc a{font-size:16px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:2px}
+.toc a:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
 </style>
 </head>
 <body>
@@ -256,7 +285,21 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
   </div>
 </div>
 
-<section class="wrap blk reveal">
+<section class="wrap" style="padding-top:34px">
+  <div class="toc">
+    <p class="tocl">В гайде</p>
+    <nav>
+      <a href="#zony">Три зоны данных</a>
+      <a href="#obezlich">Как обезличить</a>
+      <a href="#nastroyki">Настройки приватности</a>
+      <a href="#pravila">За что блокируют</a>
+      <a href="#dostup-akk">Доступ к аккаунту</a>
+      <a href="#oshibka">Если отправила лишнее</a>
+    </nav>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="zony">
   <div class="lede" style="padding-top:0"><div class="col">
   <p class="label">Три зоны</p>
   <h2>Что отправлять можно, а что нет</h2>
@@ -291,7 +334,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 
 <section class="wrap blk reveal">
   <div class="lede" style="padding-top:0"><div class="col">
-  <p class="label">Как это делается</p>
+  <p class="label" id="obezlich">Как это делается</p>
   <h2>Обезличить – минутное дело</h2>
   <p>Нейросети не нужны имена и реквизиты, чтобы помочь с задачей. Ей нужна суть: что за ситуация, чего ты хочешь, какие есть ограничения. Сравни два варианта одной и той же задачи.</p>
   </div></div>
@@ -308,7 +351,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 
 <section class="wrap blk reveal">
   <div class="lede" style="padding-top:0"><div class="col">
-  <p class="label">Настройки</p>
+  <p class="label" id="nastroyki">Настройки</p>
   <h2>Три переключателя, которые стоит проверить</h2>
   <p>Названия пунктов в сервисах отличаются и меняются, но смысл везде один.</p>
   <div class="tiplist">
@@ -362,7 +405,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 
 <section class="wrap blk reveal">
   <div class="lede" style="padding-top:0"><div class="col">
-  <p class="label">Правила сервисов</p>
+  <p class="label" id="pravila">Правила сервисов</p>
   <h2>За что действительно блокируют</h2>
     <p>У каждой нейросети есть правила использования. Нарушение правил – самая частая причина ограничений и блокировок, гораздо более частая, чем всё остальное.</p>
     <p>Большинство запретов очевидны: оружие, наркотики, вредоносный код, травля, всё, что связано с детьми. Но часть запросов выглядит вполне рабочими – и всё равно упирается в правила.</p>
@@ -383,7 +426,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 
 <section class="wrap blk reveal">
   <div class="lede" style="padding-top:0"><div class="col">
-  <p class="label">Доступ к аккаунту</p>
+  <p class="label" id="dostup-akk">Доступ к аккаунту</p>
   <h2>Что вызывает вопросы у сервиса</h2>
   <p>Вторая по частоте причина потери доступа после нарушения правил – то, как ты подключаешься и платишь.</p>
   <div class="tiplist">
@@ -410,7 +453,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 
 <section class="wrap blk reveal">
   <div class="lede" style="padding-top:0"><div class="col">
-  <p class="label">Если уже отправила лишнее</p>
+  <p class="label" id="oshibka">Если уже отправила лишнее</p>
   <h2>Что делать спокойно и по порядку</h2>
   <ol class="numlist">
         <li>Не паникуй: одна отправка редко приводит к последствиям.</li>
