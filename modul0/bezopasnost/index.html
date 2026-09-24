@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Безопасная работа с нейросетями · Гайд · Нейро-архитектор</title>
+<meta name="description" content="Какие данные нельзя отправлять нейросетям, как обезличить рабочие материалы, как хранить результаты и что снижает риск потери доступа.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel,.dark .plabel{color:var(--pink-soft)}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:13px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+.zone{margin-top:26px;border-top:1px solid var(--ink)}
+.zhead{display:flex;align-items:baseline;gap:14px;padding:22px 0 6px}
+.zmark{width:13px;height:13px;flex:none;position:relative;top:2px}
+.zred{background:#C0116E}.zyel{background:#E0A000}.zgrn{background:#1FA24E}
+.zt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.zsub{font-size:16px;color:var(--muted)}
+.zitem{display:grid;grid-template-columns:220px 1fr;gap:24px;padding:18px 0;border-top:1px solid var(--line)}
+.zitem h3{font-family:var(--sans);font-size:17px;font-weight:700;line-height:1.35}
+.zitem p{font-size:16px;color:var(--muted);line-height:1.55}
+.zplain{padding:16px 0;border-top:1px solid var(--line);font-size:17px}
+.dep{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}
+.depcard{border:1px solid var(--line);padding:22px}
+.depcard.bad{border-left:3px solid #C0116E}
+.depcard.good{border-left:3px solid #1FA24E}
+.depl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
+.depcard.bad .depl{color:#C0116E}
+.depcard.good .depl{color:#1FA24E}
+.depcard pre{white-space:pre-wrap;font-family:var(--mono);font-size:13.5px;line-height:1.7;color:#3B3143}
+.numlist{counter-reset:s;margin-top:20px}
+.numlist li{position:relative;padding-left:44px;margin-bottom:14px;list-style:none;font-size:17px}
+.numlist li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-4px;
+  font-family:var(--serif);font-size:28px;color:var(--pink);background:none;width:auto;height:auto}
+.tiplist{margin-top:20px}
+.tip{padding:18px 0;border-top:1px solid var(--line)}
+.tip h3{font-family:var(--sans);font-size:17px;font-weight:700;margin-bottom:5px}
+.tip p{font-size:16px;color:var(--muted)}
+.warn{border-left:3px solid #E0A000;background:#FFF9EF;padding:18px 22px;margin-top:24px}
+.warn p{font-size:16px;color:#6B4200}
+@media (max-width:760px){.zitem{grid-template-columns:1fr;gap:6px}.dep{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Организационный модуль · гайд</span></div>
+  <div class="kmark"><span class="kn">!</span><span class="kt">Гайд</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Безопасная работа <span class="it">с нейросетями</span></h1>
+      <p class="hlead">Что можно отправлять, что нельзя и как работать с рабочими материалами, ничем не рискуя.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">7–10 минут</span></div>
+      <div><span class="mk">Когда</span><span class="mv">До первого урока</span></div>
+      <div><span class="mk">Пригодится</span><span class="mv">Весь курс</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>в четырёх строках</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Нейросеть – это чужой сервис. Всё, что ты в неё отправила, покинуло твой компьютер.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Опасны не сами нейросети, а привычка отправлять в них чужие данные не задумываясь.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Почти любой рабочий материал можно обезличить за минуту – и спокойно с ним работать.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Помощнику и агенту дают доступ только к той папке, которая нужна для задачи.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Три зоны</p>
+  <h2>Что отправлять можно, а что нет</h2>
+  <p>Самый простой способ не ошибаться – держать в голове три зоны. Красная: не отправляем никогда. Жёлтая: можно, но сначала обезличиваем. Зелёная: работаем спокойно.</p>
+  </div></div>
+
+  <div class="zone">
+    <div class="zhead"><span class="zmark zred"></span><div><p class="zt">Красная зона</p><p class="zsub">Не отправляем никогда, ни в какой сервис</p></div></div>
+    <div class="zitem"><h3>Персональные данные других людей</h3><p>ФИО целиком, телефоны, адреса, даты рождения, паспортные данные, номера документов – клиентов, сотрудников, учеников, детей.</p></div>
+    <div class="zitem"><h3>Медицинские сведения</h3><p>Диагнозы, результаты анализов, назначения – свои и особенно чужие.</p></div>
+    <div class="zitem"><h3>Платёжные данные</h3><p>Номера карт, счетов, реквизиты, выписки, коды из СМС.</p></div>
+    <div class="zitem"><h3>Пароли и доступы</h3><p>Логины, пароли, ключи, коды подтверждения. Ни один нормальный сервис не попросит их в переписке.</p></div>
+    <div class="zitem"><h3>Чужие коммерческие материалы</h3><p>Договоры, сметы, базы клиентов, внутренние документы компании – всё, что тебе передали под обязательство не разглашать.</p></div>
+  </div>
+
+  <div class="zone">
+    <div class="zhead"><span class="zmark zyel"></span><div><p class="zt">Жёлтая зона</p><p class="zsub">Можно – после того как убрали лишнее</p></div></div>
+    <div class="zitem"><h3>Рабочие документы</h3><p>Убери имена, названия компаний, суммы и реквизиты – оставь структуру и суть задачи.</p></div>
+    <div class="zitem"><h3>Переписка с клиентом</h3><p>Замени имена на «клиент», «коллега». Смысл разговора сохранится, личность уйдёт.</p></div>
+    <div class="zitem"><h3>Таблицы и расчёты</h3><p>Оставь формулы и логику, а живые данные замени на условные – ИИ разберёт механику и на них.</p></div>
+    <div class="zitem"><h3>Свои тексты и материалы</h3><p>Обычно безопасны, но проверь, не упоминаются ли в них третьи лица.</p></div>
+  </div>
+
+  <div class="zone">
+    <div class="zhead"><span class="zmark zgrn"></span><div><p class="zt">Зелёная зона</p><p class="zsub">Работаем спокойно</p></div></div>
+    <p class="zplain">Свои идеи, черновики, планы и мысли вслух.</p>
+    <p class="zplain">Публичная информация: то, что уже опубликовано и доступно всем.</p>
+    <p class="zplain">Учебные и выдуманные примеры – на них удобно отрабатывать приёмы.</p>
+    <p class="zplain">Обезличенные версии рабочих задач.</p>
+  </div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Как это делается</p>
+  <h2>Обезличить – минутное дело</h2>
+  <p>Нейросети не нужны имена и реквизиты, чтобы помочь с задачей. Ей нужна суть: что за ситуация, чего ты хочешь, какие есть ограничения. Сравни два варианта одной и той же задачи.</p>
+  </div></div>
+  <div class="dep">
+    <div class="depcard bad"><p class="depl">Так не надо</p><pre>Иванова Мария Петровна, ООО «Ромашка», договор №47 от 12.03,
+сумма 340 000 ₽, телефон +7 900 123-45-67, задерживает оплату
+второй месяц, обещала перевести до 15 числа.</pre></div>
+    <div class="depcard good"><p class="depl">Так безопасно</p><pre>Клиентка, небольшая компания, договор на услуги,
+сумма около трёхсот тысяч, задерживает оплату второй месяц,
+обещала перевести к середине месяца.</pre></div>
+  </div>
+  <p class="rulebox" style="margin-top:24px">Ответ по второму варианту будет ровно таким же полезным. Нейросеть не станет писать письмо хуже оттого, что не знает фамилию клиентки.</p>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Настройки</p>
+  <h2>Три переключателя, которые стоит проверить</h2>
+  <p>Названия пунктов в сервисах отличаются и меняются, но смысл везде один.</p>
+  <div class="tiplist">
+      <div class="tip"><h3>Отключи обучение на твоих данных</h3><p>В настройках большинства сервисов есть переключатель, разрешающий использовать твои диалоги для улучшения модели. Его можно выключить – работать это не мешает.</p></div>
+      <div class="tip"><h3>Пользуйся временными чатами</h3><p>Для разового разговора, который не должен остаться в истории, во многих сервисах есть режим без сохранения.</p></div>
+      <div class="tip"><h3>Почисти историю</h3><p>Старые диалоги с рабочими данными можно удалить – они не нужны ни тебе, ни сервису.</p></div>
+  </div>
+  </div></div>
+</section>
+
+  <section class="wrap blk reveal" id="dostup">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Доступ к файлам</p>
+    <h2>Минимум, который нужен для задачи</h2>
+    <p>Дальше в курсе помощник начнёт работать с твоими файлами. Правило простое: доступ дают к одной папке, которая нужна для конкретной задачи, а не ко всему диску и не к рабочему столу целиком.</p>
+    <p>Заведи отдельную папку под работу с ИИ и держи в ней только то, что действительно нужно. Личные документы, архив переписки, сканы паспортов и бухгалтерия в эту папку не попадают.</p>
+    <p>Подробно разбираем это в четвёртом модуле. Здесь достаточно запомнить принцип: доступ узкий, папка отдельная, содержимое ты знаешь.</p>
+    </div></div>
+  </section>
+
+  <section class="wrap blk reveal" id="sohranyay">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сохранность работы</p>
+    <h2>Не держи важное только в чате</h2>
+    <p>История чатов – не хранилище. Диалог может потеряться, аккаунт может стать недоступен, сервис может измениться.</p>
+    <p>Всё, что получилось ценного – инструкции помощников, карты, готовые документы, удачные промпты, – сохраняй отдельным файлом в свою папку сразу, а не когда-нибудь потом.</p>
+    <p>Отдельно держи инструкции своих помощников обычным текстом. Тогда при любых изменениях ты просто вставишь текст в другой сервис и продолжишь работать.</p>
+    </div></div>
+  </section>
+
+  <section class="wrap blk reveal" id="dostupnost">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Если доступ пропал</p>
+    <h2>Подстелить соломки заранее</h2>
+    <p>Доступ к аккаунту может закрыться по разным причинам: от проблем с оплатой до изменений на стороне сервиса. Это неприятно, но не смертельно, если заранее сделать три вещи.</p>
+    <p>Первое – хранить результаты работы у себя, а не в чате. Второе – держать под рукой вторую доступную нейросеть, чтобы не остановиться совсем. Третье – иметь свои инструкции текстом: они переносятся куда угодно.</p>
+    <p>Если доступ уже пропал: не создавай новые аккаунты в спешке и не передавай данные посредникам, которые обещают всё восстановить. Спокойно перейди на запасной сервис и продолжай работу оттуда.</p>
+    </div></div>
+  </section>
+
+  <section class="wrap blk reveal" id="blokirovki">
+    <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Что снижает риски</p>
+    <h2>Спокойная гигиена доступа</h2>
+    <p>Пользуйся официальными приложениями и сайтами сервисов, а не сторонними сборками и «зеркалами»: именно там чаще всего утекают доступы.</p>
+    <p>Не передавай данные своего аккаунта третьим лицам, даже если это выглядит как техподдержка или помощь с оплатой.</p>
+    <p>Следи за стабильностью подключения: если соединение постоянно рвётся и меняется, сервис может воспринимать это как подозрительную активность.</p>
+    <p>И читай правила самого сервиса – у каждой нейросети есть темы, с которыми она не работает. Нарушение правил – самая частая причина ограничений.</p>
+    </div></div>
+  </section>
+
+<div class="dark" style="margin-top:56px">
+  <div class="wrap dgrid">
+    <h2>Сначала правила работодателя</h2>
+    <div class="dcol">
+      <p style="color:#FF8FC6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px">Если ты работаешь по найму</p>
+    <p>Во многих компаниях есть свои правила использования ИИ: где-то разрешено всё, где-то только определённые сервисы, где-то запрещено полностью.</p>
+    <p>Узнай, как у вас, до того как отправишь первый рабочий документ. Это разговор на пять минут, который снимает большую часть рисков.</p>
+    <p>Если правил нет или они непонятны – работай с обезличенными материалами. Это почти всегда допустимо и точно не навредит.</p>
+      <p style="margin-top:20px"><b>Работа с персональными данными других людей регулируется законом. Я не юрист и не даю юридических рекомендаций: если персональные данные клиентов – часть твоей работы, сверься с юристом или ответственным в компании.</b></p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Если уже отправила лишнее</p>
+  <h2>Что делать спокойно и по порядку</h2>
+  <ol class="numlist">
+        <li>Не паникуй: одна отправка редко приводит к последствиям.</li>
+        <li>Удали сообщение или весь диалог, если сервис это позволяет.</li>
+        <li>Проверь настройки приватности и отключи использование твоих данных для обучения.</li>
+        <li>Если утекли чужие данные и это рабочая ситуация – сообщи ответственному в компании. Молчание почти всегда хуже.</li>
+        <li>Если это были платёжные данные или пароль – меняй пароль и блокируй карту, как при любой другой утечке.</li>
+  </ol>
+  <div class="warn"><p>И главное – не переставай пользоваться ИИ из-за одной ошибки. Осторожность нужна не для того, чтобы бояться, а чтобы работать спокойно.</p></div>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · организационный модуль</div>
+</footer>
+
+<script>
+(function(){
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
