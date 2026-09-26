@@ -50,7 +50,7 @@ section{padding:30px 0}
 
 .dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
 .dark h2{color:#fff}
-.dark .glabel,.dark .plabel{color:var(--pink-soft)}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
 .dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
 .dark .dgrid h2{grid-column:span 5}
 .dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
@@ -87,7 +87,7 @@ ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.
 .body{padding:0 0 34px 78px}
 
 .promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
-.plabel{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:13px}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
 .promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
 .tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
 
@@ -325,7 +325,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
         <div class="promptbox stepprompt"><p class="plabel">Промпт урока</p><pre>Мы с тобой долго дорабатывали эту задачу. Проанализируй, пожалуйста, все мои правки, комментарии и выборы и скажи, что ты понял о том, как мне лучше решать такие задачи. Собери это в готовый промпт, которым я смогу пользоваться для похожих задач дальше.</pre></div>
               <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
       
-        <p>Можно проще – я сама обычно говорю так:</p>
+        <p style="margin-top:26px">Можно проще – я сама обычно говорю так:</p>
         <div class="promptbox stepprompt"><p class="plabel">Как говорю я</p><pre>Собери, пожалуйста, всё, что я предлагала, критиковала, правила, какой-то подход, чтобы мне дальше было проще решать эту задачу.</pre></div>
               <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
       </div></div>
