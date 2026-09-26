@@ -230,6 +230,7 @@ details.full[open] summary{margin-bottom:14px}
 .fulltext{background:var(--dark);padding:24px;max-height:420px;overflow:auto}
 .fulltext pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13px;line-height:1.75;color:#DDD5E2}
 @media (max-width:760px){.areas{grid-template-columns:1fr}.filebox{padding:18px}}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
 </style>
 </head>
 <body>
@@ -660,8 +661,7 @@ description: Помогает превратить повторяющуюся з
 4. первый проверочный запрос;
 5. критерии, по которым я проверю результат.
 
-Предлагай минимально достаточную конструкцию. Не добавляй отдельного GPT или помощника, если эту задачу может решить обычный проект.</pre></div>
-        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Предлагай минимально достаточную конструкцию. Не добавляй отдельного GPT или помощника, если эту задачу может решить обычный проект.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
         <p class="snote">Обрати внимание на последние две строки запроса: они просят минимально достаточную конструкцию. Это важно – иначе тебе соберут систему из пяти помощников там, где хватит одного проекта.</p>
       </div></div>
       <div class="step"><span class="snum">4</span><div>
@@ -686,8 +686,7 @@ description: Помогает превратить повторяющуюся з
       <div class="step"><span class="snum">6</span><div>
         <h3>Создай проект и вставь инструкцию</h3>
         <p>Теперь заводи комнату под свою область и клади в настройки короткие постоянные правила. Полные сведения храни отдельными файлами – не превращай поле инструкции в роман «Война, мир и tone of voice».</p>
-        <div class="promptbox stepprompt"><p class="plabel">Пример инструкции – мой, для блога</p><pre>Ты помогаешь мне вести экспертный блог. Используй мои исходные мысли, материалы и профессиональную позицию. Помогай находить угол публикации, структурировать содержание, создавать черновики постов, каруселей и сценариев. Не выдумывай факты, опыт и истории от моего имени. Не делай финальный текст без необходимости: сначала помоги выбрать задачу, формат и главную мысль. Учитывай аудиторию, продукты, примеры и ограничения из материалов проекта. Если данных не хватает, задай до трёх конкретных вопросов.</pre></div>
-        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Пример инструкции – мой, для блога</p><pre>Ты помогаешь мне вести экспертный блог. Используй мои исходные мысли, материалы и профессиональную позицию. Помогай находить угол публикации, структурировать содержание, создавать черновики постов, каруселей и сценариев. Не выдумывай факты, опыт и истории от моего имени. Не делай финальный текст без необходимости: сначала помоги выбрать задачу, формат и главную мысль. Учитывай аудиторию, продукты, примеры и ограничения из материалов проекта. Если данных не хватает, задай до трёх конкретных вопросов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
         <div class="chk"><p class="chkt">Хорошая короткая инструкция отвечает на восемь вопросов</p><ul>
           <li>кто пользователь и чем занимается</li>
           <li>о чём область работы</li>
@@ -716,8 +715,7 @@ description: Помогает превратить повторяющуюся з
       <div class="step"><span class="snum">8</span><div>
         <h3>Открой новый чат внутри проекта</h3>
         <p>Это важный технический момент: чтобы проект использовал сохранённый контекст, новую задачу начинают именно внутри него, а не в общем чате. Дай настоящую задачу со своим исходником – не учебную.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Пример задачи – мой, для блога</p><pre>У меня есть мысль: люди пытаются заставить ИИ сразу писать за них, хотя сначала полезнее использовать его как собеседника, который помогает докрутить замысел. Предложи три разных угла для публикации в моём блоге. Пока не пиши сам пост.</pre></div>
-        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Пример задачи – мой, для блога</p><pre>У меня есть мысль: люди пытаются заставить ИИ сразу писать за них, хотя сначала полезнее использовать его как собеседника, который помогает докрутить замысел. Предложи три разных угла для публикации в моём блоге. Пока не пиши сам пост.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
         <div class="road">
           <div class="rd on" data-road="proj"><p class="rdlab">У меня есть проекты</p><p>Новый чат создаётся внутри проекта, а не в общем списке. Проверь, что ты действительно внутри комнаты.</p></div>
           <div class="rd" data-road="text"><p class="rdlab">Работаю без проектов</p><p>Вставь свою инструкцию первым сообщением, следом – задачу. Файлы приложи вручную.</p></div>
@@ -784,12 +782,12 @@ description: Помогает превратить повторяющуюся з
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
     var box=btn.closest('.step')||btn.closest('.col');
-    var pre=box?box.querySelector('.promptbox pre'):null;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
-      say('Скопировано. Вставь в чат');
+      say('Скопировано. Вставьте в чат');
       setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
-    }).catch(function(){say('Не вышло скопировать – выдели текст вручную');});
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
   });
 
   var full=document.getElementById('konstr-text');

@@ -220,6 +220,7 @@ a.btn:hover{color:#fff}
 @media (max-width:760px){
   .roads,.tiers{grid-template-columns:1fr;gap:18px}
 }
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
 </style>
 </head>
 <body>
@@ -339,8 +340,7 @@ a.btn:hover{color:#fff}
 
 Мне для практики нужны живые задачи. Если у тебя есть что-то повторяющееся, что съедает время, – ответы клиентам, описания услуг, напоминания о записи, – могу собрать тебе такой промпт бесплатно.
 
-От тебя – созвон на полчаса, чтобы я разобрался(ась) в задаче, и честный отзыв после. Если сейчас не актуально – просто скажи, всё нормально.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+От тебя – созвон на полчаса, чтобы я разобрался(ась) в задаче, и честный отзыв после. Если сейчас не актуально – просто скажи, всё нормально.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div>
 
     <div class="msg">
@@ -350,8 +350,7 @@ a.btn:hover{color:#fff}
 
 Если у кого-то есть рутина, которая съедает время, – отчёты, письма-сводки, итоги встреч, ответы на типовые вопросы, – давайте попробую собрать под неё промпт. Мне это практика, вам – минус кусок рутины.
 
-От вас – 20–30 минут на разговор о задаче. Если интересно, напишите мне в личные сообщения.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+От вас – 20–30 минут на разговор о задаче. Если интересно, напишите мне в личные сообщения.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       <p class="rulebox">Прежде чем работать с рабочими документами, уточните, какие данные компании можно загружать во внешние нейросети. Что можно и что нельзя отдавать ИИ – в гайде <a href="https://aiforlife.ru/ii-course/modul0/bezopasnost/">«Безопасность»</a>.</p>
     </div>
   </div></div>
@@ -388,8 +387,7 @@ a.btn:hover{color:#fff}
 
 ДЛЯ ПРОВЕРКИ
 10. Как ты поймёшь, что промпт работает?
-11. Дашь 2–3 реальные вводные, на которых я его проверю? Без имён и телефонов клиентов.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+11. Дашь 2–3 реальные вводные, на которых я его проверю? Без имён и телефонов клиентов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">2</span><div>
@@ -399,15 +397,13 @@ a.btn:hover{color:#fff}
 
 Сначала задай мне до пяти уточняющих вопросов, если чего-то не хватает.
 
-Потом собери промпт по структуре «контекст – задача – результат». Он должен быть написан так, чтобы человек вставлял его в новый чат и дописывал в конце только свою вводную. Добавь в промпт пример удачного результата, чего точно не надо и в каком виде отдавать ответ. Промпт должен работать в любой нейросети.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Потом собери промпт по структуре «контекст – задача – результат». Он должен быть написан так, чтобы человек вставлял его в новый чат и дописывал в конце только свою вводную. Добавь в промпт пример удачного результата, чего точно не надо и в каком виде отдавать ответ. Промпт должен работать в любой нейросети.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">3</span><div>
       <h3>Проверьте на 2–3 реальных вводных заказчика</h3>
       <p>Каждую вводную – в новом чате: промпт плюс вводная в конце. Смотрите на результат глазами заказчика: так бы он написал? Где не так – давайте обратную связь, как в уроке 3.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Если результат не тот</p><pre>Вот что не так в результате: <span class="tok">[что именно не подходит]</span>. Поправь результат и скажи, что нужно изменить в самом промпте, чтобы такое больше не повторялось.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Если результат не тот</p><pre>Вот что не так в результате: <span class="tok">[что именно не подходит]</span>. Поправь результат и скажи, что нужно изменить в самом промпте, чтобы такое больше не повторялось.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       <p class="snote">ИИ ошибается и додумывает – перечитывайте каждый результат. Как проверять его системно, разберём во втором модуле.</p>
     </div></div>
 
@@ -416,8 +412,7 @@ a.btn:hover{color:#fff}
       <p>После проверок у вас накопились правки. Как в уроке 3, просим нейросеть собрать их в финальный промпт – и следим, чтобы она не добавила лишнего от себя.</p>
       <div class="promptbox stepprompt"><p class="plabel">Итоговая версия</p><pre>Мы проверили промпт на нескольких вводных, по ходу были правки и замечания. Проанализируй их все и собери финальную версию промпта.
 
-Не добавляй ничего сверх того, что было в моих правках и в исходных ответах заказчика. Если что-то пришлось додумать – отметь это отдельным списком в конце.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Не добавляй ничего сверх того, что было в моих правках и в исходных ответах заказчика. Если что-то пришлось додумать – отметь это отдельным списком в конце.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">5</span><div>
@@ -427,8 +422,7 @@ a.btn:hover{color:#fff}
 1) сам промпт – отдельным блоком, чтобы его легко было скопировать целиком;
 2) «Как пользоваться» – три шага простыми словами: где открыть чат, что вставить, что дописать;
 3) пример – вводная и результат, которые получились у нас на проверке.
-Без терминов и без лишних объяснений.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Без терминов и без лишних объяснений.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       <p class="snote">Если ваша нейросеть не создаёт файл, скопируйте текст в документ. Копию сохраните к себе в папку «Курс по ИИ» – она пригодится для портфолио.</p>
     </div></div>
   </div>
@@ -456,8 +450,7 @@ a.btn:hover{color:#fff}
 
 Давай созвонимся на 15 минут: я покажу, как это работает, и ты при мне попробуешь запустить. Неделю после этого я на связи – если что-то не так, пиши, поправлю.
 
-И просьба: напиши потом пару строк отзыва – удобно ли пользоваться и что изменилось. Можно я покажу эту работу в своём портфолио без имени и деталей?</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+И просьба: напиши потом пару строк отзыва – удобно ли пользоваться и что изменилось. Можно я покажу эту работу в своём портфолио без имени и деталей?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div>
   </div></div>
 </section>
@@ -557,7 +550,7 @@ a.btn:hover{color:#fff}
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
     var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
-    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');

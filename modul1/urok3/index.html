@@ -190,6 +190,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
   .meta{gap:0 22px}
   .practice{padding:44px 0 40px}
 }
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
 </style>
 </head>
 <body>
@@ -250,8 +251,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
       <h2>Она может додумывать – просите проверить себя</h2>
       <p>Нейросеть даёт полезные ответы, но они могут быть додуманными: что-то приврала, что-то добавила от себя. С этим нужно просто смириться как с фактом. И когда относишься к этому спокойно, видишь другое: да, что-то она придумала, зато 90% работы сделала хорошо.</p>
       <p>Чтобы себе это облегчить, особенно если речь о важном документе, просто попросите её проверить саму себя. Она пойдёт проверять и найдёт ошибки. Сидеть и сверять по буквам не нужно – достаточно держать этот факт в голове.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Проверь, пожалуйста, в документе, который ты только что создал: что ты додумал, а что было основано на моих словах. Проверь сам себя на всякий случай – я знаю тебя, ты немножко шалишь.</pre></div>
-              <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Проверь, пожалуйста, в документе, который ты только что создал: что ты додумал, а что было основано на моих словах. Проверь сам себя на всякий случай – я знаю тебя, ты немножко шалишь.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       </div></div>
     </section>
     <section class="wrap blk reveal">
@@ -316,18 +316,15 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
                 <h3>Давайте обратную связь тем способом, который вам удобен</h3>
         <p>Переписывать за нейросеть руками не нужно – вы остаётесь в режиме взаимодействия. Мне, например, в ответах не нравятся рубленые фразы и «ИИшный налёт»: искусственные противопоставления, нейросетевая драматургия. Я это так и говорю – и конкретизирую, что именно не нравится.</p>
         <p>Отдельный приём для текстов: включите диктовку и прочитайте текст вслух, как будете его произносить. Где спотыкаетесь – там же и говорите: «вот здесь не ложится, тут я бы зашла иначе». Так вы и правки собираете, и заодно репетируете.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Смотри, я сейчас прочитаю этот текст вслух. Возможно, я буду что-то править и говорить, что мне не нравится и обо что я спотыкаюсь. Выпиши, пожалуйста, все мои правки и наблюдения, скажи, как бы ты поправил текст, и предложи вариант.</pre></div>
-              <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Смотри, я сейчас прочитаю этот текст вслух. Возможно, я буду что-то править и говорить, что мне не нравится и обо что я спотыкаюсь. Выпиши, пожалуйста, все мои правки и наблюдения, скажи, как бы ты поправил текст, и предложи вариант.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       </div></div>
       <div class="step"><span class="snum">3</span><div>
                 <h3>Попросите собрать ваш подход в промпт</h3>
         <p>Это ключевой шаг урока: диалог превращается в инструкцию. Все идеи, методы и подходы, которые рождались по ходу, надо собрать – и нейросеть в этой сборке полезнее всего.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Промпт урока</p><pre>Мы с тобой долго дорабатывали эту задачу. Проанализируй, пожалуйста, все мои правки, комментарии и выборы и скажи, что ты понял о том, как мне лучше решать такие задачи. Собери это в готовый промпт, которым я смогу пользоваться для похожих задач дальше.</pre></div>
-              <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Промпт урока</p><pre>Мы с тобой долго дорабатывали эту задачу. Проанализируй, пожалуйста, все мои правки, комментарии и выборы и скажи, что ты понял о том, как мне лучше решать такие задачи. Собери это в готовый промпт, которым я смогу пользоваться для похожих задач дальше.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       
         <p style="margin-top:26px">Можно проще – я сама обычно говорю так:</p>
-        <div class="promptbox stepprompt"><p class="plabel">Как говорю я</p><pre>Собери, пожалуйста, всё, что я предлагала, критиковала, правила, какой-то подход, чтобы мне дальше было проще решать эту задачу.</pre></div>
-              <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Как говорю я</p><pre>Собери, пожалуйста, всё, что я предлагала, критиковала, правила, какой-то подход, чтобы мне дальше было проще решать эту задачу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       </div></div>
       <div class="step"><span class="snum">4</span><div>
                 <h3>Прочитайте, что получилось, и поправьте</h3>
@@ -406,7 +403,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
     var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
-    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');

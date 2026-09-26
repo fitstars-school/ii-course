@@ -190,6 +190,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
   .meta{gap:0 22px}
   .practice{padding:44px 0 40px}
 }
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
 </style>
 </head>
 <body>
@@ -334,15 +335,13 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 
 Задача. Мне нужен сценарий рилса длительностью максимум полторы минуты. Я точно не хочу формат говорящей головы, я стесняюсь записывать себя. Буду рада, если предложишь идеи, которые можно снять через детали и предметы.
 
-Результат. Хочу три разных варианта таблицей: слева время, справа текстовки, которые мне надо говорить. И подсказки, чем проиллюстрировать, если не говорящая голова.</pre></div>
-              <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Результат. Хочу три разных варианта таблицей: слева время, справа текстовки, которые мне надо говорить. И подсказки, чем проиллюстрировать, если не говорящая голова.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
         <p class="snote">Если по ходу непонятно, контекст это или задача, – не разбирайтесь. Я сама на уроке думала: «я не люблю рилсы с говорящей головой – это контекст или задача?» Просто говорите, нейросеть разберётся.</p>
       </div></div>
       <div class="step"><span class="snum">4</span><div>
                 <h3>Добавьте один-два приёма</h3>
         <p>Не все семь сразу. Выберите то, что подходит вашей задаче. Я на уроке взяла самый интересный – разбор с трёх позиций.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Приём, который я добавила</p><pre>И когда ты предложишь эти варианты, в конце сделай, пожалуйста, разбор. С позиции сценариста: где можно сделать интереснее с точки зрения истории, где нужна зацепка. С позиции эксперта-психолога по отношениям: чтобы это звучало профессионально и не превращалось в попсу. И обязательно посмотри глазами моей зрительницы: интересно ли ей, понятно ли, о чём эти ролики, что её может зацепить. Пусть каждый из них предложит улучшения и сделает итоговый вывод.</pre></div>
-              <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Приём, который я добавила</p><pre>И когда ты предложишь эти варианты, в конце сделай, пожалуйста, разбор. С позиции сценариста: где можно сделать интереснее с точки зрения истории, где нужна зацепка. С позиции эксперта-психолога по отношениям: чтобы это звучало профессионально и не превращалось в попсу. И обязательно посмотри глазами моей зрительницы: интересно ли ей, понятно ли, о чём эти ролики, что её может зацепить. Пусть каждый из них предложит улучшения и сделает итоговый вывод.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       </div></div>
       <div class="step"><span class="snum">5</span><div>
                 <h3>Сравните с прошлым ответом</h3>
@@ -409,7 +408,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
     var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
-    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');

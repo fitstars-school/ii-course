@@ -221,6 +221,7 @@ a.btn,a.btn:hover{color:#fff}
   .tab+.tab{border-left:none;border-top:1px solid var(--ink)}
   .tab{padding:15px 18px}
 }
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
 </style>
 </head>
 <body>
@@ -289,8 +290,7 @@ a.btn,a.btn:hover{color:#fff}
       <div class="step"><span class="snum">3</span><div>
         <h3>Если что-то осталось только в чатах – попросите собрать</h3>
         <p>Откройте тот диалог и отправьте в него:</p>
-        <div class="promptbox stepprompt"><p class="plabel">Собрать карточку задачи</p><pre>Собери из нашего диалога карточку задачи для портфолио: задача, что мы делали по шагам, итоговый промпт, результат, что я поправил(а) сам(а). Пиши коротко и не добавляй того, чего не было в диалоге.</pre></div>
-        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Собрать карточку задачи</p><pre>Собери из нашего диалога карточку задачи для портфолио: задача, что мы делали по шагам, итоговый промпт, результат, что я поправил(а) сам(а). Пиши коротко и не добавляй того, чего не было в диалоге.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       </div></div>
       <div class="step"><span class="snum">4</span><div>
         <h3>Заполните «Что я поправил(а) сам(а)» своими словами</h3>
@@ -322,15 +322,13 @@ a.btn,a.btn:hover{color:#fff}
       <div class="step"><span class="snum">4</span><div>
         <h3>Соберите свой подход в промпт и проверьте его в новом чате</h3>
         <p>Можно сказать так:</p>
-        <div class="promptbox stepprompt"><p class="plabel">Промпт из урока 3</p><pre>Мы с тобой долго дорабатывали эту задачу. Проанализируй, пожалуйста, все мои правки, комментарии и выборы и скажи, что ты понял о том, как мне лучше решать такие задачи. Собери это в готовый промпт, которым я смогу пользоваться для похожих задач дальше.</pre></div>
-        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Промпт из урока 3</p><pre>Мы с тобой долго дорабатывали эту задачу. Проанализируй, пожалуйста, все мои правки, комментарии и выборы и скажи, что ты понял о том, как мне лучше решать такие задачи. Собери это в готовый промпт, которым я смогу пользоваться для похожих задач дальше.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
         <p class="stepafter">Прочитайте, что получилось, уберите то, чего вы не говорили, и проверьте промпт в новом чате на похожей задаче.</p>
       </div></div>
       <div class="step"><span class="snum">5</span><div>
         <h3>Заполните «Задачу для портфолио 1», проверьте себя и пришлите ссылку</h3>
         <p>Чтобы не переписывать всё вручную, попросите нейросеть собрать карточку прямо в этом диалоге:</p>
-        <div class="promptbox stepprompt"><p class="plabel">Собрать карточку задачи</p><pre>Собери из нашего диалога карточку задачи для портфолио: задача, что мы делали по шагам, итоговый промпт, результат, что я поправил(а) сам(а). Пиши коротко и не добавляй того, чего не было в диалоге.</pre></div>
-        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <div class="promptbox stepprompt"><p class="plabel">Собрать карточку задачи</p><pre>Собери из нашего диалога карточку задачи для портфолио: задача, что мы делали по шагам, итоговый промпт, результат, что я поправил(а) сам(а). Пиши коротко и не добавляй того, чего не было в диалоге.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
         <p class="stepafter">Поле «Что я поправил(а) сам(а)» допишите своими словами. Дальше – <a href="#proverka">промпт-проверяющий</a> и <a href="#sdat">«Как сдать»</a>.</p>
       </div></div>
     </div>
@@ -343,8 +341,7 @@ a.btn,a.btn:hover{color:#fff}
     <p class="label">Проверка – для обоих путей</p>
     <h2>Промпт-проверяющий</h2>
     <p>Платформа принимает задание автоматически, поэтому первую обратную связь даст нейросеть. Скопируйте промпт, вставьте в чат и сразу под ним – текст своей страницы.</p>
-    <div class="promptbox stepprompt"><p class="plabel">Промпт-проверяющий</p><pre>Вот моя задача для портфолио. Проверь её по пяти пунктам: 1) понятно, какая задача и для кого; 2) видно, что делала нейросеть и что делал(а) я; 3) есть промпт, который можно переиспользовать; 4) есть результат; 5) нет выдуманных цифр и обещаний. По каждому пункту скажи «да» или «доработать» и что именно. Не переписывай её за меня.</pre></div>
-    <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт-проверяющий</p><pre>Вот моя задача для портфолио. Проверь её по пяти пунктам: 1) понятно, какая задача и для кого; 2) видно, что делала нейросеть и что делал(а) я; 3) есть промпт, который можно переиспользовать; 4) есть результат; 5) нет выдуманных цифр и обещаний. По каждому пункту скажи «да» или «доработать» и что именно. Не переписывай её за меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     <p class="stepafter">Где нейросеть скажет «доработать» – поправьте страницу сами. Решение, что оставить, всё равно за вами.</p>
   </div></div>
 </section>
@@ -403,7 +400,7 @@ a.btn,a.btn:hover{color:#fff}
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
     var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
-    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');

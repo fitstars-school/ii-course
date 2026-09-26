@@ -196,6 +196,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 .pgroup .note{max-width:68ch;margin-top:18px}
 .pgroup .steps{margin-top:22px}
 .step .plabel{font-size:10px;line-height:1.6;color:var(--pink-soft)}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
 </style>
 
 </head>
@@ -271,24 +272,21 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 я – <span class="tok">[кто вы и чем занимаетесь]</span>;
 это для <span class="tok">[кого: клиентов, подписчиков, коллег]</span>, им важно <span class="tok">[что]</span>;
 мне это нужно, чтобы <span class="tok">[зачем]</span>.
-Переделай ответ с учётом этого.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Переделай ответ с учётом этого.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">02</span><div>
       <h3>«Сразу выдал простыню, а я ещё сам(а) не понимаю, чего хочу»</h3>
       <p class="why">Почему так</p>
       <p>Нейросеть устроена отвечать сразу, даже когда данных мало. Не нужно угадывать, что ей рассказать, – пусть сама спросит, чего не хватает. Это приём из второго урока: уточняющие вопросы. Заодно ответ на частый вопрос «так много говорить ему надо перед каждым постом?» – не надо, пусть спрашивает он.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Подожди с ответом. Сначала задай мне вопросы – не больше пяти, – без которых ты не сделаешь это хорошо. Задавай по одному, я буду отвечать. Когда поймёшь задачу, скажи – и только тогда начинай.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Подожди с ответом. Сначала задай мне вопросы – не больше пяти, – без которых ты не сделаешь это хорошо. Задавай по одному, я буду отвечать. Когда поймёшь задачу, скажи – и только тогда начинай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">03</span><div>
       <h3>«Приписал мне то, чего я не говорил(а), и перепутал, для кого текст»</h3>
       <p class="why">Почему так</p>
       <p>Третий принцип из урока 3: нейросеть додумывает недостающее, это её природа. Спорить бесполезно, ругать себя тоже. Спокойно попросите её саму отделить ваши слова от своих догадок.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Пройдись по своему ответу и раздели его на два списка: что взято из моих слов и что ты добавил от себя. Добавленное пока не используй – я посмотрю и скажу, что оставить. И напоминаю: я <span class="tok">[кто вы]</span>, а текст для <span class="tok">[кого]</span>.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Пройдись по своему ответу и раздели его на два списка: что взято из моих слов и что ты добавил от себя. Добавленное пока не используй – я посмотрю и скажу, что оставить. И напоминаю: я <span class="tok">[кто вы]</span>, а текст для <span class="tok">[кого]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
   </div>
@@ -310,24 +308,21 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 – английские слова там, где есть русские;
 – противопоставления «не просто… а…» и пафосные восклицания;
 – короткие рубленые фразы подряд.
-Пиши так, как говорят вслух в обычном разговоре. Больше всего мне режет слух <span class="tok">[что именно, если можете назвать]</span>.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Пиши так, как говорят вслух в обычном разговоре. Больше всего мне режет слух <span class="tok">[что именно, если можете назвать]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">05</span><div>
       <h3>«Мне нужна была табличка, а он выдал сочинение»</h3>
       <p class="why">Почему так</p>
       <p>Если формат не назван, нейросеть выбирает привычный – обычно текст абзацами. Это третья часть формулы из урока 2, «результат»: в каком виде вы хотите его забрать. Содержание при этом часто уже хорошее – менять нужно только форму.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Содержание подходит, но оформи по-другому: <span class="tok">[таблицей с колонками … / списком по пунктам / коротким сообщением для мессенджера / планом по дням]</span>. Ничего не добавляй и не убирай – поменяй только вид.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Содержание подходит, но оформи по-другому: <span class="tok">[таблицей с колонками … / списком по пунктам / коротким сообщением для мессенджера / планом по дням]</span>. Ничего не добавляй и не убирай – поменяй только вид.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">06</span><div>
       <h3>«Нужна была пара строк – а тут полстраницы. Или наоборот, три сухих предложения»</h3>
       <p class="why">Почему так</p>
       <p>«Коротко» и «подробно» каждый понимает по-своему. Нейросети нужна мерка, которую можно посчитать: предложения, знаки, минуты речи, количество пунктов.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Нужен другой объём: <span class="tok">[не больше 5 предложений / как подпись к посту / на 2 минуты речи / подробно, с примером к каждому пункту]</span>. Если сокращаешь – оставь главную мысль и убери повторы. Если расширяешь – добавляй примеры, а не общие слова.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Нужен другой объём: <span class="tok">[не больше 5 предложений / как подпись к посту / на 2 минуты речи / подробно, с примером к каждому пункту]</span>. Если сокращаешь – оставь главную мысль и убери повторы. Если расширяешь – добавляй примеры, а не общие слова.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
   </div>
@@ -344,24 +339,21 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
       <h3>«Хвалит всё, что я предлагаю, а выбрать так и не помогает»</h3>
       <p class="why">Почему так</p>
       <p>Четвёртый принцип из урока 3: нейросеть льстит, её создавали так, чтобы с ней было приятно общаться. Без критериев она будет хвалить каждый вариант и каждый раз находить новые аргументы. Дайте ей мерку и разрешите спорить.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Не хвали. Оцени варианты <span class="tok">[1, 2 и 3]</span> строго по моим критериям: <span class="tok">[например: понятно новичку, можно сделать за вечер, хочется переслать подруге]</span>. У каждого назови главный минус. Потом выбери один и объясни выбор – даже если думаешь, что я с ним не соглашусь.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Не хвали. Оцени варианты <span class="tok">[1, 2 и 3]</span> строго по моим критериям: <span class="tok">[например: понятно новичку, можно сделать за вечер, хочется переслать подруге]</span>. У каждого назови главный минус. Потом выбери один и объясни выбор – даже если думаешь, что я с ним не соглашусь.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">08</span><div>
       <h3>«Переформулирует одни и те же три идеи другими словами»</h3>
       <p class="why">Почему так</p>
       <p>В диалоге нейросеть опирается на то, что уже сказано, и начинает крутиться вокруг своих же прошлых ответов. Её нужно явно выпустить из этой колеи. Если и это не помогло – пора в новый чат, об этом ниже.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Стоп, мы ходим по кругу. Все прошлые варианты считай закрытыми – к ним не возвращаемся. Зайди с другой стороны: что предложил бы человек из совсем другой сферы? Дай три идеи, не похожие ни на одну из прежних.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Стоп, мы ходим по кругу. Все прошлые варианты считай закрытыми – к ним не возвращаемся. Зайди с другой стороны: что предложил бы человек из совсем другой сферы? Дай три идеи, не похожие ни на одну из прежних.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">09</span><div>
       <h3>«Пишет „не могу с этим помочь“, хотя я не прошу ничего плохого»</h3>
       <p class="why">Почему так</p>
       <p>У нейросетей есть осторожные темы: здоровье, лекарства, деньги, право, реальные люди. Иногда обычный запрос из-за одного слова кажется ей рискованным. Помогает объяснить, зачем вам это и что вы сделаете с ответом.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Поясню, зачем мне это: я <span class="tok">[кто вы]</span>, и мне нужно <span class="tok">[для чего – например, подготовить памятку для клиентов]</span>. Я не прошу решать за специалиста – мне нужны <span class="tok">[общая информация / структура / черновик]</span>, решение остаётся за мной. С какой частью ты можешь помочь?</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Поясню, зачем мне это: я <span class="tok">[кто вы]</span>, и мне нужно <span class="tok">[для чего – например, подготовить памятку для клиентов]</span>. Я не прошу решать за специалиста – мне нужны <span class="tok">[общая информация / структура / черновик]</span>, решение остаётся за мной. С какой частью ты можешь помочь?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       <p class="snote">Если отказ повторяется – не уговаривайте. По некоторым вопросам нейросеть и правда не должна заменять врача или юриста.</p>
     </div></div>
 
@@ -379,24 +371,21 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
       <h3>«Попросили сразу всё – план, тексты, расписание – и получили кашу»</h3>
       <p class="why">Почему так</p>
       <p>Когда в одном запросе пять задач, каждой достаётся понемногу внимания, и всё выходит поверхностным. Большую задачу проще разбить на этапы и идти по одному, проверяя каждый.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Давай разобьём эту задачу на этапы. Сначала просто покажи список этапов – ничего пока не делай. Потом пойдём по одному: сделали этап, я говорю «ок» или поправляю – и только тогда следующий.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Давай разобьём эту задачу на этапы. Сначала просто покажи список этапов – ничего пока не делай. Потом пойдём по одному: сделали этап, я говорю «ок» или поправляю – и только тогда следующий.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">11</span><div>
       <h3>«Мы же договорились – а он опять за своё»</h3>
       <p class="why">Почему так</p>
       <p>В начале чата вы договорились, например, писать без смайликов и на «ты», а через час они снова тут. Всё, что было давно, нейросеть в длинном чате держит всё хуже. Правила стоит напомнить и попросить проверить по ним последний ответ.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Напоминаю, о чём мы договорились: <span class="tok">[правило 1]</span>, <span class="tok">[правило 2]</span>, <span class="tok">[правило 3]</span>. Проверь свой последний ответ по этим правилам, исправь, что не так, и дальше держись их в каждом ответе.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Напоминаю, о чём мы договорились: <span class="tok">[правило 1]</span>, <span class="tok">[правило 2]</span>, <span class="tok">[правило 3]</span>. Проверь свой последний ответ по этим правилам, исправь, что не так, и дальше держись их в каждом ответе.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step"><span class="snum">12</span><div>
       <h3>«Прикрепили файл – а отвечает так, будто его не видел»</h3>
       <p class="why">Почему так</p>
       <p>Файл мог прочитаться не целиком: длинный документ, скан, таблица с картинками. Или в длинном чате нейросеть о нём «забыла». Сначала проверьте, что она видит.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Вернись к файлу <span class="tok">[название]</span> из этого чата. Перескажи в трёх-пяти пунктах, что в нём главное. Дальше отвечай, опираясь на этот файл, а не на общие знания.</pre></div>
-      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Вернись к файлу <span class="tok">[название]</span> из этого чата. Перескажи в трёх-пяти пунктах, что в нём главное. Дальше отвечай, опираясь на этот файл, а не на общие знания.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
       <p class="snote">Если пересказ мимо – значит, файл не прочитался. Скопируйте нужный кусок текстом прямо в сообщение.</p>
     </div></div>
 
@@ -417,15 +406,13 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 – что мы уже решили и что мне понравилось;
 – что мне точно не подходит;
 – на чём остановились и какой следующий шаг.
-Коротко, без пересказа всего диалога.</pre></div>
-    <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Коротко, без пересказа всего диалога.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
 
     <p class="label" style="margin-top:30px;color:var(--pink)">Шаг 2 · в новом чате</p>
     <p>Скопируйте итог, откройте новый чат и отправьте первым сообщением:</p>
     <div class="promptbox stepprompt"><p class="plabel">Продолжите с итогом</p><pre>Продолжаем работу, которую мы начали в другом чате. Вот итог:
 <span class="tok">[вставьте итог]</span>
-Сначала коротко скажи, как ты понял задачу. Потом <span class="tok">[что делаем дальше]</span>.</pre></div>
-    <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+Сначала коротко скажи, как ты понял задачу. Потом <span class="tok">[что делаем дальше]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     <p class="rulebox">Итог можно сохранить в папку «Курс по ИИ» – тогда к этой задаче легко вернуться хоть через неделю, в любой нейросети.</p>
   </div></div>
 </section>
@@ -483,7 +470,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
     var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
-    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');
