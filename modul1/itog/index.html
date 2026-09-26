@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Моя задача и мой подход к работе с ИИ · Итог модуля 1 · Нейро-архитектор</title>
+<meta name="description" content="Итог модуля 1: соберите результаты уроков в первую страницу своего портфолио и сдайте ссылкой или файлом.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* Итог М1. Шкала: Р1 – заголовки (Instrument Serif), Р2 – h3/вкладки (Manrope 700), Р3 – текст 17px, Р4 – метки CAPS */
+a.btn,a.btn:hover{color:#fff}
+.hero{padding-top:34px}
+.blk .lede{padding-top:0}
+.promptbox .plabel{color:var(--pink-soft)}
+.dl{margin-top:26px}
+.after{margin-top:14px;color:var(--muted)}
+.tabs{display:flex;margin-top:30px;border:1px solid var(--ink)}
+.tab{flex:1 1 0;display:block;font-family:var(--sans);font-size:var(--text);font-weight:700;line-height:1.35;color:var(--ink);padding:18px 22px;transition:background .2s,color .2s}
+.tab+.tab{border-left:1px solid var(--ink)}
+.tab .tl{display:block;font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
+.tab:hover{color:var(--ink);background:#F7EFF4}
+.tab.on,.tab.on:hover{background:var(--ink);color:#fff}
+.tab.on .tl{color:var(--pink-soft)}
+.panel{padding-top:34px;scroll-margin-top:16px}
+.panel[hidden]{display:none}
+.panel h3.ptitle{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3}
+.panel .pfor{color:var(--muted);margin-top:6px}
+.panel .steps{padding-top:18px}
+.stepafter{margin-top:14px}
+#algo,.tabs{scroll-margin-top:16px}
+.dark .label{color:#9C8AA6;margin-top:26px}
+.dark .quote{color:#fff;margin-top:12px}
+.dark .final{margin-top:26px}
+.blk .btns{margin-top:22px}
+@media (max-width:760px){
+  .tabs{flex-direction:column}
+  .tab+.tab{border-left:none;border-top:1px solid var(--ink)}
+  .tab{padding:15px 18px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · итог</span></div>
+  <div class="kmark"><span class="kn">1</span><span class="kt">Итог модуля 1</span></div>
+  <div class="hero">
+    <div class="hgrid">
+      <h1>Моя&nbsp;задача и&nbsp;мой&nbsp;подход к&nbsp;работе с&nbsp;ИИ</h1>
+      <p class="hlead">Собираем результаты четырёх уроков на одну страницу – первую задачу в вашем портфолио. К концу курса из таких страниц сложится готовое портфолио. Задание принимается автоматически.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Сдаёте</span><span class="mv">«Задачу для портфолио 1»</span></div>
+      <div><span class="mk">Проверка</span><span class="mv">Автоматически</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Первая страница портфолио</span></div>
+    </div>
+    <nav class="nav" aria-label="Разделы страницы">
+      <a class="navlink" href="#portfolio">Портфолио</a>
+      <a class="navlink" href="#algo">Два пути</a>
+      <a class="navlink" href="#proverka">Проверка</a>
+      <a class="navlink" href="#sdat">Как сдать</a>
+      <a class="navlink" href="#uroki">Что взять из уроков</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap blk" id="portfolio">
+  <div class="lede"><div class="col">
+    <p class="label">Ваше портфолио</p>
+    <h2>Один документ на&nbsp;весь курс</h2>
+    <p>«Моё портфолио» – это ваш рабочий документ на весь курс. В нём по одной странице на каждый модуль – «Задача для портфолио»: какую задачу вы решали, что делали вместе с нейросетью, что получилось и что вы поправили сами. Сейчас заполняем первую страницу – «Задачу для портфолио 1».</p>
+    <p>К концу курса у вас будет несколько таких страниц на своих настоящих задачах – это и есть портфолио.</p>
+    <div class="btns dl"><a class="btn" href="assets/portfolio-neiro-arhitektor.docx" download="Моё портфолио.docx"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M4 21h16"></path></svg>Скачать шаблон портфолио (Word)</a></div>
+    <p class="after">Уже скачали шаблон в первом уроке? Работайте в нём – новый не нужен.</p>
+    <p class="note"><b>Удобнее в Google Документах.</b> Откройте Google Документы → Файл → Открыть → Загрузить и выберите скачанный файл. Затем Файл → Сохранить как Google Документ – и дальше просто отправляете ссылку. Работаете в Word – тоже можно, тогда сдаёте файлом.</p>
+    <p>В каждом модуле вы добавляете новую страницу и присылаете тот же самый документ. В тарифе «Старт» три модуля и три задачи для портфолио, четвёртая – для тарифов «Система» и «Масштаб».</p>
+  </div></div>
+</section>
+
+<section class="wrap blk" id="algo">
+  <div class="lede"><div class="col">
+    <p class="label">Два пути</p>
+    <h2>Выберите свой путь</h2>
+    <p>Если результаты уроков сохранены – просто соберите их. Хотите взять в портфолио задачу поактуальнее – пройдите путь модуля заново на новой задаче. Оба пути ведут к одному: заполненной странице «Задача для портфолио 1».</p>
+
+  <div class="tabs" role="tablist">
+    <a class="tab on" href="#sobrat" data-tab="sobrat" role="tab" aria-selected="true" aria-controls="sobrat"><span class="tl">Путь 1</span>Всё готово, мне только собрать</a>
+    <a class="tab" href="#novoe" data-tab="novoe" role="tab" aria-selected="false" aria-controls="novoe"><span class="tl">Путь 2</span>Сделаю новое</a>
+  </div>
+
+  <div class="panel" id="sobrat" role="tabpanel">
+    <h3 class="ptitle">Всё готово, мне только собрать</h3>
+    <p class="pfor">Для тех, кто делал задания после уроков и сохранял результаты.</p>
+    <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Откройте портфолио на странице «Задача для портфолио 1»</h3>
+        <p>Если шаблона ещё нет – скачайте его кнопкой выше.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Перенесите то, что сохраняли после уроков</h3>
+        <p>Задачу и нейросеть (урок 1), запрос «до» и «после» (урок 2), свой промпт (урок 3), карту применений и первую пробу (урок 4). Что именно взять из каждого урока – в <a href="#uroki">шпаргалке внизу страницы</a>.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Если что-то осталось только в чатах – попросите собрать</h3>
+        <p>Откройте тот диалог и отправьте в него:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Собрать карточку задачи</p><pre>Собери из нашего диалога карточку задачи для портфолио: задача, что мы делали по шагам, итоговый промпт, результат, что я поправил(а) сам(а). Пиши коротко и не добавляй того, чего не было в диалоге.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>Заполните «Что я поправил(а) сам(а)» своими словами</h3>
+        <p>Где нейросеть ошиблась или звучала «не так» и как вы это исправили. Это самое ценное для портфолио: здесь видно, где решали вы.</p>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <h3>Проверьте себя и пришлите ссылку</h3>
+        <p>Прогоните карточку через <a href="#proverka">промпт-проверяющий</a>, поправьте то, что он подсветит, и сдайте – как, написано в блоке <a href="#sdat">«Как сдать»</a>.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="panel" id="novoe" role="tabpanel">
+    <h3 class="ptitle">Сделаю новое</h3>
+    <p class="pfor">Для тех, кто хочет в портфолио задачу поактуальнее.</p>
+    <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Возьмите задачу из своей карты применений</h3>
+        <p>Карту вы собирали в уроке 4. Выберите задачу, которую хотите показать в портфолио.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Наговорите её голосом и добавьте один приём</h3>
+        <p>По формуле урока 2: контекст (кто вы, для кого, в какой ситуации), задача, какой результат нужен. И один приём усиления – например, попросите сначала задать вам уточняющие вопросы.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Доведите результат до рабочего</h3>
+        <p>Давайте обратную связь, как живому человеку (урок 3): что нравится, что звучит «по-ИИшному», чего не хватает.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>Соберите свой подход в промпт и проверьте его в новом чате</h3>
+        <p>Можно сказать так:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Промпт из урока 3</p><pre>Мы с тобой долго дорабатывали эту задачу. Проанализируй, пожалуйста, все мои правки, комментарии и выборы и скажи, что ты понял о том, как мне лучше решать такие задачи. Собери это в готовый промпт, которым я смогу пользоваться для похожих задач дальше.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <p class="stepafter">Прочитайте, что получилось, уберите то, чего вы не говорили, и проверьте промпт в новом чате на похожей задаче.</p>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <h3>Заполните «Задачу для портфолио 1», проверьте себя и пришлите ссылку</h3>
+        <p>Чтобы не переписывать всё вручную, попросите нейросеть собрать карточку прямо в этом диалоге:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Собрать карточку задачи</p><pre>Собери из нашего диалога карточку задачи для портфолио: задача, что мы делали по шагам, итоговый промпт, результат, что я поправил(а) сам(а). Пиши коротко и не добавляй того, чего не было в диалоге.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <p class="stepafter">Поле «Что я поправил(а) сам(а)» допишите своими словами. Дальше – <a href="#proverka">промпт-проверяющий</a> и <a href="#sdat">«Как сдать»</a>.</p>
+      </div></div>
+    </div>
+  </div>
+  </div></div>
+</section>
+
+<section class="wrap blk" id="proverka">
+  <div class="lede"><div class="col">
+    <p class="label">Проверка – для обоих путей</p>
+    <h2>Промпт-проверяющий</h2>
+    <p>Платформа принимает задание автоматически, поэтому первую обратную связь даст нейросеть. Скопируйте промпт, вставьте в чат и сразу под ним – текст своей страницы.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт-проверяющий</p><pre>Вот моя задача для портфолио. Проверь её по пяти пунктам: 1) понятно, какая задача и для кого; 2) видно, что делала нейросеть и что делал(а) я; 3) есть промпт, который можно переиспользовать; 4) есть результат; 5) нет выдуманных цифр и обещаний. По каждому пункту скажи «да» или «доработать» и что именно. Не переписывай её за меня.</pre></div>
+    <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    <p class="stepafter">Где нейросеть скажет «доработать» – поправьте страницу сами. Решение, что оставить, всё равно за вами.</p>
+  </div></div>
+</section>
+
+<div class="dark" id="sdat">
+  <div class="wrap dgrid">
+    <h2>Как сдать</h2>
+    <div class="dcol">
+      <ul>
+        <li><b>Google Документ.</b> Пришлите ссылку на свой документ «Моё портфолио» в поле ответа на платформе. Проверьте, что доступ открыт: «Настройки доступа → Все, у кого есть ссылка → Читатель».</li>
+        <li><b>Word.</b> Прикрепите файл портфолио в поле ответа.</li>
+      </ul>
+      <p class="label">Подпись для портфолио</p>
+      <p class="quote">Нашёл(ла) задачу, которую ИИ снимает с меня, и собрал(а) под неё рабочий промпт.</p>
+      <p class="final"><b>Задание принимается автоматически. Вопросы и обратная связь – в чате курса (тарифы «Система» и «Масштаб»).</b></p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk" id="uroki">
+  <div class="lede"><div class="col">
+    <p class="label">Шпаргалка</p>
+    <h2>Что взять из&nbsp;каждого урока</h2>
+    <p>Это то, что в заданиях к урокам отмечено для портфолио, – просто перенесите это в «Задачу для портфолио 1».</p>
+    <div class="defs">
+      <div class="def"><span class="dn">У1</span><div><h3>С какого ИИ начать</h3><p>Ваша задача в 1–2 предложениях и выбранная нейросеть с одной фразой «почему».</p></div></div>
+      <div class="def"><span class="dn">У2</span><div><h3>От простого запроса к сильному результату</h3><p>Запрос «до» (из урока 1) и «после» (скопируйте текст из чата), какой приём сработал.</p></div></div>
+      <div class="def"><span class="dn">У3</span><div><h3>Как думать вместе с ИИ</h3><p>«Мой промпт v1» и одна фраза о том, как он сработал в новом чате.</p></div></div>
+      <div class="def"><span class="dn">У4</span><div><h3>Как найти свои задачи для ИИ</h3><p>Карта (3–5 задач), первая проба, повторяющаяся задача.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · итог модуля 1</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var tabs=[].slice.call(document.querySelectorAll('[data-tab]'));
+  var panels=tabs.map(function(t){return document.getElementById(t.dataset.tab);});
+  function show(id,scroll){
+    if(tabs.every(function(t){return t.dataset.tab!==id;}))return false;
+    tabs.forEach(function(t){var on=t.dataset.tab===id;t.classList.toggle('on',on);t.setAttribute('aria-selected',on?'true':'false');});
+    panels.forEach(function(p){if(p)p.hidden=(p.id!==id);});
+    if(scroll){var a=document.querySelector('.tabs');if(a)a.scrollIntoView();}
+    return true;
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(ev){
+      ev.preventDefault();show(t.dataset.tab,false);
+      try{history.replaceState(null,'','#'+t.dataset.tab);}catch(e){}
+    });
+  });
+  function fromHash(){return show(location.hash.slice(1),true);}
+  if(!fromHash())show('sobrat',false);
+  window.addEventListener('hashchange',fromHash);
+  window.addEventListener('load',function(){setTimeout(fromHash,60);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){setTimeout(fromHash,60);});});
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

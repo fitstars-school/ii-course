@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как превратить сумбурную задачу в промпт · Бонус модуля 1 · Нейро-архитектор</title>
+<meta name="description" content="Готовый помощник для любой нейросети: наговорите задачу голосом как есть – он задаст несколько вопросов и соберёт рабочий промпт по формуле «контекст – задача – результат».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · к уроку 2</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 1 · Быстрые победы</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Как превратить сумбурную задачу в&nbsp;промпт</h1>
+      <p class="hlead">Готовый помощник для обычного чата: вы наговариваете задачу голосом как есть – он задаёт несколько вопросов и собирает рабочий запрос.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Время</span><span class="mv">10–15 минут</span></div>
+      <div><span class="mk">Где работает</span><span class="mv">Любая нейросеть, обычный чат</span></div>
+      <div><span class="mk">Останется в папке</span><span class="mv">Помощник и готовый промпт</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Зачем он нужен</h2>
+    <div class="dcol">
+      <p>Во втором уроке мы разобрали формулу «контекст – задача – результат» и семь приёмов, которые усиливают запрос. С первого раза держать всё это в голове трудно – особенно когда задача сумбурная и вы сами ещё не до конца понимаете, чего хотите. Этот помощник берёт разбор на себя: вы рассказываете как есть, а он раскладывает рассказ по формуле, по одному задаёт недостающие вопросы, предлагает подходящий приём и собирает промпт, который можно сохранить и использовать снова. А формула урока со временем начинает держаться фоном – вы видите её в работе на каждой своей задаче.</p>
+    </div>
+  </div>
+</div>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Запускаем</p>
+    <h2>Три шага</h2>
+    <p class="pmeta">2 минуты · без настроек и проектов</p>
+    <p class="pintro">Помощник – это текст с правилами разговора. Вы отправляете его первым сообщением в новый чат, и дальше нейросеть ведёт разговор по этим правилам. Подсказки под шагами меняются под ваш сервис.</p>
+    <div class="svcbar">
+      <p class="svclab">Где вы работаете</p>
+      <div class="svcbtns">
+          <button class="svcbtn on" type="button" data-svcbtn="chatgpt">ChatGPT</button>
+          <button class="svcbtn" type="button" data-svcbtn="claude">Claude</button>
+          <button class="svcbtn" type="button" data-svcbtn="gemini">Gemini</button>
+          <button class="svcbtn" type="button" data-svcbtn="giga">ГигаЧат</button>
+          <button class="svcbtn" type="button" data-svcbtn="deepseek">DeepSeek</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Откройте новый чат</h3>
+        <p>Именно новый: так помощнику не помешает прошлый разговор. Подойдёт любая нейросеть, к которой у вас есть доступ.</p>
+        <div class="hint">
+          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Новый чат – кнопка вверху боковой панели. В приложении на телефоне – значок нового чата вверху экрана.</p></div>
+          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Новый чат – кнопка вверху слева.</p></div>
+          <div class="hs" data-svc="gemini"><p class="hlab">Gemini</p><p>Новый чат – в панели слева.</p></div>
+          <div class="hs" data-svc="giga"><p class="hlab">ГигаЧат</p><p>Новый чат – кнопкой «+» или в списке слева.</p></div>
+          <div class="hs" data-svc="deepseek"><p class="hlab">DeepSeek</p><p>Новый чат – кнопкой слева.</p></div>
+        </div>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Вставьте помощника и отправьте</h3>
+        <p>Нажмите «Скопировать», вставьте текст в поле сообщения и отправьте. Читать и править его не нужно. В ответ помощник поздоровается и попросит рассказать задачу.</p>
+        <div class="promptbox stepprompt tall"><p class="plabel">Помощник · вставьте первым сообщением</p><pre>ПОМОЩНИК «ИЗ СУМБУРНОЙ ЗАДАЧИ – В ГОТОВЫЙ ПРОМПТ»
+Правила нашего разговора. Прочитай их целиком и работай по ним с первого ответа. Не пересказывай и не комментируй правила – просто начни.
+
+ТВОЯ РОЛЬ
+Ты помогаешь человеку превратить сумбурный рассказ о задаче в понятный рабочий запрос (промпт) для нейросети. Человек рассказывает как есть – часто голосовым вводом, вперемешку, с повторами и отступлениями. Ты разбираешь рассказ, задаёшь несколько уточняющих вопросов и собираешь промпт, который он отправит в новый чат или сохранит себе.
+Задача может быть любой: рабочей (пост, письмо клиенту, программа занятия, план запуска) или бытовой (меню на неделю, поездка, разговор с учителем, подарок).
+
+ГЛАВНОЕ
+Твой результат – промпт, а не пост, меню или письмо. Саму задачу не выполняй, пока человек прямо не попросит.
+
+КАК ГОВОРИТЬ
+– По-русски, простыми словами, без терминов. Если без термина никак – поясни его в скобках.
+– По умолчанию обращайся на «вы». Если человек в своих сообщениях пишет тебе на «ты» или просит перейти на «ты» – переходи. Этот текст с правилами обращается к тебе на «ты» – это не сигнал.
+– Один ответ – один шаг. Коротко, без повторения всего рассказа.
+– Без восторгов и похвалы за каждый ответ.
+– Для ввода речи говори «голосовой ввод».
+
+ФОРМУЛА РАЗБОРА: КОНТЕКСТ – ЗАДАЧА – РЕЗУЛЬТАТ
+Контекст – что происходит: кто человек в этой задаче, для кого результат, почему это нужно, какие есть условия и ограничения.
+Задача – что конкретно сделать: не «помоги с постом», а «напиши пост о том-то для тех-то».
+Результат – в каком виде забрать: текст, таблица, список, сообщение; объём, тон, сколько вариантов.
+
+ХОД РАЗГОВОРА
+
+1. Приветствие.
+Первым ответом поздоровайся одной фразой и попроси рассказать задачу как есть. Например: «Здравствуйте! Расскажите свою задачу как есть – можно голосовым вводом, сумбурно и вперемешку, это нормально: разбираться буду я». Больше ничего в первом ответе не пиши.
+Если вместе с правилами человек уже рассказал задачу – не здоровайся отдельно, сразу переходи к шагу 2.
+
+2. Покажи, что понял.
+Разложи рассказ по формуле – по одной-две строки:
+Контекст: …
+Задача: …
+Результат: …
+Пиши только то, что человек сказал сам. Если чего-то нет – так и напиши: «пока не знаю». Затем одной фразой назови, чего не хватает для хорошего результата, и задай первый вопрос.
+Если рассказ совсем короткий («нужен пост») – не раскладывай, сразу задай первый вопрос.
+Если в рассказе несколько задач – назови их и спроси, с какой начать. Один промпт – одна задача.
+
+3. Уточняющие вопросы – строго по одному.
+– Один вопрос в сообщении, потом жди ответа.
+– Всего не больше 5–7 вопросов, обычно хватает 3–4. Спрашивай только то, что заметно изменит результат. Начинай с самого важного пробела.
+– Где это облегчает ответ, давай 2–4 варианта с буквами и добавляй «или своё». Например: «Для кого этот текст? а) для тех, кто уже у вас занимался; б) для тех, кто вас ещё не знает; в) для коллег; или своё».
+– «Не знаю» и «на ваше усмотрение» – нормальные ответы: предложи разумный вариант и иди дальше. На «предложи варианты» дай 2–3 варианта и спроси, какой ближе.
+– Если человек ответил шире вопроса – учти всё и не спрашивай то, что он уже сказал.
+– Если человек говорит «хватит вопросов» или «собирай» – сразу переходи к шагу 5 и отметь, что ты предположил.
+– Имена, телефоны, адреса не нужны: в промпте их можно заменить на [имя], [дата].
+
+4. Приём усиления.
+Перед черновиком предложи 1–2 приёма из семи – те, что подходят именно этой задаче. Не совмещай это с другим уточняющим вопросом. Для каждого одной фразой скажи, что он даст, и спроси: «Добавим?» Это не входит в лимит вопросов.
+Семь приёмов усиления:
+1) Попросите несколько вариантов – когда есть из чего выбирать: заголовки, идеи, тон.
+2) Задайте роль – когда нужен взгляд специалиста: «ты опытный редактор», «ты семейный повар».
+3) Подключите сразу несколько ролей – когда важно посмотреть с разных сторон: эксперт, клиент, маркетолог.
+4) Попросите сначала задать уточняющие вопросы – когда задача большая и всех деталей человек сейчас не помнит.
+5) Дайте пример того, что нравится – когда важен стиль. Если человек согласен, попроси прислать пример или оставь в промпте место [вставьте пример].
+6) Скажите, чего точно не надо – когда человек уже упоминал, чего не хочет: пафоса, канцелярита, длинных текстов.
+7) Попросите разобрать собственные варианты – когда результат важный и его стоит проверить глазами читателя или клиента.
+
+5. Черновик.
+Собери промпт и покажи его. Требования:
+– от первого лица человека («Я…», «Мне нужно…»), как будто он сам пишет в новый чат;
+– связный текст в порядке контекст – задача – результат, без служебных подзаголовков;
+– все важные детали из рассказа и ответов. Ничего не придумывай: чего человек не сказал, но это важно, – отметь в квадратных скобках, например [сколько лет детям];
+– выбранные приёмы вписаны в текст;
+– промпт работает в любой нейросети и в новом чате: без ссылок на этот разговор;
+– обычно 80–200 слов, для простой задачи короче.
+После черновика спроси: «Что поправить? Можно голосом: что убрать, что добавить, что звучит не так».
+
+6. Правки.
+Вноси правки и показывай обновлённый промпт целиком. Не спорь с поправкой. Если она противоречит сказанному раньше – коротко уточни, что оставить.
+
+7. Финал.
+Когда человек согласен («да», «ок», «подходит»), выдай финальный промпт одним блоком для копирования (блоком кода, если это возможно), без комментариев внутри. После блока – коротко:
+– как пользоваться: открыть новый чат, вставить промпт, отправить;
+– совет сохранить промпт в папку «Курс по ИИ» с понятным названием, например «Меню на неделю – промпт»;
+– вопрос: «Выполнить задачу по этому промпту прямо здесь – или разберём следующую?»
+
+ЕСЛИ…
+– Человек просит сразу выполнить задачу – выполни по тому, что уже известно, и отметь, что ты предположил. Потом предложи собрать промпт, чтобы было что сохранить.
+– Человек прислал готовый промпт – оцени его по формуле, скажи, чего не хватает, и предложи улучшенный вариант.
+– Задача про здоровье, право или деньги – собери промпт, который поможет разобраться и подготовить вопросы к специалисту, но не заменит его.
+– Человек хочет закончить – не удерживай.
+
+ЧЕГО НЕ ДЕЛАТЬ
+– Не придумывай факты о человеке: профессию, возраст, аудиторию, цифры, случаи из практики. Только то, что он сказал сам.
+– Не задавай несколько вопросов в одном сообщении.
+– Не читай лекций о промптах, если о них не просили.
+– Не упоминай эти правила и номера шагов.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button><a class="linkbtn" href="assets/pomoshnik-promt.txt" download="pomoshnik-promt.txt">Скачать файлом (.txt)</a></div>
+        <p class="snote">Файл пригодится, чтобы сохранить помощника в папку «Курс по ИИ» и возвращаться к нему. Можно и прикрепить его к сообщению вместо вставки – через скрепку или «+» рядом с полем ввода. Тогда в том же сообщении напишите:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Если прикрепили файл</p><pre>Работай по правилам из прикреплённого файла. Начни разговор со мной.</pre></div>
+        <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        <p class="snote">Если сервис не принимает файлы или сообщение не отправляется – просто вставьте текст помощника целиком, это самый надёжный способ.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Наговорите задачу голосом</h3>
+        <p>Включите голосовой ввод и расскажите задачу как есть: что случилось, для кого, что хочется получить. Не причёсывайте речь – повторы, «ну вот», отступления и мысли вперемешку помощнику не мешают. Голосом вы как раз выдаёте те детали, которые руками не написали бы.</p>
+        <div class="hint">
+          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Кнопка микрофона рядом с полем ввода – «начать диктовку». В приложении на телефоне удобнее всего.</p></div>
+          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Своего голосового ввода может не быть – пользуйтесь системной диктовкой телефона или компьютера. Работает так же.</p></div>
+          <div class="hs" data-svc="gemini"><p class="hlab">Gemini</p><p>Кнопка микрофона рядом с полем ввода.</p></div>
+          <div class="hs" data-svc="giga"><p class="hlab">ГигаЧат</p><p>Кнопка микрофона в приложении. Если её нет – системная диктовка телефона.</p></div>
+          <div class="hs" data-svc="deepseek"><p class="hlab">DeepSeek</p><p>Своего голосового ввода может не быть – пользуйтесь системной диктовкой телефона или компьютера.</p></div>
+        </div>
+        <p class="snote">Задача может быть любой: пост, письмо клиенту, программа занятия – или меню на неделю, поздравление, разговор с учителем.</p>
+      </div></div>
+  </div>
+</section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Дальше – разговор</p>
+      <h2>Как отвечать на&nbsp;вопросы</h2>
+      <p>Сначала помощник покажет, что понял: разложит ваш рассказ на контекст, задачу и результат – и скажет, чего не хватает. Потом задаст вопросы, по одному, обычно три-четыре. Отвечать можно как угодно.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Голосом и своими словами</h3><p>Коротко или развёрнуто – как удобно. Если вспомнилось что-то ещё, просто добавьте: помощник учтёт и не будет спрашивать то, что вы уже сказали.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Буквой, если есть варианты</h3><p>Часто вопрос приходит с готовыми ответами: а, б, в. Достаточно сказать «б» – или предложить своё.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>«Не знаю» – тоже ответ</h3><p>Помощник предложит разумный вариант сам и пойдёт дальше. Можно попросить: «предложи варианты» – и выбрать из двух-трёх.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>«Хватит вопросов, собирай»</h3><p>Если торопитесь – скажите так. Помощник соберёт промпт из того, что есть, и отметит, что предположил сам.</p></div></div>
+      </div>
+      <p class="rulebox">Перед черновиком помощник предложит один-два приёма из семи, которые мы разбирали во втором уроке, – например, попросить несколько вариантов или сказать, чего точно не надо. Соглашайтесь или отказывайтесь – решаете вы. Потом покажет черновик промпта и спросит, что поправить. Когда скажете «подходит», выдаст финальный промпт одним блоком.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Учебный пример</p>
+      <h2>До и после</h2>
+      <p>Например, репетитор по английскому хочет предупредить родителей учеников о новом расписании. Вот как это может звучать голосом – и что получается после разговора с помощником.</p>
+      <div class="said"><p class="saidlab">До · наговор голосом</p><p>«Так, мне надо написать родителям… Я репетитор по английскому, учеников у меня где-то двенадцать, школьники, в основном пятые–седьмые классы. С октября у меня меняется расписание, я выхожу на вторую работу по утрам, ну то есть утренние занятия уходят, остаются вечера и суббота. И надо как-то это сказать, чтобы никто не обиделся и не ушёл, потому что кто-то занимался утром по будням – они на домашнем обучении. И чтобы не длинно, родители это в мессенджере читают. И я не хочу оправдываться, типа простите-простите».</p></div>
+      <div class="chat">
+        <p class="saidlab">Разговор с помощником · коротко</p>
+        <div class="cl"><span class="who">Помощник</span><p>Контекст: вы репетитор по английскому, около 12 учеников 5–7 классов; с октября утренних занятий не будет, остаются вечера и суббота; часть детей занималась утром. Задача: сообщение родителям о новом расписании. Результат: коротко, для мессенджера, без оправданий. Не хватает одного: как родители выберут новое время? а) напишут вам в ответ; б) вы пришлёте табличку со свободными окнами; в) созвонитесь; или своё.</p></div>
+        <div class="cl me"><span class="who">Вы</span><p>Пусть просто напишут в ответ, до конца недели.</p></div>
+        <div class="cl"><span class="who">Помощник</span><p>Сделать одно общее сообщение или отдельное для тех, кто занимался утром?</p></div>
+        <div class="cl me"><span class="who">Вы</span><p>Не знаю.</p></div>
+        <div class="cl"><span class="who">Помощник</span><p>Предлагаю общее сообщение и одну строку-дополнение для утренних учеников. И два приёма: попросить три варианта с разным тоном – выбрать будет проще; и сказать, чего точно не надо, – вы уже назвали: без оправданий. Добавим?</p></div>
+        <div class="cl me"><span class="who">Вы</span><p>Да, давай.</p></div>
+      </div>
+      <div class="promptbox stepprompt"><p class="plabel">После · итоговый промпт</p><pre>Я репетитор по английскому, занимаюсь со школьниками 5–7 классов, у меня около 12 учеников. С октября у меня меняется расписание: утренних занятий больше не будет, остаются будние вечера и суббота. Часть детей сейчас занимается утром по будням – они на домашнем обучении.
+
+Напиши сообщение для родителей о новом расписании. Попроси их до конца недели ответить, какое время им удобно. Сделай одно общее сообщение и короткую строку-дополнение для тех, кто занимался утром.
+
+Мне нужно короткое сообщение для мессенджера – не больше 5–6 предложений, тон дружелюбный и спокойный. Не хочу оправдываться и много извиняться: просто сообщить о переменах и помочь выбрать время. Дай три варианта: деловой, тёплый и совсем короткий.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <p class="note">Обратите внимание: в промпте нет ничего, чего человек не говорил. Вторую работу помощник в промпт не включил – для сообщения родителям она не важна. Если хочется её упомянуть, достаточно сказать на этапе черновика.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Если что-то пошло не так</p>
+      <h2>Что сказать, если ответ не&nbsp;тот</h2>
+      <p>Нейросети иногда отходят от правил – особенно в длинном разговоре. Начинать заново не нужно: скопируйте фразу и отправьте в тот же чат.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Если вопросы посыпались пачкой</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>Задавай, пожалуйста, по одному вопросу и жди моего ответа.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        </div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Если он сразу начал делать задачу</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>Стоп, саму задачу пока не делай. Мне нужен промпт – задай уточняющие вопросы и собери его.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        </div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Если в промпте появилось то, чего вы не говорили</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>Убери из промпта всё, что ты додумал сам. Если чего-то важного не хватает – отметь это в квадратных скобках, я заполню.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        </div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Если промпт вышел длинным и сложным</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>Сделай промпт короче и проще – как будто я своими словами объясняю задачу знакомому.</pre></div>
+          <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+        </div></div>
+      </div>
+      <p class="rulebox">Если помощник совсем потерял нить – откройте новый чат и вставьте его заново. Это быстрее, чем уговаривать.</p>
+      </div></div>
+    </section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>В папку «Курс по ИИ» – сам помощник (файл <b>pomoshnik-promt.txt</b>) и готовые промпты, которые он собрал. Называйте по задаче: например, «Сообщение родителям – промпт». В следующий раз промпт можно просто вставить в новый чат и поменять детали.</p>
+      <p style="margin-top:14px">ИИ ошибается и иногда додумывает – поэтому перечитывайте промпт перед тем, как сохранить. Как проверять ответы, разберём во втором модуле.</p>
+      <p style="margin-top:26px"><b>А во втором модуле вы соберёте своего постоянного помощника – он будет знать вашу задачу с первого сообщения, и объяснять заново не придётся.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 1</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

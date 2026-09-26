@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Что делать, если ИИ отвечает не то: 12 поломок · Бонус модуля 1 · Нейро-архитектор</title>
+<meta name="description" content="Двенадцать частых ситуаций, когда нейросеть отвечает не то, – и готовая фраза под каждую, которую можно скопировать и отправить в тот же чат.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.why{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:2px 0 4px}
+.pgroup{padding-top:0;padding-bottom:0}
+.pgroup h2{margin:8px 0 0}
+.pgroup .note{max-width:68ch;margin-top:18px}
+.pgroup .steps{margin-top:22px}
+.step .plabel{font-size:10px;line-height:1.6;color:var(--pink-soft)}
+</style>
+
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · бонус</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 1 · Быстрые победы</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Что делать, если ИИ&nbsp;отвечает не&nbsp;то: <span class="it">12 поломок</span></h1>
+      <p class="hlead">Первый ответ разочаровал? Найдите свой случай и скажите нейросети готовую фразу – дословно, в том же чате.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">10 минут</span></div>
+      <div><span class="mk">Когда открывать</span><span class="mv">Когда ответ «не тот»</span></div>
+      <div><span class="mk">Останется в папке</span><span class="mv">Ваши фразы-выручалки</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>за минуту</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Неудачный первый ответ – не про ваши способности. Нейросети просто не хватило сведений, и она выдала «средний» вариант.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Не переписывайте за неё и не начинайте заново. Скажите, что не так, – одной фразой, в том же чате.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Если две-три фразы не помогли – перенесите итог в новый чат. Это не провал, а обычный рабочий ход.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Кое-что вообще не поломка: разные ответы на один запрос, «забытые» прошлые чаты, лимиты бесплатной версии.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сначала</p>
+    <h2>Дело не&nbsp;в&nbsp;вас, а&nbsp;в&nbsp;том, что вы&nbsp;ему сказали</h2>
+    <p>Вот что участники практикума писали после первых проб:</p>
+    <p class="quote">«Нет прокачанного навыка правильно писать промпты»</p>
+    <p class="quote">«Попробовала – не зашло, времени разбираться не нашла»</p>
+    <p>Если узнаёте себя – это нормально. Помните метафору из второго урока: нейросеть – как мастер-парикмахер с целым чемоданчиком инструментов. Пока вы не объяснили пожелания, он сделает среднюю стрижку – ту, что обычно нравится людям. Чтение мыслей в набор инструментов не входит.</p>
+    <p>Поэтому ощущение «я неспособная» или «я неспособный» почти всегда означает другое: «я просто не знал(а), что сказать». Ниже – двенадцать самых частых поломок и фраза под каждую. Идеальный промпт писать не нужно: нужна одна точная реплика в тот момент, когда ответ не подошёл.</p>
+    <p class="rulebox"><b>Как пользоваться.</b> Найдите свой симптом, скопируйте фразу и отправьте в тот же чат. То, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>, замените своими словами – голосом это быстрее всего. Подходит для любой нейросети, включая ГигаЧат и DeepSeek.</p>
+  </div></div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:0">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Группы поломок">
+    <a class="navlink" href="#ne-ponyal">Не понял задачу</a>
+    <a class="navlink" href="#zvuchit">Звучит не так</a>
+    <a class="navlink" href="#po-krugu">Застрял и ходит по кругу</a>
+    <a class="navlink" href="#bolshaya">Большая задача и длинный чат</a>
+    <a class="navlink" href="#novyj-chat">Новый чат</a>
+    <a class="navlink" href="#norma">Это норма</a>
+  </nav>
+</section>
+
+<!-- ГРУППА 1 -->
+<section class="wrap pgroup" id="ne-ponyal">
+  <div class="ghead"><span class="glabel">Группа 1</span><span class="grange">01–03</span></div>
+  <h2>Не&nbsp;понял задачу</h2>
+  <p class="note">«ИИ не всегда понимает, что надо, наверно я неправильно даю задачу», – из вопросов участников. <b>Чаще всего задача дана нормально – просто нейросети не хватило пары деталей.</b></p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">01</span><div>
+      <h3>«Вроде гладко, но ни о чём – так можно написать кому угодно»</h3>
+      <p class="why">Почему так</p>
+      <p>Нейросеть не знает, кто вы и для кого этот текст, поэтому выдаёт то, что подошло бы большинству. «Средний по больнице»: пиджачок сшит не под вас. Лечится контекстом – первой частью формулы из второго урока.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Получилось слишком общо – так можно написать кому угодно. Вот чего ты не знал:
+я – <span class="tok">[кто вы и чем занимаетесь]</span>;
+это для <span class="tok">[кого: клиентов, подписчиков, коллег]</span>, им важно <span class="tok">[что]</span>;
+мне это нужно, чтобы <span class="tok">[зачем]</span>.
+Переделай ответ с учётом этого.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">02</span><div>
+      <h3>«Сразу выдал простыню, а я ещё сам(а) не понимаю, чего хочу»</h3>
+      <p class="why">Почему так</p>
+      <p>Нейросеть устроена отвечать сразу, даже когда данных мало. Не нужно угадывать, что ей рассказать, – пусть сама спросит, чего не хватает. Это приём из второго урока: уточняющие вопросы. Заодно ответ на частый вопрос «так много говорить ему надо перед каждым постом?» – не надо, пусть спрашивает он.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Подожди с ответом. Сначала задай мне вопросы – не больше пяти, – без которых ты не сделаешь это хорошо. Задавай по одному, я буду отвечать. Когда поймёшь задачу, скажи – и только тогда начинай.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">03</span><div>
+      <h3>«Приписал мне то, чего я не говорил(а), и перепутал, для кого текст»</h3>
+      <p class="why">Почему так</p>
+      <p>Третий принцип из урока 3: нейросеть додумывает недостающее, это её природа. Спорить бесполезно, ругать себя тоже. Спокойно попросите её саму отделить ваши слова от своих догадок.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Пройдись по своему ответу и раздели его на два списка: что взято из моих слов и что ты добавил от себя. Добавленное пока не используй – я посмотрю и скажу, что оставить. И напоминаю: я <span class="tok">[кто вы]</span>, а текст для <span class="tok">[кого]</span>.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- ГРУППА 2 -->
+<section class="wrap pgroup" id="zvuchit">
+  <div class="ghead"><span class="glabel">Группа 2</span><span class="grange">04–06</span></div>
+  <h2>Звучит не&nbsp;так</h2>
+  <p class="note">«Всё равно отредактировать проще, чем писать с нуля», – из вопросов участников. <b>Иногда правда проще поправить руками. Но если задача повторяется, скажите нейросети, что не так: правка останется в диалоге, и потом из таких правок соберётся ваш промпт, как на практике урока 3.</b></p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">04</span><div>
+      <h3>«Читаю – и сразу видно, что писал ИИ»</h3>
+      <p class="why">Почему так</p>
+      <p>Так звучит усреднённый интернет-текст, на котором училась модель: канцелярит, английские словечки, пафос, «не просто X, а Y». Пока вы не назовёте, что именно режет слух, она не знает, что убирать. В уроке 3 Светлана так и говорит нейросети: не нравятся рубленые фразы и «ИИшный налёт».</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Текст звучит искусственно. Перепиши и убери:
+– канцелярит и сложные обороты;
+– английские слова там, где есть русские;
+– противопоставления «не просто… а…» и пафосные восклицания;
+– короткие рубленые фразы подряд.
+Пиши так, как говорят вслух в обычном разговоре. Больше всего мне режет слух <span class="tok">[что именно, если можете назвать]</span>.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">05</span><div>
+      <h3>«Мне нужна была табличка, а он выдал сочинение»</h3>
+      <p class="why">Почему так</p>
+      <p>Если формат не назван, нейросеть выбирает привычный – обычно текст абзацами. Это третья часть формулы из урока 2, «результат»: в каком виде вы хотите его забрать. Содержание при этом часто уже хорошее – менять нужно только форму.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Содержание подходит, но оформи по-другому: <span class="tok">[таблицей с колонками … / списком по пунктам / коротким сообщением для мессенджера / планом по дням]</span>. Ничего не добавляй и не убирай – поменяй только вид.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">06</span><div>
+      <h3>«Нужна была пара строк – а тут полстраницы. Или наоборот, три сухих предложения»</h3>
+      <p class="why">Почему так</p>
+      <p>«Коротко» и «подробно» каждый понимает по-своему. Нейросети нужна мерка, которую можно посчитать: предложения, знаки, минуты речи, количество пунктов.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Нужен другой объём: <span class="tok">[не больше 5 предложений / как подпись к посту / на 2 минуты речи / подробно, с примером к каждому пункту]</span>. Если сокращаешь – оставь главную мысль и убери повторы. Если расширяешь – добавляй примеры, а не общие слова.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- ГРУППА 3 -->
+<section class="wrap pgroup" id="po-krugu">
+  <div class="ghead"><span class="glabel">Группа 3</span><span class="grange">07–09</span></div>
+  <h2>Застрял и&nbsp;ходит по&nbsp;кругу</h2>
+  <p class="note">«Он как по кругу идёт, зациклен, хочется новое», – из вопросов участников. <b>Помните из урока 3: финальное решение всегда за вами. Нейросеть предлагает, выбираете вы.</b></p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">07</span><div>
+      <h3>«Хвалит всё, что я предлагаю, а выбрать так и не помогает»</h3>
+      <p class="why">Почему так</p>
+      <p>Четвёртый принцип из урока 3: нейросеть льстит, её создавали так, чтобы с ней было приятно общаться. Без критериев она будет хвалить каждый вариант и каждый раз находить новые аргументы. Дайте ей мерку и разрешите спорить.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Не хвали. Оцени варианты <span class="tok">[1, 2 и 3]</span> строго по моим критериям: <span class="tok">[например: понятно новичку, можно сделать за вечер, хочется переслать подруге]</span>. У каждого назови главный минус. Потом выбери один и объясни выбор – даже если думаешь, что я с ним не соглашусь.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">08</span><div>
+      <h3>«Переформулирует одни и те же три идеи другими словами»</h3>
+      <p class="why">Почему так</p>
+      <p>В диалоге нейросеть опирается на то, что уже сказано, и начинает крутиться вокруг своих же прошлых ответов. Её нужно явно выпустить из этой колеи. Если и это не помогло – пора в новый чат, об этом ниже.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Стоп, мы ходим по кругу. Все прошлые варианты считай закрытыми – к ним не возвращаемся. Зайди с другой стороны: что предложил бы человек из совсем другой сферы? Дай три идеи, не похожие ни на одну из прежних.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">09</span><div>
+      <h3>«Пишет „не могу с этим помочь“, хотя я не прошу ничего плохого»</h3>
+      <p class="why">Почему так</p>
+      <p>У нейросетей есть осторожные темы: здоровье, лекарства, деньги, право, реальные люди. Иногда обычный запрос из-за одного слова кажется ей рискованным. Помогает объяснить, зачем вам это и что вы сделаете с ответом.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Поясню, зачем мне это: я <span class="tok">[кто вы]</span>, и мне нужно <span class="tok">[для чего – например, подготовить памятку для клиентов]</span>. Я не прошу решать за специалиста – мне нужны <span class="tok">[общая информация / структура / черновик]</span>, решение остаётся за мной. С какой частью ты можешь помочь?</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <p class="snote">Если отказ повторяется – не уговаривайте. По некоторым вопросам нейросеть и правда не должна заменять врача или юриста.</p>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- ГРУППА 4 -->
+<section class="wrap pgroup" id="bolshaya">
+  <div class="ghead"><span class="glabel">Группа 4</span><span class="grange">10–12</span></div>
+  <h2>Большая задача и&nbsp;длинный чат</h2>
+  <p class="note">Чем длиннее разговор и чем больше в нём задач, тем хуже нейросеть держит всё сразу. <b>Это не упрямство – так она устроена.</b></p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">10</span><div>
+      <h3>«Попросили сразу всё – план, тексты, расписание – и получили кашу»</h3>
+      <p class="why">Почему так</p>
+      <p>Когда в одном запросе пять задач, каждой достаётся понемногу внимания, и всё выходит поверхностным. Большую задачу проще разбить на этапы и идти по одному, проверяя каждый.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Давай разобьём эту задачу на этапы. Сначала просто покажи список этапов – ничего пока не делай. Потом пойдём по одному: сделали этап, я говорю «ок» или поправляю – и только тогда следующий.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">11</span><div>
+      <h3>«Мы же договорились – а он опять за своё»</h3>
+      <p class="why">Почему так</p>
+      <p>В начале чата вы договорились, например, писать без смайликов и на «ты», а через час они снова тут. Всё, что было давно, нейросеть в длинном чате держит всё хуже. Правила стоит напомнить и попросить проверить по ним последний ответ.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Напоминаю, о чём мы договорились: <span class="tok">[правило 1]</span>, <span class="tok">[правило 2]</span>, <span class="tok">[правило 3]</span>. Проверь свой последний ответ по этим правилам, исправь, что не так, и дальше держись их в каждом ответе.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    </div></div>
+
+    <div class="step"><span class="snum">12</span><div>
+      <h3>«Прикрепили файл – а отвечает так, будто его не видел»</h3>
+      <p class="why">Почему так</p>
+      <p>Файл мог прочитаться не целиком: длинный документ, скан, таблица с картинками. Или в длинном чате нейросеть о нём «забыла». Сначала проверьте, что она видит.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Скажите так</p><pre>Вернись к файлу <span class="tok">[название]</span> из этого чата. Перескажи в трёх-пяти пунктах, что в нём главное. Дальше отвечай, опираясь на этот файл, а не на общие знания.</pre></div>
+      <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+      <p class="snote">Если пересказ мимо – значит, файл не прочитался. Скопируйте нужный кусок текстом прямо в сообщение.</p>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- НОВЫЙ ЧАТ -->
+<section class="wrap blk reveal" id="novyj-chat">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Когда фраза не поможет</p>
+    <h2>Начните новый чат – и&nbsp;заберите туда итог</h2>
+    <p>Бывает, что вы сказали две-три фразы, а лучше не становится: чат разросся, нейросеть путается в своих же прошлых ответах. Тогда не бейтесь дальше – откройте новый чат. Но не с пустыми руками: сначала попросите старый чат собрать итог.</p>
+    <p>Это почти то же, что вы делали на практике урока 3, когда собирали свой подход из диалога и проверяли его в новом чате.</p>
+
+    <p class="label" style="margin-top:30px;color:var(--pink)">Шаг 1 · в старом чате</p>
+    <div class="promptbox stepprompt"><p class="plabel">Соберите итог</p><pre>Хочу продолжить эту работу в новом чате. Собери итог одним сообщением, чтобы его можно было вставить туда:
+– в чём задача и для кого это;
+– что мы уже решили и что мне понравилось;
+– что мне точно не подходит;
+– на чём остановились и какой следующий шаг.
+Коротко, без пересказа всего диалога.</pre></div>
+    <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+
+    <p class="label" style="margin-top:30px;color:var(--pink)">Шаг 2 · в новом чате</p>
+    <p>Скопируйте итог, откройте новый чат и отправьте первым сообщением:</p>
+    <div class="promptbox stepprompt"><p class="plabel">Продолжите с итогом</p><pre>Продолжаем работу, которую мы начали в другом чате. Вот итог:
+<span class="tok">[вставьте итог]</span>
+Сначала коротко скажи, как ты понял задачу. Потом <span class="tok">[что делаем дальше]</span>.</pre></div>
+    <div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+    <p class="rulebox">Итог можно сохранить в папку «Курс по ИИ» – тогда к этой задаче легко вернуться хоть через неделю, в любой нейросети.</p>
+  </div></div>
+</section>
+
+<!-- НОРМА -->
+<div class="dark" id="norma" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Это не&nbsp;поломка, а&nbsp;норма</h2>
+    <div class="dcol">
+      <p>Некоторые вещи кажутся сбоем, но так нейросети устроены. Чинить их не нужно – достаточно знать.</p>
+      <ul>
+        <li><b>На тот же запрос каждый раз другой ответ.</b> Нейросеть не достаёт готовый текст из базы, а собирает его заново. Понравился вариант – сохраните его: слово в слово он не повторится. Не понравился – попросите ещё один.</li>
+        <li><b>ИИ не помнит ваши прошлые чаты.</b> Новый чат – чистый лист. Пока выручает ваш промпт из урока 3 в папке «Курс по ИИ»: вставили – и контекст на месте. Во втором модуле научимся делать так, чтобы нейросеть знала вас без пересказа.</li>
+        <li><b>Бесплатная версия ограничивает сообщения.</b> Может закончиться лимит на день или доступ к более сильной модели. Это условия тарифа, а не ваша ошибка: подождите или перенесите итог в другую нейросеть – как в блоке выше.</li>
+        <li><b>ИИ может ошибаться и не знать свежего.</b> Про новости, цены и законы ответ бывает устаревшим, а цифры – неточными. ИИ ошибается – проверять его учимся во втором модуле.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="closing">
+  <div class="wrap cgrid">
+    <div class="col">
+      <p class="pull">Первый ответ – не приговор, а начало разговора. Одна точная фраза занимает десять секунд – и обычно этого хватает.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p style="font-size:16px">Две-три фразы, которые пригодились именно вам, – в файл «Фразы, когда ИИ отвечает не то» в папке «Курс по ИИ». Со временем вы начнёте говорить их сами, без шпаргалки.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 1: что делать, если ИИ отвечает не то</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pre=(near&&near.matches('.promptbox'))?near.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
