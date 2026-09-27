@@ -191,6 +191,21 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
   .practice{padding:44px 0 40px}
 }
 .promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -359,6 +374,21 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
       </div>
     </div>
   </div>
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: заберите результат урока в портфолио</h3>
+  <p class="pfb-p">Когда закончите практику, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и оформит заметку. Скопируйте её в свой документ «Моё портфолио» – в раздел «Заметки к урокам», под «Урок 3».</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в заметку попадёт:</b> ваш промпт-подход и как он сработал в новом чате. Сам файл с промптом приложите к портфолио – это ваш инструмент.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+  <p class="pfb-p">В конце модуля из четырёх заметок за 5 минут соберём одну задачу для портфолио – <a href="https://aiforlife.ru/ii-course/modul1/itog/">итог модуля 1</a>.</p>
+</div>
 </section>
 
 <div class="dark" style="margin-top:64px">
@@ -444,5 +474,16 @@ ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
 
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
 </body>
 </html>
