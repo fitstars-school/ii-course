@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Быстрый старт · Бонусный набор модуля 1 · Нейро-архитектор</title>
+<meta name="description" content="Бонусный набор модуля 1 курса «Нейро-архитектор»: все быстрые гайды и помощники первой недели в одном месте.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6; --pink-light:#FFC2E0;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --side:312px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;font-weight:500}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.shell{display:grid;grid-template-columns:var(--side) 1fr;height:100vh;height:100dvh}
+
+/* Меню слева – всегда на виду */
+.side{background:var(--dark);color:#F3EDF5;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow-y:auto;position:sticky;top:0}
+.brand{padding:28px 26px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.brand .rub{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#9C8AA6}
+.brand .home{display:block;margin-top:14px}
+.brand h1{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;letter-spacing:-.01em}
+.brand h1 i{color:var(--pink-soft)}
+.brand p{margin-top:8px;font-size:14px;color:#BFB2C6;line-height:1.5}
+.grp{padding:18px 14px 6px}
+.grp .gl{padding:0 12px 8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft)}
+.item{display:grid;grid-template-columns:30px 1fr;gap:8px;align-items:start;width:100%;text-align:left;padding:10px 12px;border-left:3px solid transparent;color:#E6DDEA;font-size:15px;line-height:1.35;font-weight:600;transition:background .15s}
+.item .n{font-family:var(--serif);font-size:20px;line-height:1;color:#8E7C98}
+.item small{display:block;font-size:12.5px;font-weight:500;color:#A898B0;margin-top:3px}
+.item:hover{background:rgba(255,255,255,.05)}
+.item.on{background:rgba(230,25,140,.16);border-left-color:var(--pink);color:#fff}
+.item.on .n{color:var(--pink-soft)}
+.side .foot{margin-top:auto;padding:18px 26px 24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#9C8AA6;line-height:1.5}
+.side .foot a{color:var(--pink-light);font-weight:700;border-bottom:1px solid rgba(255,194,224,.4)}
+
+/* Правая часть */
+.main{position:relative;min-width:0;height:100vh;height:100dvh}
+.frame{display:none;width:100%;height:100%;border:0;background:var(--paper)}
+.frame.on{display:block}
+.openbar{display:none;position:absolute;top:12px;right:16px;z-index:3;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:700;padding:8px 12px;color:var(--ink);box-shadow:0 2px 10px rgba(33,24,41,.08)}
+.openbar.on{display:inline-block}
+.openbar:hover{border-color:var(--pink);color:var(--pink-strong)}
+
+/* Стартовый экран */
+.intro{height:100%;overflow-y:auto;padding:56px 56px 64px}
+.intro.off{display:none}
+.intro .kicker{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink)}
+.intro h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-.015em;margin-top:14px;max-width:14ch}
+.intro .lead{margin-top:18px;font-size:18px;line-height:1.6;color:var(--muted);max-width:60ch}
+.cards{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;max-width:1040px}
+.card{display:block;text-align:left;border:1px solid var(--line);background:#fff;padding:20px 20px 18px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--pink);transform:translateY(-2px)}
+.card .cn{font-family:var(--serif);font-size:30px;line-height:1;color:var(--pink)}
+.card h3{margin-top:10px;font-size:17px;font-weight:800;line-height:1.3}
+.card p{margin-top:6px;font-size:14.5px;line-height:1.5;color:var(--muted)}
+.card .time{display:inline-block;margin-top:12px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pink-strong)}
+.sep{margin:40px 0 0;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+
+/* Телефон: меню под кнопкой */
+.topbar{display:none}
+@media (max-width:860px){
+  .shell{display:block;height:auto}
+  .side{position:fixed;inset:0;z-index:20;height:100dvh;transform:translateX(-100%);transition:transform .25s}
+  body.menu .side{transform:none}
+  .closem{display:block;position:absolute;top:18px;right:18px;font-size:14px;font-weight:700;color:#F3EDF5;border:1px solid rgba(255,255,255,.25);padding:8px 12px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:10;background:var(--dark);color:#F3EDF5;padding:10px 16px;height:56px}
+  .topbar .tt{font-family:var(--serif);font-size:24px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .tt i{color:var(--pink-soft)}
+  .topbar button{flex:none;background:var(--pink);color:#fff;font-weight:800;font-size:14px;padding:9px 14px}
+  .main{height:calc(100dvh - 56px)}
+  .intro{padding:30px 16px 40px}
+  .openbar{top:auto;bottom:14px;right:14px}
+}
+@media (min-width:861px){.closem{display:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="tt" href="#" data-home>Быстрый <i>старт</i></a>
+  <button type="button" id="openMenu">Материалы</button>
+</div>
+
+<div class="shell">
+  <aside class="side" id="side" aria-label="Материалы набора">
+    <button class="closem" type="button" id="closeMenu">Закрыть</button>
+    <div class="brand">
+      <div class="rub">Нейро-архитектор · Модуль 1</div>
+      <a class="home" href="#" data-home><h1>Быстрый <i>старт</i></h1></a>
+      <p>Бонусный набор модуля 1. Все гайды и помощники первой недели – в одном месте.</p>
+    </div>
+
+    <nav class="grp">
+      <div class="gl">Быстрый старт</div>
+      <button class="item" data-go="vybor"><span class="n">1</span><span>Как выбрать нейросеть под свою задачу</span></button>
+      <button class="item" data-go="dostup"><span class="n">2</span><span>Как пользоваться ИИ из России</span></button>
+      <button class="item" data-go="zapros"><span class="n">3</span><span>Первый полезный запрос за 15 минут</span></button>
+      <button class="item" data-go="golos"><span class="n">4</span><span>Голос вместо клавиатуры: как надиктовывать задачи</span></button>
+    </nav>
+    <nav class="grp">
+      <div class="gl">Помощники и шпаргалки</div>
+      <button class="item" data-go="promt"><span class="n">5</span><span>Помощник: сумбурная задача → промпт<small>к уроку 2</small></span></button>
+      <button class="item" data-go="polomki"><span class="n">6</span><span>12 поломок: что делать, если ИИ отвечает не то<small>к уроку 3</small></span></button>
+      <button class="item" data-go="top30"><span class="n">7</span><span>Топ-30 быстрых побед</span></button>
+      <button class="item" data-go="nisha"><span class="n">8</span><span>ИИ в моей профессии: карта применений<small>к уроку 4</small></span></button>
+      <button class="item" data-go="zarabotok"><span class="n">9</span><span>Как навыки модуля помогут зарабатывать</span></button>
+    </nav>
+
+    <div class="foot">Материалы остаются у вас на весь срок доступа к курсу. Итог модуля и шаблон портфолио – <a href="../itog/" target="_blank" rel="noopener">здесь</a>.</div>
+  </aside>
+
+  <main class="main" id="main">
+    <section class="intro" id="intro">
+      <p class="kicker">Бонусный набор · модуль 1</p>
+      <h2>Быстрый старт</h2>
+      <p class="lead">Короткие гайды и готовые помощники, чтобы уже в первую неделю ИИ начал работать на вас. Выберите материал в меню или начните с первого – на каждый уходит от 5 до 15 минут.</p>
+
+      <p class="sep">Быстрый старт</p>
+      <div class="cards">
+        <button class="card" data-go="vybor"><span class="cn">1</span><h3>Как выбрать нейросеть под свою задачу</h3><p>Какая нейросеть в чём сильна и с какой начать именно вам.</p><span class="time">5 минут</span></button>
+        <button class="card" data-go="dostup"><span class="cn">2</span><h3>Как пользоваться ИИ из России</h3><p>Регистрация, оплата и установка – по шагам.</p><span class="time">10–15 минут</span></button>
+        <button class="card" data-go="zapros"><span class="cn">3</span><h3>Первый полезный запрос за 15 минут</h3><p>Маршрут с таймингом и готовыми шаблонами.</p><span class="time">15 минут</span></button>
+        <button class="card" data-go="golos"><span class="cn">4</span><h3>Голос вместо клавиатуры</h3><p>Где включить диктовку и как наговаривать задачи.</p><span class="time">5 минут</span></button>
+      </div>
+
+      <p class="sep">Помощники и шпаргалки</p>
+      <div class="cards">
+        <button class="card" data-go="promt"><span class="cn">5</span><h3>Помощник по промптам</h3><p>Наговорите задачу как есть – он задаст вопросы и соберёт запрос.</p></button>
+        <button class="card" data-go="polomki"><span class="cn">6</span><h3>12 поломок</h3><p>Что сказать нейросети, если она отвечает не то.</p></button>
+        <button class="card" data-go="top30"><span class="cn">7</span><h3>Топ-30 быстрых побед</h3><p>Задачи, которые ИИ решает за 10 минут.</p></button>
+        <button class="card" data-go="nisha"><span class="cn">8</span><h3>ИИ в моей профессии</h3><p>Карта применений по 10 ролям и 4 уровням.</p></button>
+        <button class="card" data-go="zarabotok"><span class="cn">9</span><h3>Как навыки модуля помогут зарабатывать</h3><p>Кому помочь уже сейчас и как оформить первую работу.</p></button>
+      </div>
+    </section>
+
+    <iframe class="frame" id="frame" title="Материал набора" allow="clipboard-write" loading="eager"></iframe>
+    <a class="openbar" id="openbar" href="#" target="_blank" rel="noopener">Открыть в новой вкладке ↗</a>
+  </main>
+</div>
+
+<script>
+(function(){
+  var MAP={
+    vybor:'../bonus-vybor/',
+    dostup:'../../modul0/gaid-dostup/',
+    zapros:'../bonus-pervyi-zapros/',
+    golos:'../bonus-golos/',
+    promt:'../bonus-promt/',
+    polomki:'../bonus-polomki/',
+    top30:'../bonus-top30/',
+    nisha:'../bonus-nisha/',
+    zarabotok:'../bonus-zarabotok/'
+  };
+  var frame=document.getElementById('frame'), intro=document.getElementById('intro'), openbar=document.getElementById('openbar');
+  var items=[].slice.call(document.querySelectorAll('.item'));
+  function mark(key){items.forEach(function(b){b.classList.toggle('on',b.dataset.go===key);});}
+  function abs(u){var a=document.createElement('a');a.href=u;return a.href;}
+  function show(key,push){
+    document.body.classList.remove('menu');
+    if(!key||!MAP[key]){
+      frame.classList.remove('on');intro.classList.remove('off');openbar.classList.remove('on');mark(null);
+      if(push)history.replaceState(null,'',location.pathname);
+      return;
+    }
+    var url=MAP[key];
+    if(frame.dataset.key!==key){frame.src=url;frame.dataset.key=key;}
+    frame.classList.add('on');intro.classList.add('off');
+    openbar.href=abs(url);openbar.classList.add('on');
+    mark(key);
+    if(push)history.replaceState(null,'','#'+key);
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-go]');
+    if(b){e.preventDefault();show(b.dataset.go,true);return;}
+    var h=e.target.closest('[data-home]');
+    if(h){e.preventDefault();show(null,true);}
+  });
+  // если внутри фрейма перешли на другой материал набора – подсветим его в меню
+  frame.addEventListener('load',function(){
+    try{
+      var p=frame.contentWindow.location.pathname;
+      for(var k in MAP){if(p.replace(/\/$/,'').endsWith(abs(MAP[k]).replace(location.origin,'').replace(/\/$/,''))){mark(k);openbar.href=frame.contentWindow.location.href;return;}}
+      mark(null);openbar.href=frame.contentWindow.location.href;
+    }catch(err){}
+  });
+  document.getElementById('openMenu').addEventListener('click',function(){document.body.classList.add('menu');});
+  document.getElementById('closeMenu').addEventListener('click',function(){document.body.classList.remove('menu');});
+  show(location.hash.slice(1),false);
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1),false);});
+})();
+</script>
+
+<!-- Yandex.Metrika counter 112003701 (Курс ИИ) -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+</body>
+</html>

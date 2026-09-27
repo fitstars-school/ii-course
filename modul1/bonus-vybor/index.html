@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как выбрать нейросеть под свою задачу · Бонус модуля 1 · Нейро-архитектор</title>
+<meta name="description" content="Быстрый инструмент выбора: нажмите на свою задачу и узнайте, какие нейросети с ней справятся, чем каждая сильна и с какой начать.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Бонус «Как выбрать нейросеть» – инструмент выбора и карточки */
+.picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:28px}
+.pick{font-family:var(--sans);font-size:16px;font-weight:600;line-height:1.35;color:var(--ink);text-align:left;background:#fff;border:1px solid var(--line);border-radius:0;padding:15px 16px 15px 14px;cursor:pointer;display:grid;grid-template-columns:30px 1fr;gap:8px;align-items:baseline;transition:border-color .2s,background .2s,color .2s}
+.pick .pn{font-family:var(--serif);font-size:22px;line-height:1;color:var(--faint)}
+.pick:hover{border-color:var(--pink)}
+.pick:hover .pn{color:var(--pink)}
+.pick.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.pick.on .pn{color:var(--pink-soft)}
+.panes{margin-top:26px}
+.pane{border-top:1px solid var(--ink);padding:24px 0 8px}
+.pane+.pane{margin-top:18px}
+.js .pane{display:none}
+.js .pane.on{display:block}
+.pane h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:6px}
+.net{display:grid;grid-template-columns:170px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.net .nn{font-weight:700;font-size:16.5px}
+.net .nd{font-size:16px;color:var(--muted);line-height:1.5}
+.startbox{margin-top:18px;border-left:3px solid var(--pink);background:#FFF1F8;padding:16px 20px}
+.startbox .sl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink-strong);margin-bottom:5px}
+.startbox p{font-size:16.5px;line-height:1.55}
+
+.who{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 34px;margin-top:26px;border-top:1px solid var(--ink)}
+.wcell{padding:22px 0;border-bottom:1px solid var(--line)}
+.wcell .wl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.wcell h3{font-family:var(--serif);font-size:clamp(24px,2.6vw,30px);line-height:1.1;margin-bottom:8px}
+.wcell p{font-size:16px;color:var(--muted);line-height:1.55}
+
+.pays li{margin-bottom:14px}
+.blk .lede .col{grid-column:1 / span 9}
+.linkrow{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;margin-top:22px}
+.upd{margin-top:8px}
+@media (max-width:760px){
+  .blk .lede .col{grid-column:1 / -1}
+  .picker{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .pick{font-size:15px;padding:13px 12px 13px 10px;grid-template-columns:24px 1fr;gap:6px}
+  .pick .pn{font-size:19px}
+  .net{grid-template-columns:1fr;gap:2px}
+  .who{grid-template-columns:1fr}
+  .pane h3{font-size:19px}
+  .startbox{margin-left:-20px;margin-right:-20px;padding:16px 20px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 1 · бонус</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонусный набор · Быстрый старт</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Как&nbsp;выбрать нейросеть под&nbsp;свою задачу</h1>
+      <p class="hlead">Быстрый инструмент: нажмите на свою задачу – и увидите, какие нейросети с ней справятся и с какой начать.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Чтение</span><span class="mv">5 минут</span></div>
+      <div><span class="mk">Практика</span><span class="mv">5 минут</span></div>
+      <div><span class="mk">Результат</span><span class="mv">Своя нейросеть под задачу</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное за&nbsp;минуту</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p><b>Лучшей нейросети нет.</b> Новые модели выходят каждые месяц-два, и каждая «лучше всех». Поэтому звание чемпиона ни за кем не закрепляем.</p></div>
+      <div class="mline"><span class="mn">2</span><p><b>Сначала задача, потом нейросеть.</b> Выбираем под то, что нужно сделать, и под то, что доступно вам прямо сейчас.</p></div>
+      <div class="mline"><span class="mn">3</span><p><b>Для модуля 1 подойдёт любая из основных.</b> Демонстрации на курсе идут в ChatGPT, но задания можно делать и в Claude, Gemini, ГигаЧате или DeepSeek. Навык переносится: освоили одну – переедете в любую.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk">
+  <p class="label">Инструмент</p>
+  <h2>Подберите по&nbsp;задаче</h2>
+  <p style="max-width:68ch">Выберите, что хотите делать. Названия внутри – не рейтинг, а подсказка, с чего начать пробовать.</p>
+
+  <div class="picker" role="group" aria-label="Выберите задачу">
+    <button class="pick" type="button" data-pick="t1" aria-controls="t1"><span class="pn">1</span><span>Тексты и посты</span></button>
+    <button class="pick" type="button" data-pick="t2" aria-controls="t2"><span class="pn">2</span><span>Ответы клиентам и письма</span></button>
+    <button class="pick" type="button" data-pick="t3" aria-controls="t3"><span class="pn">3</span><span>Разобраться в сложной теме, учёба</span></button>
+    <button class="pick" type="button" data-pick="t4" aria-controls="t4"><span class="pn">4</span><span>Найти информацию с источниками</span></button>
+    <button class="pick" type="button" data-pick="t5" aria-controls="t5"><span class="pn">5</span><span>Документы и таблицы</span></button>
+    <button class="pick" type="button" data-pick="t6" aria-controls="t6"><span class="pn">6</span><span>Идеи и мозговой штурм</span></button>
+    <button class="pick" type="button" data-pick="t7" aria-controls="t7"><span class="pn">7</span><span>Картинки</span></button>
+    <button class="pick" type="button" data-pick="t8" aria-controls="t8"><span class="pn">8</span><span>Видео и аватары</span></button>
+    <button class="pick" type="button" data-pick="t9" aria-controls="t9"><span class="pn">9</span><span>Бытовые задачи</span></button>
+  </div>
+
+  <div class="panes" aria-live="polite">
+    <div class="pane" id="t1">
+      <h3>Тексты и посты</h3>
+      <div class="net"><span class="nn">ChatGPT</span><span class="nd">Быстро даёт несколько вариантов и сам предлагает, как доработать.</span></div>
+      <div class="net"><span class="nn">Claude</span><span class="nd">Живой, менее шаблонный стиль, хорошо держит заданный тон.</span></div>
+      <div class="net"><span class="nn">ГигаЧат</span><span class="nd">Хорошо чувствует русский язык, открыт в России.</span></div>
+      <div class="net"><span class="nn">DeepSeek</span><span class="nd">Показывает ход рассуждений – видно, почему текст построен именно так.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С ChatGPT – в нём идут демонстрации курса. Если зайти не получается – с ГигаЧата.</p></div>
+    </div>
+
+    <div class="pane" id="t2">
+      <h3>Ответы клиентам и письма</h3>
+      <div class="net"><span class="nn">Claude</span><span class="nd">Вежливо, но по-человечески – без «Уважаемый Иван Иванович».</span></div>
+      <div class="net"><span class="nn">ChatGPT</span><span class="nd">Быстро подстраивается под правку «теплее», «короче», «строже».</span></div>
+      <div class="net"><span class="nn">Gemini</span><span class="nd">Удобен, если почта и документы у вас в Google.</span></div>
+      <div class="net"><span class="nn">ГигаЧат, Алиса</span><span class="nd">Короткие ответы на русском, открыты в России.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С той нейросети, где вы уже пишете тексты. Важнее выбора – контекст: кто клиент и какие у вас отношения.</p></div>
+    </div>
+
+    <div class="pane" id="t3">
+      <h3>Разобраться в сложной теме, учёба</h3>
+      <div class="net"><span class="nn">ChatGPT</span><span class="nd">Объясняет простыми словами и может проверить вопросами, как вы поняли.</span></div>
+      <div class="net"><span class="nn">DeepSeek</span><span class="nd">Видно, как он рассуждает, шаг за шагом.</span></div>
+      <div class="net"><span class="nn">Claude</span><span class="nd">Аккуратно разбирает длинные и запутанные тексты.</span></div>
+      <div class="net"><span class="nn">Gemini</span><span class="nd">Подтягивает свежую информацию из поиска Google.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С ChatGPT или DeepSeek. Попросите: «Объясни, как новичку, и задай мне три вопроса на понимание».</p></div>
+    </div>
+
+    <div class="pane" id="t4">
+      <h3>Найти информацию с источниками</h3>
+      <div class="net"><span class="nn">Perplexity</span><span class="nd">Отвечает со ссылками на первоисточники, умеет глубокие исследования.</span></div>
+      <div class="net"><span class="nn">ChatGPT, Gemini</span><span class="nd">Тоже ищут в интернете и показывают, откуда взяли.</span></div>
+      <div class="net"><span class="nn">Алиса</span><span class="nd">Опирается на поиск Яндекса – удобна для русскоязычных тем.</span></div>
+      <div class="net"><span class="nn">ГигаЧат</span><span class="nd">Есть режим «умный поиск».</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С Perplexity. Ссылки открывайте: ИИ ошибается – проверять учимся во втором модуле.</p></div>
+    </div>
+
+    <div class="pane" id="t5">
+      <h3>Документы и таблицы</h3>
+      <div class="net"><span class="nn">ChatGPT, Claude</span><span class="nd">Умеют отдать готовый файл, который можно скачать.</span></div>
+      <div class="net"><span class="nn">Gemini</span><span class="nd">Удобен, если вы работаете в Google Документах и Таблицах.</span></div>
+      <div class="net"><span class="nn">ГигаЧат, DeepSeek</span><span class="nd">Файл обычно не создают: текст или таблицу копируете в документ сами.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С ChatGPT. Документы, таблицы и презентации подробно разберём дальше на курсе.</p></div>
+    </div>
+
+    <div class="pane" id="t6">
+      <h3>Идеи и мозговой штурм</h3>
+      <div class="net"><span class="nn">Любая из основных</span><span class="nd">Здесь важнее, как вы просите, чем где.</span></div>
+      <div class="net"><span class="nn">ChatGPT</span><span class="nd">Щедро накидывает варианты и зовёт продолжить.</span></div>
+      <div class="net"><span class="nn">Claude</span><span class="nd">Предлагает неожиданные углы, если попросить.</span></div>
+      <div class="net"><span class="nn">DeepSeek, ГигаЧат</span><span class="nd">Хороши как второе мнение: отправьте тот же запрос и сравните.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С той, что уже открыта. Попросите сразу десять вариантов, а потом – «выбери три сильных и объясни почему».</p></div>
+    </div>
+
+    <div class="pane" id="t7">
+      <h3>Картинки</h3>
+      <div class="net"><span class="nn">ChatGPT</span><span class="nd">Рисует прямо в чате, картинку можно править словами.</span></div>
+      <div class="net"><span class="nn">Gemini</span><span class="nd">Тоже создаёт и дорабатывает изображения в чате.</span></div>
+      <div class="net"><span class="nn">ГигаЧат, Алиса</span><span class="nd">Рисуют по запросу, открыты в России.</span></div>
+      <div class="net"><span class="nn">Генераторы изображений</span><span class="nd">Отдельные сервисы – когда нужен профессиональный уровень и тонкая настройка стиля.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С чат-бота, в котором уже работаете. Отдельный сервис – когда упрётесь в его возможности.</p></div>
+    </div>
+
+    <div class="pane" id="t8">
+      <h3>Видео и аватары</h3>
+      <div class="net"><span class="nn">Отдельные сервисы</span><span class="nd">Видео, аватары, озвучка – профессиональная специфика, на курсе коснёмся немного.</span></div>
+      <div class="net"><span class="nn">Большие чат-боты</span><span class="nd">Начинают делать короткие видео – обычно в платной версии.</span></div>
+      <div class="net"><span class="nn">ChatGPT, ГигаЧат, DeepSeek</span><span class="nd">Помогут со сценарием, списком кадров и тем, где взять видео.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>Не с генерации, а со сценария в обычном чате – как в уроке 1 со сценарием рилса.</p></div>
+    </div>
+
+    <div class="pane" id="t9">
+      <h3>Бытовые задачи</h3>
+      <div class="net"><span class="nn">Алиса</span><span class="nd">Голосом, с телефона или колонки, по-русски.</span></div>
+      <div class="net"><span class="nn">ChatGPT</span><span class="nd">Можно поговорить голосом или отправить фото – инструкции, полки в холодильнике.</span></div>
+      <div class="net"><span class="nn">ГигаЧат, DeepSeek</span><span class="nd">Меню, списки покупок, план на неделю – открыты в России.</span></div>
+      <div class="startbox"><p class="sl">С чего начать</p><p>С той, что уже есть в телефоне. Например: «Вот что у меня в холодильнике – что приготовить на ужин за 20 минут?»</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap blk">
+  <p class="label">Карта сервисов</p>
+  <h2>Кто&nbsp;есть кто</h2>
+  <p style="max-width:68ch">Деление из урока 1. Оно не про «лучше – хуже», а про то, на каких уровнях сервис может с вами работать: только чат или ещё помощники, документы и действия за вас.</p>
+  <div class="who">
+    <div class="wcell"><p class="wl">Лидеры</p><h3>ChatGPT · Claude · Gemini</h3><p>Работают почти на всех уровнях: от чата до постоянных помощников и действий за вас. На их возможности и опирается курс.</p></div>
+    <div class="wcell"><p class="wl">Доступны в России без дополнительных настроек</p><h3>ГигаЧат · Алиса · DeepSeek</h3><p>Пока больше формат диалога: спросили – получили текст или картинку. Для модуля 1 этого хватает, и плохими нейросетями это их не делает.</p></div>
+    <div class="wcell"><p class="wl">Поиск и первоисточники</p><h3>Perplexity</h3><p>Стоит особняком: ищет в интернете, даёт ссылки, делает глубокие исследования. Часть заданий курса можно выполнять в ней.</p></div>
+    <div class="wcell"><p class="wl">Картинки, видео, аватары, звук</p><h3>Специализированные сервисы</h3><p>Под одну задачу, но глубоко. Это уже профессиональная специфика – курс про то, как выстроить свою систему работы с ИИ.</p></div>
+  </div>
+</section>
+
+<section class="wrap blk">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Осторожно</p>
+  <h2>Проверка агрегатора «все нейросети за&nbsp;1000&nbsp;₽»</h2>
+  <p>В интернете встретятся сервисы «подписка на все нейросети мира сразу». Пользоваться ими можно, но сначала задайте три вопроса.</p>
+  <div class="defs">
+    <div class="def"><span class="dn">1</span><div><h3>Это только чат – или можно собрать своего помощника?</h3><p>Помощник уже знает ваши задачи, стиль и подходы. Собирать его будем во втором модуле – важно, чтобы сервис это позволял.</p></div></div>
+    <div class="def"><span class="dn">2</span><div><h3>Работает ли он с документами?</h3><p>Можно ли загрузить свой файл и получить готовый – документ или таблицу, которые не стыдно отправить клиенту.</p></div></div>
+    <div class="def"><span class="dn">3</span><div><h3>Может ли он что-то сделать на компьютере?</h3><p>Сохранить файл в нужную папку, заполнить форму. Это следующий уровень, до которого вы дойдёте позже на курсе.</p></div></div>
+  </div>
+  <p class="rulebox">Если на все три вопроса ответ «нет» – это просто чат. Для модуля 1 его хватит, но дальше станет тесно. Мы идём от задач, а не от того, насколько дёшево.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Честно про деньги</p>
+  <h2>Бесплатно или&nbsp;платить</h2>
+  <ul class="pays">
+    <li><b>Для модуля 1 бесплатной версии хватает.</b> Все задания делаются в обычном чате, платить заранее не нужно.</li>
+    <li><b>Лимиты – это нормально.</b> В бесплатной версии ограничено число сообщений и доступ к «думающим» моделям: продвинутая модель может ответить пару раз и закрыться на время. Упёрлись – продолжайте в другой нейросети, навык переносится.</li>
+    <li><b>Подписка окупается, когда вы уже знаете, какая нейросеть решает ваши задачи,</b> и пользуетесь ей каждый день. Тогда вы платите за сэкономленное время, а не за название.</li>
+    <li><b>Платите за одну, а не за все сразу.</b> Сначала бесплатно попробуйте две-три, потом выберите основную.</li>
+  </ul>
+  <p class="quote">«Плачу за две нейросети – Claude и ChatGPT. Мне за них совсем не жалко: они окупаются с лихвой. Но пришла я к этому постепенно».</p>
+  <p style="margin-top:-10px;padding-left:27px;font-size:14px;color:var(--muted)">– Светлана Цыро, урок 1</p>
+  </div></div>
+</section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <h2>Мини-практика на&nbsp;5&nbsp;минут</h2>
+    <p class="pmeta">Один запрос · две нейросети · одна правка</p>
+    <p class="pintro">Тот же приём, что в уроке 1: одинаковый запрос, одинаковая правка и честное сравнение. Если уже делали это на уроке, возьмите другую задачу из карточек выше.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Откройте две нейросети</h3>
+      <p>Любые две, к которым есть доступ. В каждой – новый чат.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Отправьте один и тот же запрос</h3>
+      <p>Замените то, что в квадратных скобках. Формулировку между нейросетями не меняйте, иначе сравнивать будет нечего.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Запрос</p><pre>Мне нужно <span class="tok">[написать пост / ответить клиенту / составить меню на неделю]</span> на тему <span class="tok">[ваша тема]</span>. Помоги, пожалуйста, сделать 3 варианта.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Дайте одну и ту же правку</h3>
+      <p>Отправьте в оба чата одинаковое уточнение и посмотрите, кто понял вас с первого раза.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Правка</p><pre>Сделай проще и живее – как будто я рассказываю это знакомому. Убери общие фразы и оставь один вариант, который ты считаешь самым сильным. Объясни в двух предложениях, почему он.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Сравните и выберите</h3>
+      <ul style="margin-top:6px">
+        <li>Что каждая нейросеть добавила от себя?</li>
+        <li>Как она отреагировала на правку?</li>
+        <li>С какой было приятнее разговаривать?</li>
+      </ul>
+      <p class="snote">Победившую назначьте основной для этой задачи. В папку «Курс по ИИ» запишите одну строку: задача – нейросеть – почему.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk" style="padding-bottom:10px">
+  <div class="lede" style="padding-top:0"><div class="col">
+  <p class="label">Если ещё не зарегистрировались</p>
+  <h2>Где зарегистрироваться</h2>
+  <p>Как завести аккаунт в каждой нейросети – в гайде по регистрации. Доступ из России – тоже там.</p>
+  <div class="linkrow">
+    <a class="btn" href="https://aiforlife.ru/ii-course/modul0/gaid-dostup/" style="color:#fff">Открыть гайд по регистрации</a>
+    <a class="linkbtn" href="https://aiforlife.ru/ii-course/modul1/bonus-polomki/">Если ИИ отвечает не то – 12 поломок</a>
+  </div>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="color:#B7A9BD">Список – ориентир на осень 2026, сервисы обновляются.</p>
+    <p class="upd">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 1: как выбрать нейросеть</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;root.classList.add('js');
+  var picks=[].slice.call(document.querySelectorAll('[data-pick]'));
+  function show(id,scroll){
+    picks.forEach(function(b){var on=b.dataset.pick===id;b.classList.toggle('on',on);b.setAttribute('aria-expanded',on?'true':'false');});
+    document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on',p.id===id);});
+    if(scroll){
+      var p=document.getElementById(id);
+      if(p){var r=p.getBoundingClientRect();var vh=window.innerHeight||document.documentElement.clientHeight;
+        if(r.top>vh-120||r.top<0){p.scrollIntoView({behavior:'smooth',block:'start'});}}
+    }
+  }
+  picks.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.pick,true);});});
+  show('t1',false);
+})();
+</script>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>
