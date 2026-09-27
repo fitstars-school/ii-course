@@ -3,6 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- na-gate: доступ по ключу из урока (?k=...) -->
+<style>html.na-locked body>*:not(#na-gate){display:none!important}html.na-locked,html.na-locked body{overflow:hidden}</style>
+<script>
+(function(){
+  var HS=[3632319418];
+  function kh(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))>>>0}return h}
+  function good(k){return !!k&&HS.indexOf(kh(k))>=0}
+  var ok=false,k=null;
+  try{
+    var q=new URLSearchParams(location.search);k=q.get('k');
+    if(good(k)){
+      ok=true;window.NA_KEY=k;
+      try{localStorage.setItem('na-key',k)}catch(e){}
+      q.delete('k');var qs=q.toString();
+      try{history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash)}catch(e){}
+    }
+    if(!ok){var s=null;try{s=localStorage.getItem('na-key')}catch(e){}if(good(s)){ok=true;window.NA_KEY=s}}
+  }catch(e){}
+  if(ok)return;
+  document.documentElement.classList.add('na-locked');
+  function show(){
+    if(document.getElementById('na-gate'))return;
+    var d=document.createElement('div');d.id='na-gate';
+    d.setAttribute('style','position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:#1B1420;font-family:Manrope,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif');
+    d.innerHTML='<div style="max-width:460px;background:#FFFDFB;padding:38px 32px;border-left:6px solid #E6198C;color:#211829">'+
+      '<div style="font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#E6198C;margin-bottom:14px">Нейро-архитектор · бонусы модуля 1</div>'+
+      '<div style="font-family:Instrument Serif,Georgia,serif;font-size:34px;line-height:1.05;margin-bottom:14px">Этот материал доступен участникам курса</div>'+
+      '<p style="font-size:16px;line-height:1.6;color:#3B3143;margin:0 0 20px">Откройте его по ссылке из урока на платформе – дальше браузер запомнит доступ, и всё будет открываться как обычно.</p>'+
+      '<a href="https://aiforlife.ru/ii-course/" style="display:inline-block;background:#E6198C;color:#fff;font-weight:800;font-size:15px;padding:13px 22px;text-decoration:none">О курсе «Нейро-архитектор»</a>'+
+      '</div>';
+    document.body.appendChild(d);
+  }
+  if(document.body)show();else document.addEventListener('DOMContentLoaded',show);
+})();
+</script>
+
 <title>Как навыки модуля 1 помогут зарабатывать больше · Бонус модуля 1 · Нейро-архитектор</title>
 <meta name="description" content="Бонус модуля 1: как без обещаний «быстрых денег» применить навыки первой недели для других людей – от первого сообщения до сданной работы и отзыва.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
