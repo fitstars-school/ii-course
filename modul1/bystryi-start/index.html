@@ -213,7 +213,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       return;
     }
     var url=MAP[key];
-    var kq=window.NA_KEY?('?k='+encodeURIComponent(window.NA_KEY)):'';
+    var kq='';
     if(frame.dataset.key!==key){frame.src=url+kq;frame.dataset.key=key;}
     frame.classList.add('on');intro.classList.add('off');
     openbar.href=abs(url)+kq;openbar.classList.add('on');
