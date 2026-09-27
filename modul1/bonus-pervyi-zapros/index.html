@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Первый полезный запрос за 15 минут · Бонус модуля 1 · Нейро-архитектор</title>
-<meta name="description" content="Пошаговый маршрут на 15 минут: выбрать задачу, наговорить запрос по формуле «контекст – задача – результат» и получить от нейросети результат, которым можно пользоваться сразу.">
+<meta name="description" content="За 15 минут нейросеть сама расспросит вас, найдёт задачу, которую можно закрыть с ИИ прямо сейчас, и проведёт по шагам до готового результата.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -208,7 +208,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 @media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
 
 /* Первый запрос за 15 минут */
-.tline{display:grid;grid-template-columns:2fr 3fr 1fr 5fr 4fr;gap:3px;margin-top:22px}
+.tline{display:grid;grid-template-columns:5fr 1fr 9fr;gap:3px;margin-top:22px}
 .tline a{display:block;background:var(--ink);color:#fff;padding:11px 10px 10px;font-family:var(--mono);font-size:12px;line-height:1.2;white-space:nowrap;overflow:hidden;transition:background .2s}
 .tline a:nth-child(even){background:var(--pink-strong)}
 .tline a:hover{background:var(--pink);color:#fff}
@@ -216,21 +216,23 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 .tcap{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:9px}
 .step .tmin{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin-bottom:7px}
 .step{scroll-margin-top:16px}
-.ideas{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;margin-top:22px}
-.idea{border-top:1px solid var(--line);padding:16px 0}
-.idea h3{font-family:var(--sans);font-size:17px;font-weight:700;line-height:1.35;margin-bottom:4px}
-.idea p{font-size:15.5px;color:var(--muted);line-height:1.5}
-.before{background:#F4EEF5;border-left:3px solid var(--faint);padding:20px 24px;margin-top:10px}
-.before pre{white-space:pre-wrap;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:var(--ink)}
-.balab{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:26px}
-.fixes .promptbox+.promptbox{margin-top:14px}
-.golos{margin-top:56px}
+.balab{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:28px}
+.exq{margin-top:18px;background:#F4EEF5;padding:18px 22px}
+.exq p{font-size:16px;line-height:1.5}
+.exq p+p{margin-top:8px}
+.exq .who{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;color:#fff;background:var(--ink);padding:2px 7px;margin-right:10px;vertical-align:2px}
+.gocard{margin:56px 0 0;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid var(--pink);padding:32px 32px 30px}
+.gocard .gl{font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-strong);margin-bottom:12px}
+.gocard h3{font-family:var(--sans);font-size:23px;font-weight:800;line-height:1.3;margin-bottom:10px}
+.gocard p{font-size:16.5px;color:#3B3143;max-width:60ch}
+.gocard .btn{margin-top:20px;color:#fff}
+.gocard .btn:hover{color:#fff}
 @media (max-width:760px){
-  .tline a{padding:10px 4px;font-size:11px;text-align:center}
-  .tline .tu{display:none}
-  .ideas{grid-template-columns:1fr}
-  .before{padding:18px 20px;margin-left:-20px;margin-right:-20px}
-  .before pre{font-size:12.8px;overflow-wrap:anywhere}
+  .tline a{padding:10px 6px;font-size:11px;text-align:center}
+  .tline a:nth-child(2) .tu{display:none}
+  .exq{margin-left:-20px;margin-right:-20px;padding:16px 20px}
+  .gocard{padding:26px 20px 24px;margin-left:-20px;margin-right:-20px}
+  .gocard h3{font-size:20px}
 }
 </style>
 </head>
@@ -241,22 +243,20 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
   <div class="kmark"><span class="kn">+</span><span class="kt">Бонусный набор · Быстрый старт</span></div>
   <div class="hero" style="padding-top:34px">
     <div class="hgrid">
-      <h1>15 минут – и&nbsp;у&nbsp;вас на&nbsp;руках <span class="it">полезный результат</span></h1>
-      <p class="hlead">Первый полезный запрос: пять шагов с&nbsp;таймингом и&nbsp;готовыми шаблонами. Теорию оставим на&nbsp;потом – сейчас просто делаем.</p>
+      <h1>Первый полезный запрос <span class="it">за&nbsp;15&nbsp;минут</span></h1>
+      <p class="hlead">Иногда непонятно, за&nbsp;что взяться. Найдём задачу, которую можно закрыть с&nbsp;ИИ прямо сейчас, – и&nbsp;закроем её.</p>
     </div>
     <div class="meta">
       <div><span class="mk">Время</span><span class="mv">15 минут</span></div>
-      <div><span class="mk">Понадобится</span><span class="mv">Любая нейросеть и микрофон</span></div>
-      <div><span class="mk">Останется в папке</span><span class="mv">Запрос и готовый результат</span></div>
+      <div><span class="mk">Понадобится</span><span class="mv">Любая нейросеть</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Одна закрытая задача</span></div>
     </div>
     <nav class="tline" aria-label="Маршрут по минутам">
-      <a href="#s1">2<span class="tu"> мин</span></a>
-      <a href="#s2">3<span class="tu"> мин</span></a>
-      <a href="#s3">1<span class="tu"> мин</span></a>
-      <a href="#s4">5<span class="tu"> мин</span></a>
-      <a href="#s5">4<span class="tu"> мин</span></a>
+      <a href="#s1">5<span class="tu"> мин – аудит</span></a>
+      <a href="#s2">1<span class="tu"> мин</span></a>
+      <a href="#s3">9<span class="tu"> мин – решаем</span></a>
     </nav>
-    <p class="tcap">2 + 3 + 1 + 5 + 4 = 15 минут</p>
+    <p class="tcap">5 мин – аудит · 1 мин – выбор · 9 мин – решаем</p>
   </div>
 </header>
 
@@ -265,8 +265,8 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 <section class="wrap blk">
   <div class="lede" style="padding-top:0"><div class="col">
     <p class="label">Маршрут</p>
-    <h2>Пять шагов до&nbsp;результата</h2>
-    <p>Откройте нейросеть, которой уже пользуетесь, – ChatGPT, Claude, Gemini, ГигаЧат или DeepSeek – и начните новый чат. Засеките 15 минут. Шаблоны копируйте целиком и заменяйте всё, что в [квадратных скобках], на своё.</p>
+    <h2>Три шага, одна закрытая задача</h2>
+    <p>Откройте нейросеть, которой уже пользуетесь, начните новый чат и засеките 15 минут. Думать, с&nbsp;чего начать, не нужно: вопросы задаст сама нейросеть.</p>
   </div></div>
 </section>
 
@@ -274,44 +274,30 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
   <div class="steps">
 
     <div class="step" id="s1"><span class="snum">1</span><div>
-      <p class="tmin">0:00–2:00 · 2 минуты</p>
-      <h3>Выберите одну задачу</h3>
-      <p>Маленькую и настоящую: то, что вы и так собирались сделать сегодня или завтра. Хорошая задача для первого раза – та, результат которой можно сразу отправить, распечатать или повесить на холодильник. Не выбирается – спросите саму нейросеть.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Если не знаете, что выбрать</p><pre>Я <span class="tok">[кто вы и чем занимаетесь]</span>. На этой неделе у меня в планах: <span class="tok">[перечислите 3–5 дел из работы и жизни]</span>. Какое из этих дел ты можешь помочь мне сделать за 10 минут так, чтобы результат пригодился сразу? Выбери одно и объясни в двух предложениях почему.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      <p class="snote">Идеи на выбор – ниже, в блоке <a href="#ideas">«Не знаете, с&nbsp;какой задачи начать»</a>.</p>
+      <p class="tmin">0:00–5:00 · аудит</p>
+      <h3>Пусть нейросеть найдёт задачу вместе с вами</h3>
+      <p>Скопируйте промпт и отправьте. Отвечайте коротко и честно, как есть, – можно голосом. Через пять вопросов у вас будет три задачи на выбор.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт для аудита</p><pre>Помоги мне найти одну задачу, которую я могу закрыть с твоей помощью прямо сейчас, за 15 минут.
+Задавай мне вопросы по одному, не больше пяти. Выясни: что у меня сейчас висит в работе и дома, что я давно откладываю, что меня раздражает, что повторяется каждую неделю.
+Потом предложи три задачи, которые реально сделать с тобой за 15 минут прямо сейчас. По каждой напиши:
+– что мы сделаем;
+– что понадобится от меня (например, текст письма, фото, список);
+– что будет на выходе.
+Не предлагай то, что займёт больше 15 минут или требует специальных настроек. Не выдумывай мои обстоятельства: опирайся только на мои ответы, а если чего-то не хватает – спроси.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
     <div class="step" id="s2"><span class="snum">2</span><div>
-      <p class="tmin">2:00–5:00 · 3 минуты</p>
-      <h3>Наговорите запрос по формуле «контекст – задача – результат»</h3>
-      <p><b>Контекст</b> – что происходит: кто вы, для кого это, какие есть условия. <b>Задача</b> – что нужно сделать, конкретным глаголом. <b>Результат</b> – в каком виде его забрать: список, таблица, короткое сообщение.</p>
-      <p>Включите голосовой ввод и расскажите своими словами. Порядок не важен, причёсывать речь не нужно – голосом вы дадите больше деталей, чем напечатаете.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Шаблон запроса</p><pre>Контекст: я <span class="tok">[кто вы]</span>. Это нужно для <span class="tok">[кого или какой ситуации]</span>. Важно учесть: <span class="tok">[условия, ограничения, что уже пробовали]</span>.
-Задача: <span class="tok">[что сделать: напиши, составь, сравни, разбери, объясни]</span>.
-Результат: хочу получить <span class="tok">[в каком виде: список, таблица, план по дням, сообщение на 3–4 предложения]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="tmin">5:00–6:00 · выбор</p>
+      <h3>Выберите одну</h3>
+      <p>Берите ту, что раздражает или давно висит: закрыть её приятнее всего. Долго не взвешивайте – на выбор у вас минута.</p>
+      <p class="snote">Ни одна не зацепила? Напишите: «Предложи ещё три, проще».</p>
     </div></div>
 
     <div class="step" id="s3"><span class="snum">3</span><div>
-      <p class="tmin">5:00–6:00 · 1 минута</p>
-      <h3>Добавьте «сначала задай мне вопросы»</h3>
-      <p>Это приём из второго урока – «попросите сначала задать уточняющие вопросы». Вам не нужно угадывать, что ещё рассказать: нейросеть сама спросит, какого контекста ей не хватает. Допишите фразу в конец запроса и отправьте всё одним сообщением.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Допишите в конец</p><pre>Прежде чем выполнять, задай мне до пяти уточняющих вопросов, на которые я отвечу, чтобы ты выполнил задачу качественнее. Сам результат пока не пиши.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-    </div></div>
-
-    <div class="step" id="s4"><span class="snum">4</span><div>
-      <p class="tmin">6:00–11:00 · 5 минут</p>
-      <h3>Ответьте на вопросы и получите результат</h3>
-      <p>Отвечайте коротко и тоже голосом. На вопрос, на который нет ответа, так и скажите – «не знаю, предложи сам». Если хочется выбрать, попросите два-три варианта: из нескольких выбирать проще, чем спорить с одним.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Шаблон ответа</p><pre>Отвечаю: 1) <span class="tok">[...]</span> 2) <span class="tok">[...]</span> 3) <span class="tok">[...]</span>.
-Если на что-то я не ответил(а) – выбери вариант сам и отметь, что это твоё предположение. Теперь выполни задачу. Дай <span class="tok">[один / три]</span> вариант(а).</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-    </div></div>
-
-    <div class="step" id="s5"><span class="snum">5</span><div>
-      <p class="tmin">11:00–15:00 · 4 минуты</p>
-      <h3>Сделайте одну правку и сохраните</h3>
-      <p>Прочитайте ответ и найдите главное, что не так. Одну вещь, конкретно: «короче», «проще», «теплее», «без пафоса», «убери пункт про…». Переписывать самим не нужно – скажите, и нейросеть поправит.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Одна правка</p><pre>Хорошо, но поправь: <span class="tok">[что именно не так и как должно быть]</span>. Остальное оставь как есть.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      <p class="snote">Готовый результат скопируйте в документ вместе со своим запросом и положите в папку «Курс по ИИ». Назовите по задаче, например «Первый запрос – план недели». Сам чат не удаляйте: к нему ещё можно вернуться.</p>
+      <p class="tmin">6:00–15:00 · решаем</p>
+      <h3>Сделайте её прямо сейчас</h3>
+      <p>Вставьте номер задачи и отправьте. Дальше просто отвечайте на вопросы и давайте то, что попросит нейросеть: текст, список, фото.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт, чтобы решить</p><pre>Давай сделаем задачу <span class="tok">[номер]</span> прямо сейчас. Веди меня по шагам, вопросы задавай по одному, в конце дай готовый результат, который я смогу сразу использовать.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
     </div></div>
 
   </div>
@@ -319,70 +305,49 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
   <div class="donebox">
     <div class="dc">
       <p class="dl">Готово, когда</p>
-      <p>У вас есть результат, которым можно воспользоваться сегодня, и запрос, который привёл к нему. В следующий раз по этим же шаблонам получится быстрее – структура запомнится сама.</p>
+      <p>У вас на руках готовая вещь – отправленное сообщение, план, список или принятое решение – и вы потратили на это не больше 15 минут.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p style="font-size:16px">Сохраните результат там, где вам удобно к нему вернуться.</p>
+      </div>
     </div>
   </div>
-</section>
-
-<section class="wrap blk reveal" id="ideas">
-  <div class="lede" style="padding-top:0"><div class="col">
-    <p class="label">Если задачи нет</p>
-    <h2>Не знаете, с&nbsp;какой задачи начать</h2>
-    <p>Берите любую из восьми – они короткие и дают результат сразу.</p>
-  </div></div>
-  <div class="ideas">
-    <div class="idea"><h3>Ответ клиенту</h3><p>На сложное письмо или неудобный вопрос – вежливо, по делу и вашим тоном.</p></div>
-    <div class="idea"><h3>План недели</h3><p>Выгрузите все дела голосом – получите план по дням с учётом ваших сил и дедлайнов.</p></div>
-    <div class="idea"><h3>Пост</h3><p>Расскажите тему и пару мыслей – получите черновик, который останется довести до своего.</p></div>
-    <div class="idea"><h3>Разбор длинного письма</h3><p>Вставьте текст – получите суть в трёх пунктах и что от вас ждут.</p></div>
-    <div class="idea"><h3>Меню и список покупок</h3><p>Меню на неделю под вашу семью, бюджет и время – и список продуктов по отделам магазина.</p></div>
-    <div class="idea"><h3>Подготовка к разговору</h3><p>С руководителем, клиентом, родственником: что сказать, какие будут возражения, как ответить.</p></div>
-    <div class="idea"><h3>Сравнение вариантов</h3><p>Два-три варианта – курсы, покупки, подрядчики – в таблице по вашим критериям.</p></div>
-    <div class="idea"><h3>Объяснение сложной темы</h3><p>Налоговый вычет, договор, школьная тема ребёнка – простыми словами и с примером.</p></div>
-  </div>
-  <div class="lede" style="padding-top:18px"><div class="col">
-    <p class="note">Больше идей – в подборке <a href="https://aiforlife.ru/ii-course/modul1/bonus-top30/">«Топ-30 быстрых побед»</a>.</p>
-  </div></div>
 </section>
 
 <section class="wrap blk reveal">
   <div class="lede" style="padding-top:0"><div class="col">
-    <p class="label">Пример</p>
-    <h2>До и&nbsp;после</h2>
-    <p>Учебный пример: вы репетитор по английскому, и мама ученика пишет, что занятия выходят дорого и они хотят сделать паузу.</p>
-    <p class="balab">До</p>
-    <div class="before"><pre>Напиши ответ клиенту, который хочет уйти.</pre></div>
-    <p class="snote">На такой запрос обычно приходит вежливая отписка в духе «Уважаемая…» – формально верно, но писать так живому человеку не хочется.</p>
-    <p class="balab">После</p>
-    <div class="promptbox stepprompt"><p class="plabel">Тот же запрос по формуле</p><pre>Я репетитор по английскому, занимаюсь с ребёнком 12 лет уже полгода. Мама написала, что занятия выходят дорого и они хотят сделать паузу на пару месяцев. Мне важно сохранить хорошие отношения и оставить дверь открытой, но не уговаривать и не снижать цену.
-Напиши ответ маме.
-Результат: короткое сообщение для мессенджера, 3–4 предложения, тепло и без официоза.
-Прежде чем писать, задай мне до пяти уточняющих вопросов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-    <p class="snote">Разница не в «волшебных словах», а в том, что нейросеть теперь знает ситуацию, цель и формат. Вопросы после этого будут по делу: например, есть ли у ребёнка прогресс, который стоит упомянуть.</p>
-  </div></div>
-</section>
-
-<section class="wrap blk reveal fixes">
-  <div class="lede" style="padding-top:0"><div class="col">
-    <p class="label">Если ответ не тот</p>
-    <h2>Три фразы, которые почти всегда выручают</h2>
-    <p>Не начинайте заново – скажите в том же чате.</p>
-    <div class="promptbox stepprompt"><p class="plabel">Если слишком общо</p><pre>Это слишком общо. Вот что важно именно в моей ситуации: <span class="tok">[детали]</span>. Переделай с учётом этого.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-    <div class="promptbox stepprompt"><p class="plabel">Если мимо</p><pre>Не то. Мне нужно не <span class="tok">[что получилось]</span>, а <span class="tok">[что нужно]</span>. Предложи три других варианта.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-    <div class="promptbox stepprompt"><p class="plabel">Если непонятно, что не так</p><pre>Задай мне ещё три уточняющих вопроса: чего тебе не хватает, чтобы попасть точнее?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-    <p class="note">Не помогло – найдите свой случай в разборе <a href="https://aiforlife.ru/ii-course/modul1/bonus-polomki/">«12 поломок»</a>. А если сложно собрать запрос самим, <a href="https://aiforlife.ru/ii-course/modul1/bonus-promt/">помощник по промптам</a> задаст вопросы за вас.</p>
-    <p class="snote">И помните: ИИ ошибается. Если в ответе есть факты, цифры или даты – перепроверьте. Как это делать системно, учимся во втором модуле.</p>
-  </div></div>
-</section>
-
-<div class="dark golos">
-  <div class="wrap dgrid">
-    <h2>Голосом быстрее</h2>
-    <div class="dcol">
-      <p>Не печатайте – наговаривайте: голосом вы не фильтруете и даёте нейросети больше деталей. Где включить диктовку и как наговаривать задачи – в гайде <a href="https://aiforlife.ru/ii-course/modul1/bonus-golos/" style="color:var(--pink-soft)">«Голос вместо клавиатуры»</a>.</p>
+    <p class="label">Учебный пример</p>
+    <h2>Как может выглядеть аудит</h2>
+    <p>Например, так может пройти аудит у&nbsp;человека, который работает из дома и&nbsp;растит ребёнка.</p>
+    <div class="exq">
+      <p><span class="who">ИИ</span>Что сейчас висит у вас в работе и дома?</p>
+      <p><span class="who">ИИ</span>Что вы давно откладываете?</p>
+      <p><span class="who">ИИ</span>Что повторяется каждую неделю и утомляет?</p>
     </div>
+    <p class="balab">Три задачи на выбор</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Ответить заказчику на письмо с правками</h3><p>От вас: текст письма и что вы готовы поменять. На выходе: готовый ответ.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Меню на неделю и список покупок</h3><p>От вас: что едят дома и чего не едят. На выходе: меню и список по отделам магазина.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Письмо в управляющую компанию</h3><p>От вас: что случилось и с какого числа. На выходе: текст заявления.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="wrap reveal">
+  <div class="gocard">
+    <p class="gl">Если задача не нашлась</p>
+    <h3>Не страшно – загляните в «Топ-30 быстрых побед»</h3>
+    <p>Там 30 задач, которые ИИ решает за 10 минут. Выберите ту, что раздражает прямо сейчас.</p>
+    <a class="btn" href="https://aiforlife.ru/ii-course/modul1/bonus-top30/">Открыть «Топ-30»</a>
   </div>
-</div>
+</section>
+
+<section class="wrap blk">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="note"><b>Ответ не тот?</b> Найдите свой случай и готовую фразу в разборе <a href="https://aiforlife.ru/ii-course/modul1/bonus-polomki/">«12 поломок»</a>.</p>
+    <p class="note"><b>Голосом быстрее.</b> Отвечать на вопросы удобнее вслух – как включить диктовку, в гайде <a href="https://aiforlife.ru/ii-course/modul1/bonus-golos/">«Голос вместо клавиатуры»</a>.</p>
+  </div></div>
+</section>
 
 </main>
 
