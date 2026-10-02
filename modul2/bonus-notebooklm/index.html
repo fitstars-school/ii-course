@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>NotebookLM: своя база знаний для учёбы · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Простой гайд по NotebookLM (теперь Gemini Notebook): как зарегистрироваться, загрузить лекции и книги, получать ответы только по своим материалам со сносками, учиться по майнд-картам, подкастам, карточкам и тестам. 7 готовых запросов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Бонусы модуля 2: дополнения к стилю бонусов модуля 1 */
+.blk h3.sub{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:30px 0 8px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:600px;margin-top:24px}
+.shot{margin:24px 0 0;max-width:300px}
+.shots .shot{margin:0;max-width:none}
+.shot.wide{max-width:460px}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.shot figcaption{font-size:14px;line-height:1.5;color:var(--muted);margin-top:10px}
+.step ol{margin:14px 0 0 0;padding-left:22px}
+.step ol li{margin-bottom:8px;font-size:17px;color:#3B3143;padding-left:4px}
+.step ol li::marker{color:var(--pink);font-weight:700}
+.step .btns{margin-top:18px}
+.step a.btn,.dark a.btn{color:#fff}
+.facts{margin:0 0 20px}
+.fact{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.fact:first-child{border-top:none;padding-top:0}
+.fact .fk{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);padding-top:4px}
+.fact p{font-size:16px;line-height:1.55;color:#3B3143}
+.parthead{padding-top:70px}
+.parthead .ptag{display:inline-block;background:var(--pink);color:#fff;font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px}
+.parthead h2{font-size:clamp(32px,4.4vw,52px);margin:16px 0 14px}
+.parthead p{max-width:68ch}
+.back{padding-top:44px}
+.back .linkbtn{font-size:16px}
+footer a{color:#B7A9BD;border-bottom:1px solid rgba(183,169,189,.4)}
+footer a:hover{color:var(--pink-soft)}
+footer p+p{margin-top:8px}
+@media (max-width:760px){
+  .fact{grid-template-columns:1fr;gap:4px}
+  .shot,.shot.wide{max-width:100%}
+  .shots{grid-template-columns:1fr 1fr;gap:14px}
+  .parthead{padding-top:54px}
+}
+@media (max-width:420px){.shots{grid-template-columns:1fr}}
+
+/* NotebookLM: дополнения */
+.rubric a.back{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent}
+.rubric a.back:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.steps .step ul{margin-top:14px}
+.steps .step ul li{font-size:17px;color:#3B3143}
+.lede .promptbox{margin-top:22px}
+.donebox .facts{margin-top:6px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.cbox{border-top:2px solid var(--ink);padding-top:16px}
+.cbox .ck{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.cbox h3{font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.cbox p+p{margin-top:0}
+.cbox p:last-child{font-size:16px;color:var(--muted);line-height:1.55}
+footer p{max-width:none}
+@media (max-width:760px){
+  .cmp{grid-template-columns:1fr;gap:26px}
+  .rubric{gap:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><a class="r2 back" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Весь набор</a></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 2 · Учиться легче вместе с ИИ</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>NotebookLM: <span class="it">своя база знаний для&nbsp;учёбы</span></h1>
+      <p class="hlead">Простой гайд: как загрузить лекции, книги и конспекты в нейросеть Google, которая отвечает только по ним, объясняет наглядно и тренирует по карточкам.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">15 минут</span></div>
+      <div><span class="mk">Понадобится</span><span class="mv">Google-аккаунт и материал, по которому вы учитесь</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Блокнот по теме и 7 готовых запросов</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>за минуту</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>NotebookLM отвечает только по материалам, которые вы в него загрузили, и к каждой мысли ставит сноску&nbsp;– откуда это взято. Поэтому его так часто советуют именно для учёбы.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Один блокнот&nbsp;– одна тема: курс, книга, профессия. Это ваша база знаний, к которой можно возвращаться сколько угодно.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Из материалов он делает майнд-карту, видео-обзор, подкаст, конспект, карточки и тесты. Объясняет и словами, и наглядно.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Базовый тариф бесплатный. Из России сервис официально недоступен&nbsp;– без VPN не откроется.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сначала про имя</p>
+    <h2>NotebookLM теперь называется Gemini Notebook</h2>
+    <p>Летом 2026 года Google переименовал NotebookLM в Gemini Notebook. Это тот же самый сервис: блокноты на месте, старый адрес ведёт на новый. В статьях, видео и советах коллег вы ещё долго будете встречать старое название&nbsp;– не пугайтесь, речь об одном и том же. На этой странице мы пишем «NotebookLM», потому что так его пока знает большинство.</p>
+  </div></div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:0">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы гайда">
+    <a class="navlink" href="#otlichie">Чем отличается</a>
+    <a class="navlink" href="#registraciya">Регистрация</a>
+    <a class="navlink" href="#marshrut">Маршрут учёбы</a>
+    <a class="navlink" href="#zaprosy">7 запросов</a>
+    <a class="navlink" href="#pomoshnik">Или свой помощник</a>
+    <a class="navlink" href="#roditelyam">Родителям</a>
+    <a class="navlink" href="#sohranit">Что сохранить</a>
+  </nav>
+</section>
+
+<section class="wrap blk reveal" id="otlichie">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Глава 1</p>
+    <h2>Чем NotebookLM отличается от&nbsp;обычного чата</h2>
+    <p>Обычный чат с нейросетью отвечает из всего, что она когда-то прочитала, и иногда уверенно додумывает. NotebookLM устроен иначе: сначала вы приносите материалы, а потом он работает только с ними.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Только ваши материалы</h3><p>Ответы строятся по источникам, которые вы загрузили в блокнот. Ничего не притаскивает со стороны и не смешивает вашу лекцию с чужими статьями.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Показывает, откуда взял</h3><p>В ответе стоят номера-сноски. Наведите на номер&nbsp;– увидите цитату из источника, нажмите&nbsp;– откроется это место в самом материале.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Если в материалах нет&nbsp;– скажет</h3><p>Он создан, чтобы отвечать по вашим источникам. Если ответа в них нет, он обычно так и говорит. Это сигнал: в базу пора добавить материал.</p></div></div>
+    </div>
+    <p style="margin-top:22px">В уроке 4 мы ловили галлюцинации по красным флагам и проверяли ссылки вручную. Здесь половину этой работы делает сам инструмент: любую мысль можно сверить с источником в один клик.</p>
+    <p class="rulebox"><b>Честная оговорка.</b> Выдумок меньше, но «меньше»&nbsp;– не значит «никогда». Google прямо пишет, что сервис может ошибаться: неточно пересказать кусок или склеить две мысли из разных мест. А если ошибка есть в самом материале, NotebookLM её добросовестно повторит. Поэтому по важным для вас вещам открывайте сноски и смотрите, что написано в источнике.</p>
+  </div></div>
+</section>
+
+<div class="practice" id="registraciya">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Глава 2</p>
+    <h2>Регистрация за&nbsp;5&nbsp;минут</h2>
+    <p class="pintro">Отдельно регистрироваться не нужно: NotebookLM работает с обычным аккаунтом Google. Интерфейс иногда меняется, поэтому ориентируйтесь на суть шагов, а не на точные названия кнопок.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Аккаунт Google</h3>
+      <p>Если у вас есть почта Gmail&nbsp;– это и есть аккаунт Google, ничего заводить не нужно. Если нет&nbsp;– создайте его на сайте Google, это бесплатно. Подойдёт и рабочий или учебный аккаунт, но там доступ к NotebookLM должен включить администратор организации.</p>
+      <p class="snote">Возраст: по правилам Google сервисом можно пользоваться с того возраста, с которого в вашей стране разрешено самостоятельно вести аккаунт Google (для многих стран&nbsp;– с 13 лет). До 18 лет действуют более строгие фильтры, а часть функций доступна только с 18. Google может попросить подтвердить возраст в настройках аккаунта.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Доступ из России</h3>
+      <p>Россия не входит в список стран, где официально работает NotebookLM (как и другие сервисы Google с ИИ). Поэтому из России без VPN он не откроется. Как настроить доступ к зарубежным нейросетям&nbsp;– в гайде курса.</p>
+      <div class="btns"><a class="btn" href="https://aiforlife.ru/ii-course/modul0/gaid-dostup/" target="_top">Открыть гайд по доступу</a></div>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Войдите на сайт</h3>
+      <p>Откройте <a href="https://notebook.google/" target="_blank" rel="noopener">notebook.google</a> в браузере и войдите своим аккаунтом Google. Старый адрес notebooklm.google.com тоже приведёт туда. Для телефона есть приложение Gemini Notebook, но удобнее всего начинать с компьютера.</p>
+      <p class="snote">Чтобы ответы, подкасты и видео-обзоры были на русском, проверьте язык вывода в настройках (в английском интерфейсе&nbsp;– Settings, затем Output Language). Русский в списке есть.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Создайте первый блокнот</h3>
+      <ol>
+        <li>Нажмите кнопку создания нового блокнота.</li>
+        <li>Откроется окно добавления источников: загрузите файл с компьютера, выберите документ с Google Диска, вставьте ссылку или скопированный текст.</li>
+        <li>Дайте блокноту понятное название по теме&nbsp;– например, «Курс по нутрициологии» или «Книга о переговорах».</li>
+        <li>Слева&nbsp;– ваши источники, в центре&nbsp;– чат, справа&nbsp;– панель инструментов, где появляются конспекты, карты, подкасты и карточки.</li>
+      </ol>
+      <p class="snote">Каждый блокнот живёт отдельно: NotebookLM не видит соседние блокноты. Поэтому под каждую тему&nbsp;– свой.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Бесплатно или платно</h3>
+      <div class="facts" style="margin-top:6px">
+        <div class="fact"><span class="fk">Бесплатно</span><p>Базовый тариф бесплатный&nbsp;– с обычным аккаунтом Google. В нём есть всё, что описано на этой странице: чат со сносками, майнд-карты, подкасты, видео-обзоры, карточки и тесты. До 50 источников в одном блокноте.</p></div>
+        <div class="fact"><span class="fk">Лимиты</span><p>С сентября 2026 года лимиты считаются по нагрузке и обновляются каждые несколько часов. Сколько осталось&nbsp;– видно в настройках. Если упёрлись, можно вернуться позже.</p></div>
+        <div class="fact"><span class="fk">Платно</span><p>Больше лимитов и источников&nbsp;– в подписках Google AI Plus, Pro и Ultra. Для того чтобы начать учиться, они не нужны.</p></div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="donebox"><div class="dc">
+    <p class="dl">Что можно загрузить</p>
+    <div class="facts">
+      <div class="fact"><span class="fk">Файлы</span><p>PDF, Word, презентации PowerPoint, текстовые файлы, электронные книги ePub, таблицы CSV, картинки.</p></div>
+      <div class="fact"><span class="fk">Google</span><p>Документы, Презентации и Таблицы с Google Диска.</p></div>
+      <div class="fact"><span class="fk">Ссылки</span><p>Страницы сайтов и открытые видео на YouTube, у которых есть субтитры.</p></div>
+      <div class="fact"><span class="fk">Аудио</span><p>Записи лекций и голосовых, в том числе файлы mp3, m4a, wav и mp4: речь расшифровывается при загрузке.</p></div>
+      <div class="fact"><span class="fk">Текст</span><p>Любой скопированный текст&nbsp;– конспект, расшифровка, заметки.</p></div>
+      <div class="fact"><span class="fk">Размер</span><p>Один источник&nbsp;– до 500 тысяч слов или до 200 МБ для файла.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="practice" id="marshrut">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Глава 3</p>
+    <h2>Маршрут учёбы</h2>
+    <p class="pmeta">материал → база знаний → объяснение → тренировка</p>
+    <p class="pintro">Не обязательно проходить все четыре шага за раз. Но если учиться по этому маршруту, материал не оседает в папке «посмотрю потом», а превращается в знание, которое можно проверить.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Материал&nbsp;– в текст</h3>
+      <p>NotebookLM лучше всего работает с текстом. Часть материалов он переведёт в текст сам, часть&nbsp;– удобнее подготовить заранее.</p>
+      <ul>
+        <li><b>Видео на YouTube.</b> Достаточно вставить ссылку. NotebookLM возьмёт текст субтитров&nbsp;– подойдут и автоматические. Видео должно быть открытым и загруженным не меньше трёх дней назад.</li>
+        <li><b>Аудиофайл до 200 МБ.</b> Загрузите как есть&nbsp;– речь расшифруется при загрузке.</li>
+        <li><b>Закрытые уроки, вебинары в записи, длинные файлы, видео без субтитров.</b> Сначала переведите в текст, а потом загрузите расшифровку. Как это сделать&nbsp;– в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/" target="_top">«Транскрибация»</a>.</li>
+      </ul>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Загрузить в блокнот&nbsp;– своя база знаний</h3>
+      <p>Соберите в одном блокноте всё по теме: расшифровки уроков, конспекты, статьи, главы книги, свои заметки. Это и есть ваша база знаний. Она не исчезнет, как ветка в чате: через месяц открываете блокнот и спрашиваете снова.</p>
+      <p class="snote">Удачный ответ можно сохранить в заметку прямо в блокноте&nbsp;– вместе со сносками. Так база постепенно обрастает вашими выводами.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Объяснение&nbsp;– словами и наглядно</h3>
+      <p><b>Словами.</b> Спрашивайте в чате, просите объяснить проще, привести пример из материала, сравнить. В настройках чата есть стиль для учёбы (в английском интерфейсе&nbsp;– Learning Guide): он работает как репетитор по вашим материалам и разбирает тему по шагам.</p>
+      <p><b>Наглядно.</b> В панели инструментов (на компьютере она справа):</p>
+      <ul>
+        <li><b>Майнд-карта</b>&nbsp;– вся тема веткой: главные идеи и что из них следует. Нажмите на ветку&nbsp;– и задайте вопрос именно про неё.</li>
+        <li><b>Видео-обзор</b>&nbsp;– ролик с картинками и голосом по вашим материалам: подробный или короткий, примерно на минуту.</li>
+        <li><b>Подкаст</b> (Audio Overview)&nbsp;– два ведущих обсуждают ваши материалы. Есть короткий формат&nbsp;– главное меньше чем за две минуты. Подкаст можно скачать или слушать в приложении в дороге.</li>
+        <li><b>Конспект</b>&nbsp;– учебный конспект, краткая справка или вопросы и ответы по материалам.</li>
+      </ul>
+      <p class="snote">Всё это сделано нейросетью и тоже может содержать неточности&nbsp;– Google сам об этом предупреждает. Подкаст и видео хороши, чтобы войти в тему, а точные формулировки сверяйте по сноскам в чате.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Тренировка&nbsp;– карточки и тесты</h3>
+      <p>В той же панели есть карточки и тесты по вашим материалам. Перед созданием можно выбрать сложность, количество и написать, на чём сосредоточиться.</p>
+      <ul>
+        <li>Не поняли ответ&nbsp;– попросите объяснение прямо в карточке.</li>
+        <li>Отмечайте, что знаете, а что нет: NotebookLM запомнит прогресс и даст повторить только те карточки, где вы ошиблись.</li>
+      </ul>
+      <p class="snote">Совет: делайте тест не сразу после чтения, а на следующий день. Так видно, что правда запомнилось.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="zaprosy">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Глава 4</p>
+    <h2>Семь готовых запросов для&nbsp;NotebookLM</h2>
+    <p>Скопируйте запрос в чат блокнота и замените то, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>. Запросы написаны под NotebookLM, но сработают и в ChatGPT, Claude или Gemini, если прикрепить к чату те же материалы.</p>
+
+    <div class="promptbox stepprompt"><p class="plabel">Запрос 1 · объясни главное как новичку</p><pre>Объясни главное из моих источников так, будто я новичок и читаю о теме впервые.
+1. Начни с пяти ключевых мыслей – по одной-две фразы на каждую.
+2. Сложные термины объясни простыми словами. Если в материалах есть пример, приведи его.
+3. В конце скажи, с какого источника мне лучше начать и почему.
+Опирайся только на мои источники. Если чего-то в них нет, так и скажи, не достраивай сам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <div class="promptbox stepprompt"><p class="plabel">Запрос 2 · план изучения на неделю</p><pre>Составь мне план изучения этих материалов на неделю.
+Сколько времени у меня в день: <span class="tok">[например, 30 минут]</span>
+Зачем я учусь: <span class="tok">[например, сдать экзамен, начать применять в работе, разобраться для себя]</span>
+
+На каждый день:
+– что прочитать или послушать – назови конкретный источник и раздел;
+– один вопрос для самопроверки;
+– маленькое практическое задание.
+Последний день оставь на повторение. Бери только то, что есть в моих источниках.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <div class="promptbox stepprompt"><p class="plabel">Запрос 3 · чем отличается X от Y&nbsp;– только по источникам</p><pre>Чем отличается <span class="tok">[понятие или подход X]</span> от <span class="tok">[понятие или подход Y]</span>?
+Отвечай только по моим источникам, без общих знаний. Сделай таблицу: в чём суть, когда применять, плюсы, минусы. К каждой строке – ссылка на источник.
+Если для какой-то клетки в материалах нет данных, напиши «в источниках нет» и не заполняй сам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <div class="promptbox stepprompt"><p class="plabel">Запрос 4 · где в материалах противоречия</p><pre>Найди в моих источниках места, где авторы расходятся или противоречат друг другу.
+Для каждого расхождения:
+– в чём суть;
+– кто что утверждает – со ссылками на источники;
+– от чего может зависеть, какой вариант подходит.
+Если противоречий нет, так и скажи – не придумывай их.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <div class="promptbox stepprompt"><p class="plabel">Запрос 5 · проверь меня вопросами, не подсказывая</p><pre>Проверь, как я разобрался(ась) в теме: <span class="tok">[тема или раздел]</span>.
+Задавай вопросы по моим источникам по одному, от простых к сложным. Ответ не подсказывай и следующий вопрос не задавай, пока я не отвечу.
+После каждого моего ответа скажи, что верно, а что нет, и покажи, где в источниках правильный ответ.
+После 10 вопросов подведи итог: что я знаю хорошо, а что стоит повторить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <div class="promptbox stepprompt"><p class="plabel">Запрос 6 · чего не хватает в моей базе</p><pre>Моя задача: <span class="tok">[что хотите уметь или сделать после изучения]</span>.
+Посмотри, на какие вопросы по этой задаче в моих источниках нет ответа или ответ неполный.
+Составь список: вопрос – чего не хватает – какой материал стоит добавить в блокнот.
+Сам пробелы не заполняй, отвечай только по источникам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <div class="promptbox stepprompt"><p class="plabel">Запрос 7 · выжимка для своего помощника</p><pre>Собери из моих источников выжимку для ИИ-помощника, который будет помогать мне с задачей: <span class="tok">[какая задача – например, отвечать клиентам, писать посты по теме, готовить уроки]</span>.
+
+Структура:
+1. Главные принципы и правила – списком.
+2. Термины и как их понимать.
+3. Пошаговые методы и чек-листы, если они есть в материалах.
+4. Чего делать нельзя – по материалам.
+
+Пиши коротко, только то, что есть в источниках. В конце перечисли, из каких источников что взято.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="pomoshnik">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Глава 5</p>
+    <h2>NotebookLM или свой помощник&nbsp;– когда&nbsp;что</h2>
+    <p>Это не соперники, а два разных инструмента. Один помогает разобраться, другой&nbsp;– регулярно делать работу.</p>
+    <div class="cmp">
+      <div class="cbox"><p class="ck">NotebookLM</p><h3>Разобраться и вернуться к базе знаний</h3><p>Изучить курс, книгу или стопку статей. Найти, где это было сказано. Проверить себя перед экзаменом. Отвечает строго по материалам и показывает источник.</p></div>
+      <div class="cbox"><p class="ck">Проект-помощник</p><h3>Регулярно делать задачи по своим правилам</h3><p>Тот самый помощник в ChatGPT или Claude из урока 1 модуля 2. Работает по вашей инструкции, вашим голосом и под ваши задачи: посты, ответы клиентам, планы.</p></div>
+    </div>
+    <p class="rulebox"><b>Как сочетать.</b> Разберитесь в теме в NotebookLM, попросите выжимку запросом 7&nbsp;– и добавьте её в материалы своего помощника. Тогда помощник будет работать с проверенными знаниями из ваших источников, а не с общими представлениями о теме.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="roditelyam">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Глава 6</p>
+    <h2>Для родителей</h2>
+    <p>Если ребёнок учится по учебнику, загрузите учебник или нужные главы в NotebookLM&nbsp;– и ответы будут только по школьной программе, без лишнего из интернета.</p>
+    <p class="note">Свой аккаунт подростку можно завести с того возраста, с которого это разрешено в вашей стране (для многих стран&nbsp;– с 13 лет); до 18 лет фильтры строже. С ребёнком помладше занимайтесь вместе, со своего аккаунта. Помощники, которые объясняют тему, но не выдают готовых ответов,&nbsp;– в соседнем бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-uchit-dumat/" target="_top">«Учит думать, а не списывать»</a>.</p>
+  </div></div>
+</section>
+
+<div class="dark" id="sohranit" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить</h2>
+    <div class="dcol">
+      <ul style="margin-top:0">
+        <li><b>Блокнот по теме.</b> Он сам и есть хранилище: источники, заметки, карточки и подкасты остаются в нём.</li>
+        <li><b>Удачные ответы</b>&nbsp;– в заметки внутри блокнота, вместе со сносками.</li>
+        <li><b>Выжимку для помощника</b> (запрос 7)&nbsp;– в папку «Мои помощники» из урока 1, рядом с материалами того помощника, которому она нужна.</li>
+        <li><b>Эту страницу</b>&nbsp;– в закладки, чтобы запросы были под рукой.</li>
+      </ul>
+      <p style="margin-top:22px"><b>Попробуйте сегодня: создайте один блокнот, загрузите в него материал, по которому вы сейчас учитесь, и задайте запрос 1. Откройте пару сносок&nbsp;– и посмотрите, как он работает.</b></p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap back">
+  <a class="linkbtn" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Все материалы набора «Учиться легче вместе с ИИ»</a>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">«Учиться легче вместе с ИИ»</a>, модуль 2: NotebookLM<p style="margin-top:8px">По материалам <a href="https://support.google.com/notebooklm/" target="_blank" rel="noopener">справки Google по NotebookLM</a>, октябрь 2026.</p></div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</body>
+</html>
