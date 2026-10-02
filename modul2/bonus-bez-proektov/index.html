@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Помощник там, где нет «Проектов» · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Что делать, если в вашей нейросети нет проектов или они на платном тарифе: одна ветка вместо проекта, инструкция-обёртка, общие настройки «о себе» и перенос помощника между нейросетями.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* бонусы модуля 2 */
+.matrix{margin-top:28px;border-top:1px solid var(--ink)}
+.mrow{display:grid;grid-template-columns:120px minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:22px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.52;color:#3B3143}
+.mrow.mh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding:12px 0}
+.mrow .mname{font-weight:700;color:var(--ink);font-size:16px}
+.mcap{margin-top:16px;font-size:14px;color:var(--muted)}
+.tree{margin-top:22px;border-left:2px solid var(--pink);padding:16px 0 16px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:#3B3143;white-space:pre-wrap;overflow-wrap:anywhere}
+.tree b{color:var(--ink);font-weight:500}
+.tree i{font-style:normal;color:var(--faint)}
+.sublab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:30px 0 4px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.peek{margin-top:18px}
+.peek summary{display:inline-block;cursor:pointer;list-style:none;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.peek[open] summary{color:var(--pink);border-bottom-color:var(--pink)}
+.peek .promptbox{margin-top:16px}
+.skcode{font-family:var(--mono);font-size:13px;color:var(--faint);font-weight:400;margin-left:6px;white-space:nowrap}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:22px}
+.chain span{font-size:15px;font-weight:600;padding:8px 14px;border:1px solid var(--line);background:#fff}
+.chain em{font-style:normal;color:var(--pink);font-weight:700}
+.backlink{display:inline-block;margin-top:12px;color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px}
+.backlink:hover{color:#fff;border-bottom-color:var(--pink-soft)}
+@media (max-width:760px){
+  .mrow{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .mrow.mh{display:none}
+  .mrow>div[data-l]::before{content:attr(data-l);display:block;font-size:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .mrow .mname{font-size:18px}
+  .tree{font-size:12.5px;padding-left:16px}
+  .peek .promptbox{margin-left:-20px;margin-right:-20px}
+  .step .btns .btn{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · к уроку 1</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 2 · Учиться легче</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Помощник там, где нет <span class="it">«Проектов»</span></h1>
+      <p class="hlead">Что делать, если в вашей нейросети нет проектов или они только на платном тарифе. Три рабочих способа и перенос помощника из одной нейросети в другую.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">10–12 минут</span></div>
+      <div><span class="mk">Где работает</span><span class="mv">Любая нейросеть, в том числе бесплатная</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Обёртка помощника в папке «Мои помощники»</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Сначала главное</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Помощник – это не кнопка «Проекты». Это <b>инструкция и два-три материала</b>, которые собрал Конструктор помощников. Это обычный текст, и он работает в любой нейросети.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Проект просто удобная полка: инструкция и файлы подхватываются в каждом новом чате сами. Без проекта вы делаете то же самое руками – вставляете инструкцию в начало чата.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Что теряется без проекта: автоподгрузка и память между чатами. Что остаётся: сам помощник, его правила и качество ответов.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сначала проверьте</p>
+    <h2>Что есть в&nbsp;вашей нейросети</h2>
+    <p>Проекты, свои помощники и общие настройки называются в разных нейросетях по-разному, а часть возможностей открыта только на платных тарифах. Ниже – ориентир, где что обычно бывает. Ищите не точное название кнопки, а суть: место, где можно один раз сохранить инструкцию и файлы.</p>
+  </div></div>
+  <div class="matrix" role="table" aria-label="Что где есть">
+    <div class="mrow mh" role="row"><div role="columnheader">Нейросеть</div><div role="columnheader">Где может жить помощник</div><div role="columnheader">Общие настройки «о себе»</div><div role="columnheader">Если этого нет</div></div>
+    <div class="mrow" role="row"><div class="mname" role="cell">ChatGPT</div><div role="cell" data-l="Где может жить помощник">Проекты – с инструкцией и файлами. Ещё есть свои GPTs – отдельные помощники; создавать их можно на части тарифов.</div><div role="cell" data-l="Общие настройки «о себе»">Есть раздел персонализации: можно рассказать о себе и как отвечать. Есть память.</div><div role="cell" data-l="Если этого нет">Обёртка в начале чата.</div></div>
+    <div class="mrow" role="row"><div class="mname" role="cell">Claude</div><div role="cell" data-l="Где может жить помощник">Проекты (Projects) – с инструкцией и файлами. На части тарифов возможности ограничены.</div><div role="cell" data-l="Общие настройки «о себе»">В настройках профиля можно написать о себе и как отвечать. Память – на части тарифов.</div><div role="cell" data-l="Если этого нет">Обёртка в начале чата.</div></div>
+    <div class="mrow" role="row"><div class="mname" role="cell">Gemini</div><div role="cell" data-l="Где может жить помощник">Gems – свои помощники с инструкцией, на части тарифов – и с файлами.</div><div role="cell" data-l="Общие настройки «о себе»">Можно сохранить сведения о себе; на части тарифов есть и память о прошлых чатах.</div><div role="cell" data-l="Если этого нет">Обёртка в начале чата.</div></div>
+    <div class="mrow" role="row"><div class="mname" role="cell">ГигаЧат</div><div role="cell" data-l="Где может жить помощник">Раздел «Проекты» есть, но это скорее папки с документами: собрать инструкции в одном месте нельзя – мы проверили это на уроке.</div><div role="cell" data-l="Общие настройки «о себе»">Проверьте настройки или спросите у самого ГигаЧата.</div><div role="cell" data-l="Если этого нет">Одна ветка = один помощник. Обёртка – чтобы перезапускать.</div></div>
+    <div class="mrow" role="row"><div class="mname" role="cell">DeepSeek</div><div role="cell" data-l="Где может жить помощник">Проектов на момент подготовки бонуса нет.</div><div role="cell" data-l="Общие настройки «о себе»">Общих настроек «о себе» может не быть.</div><div role="cell" data-l="Если этого нет">Обёртка или одна ветка.</div></div>
+    <div class="mrow" role="row"><div class="mname" role="cell">Perplexity</div><div role="cell" data-l="Где может жить помощник">Spaces – пространства с инструкцией и файлами. Часть возможностей – на части тарифов.</div><div role="cell" data-l="Общие настройки «о себе»">В профиле можно рассказать о себе и о том, какие ответы вам нужны.</div><div role="cell" data-l="Если этого нет">Обёртка в начале чата.</div></div>
+  </div>
+  <p class="mcap">Интерфейсы и тарифы меняются часто: что-то появляется, что-то переезжает в другое меню. Если не нашли у себя – это не значит, что функции нет. Спросите саму нейросеть.</p>
+  <div class="lede" style="padding-top:8px"><div class="col">
+<div class="promptbox stepprompt"><p class="plabel">Спросите у своей нейросети</p><pre>Подскажи, есть ли в твоей версии возможность один раз сохранить постоянную инструкцию для помощника: проекты, свои помощники, пространства, общие настройки «о себе», память между чатами. Для каждой возможности скажи: есть ли она на моём тарифе [бесплатный / платный] и как её найти. Если не уверен – так и скажи, не придумывай названия кнопок. Если можешь, сверься с официальной справкой.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+</section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Работаем без проектов</p>
+    <h2>Три рабочих способа</h2>
+    <p class="pmeta">подходят для любой нейросети · можно совмещать</p>
+    <p class="pintro">Первые два заменяют проект, третий задаёт общий фон для всех чатов. Самая надёжная связка: общие настройки «о себе» один раз – и обёртка для каждого помощника. А ветку держите для текущей работы, пока она не стала слишком длинной.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Одна ветка = один помощник</h3>
+      <p>Именно это мы предложили на уроке для ГигаЧата. Вы заводите отдельный чат, первым сообщением отправляете инструкцию помощника и материалы – и дальше приходите с задачами только в этот чат. Нейросеть видит инструкцию в начале переписки и работает по ней.</p>
+      <p class="sublab">Как не потерять</p>
+      <ul>
+        <li><b>Назовите чат понятно</b> – с одинаковым началом, например «Помощник: контент», «Помощник: меню». Переименовать чат обычно можно в списке чатов, через меню рядом с названием.</li>
+        <li><b>Закрепите его</b>, если ваша нейросеть так умеет, – тогда он всегда будет вверху списка.</li>
+        <li><b>Сохраните ссылку на чат</b> в закладки браузера или в заметку – если у чата есть своя ссылка.</li>
+        <li><b>Держите копию инструкции</b> в папке «Мои помощники». Чат может потеряться или устареть, а файл останется.</li>
+      </ul>
+      <p class="sublab">Когда начинать новую ветку</p>
+      <ul>
+        <li>Помощник начал забывать правила из первого сообщения или путать старые задачи с новыми.</li>
+        <li>Ответы стали медленнее, длиннее и хуже – так бывает, когда чат перегружен (про лимиты на объём диалога мы говорили на уроке).</li>
+        <li>Вы заметно обновили инструкцию – проще начать с чистого листа.</li>
+      </ul>
+      <p class="snote">Если помощник один раз отошёл от правил – начинать заново не нужно. Сначала верните его:</p>
+<div class="promptbox stepprompt"><p class="plabel">Вернуть к правилам</p><pre>Вернись к инструкции из первого сообщения этого чата и дальше работай строго по ней. Коротко перечисли 3–5 главных правил, которые ты сейчас соблюдаешь, – я проверю.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если пора переезжать в новую ветку – попросите памятку, чтобы ничего не потерять:</p>
+<div class="promptbox stepprompt"><p class="plabel">Перед новой веткой</p><pre>Мы скоро продолжим работу в новом чате. Собери памятку для переезда:
+1) что мы решили и о чём договорились за это время;
+2) что сейчас в работе и на чём остановились;
+3) правки, которые появились по ходу и должны действовать всегда.
+Если эти правки меняют твою исходную инструкцию – выдай обновлённую инструкцию целиком – я заменю её в своём файле. Пиши коротко, без пересказа всей переписки. Выдай одним блоком для копирования.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">В новом чате отправьте первым сообщением инструкцию, а следом – памятку. Обновлённую инструкцию сохраните в «Мои помощники» вместо старой.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Инструкция-обёртка</h3>
+      <p>Обёртка – один текстовый файл, в котором лежит всё, что нужно помощнику: инструкция, два-три материала и короткие правила для работы без проекта. Хотите поработать с помощником – открываете новый чат, вставляете обёртку первым сообщением, дальше пишете задачу. Это самый надёжный способ: он работает в любой нейросети и не зависит от одной ветки.</p>
+      <p class="snote">Скопируйте шаблон или скачайте файлом. Заполните места в квадратных скобках: инструкцию берите из ответа Конструктора помощников, материалы – те, что он предложил.</p>
+<div class="promptbox stepprompt tall"><p class="plabel">Шаблон обёртки · заполните и вставляйте первым сообщением</p><pre>ОБЁРТКА ПОМОЩНИКА «[название помощника]»
+Обновлено: [дата]
+
+Это мой постоянный помощник. Ниже – твоя инструкция и мои материалы. Прочитай всё целиком и работай по этим правилам во всех следующих сообщениях этого чата. Не пересказывай инструкцию. Ответь одной фразой, что готов, и жди мою задачу.
+
+=== 1. ИНСТРУКЦИЯ ПОМОЩНИКА ===
+[вставьте сюда инструкцию, которую собрал Конструктор помощников: роль, контекст, задачи, порядок работы, границы, формат результата]
+
+=== 2. МАТЕРИАЛЫ ===
+Опирайся на них. Если материалы противоречат друг другу, главнее тот, что стоит выше в списке.
+
+Материал 1 – [название, например «Кто я и для кого работаю»]
+[вставьте текст]
+
+Материал 2 – [название, например «Продукты и услуги»]
+[вставьте текст]
+
+Материал 3 – [название, например «Примеры, которые мне нравятся»] (если есть)
+[вставьте текст]
+
+=== 3. ПРАВИЛА РАБОТЫ БЕЗ ПРОЕКТА ===
+– Здесь нет проекта и памяти между чатами: всё, что тебе нужно знать, – в этом сообщении и в нашей переписке ниже.
+– Если для задачи не хватает данных – задай до трёх вопросов. Не додумывай факты обо мне и моей работе.
+– Если я даю правку, которая должна действовать всегда, – в конце ответа предложи, как дописать её в инструкцию одной-двумя строками. Я перенесу её в свой файл.
+– Если разговор стал очень длинным и ты начинаешь терять правила – скажи мне, что пора открыть новый чат с этой обёрткой.
+
+=== 4. ЗАДАЧА ===
+[можно оставить пустым и написать задачу следующим сообщением]</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button><a class="linkbtn" href="assets/obertka-pomoshnika.txt" download="obertka-pomoshnika.txt" style="color:#CFC4D4;border-bottom-color:rgba(255,255,255,.25)">Скачать файлом (.txt)</a></div></div>
+      <p class="snote">Обёртка вышла длинной и сообщение не отправляется? Приложите файл обёртки через скрепку или «+» у поля ввода и напишите в том же сообщении:</p>
+<div class="promptbox stepprompt"><p class="plabel">Если прикрепили файл обёртки</p><pre>Работай по инструкции и материалам из прикреплённого файла. Ответь одной фразой, что готов, и жди мою задачу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Собирать обёртку вручную необязательно. Попросите Конструктор помощников упаковать вашего помощника:</p>
+<div class="promptbox stepprompt"><p class="plabel">Попросите Конструктор упаковать помощника</p><pre>У меня нет проектов в нейросети [или: проекты есть только на платном тарифе]. Помоги упаковать моего помощника в обёртку – один текст, который я буду вставлять в начало нового чата.
+Вот что у меня есть: [вставьте инструкцию помощника или опишите его своими словами]. Материалы: [вставьте или прикрепите 2–3 материала].
+Собери обёртку по такой схеме: 1) короткое вступление – что это за помощник и как работать по этому тексту; 2) инструкция; 3) материалы – только самое нужное, сокращённое до главного; 4) правила работы без проекта и памяти между чатами; 5) место для задачи.
+Текст должен поместиться в одно сообщение. Если не помещается – предложи, что вынести в отдельный файл. Не добавляй ничего, чего нет в моих материалах; где данных не хватает – оставь [в квадратных скобках]. Выдай обёртку одним блоком для копирования.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Обёртка живёт в вашей папке, а не в нейросети. Помощник по ходу работы предлагает дописать в инструкцию новую правку – перенесите её в файл обёртки. Тогда в следующем чате помощник будет уже обновлённым.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Общие настройки «о себе» и память</h3>
+      <p>Во многих нейросетях есть раздел, где один раз пишут о себе и о том, как отвечать, – и это действует во всех чатах. Обычно он лежит в настройках профиля и называется вроде «персонализация», «о себе» или «инструкции». Где-то есть ещё память: нейросеть сама запоминает факты о вас из прошлых разговоров. На части тарифов этих разделов нет – тогда пропускайте этот способ.</p>
+      <p class="sublab">Что туда писать – и что не писать</p>
+      <ul>
+        <li><b>Писать:</b> кто вы и чем занимаетесь, для чего чаще всего пользуетесь нейросетью, как вам удобнее получать ответы, на «ты» или на «вы», чего не любите в ответах.</li>
+        <li><b>Не писать:</b> инструкцию конкретного помощника. Эти настройки работают во всех чатах – правила контент-помощника начнут влезать в меню на неделю.</li>
+        <li><b>Не писать:</b> пароли, номера документов и карт, данные клиентов.</li>
+      </ul>
+<div class="promptbox stepprompt"><p class="plabel">Соберите текст «о себе»</p><pre>Помоги мне составить короткий текст для общих настроек нейросети – раздела, где пишут «о себе» и «как отвечать». Он будет действовать во всех чатах, поэтому туда нужно только общее, без задач конкретного помощника.
+Задай мне по одному не больше пяти вопросов: чем я занимаюсь, для чего чаще всего пользуюсь нейросетью, как мне удобнее получать ответы, чего я не люблю в ответах, на «ты» или на «вы». Потом собери два коротких блока: «Обо мне» и «Как мне отвечать» – каждый до 5–6 строк, простыми словами. Не включай имена клиентов, телефоны, адреса и другие личные данные.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если в вашей нейросети есть память, время от времени проверяйте, что она о вас запомнила, – там бывают устаревшие или случайные факты:</p>
+<div class="promptbox stepprompt"><p class="plabel">Проверить память</p><pre>Что ты сейчас помнишь обо мне из прошлых разговоров? Перечисли коротким списком. Я скажу, что убрать или поправить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Переезд</p>
+    <h2>Как перенести помощника в&nbsp;другую нейросеть</h2>
+    <p>Закончилась подписка, пропал доступ, захотелось попробовать другую нейросеть – помощника не нужно собирать заново. На уроке мы говорили: важно не зависеть от одной нейросети и иметь возможность переехать. Переезд занимает четыре шага.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Попросите старого помощника собрать инструкцию для переноса</h3><p>Отправьте запрос ниже в проект или ветку, где помощник работал. Он соберёт не только исходную инструкцию, но и договорённости, которые появились по ходу работы.</p>
+<div class="promptbox stepprompt"><p class="plabel">В старой нейросети</p><pre>Мне нужно перенести тебя как помощника в другую нейросеть. Собери мне инструкцию для переноса – один текст, по которому другая нейросеть сможет работать так же, как ты.
+Включи: 1) роль и контекст – кто я, для кого и над чем мы работаем; 2) задачи, которые ты для меня делаешь; 3) порядок работы – как ты отвечаешь, когда задаёшь вопросы, в каком виде выдаёшь результат; 4) границы – что нельзя придумывать и решать за меня; 5) правки и договорённости, которые появились у нас по ходу работы и которых нет в исходной инструкции; 6) список материалов, на которые ты опираешься, – по одной строке о том, что в каждом; 7) что из твоих возможностей может не сработать в другой нейросети: файлы, поиск в интернете, навыки, память.
+Пиши от второго лица («Ты – …»), без ссылок на этот чат и без названий кнопок. Не добавляй ничего, чего не было в инструкции и в нашей работе. Выдай одним блоком для копирования.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Сохраните её в «Мои помощники»</h3><p>Рядом с материалами этого помощника. Старую инструкцию не удаляйте – переименуйте с пометкой «(архив)», чтобы было с чем сравнить.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Поселите помощника в новой нейросети</h3><p>Если там есть проекты, Gems или Spaces – создайте нового помощника, вставьте инструкцию в его настройки и добавьте материалы. Если нет – соберите обёртку и работайте способом 1 или 2. Затем попросите новую нейросеть проверить инструкцию под себя:</p>
+<div class="promptbox stepprompt"><p class="plabel">В новой нейросети</p><pre>Вот инструкция помощника, перенесённая из другой нейросети: [вставьте инструкцию или прикрепите файл]. Прочитай её и скажи: что тебе понятно, что непонятно и что в твоих возможностях работает иначе – например, нет доступа к файлам, интернету, навыкам или памяти между чатами. Предложи правки, чтобы инструкция работала здесь, и выдай исправленную версию целиком. Не обещай возможностей, которых у тебя нет.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="def"><span class="dn">4</span><div><h3>Проверьте на знакомой задаче</h3><p>Дайте новому помощнику задачу, которую уже решал старый, и сравните ответы. Чего-то не хватает – допишите в инструкцию и обновите файл в папке.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Хранение</p>
+    <h2>Папка «Мои помощники»</h2>
+    <p>Ту самую папку вы завели на уроке. Без проектов она становится главным местом, где живут ваши помощники: нейросеть – только рабочее место, а инструкции и материалы хранятся у вас. Например, так:</p>
+    <div class="tree"><b>Мои помощники</b>
+├─ <b>Конструктор помощников</b>
+│  └─ konstruktor-pomoshnikov.md
+└─ <b>Контент-помощник</b>
+   ├─ Инструкция.txt         <i>то, что собрал Конструктор</i>
+   ├─ Обёртка.txt            <i>инструкция + материалы одним файлом</i>
+   ├─ Кто я и для кого.txt
+   ├─ Продукты и услуги.txt
+   └─ Правки по ходу.txt     <i>новые договорённости</i></div>
+    <ul>
+      <li><b>Один помощник – одна папка.</b> Внутри – всё, что нужно, чтобы воссоздать его в любой нейросети.</li>
+      <li><b>Новая версия – правка того же файла,</b> а не «Инструкция 2», «Инструкция финал». Старую версию, если жалко, переименуйте с пометкой «(архив)».</li>
+      <li><b>Дату обновления – в первой строке</b> инструкции или обёртки. Так сразу видно, какая версия свежая.</li>
+      <li><b>«Правки по ходу»</b> – простой список: что помощник делал не так и как договорились. Раз в неделю-две отнесите его Конструктору помощников и попросите обновить инструкцию.</li>
+    </ul>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Если что-то не так</p>
+    <h2>Частые затыки</h2>
+    <ul>
+      <li><b>Сообщение не отправляется – слишком длинное.</b> Приложите обёртку файлом или попросите Конструктор сократить материалы до главного. Инструкцию не сокращайте в первую очередь: она важнее примеров.</li>
+      <li><b>Нейросеть не принимает файлы.</b> Вставьте материалы текстом прямо в обёртку – самыми важными кусками, а не целиком.</li>
+      <li><b>Закончились бесплатные сообщения.</b> Обёртка выручает и здесь: откройте другую нейросеть, вставьте обёртку и продолжайте.</li>
+      <li><b>Помощник отвечает «как обычный чат».</b> Проверьте, что инструкция стоит в начале переписки, а не потерялась где-то в середине. Если ветка длинная – откройте новую с обёрткой.</li>
+    </ul>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните в «Мои помощники» обёртку своего помощника (шаблон – <b>obertka-pomoshnika.txt</b>) и, если пользуетесь, текст общих настроек «о себе». С этим набором вы откроете помощника в любой нейросети за минуту.</p>
+      <p style="margin-top:14px">Во втором уроке вы соберёте навык «Мой голос». Если в вашей нейросети навыков нет, он работает так же, как обёртка: откройте файл навыка и вставьте его текст в начало чата или в инструкцию помощника.</p>
+      <a class="backlink" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Ко всем материалам набора «Учиться легче вместе с ИИ»</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 2 к уроку 1: помощник там, где нет «Проектов»</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
+

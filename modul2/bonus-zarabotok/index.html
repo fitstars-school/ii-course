@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Как навыки модуля 2 помогут зарабатывать · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Бонус модуля 2: как без обещаний «быстрых денег» собрать ИИ-помощника под чужой процесс – от первого сообщения до установки в аккаунт заказчика и сопровождения.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* Бонус «Заработок» – общий каркас для всех модулей */
+.nav{border-bottom:none;padding-bottom:0}
+.navwrap{margin-top:40px;border-top:1px solid var(--line);padding-top:18px}
+.roads{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+.road{border-top:1px solid var(--ink);padding-top:20px}
+.road .rl{font-family:var(--serif);font-size:40px;line-height:1;color:var(--pink)}
+.road h3{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:10px 0 8px}
+.road p{font-size:16px;color:var(--muted);line-height:1.55}
+.road ul li{font-size:16px;color:#3B3143}
+.def .dtask{margin-top:8px;color:var(--ink)}
+.def .dtask b{color:var(--pink)}
+.qsign{font-size:var(--fine);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:-10px}
+.msg{margin-top:30px}
+.msg h3{font-family:var(--sans);font-size:19px;font-weight:700;margin-bottom:8px}
+.msg>p{font-size:16px;color:var(--muted);margin-bottom:16px}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:26px}
+.tier{border-top:1px solid var(--ink);padding-top:18px}
+.tier .tk{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}
+.tier .tv{font-family:var(--serif);font-size:clamp(26px,2.8vw,32px);line-height:1.1;margin:10px 0 8px}
+.tier p{font-size:15.5px;color:var(--muted);line-height:1.55}
+.handover{counter-reset:h}
+.handover li{padding-left:34px}
+.handover li::before{counter-increment:h;content:counter(h);background:none;width:auto;height:auto;top:0;left:0;font-family:var(--serif);font-size:24px;line-height:1.2;color:var(--pink)}
+.caseflds{margin-top:18px}
+.caseflds li b{color:var(--ink)}
+a.btn:hover{color:#fff}
+@media (max-width:760px){
+  .roads,.tiers{grid-template-columns:1fr;gap:18px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+.msg .def h3{font-size:17.5px;margin-bottom:5px}
+footer a{color:var(--pink-soft)}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · бонус</span></div>
+  <div class="kmark"><span class="kn">2</span><span class="kt">Бонус модуля 2 · Заработок</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Как&nbsp;навыки модуля&nbsp;2 помогут зарабатывать</h1>
+      <p class="hlead">Без обещаний миллионов и волшебной кнопки. Как с навыками второго модуля собрать помощника под чужой процесс – и провести эту работу от первого сообщения до установки в аккаунт заказчика и сопровождения.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Опирается на</span><span class="mv">Уроки 1–4 модуля 2</span></div>
+      <div><span class="mk">Первая работа</span><span class="mv">Созвон 30–40 минут + сборка</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Помощник в портфолио</span></div>
+    </div>
+    <div class="navwrap">
+      <p class="label">На этой странице</p>
+      <nav class="nav" aria-label="Разделы">
+        <a class="navlink" href="#umeete">Что вы умеете</a>
+        <a class="navlink" href="#dorogi">Две дороги</a>
+        <a class="navlink" href="#komu">Кому это нужно</a>
+        <a class="navlink" href="#predlozhit">Как договориться</a>
+        <a class="navlink" href="#sdelat">Как сделать</a>
+        <a class="navlink" href="#sdat">Как сдать</a>
+        <a class="navlink" href="#skolko">Сколько просить</a>
+        <a class="navlink" href="#ne-obeshchat">Чего не обещать</a>
+        <a class="navlink" href="#portfolio">Портфолио</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. Что вы уже умеете -->
+<div class="dark" id="umeete" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Что&nbsp;вы&nbsp;уже&nbsp;умеете после модуля&nbsp;2</h2>
+    <div class="dcol">
+      <p>Вы знаете, что помощники бывают трёх видов – проекты, навыки и регулярные задачи, – и чем они отличаются. Собрали свой первый проект-помощник вместе с Конструктором помощников: рассказали ему контекст, получили инструкцию и материалы, проверили на настоящей задаче. Сделали навык «Мой голос» из своих текстов и живой речи – и знаете, что навык работает в любом чате, а не в одной папке. Умеете обновлять помощника так, чтобы навыки не спорили друг с другом и он сам понимал, когда какой подключать. И ловите галлюцинации по четырём красным флагам, а для важных текстов можете подключить навык фактчекинга. Новой теории здесь не будет: всё ниже – про то, как собрать такого же помощника для другого человека.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Две дороги к деньгам -->
+<section class="wrap blk reveal" id="dorogi">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 2 из 9</p>
+    <h2>Две дороги к&nbsp;деньгам</h2>
+    <p>После модуля 1 вы могли собрать человеку промпт. Теперь можете больше: не инструкцию на один раз, а помощника, который знает контекст человека, пишет его голосом и проверяет факты. Это уже маленький рабочий инструмент – и стоит он по-другому. Дороги те же две, можно идти по одной или по обеим.</p>
+    <div class="roads">
+      <div class="road">
+        <span class="rl">А</span>
+        <h3>Дороже в своей профессии</h3>
+        <p>Помощник под свою работу или под процесс команды.</p>
+        <ul>
+          <li>Собрать помощника под повторяющуюся часть своей работы – и брать больше задач или клиентов за то же время.</li>
+          <li>Сделать помощника для отдела: ответы на типовые вопросы, письма и предложения в едином стиле.</li>
+          <li>Стать человеком, который не просто «разбирается в ИИ», а настраивает его под процессы.</li>
+        </ul>
+      </div>
+      <div class="road">
+        <span class="rl">Б</span>
+        <h3>Помощник под чужой процесс</h3>
+        <p>Проект-помощник и 1–2 навыка для эксперта или малого бизнеса.</p>
+        <ul>
+          <li>Помощник под ключ: собрать, проверить, установить в аккаунт человека и научить пользоваться.</li>
+          <li>Сопровождение: время от времени обновлять инструкцию, материалы и навыки по правкам человека.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="quote">Создавать помощников можно и для других людей – это тоже способ наращивать свой заработок.</p>
+    <p class="qsign">Светлана Цыро, урок 4 модуля 2</p>
+    <p style="margin-top:22px">Дальше на странице – дорога Б по шагам. Но всё то же самое работает и для дороги А: вместо «заказчика» – ваш коллега или руководитель, вместо оплаты – ваша роль и репутация внутри команды.</p>
+  </div></div>
+</section>
+
+<!-- 3. Кому это нужно -->
+<section class="wrap blk reveal" id="komu">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 3 из 9</p>
+    <h2>Кому это&nbsp;нужно</h2>
+    <p>Ищите тех, у кого одна и та же работа повторяется каждую неделю и кто устал объяснять её заново – людям или нейросети. Почти в любом окружении есть кто-то из этих четырёх.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div>
+        <h3>Эксперт или блогер, которому не хватает сил на тексты</h3>
+        <p>Психолог, нутрициолог, тренер, репетитор. Знает, о чём писать, но каждый пост – как подвиг.</p>
+        <p class="dtask"><b>Помощник:</b> по контенту в голосе клиента. В проекте – контекст блога, аудитория, продукты; к нему навык голоса, собранный из постов и голосовых человека. Как вы делали для себя в уроках 1 и 2.</p>
+      </div></div>
+      <div class="def"><span class="dn">2</span><div>
+        <h3>Мастер или маленький бизнес, который тонет в сообщениях</h3>
+        <p>Студия, салон, мастерская, онлайн-школа на одного человека. Десятки однотипных вопросов в мессенджере каждый день.</p>
+        <p class="dtask"><b>Помощник:</b> для ответов клиентам. В проекте – услуги, цены, правила записи и частые вопросы; на выходе – черновик ответа в манере владельца, который он перечитывает и отправляет сам.</p>
+      </div></div>
+      <div class="def"><span class="dn">3</span><div>
+        <h3>Специалист, который часто готовит предложения</h3>
+        <p>Дизайнер, бухгалтер на аутсорсе, организатор мероприятий. После каждого разговора с клиентом – вечер над коммерческим предложением.</p>
+        <p class="dtask"><b>Помощник:</b> по подготовке КП. Из заметок после разговора собирает предложение по шаблону человека – с его услугами, условиями и примерами работ.</p>
+      </div></div>
+      <div class="def"><span class="dn">4</span><div>
+        <h3>Эксперт в нише, где ошибка стоит дорого</h3>
+        <p>Юрист, финансовый консультант, нутрициолог с блогом. Пишет про законы, цифры и исследования – и боится ошибиться публично.</p>
+        <p class="dtask"><b>Навык:</b> фактчекинга для блога. Перед публикацией проверяет цитаты, цифры, обобщения и свежие законы и показывает, что подтверждено, а что нет. Можно отдельно или в связке с контент-помощником, как в уроке 4.</p>
+      </div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 4. Как предложить и договориться -->
+<section class="wrap blk reveal" id="predlozhit">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 4 из 9</p>
+    <h2>Как&nbsp;предложить и&nbsp;договориться</h2>
+    <p>Первого помощника по-прежнему честно предлагать как практику: вы учитесь, вам нужны живые задачи. Новое здесь – договорённости. Помощник живёт в чужом аккаунте и требует ухода, поэтому о главном договариваемся до начала работы, а не при сдаче.</p>
+
+    <div class="msg">
+      <h3>Знакомому эксперту или владельцу бизнеса</h3>
+      <p>Поправьте под себя: оставьте один-два примера помощника, которые подходят именно этому человеку.</p>
+      <div class="promptbox"><p class="plabel">Сообщение знакомому</p><pre>Привет! Я прохожу курс по нейросетям и сейчас учусь собирать ИИ-помощников под конкретную работу. Это не просто промпт, а настроенный помощник: он знает твои услуги и правила, пишет в твоём стиле, и ему не нужно каждый раз объяснять всё заново.
+
+Например, помощник, который готовит черновики ответов клиентам, посты в твоём голосе или коммерческие предложения по твоему шаблону.
+
+Мне для практики нужны живые задачи, поэтому первого помощника могу собрать бесплатно. От тебя – созвон на 30–40 минут, несколько твоих текстов для примера и честный отзыв после. Если сейчас не актуально – просто скажи, всё нормально.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg">
+      <h3>В рабочий чат</h3>
+      <p>Подходит для дороги А: внутри команды это чаще работает не на деньги, а на вашу роль «человека, который настраивает».</p>
+      <div class="promptbox"><p class="plabel">Сообщение в рабочий чат</p><pre>Коллеги, я учусь настраивать ИИ-помощников под рабочие процессы. Это помощник, который знает наши правила и шаблоны, и ему не нужно каждый раз объяснять задачу заново.
+
+Если есть процесс, который повторяется и съедает время, – ответы на типовые вопросы, письма, коммерческие предложения, отчёты, – давайте попробую собрать под него помощника. Мне это практика, команде – минус кусок рутины.
+
+От вас – 30–40 минут на разговор о процессе и пара примеров удачных документов. Если интересно, напишите мне в личные сообщения.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Прежде чем работать с рабочими документами, уточните, какие данные компании можно загружать во внешние нейросети. Что можно и что нельзя отдавать ИИ – в гайде <a href="https://aiforlife.ru/ii-course/modul0/bezopasnost/">«Безопасность»</a>.</p>
+    </div>
+
+    <div class="msg">
+      <h3>О чём договориться на берегу</h3>
+      <p>Пять вопросов, которые лучше закрыть на первом созвоне.</p>
+      <ul>
+        <li><b>Где будет жить помощник.</b> В аккаунте заказчика, а не в вашем: так помощник остаётся у человека, когда работа закончена. Пароли от чужого аккаунта не берите – устанавливайте вместе на созвоне с показом экрана.</li>
+        <li><b>Какая нейросеть и какой тариф у заказчика.</b> От этого зависит, что вы соберёте: проект с навыками или инструкцию-обёртку для обычного чата. Проекты и навыки есть не во всех нейросетях и не на всех тарифах.</li>
+        <li><b>Какие материалы он даст.</b> Примеры текстов, описание услуг, шаблоны, частые вопросы.</li>
+        <li><b>Что входит в работу.</b> Один помощник под одну задачу, 1–2 навыка, проверка, установка и время на вопросы после сдачи. Всё, что сверх, – отдельно.</li>
+        <li><b>Что будет после сдачи.</b> Помощнику нужны обновления: меняются услуги, цены, сама нейросеть. Сразу решите, кто его обновляет – заказчик сам по памятке или вы на сопровождении.</li>
+      </ul>
+    </div>
+
+    <div class="msg">
+      <h3>Закрепите договорённость письменно</h3>
+      <p>Короткое сообщение после созвона избавит от «а я думал, это тоже входит». Наговорите заметки и попросите нейросеть собрать текст.</p>
+      <div class="promptbox"><p class="plabel">Сообщение-договорённость</p><pre>Помоги составить короткое сообщение-договорённость для заказчика по итогам нашего разговора. Вот мои заметки: <span class="tok">[что заказчик хочет, его нейросеть и тариф, какие материалы даст, сроки, цена или условия]</span>.
+
+В сообщении должно быть:
+– какой помощник и для какой задачи;
+– что входит в работу и что не входит;
+– где будет жить помощник – в аккаунте заказчика;
+– что нужно от заказчика и к какому сроку;
+– сколько дней после сдачи я на связи;
+– как будем обновлять помощника потом.
+
+Пиши просто и дружелюбно, без юридических формулировок, не длиннее 12 строк. Ничего не добавляй от себя: если в заметках чего-то не хватает, сначала спроси меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 5. Как сделать -->
+<section class="wrap blk reveal" id="sdelat">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 5 из 9</p>
+    <h2>Как&nbsp;сделать: от созвона до папки передачи</h2>
+    <p>Всё, что ниже, вы уже делали для себя в модуле 2. Разница одна: контекст и голос теперь чужие, поэтому сначала их нужно собрать у человека.</p>
+  </div></div>
+</section>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Созвон-интервью на 30–40 минут</h3>
+      <p>Задаёте вопросы и просите материалы. С разрешения человека запишите созвон и расшифруйте – так же, как голосовые для навыка в уроке 2. Самое ценное – примеры: удачные тексты, ответы, предложения и то, как точно не надо.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Вопросы для созвона</p><pre>ПРОЦЕСС
+1. Какую работу ты хочешь отдать помощнику? Как часто она повторяется?
+2. Как ты делаешь её сейчас, по шагам? Где уходит больше всего времени?
+3. С чего задача начинается: что у тебя на руках в этот момент (вопрос клиента, заметки после звонка, тема поста)?
+4. Что должно получаться на выходе и в каком виде?
+
+КОНТЕКСТ
+5. Кто твои клиенты или читатели? Что им важно?
+6. Какие услуги, цены, правила, условия должен знать помощник?
+7. Есть ли то, чего писать нельзя: обещания, темы, слова?
+
+ГОЛОС И ПРИМЕРЫ
+8. Пришлёшь 3–5 своих удачных текстов – ответов, постов, предложений?
+9. Есть ли голосовые или записи, где ты рассказываешь о своей работе?
+10. На «ты» или на «вы»? Что тебя раздражает в текстах от нейросети?
+11. Покажи пример, как точно не надо.
+
+ГДЕ БУДЕТ ЖИТЬ ПОМОЩНИК
+12. В какой нейросети ты работаешь и какой у тебя тариф? Есть ли там проекты?
+13. Чаще будешь пользоваться с компьютера или с телефона?
+
+ДЛЯ ПРОВЕРКИ
+14. Как ты поймёшь, что помощник работает?
+15. Дашь 3 реальные вводные, на которых я его проверю? Без имён, телефонов и переписок клиентов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Соберите помощника вместе с Конструктором</h3>
+      <p>Откройте Конструктор помощников из урока 1 и начните в нём новый чат – отдельный под этого заказчика, чтобы контексты не смешивались. Переименуйте чат так, чтобы было понятно, чей это помощник.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт для Конструктора</p><pre>Я собираю помощника не для себя, а для другого человека. Вот его задача и ответы с созвона: <span class="tok">[вставьте расшифровку или заметки]</span>. Прикладываю его материалы: <span class="tok">[тексты, описание услуг, шаблоны]</span>.
+
+Он работает в <span class="tok">[нейросеть]</span> на тарифе <span class="tok">[тариф]</span>.
+
+Сначала задай мне до пяти уточняющих вопросов, если чего-то не хватает.
+
+Потом собери:
+1) инструкцию проекта по формуле «контекст – задача – результат», написанную так, чтобы она работала в любой нейросети;
+2) список из 2–3 материалов, которые стоит положить в проект, – не больше;
+3) три тестовых запроса, на которых я проверю помощника.
+
+Не добавляй ничего, чего нет в ответах заказчика. Если что-то пришлось додумать, отметь это отдельным списком в конце.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Инструкцию и материалы сохраняйте в папку «Мои помощники» – отдельной папкой под заказчика. Из неё вы потом соберёте передачу.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Добавьте 1–2 навыка – и пропишите, когда их подключать</h3>
+      <p>Чаще всего это голос заказчика: соберите его так же, как свой «Мой голос» в уроке 2, только из его текстов и расшифровок. Для экспертного блога – навык фактчекинга из урока 4. Больше двух навыков первому помощнику не нужно: как вы видели в уроке 3, лишние навыки путают помощника и быстрее тратят лимиты.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Когда подключать навыки</p><pre>У помощника для <span class="tok">[задача заказчика]</span> будут навыки: <span class="tok">[например, голос заказчика и фактчекинг]</span>.
+
+Добавь в инструкцию проекта, в какой момент и в каком порядке подключается каждый навык: что делается сначала, что в конце. Пропиши и случаи, когда навык не нужен.
+
+Собери одну итоговую инструкцию целиком, чтобы её можно было вставить вместо старой. Если она получается слишком длинной, предупреди и предложи, что сократить без потери смысла.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Навыки называйте понятно для заказчика: «Голос [имя]», «Проверка фактов» – а не набором латинских букв.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Проверьте на реальных вводных заказчика</h3>
+      <p>Каждую вводную – в новом чате помощника. Читайте глазами заказчика: так бы он ответил? И глазами фактчекера: в текстах для чужого блога или чужих клиентов ошибка бьёт по чужой репутации.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Проверка перед сдачей</p><pre>Вот ответ помощника на реальную вводную заказчика: <span class="tok">[вставьте ответ]</span>.
+А вот примеры текстов самого заказчика: <span class="tok">[вставьте 1–2 примера]</span>.
+
+Проверь ответ по двум линиям.
+1) Голос и задача: где текст не похож на примеры заказчика и где не выполнено то, что он просил.
+2) Красные флаги: цитаты и авторство, точные цифры, обобщения вроде «все» и «большинство», свежие новости и законы. Для каждого такого места дай ссылку или подтверждение – или пометку «не подтверждено».
+
+В конце скажи, что поменять в инструкции или навыках, чтобы такие ошибки не повторялись.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если ошибка повторяется, обновите инструкцию в Конструкторе, а не поправляйте каждый ответ руками.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Соберите памятку для заказчика</h3>
+      <p>Заказчику не нужен «проект с навыками». Ему нужна понятная вещь: что куда вставить, как пользоваться и что делать, когда помощник начнёт ошибаться.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Памятка для заказчика</p><pre>Сделай памятку по помощнику, которого мы собрали, для человека, который не разбирается в нейросетях. Четыре части:
+1) Что умеет помощник – 3–4 строки и 2–3 примера запросов.
+2) Как установить – по шагам для <span class="tok">[нейросеть заказчика]</span>: где создать проект, куда вставить инструкцию, какие файлы добавить, как подключить навык. Если не уверен, как называется кнопка, напиши общо и предложи спросить саму нейросеть.
+3) Как пользоваться каждый день – три шага простыми словами.
+4) Когда помощника пора обновить – по каким признакам это понять и что делать.
+
+Без терминов. В конце – напоминание: ответы помощника нужно перечитывать перед отправкой.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если ваша нейросеть не создаёт файл, скопируйте текст в документ. Копию сохраните к себе – она пригодится для портфолио.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- 6. Как сдать -->
+<section class="wrap blk reveal" id="sdat">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 6 из 9</p>
+    <h2>Как&nbsp;сдать</h2>
+    <p>Работа сдана, когда помощник живёт в аккаунте заказчика и человек сам получил от него первый результат. Поэтому отдаёте не только файлы.</p>
+    <ul class="handover">
+      <li><b>Папка передачи:</b> инструкция помощника текстом, 2–3 материала, навыки – архивом и текстом, памятка. Текстовые копии нужны всегда: с ними помощника можно перенести в любую нейросеть.</li>
+      <li><b>Созвон-установка на 20–30 минут:</b> заказчик показывает экран и сам создаёт проект, вставляет инструкцию, добавляет файлы и навыки. Вы подсказываете. В конце он даёт помощнику живую задачу.</li>
+      <li><b>Две недели на вопросы:</b> в первые дни всплывают мелочи – поправьте их в Конструкторе и пришлите обновлённую инструкцию.</li>
+    </ul>
+
+    <div class="msg">
+      <h3>Если у заказчика другая нейросеть или нет платного тарифа</h3>
+      <p>Так бывает часто: вы собирали в одной нейросети, а человек работает в другой, или у него бесплатная версия без проектов и навыков. Помощник от этого не пропадает – меняется упаковка.</p>
+      <div class="defs" style="margin-top:0">
+        <div class="def"><span class="dn">1</span><div>
+          <h3>Другая нейросеть, но проекты в ней есть</h3>
+          <p>Инструкция и материалы переносятся как есть: создайте проект там и вставьте их. Навык загрузите, если навыки доступны на тарифе заказчика, – или вставьте его текст в инструкцию проекта отдельным разделом. Первые ответы проверьте вместе: разные нейросети понимают одну инструкцию чуть по-разному.</p>
+        </div></div>
+        <div class="def"><span class="dn">2</span><div>
+          <h3>Нет проектов или бесплатный тариф</h3>
+          <p>Соберите инструкцию-обёртку: один текст, в котором уже есть всё – роль помощника, контекст, правила голоса, проверка фактов, примеры. Человек вставляет его первым сообщением в новый чат и дальше пишет свою задачу. Можно вести одну ветку диалога и возвращаться в неё – как в нейросетях без проектов из урока 1. Это работает проще, чем проект, – скажите об этом заранее.</p>
+        </div></div>
+        <div class="def"><span class="dn">3</span><div>
+          <h3>Заказчик не готов разбираться сам</h3>
+          <p>Предложите сопровождение: вы храните инструкцию и навыки у себя в «Моих помощниках» и присылаете обновлённую версию, когда она нужна. Сам помощник всё равно живёт в аккаунте заказчика.</p>
+        </div></div>
+      </div>
+      <div class="promptbox" style="margin-top:18px"><p class="plabel">Инструкция-обёртка</p><pre>Мне нужно перенести помощника в нейросеть, где нет проектов и навыков, или в бесплатную версию. Вот всё, из чего он состоит:
+– инструкция проекта: <span class="tok">[вставьте]</span>;
+– материалы: <span class="tok">[вставьте текст или приложите файлы]</span>;
+– навыки: <span class="tok">[вставьте текст навыков]</span>.
+
+Собери из этого один текст – инструкцию-обёртку, которую человек вставит первым сообщением в новый чат.
+1) В начале – коротко, кто такой помощник и что он делает.
+2) Дальше – только самое нужное из материалов и правила навыков, без повторов.
+3) В конце – просьба к нейросети: подтвердить, что правила понятны, и спросить, с какой задачей помочь.
+4) Объём – чтобы текст поместился в одно сообщение. Если не помещается, предложи, что вынести в отдельный файл.
+
+Инструкция должна работать в любой нейросети. Ничего не придумывай сверх того, что я дал.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg">
+      <h3>Сопроводительный текст к папке</h3>
+      <p>Подставьте задачу, название навыка, нейросеть заказчика и выберите вариант обновления.</p>
+      <div class="promptbox"><p class="plabel">Сопроводительное сообщение</p><pre>Привет! Помощник для задачи «<span class="tok">[задача]</span>» готов.
+
+В папке: инструкция помощника, материалы, навык «<span class="tok">[название]</span>» и памятка – как установить, как пользоваться и когда обновлять. Там же текстовые копии: с ними помощника можно перенести в другую нейросеть.
+
+Давай созвонимся на 20–30 минут: ты при мне установишь помощника в свой <span class="tok">[нейросеть]</span> и дашь ему первую живую задачу. Две недели после этого я на связи – если что-то не так, пиши, поправлю.
+
+Важно: ответы помощника нужно перечитывать перед отправкой – нейросеть иногда ошибается или додумывает. А сам помощник со временем потребует обновления: поменяются твои услуги, цены, сама нейросеть. Обновлять будем так: <span class="tok">[ты сам(а) по памятке / я обновляю раз в месяц]</span>.
+
+И просьба: напиши потом пару строк отзыва – удобно ли пользоваться и что изменилось. Можно я покажу эту работу в своём портфолио без имени и деталей?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg">
+      <h3>Помощнику нужен уход: договоритесь о сопровождении</h3>
+      <p>Честно предупредите: помощник не собирается раз и навсегда. Меняются услуги и цены заказчика, обновляется нейросеть, копятся правки – и без обновлений помощник начинает ошибаться чаще. Договоритесь об одном из двух вариантов: заказчик обновляет сам по памятке или вы берёте сопровождение – например, раз в месяц собираете его правки и обновляете инструкцию и навыки.</p>
+      <div class="promptbox"><p class="plabel">Обновление на сопровождении</p><pre>Это помощник для <span class="tok">[задача заказчика]</span>. Вот его текущая инструкция: <span class="tok">[вставьте]</span>.
+Вот что заказчик заметил за месяц и что у него поменялось: <span class="tok">[правки, новые услуги и цены, примеры неудачных ответов]</span>.
+
+Разбери, что из этого нужно внести в инструкцию, что – в материалы, а что – в навык голоса. Собери обновлённую инструкцию целиком и коротко перечисли, что изменилось, – этот список я отправлю заказчику.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 7. Сколько просить -->
+<section class="wrap blk reveal" id="skolko">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 7 из 9</p>
+    <h2>Сколько просить</h2>
+    <p>Логика та же, что в модуле 1: сначала – портфолио, потом деньги. Но помощник – это больше работы, чем промпт: созвон, сборка, навыки, проверка, установка. Поэтому цену удобнее считать не на глаз, а от своего часа.</p>
+  <div class="tiers">
+    <div class="tier">
+      <p class="tk">Первые 2–3 помощника</p>
+      <p class="tv">Бесплатно или символически</p>
+      <p>Взамен – отзыв и разрешение показать работу обезличенно. Заодно засеките, сколько часов уходит у вас на одного помощника.</p>
+    </div>
+    <div class="tier">
+      <p class="tk">Помощник под ключ</p>
+      <p class="tv">≈ 5 000–10 000 ₽</p>
+      <p>Проект и 1–2 навыка под одну задачу: интервью, сборка, проверка, памятка, установка, две недели на вопросы. Инструкция-обёртка для другой нейросети входит сюда же.</p>
+    </div>
+    <div class="tier">
+      <p class="tk">Сопровождение</p>
+      <p class="tv">≈ 1 000–3 000 ₽ в месяц</p>
+      <p>Собрать правки заказчика и обновить инструкцию, материалы и навыки. Или по факту – по вашей часовой ставке.</p>
+    </div>
+  </div>
+    <p class="rulebox" style="margin-top:28px"><b>Это ориентир для новичка, а не прайс.</b> Цена зависит от города, ниши и вашей экспертизы. Проверьте, сколько берут за похожую работу в вашей нише: загляните на фриланс-биржи и спросите двух-трёх знакомых, сколько они были бы готовы заплатить. Подписку на нейросеть оплачивает заказчик: помощник живёт в его аккаунте.</p>
+
+    <div class="msg">
+      <h3>Как посчитать от своего часа</h3>
+      <p>Сложите часы на каждый этап и умножьте на ставку, которую готовы брать за час своей работы. Первые бесплатные помощники как раз покажут, сколько часов уходит у вас.</p>
+      <div class="promptbox"><p class="plabel">Посчитать цену</p><pre>Помоги посчитать цену помощника под ключ. Не опирайся на рыночную статистику – считаем только от моих данных.
+
+Мои данные:
+– сколько времени у меня ушло на этапы в прошлый раз: <span class="tok">[созвон, сборка, навыки, проверка, памятка, установка]</span>;
+– ставка, которую я хочу получать за час: <span class="tok">[сумма]</span>;
+– сколько дней я на связи после сдачи: <span class="tok">[число]</span>.
+
+Посчитай итог, добавь запас на правки и предложи две цифры: «минимум, ниже которого мне невыгодно» и «нормальная цена». Отдельно посчитай сопровождение на месяц, если одно обновление занимает у меня <span class="tok">[время]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <p style="margin-top:28px">На чём держится цена:</p>
+    <ul>
+      <li><b>Ваша экспертиза в нише.</b> Бухгалтер, который собирает помощников для бухгалтеров, понимает процесс с полуслова – это стоит дороже, чем «просто помощник».</li>
+      <li><b>Сколько работы закрывает помощник.</b> Один тип запросов – нижняя граница вилки. Помощник, которым человек пользуется каждый день, с голосом и проверкой фактов, – ближе к верхней.</li>
+      <li><b>Есть ли кейсы.</b> Первые отзывы – главный аргумент, чтобы поднять цену.</li>
+    </ul>
+    <p style="margin-top:14px">А деньги по дороге А не посчитать в прайсе: это больше задач за то же время, новые клиенты, другая роль в команде. Отслеживайте их тоже – в портфолио.</p>
+  </div></div>
+</section>
+
+<!-- 8. Чего не обещать -->
+<div class="dark" id="ne-obeshchat" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Чего не&nbsp;обещать</h2>
+    <div class="dcol">
+      <p>Честность здесь – не скромность, а защита вашей репутации. Одна несбывшаяся обещалка стоит дороже, чем три удачные работы.</p>
+      <ul>
+        <li><b>Что помощник собран «навсегда».</b> Ему нужны обновления. Обговорите сопровождение до сдачи, а не тогда, когда он начнёт ошибаться.</li>
+        <li><b>Что он будет работать одинаково везде.</b> В другой нейросети или на бесплатном тарифе помощник работает проще. Покажите это на созвоне, а не в обещаниях.</li>
+        <li><b>Что проверка фактов убирает все ошибки.</b> Фактчекинг делает работу тщательнее, но не даёт гарантии. Последнее слово – за автором текста.</li>
+        <li><b>Работу с чужими персональными данными как есть.</b> Переписки и данные клиентов заказчика – в нейросеть только обезличенными, без имён, телефонов и адресов (подробнее – в гайде <a href="https://aiforlife.ru/ii-course/modul0/bezopasnost/" style="color:var(--pink-soft)">«Безопасность»</a>).</li>
+        <li><b>Результат, за который вы не отвечаете.</b> «Продажи вырастут», «клиентов станет больше» – не ваша зона. Ваша зона – процесс, который делается быстрее и стабильно хорошо.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 9. Портфолио и следующая ступень -->
+<section class="wrap closing reveal" id="portfolio">
+  <div class="cgrid"><div class="col">
+    <p class="label">Раздел 9 из 9</p>
+    <h2 style="margin:14px 0 18px">Каждый помощник – новая работа в&nbsp;вашем портфолио</h2>
+    <p>После сдачи вставьте в чат Конструктора, где собирали помощника, «Промпт для портфолио» из любого урока модуля 2 – нейросеть оформит работу. Добавьте её в документ «Моё портфолио»: его потом показываете следующим заказчикам.</p>
+    <ul class="caseflds">
+      <li><b>Задача</b> – чья и какая, без имени: «нутрициологу – посты в её голосе».</li>
+      <li><b>Что я сделал(а) с помощью ИИ</b> – интервью, сборка с Конструктором, навык, проверка, установка.</li>
+      <li><b>Результат</b> – что получил человек и его отзыв.</li>
+      <li><b>Где это ещё пригодится</b> – каким ещё людям и задачам подойдёт такой помощник.</li>
+      <li><b>Какой навык это показывает</b> – одной фразой.</li>
+      <li><b>Мой инструмент</b> – название помощника, что он делает и где живёт; инструкция без данных заказчика.</li>
+    </ul>
+    <div class="btns"><a class="btn" href="https://aiforlife.ru/ii-course/modul2/itog/">«Моё портфолио» и итог модуля 2</a></div>
+    <p class="pull" style="margin-top:44px">Следующая ступень – в модуле 3: помощник начнёт отдавать готовые документы – таблицы, презентации, PDF.</p>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 2 «Заработок» · <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">к бонусам модуля 2</a></div>
+</footer>
+
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

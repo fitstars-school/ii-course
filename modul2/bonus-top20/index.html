@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Топ-20 способов учиться с ИИ · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Двадцать готовых запросов, чтобы учиться с ИИ: спланировать учёбу, понять сложное, запомнить, потренироваться и применить в работе – даже когда нет времени.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}.promptbox .linkbtn{color:#F3EDF5;border-bottom-color:rgba(255,255,255,.35)}.promptbox .linkbtn:hover{color:var(--pink-soft);border-bottom-color:var(--pink-soft)}
+
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.twhen{display:block;margin-top:5px;font-size:15px;line-height:1.45;font-weight:500;color:var(--muted)}
+.body .note.warn{margin:0 0 20px}
+.tip{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin-top:20px;font-size:16px;color:var(--muted)}
+.tip b{color:var(--ink)}
+.backlink{display:inline-block;margin-top:30px;font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:2px}
+.backlink:hover{color:var(--pink)}
+footer a{color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25)}
+footer a:hover{color:var(--pink-soft)}
+@media (max-width:760px){
+  .twhen{font-size:14.5px}
+  section.wrap.lede{padding-top:34px}
+  .tip{padding-left:16px}
+  .kmark{padding:8px 14px}
+  .kmark .kt{letter-spacing:.14em}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · бонус</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонусный набор · Учиться легче вместе с ИИ</span></div>
+  <div class="hero">
+    <div class="hgrid">
+      <h1>Топ-20 способов <span class="it">учиться</span> с ИИ</h1>
+      <p class="hlead">Выберите то, что нужно вам прямо сейчас, скопируйте запрос и подставьте своё в квадратные скобки.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap lede">
+  <div class="col">
+    <p>Взрослому человеку учиться сложнее не потому, что голова «уже не та». Просто учёба втиснута между работой, семьёй и делами, а материал часто написан так, будто у читателя впереди свободный семестр.</p>
+    <p>ИИ здесь – терпеливый собеседник, который объяснит пятый раз без вздоха, придумает вопросы по вашей теме, сыграет экзаменатора или сложного клиента и подстроится под двадцать минут в дороге. Ниже – двадцать способов, собранных в пять групп. Не нужно пробовать всё: возьмите один, который снимает вашу задачу сегодня.</p>
+  </div>
+</section>
+
+<div class="dark">
+  <div class="wrap dgrid">
+    <h2>Три правила, чтобы ИИ учил, а не делал за вас</h2>
+    <div class="dcol">
+      <ul>
+        <li><b>Просите вопросы, а не только ответы.</b> Пусть нейросеть спрашивает по одному и ждёт вашего ответа. Так думаете вы, а не только нейросеть.</li>
+        <li><b>Давайте свой материал.</b> Конспект, документ, расшифровку лекции. Тогда ИИ учит вас по вашей программе, а не «по интернету».</li>
+        <li><b>Проверяйте факты.</b> Цифры, нормы, цитаты, названия книг и свежие изменения – красные флаги из урока 4. Чем важнее тема для работы, тем внимательнее сверяйте с источником.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="lede" style="padding-top:52px">
+    <div class="col">
+      <p class="label">Как пользоваться списком</p>
+      <h2 style="margin:16px 0 20px">Выберите то, что нужно сейчас</h2>
+      <p>Откройте нужный пункт, скопируйте запрос и замените всё, что в квадратных скобках, на своё. Писать долго – включите голосовой ввод и расскажите своими словами.</p>
+      <p style="margin-top:22px">Если ответы получаются слишком общими, добавьте в начало любого запроса:</p>
+      <div class="promptbox" style="margin-top:16px"><p class="plabel">Добавка к любому запросу</p><pre>Прежде чем отвечать, задай мне по одному три вопроса: что я уже знаю по теме, зачем она мне в работе и сколько времени у меня есть. Объясняй простыми словами и приводи примеры из моей сферы: <span class="tok">[ВАША ПРОФЕССИЯ]</span>. Не давай готовых ответов сразу – сначала дай мне попробовать.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать</button></div></div>
+    </div>
+  </div>
+
+  <nav class="nav" aria-label="Разделы" style="margin-top:52px">
+    <a class="navlink" href="#plan">Спланировать учёбу</a>
+    <a class="navlink" href="#ponyat">Понять сложное</a>
+    <a class="navlink" href="#zapomnit">Запомнить и потренироваться</a>
+    <a class="navlink" href="#primenit">Применить в работе</a>
+    <a class="navlink" href="#netvremeni">Учиться, когда нет времени</a>
+  </nav>
+
+    <section class="group reveal" id="plan">
+      <div class="ghead"><p class="glabel">Спланировать учёбу</p><span class="grange">01 – 04</span></div>
+      <details class="task">
+        <summary><span class="num">01</span><span class="tname">Персональный план обучения<span class="twhen">Нужно освоить новую тему для работы, а с чего начать – непонятно.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я <span class="tok">[ПРОФЕССИЯ]</span> и хочу освоить <span class="tok">[ТЕМА]</span>, чтобы <span class="tok">[ЗАЧЕМ: КАКАЯ ЗАДАЧА В РАБОТЕ]</span>. Сейчас мой уровень такой: <span class="tok">[ЧТО УЖЕ ЗНАЮ И УМЕЮ]</span>. Могу заниматься <span class="tok">[СКОЛЬКО ВРЕМЕНИ В НЕДЕЛЮ]</span>, срок – <span class="tok">[К КАКОЙ ДАТЕ]</span>.
+
+Сначала задай мне до пяти уточняющих вопросов по одному. Потом составь план по неделям: что изучить, что сделать руками и по какому результату я пойму, что неделя пройдена. Начни с того, что пригодится в работе быстрее всего.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Через неделю вернитесь в тот же чат и расскажите, что получилось, а что нет, – попросите пересобрать план под ваш реальный темп. Если хотите, чтобы ИИ вёл вас по плану неделями, соберите себе <a href="https://aiforlife.ru/ii-course/modul2/bonus-tyutor/">«ИИ-тьютор»</a>.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">02</span><span class="tname">Карта понятий темы<span class="twhen">Тема кажется огромной и путаной – хочется увидеть её целиком.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Составь карту понятий по теме <span class="tok">[ТЕМА]</span> для человека, который <span class="tok">[МОЙ УРОВЕНЬ: НОВИЧОК, ЗНАЮ ОСНОВЫ, РАБОТАЮ С ЭТИМ ДАВНО]</span>. Выдели 5–7 главных блоков, в каждом – ключевые понятия и одной строкой, как они связаны между собой. Отметь, что нужно понять в первую очередь, а что можно отложить. Оформи списком с отступами, чтобы карту можно было перерисовать на листе.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Попросите отдельно отметить понятия, которые новички чаще всего путают между собой, – с них и начните.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">03</span><span class="tname">Подготовиться к курсу повышения квалификации или вебинару<span class="twhen">Впереди обучение, и хочется унести с него максимум, а не просто «прослушать».</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Через <span class="tok">[СРОК]</span> у меня <span class="tok">[КУРС, ВЕБИНАР, КОНФЕРЕНЦИЯ]</span> на тему <span class="tok">[ТЕМА]</span>. Вот программа или описание: <span class="tok">[ТЕКСТ ПРОГРАММЫ]</span>. Моя рабочая задача, ради которой я туда иду: <span class="tok">[ЗАДАЧА]</span>.
+
+Помоги подготовиться: объясни простыми словами термины из программы, которые могут быть мне незнакомы, предложи 5–7 вопросов, которые стоит задать спикеру, и подскажи, на какие темы обратить особое внимание с учётом моей задачи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> После занятия вернитесь в этот же чат со своими заметками и попросите сверить, на какие вопросы вы получили ответ, а какие остались открытыми. Конспект из записи поможет собрать <a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/">«Конспект из чего угодно»</a>.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">04</span><span class="tname">Что почитать дальше – с проверкой источников<span class="twhen">Основы понятны, хочется копнуть глубже и не утонуть в случайных статьях.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <p class="note warn"><b>Обязательно откройте каждую ссылку.</b> Проверьте, что источник существует, автор и год совпадают, а внутри написано то, что обещано. Нейросети уверенно придумывают книги, статьи и цитаты – это красный флаг про авторство из урока 4 о галлюцинациях.</p>
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я уже знаю основы темы <span class="tok">[ТЕМА]</span> на уровне <span class="tok">[УРОВЕНЬ]</span>. Предложи, что изучить дальше: 5–7 книг, статей, курсов или официальных документов. Для каждого укажи автора, год, чем он полезен именно мне и для какого уровня. Если не уверен, что такой источник существует, или не помнишь точных данных – так и напиши, не придумывай. Где можешь, дай ссылки.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Удобнее делать это в нейросети с поиском по интернету – например, в Perplexity или в режиме поиска, если он есть в вашей нейросети. Но и там ссылки нужно проверять.</p>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="ponyat">
+      <div class="ghead"><p class="glabel">Понять сложное</p><span class="grange">05 – 08</span></div>
+      <p class="note"><b>Про свои материалы.</b> Чем точнее текст, который вы даёте нейросети, тем меньше она додумывает. Вставляйте фрагменты текстом или прикладывайте файл через значок скрепки. Перед этим уберите имена, контакты и всё, по чему можно узнать человека.</p>
+      <details class="task">
+        <summary><span class="num">05</span><span class="tname">Объяснить тремя разными способами<span class="twhen">Прочитали объяснение несколько раз, а понимания так и нет.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Объясни мне <span class="tok">[ПОНЯТИЕ ИЛИ ТЕМА]</span> тремя разными способами:
+1) простыми словами, как человеку без подготовки;
+2) через аналогию из обычной жизни;
+3) через пример из моей работы – я <span class="tok">[ПРОФЕССИЯ]</span>.
+
+В конце спроси, какой способ мне ближе, и следующие темы объясняй в этом стиле.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Если не помог ни один способ, напишите, на каком месте вы теряете нить. Это работает лучше, чем просьба «объясни ещё проще».</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">06</span><span class="tname">Разобрать профессиональную статью или стандарт<span class="twhen">Вышел новый стандарт, приказ, методичка или статья – и нужно быстро понять, что меняется для вас.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Ниже текст <span class="tok">[СТАТЬИ, СТАНДАРТА, ПРИКАЗА, МЕТОДИЧЕСКИХ РЕКОМЕНДАЦИЙ]</span>. Я <span class="tok">[ПРОФЕССИЯ]</span>, работаю с <span class="tok">[С КЕМ ИЛИ С ЧЕМ]</span>. Опирайся только на этот текст, ничего не добавляй от себя.
+
+Разбери:
+1) о чём документ – в трёх предложениях;
+2) что из него касается именно моей работы;
+3) непонятные термины – простыми словами;
+4) что мне стоит делать иначе.
+
+К каждому выводу укажи, из какого пункта или абзаца он взят.
+
+<span class="tok">[ТЕКСТ ДОКУМЕНТА]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Давайте сам текст, а не только название документа: по одному названию нейросеть может пересказать старую редакцию или додумать содержание. Законы и нормы – красный флаг из урока 4, поэтому ключевые пункты сверяйте с оригиналом.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">07</span><span class="tname">Читать сложную книгу с проводником<span class="twhen">Взялись за важную, но тяжёлую профессиональную книгу и буксуете.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я читаю книгу <span class="tok">[НАЗВАНИЕ, АВТОР]</span>, чтобы <span class="tok">[ЗАЧЕМ]</span>. Будь моим проводником. Перед каждой главой я буду присылать её текст или свои заметки – подскажи, на что обратить внимание при чтении. После главы задай мне 3 вопроса на понимание, обсуди мои ответы и помоги связать идеи главы с моей работой: <span class="tok">[ПРОФЕССИЯ]</span>.
+
+Если я спрашиваю о том, чего нет в присланном тексте, прямо скажи, что опираешься на общие знания, а не на книгу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Пересказ книги «по памяти» у нейросети бывает неточным: она может перепутать главы, приписать автору чужую мысль или сочинить цитату. Поэтому опирайтесь на присланные фрагменты и свои заметки.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">08</span><span class="tname">Разобрать кейс из своей практики<span class="twhen">Был сложный случай с клиентом или проектом, и хочется понять, чему он учит.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги разобрать случай из моей практики как учебный кейс. Я <span class="tok">[ПРОФЕССИЯ]</span>.
+Ситуация: <span class="tok">[ЧТО ПРОИЗОШЛО – БЕЗ ИМЁН И ЛИЧНЫХ ДАННЫХ]</span>.
+Мои действия: <span class="tok">[ЧТО ДЕЛАЛИ]</span>.
+Результат: <span class="tok">[ЧЕМ ЗАКОНЧИЛОСЬ]</span>.
+
+Сначала задай мне 3–4 уточняющих вопроса по одному. Затем разбери: какие были точки выбора, какие ещё варианты действий существовали, что сработало и какой принцип можно вынести на будущее. Не оценивай меня – помоги увидеть закономерности.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Разберите так же один удачный случай, а не только трудный: принципы, которые уже работают, полезно знать про себя не меньше, чем слабые места.</p>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="zapomnit">
+      <div class="ghead"><p class="glabel">Запомнить и потренироваться</p><span class="grange">09 – 12</span></div>
+      <details class="task">
+        <summary><span class="num">09</span><span class="tname">Тесты и тренажёры по своей теме<span class="twhen">Хотите проверить, что действительно усвоили, а не просто прочитали.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Сделай для меня тренажёр по теме <span class="tok">[ТЕМА]</span>, уровень – <span class="tok">[НОВИЧОК, СРЕДНИЙ, ПРОДВИНУТЫЙ]</span>. Задавай по одному вопросу и жди моего ответа. Чередуй форматы: выбор из вариантов, вопрос «почему», короткая задача из практики <span class="tok">[ПРОФЕССИЯ]</span>.
+
+После каждого ответа коротко объясни, что верно, а что нет. Если я ошибаюсь, через пару вопросов вернись к этой теме в другой формулировке. После 10 вопросов покажи, что у меня получается хорошо, а что стоит повторить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Чтобы вопросы шли точно по вашей программе, а не «по интернету», вставьте свой конспект или учебный материал и допишите: «Задавай вопросы только по этому тексту».</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">10</span><span class="tname">Карточки для запоминания<span class="twhen">Нужно выучить термины, нормы, формулы, классификации или слова.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Сделай карточки для запоминания по материалу ниже. Формат – таблица из трёх колонок: «Вопрос», «Ответ», «Как запомнить» (ассоциация или короткий пример). Одна карточка – один факт. Вопросы формулируй так, чтобы ответ нужно было вспомнить, а не узнать. Не добавляй ничего, чего нет в материале.
+
+<span class="tok">[МАТЕРИАЛ: КОНСПЕКТ, СПИСОК ТЕРМИНОВ, ГЛАВА]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Карточки можно сразу погонять в чате: «Показывай по одной карточке, я отвечаю, ты проверяешь, а трудные возвращай в конец». А если пользуетесь приложением для карточек, попросите выдать их строками «вопрос;ответ» – такой текст обычно легко импортировать.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">11</span><span class="tname">Интервальное повторение по расписанию<span class="twhen">Выучили – а через неделю почти всё забылось.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я изучаю <span class="tok">[ТЕМА]</span>. Вот что нужно запомнить: <span class="tok">[СПИСОК ТЕМ ИЛИ КАРТОЧЕК]</span>. Составь расписание повторений на месяц по принципу интервального повторения: первое повторение на следующий день, дальше – с растущими промежутками. На каждый день повторения дай список того, что повторить, и 2–3 вопроса для самопроверки. Учти, что заниматься я могу <span class="tok">[В КАКИЕ ДНИ И СКОЛЬКО МИНУТ]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Если в вашей нейросети есть регулярные задачи (на части тарифов), поставьте напоминание на дни повторения – ИИ сам придёт к вам с вопросами.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">12</span><span class="tname">Метод Фейнмана: объяснить самому, а ИИ найдёт дыры<span class="twhen">Кажется, что тема понятна, но объяснить её другому вы бы не взялись.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я хочу проверить, насколько понимаю тему <span class="tok">[ТЕМА]</span>. Сейчас я объясню её своими словами, как будто рассказываю коллеге-новичку. Твоя задача – не хвалить, а найти дыры: где я ошибаюсь, где пропускаю важный шаг, где прячусь за терминами вместо объяснения. Задай мне 2–3 вопроса, на которых моё объяснение «поплывёт». Потом подскажи, что повторить.
+
+Моё объяснение: <span class="tok">[ВАШ РАССКАЗ – МОЖНО НАГОВОРИТЬ ГОЛОСОМ]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Наговорите объяснение голосом – так сразу слышно, где вы запинаетесь. Через пару дней объясните ту же тему ещё раз и сравните, стало ли меньше дыр.</p>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="primenit">
+      <div class="ghead"><p class="glabel">Применить в работе</p><span class="grange">13 – 16</span></div>
+      <details class="task">
+        <summary><span class="num">13</span><span class="tname">Разобрать собственные ошибки<span class="twhen">Одни и те же ошибки повторяются в тестах, задачах или в работе.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги разобрать мои ошибки по теме <span class="tok">[ТЕМА]</span>. Вот задания и мои ответы: <span class="tok">[ЗАДАНИЯ, МОИ ОТВЕТЫ, ПРАВИЛЬНЫЕ ОТВЕТЫ ИЛИ ЗАМЕЧАНИЯ ПРОВЕРЯЮЩЕГО]</span>.
+
+Не исправляй сразу. Сначала найди закономерность: какие ошибки повторяются и из-за чего они могут быть – не знаю правило, путаю похожие понятия, невнимательность, неверно понимаю условие. Затем дай по 2 упражнения на каждую закономерность и проверь, как я с ними справлюсь.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Ведите разбор в одном и том же чате или проекте – со временем станет видно, какие ошибки ушли, а какие держатся.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">14</span><span class="tname">Спарринг перед экзаменом, аттестацией, собеседованием<span class="twhen">Впереди проверка, где придётся отвечать вслух и под давлением.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Проведи со мной тренировочный <span class="tok">[ЭКЗАМЕН, АТТЕСТАЦИЮ, СОБЕСЕДОВАНИЕ]</span> на тему <span class="tok">[ТЕМА ИЛИ ДОЛЖНОСТЬ]</span>. Ты – строгий, но справедливый <span class="tok">[ЭКЗАМЕНАТОР, КОМИССИЯ, РУКОВОДИТЕЛЬ]</span>. Вот вопросы или требования: <span class="tok">[БИЛЕТЫ, ПРОГРАММА, ОПИСАНИЕ ВАКАНСИИ]</span>.
+
+Задавай по одному вопросу, добавляй уточняющие и неудобные вопросы, как на настоящей проверке. Не подсказывай, пока я отвечаю. В конце дай разбор: что прозвучало убедительно, где ответ был слабым и как его усилить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Включите голосовой режим, если он есть в вашей нейросети: отвечать вслух гораздо ближе к настоящей проверке, чем печатать. Через пару дней повторите спарринг с другими вопросами.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">15</span><span class="tname">Ролевая игра с клиентом, пациентом, учеником<span class="twhen">Нужно отработать трудный разговор до того, как он случится вживую.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Давай отработаем сложную рабочую ситуацию. Я <span class="tok">[ПРОФЕССИЯ]</span>. Ты играешь <span class="tok">[КЛИЕНТА, ПАЦИЕНТА, УЧЕНИКА, РОДИТЕЛЯ]</span>: <span class="tok">[ХАРАКТЕР, ЧТО ЕГО БЕСПОКОИТ, ЧЕГО ОН ХОЧЕТ]</span>. Ситуация: <span class="tok">[ЧТО ПРОИСХОДИТ]</span>.
+
+Веди себя реалистично: сомневайся, возражай, иногда уходи от темы. Отвечай короткими репликами и жди моего ответа. Когда я напишу «стоп», выйди из роли и разбери разговор: какие мои фразы сработали, в какие моменты разговор пошёл не туда и что можно было сказать иначе.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Сыграйте одну сцену дважды: сначала с «мягким» собеседником, потом попросите усложнить – «стань более недоверчивым и торопливым».</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">16</span><span class="tname">Иностранный язык в режиме собеседника<span class="twhen">Грамматику вы знаете, но говорить и писать на работе всё равно страшно.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Будь моим собеседником для практики <span class="tok">[ЯЗЫК]</span>. Мой уровень – <span class="tok">[УРОВЕНЬ, НАПРИМЕР A2 ИЛИ B1]</span>. Тема разговора: <span class="tok">[РАБОЧАЯ СИТУАЦИЯ: ПЕРЕГОВОРЫ, ПИСЬМО КОЛЛЕГЕ, КОНСУЛЬТАЦИЯ КЛИЕНТА]</span>.
+
+Говори только на <span class="tok">[ЯЗЫК]</span>, простыми фразами под мой уровень, задавай мне вопросы и поддерживай беседу. Не исправляй каждую ошибку по ходу. После каждых 5 моих реплик сделай короткий разбор: 3 главные ошибки, как сказать правильно и 3 полезных выражения для этой темы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Голосовой режим превращает это в настоящую разговорную практику. А выражения из разборов сложите в карточки – способ 10.</p>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="netvremeni">
+      <div class="ghead"><p class="glabel">Учиться, когда нет времени</p><span class="grange">17 – 20</span></div>
+      <details class="task">
+        <summary><span class="num">17</span><span class="tname">Встроить учёбу в плотный день<span class="twhen">Учиться надо, но день расписан, и на «сесть и позаниматься» сил не остаётся.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне нужно учить <span class="tok">[ТЕМА]</span>, но времени почти нет. Вот мой обычный день: <span class="tok">[КАК ПРОХОДИТ ДЕНЬ – РАБОТА, ДОРОГА, ДЕТИ, ВЕЧЕР]</span>. Помоги найти в нём реальные окна по 5–15 минут и подбери формат для каждого: что можно делать в дороге, что – с телефоном в очереди, что – вечером, когда сил мало.
+
+Предложи минимальный план, который я точно выполню даже в тяжёлую неделю, и подскажи, как понять, что пора добавить нагрузку.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Честно расскажите, когда вы обычно срываетесь, и попросите план «на плохие дни»: одно действие на 5 минут, которое просто удерживает вас в теме.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">18</span><span class="tname">Мини-курс на две недели по 20 минут<span class="twhen">Хочется разобраться в небольшой теме за короткий срок, без большого курса.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Составь для меня мини-курс на 14 дней по 20 минут в день по теме <span class="tok">[ТЕМА]</span>. Цель: через две недели я смогу <span class="tok">[ЧТО ХОЧУ УМЕТЬ]</span>. Каждый день – одна небольшая порция: 10 минут на новое, 7 минут на практику, 3 минуты на самопроверку. Каждый третий день – повторение пройденного.
+
+Не выдавай всё сразу: сейчас покажи только план по дням, а дальше, когда я напишу «день 1», «день 2» и так далее, давай материал этого дня и задание.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Ведите курс в одном чате, чтобы нейросеть помнила, что уже пройдено. А если тема надолго, сделайте под неё отдельный проект в «Моих помощниках».</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">19</span><span class="tname">Учиться голосом в дороге<span class="twhen">Едете, гуляете с коляской или с собакой – руки заняты, а голова свободна.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мы будем заниматься голосом, пока я в дороге. Поэтому без таблиц, списков и длинных абзацев – говори короткими фразами, как в живом разговоре. Тема: <span class="tok">[ТЕМА]</span>.
+
+Сначала в двух-трёх фразах напомни, на чём мы остановились: <span class="tok">[ЧТО УЖЕ ПРОШЛИ]</span>. Потом расскажи одну новую мысль и задай мне вопрос. Дождись ответа, обсуди его и переходи к следующей мысли. Через 15 минут подведи итог в трёх фразах.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Голосовой режим разговора есть не во всех нейросетях и не на всех тарифах. Если его нет, отвечайте через микрофон на клавиатуре телефона. За рулём – только голосом, не глядя на экран.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">20</span><span class="tname">Взять главное из видеолекции, когда некогда смотреть целиком<span class="twhen">Лекция на полтора часа, а нужно понять, стоит ли она вашего времени и что из неё взять.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Ниже расшифровка лекции <span class="tok">[ТЕМА, СПИКЕР]</span>. Я <span class="tok">[ПРОФЕССИЯ]</span>, моя задача: <span class="tok">[ЗАЧЕМ МНЕ ЭТА ЛЕКЦИЯ]</span>. Опирайся только на расшифровку.
+
+Ответь:
+1) стоит ли мне смотреть лекцию целиком и почему;
+2) 3 идеи, которые я могу применить в работе, – и где примерно в лекции они звучат;
+3) 3 вопроса, чтобы проверить себя после просмотра;
+4) с какого места смотреть, если у меня есть только 15 минут.
+
+<span class="tok">[РАСШИФРОВКА]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Как получить расшифровку из видео – в гайде <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация»</a>. Если нужен полноценный конспект, а не выжимка для решения «смотреть или нет», – загляните в <a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/">«Конспект из чего угодно»</a>.</p>
+        </div>
+      </details>
+    </section>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Когда одного запроса мало</h2>
+    <div class="dcol">
+      <p>Эти двадцать способов – разовые заходы. Если учёба надолго или материал приходит в видео и голосовых, загляните в соседние гайды набора:</p>
+      <ul>
+        <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-tyutor/" style="color:var(--pink-soft)"><b>«ИИ-тьютор»</b></a> – помощник, который ведёт вас по теме неделями и помнит, что вы уже прошли.</li>
+        <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/" style="color:var(--pink-soft)"><b>«Конспект из чего угодно»</b></a> – из лекции, книги или статьи в конспект, по которому удобно повторять.</li>
+        <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/" style="color:var(--pink-soft)"><b>«Транскрибация»</b></a> – как превратить видео, аудио и голосовые в текст, с которым может работать нейросеть.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="wrap closing">
+  <div class="cgrid">
+    <div class="col">
+      <p class="pull">Учиться с ИИ – это не получать готовые ответы, а чаще думать самому. Просто рядом теперь есть собеседник, который никогда не устаёт от ваших вопросов.</p>
+      <a class="backlink" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Ко всем материалам набора «Учиться легче вместе с ИИ»</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">«Учиться легче вместе с ИИ»</a>, модуль 2</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function textOf(btn){
+    var box=btn.closest('.body')||btn.closest('.col');
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    return pre?pre.innerText:'';
+  }
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      copy(textOf(btn)).then(function(){
+        var old=btn.innerHTML;
+        btn.textContent='Скопировано';btn.classList.add('done');
+        say('Промпт скопирован. Вставьте его в чат');
+        setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+      }).catch(function(){say('Не вышло скопировать – выделите текст промпта вручную');});
+    });
+  });
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

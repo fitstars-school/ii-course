@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конспект из чего угодно: книга, статья, видео, длинный урок · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Шпаргалка: четыре формата конспекта под разные цели – запомнить, применить, пересказать, вернуться через месяц – с готовым промптом под каждый, плюс как убрать воду и сверить конспект с источником.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+/* бонусы модуля 2 */
+.rubric a.back{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent}
+.rubric a.back:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.why{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:2px 0 4px}
+.pgroup{padding-top:0;padding-bottom:0}
+.pgroup h2{margin:8px 0 0}
+.pgroup .note{max-width:68ch;margin-top:18px}
+.pgroup .steps{margin-top:22px}
+.def a,.note a,.snote a{border-bottom:1px solid rgba(230,25,140,.35)}
+.cgroup{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);margin:30px 0 0}
+.cmds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;margin-top:10px}
+.cmd{padding:16px 0;border-top:1px solid var(--line)}
+.cmd .cw{display:inline-block;font-family:var(--mono);font-size:14px;font-weight:500;color:var(--pink-strong);background:#FBEAF3;padding:3px 10px}
+.cmd p{font-size:15.5px;line-height:1.5;color:var(--muted);margin-top:8px}
+.donebox .dc p:not(.dl){font-size:17px;color:#3B3143}
+@media (max-width:760px){
+  .cmds{grid-template-columns:1fr}
+  .rubric{gap:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><a class="r2 back" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Весь набор</a></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 2 · Учиться легче вместе с ИИ</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Конспект из&nbsp;чего угодно: <span class="it">книга, статья, видео, длинный урок</span></h1>
+      <p class="hlead">Шпаргалка, после которой длинный материал превращается не в пересказ, а в конспект, которым вы правда пользуетесь.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">10 минут</span></div>
+      <div><span class="mk">Когда открывать</span><span class="mv">Перед длинным материалом</span></div>
+      <div><span class="mk">Останется</span><span class="mv">4 промпта под разные цели</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>за минуту</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Пересказ отвечает на вопрос автора, конспект – на ваш. Поэтому начинаем не с материала, а с цели: зачем вам это.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Четыре цели – четыре формата: запомнить, применить, пересказать другим, быстро вернуться через месяц. Под каждый – свой промпт.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Видео, подкаст и запись эфира сначала превращаем в текст. Нейросеть лучше всего работает с буквами.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Конспект от ИИ сверяем с источником: не потерялось ли главное и не появилось ли то, чего у автора не было.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сначала</p>
+    <h2>Почему «сделай краткое содержание» не&nbsp;работает</h2>
+    <p>Знакомо: папка недосмотренных вебинаров, книги с закладкой на середине, сохранённые статьи «на потом». Дело редко в скорости чтения или дисциплине. Между «узнал(а)» и «применил(а)» просто нет ни одного шага – и знание тихо испаряется за несколько дней.</p>
+    <p>Просьба «сделай краткое содержание» этот шаг не добавляет. Нейросеть честно сожмёт текст – и получится тот же материал, только короче: всё понемногу, ничего под вашу задачу. Такой пересказ не хочется перечитывать.</p>
+    <p>Конспект начинается с вопроса «для чего». Чтобы запомнить – нужны вопросы и карточки. Чтобы применить – список действий под вашу ситуацию. Чтобы рассказать другим – три мысли и порядок. Чтобы вернуться через месяц – одна страница и ссылки на места в источнике. Ниже – промпт под каждую цель.</p>
+    <p class="rulebox"><b>Как пользоваться.</b> Выберите цель, скопируйте промпт, замените то, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>, и вставьте материал или прикрепите файл. Промпты работают в любой нейросети: ChatGPT, Claude, Gemini, ГигаЧат, DeepSeek, Perplexity.</p>
+  </div></div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:0">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы шпаргалки">
+    <a class="navlink" href="#tekst">Сначала текст</a>
+    <a class="navlink" href="#formaty">Четыре формата</a>
+    <a class="navlink" href="#voda">Без воды</a>
+    <a class="navlink" href="#sverka">Сверка с источником</a>
+    <a class="navlink" href="#primer">Сквозной пример</a>
+  </nav>
+</section>
+
+<!-- СНАЧАЛА ТЕКСТ -->
+<section class="wrap pgroup" id="tekst">
+  <div class="ghead"><span class="glabel">Шаг 0</span><span class="grange">до конспекта</span></div>
+  <h2>Видео и&nbsp;подкаст: сначала текст</h2>
+  <p class="note">Нейросеть надёжнее всего работает с текстом. <b>Поэтому любой материал сначала превращаем в буквы – а уже потом просим конспект.</b></p>
+  <div class="defs" style="max-width:68ch">
+    <div class="def"><span class="dn">1</span><div><h3>Видео и вебинары</h3><p>У многих видео на больших площадках есть субтитры или расшифровка – её можно открыть и скопировать. Если нет – запись нужно расшифровать. Как это сделать бесплатно и без мучений, разобрано в соседнем бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация: из голоса и видео в текст»</a>.</p></div></div>
+    <div class="def"><span class="dn">2</span><div><h3>Подкасты</h3><p>Сначала поищите текст выпуска на его странице – иногда авторы выкладывают расшифровку. Нет – расшифровывайте так же, как видео.</p></div></div>
+    <div class="def"><span class="dn">3</span><div><h3>Статьи, PDF, электронные книги</h3><p>Статью скопируйте текстом – по ссылке нейросеть открывает страницы не всегда, а иногда пересказывает то, чего не прочитала. PDF прикрепите файлом. Книгу давайте главами, а не целиком.</p></div></div>
+    <div class="def"><span class="dn">4</span><div><h3>Бумажная книга или распечатка</h3><p>Сфотографируйте страницы и прикрепите к сообщению – большинство нейросетей читают текст с фото. Снимайте ровно и при хорошем свете.</p></div></div>
+  </div>
+  <div style="max-width:68ch">
+  <p class="snote" style="margin-top:22px">Длинный материал – запись на пару часов, толстая глава – лучше давать частями. Одним куском нейросеть может читать по диагонали и упустить середину. Отправьте сначала эту фразу, потом части по очереди:</p>
+  <div class="promptbox stepprompt"><p class="plabel">Если материал длинный</p><pre>Я пришлю материал частями. Это часть <span class="tok">[1]</span> из <span class="tok">[3]</span>. Просто прими её и ответь одним словом: «Принято». Конспект не делай, пока я не напишу «Все части отправлены».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div>
+</section>
+
+<!-- ЧЕТЫРЕ ФОРМАТА -->
+<section class="wrap pgroup" id="formaty">
+  <div class="ghead"><span class="glabel">Главное</span><span class="grange">01–04</span></div>
+  <h2>Четыре формата под&nbsp;четыре цели</h2>
+  <p class="note">Один и тот же материал можно законспектировать по-разному. <b>Выберите тот формат, который отвечает на ваш вопрос сейчас.</b> Если целей две – прогоните два промпта в том же чате по очереди.</p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">01</span><div>
+      <h3>Чтобы запомнить: вопросы-ответы и&nbsp;карточки</h3>
+      <p class="why">Когда</p>
+      <p>Готовитесь к экзамену или аттестации, учите новую тему с нуля, хотите, чтобы главное осталось в голове, а не в файле. Перечитанный конспект создаёт ощущение знания, а вопросы проверяют, есть ли оно на самом деле.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт · для запоминания</p><pre>Сделай из этого материала конспект для запоминания. Пересказ мне не нужен – мне нужно, чтобы главное осталось в голове.
+
+Кто я и зачем изучаю: <span class="tok">[например: бухгалтер, готовлюсь к аттестации]</span>
+Что я уже знаю по теме: <span class="tok">[коротко, чтобы не объяснять очевидное]</span>
+
+Материал:
+"""
+<span class="tok">[вставьте текст или прикрепите файл]</span>
+"""
+
+Сделай три части:
+1. Главное – 5–7 пунктов, по одной мысли в пункте, простыми словами.
+2. Вопросы и ответы – 10–15 вопросов, на которые нужно уметь ответить после этого материала. Вопросы не «что сказал автор», а «почему», «как», «что будет, если». Ответ – 1–2 предложения.
+3. Карточки для повторения – каждая в две строки: «В: вопрос» и «О: короткий ответ». Термины – отдельными карточками «Что такое…».
+
+Бери только то, что есть в материале. Чего в нём нет – не дописывай из общих знаний.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Что получится: короткая выжимка, список вопросов для самопроверки и карточки, которые можно перенести в любое приложение для повторения – или через пару дней попросить нейросеть: «Задавай мне эти вопросы по одному и проверяй ответы».</p>
+    </div></div>
+
+    <div class="step"><span class="snum">02</span><div>
+      <h3>Чтобы применить: что делать и&nbsp;чек-лист под мою ситуацию</h3>
+      <p class="why">Когда</p>
+      <p>Материал про то, что вы делаете руками: продажи, ведение клиентов, тексты, порядок в делах, новая программа на работе. Здесь важна не полнота, а ответ на вопрос «что мне с этим делать на этой неделе».</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт · для работы</p><pre>Сделай из этого материала рабочий конспект – не пересказ, а то, что мне делать.
+
+Моя ситуация: <span class="tok">[кто вы, чем занимаетесь, над чем работаете сейчас]</span>
+Что хочу решить или изменить: <span class="tok">[например: начать отвечать на отзывы клиентов]</span>
+Мои условия: <span class="tok">[сколько времени есть, что уже работает, чего точно не будет]</span>
+
+Материал:
+"""
+<span class="tok">[вставьте текст или прикрепите файл]</span>
+"""
+
+Собери:
+1. Что из материала относится именно к моей ситуации – по пунктам. Остальное отбрось.
+2. Конкретика, которую можно взять как есть: приёмы, шаги, формулировки, цифры. У каждого пункта – где это в материале.
+3. Чек-лист применения: 5–10 пунктов, каждый начинается с действия («открыть», «написать», «проверить»). Первым – то, что можно сделать за полчаса.
+4. Что в материале расходится с тем, как я делаю сейчас.
+5. Что мне не подходит и почему – с учётом моих условий.
+
+Никаких общих слов вроде «выстроить системный подход» – только то, что можно поставить в список дел. Не добавляй советов, которых нет в материале. Если очень хочется добавить своё – вынеси отдельно с пометкой «от себя».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Что получится: выжимка под вашу задачу и чек-лист, первый пункт которого можно сделать сегодня. Материал можно считать изученным, когда выполнен хотя бы один пункт.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">03</span><div>
+      <h3>Чтобы пересказать другим: структура и&nbsp;три главные мысли</h3>
+      <p class="why">Когда</p>
+      <p>Нужно рассказать о прочитанном коллегам на планёрке, клиентам, подписчикам, близким. Три мысли люди запоминают, двенадцать – нет. А ещё важно не выдать спорное за проверенное и чужие мысли – за свои.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт · для пересказа</p><pre>Помоги подготовить пересказ этого материала для других людей.
+
+Кому буду рассказывать: <span class="tok">[коллегам на планёрке / клиентам / подписчикам / ребёнку]</span>
+Сколько есть времени или места: <span class="tok">[например: 3 минуты устно / пост до 1500 знаков]</span>
+
+Материал:
+"""
+<span class="tok">[вставьте текст или прикрепите файл]</span>
+"""
+
+Сделай:
+1. Одна фраза: о чём материал и зачем его знать именно этим людям.
+2. Три главные мысли – не больше. К каждой – одно предложение пояснения и один пример из материала.
+3. Порядок пересказа: с чего начать, в какой последовательности подать три мысли, чем закончить.
+4. Вопросы, которые скорее всего зададут слушатели, и короткие ответы – из материала.
+5. Что лучше не пересказывать без проверки: спорные утверждения, цифры, ссылки на исследования.
+
+Пиши так, чтобы это было удобно сказать вслух. Везде, где звучит мысль автора, оставь понятным, что она его, а не моя.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Что получится: каркас короткого выступления или поста – одна фраза, три мысли, порядок и ответы на вероятные вопросы. Свои примеры и опыт добавьте сами: именно они делают пересказ вашим.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">04</span><div>
+      <h3>Чтобы вернуться через месяц: одна страница и&nbsp;где подробности</h3>
+      <p class="why">Когда</p>
+      <p>Материал хороший, но прямо сейчас не нужен: книга по профессии, длинный урок, документ с правилами. Через месяц вы откроете конспект и за пару минут вспомните главное – а за подробностями пойдёте прямо в нужное место источника.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт · на потом</p><pre>Сделай из этого материала конспект на одну страницу – такой, чтобы через месяц его можно было открыть, за пару минут вспомнить главное и быстро найти подробности в источнике.
+
+Зачем я это изучаю: <span class="tok">[одной фразой]</span>
+
+Материал:
+"""
+<span class="tok">[вставьте текст или прикрепите файл]</span>
+"""
+
+Формат:
+– Первая строка: о чём это и зачем мне – одной фразой. Под ней оставь пустую строку «Что я решил(а) сделать:» – это я допишу.
+– Суть в трёх предложениях.
+– 5–8 ключевых идей, по строке на каждую. После каждой – где в источнике подробности: глава, раздел, страница или тайм-код, если они есть в материале.
+– Понятия и термины – с короткими определениями.
+– Что применить, если вернусь к теме: 2–3 пункта.
+– Что осталось непонятным или спорным.
+
+Всё должно помещаться на один экран. Если в материале нет страниц и тайм-кодов – ориентируйся по заголовкам и приводи первые 3–5 слов нужного фрагмента. Не придумывай страницы и тайм-коды.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Что получится: страница-навигатор по материалу. Первую строку – что вы решили сделать – допишите от себя. Через время именно она окажется самой ценной.</p>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- БЕЗ ВОДЫ -->
+<section class="wrap pgroup" id="voda">
+  <div class="ghead"><span class="glabel">Качество</span><span class="grange">4 правила</span></div>
+  <h2>Как не&nbsp;получить водянистый пересказ</h2>
+  <p class="note">Вода – это фразы, которые подходят к любой теме: «важно выстраивать доверие», «необходимо учитывать особенности». <b>Они звучат умно, но ничего не дают делать.</b></p>
+  <div class="defs" style="max-width:68ch">
+    <div class="def"><span class="dn">1</span><div><h3>Назовите цель</h3><p>Без цели нейросеть сжимает всё понемногу. С целью – выбирает. Поэтому в каждом промпте выше есть строка «зачем я это изучаю».</p></div></div>
+    <div class="def"><span class="dn">2</span><div><h3>Скажите, что уже знаете</h3><p>Иначе половина конспекта уйдёт на объяснение очевидного. Хватит одной фразы: «я давно веду клиентов, базу объяснять не надо».</p></div></div>
+    <div class="def"><span class="dn">3</span><div><h3>Задайте рамку</h3><p>Сколько пунктов, «одна мысль – одна строка», каждый пункт начинается с действия. Чем точнее рамка, тем меньше места для общих слов.</p></div></div>
+    <div class="def"><span class="dn">4</span><div><h3>Запретите добавлять своё</h3><p>«Только из материала» – иначе нейросеть щедро дополнит конспект общими знаниями, и вы уже не поймёте, где автор, а где она.</p></div></div>
+  </div>
+  <div style="max-width:68ch">
+  <p class="snote" style="margin-top:22px">Если всё равно получилось водянисто – не начинайте заново, скажите в том же чате:</p>
+  <div class="promptbox stepprompt"><p class="plabel">Уточнение · убрать воду</p><pre>Это пока пересказ, а мне нужен конспект. Переделай:
+– убери вводные слова, общие фразы и всё, что подошло бы к любой теме;
+– в каждом пункте оставь одну конкретную вещь: факт, приём, шаг, пример или формулировку автора;
+– выкинь то, что не относится к моей цели: <span class="tok">[зачем вам этот конспект]</span>;
+– если пункт можно убрать и ничего не потеряется – убери.
+Сделай в два раза короче, чем сейчас, и ничего не добавляй от себя.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div>
+</section>
+
+<!-- СВЕРКА -->
+<section class="wrap pgroup" id="sverka">
+  <div class="ghead"><span class="glabel">Проверка</span><span class="grange">5 минут</span></div>
+  <h2>Ничего не&nbsp;потеряно и&nbsp;ничего не&nbsp;придумано</h2>
+  <p class="note">Нейросеть может упустить важную оговорку автора, округлить цифру или уверенно добавить вывод, которого в тексте не было. <b>Это те же галлюцинации, что мы ловили в уроке 4, – только сверяем не с интернетом, а с конкретным источником.</b></p>
+  <div style="max-width:68ch;margin-top:22px">
+  <p>Сверку лучше делать в новом чате: так нейросеть смотрит на конспект свежим взглядом и не защищает свою же работу. Вставьте и источник, и конспект.</p>
+  <div class="promptbox stepprompt"><p class="plabel">Промпт · сверка с источником</p><pre>Сверь конспект с исходным материалом. Работай как внимательный редактор, а не как автор: твоя задача – найти расхождения.
+
+Исходный материал:
+"""
+<span class="tok">[вставьте текст или прикрепите файл]</span>
+"""
+
+Конспект:
+"""
+<span class="tok">[вставьте конспект]</span>
+"""
+
+Ответь списками:
+1. Потеряно: какие важные мысли, условия и оговорки автора есть в материале, но не попали в конспект.
+2. Придумано: что есть в конспекте, но нет в материале – факты, цифры, примеры, выводы. Для каждого пункта процитируй, что сказано в материале на самом деле, или напиши «в материале этого нет».
+3. Искажено: где смысл сдвинулся – обобщение («всегда», «все»), усиление, перепутанный порядок шагов.
+4. Цифры, имена, даты и цитаты: сверь каждую с материалом.
+
+В конце дай исправленный конспект: придуманное убрано, потерянное добавлено.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="rulebox">Сверять каждый конспект не обязательно. Обязательно – если вы будете пересказывать материал другим, принимать по нему решения или опираться на цифры.</p>
+  </div>
+</section>
+
+<!-- ПРИМЕР -->
+<section class="wrap blk reveal" id="primer">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сквозной пример · условный</p>
+    <h2>Длинная статья → конспект для работы</h2>
+    <p>Администратор детского центра сохранила длинную статью о том, как отвечать на отзывы клиентов, – минут на двадцать чтения. Её цель – начать отвечать на отзывы уже на этой неделе. Статья и цифры в примере условные.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Текст</h3><p>Она открыла статью в браузере и скопировала текст целиком, а не отправила ссылку.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Формат</h3><p>Цель – применить, значит, формат 02 «для работы». В скобки она вписала: «администратор детского центра, отвечаю за отзывы на картах и в соцсетях», «хочу начать отвечать на отзывы», «есть 20 минут в день, отвечаю одна».</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Вода</h3><p>В первом варианте нашлись пункты «важно выстраивать доверительные отношения» и «отзывы – лицо компании». Уточнение «убрать воду» заменило их на конкретику.</p></div></div>
+      <div class="def"><span class="dn">4</span><div><h3>Сверка</h3><p>В новом чате сверка нашла расхождение: в конспекте «отвечать в течение суток», а в статье – «в течение двух рабочих дней». Нейросеть округлила срок – исправили.</p></div></div>
+    </div>
+    <div class="said"><p class="saidlab">Что получилось · фрагмент чек-листа</p><p>1. Открыть отзывы за последний месяц и выписать те, что остались без ответа. 2. Ответить на один отрицательный по схеме из статьи: поблагодарить – признать, что случилось, – сказать, что изменили. 3. Сделать три заготовки ответов на частые ситуации и сохранить в заметки. 4. Отвечать на новые отзывы в течение двух рабочих дней.</p></div>
+    <p class="note">Обратите внимание: в конспекте нет ни одной мысли «вообще про отзывы» – только то, что администратор может сделать сама, за 20 минут в день. Первый пункт выполняется сегодня.</p>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что делать с&nbsp;конспектом дальше</h2>
+    <div class="dcol">
+      <ul>
+        <li><b>Первая строка – от себя.</b> Зачем вы это изучали и что решили сделать. Через пару месяцев эта строка подскажет больше, чем весь остальной конспект.</li>
+        <li><b>Одно действие в течение суток.</b> Хотя бы самое маленькое из чек-листа. Отложенное на неделю обычно так и не делается.</li>
+        <li><b>Проверьте, что запомнилось.</b> Конспект для запоминания удобно отдать <a href="https://aiforlife.ru/ii-course/modul2/bonus-tyutor/" style="color:var(--pink-soft)">ИИ-тьютору</a>: «проверь меня по этому конспекту» – и он задаст вопросы по одному.</li>
+        <li><b>Не конспектируйте всё подряд.</b> Конспект без цели и без действия – потраченный вечер. Иногда материал достаточно просто посмотреть.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="closing">
+  <div class="wrap cgrid">
+    <div class="col">
+      <p class="pull">Хороший конспект – не самый подробный, а тот, который вы открыли второй раз.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p style="font-size:16px">Один-два формата, которыми будете пользоваться чаще всего, и промпт сверки. Со временем вы начнёте сразу называть нейросети цель – и пересказы перестанут получаться сами собой.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 2 · набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" style="color:#B7A9BD;border-bottom:1px solid #4A3E52" target="_top">«Учиться легче вместе с ИИ»</a></div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');
+    var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

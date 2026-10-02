@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Транскрибация: из голоса и видео в текст · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Как перевести голосовые, лекции, вебинары и созвоны в текст: бот «Буквица», загрузка в нейросеть, готовые расшифровки и Whisper-боты – и что делать с расшифровкой дальше.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Бонусы модуля 2: дополнения к стилю бонусов модуля 1 */
+.blk h3.sub{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:30px 0 8px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:600px;margin-top:24px}
+.shot{margin:24px 0 0;max-width:300px}
+.shots .shot{margin:0;max-width:none}
+.shot.wide{max-width:460px}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.shot figcaption{font-size:14px;line-height:1.5;color:var(--muted);margin-top:10px}
+.step ol{margin:14px 0 0 0;padding-left:22px}
+.step ol li{margin-bottom:8px;font-size:17px;color:#3B3143;padding-left:4px}
+.step ol li::marker{color:var(--pink);font-weight:700}
+.step .btns{margin-top:18px}
+.step a.btn,.dark a.btn{color:#fff}
+.facts{margin:0 0 20px}
+.fact{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.fact:first-child{border-top:none;padding-top:0}
+.fact .fk{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);padding-top:4px}
+.fact p{font-size:16px;line-height:1.55;color:#3B3143}
+.parthead{padding-top:70px}
+.parthead .ptag{display:inline-block;background:var(--pink);color:#fff;font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px}
+.parthead h2{font-size:clamp(32px,4.4vw,52px);margin:16px 0 14px}
+.parthead p{max-width:68ch}
+.back{padding-top:44px}
+.back .linkbtn{font-size:16px}
+footer a{color:#B7A9BD;border-bottom:1px solid rgba(183,169,189,.4)}
+footer a:hover{color:var(--pink-soft)}
+footer p+p{margin-top:8px}
+@media (max-width:760px){
+  .fact{grid-template-columns:1fr;gap:4px}
+  .shot,.shot.wide{max-width:100%}
+  .shots{grid-template-columns:1fr 1fr;gap:14px}
+  .parthead{padding-top:54px}
+}
+@media (max-width:420px){.shots{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · бонус</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонусный набор · Учиться легче вместе с ИИ</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Транскрибация: <span class="it">из&nbsp;голоса и&nbsp;видео в&nbsp;текст</span></h1>
+      <p class="hlead">Как превратить голосовые, лекции, вебинары и созвоны в текст – и что с этим текстом делать дальше, чтобы он стал навыком или конспектом.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">10 минут</span></div>
+      <div><span class="mk">Понадобится</span><span class="mv">Телеграм и запись, которую хочется расшифровать</span></div>
+      <div><span class="mk">Результат</span><span class="mv">Расшифровка, готовая для навыка или конспекта</span></div>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Разделы" style="margin-top:34px">
+    <a class="navlink" href="#zachem">Зачем</a>
+    <a class="navlink" href="#sposoby">Четыре способа</a>
+    <a class="navlink" href="#vybor">Что выбрать</a>
+    <a class="navlink" href="#posle">Что делать с текстом</a>
+    <a class="navlink" href="#problemy">Частые проблемы</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="dark mainbox" id="zachem" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Зачем переводить голос в&nbsp;текст</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p><b>Голос для навыка.</b> Для навыка «Мой голос» из урока 2 нужна ваша живая речь: голосовые, эфиры, подкасты. Нейросеть разбирает её по тексту – ритм, любимые обороты, то, как вы объясняете сложное. В письменных текстах этого часто меньше, чем в речи.</p></div>
+      <div class="mline"><span class="mn">2</span><p><b>Лекции, вебинары, подкасты – в конспект.</b> Нейросеть работает с текстом. Сначала превращаем запись в буквы, потом – в конспект под вашу задачу.</p></div>
+      <div class="mline"><span class="mn">3</span><p><b>Созвоны с клиентами.</b> Расшифровка помогает не потерять договорённости и детали. Но только с согласия собеседника и с осторожностью к персональным данным – об этом чуть ниже.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сначала о бережности</p>
+    <h2>Чужой голос – чужие данные</h2>
+    <p>Всё, что вы отправляете в бот или нейросеть, уходит на чужой сервер. Свои голосовые и открытые лекции – пожалуйста. А с разговорами, где есть другие люди, действует простое правило.</p>
+    <ul>
+      <li><b>Записывайте и расшифровывайте разговор с клиентом только с его согласия.</b> Спросите заранее, ещё до начала записи.</li>
+      <li><b>Перед тем как отдавать расшифровку нейросети, уберите персональные данные:</b> имена, телефоны, адреса, диагнозы, суммы, названия компаний – всё, по чему можно узнать человека.</li>
+      <li><b>Сомневаетесь насчёт куска – не берите его.</b> Для навыка и конспекта он почти наверняка не критичен.</li>
+    </ul>
+  </div></div>
+</section>
+
+<div class="practice" id="sposoby">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Расшифровываем</p>
+    <h2>Четыре способа – от&nbsp;простого к&nbsp;сложному</h2>
+    <p class="pintro">Начните с первого: его хватает для голосовых и большинства записей. Остальные пригодятся, когда бесплатные расшифровки закончились, запись уже лежит на YouTube или встреча прошла в сервисе, который умеет расшифровывать сам. Интерфейсы сервисов меняются, поэтому ориентируйтесь на суть, а не на точные названия кнопок.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Бот «Буквица» в Телеграме</h3>
+      <p>Тот самый бот из урока 2. Ничего устанавливать не нужно: отправляете запись – через пару минут получаете текст. Есть несколько бесплатных расшифровок, карту привязывать не нужно.</p>
+      <ol>
+        <li>Откройте бота по ссылке ниже и нажмите кнопку запуска внизу экрана. Это нужно сделать один раз – дальше бот просто будет в списке чатов.</li>
+        <li>Отправьте запись. Подойдёт голосовое – своё или пересланное, аудио- или видеофайл через значок скрепки, а также ссылка на открытое видео на YouTube, VK или RuTube.</li>
+        <li>Подождите пару минут. Длинную расшифровку бот пришлёт отдельным текстовым файлом.</li>
+        <li>Сохраните файл к себе на компьютер. Расшифровки для навыка удобно держать рядом с другими материалами помощников – в папке «Мои помощники».</li>
+      </ol>
+      <p class="snote">Запись лежит на компьютере, а Телеграм – на телефоне? Откройте web.telegram.org в браузере на компьютере и отправьте файл оттуда.</p>
+      <div class="btns"><a class="btn" href="https://t.me/bykvitsa?start=7558032207" target="_blank" rel="noopener">Открыть «Буквицу»</a></div>
+      <figure class="shot">
+        <img src="assets/bot-bukvica.jpg" alt="Чат с ботом «Буквица»: отправлено голосовое на 26 минут, бот прислал расшифровку текстовым файлом" width="560" height="1017" loading="lazy">
+        <figcaption>1 – отправляем боту голосовое или файл. 2 – бот присылает готовый текст файлом, остаётся его скачать. Кнопку конспекта рядом можно нажать для быстрого обзора, но конспект под вашу задачу точнее собрать промптом ниже.</figcaption>
+      </figure>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Загрузить запись прямо в нейросеть</h3>
+      <p>ChatGPT, Gemini и некоторые другие нейросети на части тарифов принимают аудио- и видеофайлы: прикрепите файл через значок скрепки и попросите расшифровать. Что именно примет ваша нейросеть, зависит от тарифа, версии и даже от того, сидите вы в приложении или в браузере, – проще всего попробовать.</p>
+      <p class="snote">Если нейросеть отвечает, что не может слушать аудио, или файл слишком большой – переходите к способу 1 или 4. И следите, чтобы вместо расшифровки вам не выдали пересказ: для навыка голоса нужны ваши точные слова.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Попросить дословную расшифровку</p><pre>Расшифруй этот файл дословно, слово в слово. Не сокращай, не пересказывай и не исправляй речь. Если какое-то место неразборчиво, поставь пометку (неразборчиво) и иди дальше. Если запись слишком длинная для тебя, скажи, на какие части её разделить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Готовая расшифровка: YouTube, сервисы созвонов, подкасты</h3>
+      <p>Иногда расшифровка уже существует – её нужно только найти.</p>
+      <ol>
+        <li><b>YouTube.</b> У многих роликов есть автоматическая расшифровка. Ищите её под видео – в описании или в меню с тремя точками. Текст можно выделить и скопировать, тайм-коды не мешают.</li>
+        <li><b>Zoom, Телемост и другие сервисы созвонов.</b> На части тарифов они сами записывают встречу и делают расшифровку или краткий итог. Загляните в настройки записи до встречи – возможно, бот потом и не понадобится.</li>
+        <li><b>Подкасты.</b> У многих выпусков расшифровка лежит на странице выпуска. Проверьте сначала её, а если её нет – скачайте аудио и отправьте в бота.</li>
+      </ol>
+      <p class="snote">Автоматические субтитры часто путают имена и термины. Как это поправить – в разделе «Частые проблемы».</p>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Боты на технологии Whisper</h3>
+      <p>Whisper – технология распознавания речи, на ней работают многие боты и сервисы расшифровки. Пригодится, когда в «Буквице» закончились бесплатные расшифровки или запись длинная и с несколькими собеседниками: лимиты у разных ботов считаются отдельно.</p>
+      <p>Работает так же: отправляете запись – получаете текст. Например, бот ниже присылает сразу два файла: чистый текст и версию с тайм-кодами и разделением по говорящим.</p>
+      <p class="snote">Выбирая другой бот такого типа, помните про бережность: не отправляйте в незнакомые сервисы разговоры, где есть чужие персональные данные.</p>
+      <div class="btns"><a class="btn" href="https://t.me/WhisperSummaryAI_bot?start=ref_7558032207" target="_blank" rel="noopener">Открыть бота Whisper AI</a></div>
+      <figure class="shot">
+        <img src="assets/bot-whisper.jpg" alt="Чат с ботом Whisper AI: отправлено видео, бот прислал два файла – чистый текст и текст со спикерами и тайм-кодами" width="560" height="1017" loading="lazy">
+        <figcaption>1 – отправляем запись. 2 – получаем два файла: чистый текст и версию со спикерами и тайм-кодами.</figcaption>
+      </figure>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="vybor">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Шпаргалка</p>
+    <h2>Что выбрать под вашу запись</h2>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Свои голосовые для навыка «Мой голос»</h3><p>«Буквица» – пересылаете голосовые прямо из переписки.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Лекция или вебинар на YouTube</h3><p>Сначала поищите готовую расшифровку под видео. Нет – отправьте ссылку в «Буквицу».</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Созвон или консультация</h3><p>Встроенная расшифровка сервиса созвонов, если она есть на вашем тарифе. Нет – запись в бота. И в обоих случаях – согласие собеседника.</p></div></div>
+      <div class="def"><span class="dn">4</span><div><h3>Длинная запись с несколькими людьми</h3><p>Бот, который делит текст по говорящим, или промпт «раздели по спикерам» ниже.</p></div></div>
+      <div class="def"><span class="dn">5</span><div><h3>Короткий файл, а нейросеть принимает аудио</h3><p>Загрузите прямо в чат и попросите дословную расшифровку.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="posle">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">После расшифровки</p>
+    <h2>Что делать с&nbsp;текстом дальше</h2>
+    <p>Сырая расшифровка – это ещё не результат. Дальше всё зависит от задачи: для навыка голоса текст нужно почистить очень бережно, для разговора нескольких людей – разделить по репликам, для лекции – превратить в конспект.</p>
+
+    <h3 class="sub">Почистить, но не причёсывать</h3>
+    <p>Для навыка «Мой голос» важно сохранить вашу речь как есть: все «ну», «короче», повторы и обрывы фраз – это ваш ритм, именно его нейросеть и должна увидеть. Чистим только ошибки распознавания и служебный мусор. Если правок почти нет, можно вообще ничего не чистить и отдать расшифровку как есть.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт 1 · почистить расшифровку, не меняя моих слов</p><pre>Ниже расшифровка моей живой речи. Она нужна как образец того, как я говорю, поэтому почисти её очень бережно.
+
+Что можно:
+– исправить явные ошибки распознавания, когда по смыслу видно, что слово распознано неверно;
+– убрать тайм-коды и служебные пометки сервиса;
+– расставить знаки препинания и разбить текст на абзацы.
+
+Чего нельзя:
+– менять мои слова на синонимы и «улучшать» формулировки;
+– убирать мои словечки, повторы, «ну», «короче», обрывы фраз – это мой ритм;
+– сокращать, пересказывать и добавлять что-то от себя.
+
+Если не уверен, какое слово там было, не угадывай: поставь знак (?) и выпиши такие места отдельным списком в конце.
+
+Расшифровка:
+"""
+<span class="tok">[вставьте расшифровку или прикрепите файл]</span>
+"""</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <h3 class="sub">Разделить по спикерам</h3>
+    <p>Бесплатные расшифровки часто сливают всех говорящих в один поток. Нейросеть может разделить реплики по смыслу. Для навыка голоса это ещё и способ оставить только ваши слова – чужие реплики навыку не нужны.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт 2 · раздели по спикерам</p><pre>Это расшифровка разговора: <span class="tok">[что это – консультация, эфир с гостем, созвон команды]</span>. Участники: <span class="tok">[кто говорит – например: я, ведущая; гость, эксперт по питанию]</span>.
+
+Раздели текст на реплики и подпиши перед каждой, кто говорит. Определяй по смыслу, по обращениям и по тому, кто задаёт вопросы. Сами слова не меняй и не сокращай. Если не уверен, чья это реплика, поставь знак (?).
+
+В конце отдельным блоком собери только мои реплики одним текстом, подряд, без чужих.
+
+Расшифровка:
+"""
+<span class="tok">[вставьте расшифровку или прикрепите файл]</span>
+"""</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <h3 class="sub">Сделать конспект</h3>
+    <p>Для лекции, вебинара или подкаста. Короткая версия – ниже, а четыре формата конспекта под разные цели – в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/">«Конспект из чего угодно»</a>.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт 3 · сделай конспект</p><pre>Сделай конспект этого материала под мою задачу. Пересказ мне не нужен.
+
+Моя задача сейчас: <span class="tok">[над чем работаете и зачем вам этот материал]</span>
+
+Материал:
+"""
+<span class="tok">[вставьте расшифровку или прикрепите файл]</span>
+"""
+
+Оставь только то, что относится к моей задаче:
+1. Главные мысли – по пунктам, короткими фразами.
+2. Конкретика: приёмы, шаги, формулировки, которые можно взять и использовать.
+3. Что противоречит тому, как я делаю сейчас, – отдельным списком.
+Не добавляй ничего, чего нет в материале. Если что-то спорно или не подтверждено, так и пометь.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="problemy">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Если что-то пошло не так</p>
+    <h2>Частые проблемы</h2>
+
+    <h3 class="sub">Имена и термины искажены</h3>
+    <p>Распознавание речи плохо знает фамилии, названия методик и профессиональные слова: вместо них появляются похожие по звучанию. Не правьте руками по всему тексту – дайте нейросети список правильных написаний.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт 4 · исправить имена и термины по списку</p><pre>В этой расшифровке искажены имена и термины. Вот как они пишутся правильно:
+<span class="tok">[список: имена и фамилии, названия методик, программ, профессиональные термины – по одному на строку]</span>
+
+Исправь по всему тексту только эти слова и их искажённые варианты. Остальной текст не трогай. Если встретишь другие похожие искажения, которых нет в списке, не исправляй их сам, а выпиши отдельно в конце – я проверю.
+
+Расшифровка:
+"""
+<span class="tok">[вставьте расшифровку или прикрепите файл]</span>
+"""</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <h3 class="sub">Длинный файл</h3>
+    <p>Боты и нейросети ограничены по размеру и длительности файла. Разделите запись на части по 20–30 минут – это умеет любой бесплатный аудиоредактор, а на телефоне часто и стандартный диктофон. Длинную расшифровку тоже лучше отдавать нейросети частями: если вставить несколько часов текста одним куском, она начнёт читать по диагонали и упустит середину.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт 5 · отдать длинный текст частями</p><pre>Я пришлю длинную расшифровку частями. Это часть 1 из <span class="tok">[сколько всего частей]</span>. Просто прими её и жди следующую, ничего пока не делай. Задание дам после последней части.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <ul style="margin-top:26px">
+      <li><b>Кончились бесплатные расшифровки.</b> Возьмите другой бот – лимиты у них считаются отдельно.</li>
+      <li><b>Бот не принимает ссылку.</b> Проверьте, что видео открытое, а не приватное. Не помогло – скачайте ролик и отправьте файлом.</li>
+      <li><b>В расшифровке каша из говорящих.</b> Это нормально для бесплатных расшифровок. Помогут промпт 2 или бот, который сам делит текст по говорящим.</li>
+      <li><b>Много ошибок по всему тексту.</b> Чаще всего виноват звук: шум, музыка, далёкий микрофон. Для своих голосовых записывайте в тишине и держите телефон ближе.</li>
+    </ul>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Попробуйте прямо сейчас</h2>
+    <div class="dcol">
+      <p>Возьмите одно своё голосовое на 3–5 минут, где вы рассказываете о работе или о том, что вас волнует. Отправьте его в «Буквицу», почистите промптом 1 и добавьте к материалам для навыка «Мой голос».</p>
+      <p style="margin-top:14px"><b>Перечитайте расшифровку: узнаёте в ней себя? Именно эти обороты нейросеть и возьмёт в ваш голос.</b></p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap back">
+  <a class="linkbtn" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Все материалы набора «Учиться легче вместе с ИИ»</a>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">«Учиться легче вместе с ИИ»</a>, модуль 2: транскрибация</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</body>
+</html>

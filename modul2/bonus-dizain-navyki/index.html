@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Навыки для дизайн-помощника · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Три готовых навыка для дизайн-помощника: из сырой идеи – в ТЗ на картинку, фирменный стиль по паспорту и проверка готового макета с тремя главными правками. Zip для нейросетей с навыками и текстовые версии для остальных.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* бонусы модуля 2 */
+.matrix{margin-top:28px;border-top:1px solid var(--ink)}
+.mrow{display:grid;grid-template-columns:120px minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:22px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.52;color:#3B3143}
+.mrow.mh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding:12px 0}
+.mrow .mname{font-weight:700;color:var(--ink);font-size:16px}
+.mcap{margin-top:16px;font-size:14px;color:var(--muted)}
+.tree{margin-top:22px;border-left:2px solid var(--pink);padding:16px 0 16px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:#3B3143;white-space:pre-wrap;overflow-wrap:anywhere}
+.tree b{color:var(--ink);font-weight:500}
+.tree i{font-style:normal;color:var(--faint)}
+.sublab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:30px 0 4px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.peek{margin-top:18px}
+.peek summary{display:inline-block;cursor:pointer;list-style:none;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.peek[open] summary{color:var(--pink);border-bottom-color:var(--pink)}
+.peek .promptbox{margin-top:16px}
+.skcode{font-family:var(--mono);font-size:13px;color:var(--faint);font-weight:400;margin-left:6px;white-space:nowrap}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:22px}
+.chain span{font-size:15px;font-weight:600;padding:8px 14px;border:1px solid var(--line);background:#fff}
+.chain em{font-style:normal;color:var(--pink);font-weight:700}
+.backlink{display:inline-block;margin-top:12px;color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px}
+.backlink:hover{color:#fff;border-bottom-color:var(--pink-soft)}
+@media (max-width:760px){
+  .mrow{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .mrow.mh{display:none}
+  .mrow>div[data-l]::before{content:attr(data-l);display:block;font-size:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .mrow .mname{font-size:18px}
+  .tree{font-size:12.5px;padding-left:16px}
+  .peek .promptbox{margin-left:-20px;margin-right:-20px}
+  .step .btns .btn{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · к уроку 3</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 2 · Учиться легче</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Навыки для <span class="it">дизайн-помощника</span></h1>
+      <p class="hlead">Три готовых навыка: из сырой идеи – в чёткое ТЗ на картинку, фирменный стиль под присмотром и проверка готового макета. Скачайте, поставьте и свяжите в одном помощнике.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Время</span><span class="mv">15–20 минут</span></div>
+      <div><span class="mk">Где работает</span><span class="mv">Нейросети с навыками, в остальных – текстом</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Три навыка в папке «Мои помощники»</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Что это за набор</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>В третьем уроке мы обещали навыки для тех, кто будет собирать дизайн-помощника. Вот они: <b>три навыка, собранные для этого курса</b> как стартовый комплект. Это не копия навыков из проекта, который показан в уроке, – их вы со временем подберёте под себя.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Навыки закрывают цепочку, на которой визуал чаще всего буксует: сырая идея → понятное ТЗ → картинка или макет в вашем стиле → проверка перед публикацией.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Ставить все три не обязательно. Помните правило урока: без каши из навыков. Берите тот, что закрывает ваше узкое место, – и добавляйте следующий, когда почувствуете, что его не хватает.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Когда какой нужен</p>
+    <h2>Три навыка – три момента в&nbsp;работе</h2>
+    <div class="chain"><span>Идея</span><em>→</em><span>ТЗ и промпт</span><em>→</em><span>Картинка в стиле</span><em>→</em><span>Проверка</span></div>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Бриф арт-директора <span class="skcode">art-director-brief</span></h3><p><b>Когда:</b> есть идея картинки или обложки, но нет внятного описания – «нужно что-то спокойное к посту про отдых». <b>Что даёт:</b> ТЗ по пунктам – цель, аудитория, композиция, свет, палитра, стиль, формат 4:5, 1:1 или 9:16, чего избегать – и готовый промпт. Если чего-то не хватает, задаст 2–3 вопроса.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Фирменный стиль <span class="skcode">brand-style</span></h3><p><b>Когда:</b> хочется, чтобы обложки, слайды и картинки выглядели как от одного автора. <b>Что даёт:</b> собирает из ваших примеров «паспорт стиля» – цвета, шрифты, настроение, типы изображений, запреты – и сверяет с ним каждую новую задачу. Шаблон паспорта – внутри навыка, его можно заполнить и самостоятельно.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Проверка макета <span class="skcode">design-check</span></h3><p><b>Когда:</b> макет, слайд или обложка готовы и вы сомневаетесь, можно ли публиковать. <b>Что даёт:</b> проходит чек-лист – иерархия, читаемость, контраст, отступы, одна главная мысль, ошибки в тексте – и выдаёт три главные правки, а не двадцать.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Забираем</p>
+    <h2>Скачать навыки</h2>
+    <p class="pmeta">zip – для нейросетей с навыками · txt – для всех остальных</p>
+    <p class="pintro">Каждый навык – папка с файлом SKILL.md внутри, упакованная в zip-архив: в таком виде навыки и загружаются, как в уроках 2 и 3. Текстовая версия – тот же навык одним файлом, чтобы вставить его в инструкцию проекта или в начало чата.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Бриф арт-директора</h3>
+      <p>Превращает сырую идею в ТЗ и промпт на картинку, обложку, баннер или фон для слайда. Если ваша нейросеть сама картинки не рисует, ТЗ и промпт можно отнести в ту, что рисует, или отдать дизайнеру.</p>
+      <div class="btns"><a class="btn" href="assets/art-director-brief.zip" download="art-director-brief.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/art-director-brief.txt" download="art-director-brief.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · art-director-brief</p><pre>---
+name: art-director-brief
+description: Превращает сырую идею картинки, обложки, баннера или иллюстрации в чёткое ТЗ и готовый промпт – для генерации изображения или для дизайнера. Подключай, когда пользователь просит картинку, обложку, визуал к посту, фон для слайда или сторис, иллюстрацию, говорит «придумай, как это может выглядеть», а внятного описания картинки ещё нет.
+---
+
+# Арт-директор: из сырой идеи – в ТЗ и промпт
+
+## Зачем этот навык
+Пользователь приходит с сырой идеей: «нужна обложка к посту про отдых, что-то спокойное». Если сразу генерировать, получится случайная картинка, и дальше начнётся бесконечное «не то». Твоя задача – как арт-директор собрать из идеи понятное техническое задание (ТЗ) и промпт, по которым картинку можно получить с первой-второй попытки.
+
+## Что должно быть в ТЗ
+1. Цель и площадка – зачем картинка и где она будет жить: обложка поста, сторис, слайд, баннер, карточка товара, обложка видео.
+2. Аудитория и главная мысль – кто увидит и что должен понять или почувствовать за две секунды. Мысль одна.
+3. Композиция – что в кадре, что в центре внимания, план (крупный, средний, общий), ракурс, где оставить свободное место под текст.
+4. Свет – время суток, мягкий или контрастный, откуда падает.
+5. Палитра – 2–4 основных цвета. Если у пользователя есть паспорт стиля (навык brand-style), бери цвета оттуда.
+6. Стиль и настроение – фото, иллюстрация, 3D, коллаж, минимализм, графика; какое настроение.
+7. Формат – соотношение сторон под площадку: 4:5 – лента, 1:1 – квадрат, 9:16 – сторис и вертикальное видео, 16:9 – слайд и обложка видео. Если площадка другая – спроси.
+8. Текст на изображении – нужен ли, какой, где. По умолчанию советуй добавлять текст отдельно, в редакторе: нейросети часто искажают буквы, особенно кириллицу.
+9. Чего избегать – штампы, лишние предметы, нежелательные образы и цвета.
+
+## Порядок работы
+1. Прочитай запрос и разложи по пунктам ТЗ то, что уже известно.
+2. Если не хватает важного, задай 2–3 вопроса одним сообщением, с вариантами ответа: а, б, в, «или своё». Важное – это площадка (формат), главная мысль и стиль или настроение. Остальное предложи сам и пометь как предложение.
+3. Если пользователь отвечает «на твоё усмотрение», предложи 2–3 разные концепции по одной строке и попроси выбрать.
+4. Собери ТЗ по формату ниже.
+5. Под ТЗ дай готовый промпт для генерации: одним абзацем, конкретно, в порядке «что в кадре → композиция → свет → палитра → стиль → формат → чего избегать». По просьбе пользователя добавь вариант на английском: часть генераторов понимает его лучше.
+6. Спроси, что поправить. Вноси правки в ТЗ и промпт и показывай обновлённый промпт целиком.
+
+## Формат ответа
+**ТЗ: [короткое название]**
+- Цель и площадка:
+- Аудитория и главная мысль:
+- Композиция:
+- Свет:
+- Палитра:
+- Стиль и настроение:
+- Формат:
+- Текст на изображении:
+- Чего избегать:
+
+**Промпт для генерации** – одним блоком для копирования.
+
+**Что проверить в результате** – 2–3 пункта: например, видна ли главная мысль, осталось ли место под текст, нет ли искажений.
+
+## Правила
+- Одна картинка – одна главная мысль. Если в идее их три, предложи выбрать одну или сделать серию.
+- Пиши конкретно: не «красивый фон», а «светло-бежевая стена, мягкая тень от окна слева».
+- Не используй в промпте имена живых художников и фотографов, чужие бренды и персонажей. Описывай стиль словами: техника, цвет, свет, настроение.
+- Не изображай реальных людей по имени и чужие логотипы. Фото самого пользователя – только если он сам его прислал и попросил.
+- Если есть паспорт стиля – сверяйся с ним, а отступления от него называй прямо.
+- Если ты сам не умеешь создавать изображения, так и скажи и отдай ТЗ и промпт: пользователь сгенерирует картинку в другом сервисе или передаст дизайнеру.
+- Не обещай идеальную картинку с первого раза. Подскажи, что менять в промпте, если результат не тот.
+
+## Если картинка получилась не та
+Попроси показать результат или описать, что не так. Меняй один-два параметра за раз – композицию, свет, стиль или «чего избегать» – и объясняй, что именно поменял. Не переписывай промпт целиком без необходимости.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Фирменный стиль</h3>
+      <p>Два режима: собрать паспорт стиля из ваших примеров и сверять с ним каждую новую визуальную задачу. Готовый паспорт сохраните файлом и добавьте в материалы помощника – тогда стиль не придётся объяснять заново.</p>
+      <div class="btns"><a class="btn" href="assets/brand-style.zip" download="brand-style.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/brand-style.txt" download="brand-style.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · brand-style</p><pre>---
+name: brand-style
+description: Держит фирменный стиль пользователя. Собирает «паспорт стиля» из его примеров – цвета, шрифты, настроение, типы изображений, запреты – и сверяет с ним каждую новую визуальную задачу. Подключай, когда пользователь делает обложку, картинку, слайд, баннер, пост или страницу и хочет, чтобы всё было «в одном стиле», когда присылает примеры своего оформления или спрашивает, «похоже ли это на меня».
+---
+
+# Фирменный стиль: паспорт и сверка
+
+## Зачем этот навык
+Картинки, слайды и обложки, сделанные в разные дни, начинают выглядеть так, будто их делали разные люди. Паспорт стиля – короткий документ, в котором записано, как выглядит визуал пользователя. Твоя задача – помочь его собрать, а дальше держать каждую задачу в его рамках.
+
+## Режим 1. Собрать паспорт
+Когда паспорта ещё нет:
+1. Попроси 3–10 примеров: свои картинки, обложки, слайды, скриншоты страниц или аккаунта. Дополнительно – 1–3 примера того, что нравится у других (как ориентир по настроению, не для копирования), и того, что точно не нравится.
+2. Опиши, что видишь в примерах: повторяющиеся цвета (с примерными HEX-кодами – и честно отметь, что коды, снятые с картинки, приблизительные), шрифты или их тип, композицию, настроение, типы изображений.
+3. Задай до пяти вопросов о том, чего не видно из примеров: для кого визуал, какие три слова описывают стиль, чего делать нельзя, есть ли логотип, точные цвета и шрифты из брендбука.
+4. Заполни шаблон паспорта. Где данных нет – оставь [заполнить] и ничего не выдумывай.
+5. Покажи паспорт и спроси, что поправить. Итог выдай одним блоком, чтобы пользователь сохранил его в файл и добавил в материалы проекта.
+
+## Шаблон паспорта стиля
+Пользователь может заполнить его сам, а ты помогаешь. Заполняй своими словами, коротко.
+
+```
+ПАСПОРТ СТИЛЯ: [имя или название бренда]
+Обновлён: [дата]
+
+1. ДЛЯ КОГО И ЗАЧЕМ
+Аудитория: [кто смотрит]
+Три слова о стиле: [например: спокойный, тёплый, честный]
+Какое впечатление оставляет визуал: [...]
+
+2. ЦВЕТА
+Основной: [название] – [#HEX]
+Дополнительный: [название] – [#HEX]
+Фон: [название] – [#HEX]
+Акцент (не больше 10% площади): [название] – [#HEX]
+Не используем: [цвета]
+
+3. ШРИФТЫ
+Заголовки: [шрифт или тип: с засечками, без засечек, рукописный]
+Основной текст: [шрифт или тип]
+Правила: [например: заголовок до 6 слов, без сплошных заглавных, не больше двух шрифтов]
+
+4. ИЗОБРАЖЕНИЯ
+Тип: [фото, иллюстрация, коллаж, 3D, графика]
+Что в кадре: [люди, предметы, природа, рабочие моменты]
+Свет и обработка: [например: естественный свет, тёплая обработка, без фильтров]
+Композиция: [например: много воздуха, один объект в центре]
+Не используем: [например: стоковые улыбки, неон]
+
+5. ЭЛЕМЕНТЫ И ДЕТАЛИ
+Логотип: [есть или нет, где ставим]
+Повторяющиеся элементы: [линии, рамки, формы, иконки]
+Отступы: [например: поля не меньше 5% ширины]
+
+6. ФОРМАТЫ
+[площадка] – [соотношение сторон] – [особенности]
+
+7. ЭТАЛОНЫ
+[2–3 картинки или описания, на которые равняемся]
+
+8. ЧЕГО ИЗБЕГАТЬ ВСЕГДА
+[...]
+```
+
+## Режим 2. Сверка новой задачи с паспортом
+Когда паспорт есть (в материалах проекта, в чате или прикреплён) и приходит визуальная задача:
+1. Перед работой назови 3–5 пунктов паспорта, которые важны именно для этой задачи. Например, для обложки – палитра, тип изображения и место под текст.
+2. Если ТЗ или промпт готовишь ты сам или другой навык (например, art-director-brief), встрой в него цвета, стиль, свет и запреты из паспорта.
+3. Если пользователь прислал готовый результат, сверь его по пунктам паспорта и ответь так:
+   - Совпадает: [что в стиле]
+   - Расходится: [пункт паспорта] – [что не так] – [как поправить]
+   - Вердикт: «в стиле», «почти – поправить 1–2 вещи» или «выбивается из стиля».
+4. Если пользователь осознанно хочет отойти от стиля, не спорь. Назови, в чём отход, и спроси: это разовое решение или стоит обновить паспорт.
+
+## Обновление паспорта
+Если пользователь несколько раз принимает одно и то же отступление или говорит «теперь делаем так», предложи обновить паспорт: покажи строку «было → стало» и обновлённый паспорт целиком, чтобы он заменил старый файл.
+
+## Правила
+- Паспорт – одна-две страницы. Лучше коротко и точно, чем полно и расплывчато.
+- Не выдумывай цвета, шрифты и правила, которых нет в примерах и ответах пользователя.
+- HEX-коды, определённые по картинке, приблизительные – так и говори. Точные берутся из брендбука или у дизайнера.
+- Чужие работы – ориентир по настроению. Не копируй чужой стиль целиком.
+- Если паспорта нет, а пользователь торопится, работай по трём вопросам – цвета, настроение, тип изображений – и предложи собрать паспорт позже.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Проверка макета</h3>
+      <p>Смотрит на готовый визуал глазами придирчивого дизайнера, но показывает только главное: три правки, ошибки в тексте и короткий вердикт – можно публиковать или нет.</p>
+      <div class="btns"><a class="btn" href="assets/design-check.zip" download="design-check.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/design-check.txt" download="design-check.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · design-check</p><pre>---
+name: design-check
+description: Проверяет готовый макет, слайд, обложку, баннер, карточку или страницу по чек-листу дизайна и выдаёт три главные правки, а не двадцать. Подключай, когда пользователь присылает готовый визуал и просит «проверь», «что не так», «как улучшить», «можно публиковать?», а также перед тем, как отдать визуал, который подготовил ты сам.
+---
+
+# Проверка макета: три главные правки
+
+## Зачем этот навык
+Двадцать замечаний никто не внесёт. Пользователю нужно понять, что мешает больше всего, и быстро это исправить. Твоя задача – пройти весь чек-лист, а показать только то, что сильнее всего влияет на результат.
+
+## Перед проверкой
+Если это не ясно из контекста, уточни одним сообщением – не больше двух вопросов:
+- где будет жить макет (лента, сторис, презентация на экране, печать, сайт) и кто его увидит;
+- какая главная мысль или действие: что человек должен понять или сделать.
+Если пользователь не ответил – проверяй по общему чек-листу и отметь, что ты предположил.
+Если есть паспорт стиля (навык brand-style), добавь сверку с ним отдельным пунктом.
+
+## Чек-лист – проходишь целиком, про себя
+1. Одна главная мысль. Понятно ли за 2–3 секунды, о чём это? Нет ли двух-трёх равноправных сообщений?
+2. Иерархия. Что видно первым, вторым, третьим – и совпадает ли это с важностью? Заголовок заметно крупнее остального?
+3. Читаемость. Размер текста под площадку (на телефоне мелкий текст не читается), длина строк, объём текста, не больше двух шрифтов.
+4. Контраст. Текст хорошо отделяется от фона? Нет ли текста поверх пёстрого участка картинки, светлого на светлом, тёмного на тёмном?
+5. Отступы и воздух. Есть поля по краям, ничего не прилипает к краю, расстояния между блоками одинаковые по смыслу, нет тесноты.
+6. Выравнивание. Элементы стоят по общим линиям, нет случайных сдвигов.
+7. Цвет. Не больше 2–3 основных цветов плюс акцент, и акцент работает на главную мысль.
+8. Изображение. Не размыто и не растянуто, подходит по смыслу, нет следов генерации: лишних пальцев, искажённых букв, странных предметов.
+9. Текст. Опечатки, ошибки, лишние слова, канцелярит, разные кавычки и тире, обрезанные слова, неудачные переносы. Цифры, даты и имена совпадают с исходником.
+10. Формат. Соотношение сторон под площадку; важное не попадает в зоны, которые перекрывает интерфейс (например, верх и низ сторис).
+11. Действие. Если нужен призыв – он заметен и понятен.
+
+## Как выбрать три правки
+Ранжируй найденное по влиянию на результат:
+1. Сначала то, что мешает понять главную мысль и прочитать текст: мысль, иерархия, читаемость, контраст.
+2. Ошибки в тексте показывай всегда, отдельной строкой: их исправить быстро, а заметны они всем.
+3. Потом – отступы, выравнивание, цвет, детали.
+Каждая правка – конкретная: что именно, где и как исправить. Не «улучшить контраст», а «заголовок светло-серый на бежевом фоне – сделайте его почти чёрным или подложите под него полупрозрачную плашку».
+
+## Формат ответа
+**Главное впечатление:** одна фраза – что работает и в чём главная проблема.
+
+**Три правки:**
+1. [что не так] – [где] – [как исправить]
+2. [что не так] – [где] – [как исправить]
+3. [что не так] – [где] – [как исправить]
+
+**Ошибки в тексте:** [список – или «не нашёл»]
+
+**По желанию:** не больше трёх коротких пунктов одной строкой – или «остальное в порядке».
+
+**Вердикт:** «можно публиковать», «поправить три пункта – и можно» или «лучше переделать основу» – и одна фраза почему.
+
+## Правила
+- Не больше трёх главных правок, даже если нашёл больше. Остальное – в «по желанию».
+- Хвали коротко и по делу, одной фразой, без восторгов.
+- Не переделывай макет сам, если об этом не просили. По просьбе – опиши, как выглядела бы исправленная версия, или подготовь новое ТЗ (навык art-director-brief, если он есть).
+- Если изображение видно не целиком или в плохом качестве – скажи, что именно проверить не удаётся.
+- Если не уверен, ошибка ли это (имя, термин, название), отметь как «проверьте», а не как ошибку.
+- Когда пользователь присылает исправленную версию, сначала проверь, исправлены ли три правки, и только потом ищи новые.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Ставим</p>
+    <h2>Как поставить</h2>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Если в нейросети есть навыки</h3><p>Как в уроках 2 и 3: загрузите zip-архив целиком в разделе навыков в настройках – или прикрепите его в любой чат и напишите «Установи навык.». Если архив сам распаковался после скачивания, снова сожмите папку в zip. Навыки есть, например, в ChatGPT и Claude – обычно на части тарифов.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Если навыков нет</h3><p>Скачайте текстовую версию (.txt) и вставьте её в инструкцию проекта, Gem или Space – или приложите файлом к материалам помощника. Нет и проектов – вставьте текст в начало чата, как обёртку из бонуса <a href="../bonus-bez-proektov/">«Помощник там, где нет „Проектов“»</a>. Все три текста в поле инструкции могут не поместиться – тогда соедините их запросом ниже.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Сохраните к себе</h3><p>Zip и txt – в папку «Мои помощники», в подпапку дизайн-помощника. Если потом будете докручивать навык, правьте этот файл, а не заводите «навык 2».</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Собираем систему</p>
+    <h2>Как связать три навыка в&nbsp;одном помощнике</h2>
+    <p>Просто поставить навыки мало. Как мы разбирали в третьем уроке, важно, чтобы в инструкции проекта было прописано, в какой момент какой навык подключается, – тогда помощник не забудет о навыке и не будет хвататься за все сразу. Эту инструкцию проще всего попросить у Конструктора помощников – в том чате, где вы собирали дизайн-помощника, или в новом, если помощника ещё нет.</p>
+<div class="promptbox stepprompt"><p class="plabel">Конструктору помощников · навыки есть</p><pre>Смотри, мой Конструктор помощников. Я собираю дизайн-помощника [или: у меня уже есть проект-помощник по дизайну «[название]»]. Прикрепляю три навыка: art-director-brief – из сырой идеи в ТЗ и промпт на картинку; brand-style – паспорт фирменного стиля и сверка с ним; design-check – проверка готового макета и три главные правки.
+Посмотри на них и на инструкцию моего проекта: [вставьте инструкцию или напишите «инструкции пока нет – собери с нуля, сначала задай мне вопросы»]. Перепиши инструкцию проекта целиком, чтобы помощник сам понимал, когда какой навык подключать и в каком порядке они работают. Названия навыков пиши точно так, как в файлах.
+Если какой-то навык мне сейчас не нужен или повторяет то, что уже есть в инструкции, – скажи прямо, не надо впихивать всё. Проверь, чтобы инструкция уложилась в лимит знаков для настроек проекта. Выдай итог одним документом, который останется просто вставить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="snote">Чтобы было с чем сравнить, вот как может выглядеть кусок такой инструкции. Ваш будет другим – под ваши задачи.</p>
+<div class="promptbox stepprompt"><p class="plabel">Пример · фрагмент инструкции про навыки</p><pre>КОГДА ПОДКЛЮЧАТЬ НАВЫКИ
+– Пришла идея картинки, обложки или фона, но нет чёткого описания – сначала art-director-brief: собери ТЗ и промпт, при необходимости задай 2–3 вопроса.
+– Любая визуальная задача – сверяйся с паспортом стиля через brand-style. Если паспорта ещё нет – предложи собрать его, но не задерживай срочную задачу.
+– Мне прислали или ты подготовил готовый макет, слайд, обложку – перед тем как отдать, проверь через design-check и покажи три главные правки.
+Порядок: art-director-brief → brand-style → результат → design-check.
+Если задача только про текст, без визуала, навыки по дизайну не подключай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="snote">Если навыков в вашей нейросети нет – соберите из трёх текстов одну инструкцию:</p>
+<div class="promptbox stepprompt"><p class="plabel">Конструктору помощников · навыков нет</p><pre>В моей нейросети нет навыков. Прикрепляю три текста навыков для дизайн-помощника: art-director-brief, brand-style и design-check. Собери из них одну инструкцию для [проекта / Gem / Space / начала чата]. Сохрани логику: когда какой режим включается и в каком порядке они работают. Убери повторы, шаблон паспорта стиля оставь отдельным блоком в конце. Если всё не помещается в [лимит знаков, если знаете], предложи, что вынести в отдельный файл материалов. Ничего не добавляй от себя. Выдай одним блоком для копирования.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="rulebox">Проверить, что всё связалось, можно так же, как в уроке: спросите помощника «Расскажи, как ты работаешь». В ответе он должен назвать навыки и момент, когда подключает каждый. В ChatGPT навыки надёжнее подключаются в режиме «Работа».</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Первые запросы</p>
+    <h2>С чего начать</h2>
+    <p>По одному запросу на каждый навык. Голосом тоже можно – главное, чтобы в запросе были площадка и мысль.</p>
+<div class="promptbox stepprompt"><p class="plabel">Бриф арт-директора</p><pre>Нужна [обложка для поста / картинка для сторис / фон для слайда] про [тема]. Вот моя идея как есть: [расскажите своими словами, можно сумбурно]. Сделай ТЗ и промпт для генерации.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox stepprompt"><p class="plabel">Фирменный стиль</p><pre>Прикрепляю [число] примеров моего оформления: [что это – обложки, слайды, скриншоты страниц]. Собери из них паспорт стиля. Чего не видно по примерам – спроси.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox stepprompt"><p class="plabel">Проверка макета</p><pre>Проверь [слайд / обложку / макет] – прикрепляю. Это для [площадка], главная мысль – [какая]. Дай три главные правки.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Учебный пример</p>
+    <h2>Из сырой идеи – в&nbsp;ТЗ</h2>
+    <p>Например, психолог ведёт блог и хочет обложку к посту. Вот что она говорит голосом – и что может собрать навык «Бриф арт-директора», задав один уточняющий вопрос – нужен ли текст на картинке.</p>
+    <div class="said"><p class="saidlab">До · наговор голосом</p><p>«Нужна картинка к посту про то, что я перестала брать телефон в спальню. Хочется что-то спокойное, уютное, без меня в кадре. Ну и чтобы не как в рекламе матрасов. Пост в ленту».</p></div>
+<div class="promptbox stepprompt"><p class="plabel">После · ТЗ и промпт</p><pre>ТЗ: обложка «Спальня без телефона»
+– Цель и площадка: обложка поста в ленту.
+– Аудитория и главная мысль: читатели блога психолога; спальня без телефона – это спокойно и приятно, а не подвиг.
+– Композиция: прикроватная тумбочка крупным планом – бумажная книга, стакан воды, тёплая лампа; телефона в кадре нет. Слева сверху – свободное место под заголовок.
+– Свет: вечерний, тёплый, от лампы, мягкие тени.
+– Палитра: тёплый бежевый, приглушённый терракотовый, кремовый.
+– Стиль и настроение: живое фото, без глянца, спокойно и уютно.
+– Формат: 4:5.
+– Текст на изображении: нет, заголовок добавить в редакторе.
+– Чего избегать: людей в кадре, идеальной рекламной спальни, холодного синего света, гаджетов.
+
+Промпт: Прикроватная тумбочка крупным планом вечером: бумажная книга, стакан воды, тёплая настольная лампа, мягкие тени. Телефона и людей в кадре нет. Тёплая палитра – бежевый, приглушённый терракотовый, кремовый. Живое фото без глянца, спокойное уютное настроение. Свободное место слева сверху. Формат 4:5. Без рекламного интерьера, без холодного света, без гаджетов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="note">Обратите внимание: навык ничего не придумал о самом посте – только то, что прозвучало в наговоре. Решения, которые он принял сам (книга, лампа, палитра), – предложения. Не нравится – так и скажите, он поменяет один-два параметра.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Если что-то не так</p>
+    <h2>Частые затыки</h2>
+    <ul>
+      <li><b>Помощник не подключает навык.</b> Назовите его прямо: «Используй навык design-check для этого макета». В ChatGPT проверьте, что вы в режиме «Работа». Если навык всё равно не подхватывается – вернитесь к Конструктору и уточните инструкцию.</li>
+      <li><b>Замечаний всё равно двадцать.</b> Напомните: «Только три главные правки, остальное – одной строкой».</li>
+      <li><b>На картинке кривые буквы.</b> Это частая беда генераторов, особенно с кириллицей. Генерируйте картинку без текста, а заголовок добавляйте в редакторе.</li>
+      <li><b>Нейросеть не рисует картинки.</b> Не все нейросети умеют создавать изображения. ТЗ и промпт от этого не теряют смысла: отнесите их в ту, что рисует, или отдайте дизайнеру.</li>
+    </ul>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните навыки (zip и txt) и обновлённую инструкцию дизайн-помощника в «Мои помощники». Когда соберёте паспорт стиля – положите его туда же и добавьте в материалы помощника.</p>
+      <p style="margin-top:14px">Поработайте с навыками неделю-две и отметьте, где они промахиваются. Эти наблюдения несите в Конструктор помощников – так навыки станут вашими, а не просто скачанными.</p>
+      <a class="backlink" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Ко всем материалам набора «Учиться легче вместе с ИИ»</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 2 к уроку 3: навыки для дизайн-помощника</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
+

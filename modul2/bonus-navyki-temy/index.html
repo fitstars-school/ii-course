@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Навыки: где взять свои тексты и какие навыки собрать · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Как выгрузить свои тексты из Телеграма, соцсетей и переписок для навыка – и 20 идей навыков-процессов, стандартов и инструментов с готовой фразой для Конструктора помощников.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Бонусы модуля 2: дополнения к стилю бонусов модуля 1 */
+.blk h3.sub{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:30px 0 8px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:600px;margin-top:24px}
+.shot{margin:24px 0 0;max-width:300px}
+.shots .shot{margin:0;max-width:none}
+.shot.wide{max-width:460px}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.shot figcaption{font-size:14px;line-height:1.5;color:var(--muted);margin-top:10px}
+.step ol{margin:14px 0 0 0;padding-left:22px}
+.step ol li{margin-bottom:8px;font-size:17px;color:#3B3143;padding-left:4px}
+.step ol li::marker{color:var(--pink);font-weight:700}
+.step .btns{margin-top:18px}
+.step a.btn,.dark a.btn{color:#fff}
+.facts{margin:0 0 20px}
+.fact{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.fact:first-child{border-top:none;padding-top:0}
+.fact .fk{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);padding-top:4px}
+.fact p{font-size:16px;line-height:1.55;color:#3B3143}
+.parthead{padding-top:70px}
+.parthead .ptag{display:inline-block;background:var(--pink);color:#fff;font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px}
+.parthead h2{font-size:clamp(32px,4.4vw,52px);margin:16px 0 14px}
+.parthead p{max-width:68ch}
+.back{padding-top:44px}
+.back .linkbtn{font-size:16px}
+footer a{color:#B7A9BD;border-bottom:1px solid rgba(183,169,189,.4)}
+footer a:hover{color:var(--pink-soft)}
+footer p+p{margin-top:8px}
+@media (max-width:760px){
+  .fact{grid-template-columns:1fr;gap:4px}
+  .shot,.shot.wide{max-width:100%}
+  .shots{grid-template-columns:1fr 1fr;gap:14px}
+  .parthead{padding-top:54px}
+}
+@media (max-width:420px){.shots{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · бонус</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонусный набор · К уроку 2</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Навыки: <span class="it">где взять свои тексты и&nbsp;какие навыки собрать</span></h1>
+      <p class="hlead">Как достать свои тексты из Телеграма, соцсетей и переписок – и 20 идей навыков с готовой фразой для Конструктора помощников.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">15 минут</span></div>
+      <div><span class="mk">Понадобится</span><span class="mv">Компьютер, ваши тексты и чат с Конструктором помощников</span></div>
+      <div><span class="mk">Результат</span><span class="mv">Материал для навыка и выбранный следующий навык</span></div>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Разделы" style="margin-top:34px">
+    <a class="navlink" href="#vygruzit">А. Выгрузить свои тексты</a>
+    <a class="navlink" href="#skolko">Сколько и какого</a>
+    <a class="navlink" href="#ne-gruzit">Что не грузить</a>
+    <a class="navlink" href="#idei">Б. 20 идей навыков</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Навык настолько хорош, насколько хорош материал</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Нейросеть собирает навык из того, что вы ей принесли. Принесли общие слова – получите общий навык. Принесли свои тексты, свои чек-листы и свои удачные примеры – навык будет работать под вас.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Хорошая новость: почти всё нужное у вас уже есть. Посты, переписки, голосовые, рабочие документы – осталось достать их и сложить в одно место.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Первая часть страницы – о том, где взять материал. Вторая – 20 идей, какие навыки собрать после «Моего голоса», и с какой фразы начать разговор с Конструктором помощников.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap parthead" id="vygruzit">
+  <span class="ptag">Часть А</span>
+  <h2>Как выгрузить свои тексты для навыка</h2>
+  <p>Пять источников – от самого удобного к самому ручному. Не нужно собирать всё сразу: для первого навыка хватит одного-двух.</p>
+</section>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Канал или чат в Телеграме</h3>
+      <p>Самый быстрый способ, если вы регулярно пишете в Телеграм: одна выгрузка – и все ваши тексты за период в одном файле. Это тот же экспорт, что в уроке 2.</p>
+      <ol>
+        <li>Откройте Telegram Desktop на компьютере. В приложении на телефоне такой выгрузки нет.</li>
+        <li>Зайдите в свой канал или чат и нажмите значок с тремя точками в правом верхнем углу – на картинке это цифра 1.</li>
+        <li>Выберите «Экспорт истории чата» – цифра 2.</li>
+        <li>В окне экспорта снимите галочки с фото, видео и файлов – нужен текст. Голосовые можно выгрузить тоже, если хотите их потом расшифровать. Формат – JSON, период – лучше с первого сообщения, если история у вас есть.</li>
+        <li>Телеграм сохранит файл на компьютер. Выглядит он страшно, но внутри – все ваши тексты, даже с реакциями. Его можно целиком прикрепить в чат с нейросетью.</li>
+      </ol>
+      <figure class="shot wide">
+        <img src="assets/eksport-telegram.jpg" alt="Меню канала в Telegram Desktop: значок с тремя точками и пункт «Экспорт истории чата»" width="780" height="848" loading="lazy">
+        <figcaption>Так это выглядит в Telegram Desktop: 1 – значок с тремя точками в правом верхнем углу, 2 – пункт «Экспорт истории чата».</figcaption>
+      </figure>
+      <p class="snote">Выгружаете личную переписку или рабочий чат – в файл попадут и сообщения других людей. Для навыка голоса нужны только ваши, а чужие данные лучше вообще не отдавать нейросети. Об этом – в разделе «Что не грузить».</p>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Посты из ВКонтакте, Инстаграма, с сайта, из рассылки</h3>
+      <p>Здесь проще всего скопировать руками, чем разбираться с выгрузками. Выберите 10–20 своих лучших постов – тех, где вы звучите как вы, – и сложите в один документ.</p>
+      <ol>
+        <li>Откройте свою страницу и пролистайте публикации. Берите не подряд, а те, что нравятся вам самим.</li>
+        <li>Копируйте текст поста целиком в один документ. Между постами – пустая строка. Даты и заголовки можно оставить, оформлять и причёсывать ничего не нужно.</li>
+        <li>Сохраните документ и прикрепите его в чат, когда будете собирать навык.</li>
+      </ol>
+      <p class="snote">У некоторых соцсетей в настройках аккаунта есть запрос копии своих данных – архив приходит на почту. Но для навыка обычно быстрее выбрать лучшие посты руками. Инстаграм – соцсеть, запрещённая в России.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Письма и переписки</h3>
+      <p>Ответы клиентам, письма партнёрам, развёрнутые сообщения подписчикам. В переписке меньше всего «режима автора» и больше всего живого языка – особенно ценно, если публичных текстов у вас мало.</p>
+      <ol>
+        <li>Выберите 10–20 своих сообщений и писем под задачу навыка: для голоса – живые, для навыка «Тон ответов клиентам» – ответы клиентам.</li>
+        <li>Оставьте только свои реплики. Чужие удалите.</li>
+        <li>Обезличьте: уберите имена, телефоны, адреса, суммы, названия компаний и всё, по чему можно узнать человека. Делайте это до того, как отправляете текст в нейросеть, – руками или поиском с заменой в документе.</li>
+      </ol>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Голосовые, эфиры, подкасты</h3>
+      <p>Ваша живая речь – вторая половина навыка «Мой голос». Голосовые подругам, эфиры, записи выступлений: всё, где вы говорите свободно, а не читаете по бумажке. Сначала их нужно перевести в текст – как это сделать и что потом делать с расшифровкой, разобрано в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация: из голоса и видео в текст»</a>.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Рабочие документы и уроки</h3>
+      <p>Для навыков-процессов, стандартов и инструментов нужен не голос, а ваш способ работать. Он часто уже записан: в чек-листах, регламентах, шаблонах, методичках, уроках, удачных отчётах и коммерческих предложениях.</p>
+      <ol>
+        <li>Найдите 2–5 документов, которыми вы довольны, – «вот так у меня правильно».</li>
+        <li>Если есть – добавьте свой чек-лист или список шагов. Если нет – ничего страшного, нейросеть вытащит его из вас вопросами.</li>
+        <li>Перед загрузкой уберите из документов данные клиентов и всё конфиденциальное.</li>
+      </ol>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="skolko">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сколько и какого</p>
+    <h2>Какой материал работает лучше всего</h2>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Живое и своё</h3><p>Тексты, которые писали вы. Тексты, которые вы писали вместе с нейросетью и сильно правили под себя, – тоже подойдут. А вот тексты, которые ИИ написал за вас и вы их почти не трогали, не берите: навык выучит ИИ-штампы, а не вас.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Разное, но под одну задачу</h3><p>Несколько форматов в пределах того, для чего нужен навык: для голоса в блоге – посты, ответы подписчикам и голосовые. А вот официальные письма лучше оставить для отдельного навыка: если смешать всё, навык потеряет точность.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Достаточно, но не гора</h3><p>Для голоса обычно хватает 30–40 постов или около часа свободной речи. Для навыка-процесса или инструмента – ваш чек-лист и 2–5 примеров хорошего результата. Больше – не всегда лучше: длинный материал нейросеть начинает читать по диагонали. Много материала – отдавайте частями.</p></div></div>
+      <div class="def"><span class="dn">4</span><div><h3>Хорошее и плохое</h3><p>Кроме удачных примеров, принесите пару таких, где «вот так не надо», и скажите, что именно не нравится. Из сравнения получаются конкретные правила, а не общие слова.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="ne-gruzit">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Осторожно</p>
+    <h2>Что не грузить</h2>
+    <p>Всё, что вы вставляете в чат или прикрепляете файлом, лучше считать вышедшим из ваших рук. Поэтому:</p>
+    <ul>
+      <li><b>Чужие персональные данные.</b> Имена, телефоны, адреса, диагнозы, суммы, фото документов клиентов – убираем до загрузки.</li>
+      <li><b>Клиентские документы без обезличивания.</b> Договоры, анкеты, медицинские и финансовые документы клиентов. Нужен пример – обезличьте или соберите учебный.</li>
+      <li><b>То, что вы обязались не разглашать.</b> Документы работодателя, материалы под соглашением о конфиденциальности, внутренние цифры компании.</li>
+      <li><b>Пароли, доступы, номера карт.</b> Ни в каком виде – даже внутри скриншота.</li>
+      <li><b>Чужие тексты под видом своих.</b> Для навыка голоса они просто вредны: голос получится не ваш.</li>
+    </ul>
+    <p class="rulebox">Сомневаетесь насчёт куска – не берите его. Навык почти никогда не держится на одном конкретном документе.</p>
+  </div></div>
+</section>
+
+<section class="wrap parthead" id="idei">
+  <span class="ptag">Часть Б</span>
+  <h2>20 идей навыков</h2>
+  <p>Как в уроке 2, навыки бывают трёх типов: процессы – как вы что-то делаете по шагам, стандарты – каким должен быть результат, инструменты – готовые форматы и шаблоны. Ниже по 6–7 идей каждого типа: для кого, что делает навык, какой материал принести и готовая фраза, чтобы начать.</p>
+  <p class="rulebox">Не собирайте всё подряд. Выберите один навык – тот, что вы объясняете нейросети чаще всего. Скопируйте фразу, вставьте в чат с Конструктором помощников и отвечайте на его вопросы – лучше голосом. Как установить готовый навык из архива – в <a href="https://aiforlife.ru/ii-course/modul2/urok2/">уроке 2</a>.</p>
+</section>
+
+<section class="wrap">
+
+    <section class="group reveal" id="processy">
+      <div class="ghead"><p class="glabel">Навыки-процессы</p><span class="grange">01 – 07</span></div>
+
+      <details class="task">
+        <summary><span class="num">01</span><span class="tname">Разбор заявки клиента</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Психологи, юристы, косметологи, дизайнеры – все, кто получает заявки и решает, как на них ответить.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>По тексту заявки выделяет запрос, недостающие данные и «красные флаги», предлагает уточняющие вопросы и черновик ответа.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваши шаги разбора своими словами, 3–5 обезличенных заявок с вашими ответами, список того, что для вас настораживает.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-процесс «Разбор заявки клиента». Я <span class="tok">[кто вы и с кем работаете]</span>. Когда приходит заявка, я обычно смотрю на <span class="tok">[что для вас важно в заявке]</span>. Помоги собрать навык: задавай вопросы по одному, скажи, какие примеры заявок и моих ответов тебе нужны, и в конце собери навык одним архивом, чтобы его можно было скачать.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">02</span><span class="tname">Подготовка к консультации</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Консультанты, коучи, психологи, нутрициологи, юристы, наставники.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>По анкете или переписке собирает короткую карточку клиента, план встречи и вопросы, которые стоит задать.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Структуру вашей консультации, вашу анкету, пример подготовки, которой вы довольны.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-процесс «Подготовка к консультации». Я провожу <span class="tok">[какие консультации и для кого]</span>. Перед встречей я обычно <span class="tok">[как вы готовитесь сейчас]</span>. Хочу, чтобы навык по анкете или переписке с клиентом собирал карточку клиента, план встречи и вопросы. Что тебе нужно от меня? Спрашивай по одному вопросу, а в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">03</span><span class="tname">Проверка договора по чек-листу</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Юристы, бухгалтеры, фрилансеры и предприниматели, которые регулярно подписывают типовые договоры.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Проходит договор по вашему чек-листу, отмечает пункты, которые не совпадают с вашими правилами, и формулирует вопросы к другой стороне. Помогает не пропустить важное, но не заменяет юриста.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваш чек-лист проверки, типовые спорные пункты, обезличенный договор с вашими пометками.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-процесс «Проверка договора по чек-листу». Я <span class="tok">[кто вы]</span>, обычно проверяю договоры <span class="tok">[какие: с клиентами, с подрядчиками, аренды]</span>. Вот на что я смотрю: <span class="tok">[пункты вашего чек-листа или как вы проверяете своими словами]</span>. Помоги превратить это в навык, который проходит договор по шагам и отмечает расхождения. Задавай вопросы по одному, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">04</span><span class="tname">Сбор контент-плана</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Блогеры, эксперты, СММ-специалисты, все, кто ведёт свой канал.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Собирает контент-план на неделю или месяц по вашим рубрикам, целям и ближайшим событиям – запуску, эфиру, акции.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваши рубрики, цели канала, план, который у вас сработал, ограничения: сколько постов в неделю вы реально пишете.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-процесс «Сбор контент-плана». Я веду <span class="tok">[где: Телеграм-канал, блог, страницу]</span> для <span class="tok">[кого]</span>. Мои рубрики: <span class="tok">[перечислите или скажите, что их пока нет]</span>. Пишу <span class="tok">[сколько]</span> постов в неделю. Помоги собрать навык, который составляет контент-план по моему подходу. Скажи, какие примеры тебе принести, задавай вопросы по одному и в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">05</span><span class="tname">Аудит урока или курса</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Методисты, авторы курсов, преподаватели, наставники онлайн-школ.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Проходит урок, программу или лендинг курса по вашим критериям и выдаёт замечания с примерами, что поправить.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваши критерии аудита, пример разобранного урока с вашими замечаниями, типичные ошибки, которые вы ловите.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-процесс «Аудит урока или курса». Я <span class="tok">[кто вы]</span>, провожу аудит <span class="tok">[чего: уроков, программ, курсов целиком]</span>. Сейчас моя технология живёт в голове: <span class="tok">[расскажите своими словами, на что вы смотрите и в каком порядке]</span>. Помоги оцифровать её в навык. Задавай вопросы по одному, скажи, какие примеры принести, и в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">06</span><span class="tname">Начало работы с новым клиентом</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Специалисты на долгих проектах: дизайнеры, маркетологи, бухгалтеры, наставники, репетиторы.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Ведёт по вашим шагам старта: приветственное письмо, анкета, что запросить у клиента, план первых встреч.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваши шаги старта, шаблоны писем и анкет, частые вопросы клиентов в начале работы.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-процесс «Начало работы с новым клиентом». Я <span class="tok">[кто вы и с кем работаете]</span>. Когда появляется новый клиент, я делаю так: <span class="tok">[шаги своими словами, можно сумбурно]</span>. Помоги собрать навык, который проводит меня по этим шагам и готовит письма и анкеты в моём формате. Спрашивай по одному вопросу, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">07</span><span class="tname">Из созвона – в задачи и договорённости</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Все, у кого много созвонов: с клиентами, командой, подрядчиками.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>По расшифровке встречи собирает договорённости, задачи со сроками и ответственными и письмо-итог участникам.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Обезличенную расшифровку одной встречи, формат итога, который вам удобен, пример хорошего письма после встречи.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-процесс «Из созвона – в задачи». После встреч с <span class="tok">[кем: клиентами, командой]</span> мне нужно <span class="tok">[что: список задач, письмо-итог, обновить план]</span>. Сейчас я делаю это вручную так: <span class="tok">[как]</span>. Помоги собрать навык, который по расшифровке встречи выдаёт итог в моём формате. Задавай вопросы по одному, скажи, какой пример расшифровки принести, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="group reveal" id="standarty">
+      <div class="ghead"><p class="glabel">Навыки-стандарты</p><span class="grange">08 – 14</span></div>
+
+      <details class="task">
+        <summary><span class="num">08</span><span class="tname">Мой голос для официальных текстов</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Тем, кто на уроке собрал голос для блога, а пишет ещё и письма, статьи, профессиональные тексты.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Второй голос – деловой: как вы звучите в письмах партнёрам, в статьях, в официальной переписке. Отдельно от голоса для блога, чтобы оба работали точно.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>10–20 ваших писем и профессиональных текстов, примеры «так я не пишу», ваши «да» и «нет».</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать второй навык-стандарт «Мой голос для официальных текстов». Навык «Мой голос» для блога у меня уже есть, а этот нужен для <span class="tok">[писем партнёрам, статей, официальной переписки]</span>. Я принесу свои тексты. Помоги собрать навык так, чтобы он не путался с голосом для блога. Что тебе нужно от меня? Спрашивай по одному вопросу, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">09</span><span class="tname">Тон ответов клиентам</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Мастера, студии, онлайн-школы, специалисты, которые много переписываются с клиентами.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Держит единый тон: на «вы» или на «ты», как вы извиняетесь, как отказываете, как напоминаете об оплате, чего никогда не обещаете.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>10–20 ваших удачных ответов клиентам (обезличенных), пару неудачных, фразы, которые вы не используете.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-стандарт «Тон ответов клиентам». Я <span class="tok">[кто вы]</span>, клиентам пишу в <span class="tok">[мессенджере, почте, соцсетях]</span>. Мне важно, чтобы ответы были <span class="tok">[какими: тёплыми, короткими, без заискивания]</span>. Я принесу свои обезличенные ответы. Помоги вынуть из них правила: как я обращаюсь, отказываю, напоминаю, чего не пишу. Спрашивай по одному вопросу, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">10</span><span class="tname">Стандарт оформления документов</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Бухгалтеры, юристы, методисты, HR, все, у кого документы должны выглядеть одинаково.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Знает ваши правила: структуру, заголовки, нумерацию, обязательные блоки, как оформлять даты и суммы. Собирает документ по ним и проверяет готовый.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>1–3 образцовых документа без реальных данных, ваши правила оформления, требования организации, если они есть.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-стандарт «Оформление моих документов». Я готовлю <span class="tok">[какие документы: отчёты, справки, методички, письма]</span>. У меня есть образцы, как должно быть. Помоги вынуть из них правила оформления и собрать навык, который оформляет документы по ним и проверяет готовые. Скажи, какие образцы тебе нужны, задавай вопросы по одному и в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">11</span><span class="tname">Правила моей методики</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Авторы методик, тренеры, нутрициологи, психологи, преподаватели – все, у кого есть свой подход.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Следит, чтобы ответы и материалы не противоречили вашему подходу: ваши принципы, термины, что вы рекомендуете, а чего у вас «так не делают».</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Описание методики своими словами, ваши уроки или статьи о ней, список «мы так не делаем».</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-стандарт «Правила моей методики». Я <span class="tok">[кто вы]</span>, работаю по своему подходу: <span class="tok">[опишите его в двух-трёх фразах]</span>. Хочу, чтобы нейросеть в любом чате опиралась на мои принципы и не советовала то, что моей методике противоречит. Помоги собрать навык: задавай вопросы по одному, скажи, какие материалы принести, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">12</span><span class="tname">Стандарт учебного материала</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Методисты, преподаватели, эксперты, которые делают уроки, гайды и задания.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Знает, каким должен быть ваш урок или гайд: структура, длина, как формулировать задания, что обязательно в конце. Собирает материалы по этому стандарту.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>1–2 эталонных урока или гайда, требования площадки, ваши правила для заданий.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-стандарт «Мой учебный материал». Я делаю <span class="tok">[уроки, гайды, задания]</span> для <span class="tok">[кого]</span>. Хороший материал у меня выглядит так: <span class="tok">[что в нём обязательно есть]</span>. Я принесу эталонные примеры. Помоги собрать навык, по которому нейросеть делает материалы в этом стандарте. Спрашивай по одному вопросу, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">13</span><span class="tname">Мой словарь терминов</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Эксперты в нишах со своим языком: медицина и красота, право, финансы, психология, IT для новичков.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Следит, чтобы вещи назывались одинаково и понятно: какие термины вы используете, какие заменяете простыми словами, каких слов избегаете.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Список ваших терминов с объяснениями, слова-исключения, пару текстов, где термины использованы правильно.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-стандарт «Мой словарь терминов». Я работаю в <span class="tok">[ниша]</span>, пишу для <span class="tok">[кого: коллег, клиентов-новичков]</span>. Мне важно, чтобы термины везде назывались одинаково, а сложные слова объяснялись так, как объясняю я. Помоги собрать навык: задавай вопросы по одному, скажи, в каком виде принести список терминов, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">14</span><span class="tname">Что я не обещаю: этика и оговорки</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Психологи, косметологи, нутрициологи, тренеры, финансовые консультанты – все, кому нельзя обещать лишнего.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Проверяет тексты на обещания результата, утверждения, которые нельзя делать в вашей профессии, и добавляет нужные оговорки.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваши профессиональные правила и ограничения, требования площадок, примеры формулировок «так можно – так нельзя».</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-стандарт «Что я не обещаю». Я <span class="tok">[кто вы]</span>, и в моей профессии есть то, что нельзя обещать и утверждать: <span class="tok">[перечислите, что знаете]</span>. Хочу, чтобы навык проверял мои тексты и ответы клиентам на такие места и предлагал честные формулировки. Помоги собрать навык: задавай вопросы по одному, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="group reveal" id="instrumenty">
+      <div class="ghead"><p class="glabel">Навыки-инструменты</p><span class="grange">15 – 20</span></div>
+
+      <details class="task">
+        <summary><span class="num">15</span><span class="tname">Еженедельный отчёт</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Сотрудники, руководители, фрилансеры, которые отчитываются перед клиентом или командой.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Из ваших заметок, списка дел или наговора собирает отчёт в одном и том же формате: что сделано, что в работе, где риски, какая нужна помощь.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Шаблон отчёта, 1–2 отчёта, которыми вы довольны, требования того, кто отчёт читает.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-инструмент «Еженедельный отчёт». Я отчитываюсь перед <span class="tok">[кем]</span> каждую <span class="tok">[неделю, две недели]</span>. Отчёт должен быть в таком формате: <span class="tok">[разделы или «покажу на примере»]</span>. Хочу наговаривать или скидывать заметки, а получать готовый отчёт. Помоги собрать навык: что тебе нужно от меня? Спрашивай по одному вопросу, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">16</span><span class="tname">Коммерческое предложение по шаблону</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Фрилансеры, агентства, эксперты, которые отправляют предложения после разговора с клиентом.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>По вашим заметкам о клиенте собирает предложение по вашей структуре: задача клиента, что вы сделаете, этапы, сроки, ваши пакеты.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваше лучшее предложение, описание пакетов и условий, частые вопросы клиентов перед покупкой.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-инструмент «Коммерческое предложение по моему шаблону». Я <span class="tok">[кто вы]</span>, продаю <span class="tok">[услуги]</span>. После разговора с клиентом у меня есть заметки, а нужно предложение в моём формате. Я принесу своё лучшее предложение и описание пакетов. Помоги собрать навык: задавай вопросы по одному, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">17</span><span class="tname">Карточка товара или услуги</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Мастера, магазины, продавцы на маркетплейсах, эксперты с линейкой услуг.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Пишет описание по единому шаблону: для кого, что входит, какой результат, сколько длится, какие ограничения. С учётом требований площадки.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>3–5 удачных карточек, требования площадки к длине и формату, слова, которых избегаете.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-инструмент «Карточка товара или услуги». Я продаю <span class="tok">[что]</span> на <span class="tok">[где: сайт, маркетплейс, соцсети]</span>. Хорошая карточка у меня выглядит так: <span class="tok">[что в ней должно быть]</span>. Я принесу удачные примеры. Помоги собрать навык, который пишет карточки по этому шаблону. Спрашивай по одному вопросу, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">18</span><span class="tname">Таблица учёта с моими столбцами и формулами</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Все, кто ведёт учёт: клиентов, записей, оплат, расходов, заказов.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Из сырых данных собирает таблицу в вашем формате – с нужными столбцами, формулами и итогами – и объясняет, где что посчитано.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Вашу таблицу-образец без реальных данных, список нужных итогов, где вы ведёте таблицы.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-инструмент «Моя таблица учёта». Я веду учёт <span class="tok">[чего]</span> в <span class="tok">[Excel, Google Таблицах, другом]</span>. Мне нужны столбцы <span class="tok">[какие]</span> и итоги <span class="tok">[какие: сумма за месяц, долги, средний чек]</span>. Я принесу образец без реальных данных. Помоги собрать навык, который делает таблицы в этом формате. Спрашивай по одному вопросу, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">19</span><span class="tname">Анкета или бриф для клиента</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Дизайнеры, маркетологи, нутрициологи, организаторы, все, кто перед работой собирает информацию.</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Под конкретную услугу собирает анкету или бриф с вашими вопросами – не длиннее, чем клиент готов заполнить.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваши анкеты, вопросы, которые вы всегда задаёте устно, то, что клиенты обычно забывают сообщить.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-инструмент «Анкета для клиента». Я <span class="tok">[кто вы]</span>, перед работой мне нужно узнать у клиента <span class="tok">[что]</span>. Услуги у меня разные: <span class="tok">[перечислите]</span>. Хочу, чтобы навык собирал анкету под конкретную услугу из моих вопросов. Я принесу свои анкеты. Помоги собрать навык: задавай вопросы по одному, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+
+      <details class="task">
+        <summary><span class="num">20</span><span class="tname">Памятка для клиента</span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="facts">
+            <div class="fact"><span class="fk">Для кого</span><p>Косметологи, мастера, тренеры, репетиторы, консультанты – все, кто даёт клиенту инструкции «до» и «после».</p></div>
+            <div class="fact"><span class="fk">Что делает</span><p>Превращает ваши объяснения в короткую памятку единого вида: что делать, чего не делать, когда обращаться к вам.</p></div>
+            <div class="fact"><span class="fk">Что принести</span><p>Ваши памятки или то, что вы обычно объясняете устно, формат: сообщение в мессенджер, PDF, карточка.</p></div>
+          </div>
+          <div class="promptbox stepprompt"><p class="plabel">Фраза для Конструктора помощников</p><pre>Я хочу создать навык-инструмент «Памятка для клиента». Я <span class="tok">[кто вы]</span>, клиентам часто объясняю <span class="tok">[что: как подготовиться, как ухаживать после, как выполнять задание]</span>. Хочу получать памятки в одном виде – <span class="tok">[формат]</span>. Я принесу свои объяснения и примеры. Помоги собрать навык: задавай вопросы по одному, в конце собери навык одним архивом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div>
+      </details>
+    </section>
+
+  <div class="lede" style="padding-top:60px"><div class="col">
+    <p class="label">Своей идеи нет в списке</p>
+    <h2 style="margin:14px 0 18px">Найти свой навык</h2>
+    <p>Лучший следующий навык – тот, который вы объясняете нейросети снова и снова. Если не получается сразу его назвать, спросите у самой нейросети: она видит ваши задачи со стороны.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Найти следующий навык</p><pre>Я хочу понять, какой навык мне собрать следующим. Я <span class="tok">[кто вы и чем занимаетесь]</span>. Вот задачи, которые я регулярно объясняю нейросети заново: <span class="tok">[перечислите, можно сумбурно]</span>. Если видишь наши прошлые чаты, посмотри и их.
+
+Помоги разобраться: что из этого процесс, что стандарт, а что инструмент. Предложи один навык, который сэкономит мне больше всего времени, и объясни почему. Не предлагай больше трёх вариантов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сделать сегодня</h2>
+    <div class="dcol">
+      <p>Выберите одну идею. Соберите для неё материал из части А – хватит одного источника. Откройте чат с Конструктором помощников, вставьте фразу и отвечайте на вопросы.</p>
+      <p style="margin-top:14px"><b>Один навык, который работает, полезнее десяти, установленных на всякий случай.</b></p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap back">
+  <a class="linkbtn" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Все материалы набора «Учиться легче вместе с ИИ»</a>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">«Учиться легче вместе с ИИ»</a>, модуль 2: материал к уроку 2</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</body>
+</html>
