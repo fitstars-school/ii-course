@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конспект урока 4 · Правда или вымысел: как ловить галлюцинации ИИ · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 4 модуля 2: почему результат ИИ не устраивает, четыре красных флага галлюцинаций и навык фактчекинга для своего помощника.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · урок 4</span></div>
+  <div class="kmark"><span class="kn">4</span><span class="kt">Конспект урока</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Правда или вымысел: как ловить галлюцинации ИИ</h1>
+      <p class="hlead">Отличить галлюцинацию от нечёткой задачи, знать четыре красных флага и при необходимости подключить к помощнику навык фактчекинга.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Видео</span><span class="mv">30 минут</span></div>
+      <div><span class="mk">Практика</span><span class="mv">Статья с проверкой фактов</span></div>
+      <div><span class="mk">Останется в папке</span><span class="mv">Навык фактчекинга – если он вам нужен</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>из урока</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Не каждая ошибка или не устраивающий вас результат – это галлюцинация. Иногда задача поставлена недостаточно чётко, иногда в процессе работы есть пробел.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Когда результат кажется неправильным, начинайте с трёх вопросов: достаточно ли я объяснил задачу, были ли у помощника нужные инструкции и файлы – и только потом: нет ли здесь того, что нейросеть могла додумать.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Четыре красных флага: слишком красивые цитаты и авторство, точные цифры, обобщения, свежие новости и законы.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Руками гуглить каждый факт – не вариант. Просите у нейросети ссылки и подтверждения, а для важных материалов подключайте навык фактчекинга.</p></div>
+      <div class="mline"><span class="mn">5</span><p>Навык можно найти готовый, собрать под свою нишу или обойтись глазами и красными флагами. Не перегружайте помощника: если проверка вам не нужна – не делайте.</p></div>
+    </div>
+  </div>
+</div>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Важная граница</p>
+      <h2>Не каждая ошибка – галлюцинация</h2>
+      <p>Многие говорят, что ИИ сложно доверять: он что-то додумывает, придумывает, путается. Но результат, который вас не устраивает, может появиться по трём разным причинам.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Недостаточно чётко поставленная задача</h3><p>Если написать «сделай хороший пост по моему продукту», скорее всего, нейросеть даст очень средний ответ. Мы не сказали, про какой продукт, что значит для нас «хороший», какая длина, какой ритм, какой tone of voice. С этим мы как раз учились разбираться в первую очередь.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Пробел в процессе работы</h3><p>Особенно когда мы начинаем работать с помощником: он приносит ерунду, а мы не замечаем, что пропустили какой-то этап. Ждём от него публикаций на актуальные инфоповоды – а сами эти инфоповоды ему не приносим. Или не дали ему, например, топ-25 триггерных заголовков и их формулы. Тогда он достроит процесс так, как сам решит, – и именно этот процесс нас не устраивает. Замечать такие пробелы и достраивать процесс мы учились в прошлом уроке.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Собственно галлюцинации</h3><p>Когда ИИ придумывает красивые истории и красивые факты, путает их, немножко обобщает выводы. В общем, то, что он на самом деле придумал.</p></div></div>
+      </div>
+      <p style="margin-top:26px">Поэтому, когда результат кажется вам неправильным, я бы начинала с трёх простых вопросов:</p>
+      <ul>
+        <li>Достаточно ли я объяснил или объяснила, что нужно сделать?</li>
+        <li>Были ли у моего помощника нужные инструкции, файлы и документы, чтобы выполнить задачу?</li>
+        <li>И только потом: нет ли в результате того, что нейросеть могла просто додумать?</li>
+      </ul>
+      <p>Третьим вопросом мы и занимаемся в этом уроке: настраиваем свой авторский радар, чтобы ловить галлюцинации, разбираемся, по каким признакам их ловить и какие инструменты для этого уже есть в нейросетях. А ещё собираем отдельный навык – фактчекер. Встраивать его стоит, если у вас есть такая задача. Если пока не актуально – пробегайтесь глазами по тем же признакам: фактчекер в любом случае строится на этих принципах.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Из моего опыта</p>
+      <h2>Уверенно, красиво – и неправда</h2>
+      <p>Я подбирала цитаты под выступления и уроки, и меня невероятно раздражало, что нейросеть придумывала цитаты, приписывала их другим людям, путалась. Потом я искала подборки фильмов: какие там сцены, кто из героев что делал. Он и там путался.</p>
+      <p class="quote">Вроде бы всё выглядит красиво, он выдал уверенный результат – а ты идёшь проверить в поиске, и такой цитаты нет, или она другого автора, или такой сцены в фильме нет.</p>
+      <p>Каждую цитату вручную ведь не будешь проверять. Отсюда и первый красный флаг.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Радар</p>
+      <h2>Четыре красных флага</h2>
+      <p>Мы сейчас не пугаемся – просто обозначаем точки, на которые стоит обращать более пристальное внимание, когда вы публикуете любой контент: уроки, посты, статьи. Это базовые места, где нейросеть может что-то додумать, а другие люди это быстро заметят.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Слишком красивые цитаты и авторство</h3><p>Всё слишком красиво, слишком прилизано – и при этом приписано конкретному человеку или конкретному произведению. Здесь важно перепроверить лишний раз.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Очень точные цифры</h3><p>12 стран, 180 тысяч человек, 2 человека из 3. Про любые такие данные нужно понимать, откуда он берёт статистику: цифры легко искажаются, берутся не те источники.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Обобщения</h3><p>«Все эксперты», «большинство людей», «массовый тренд». Такие выводы часто носят очень общий характер и не сильно соответствуют реальной статистике. За них цепляется взгляд – и всегда найдутся люди, которые скажут: «да не большинство, мы не такие».</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Свежие новости, законы, инфоповоды</h3><p>Всё, что происходит прямо сейчас. Вышла новость – кто-то передал её одним образом, кто-то другим, данные исказились. И доверие к тем, кто распространяет недостоверный контент, теряется сразу.</p></div></div>
+      </div>
+      <p class="rulebox">Нейросети, конечно, прокачались: дают ссылку на фильм, на источник, прямо подстилают соломку – «вот здесь я опирался на этот источник». Но не всегда нейросеть действительно сходила в этот источник и правильно забрала оттуда информацию. Она может её немножко исказить.</p>
+      </div></div>
+    </section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <h2>Практика</h2>
+    <p class="pmeta">Правда или вымысел · поставьте видео на паузу</p>
+    <p class="pintro">Пишем статью, в которой нарочно много мест, где нейросеть может накосячить, – и учимся проверять её не руками и не гуглением, а вместе с нейросетью. Потом ищем или собираем навык фактчекинга. Делать это можно в контент-помощнике или в обычном чате – не так важно. Я показываю в ChatGPT.</p>
+    <div class="svcbar">
+      <p class="svclab">Где вы работаете</p>
+      <div class="svcbtns">
+          <button class="svcbtn on" type="button" data-svcbtn="chatgpt">ChatGPT</button>
+          <button class="svcbtn" type="button" data-svcbtn="claude">Claude</button>
+          <button class="svcbtn" type="button" data-svcbtn="gemini">Gemini</button>
+          <button class="svcbtn" type="button" data-svcbtn="giga">ГигаЧат</button>
+          <button class="svcbtn" type="button" data-svcbtn="deepseek">DeepSeek</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Попросите статью с «опасными» местами</h3>
+        <p>Представим, что нужно написать статью – не просто для Телеграма, а, например, для своего сайта или Яндекс.Дзена. Задайте нейросети параметры, где она потенциально может ошибиться (не обязательно все): известная цитата, примеры из фильмов, известные авторы и источники, конкретные цифры, свежие новости, тренды. Всё то, что делает текст более содержательным и интересным.</p>
+        <p>Промпт для практики – ниже: подставьте свою тему или оставьте мою. Структуру и подачу статьи сейчас не анализируем – смотрим только, где нейросеть может наврать.</p>
+        <div class="pgroup"><div class="promptbox stepprompt"><p class="plabel">Промпт для статьи</p><pre>Напиши статью для моего [сайта / блога на Дзене] на тему [ваша тема, например: как ИИ меняет работу экспертов]. Объём – около 5000 знаков, для широкой аудитории, живым языком.
+Чтобы текст был содержательным и интересным, обязательно включи:
+– одну-две известные цитаты с указанием автора;
+– пример из фильма или книги;
+– ссылки на известных авторов, исследования или источники;
+– конкретные цифры и статистику;
+– свежие новости и тренды по теме за последний год.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div></div>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Сравните: помощник и обычный чат</h3>
+        <p>Я отправила один и тот же промпт в режиме «Работа», где подключены мои навыки, и в обычный чат со средним уровнем размышления. В режиме «Работа» он думал долго: ему нужно было проверить много источников – он искал на 27 сайтах, и видно, на какие источники он опирается. Мы не пугаемся: задача ресурсная, мы просим много данных и фактов.</p>
+        <p>Обычный чат выдал статью быстро: цитата Артура Кларка, «Морган Стэнли встроили» – когда, непонятно. Данных много, но где он что придумал и на что ссылается, проверить невозможно. К тому же мой навык редактирования в простом чате не применился: рубленые предложения, которые я не выношу, – так я никогда не напишу. Убедительно, возможно красиво, но эту статью я бы не использовала.</p>
+        <p class="snote">Признак: если на такую задачу ИИ выдал результат очень быстро, скорее всего, он что-нибудь вам наврал.</p>
+        <div class="hint">
+          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>На уроке – режим «Работа» против обычного чата. В режиме «Работа» можно смотреть, по какому маршруту идёт работа и на какие источники он опирается.</p></div>
+          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Сравните помощника, в котором собраны ваши инструкции, и обычный новый чат – тем же промптом.</p></div>
+          <div class="hs" data-svc="gemini"><p class="hlab">Gemini</p><p>Сравните помощника, в котором собраны ваши инструкции, и обычный новый чат – тем же промптом.</p></div>
+          <div class="hs" data-svc="giga"><p class="hlab">ГигаЧат</p><p>Отправьте промпт и посмотрите на результат через четыре красных флага.</p></div>
+          <div class="hs" data-svc="deepseek"><p class="hlab">DeepSeek</p><p>Отправьте промпт и посмотрите на результат через четыре красных флага.</p></div>
+        </div>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Попросите ссылки и подтверждения</h3>
+        <p>Если вы сделали это просто в чате и получили такой результат, скажите ему прямо. В проектах мы обычно выстраиваем процесс «сначала принеси мне вот это, я потом проверю». В обычном чате, без помощника и без внятной инструкции, он делает так, как сам додумал.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Как я сказала на уроке</p><pre>Мне нужны ссылки и подтверждения, готовые для копирования, а не просто готовая статья.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p style="margin-top:18px">После этого он начал собирать карту фактов и подтверждений и сам себя перепроверять. Можно так и попросить:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Составь карту фактов и доказательств.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>Пройдите по ссылкам</h3>
+        <p>По ссылкам можно переходить. Если источник на английском, а языком вы не владеете, – в браузерах есть встроенный перевод. Через поиск Ctrl+F ищите на странице конкретные данные и статистику.</p>
+        <p>Особенно внимательно – к обобщениям, нашему третьему флагу: «большинство», «меньшинство». Важно перепроверить, на основе каких данных он сделал такой вывод.</p>
+        <p class="snote">Честно: в том формате, в котором он спонтанно выдаёт результат, работать не очень удобно. Глазами пробежаться можно всегда, но для важных материалов нужен помощник или навык.</p>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <h3>Найдите готовый навык фактчекинга</h3>
+        <p>Навык пригодится, если фактчекинг нужен перед особо важными материалами: сводка новостей, глава диссертации. Способа два: надиктовать свою задачу по нашему алгоритму «контекст, задача, результат», чтобы нейросеть предложила сформировать собственный навык, – или поискать готовый. Я показываю поиск и добавляю контекст о себе.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Найди готовый навык для фактчекинга, который можно установить в ChatGPT. Он должен проверять цифры, данные и так далее. Я хочу писать диссертацию в этом году.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p style="margin-top:18px">ChatGPT справедливо заметил: существует ли статья вообще и подтверждает ли она эту фразу – это две разные проверки. Для серьёзной научной литературы он сразу предложил навык по поиску научной литературы. Глубина навыка управляется вами: можно совсем базовую проверку – «посмотри, что не переврал, на какие источники ссылается, расставь метки: проверено, не подтверждено», – а можно целую работу.</p>
+        <p>В ответе он нашёл вариант «фактчекинг плюс цитата-чекинг»: извлекает из текста цитаты и цифры, для каждой делает строчку с расхождением и вердиктом. Дальше я сузила задачу:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Моё уточнение</p><pre>Давай пока попроще – для ведения контента в блоге, без научных диссертаций.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p style="margin-top:18px">Он посоветовал взять первый вариант и адаптировать его: короткий отчёт, быстрая проверка поста и тщательная – экспертной статьи. Как раз то, что нужно. Я бы в этом случае брала конкретные инструменты и немножко адаптировала под себя:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Финальный шаг</p><pre>Давай так и сделаем. И дай скачать его напрямую.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+        <h3>Настройте навык под свою нишу</h3>
+        <p>Если у вас сложная ниша – юридическая, что-то про законодательство, – спрашивайте конкретно под неё. Навык сразу будет предложен под вашу нишу и тему.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Например, для юридического блога</p><pre>Я веду юридический блог, и мне нужно проверять фактичность всех утверждений, свежих законов и так далее на действительность. Понятное дело, что финальная проверка за мной, но что ты можешь сделать, чтобы мне легче давался этот процесс и я не гуглил каждую строчку?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p style="margin-top:18px">Фактчекинг может быть направлен и на сверку с первоисточником: вы пишете короткие заметки по своей или чьей-то книге и не хотите перевирать утверждения автора.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Сверка с первоисточником</p><pre>Я пишу такую-то историю для того-то, беру такие источники. Мне важно, чтобы эта история не перевиралась, чтобы я не расходился с автором. Мне нужно, чтобы ты делал финальный фактчекинг: перед тем как выдать мне текст, проверял его по критериям, которые для меня важны, и только потом выдавал ответ.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">7</span><div>
+        <h3>Установите навык – или решите, что он вам не нужен</h3>
+        <p>В режиме «Работа» видно, как идёт сборка: он создаёт каркас личного навыка, настраивает режимы, проверяет структуру и сценарии, собирает zip-архив. Дальше навык вставляем, сохраняем и устанавливаем – так же, как в уроке про работу с навыками. Если потом будет мешать – его можно удалить.</p>
+        <p>Не перегружайте помощника навыками: это просто способ чуть-чуть его доработать. Дополнительная проверка – это и дополнительный расход токенов. Если вам это не нужно – не делайте, достаточно пробегаться глазами по красным флагам.</p>
+        <div class="hint">
+          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>С навыками, и особенно с их созданием, лучше всего работать в режиме «Работа». Готовый навык приходит zip-архивом – устанавливайте его, как в уроке про навыки.</p></div>
+          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Попросите собрать навык фактчекинга по тем же запросам и установите его так же, как навыки из урока про навыки.</p></div>
+          <div class="hs" data-svc="gemini"><p class="hlab">Gemini</p><p>Если установить навык не получается, сохраните правила фактчекинга текстом в инструкцию помощника или в файл и вставляйте перед проверкой.</p></div>
+          <div class="hs" data-svc="giga"><p class="hlab">ГигаЧат</p><p>Сохраните правила фактчекинга текстом в файл и вставляйте их перед проверкой важного материала.</p></div>
+          <div class="hs" data-svc="deepseek"><p class="hlab">DeepSeek</p><p>Сохраните правила фактчекинга текстом в файл и вставляйте их перед проверкой важного материала.</p></div>
+        </div>
+      </div></div>
+  </div>
+
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>Готово, когда вы прошлись по статье четырьмя красными флагами, получили от нейросети ссылки и подтверждения и решили, нужен ли вам навык фактчекинга – и какой глубины.</p>
+      <p style="margin-top:18px">Это не гарантия и не страховка, а более тщательная работа с утверждениями, которые вы несёте в блог, – вместо «проверь, где ты наврал». Хороший способ быть увереннее в своём контенте.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p style="font-size:16px">Если навык собрали – архив навыка фактчекинга, установленный в вашего помощника.</p>
+      </div>
+    </div>
+  </div>
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
+  <p class="pfb-p">Когда закончите практику, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и опишет вашу работу так, чтобы её было интересно прочитать работодателю или клиенту. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 2», под «Урок 4».</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> какой материал вы проверили, какие красные флаги нашли и решили ли подключать навык фактчекинга.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+  <p class="pfb-p">Больше ничего собирать не нужно: в конце модуля вы просто пришлёте этот документ – <a href="https://aiforlife.ru/ii-course/modul2/itog/">итог модуля 2</a>.</p>
+</div>
+<div class="matbox">
+  <p class="ml">Материалы к уроку</p>
+  <ul>
+    <li><a href="https://aiforlife.ru/ii-course/modul2/itog/">Итог модуля 2</a><span>Соберите заметки четырёх уроков в «Задачу для портфолио 2» и пришлите документ.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-zarabotok/">Как навыки модуля помогут зарабатывать</a><span>Помощник под чужой процесс: кому предложить, как договориться, сделать, сдать и сколько просить.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/">Набор «Учиться легче вместе с ИИ»</a><span>Бонусный набор модуля 2: ИИ-тьютор, конспект из чего угодно, транскрибация и 20 способов учиться с ИИ.</span></li>
+  </ul>
+</div>
+</section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Незаметный шаг</p>
+      <h2>Вы уже касаетесь агентской работы</h2>
+      <p>Режим «Работа» в ChatGPT – это уже работа агентов: к самому ChatGPT подключаются субагенты, необходимые для выполнения вашей задачи. Поздравляю, у вас сделан очень серьёзный шаг, незаметный для вас: вы всё больше погружаетесь в систему работы с нейросетями.</p>
+      </div></div>
+    </section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что забрать<br>из урока</h2>
+    <div class="dcol">
+      <p>Нейросеть любит что-то додумать, приукрасить, перепутать, приписать не тому источнику. Ничего страшного в этом нет – просто принимайте это как данность. Навык фактчекинга можно создать по своим правилам, можно скачать и установить чужой, можно проверять глазами. Если для вас это критично – подключайте инструменты и прокачивайте своего помощника.</p>
+      <p style="margin-top:14px">Второй модуль подходит к концу: мы разобрались, как создавать помощников, которым правда можно доверять и которые опираются на важные для вас инструкции. Не останавливайтесь, улучшайте их, находите новые идеи. Создавать помощников можно и для других людей – это тоже способ наращивать свой заработок.</p>
+      <p style="margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase">Вопросы к себе</p>
+      <ul style="margin-top:12px">
+        <li>Какие из четырёх красных флагов чаще всего встречаются в вашем контенте?</li>
+        <li>Где результат вас не устраивал из-за нечёткой задачи или пробела в процессе, а не из-за галлюцинации?</li>
+        <li>Нужен ли вам навык фактчекинга – или пока достаточно глаз?</li>
+      </ul>
+      <p style="margin-top:26px"><b>В третьем модуле – документы. Таблицы, карусели, PDF, конспекты, презентации: всё, что вы хотите забирать из своего помощника. И учимся работать с ними так, чтобы они сами обновлялись, хранились у вас на компьютере или на облачном диске, а нейросеть сама ходила и складывала их для вас.</b></p>
+    </div>
+  </div>
+</div>
+
+<nav class="wrap" aria-label="Уроки модуля 2" style="margin-top:44px">
+  <div class="nav lessnav">
+    <a class="navlink" href="/ii-course/modul2/urok3/">← Урок 3 модуля 2</a>
+    <a class="navlink" href="https://aiforlife.ru/ii-course/modul2/itog/">Итог модуля 2 →</a>
+  </div>
+</nav>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · конспект урока 4, модуль 2</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
+    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
+    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
+    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>

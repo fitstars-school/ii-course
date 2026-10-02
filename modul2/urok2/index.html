@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конспект урока 2 · Навык «Мой голос»: ИИ пишет как вы · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 2 модуля 2: чем навык отличается от проекта, три типа навыков и как собрать, подключить и прокачать свой первый навык «Мой голос».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.pwrap{margin-top:18px}
+.pwrap+.pwrap{margin-top:26px}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+/*lessnav*/.lessnav-x{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · урок 2</span></div>
+  <div class="kmark"><span class="kn">2</span><span class="kt">Конспект урока</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Навык «Мой голос»: ИИ пишет как вы</h1>
+      <p class="hlead">Чем навык отличается от проекта, какие навыки бывают и как собрать, подключить и прокачать свой первый навык – «Мой голос».</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Видео</span><span class="mv">47 минут</span></div>
+      <div><span class="mk">Практика</span><span class="mv">Повторяйте за мной по видео</span></div>
+      <div><span class="mk">Останется в папке</span><span class="mv">Навык «Мой голос» в zip-архиве</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>из урока</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Проект отвечает на вопрос, что мы делаем, где и с чем работаем. Навык описывает, <b>как</b> мы подходим к решению задачи. И подключается он в любом чате, а не только внутри одной папочки.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Навыки бывают разных типов: навыки-процессы, навыки-стандарты и навыки-инструменты. Ваш голос – это навык-стандарт.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Для навыка «Мой голос» готовим три вещи: примеры ваших текстов, вашу живую речь и явные «да» и «нет» – что вы любите в текстах, а что нет.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Всё делается простыми шагами: дали материал и создали навык – подключили – перешли в режим «Работа», где навык работает.</p></div>
+      <div class="mline"><span class="mn">5</span><p>Навык не застывает. Давайте обратную связь и просите обновить навык – за 2–3 недели такой работы он прокачается невероятно.</p></div>
+    </div>
+  </div>
+</div>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Проект и навык</p>
+      <h2>Зачем нужен навык, если уже есть проект</h2>
+      <p>В предыдущем уроке мы собирали в проект весь контекст и подходы, которые вам важны, например, для создания контента. Проект по-прежнему можно представлять как папочку, в которую вы заходите и выполняете какие-то действия. Но наша жизнь и работа – это не всегда конкретная папочка.</p>
+      <p>Иногда вы идёте в другой чат, не в вашем проекте, и тоже не хотите объяснять 100–500 раз, как правильно для вас писать посты или выполнять рутинные задачи. Вот здесь на арену выходят навыки.</p>
+      <p class="quote">Если проект отвечает на вопрос, что мы делаем, где и с чем работаем, то навык – это инструмент, который описывает, как мы подходим к решению задачи.</p>
+      <p>Навык особенно полезен, когда вы ловите себя на мысли: «Я каждый раз объясняю, как это делать, мне надоело – как перестать?» Вместо одного и того же промпта или файла с длинной инструкцией мы создаём навык, в котором описаны все процессы или стандарты, по которым нужно получать результат.</p>
+      <p>Навык может включиться в любом чате. Иногда вы зовёте его принудительно: «Примени, пожалуйста, навык по написанию моих официальных писем». А иногда нейросеть сама понимает из контекста задачи, что нужен определённый навык, и подтягивает его – механически выбирать не придётся.</p>
+      <p>Разбирать будем на ChatGPT. Этот функционал есть и в Claude, в других нейросетях он, возможно, появился или появится в ближайшее время. Важно понять суть, а не то, какую кнопочку нажимать.</p>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Какие бывают</p>
+      <h2>Три типа навыков</h2>
+      <p>Навыки бывают разных типов – так же, как вы сами умеете делать совершенно разные вещи.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Навыки-процессы</h3><p>Вы умеете что-то делать по определённому процессу, регламенту. Давайте отвяжемся от ИИ: вы прекрасно знаете, как печь блинчики – сначала это, потом это. Или знаете, как провести аудит юридических документов или аудит курса, – у вас есть своя технология. Возможно, она живёт у вас в голове, а с помощью нейросети её можно оцифровать и применять, когда нужно.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Навыки-стандарты</h3><p>Стандарты качества: каким должен быть текст, какими должны быть посты, контент-планы, отчёты. Ваш голос – это тоже навык-стандарт: как вы хотите, чтобы это выглядело.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Навыки-инструменты</h3><p>Например, помогают создавать отчёты с нужными формулами, по нужным форматам, с нужными столбцами. Их тоже можно подключать в нужный момент.</p></div></div>
+      </div>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Начинаем с голоса</p>
+      <h2>«Пиши по-человечески» – это ещё не навык</h2>
+      <p>Голос пригодится не только для контента: для уроков, профессиональных статей, официальных писем, текстов для подкастов. У каждого будет своя сфера, где нужно, чтобы нейросеть писала так, как надо вам.</p>
+      <p>Но прийти и сказать «пиши в моём стиле, пиши по-человечески, пиши не ИИшно» – это короткие команды, а не навык. Если не дать нейросети конкретики, она сделает так, как ей захочется. А с навыком не приходится в 500 раз объяснять: пиши именно так, используй вот такие подходы, тут такие шуточки. Я, например, не использую определённые конструкции предложений, не использую длинные тире. У вас в текстах тоже точно есть такие моменты.</p>
+      <p>Чем больше контекста мы дадим, чтобы наш голос был проанализирован, тем выше вероятность, что навык правда будет работать под нас.</p>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">До практики</p>
+      <h2>Что подготовить для навыка «Мой голос»</h2>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Примеры ваших текстов</h3><p>Хотите писать для блога – подготовьте примеры ваших хороших постов и публикаций. Хотите официальные письма, развёрнутые статьи, профессиональный язык – пригодятся эти тексты. Если хочется и того, и другого, выберите, с каким навыком потренируетесь прямо сейчас, а второй можно отточить или дополнить позже. Как и проект, навык важно не перегрузить, чтобы он работал точечно. Берём тексты, которые правда подходят под результат, который мы хотим получать.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Ваша живая речь</h3><p>Аудиосообщения, подкасты, голосовые подругам о том, что вы делаете, о чём переживаете и волнуетесь, – всё это пригодится для навыка по тону и вашему голосу. Если голосовые у вас простые, а навык нужен для профессиональных текстов, включите диктофон и наговорите хотя бы несколько минут на свою профессиональную тему, как будто рассказываете её где-нибудь. Можно достать записи ваших встреч и расшифровать их. Как транскрибировать аудио, покажу в практике, а подробно – в гайде <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация: из голоса и видео в текст»</a>.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Явные «да» и «нет»</h3><p>Какие тексты вы хотите видеть от помощника, а какие нет. Я, например, как и многие, не люблю супердлинные тире, которые ставит нейросеть, – прямо говорю: ставь средние. Прошу минимально использовать короткие рубленые предложения и предложения с большим количеством тире, а больше – запятых, живой речи, моих оборотов. Люблю юмор и лёгкость в подаче, люблю, когда это как рассказ нормальной, вдумчивой подруги. Не люблю панибратство и позицию сверху. Всё это можно наговорить в свободном режиме уже в процессе практики.</p></div></div>
+      </div>
+      <p class="rulebox">До практики важно подготовить тексты и живую речь – с ними навык создавать проще. Посты можно экспортировать, например, из вашего Телеграм-канала: как это сделать, покажу в практике, а подходы, как доставать тексты легко и играючи, будут в приложении к уроку.</p>
+      </div></div>
+    </section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <h2>Практика</h2>
+    <p class="pmeta">Повторяйте за мной · ставьте видео на паузу</p>
+    <p class="pintro">Создаём навык «Мой голос» через тот же конструктор помощников, что и в предыдущем уроке. Я разбираю свой голос на примере постов в Телеграме, потому что хочу чаще писать именно туда. Ваш стиль и ваши источники могут отличаться. Если сейчас проще повторить за мной – повторяйте, а потом пробуйте на своих задачах.</p>
+    <div class="svcbar">
+      <p class="svclab">Где вы работаете</p>
+      <div class="svcbtns">
+          <button class="svcbtn on" type="button" data-svcbtn="chatgpt">ChatGPT</button>
+          <button class="svcbtn" type="button" data-svcbtn="claude">Claude</button>
+          <button class="svcbtn" type="button" data-svcbtn="other">Другие нейросети</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+                <h3>Попросите конструктор помощников провести вас</h3>
+        <p>Идём в конструктор помощников из предыдущего урока. Чат с ним уже есть в истории, удобнее всего искать его именно там. Самое важное, что вы можете делать в проектах, – переименовывать чаты, чтобы понимать, какого помощника вы в них создавали. И так и пишем:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Я хочу создать свой первый навык «Мой голос». Помоги, пожалуйста, с чего начать, чем закончить, что тебе нужно от меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Мне он предложил идти пошагово: собрать образцы, вынуть правила, разделить голос и редакторские предпочтения. Голос – это мой стиль, как я говорю. Редакторские предпочтения – это «тирешечки и не тирешечки». Потом проверить навык на трёх разных текстах. Материалы подойдут любые: ссылки, файлы с постами, письма, расшифровки голосовых, тексты, которые вы писали вместе. Из них он делает паспорт голоса.</p>
+        <div class="hint">
+          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Конструктор помощников – тот чат, который мы завели в предыдущем уроке. Ищите его в истории чатов.</p></div>
+          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Навыки есть и в Claude. На уроке я показываю на ChatGPT, но суть та же: материалы → пакет навыка → подключение.</p></div>
+          <div class="hs" data-svc="other"><p class="hlab">Другие нейросети</p><p>Функционал навыков, возможно, уже появился или появится в ближайшее время. Важно понять суть, а не то, какую кнопочку нажимать.</p></div>
+        </div>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+                <h3>Выгрузите свои тексты из Телеграма</h3>
+        <p>Если у вас, как у меня, есть канал в Телеграме, где вы регулярно писали посты, откройте его <b>в приложении на компьютере</b> – так проще всего. Копировать тексты вручную тоже можно, но неудобно. Лучше сделать экспорт всей истории чата.</p>
+        <p>Экспортировать можно только текст, а можно и голосовые сообщения. Лучше брать с первого сообщения, если у вас есть история. Я для скорости взяла период с 1 мая. Телеграм скачает файл JSON – выглядит страшно, но это и есть все ваши тексты за период, даже с подсчётом реакций.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+                <h3>Расшифруйте свои аудио</h3>
+        <p>Для расшифровки есть специальные сервисы – я беру «Буквицу». Туда можно отправить аудио, видеоподкасты, что угодно, где вы разговариваете и откуда нужно достать текст. За пару минут она даёт расшифровку текстовым файлом – сохраните его к себе, например в «Загрузки».</p>
+        <p>Чем больше таких расшифровок аудио вы добавите, тем лучше, не стесняйтесь. «Буквица» даёт три расшифровки бесплатно. Подробнее – в <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">гайде по транскрибации</a>.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+                <h3>Загрузите материалы и спросите, что ещё нужно</h3>
+        <p>Подгружаем в чат файл JSON с текстами и расшифровку аудио. Когда нейросеть пишет очень много текста, я прямо начинаю плыть – поэтому прошу коротко:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Что ещё тебе прислать? Скажи кратко.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Если что-то зависло или отвалился интернет – перезагрузите. Всё, что здесь нужно развивать в себе, – это адаптивность к тому, что иногда что-то работает нестабильно.</p>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+                <h3>Ответьте на его вопросы голосом</h3>
+        <p>Мне нужно было ответить: какие 3–5 текстов особенно мои, какие есть примеры, как не надо писать, и где навык должен работать. Включаем диктовку и отвечаем свободно. Если есть сомнения или не хочется отвечать на какой-то вопрос, не стесняйтесь так и сказать. Вот что я наговорила:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой ответ на уроке, собран из диктовки</p><pre>Смотри, 3–5 текстов я тебе сейчас не пришлю. Мне все мои тексты нравятся, там живая речь.
+
+Примеры, как не надо писать. Я ненавижу короткие рубленые предложения. От ИИ я ненавижу длинные тире и вообще большое количество предложений с длинным тире. Где уместно, лучше составить предложение с запятой. А вместо длинного тире нужно обязательно использовать среднее тире. Ещё ненавижу конструкции «это не про это, это про то».
+
+Навык будет работать в постах, сценариях, уроках, подкастах в аудио- и видеоформате, в статьях, возможно неформальных, которые я хочу публиковать у себя на лендинге. Это минимум. Если что-то из навыка пригодится для сообщений клиентам, писем, чуть более официальной переписки – возможно, можно его использовать и там.
+
+Возможно, ты знаешь больше ИИ-штампов, по которым люди распознают ИИ-текст. Предложи мне хотя бы пять, и я по ним выберу, что мы берём в антипримеры.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Он сразу предложил штампы, и часть я узнала: «здесь начинается самое интересное», искусственные тройки. Вы решаете, что включить в антипримеры, а что «ну и ладно».</p>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+                <h3>Получите навык одним zip-архивом</h3>
+        <p>Нейросеть собирает текст инструкции – его можно перечитать и дать обратную связь. Дальше есть два пути: скопировать этот текст или сохранить файлом и вставлять в конкретные проекты. Или сделать легко подключаемый навык. Для этого нужен пакет с файлами, и его очень важно сохранить.</p>
+        <p>Иногда нейросети прикольны тем, что говорят «я тебе всё сделал», – а где? Если непонятно, куда нажимать и что скачивать, так и попросите:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Сделай один архив, чтобы я могла его скачать.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Скачайте zip-архив и сохраните в ту же папку, где у вас хранятся помощники. У меня это папка «Мои помощники».</p>
+      </div></div>
+      <div class="step"><span class="snum">7</span><div>
+                <h3>Установите навык</h3>
+        <p>Это уже чуть более продвинутая версия работы. Интерфейс может меняться, но нейросеть должна пошагово вас проводить – спросите её, если чего-то не видите. Конструктор помощников предупредил, что создание навыков доступно не на всех тарифах.</p>
+        <div class="hint">
+          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Найдите функцию «Настроить» (значок-«вилочки»). Там есть плагины – внешние приложения, их мы ещё коснёмся, – и навыки. Путь, который назвал мне конструктор: Plugins → Skills → Create → Upload from your computer. Загрузите zip-архив целиком, закройте окно – навык загружен, его можно посмотреть и сразу попробовать в чате. Через «плюсик» навык можно создать и прямо там.</p></div>
+          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Навыки есть и в Claude. Загрузка готового навыка устроена по тому же принципу – если не найдёте, где это, спросите у самой нейросети.</p></div>
+          <div class="hs" data-svc="other"><p class="hlab">Другие нейросети</p><p>Если навыков в вашей нейросети пока нет, сохраните текст инструкции файлом и вставляйте его в проекты.</p></div>
+        </div>
+        <p class="snote">Загружать можно не только свои навыки, но и сторонние, скачанные: по редактуре, по монтажу, по составлению планов питания – по чему угодно.</p>
+      </div></div>
+      <div class="step"><span class="snum">8</span><div>
+                <h3>Перейдите в режим «Работа»</h3>
+        <p>Мы до этого всегда работали просто в чате. Чат и «Работа» – разные режимы ChatGPT. Когда мы просто болтаем в чате, он может опираться на инструкции проектов, но навык может там не подключиться. А в режиме «Работа» навык «Мой голос» можно использовать где угодно.</p>
+        <p>Навыки вызываются через собачку: пишете @ – и видите My voice и целую подборку навыков, которые можно подключать. Если вместо ответа он выдал стандартную инструкцию на английском, просто попросите: «Только на русском».</p>
+        <p>«Работа» – это режим, который позволяет работать с вашими файлами на компьютере и на Google Диске и даёт больше возможностей: под капотом там агентская система. Мы потихонечку будем на него переходить. В нём доступно больше моделей, чем в обычном чате. Режим доступен для любого проекта, но у него есть лимиты по тарифам – посмотреть их можно в своём плане. В обычных чатах этих лимитов нет, но на большую часть задач в «Работе» лимитов хватает.</p>
+        <p class="snote">«Напиши в моём стиле» можно попробовать и в обычном чате – ChatGPT может приблизиться к вашему стилю, но может и не попасть. Где обязательно важно создать что-то в вашем голосе, делайте это в режиме «Работа».</p>
+      </div></div>
+      <div class="step"><span class="snum">9</span><div>
+                <h3>Проверьте навык на реальной задаче</h3>
+        <p>Я попросила написать посты, которые мы придумали в другом чате, в контент-плане. Спросите, может он или нет, – и предложите принести материал, если сам не достанет. Так вы открываете для ИИ новые возможности. У меня он думал долго, но нашёл посты сам.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Смотри, там в одном из чатов мы придумали контент-план и несколько постов. Если надо, я тебе их принесу, если ты не можешь их достать. Но на всякий случай сходи, посмотри. Можешь ли ты эти пять постов попробовать собрать по моему навыку «Мой голос», пожалуйста? Проверь, пожалуйста, сам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Возможно, это не супергениальные посты с точки зрения контент-стратегии и правил «залетевших» постов. Но это мои посты. Если я захочу, чтобы они залетали и перепощивались, я нарою такой материал и скормлю помощнику – тогда он будет так делать.</p>
+      </div></div>
+      <div class="step"><span class="snum">10</span><div>
+                <h3>Дайте обратную связь и обновите навык</h3>
+        <p>Оцените, что он написал, и скажите, что поправить в навыке голоса. Обновить навык он может прямо в вашем чате. Для такой правки можно выбрать усилие пониже – будет попроще. Мне не понравились бесконечные скобочки вместо смайликов и то, что текст шёл простынёй:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Моя правка на уроке</p><pre>Мне не нравится, что в постах очень много скобочек вместо смайликов. Можно какие-то эмодзи, но чуть-чуть добавлять. Я бы попросила тебя акцентно выделять ключевые фразы, на которые стоит обращать внимание, чтобы было хотя бы немножко оформления. Сейчас взгляд не цепляется совершенно, это простыня текста. Можешь ли ты сразу внести это обновление в мой навык?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">В режиме «Работа» он становится более продвинутым товарищем: сам подключил нужные навыки для обновления навыка и сам нашёл причину того, что мне не нравилось, – посты были слишком одинаково собраны, со слишком аккуратными профессиональными выводами. Не зря я говорю: делитесь голосом своими ощущениями, он найдёт и предложит.</p>
+      </div></div>
+      <div class="step"><span class="snum">11</span><div>
+                <h3>Попробуйте навык в новом чате</h3>
+        <p>Создаёте новый чат – переходите в режим «Работа». Можно тегнуть навык через @, тогда он точно его подключит. А можно просто сказать, что нужно в вашем стиле, – ключевое, подсказать ему, чтобы он зацепился за «в моём стиле». Навык он подключит сам.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Слушай, мне нужно в моём стиле написать небольшую статью, заметку про то, почему методологу классно уметь использовать инструменты. Можешь, пожалуйста, набросать что-то? Я об этом подумаю и внесу правки.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">12</span><div>
+                <h3>Продолжайте прокачивать навык</h3>
+        <p>С результатом можно работать и давать обратную связь. А по ходу правок прямо попросить собрать всё, что вы наговорили, в обновление навыка:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Найди, что я тебе наговорила, где я видела противоречия, что я просила исправить, и обнови снова навык моего голоса.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Так вы будете обновлять навык, и за 2–3 недели он прокачается невероятно. Какое-то время вы вкладываете в то, чтобы он писал лучше и лучше, но это точно окупается.</p>
+      </div></div>
+  </div>
+
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>Всё это делается не так сложно. Есть маленькие технические нюансы, но по факту это очень простые шаги. Первый – создали навык, дав ему материал. Второй – подключили. Третий – чтобы он работал, перешли в режим «Работа» (по крайней мере, в текущей версии).</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p style="font-size:16px">Zip-архив навыка «Мой голос» – в ту же папку, где хранятся ваши помощники.</p>
+      </div>
+    </div>
+  </div>
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
+  <p class="pfb-p">Когда закончите практику, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и опишет вашу работу так, чтобы её было интересно прочитать работодателю или клиенту. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 2», под «Урок 2».</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> ваш навык «Мой голос»: из каких материалов он собран и как изменились тексты после проверки.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+  <p class="pfb-p">Больше ничего собирать не нужно: в конце модуля вы просто пришлёте этот документ – <a href="https://aiforlife.ru/ii-course/modul2/itog/">итог модуля 2</a>.</p>
+</div>
+<div class="matbox">
+  <p class="ml">Материалы к уроку</p>
+  <ul>
+    <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">Транскрибация: из голоса и видео в текст</a><span>Как расшифровать голосовые, созвоны и лекции – и что сделать с расшифровкой, чтобы не потерять ваши слова.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-navyki-temy/">Навыки: где взять свои тексты и какие навыки собрать</a><span>Как выгрузить посты и переписки для навыка и 20 идей навыков – процессы, стандарты, инструменты.</span></li>
+  </ul>
+</div>
+</section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">После урока</p>
+      <h2>Как ещё можно создавать навыки</h2>
+      <p>Возвращайтесь к этому уроку, когда понадобится создать другой навык, и повторяйте. Нейросети развиваются, появляются дополнительные опции, поэтому есть и другие пути.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Из чата, где вы долго работали</h3><p>Заходите в чат, где вы что-то делали очень долго, кропотливо и вдумчиво, и просите собрать на основе этого навык – она просто соберёт. Помните, как на одном из первых уроков мы собирали правила нашего диалога, которые нейросеть вытащила для нас? Этот обратный инжиниринг здесь очень пригодится. Только теперь это уже не промпт-инжиниринг, а навыка-инжиниринг.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Кнопкой «Записать мой навык»</h3><p>Появляются специальные кнопочки. Включаете «Записать мой навык» и начинаете что-то делать. Когда заканчиваете и нажимаете «Я закончил», нейросеть снимает с вас навык и выдаёт его готовым документом – таким же, как мы получили в практике.</p></div></div>
+      </div>
+      <div class="pwrap">
+        <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Создай, пожалуйста, на основе этого навык, который я буду применять в этой нейросети или в другой нейросети.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Свои и чужие</p>
+      <h2>Навыки можно сохранять, переносить и брать у других</h2>
+      <p>Навыки очень важно сохранять для себя. Доступ к одной нейросети закончился, завтра откроется другая – навыки можно экспортировать и принести туда.</p>
+      <p>Более того, существуют маркетплейсы и публикации разных навыков, и их можно брать у других. Наконец-то есть легальный способ просто взять чужую голову и с её помощью что-то сделать – например, навык по созданию сильных маркетинговых текстов или воронок. Не обязательно создавать целую гору папок-проектов: можно делать контент с помощью навыка определённого блогера или маркетолога. Много навыков открыто и доступно бесплатно, что-то продаётся.</p>
+      </div></div>
+    </section>
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Осторожно</p>
+      <h2>Не напихивать навыки на всякий случай</h2>
+      <p>Если сомневаетесь, нужен ли вам какой-то навык, придерживайтесь принципа: не перегружать контекст, который нейросеть хранит о вас, разными навыками. Есть стремление напихать всё на всякий случай – я предлагаю этого не делать. Используем наш главный принцип: спросите у нейросети.</p>
+      <div class="pwrap">
+        <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Слушай, как думаешь, мне этот навык пригодится в какой-то задаче?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div>
+      <p style="margin-top:26px">Или у вас есть свой навык, например по написанию контент-планов, свой подход, как у СММщика, и вы нашли другой навык на ту же тему. Попросите нейросеть сравнить эти два навыка, посмотреть, чем они отличаются, и дополнить ваш навык тем, что вам больше понравится. Так навык можно развивать и качать в натуральном смысле.</p>
+      <p>Даже если вам не до конца понравилось, как нейросеть ответила по вашему навыку, просто дайте обратную связь: «Слушай, мне вот это не нравится, вот это не нравится. Обнови, пожалуйста, навык через эти данные».</p>
+      <p class="rulebox">К уроку мы приложили варианты, на какие темы создавать навыки. Это история, которая точно сильно вас усилит: задачи будет проще и быстрее выполнять, и не нужно будет сто пятьсот раз объяснять одно и то же.</p>
+      </div></div>
+    </section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что забрать<br>из урока</h2>
+    <div class="dcol">
+      <p>Проект – это где и с чем вы работаете. Навык – это как вы решаете задачу, и он работает в любом чате. Ваш голос – первый и очень показательный навык: собрали материал, подключили, перешли в режим «Работа» и дальше прокачиваете его обратной связью.</p>
+      <p style="margin-top:14px">Мне нравится, что мы открываем для себя кнопочки нейросетей не заранее, а в процессе – тогда, когда они правда пригождаются.</p>
+      <p style="margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase">Вопросы к себе</p>
+      <ul style="margin-top:12px">
+        <li>Какие задачи вы объясняете нейросети снова и снова?</li>
+        <li>Что из этого – процесс, что – стандарт, а что – инструмент?</li>
+        <li>Что вы уже поправили бы в своём навыке «Мой голос» после первой проверки?</li>
+      </ul>
+      <p style="margin-top:26px"><b>В следующем уроке посмотрим, как объединяются проект, регулярная задача и навык, который мы настроили, – уже не на уровне отдельных инструментов, а чтобы создать из них что-то новое.</b></p>
+    </div>
+  </div>
+</div>
+
+<nav class="wrap" aria-label="Уроки модуля" style="margin-top:44px">
+  <div class="nav lessnav">
+    <a class="navlink" href="/ii-course/modul2/urok1/">← Урок 1 модуля 2</a>
+    <a class="navlink" href="/ii-course/modul2/urok3/">Урок 3 модуля 2 →</a>
+  </div>
+</nav>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · конспект урока 2, модуль 2</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.pwrap')||btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>
