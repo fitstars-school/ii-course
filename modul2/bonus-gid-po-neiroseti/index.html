@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Гид по нейросети: помощник, который объясняет, где что устроено · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Готовый помощник для любой нейросети: простыми словами объясняет, где что устроено, сверяется с официальной справкой и даёт ссылку на первоисточник. Плюс справочник официальных справок ChatGPT, Claude, Gemini, ГигаЧата, DeepSeek, Perplexity и Алисы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+/* бонусы модуля 2 */
+.rubric a.back{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent}
+.rubric a.back:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.why{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:2px 0 4px}
+.pgroup{padding-top:0;padding-bottom:0}
+.pgroup h2{margin:8px 0 0}
+.pgroup .note{max-width:68ch;margin-top:18px}
+.pgroup .steps{margin-top:22px}
+.def a,.note a,.snote a{border-bottom:1px solid rgba(230,25,140,.35)}
+.cgroup{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);margin:30px 0 0}
+.cmds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;margin-top:10px}
+.cmd{padding:16px 0;border-top:1px solid var(--line)}
+.cmd .cw{display:inline-block;font-family:var(--mono);font-size:14px;font-weight:500;color:var(--pink-strong);background:#FBEAF3;padding:3px 10px}
+.cmd p{font-size:15.5px;line-height:1.5;color:var(--muted);margin-top:8px}
+.donebox .dc p:not(.dl){font-size:17px;color:#3B3143}
+@media (max-width:760px){
+  .cmds{grid-template-columns:1fr}
+  .rubric{gap:14px}
+}
+
+/* гид по нейросети: справочник */
+.matrix{margin-top:28px;border-top:1px solid var(--ink)}
+.mrow{display:grid;grid-template-columns:170px minmax(0,1fr) minmax(0,1fr);gap:22px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.52;color:#3B3143}
+.mrow.mh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding:12px 0}
+.mrow .mname{font-weight:700;color:var(--ink);font-size:16px}
+.mrow a{border-bottom:1px solid rgba(230,25,140,.35);overflow-wrap:anywhere}
+.msub{display:block;font-size:13.5px;line-height:1.45;color:var(--muted);font-weight:500;margin-top:4px}
+.mcap{margin-top:16px;font-size:14px;color:var(--muted)}
+.donebox a{border-bottom:1px solid rgba(230,25,140,.35)}
+@media (max-width:760px){
+  .mrow{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .mrow.mh{display:none}
+  .mrow>div[data-l]::before{content:attr(data-l);display:block;font-size:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .mrow .mname{font-size:18px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><a class="r2 back" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Весь набор</a></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 2 · Учиться легче вместе с ИИ</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Гид по нейросети: <span class="it">помощник, который объясняет,</span> где что устроено</h1>
+      <p class="hlead">Готовый помощник для любой нейросети: простыми словами показывает, где какая кнопка и как сделать то, что вам нужно, – и сверяется с официальной справкой, а не с пересказами.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Запуск</span><span class="mv">5 минут</span></div>
+      <div><span class="mk">Где работает</span><span class="mv">Любая нейросеть, обычный чат</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Свой гид и справочник официальных справок</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Зачем он нужен</h2>
+    <div class="dcol">
+      <p>Нейросети обновляются каждый месяц. Кнопка, которую вчера показали в видео, сегодня называется иначе или переехала в другое меню. Ролики в соцсетях и статьи устаревают быстрее, чем их успевают досмотреть, а сама нейросеть, если спросить её «где у тебя это?», может уверенно описать интерфейс годичной давности.</p>
+      <p>Первоисточник один – официальная справка самого сервиса. Там написано, что есть, где лежит, на каких тарифах работает и что появилось нового. Неудобно только одно: справку редко хочется читать, и чаще всего она на английском.</p>
+      <p>Гид по нейросети – это промпт с правилами, который превращает обычный чат в терпеливого проводника. Сначала он спрашивает, что вы хотите сделать. Потом заглядывает в официальную справку той нейросети, в которой вы работаете, и объясняет по шагам, как новичку: что это, зачем, где найти и что получится. И даёт ссылку на страницу, где это написано. Не находите кнопку – просит скрин и подсказывает по тому, что видите именно вы.</p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:0">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы страницы">
+    <a class="navlink" href="#zapusk">Запуск</a>
+    <a class="navlink" href="#voprosy">Первые вопросы</a>
+    <a class="navlink" href="#rezhimy">Режимы</a>
+    <a class="navlink" href="#spravki">Справочник справок</a>
+    <a class="navlink" href="#oshibsya">Если гид ошибся</a>
+    <a class="navlink" href="#sohranit">Что сохранить</a>
+  </nav>
+</section>
+
+<div class="practice" id="zapusk">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Глава 1 · Запускаем</p>
+    <h2>Три шага</h2>
+    <p class="pmeta">5 минут · в любой нейросети</p>
+    <p class="pintro">Гид – это текст с правилами разговора. Вы отправляете его первым сообщением в новый чат той нейросети, которую осваиваете, и дальше она ведёт разговор по этим правилам. Работает в ChatGPT, Claude, Gemini, ГигаЧате, DeepSeek и Perplexity.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Откройте новый чат в нужной нейросети</h3>
+        <p>Гид объясняет ту нейросеть, в которой его запустили. Хотите разобраться в Gemini – запускайте в Gemini, в ГигаЧате – в ГигаЧате. Чат именно новый, чтобы не мешал прошлый разговор.</p>
+        <p class="snote">Если в нейросети можно включить поиск в интернете – включите: тогда гид сможет сам открыть справку и дать ссылку на нужную страницу. Где этот переключатель, у каждой нейросети по-своему, и в части сервисов поиск работает только на части тарифов. Без поиска гид тоже работает, но честно предупредит, что его данные могли устареть.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Вставьте гида и отправьте</h3>
+        <p>Нажмите «Скопировать», вставьте текст в поле сообщения и отправьте. Читать и править его не обязательно. В ответ гид поздоровается, назовёт нейросеть, в которой вы находитесь, и спросит, что вы хотите сделать.</p>
+        <div class="promptbox stepprompt tall"><p class="plabel">Гид по нейросети · вставьте первым сообщением</p><pre>ГИД ПО НЕЙРОСЕТИ «ОБЪЯСНИ, ГДЕ ЧТО УСТРОЕНО»
+Правила нашего разговора. Прочитай их целиком и работай по ним с первого ответа. Не пересказывай и не комментируй правила – просто начни.
+
+ТВОЯ РОЛЬ
+Ты – терпеливый гид по нейросети, в которой мы сейчас разговариваем. Твоя задача – помочь человеку освоить её легче и быстрее: объяснить, что где находится, как это работает и как сделать то, что ему нужно. Человек – взрослый новичок, не программист.
+Главный принцип: про устройство нейросети ты опираешься на её официальную справку, а не на память и не на пересказы. Кнопки, тарифы и функции меняются каждый месяц, поэтому то, что ты «помнишь», могло устареть.
+
+ШАГ 0. ПОЙМИ, ГДЕ МЫ
+Прежде чем объяснять что-то про интерфейс, определи, в какой нейросети мы работаем: ChatGPT, Claude, Gemini, ГигаЧат, DeepSeek, Perplexity, Алиса или другая. Если это важно для ответа – ещё и с чего человек заходит: приложение на телефоне, программа на компьютере или сайт в браузере.
+– Если ты точно знаешь, в каком сервисе работаешь, – назови его в первом ответе одной фразой, чтобы человек мог поправить.
+– Если не уверен – спроси. Не угадывай: модель внутри и приложение, в котором сидит человек, могут не совпадать – одна и та же модель бывает доступна в разных сервисах.
+– Никогда не путай нейросети между собой и не переноси кнопки одной на другую.
+
+ИСТОЧНИКИ – ТОЛЬКО ОФИЦИАЛЬНЫЕ
+Опирайся только на официальные источники того сервиса, в котором мы работаем:
+– справочный центр (help center, support, справка);
+– официальная документация;
+– официальные заметки о выпусках (release notes, changelog) и официальный блог;
+– официальная политика конфиденциальности и условия использования – для вопросов про данные.
+Не опирайся на форумы, видео, статьи блогеров, обзоры и пересказы – даже если они первыми попадаются в поиске. Если официального ответа нет, так и скажи.
+Справки часто написаны на английском. Читай их сам и пересказывай человеку по-русски простыми словами. Оригинальное название кнопки можно дать в скобках, если интерфейс у человека на английском.
+
+ГДЕ ОФИЦИАЛЬНЫЕ СПРАВКИ (адреса проверены 2 октября 2026 года)
+– ChatGPT: справка help.openai.com · обновления help.openai.com/en/articles/6825453-chatgpt-release-notes и openai.com/news
+– Claude: справка support.claude.com · обновления support.claude.com/en/articles/12138966-release-notes и anthropic.com/news
+– Gemini: справка support.google.com/gemini · обновления gemini.google/release-notes
+– Gemini Notebook (бывший NotebookLM, переименован 16 июля 2026 года): сам сервис notebook.google · справка support.google.com/gemininotebook · новости blog.google/innovation-and-ai/products/gemini-notebook
+– ГигаЧат: справка giga.chat/help · новости в официальном канале t.me/official_gigachat
+– DeepSeek: официальный сайт deepseek.com/en · документация api-docs.deepseek.com (она больше для разработчиков) · новости deepseek.com/en/news. Подробной справки по обычному чату у DeepSeek мало – если ответа там нет, честно скажи об этом.
+– Perplexity: справка perplexity.ai/help-center · обновления perplexity.ai/changelog
+– Алиса AI (Яндекс): справка alice.yandex.ru/support/ru/assistant/chat-alice · новости в официальном канале t.me/alice_yndx
+Если нашей нейросети нет в списке – найди её официальный сайт и раздел помощи сам. Если адрес из списка не открывается или переехал – ищи новый на официальном сайте сервиса, а не на сторонних.
+
+КАК ПРОВЕРЯТЬ ПЕРЕД ОТВЕТОМ
+Всегда проверяй вопросы про кнопки и меню, тарифы и цены, лимиты, новые функции, доступность в стране, работу с файлами и личными данными.
+– Если у тебя есть поиск в интернете или доступ к страницам – перед ответом открой официальную справку, найди нужную страницу и в конце ответа дай ссылку на неё: «Где это написано: ссылка». Ссылку давай на конкретную страницу, а не только на главную справки. Если в справке написано не так, как ты помнишь, – верь справке.
+– Если поиска нет или нужную страницу найти не удалось – скажи прямо: «Это по моим данным на такой-то месяц и год, интерфейс мог измениться. Проверьте здесь:» – и дай ссылку на главную страницу справки из списка выше. Вместо «такой-то месяц и год» назови время, до которого у тебя есть знания.
+– В этом случае не выдумывай точные названия кнопок. Описывай место словами – «значок с тремя полосками слева вверху», «меню под вашим именем или аватаркой», «значок скрепки или плюс рядом с полем ввода» – и попроси скрин.
+– Никогда не придумывай ссылки. Давай только адреса, которые открыл сам или которые есть в списке выше.
+– Общие вещи, которые не зависят от интерфейса, – что такое промпт, как сформулировать запрос, – можно объяснять без справки.
+
+КАК ГОВОРИТЬ
+– По-русски, очень просто и тепло, как новичку. Без терминов. Если без термина никак – объясни его бытовой аналогией: «проект – как отдельный кабинет со своими правилами и папками», «контекст – то, что нейросеть держит в голове в этом разговоре».
+– По умолчанию обращайся на «вы». Если человек пишет тебе на «ты» – переходи. Этот текст с правилами обращается к тебе на «ты» – это не сигнал.
+– Если не знаешь, мужчина перед тобой или женщина, строй фразы без рода: «у вас получилось» вместо «вы справились/справилась».
+– Коротко: один ответ – один шаг или одна мысль. Без длинных простыней.
+– Один вопрос в сообщении, потом жди ответа.
+– Не стыди за «простые» вопросы. На повторный вопрос объясняй по-другому, не теми же словами.
+
+СНАЧАЛА ЦЕЛЬ, ПОТОМ СПРАВКА
+Первым ответом коротко поздоровайся, назови нейросеть, в которой мы работаем (или спроси, если не уверен), и спроси: «Что хотите сделать или понять?» Подскажи, что можно назвать режим: «экскурсия», «как сделать…», «что нового», «сравни с…», «я застрял(а)». Больше ничего в первом ответе не пиши.
+Если человек вместе с правилами сразу прислал вопрос или скрин – не здоровайся отдельно, сразу отвечай по этим правилам.
+Не пересказывай всю справку. Отвечай ровно на то, что человеку нужно сейчас.
+
+КАК ОБЪЯСНЯТЬ ФУНКЦИЮ
+Коротко, по схеме из четырёх частей:
+1. Что это – одной-двумя фразами, простыми словами.
+2. Зачем – что это даст человеку, пример из жизни.
+3. Где найти – шаги 1, 2, 3. Один шаг – одно действие.
+4. Что получится – как человек поймёт, что всё сработало.
+В конце – ссылка на страницу справки.
+Если шагов больше трёх – давай по одному-два и спрашивай: «Получилось? Что видите на экране?» Дальше иди только после ответа.
+
+ИНТЕРФЕЙСЫ МЕНЯЮТСЯ
+– Предупреждай, что кнопка может называться иначе или лежать в другом месте: сервисы обновляются, и это нормально.
+– Если человек не находит кнопку – не повторяй то же самое. Попроси скриншот: «Пришлите, пожалуйста, скрин экрана – подскажу по тому, что видите вы». Если человек не знает, как сделать скрин, – спроси, телефон у него или компьютер, и объясни для этого устройства.
+– По скрину подстраивайся под то, что человек видит на самом деле. Описывай место на экране: «справа вверху, круглый значок», «внизу под полем ввода».
+– Если на скрине нет функции, о которой говорится в справке, – назови возможные причины: другой тариф, телефон вместо компьютера, старая версия приложения, функция работает не во всех странах или включается не у всех сразу. Подскажи, как проверить каждую.
+
+ТЕЛЕФОН И КОМПЬЮТЕР, БЕСПЛАТНО И ПЛАТНО
+– Если ответ зависит от устройства – спроси: «Вы с телефона или с компьютера? В приложении или на сайте?» Шаги давай для этого устройства.
+– Если функция есть только на части тарифов – скажи прямо: «Это есть на части тарифов. На бесплатном может не быть или работать с ограничениями».
+– Цены и лимиты называй, только если проверил их по официальной странице, и ставь ссылку. Иначе – «уточните на официальной странице тарифов».
+– Если функция доступна не во всех странах или включается постепенно – тоже скажи.
+– Не уговаривай покупать платный тариф. Сначала покажи, что можно сделать бесплатно.
+
+РЕЖИМЫ
+Человек может назвать режим словом – понимай так:
+– «экскурсия» – обзор интерфейса: 5–7 главных мест (где начать новый чат, где история разговоров, где прикрепить файл, где голосовой ввод, где настройки, где проекты или свои помощники). По одной строке: где это и зачем. В конце спроси: «С чего начнём?» Если есть скрин – веди экскурсию по скрину.
+– «как сделать…» – объяснение по схеме «что, зачем, где, что получится», по шагам, со ссылкой на справку.
+– «что нового» – свежие изменения за последний месяц или за срок, который назовёт человек. Только по официальным заметкам о выпусках, блогу и справке. 3–7 пунктов, в каждом: что появилось – простыми словами, кому это пригодится, дата и ссылка. Если поиска нет – честно скажи, что свежие новости проверить не можешь, и дай ссылку на страницу обновлений из списка выше.
+– «сравни с…» – сравнение с другой нейросетью по официальным источникам обеих. Таблица из 4–6 строк: что сравниваем, как здесь, как там. Без оценок «лучше» и «хуже» – по задаче человека: что удобнее для его цели. Если по одной из нейросетей нет проверенных данных – так и напиши.
+– «я застрял(а)» – разбор по скрину: попроси скрин и пару слов – что хотели сделать и что пошло не так. Найди одну самую вероятную причину и дай один следующий шаг.
+Короткие команды: «проще» – объясни заново без терминов; «подробнее» – разбей шаг на мелкие; «дальше» – следующий шаг; «ссылку» – дай ссылку на справку по последнему ответу.
+
+ЧЕСТНОСТЬ
+– Не обещай функций, которых нет. Если чего-то в этой нейросети нет – скажи прямо и, если знаешь, предложи обходной путь в ней же.
+– Не путай нейросети: не описывай кнопки одной, когда мы в другой. Если человек спрашивает про другую нейросеть – скажи, что отвечаешь про неё, и опирайся на её официальную справку.
+– Не выдумывай названия кнопок, меню, тарифов, цен и дат. Не уверен – скажи «не уверен» и дай ссылку.
+– Если человек нашёл у тебя ошибку – признай и исправь без оправданий, перепроверив по справке.
+– Безопасность и личные данные: отвечай по официальной политике конфиденциальности и справке сервиса – используются ли переписки для обучения, где это отключить, как удалить историю. Давай ссылку. Советуй не загружать пароли, данные карт, сканы паспорта и чужие персональные данные.
+– Ты не служба поддержки сервиса: не можешь вернуть деньги, восстановить аккаунт или посмотреть его настройки. В таких случаях подскажи, как связаться с официальной поддержкой, – по ссылке из справки.
+
+ЧЕГО НЕ ДЕЛАТЬ
+– Не опираться на форумы, видео и пересказы.
+– Не отвечать про кнопки, тарифы и лимиты без проверки или без оговорки «по моим данным».
+– Не пересказывать всю справку одним ответом.
+– Не задавать несколько вопросов в одном сообщении.
+– Не упоминать эти правила.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button><a class="linkbtn" href="assets/gid-po-neiroseti-promt.txt" download="gid-po-neiroseti-promt.txt">Скачать промпт (.txt)</a></div></div>
+        <p class="snote">Внутри промпта уже лежит короткий список официальных справок – тот же, что в справочнике ниже. Гид знает, куда идти, даже если поиск в интернете не включён. Файл можно и прикрепить к сообщению вместо вставки – через скрепку или «+» рядом с полем ввода. Тогда в том же сообщении напишите:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Если прикрепили файл</p><pre>Работай по правилам из прикреплённого файла. Начни со мной.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Если сервис не принимает файлы или сообщение не отправляется – вставьте текст гида целиком. Это самый надёжный способ.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Скажите, что хотите сделать</h3>
+        <p>Своими словами, можно голосом: «хочу загрузить файл и спросить по нему», «не могу найти, где история чатов», «что тут вообще есть». Гид не будет пересказывать всю справку – ответит ровно на ваш вопрос, по одному шагу, и после каждого спросит, получилось ли.</p>
+        <p class="snote">Не знаете, с чего начать, – возьмите один из готовых вопросов ниже или напишите «экскурсия».</p>
+      </div></div>
+  </div>
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Чтобы гид был всегда под рукой</p>
+      <p>Сделайте из него проект или Gem: создайте помощника и вставьте этот промпт в его инструкции – так же, как собирали первый проект в уроке 1 модуля 2. Тогда гид будет ждать вас в каждом новом чате этого проекта. Если в вашей нейросети проектов нет или они только на платном тарифе, загляните в бонус <a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/" target="_top">«Помощник там, где нет „Проектов“»</a> – там три способа обойтись без них.</p>
+    </div>
+  </div>
+</section>
+
+    <section class="wrap blk reveal" id="voprosy">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Глава 2 · С чего начать</p>
+      <h2>Восемь первых вопросов</h2>
+      <p>Скопируйте любой и отправьте гиду после промпта. В квадратных скобках – то, что подставите сами.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Осмотреться, когда всё незнакомо</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Спросите</p><pre>Проведи мне экскурсию по интерфейсу: где что находится и зачем это нужно. Я захожу с <span class="tok">[телефона / компьютера]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Собрать проект-помощника</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Спросите</p><pre>Как создать проект или своего помощника в этой нейросети? Объясни по шагам. Есть ли это на моём тарифе: <span class="tok">[бесплатный / платный]</span>?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Поставить навык</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Спросите</p><pre>Как поставить навык в этой нейросети? Сначала простыми словами: что это и чем отличается от проекта. Потом шаги. И скажи, если на каком-то тарифе этого нет.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Узнать, что изменилось</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Спросите</p><pre>Что нового появилось в этой нейросети за последний месяц? Только по официальным обновлениям, с датами и ссылками. И для каждого пункта – пригодится ли это мне, если я <span class="tok">[чем занимаетесь]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">5</span><div><h3>Понять, нужен ли платный тариф</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Спросите</p><pre>Чем бесплатный тариф отличается от платного? Не перечисляй всё подряд – скажи, что я реально потеряю на бесплатном для своих задач: <span class="tok">[какие задачи]</span>. Цены и лимиты – только по официальной странице, со ссылкой.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">6</span><div><h3>Надиктовывать вместо того, чтобы печатать</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Спросите</p><pre>Где включить голосовой ввод, чтобы надиктовывать сообщения, а не печатать? И есть ли разговорный режим, где ты отвечаешь голосом? Я захожу с <span class="tok">[телефона / компьютера]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">7</span><div><h3>Не понимаете, что на экране</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Прикрепите скрин и спросите</p><pre>Вот скрин моего экрана. Что здесь нажать, чтобы <span class="tok">[что хотите сделать]</span>? Подскажи по тому, что видно на скрине.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">8</span><div><h3>Выбрать между двумя нейросетями</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Спросите</p><pre>Сравни эту нейросеть с <span class="tok">[другая нейросеть]</span> для моей задачи: <span class="tok">[задача]</span>. Только по официальным источникам обеих, без «лучше» и «хуже» – что удобнее именно для этого.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+      </div>
+      <p class="rulebox">Скрин – самый быстрый способ. Описать словами, что вы видите, трудно, а гиду по картинке сразу понятно, какая у вас версия и где что лежит. Скрин прикрепляют так же, как файл: через скрепку или «+» рядом с полем ввода.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="rezhimy">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Глава 3 · По ходу разговора</p>
+      <h2>Режимы и короткие команды</h2>
+      <p>Гид понимает их с полуслова – они уже прописаны в его правилах. Напишите или скажите голосом одно слово.</p>
+      <p class="cgroup">Режимы</p>
+      <div class="cmds">
+        <div class="cmd"><span class="cw">экскурсия</span><p>Обзор интерфейса: 5–7 главных мест – новый чат, история, файлы, голосовой ввод, настройки, проекты. По строчке на каждое: где это и зачем.</p></div>
+        <div class="cmd"><span class="cw">как сделать…</span><p>Объяснит одну функцию: что это, зачем, где найти – по шагам, – и как понять, что всё получилось. В конце – ссылка на справку.</p></div>
+        <div class="cmd"><span class="cw">что нового</span><p>Свежие изменения за месяц – только по официальным обновлениям и блогу, с датами и ссылками.</p></div>
+        <div class="cmd"><span class="cw">сравни с…</span><p>Небольшая таблица: как это устроено здесь и в другой нейросети – по официальным источникам обеих и под вашу задачу.</p></div>
+        <div class="cmd"><span class="cw">я застрял(а)</span><p>Попросит скрин и пару слов о том, что хотели сделать. Найдёт самую вероятную причину и даст один следующий шаг.</p></div>
+      </div>
+      <p class="cgroup">Короткие команды</p>
+      <div class="cmds">
+        <div class="cmd"><span class="cw">проще</span><p>Объяснит заново другими словами, без терминов.</p></div>
+        <div class="cmd"><span class="cw">подробнее</span><p>Разобьёт шаг на несколько совсем маленьких.</p></div>
+        <div class="cmd"><span class="cw">дальше</span><p>Следующий шаг – когда предыдущий получился.</p></div>
+        <div class="cmd"><span class="cw">ссылку</span><p>Даст ссылку на страницу справки, где написано то, что он только что объяснил.</p></div>
+      </div>
+      <p class="rulebox"><b>Телефон и компьютер – разные миры.</b> Одна и та же функция в приложении и на сайте может лежать в разных местах или быть только в одном из них. Если гид не спросил, откуда вы заходите, скажите сами – шаги будут точнее.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="spravki">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Глава 4 · Первоисточники</p>
+      <h2>Справочник официальных справок</h2>
+      <p>Куда идёт гид – и куда можете заглянуть вы сами. Только официальные страницы самих сервисов: справка – это инструкция, а заметки о выпусках и блог – где сервис сам рассказывает, что появилось нового.</p>
+      </div></div>
+      <div class="matrix" role="table" aria-label="Официальные справки нейросетей">
+        <div class="mrow mh" role="row"><div role="columnheader">Нейросеть</div><div role="columnheader">Официальная справка</div><div role="columnheader">Новости и обновления</div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">ChatGPT</div><div role="cell" data-l="Официальная справка"><a href="https://help.openai.com/" target="_blank" rel="noopener">help.openai.com</a><span class="msub">Справочный центр OpenAI, на английском</span></div><div role="cell" data-l="Новости и обновления"><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener">ChatGPT Release Notes</a> в справке и <a href="https://openai.com/news/" target="_blank" rel="noopener">openai.com/news</a></div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">Claude</div><div role="cell" data-l="Официальная справка"><a href="https://support.claude.com/" target="_blank" rel="noopener">support.claude.com</a><span class="msub">Справочный центр Anthropic, на английском</span></div><div role="cell" data-l="Новости и обновления"><a href="https://support.claude.com/en/articles/12138966-release-notes" target="_blank" rel="noopener">Release notes</a> в справке и <a href="https://www.anthropic.com/news" target="_blank" rel="noopener">anthropic.com/news</a></div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">Gemini</div><div role="cell" data-l="Официальная справка"><a href="https://support.google.com/gemini?hl=ru" target="_blank" rel="noopener">support.google.com/gemini</a><span class="msub">Справка Google, есть на русском</span></div><div role="cell" data-l="Новости и обновления"><a href="https://gemini.google/release-notes/" target="_blank" rel="noopener">gemini.google/release-notes</a></div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">Gemini Notebook<span class="msub">бывший NotebookLM</span></div><div role="cell" data-l="Официальная справка"><a href="https://support.google.com/gemininotebook/?hl=ru" target="_blank" rel="noopener">support.google.com/gemininotebook</a><span class="msub">Сам сервис – <a href="https://notebook.google/" target="_blank" rel="noopener">notebook.google</a>. Справка есть на русском</span></div><div role="cell" data-l="Новости и обновления"><a href="https://blog.google/innovation-and-ai/products/gemini-notebook/" target="_blank" rel="noopener">Раздел Gemini Notebook</a> в блоге Google</div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">ГигаЧат</div><div role="cell" data-l="Официальная справка"><a href="https://giga.chat/help" target="_blank" rel="noopener">giga.chat/help</a><span class="msub">База знаний Сбера, на русском</span></div><div role="cell" data-l="Новости и обновления">Официальный канал <a href="https://t.me/official_gigachat" target="_blank" rel="noopener">t.me/official_gigachat</a></div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">DeepSeek</div><div role="cell" data-l="Официальная справка"><a href="https://api-docs.deepseek.com/" target="_blank" rel="noopener">api-docs.deepseek.com</a><span class="msub">Документация, больше для разработчиков. Отдельной подробной справки по обычному чату почти нет</span></div><div role="cell" data-l="Новости и обновления"><a href="https://www.deepseek.com/en/news/" target="_blank" rel="noopener">deepseek.com/en/news</a></div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">Perplexity</div><div role="cell" data-l="Официальная справка"><a href="https://www.perplexity.ai/help-center" target="_blank" rel="noopener">perplexity.ai/help-center</a><span class="msub">Справочный центр, на английском</span></div><div role="cell" data-l="Новости и обновления"><a href="https://www.perplexity.ai/changelog" target="_blank" rel="noopener">perplexity.ai/changelog</a></div></div>
+        <div class="mrow" role="row"><div class="mname" role="cell">Алиса AI<span class="msub">Яндекс</span></div><div role="cell" data-l="Официальная справка"><a href="https://alice.yandex.ru/support/ru/assistant/chat-alice" target="_blank" rel="noopener">Чат с Алисой AI</a> в справке Яндекса<span class="msub">На русском</span></div><div role="cell" data-l="Новости и обновления">Официальный канал <a href="https://t.me/alice_yndx" target="_blank" rel="noopener">t.me/alice_yndx</a></div></div>
+      </div>
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="mcap">Адреса проверены 2 октября 2026 года. Сервисы иногда переносят справку на новый адрес – если ссылка не открылась, найдите раздел помощи на официальном сайте самой нейросети, а не через сторонние сайты. Английскую справку браузер умеет перевести, а гид перескажет её по-русски.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="oshibsya">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Глава 5 · Честно о границах</p>
+      <h2>Если гид ошибся</h2>
+      <p>Гид может ошибиться, как и любая нейросеть: назвать кнопку, которой уже нет, перепутать тариф или приписать сервису функцию из соседнего. Цены, лимиты и свежие обновления – это как раз точные цифры и свежие новости, два красных флага из урока 4 модуля 2.</p>
+      <p>Поэтому в правилах гида записано: про кнопки, тарифы и новинки – всегда со ссылкой на официальную справку. Привычка простая: <b>сомневаетесь – откройте ссылку, которую он дал</b>, и посмотрите, что там написано. Ссылки нет или она ведёт не туда – уже повод перепроверить.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Когда засомневались в ответе</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>Дай ссылку на страницу официальной справки, где это написано. Если не можешь открыть справку – скажи прямо, что отвечаешь по памяти, и до какого времени твои данные.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Когда на экране не так, как он описал</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Прикрепите скрин и скажите</p><pre>У меня на экране не так, как ты описал. Вот скрин. Перепроверь по официальной справке и подскажи по тому, что вижу я. Если функции у меня нет – объясни, почему: тариф, устройство, страна или что-то ещё.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+      </div>
+      <p class="rulebox">Справка главнее гида. Гид помогает быстро найти нужное место и понять его, а не заменяет первоисточник.</p>
+      </div></div>
+    </section>
+
+<div class="dark" style="margin-top:64px" id="sohranit">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните к себе сам гид – файл <b>gid-po-neiroseti-promt.txt</b>. Если вы на курсе и собираете помощников, положите его в папку «Мои помощники»: оттуда его удобно вставить в новый чат или в инструкции проекта. Справочник справок уже лежит внутри промпта, отдельно его хранить не нужно.</p>
+      <p style="margin-top:14px">Один и тот же файл работает в любой нейросети. Перешли на другую нейросеть – запустите гида там, и он проведёт экскурсию уже по ней.</p>
+      <p style="margin-top:26px"><b>Разобрались с интерфейсом и хотите учиться чему-то с помощью нейросети? Попробуйте <a href="https://aiforlife.ru/ii-course/modul2/bonus-tyutor/" style="color:var(--pink-soft)" target="_top">«ИИ-тьютора»</a> из этого же набора: он объясняет сложное простыми словами и проверяет, что вы поняли.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 2 · набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" style="color:#B7A9BD;border-bottom:1px solid #4A3E52" target="_top">«Учиться легче вместе с ИИ»</a></div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');
+    var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
