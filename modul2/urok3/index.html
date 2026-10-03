@@ -219,6 +219,17 @@ a.inl:hover{color:var(--pink)}
 .matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
 .lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
 @media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
 </style>
 </head>
 <body>
@@ -397,81 +408,13 @@ a.inl:hover{color:var(--pink)}
     <h2>Практика</h2>
     <p class="pmeta">вместе с уроком · с помощником из урока 1 модуля</p>
     <p class="pintro">Сегодня мы не создаём нового помощника, а работаем с тем, что у вас уже есть: ищем дырочки и слабые места в процессе и дополняем помощника. Задача – сделать примерно то же, что я показала на уроке.</p>
-    <div class="svcbar">
-      <p class="svclab">Где вы работаете</p>
-      <div class="svcbtns">
-          <button class="svcbtn on" type="button" data-svcbtn="chatgpt">ChatGPT</button>
-          <button class="svcbtn" type="button" data-svcbtn="other">Другая нейросеть</button>
-      </div>
+    <div class="btns">
+      <a class="btn btn-praktika" href="praktika/">Открыть инструкцию к практике<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
   </div>
 </div>
 
 <section class="wrap">
-  <div class="steps">
-      <div class="step"><span class="snum">1</span><div>
-                <h3>Откройте конструктор помощников</h3>
-        <p>Найдите тот чат, в котором вы создавали своего помощника: он помнит контекст. Удобно закрепить его, чтобы не искать каждый раз.</p>
-        <div class="hint">
-          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Вкладка «Проекты» → на нужном проекте кнопка «Закрепить». Иконку проекта можно поменять в его настройках.</p></div>
-          <div class="hs" data-svc="other"><p class="hlab">Другая нейросеть</p><p>Кнопки и названия у вас могут отличаться – они меняются и в ChatGPT. Главное – понимать, что зачем стоит: вам нужен чат, в котором вы собирали помощника.</p></div>
-        </div>
-      </div></div>
-      <div class="step"><span class="snum">2</span><div>
-                <h3>Наговорите задачу: навык и узкие места</h3>
-        <p>Лучше голосом, своими словами. Две просьбы: как подключать навык, созданный в прошлом уроке, и какие узкие места есть у помощника. Вот как я надиктовала это на уроке:</p>
-        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Смотри, я создала контент-помощника, добавила туда все эти файлы, которые ты мне предложил и сделал. После этого я создала навык «Мой голос». Он уже опубликован в доступных навыках для меня. И при этом я не понимаю, будет он туда подключаться или нет. Может быть, нужно как-то обновить инструкцию, чтобы он подключался в нужный момент, этот голос.
-
-И второй вопрос у меня к тебе. Я думаю, что есть какие-то узкие места в моём контент-помощнике, чтобы контент создавался действительно качественно. В конечном счёте я просто хочу минимально править контент руками. Скажи, пожалуйста, можешь ли ты сделать такой анализ моего контент-помощника? Может быть, задать какие-то уточняющие вопросы и подсказать мне, как, с помощью чего, с помощью каких дополнительных навыков, возможно, или дополнительных файлов я могла бы улучшить этого помощника.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      </div></div>
-      <div class="step"><span class="snum">3</span><div>
-                <h3>Проверьте, что навык на месте</h3>
-        <p>Пока конструктор думает, откройте ещё одну вкладку и убедитесь, что навык из прошлого урока появился. Если конструктор работает в режиме чата, подключить навык в моменте он, скорее всего, не сможет – тогда просто дошлите ему скачанный навык.</p>
-        <div class="hint">
-          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Вкладка «Плагины» → «Навыки». Посмотрите, как навык называется на самом деле: у меня «Мой голос» оказался My Voice.</p></div>
-          <div class="hs" data-svc="other"><p class="hlab">Другая нейросеть</p><p>Найдите, где у вас хранятся навыки, и посмотрите точное название своего навыка.</p></div>
-        </div>
-      </div></div>
-      <div class="step"><span class="snum">4</span><div>
-                <h3>Попросите единую инструкцию и навыки под ваше узкое место</h3>
-        <p>Прочитайте анализ. Если правок несколько, попросите объединить их с прежней инструкцией в один документ. И подумайте, какое узкое место у вас: у меня это редактура и ИИ-штампы, у вас может быть что-то своё.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Можешь ли ты, пожалуйста, объединить вот эти правки, которые ты предлагаешь, и ту инструкцию, которая была, в единый документ, который я бы вставила и обновила бы помощника? Мне неудобно копировать, и там может получиться слишком много знаков в инструкции.
-
-Но потом я бы всё же с тобой поработала: мои редакционные моменты и правила пополняемые, я бы хотела превратить их в навык. Может быть, ты можешь найти какие-то навыки по редактированию, по избавлению от ИИ-штампов? Пока это как рекомендации, но по сути навыков нет. Мне кажется, они точно существуют, и ты можешь найти их в открытых источниках и предложить мне. Но опять же, чтобы они не перегружали.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-        <p class="snote">Если он просит «принеси материалы», а вам некогда, – так и скажите. Мой ответ на уроке есть выше, в блоке «Спасибо, без домашнего задания».</p>
-      </div></div>
-      <div class="step"><span class="snum">5</span><div>
-                <h3>Обновите инструкцию проекта</h3>
-        <p>Прочитайте финальную инструкцию, откройте настройки проекта и замените инструкцию целиком: Ctrl+A – выделить всё, Ctrl+V – вставить новую.</p>
-        <p class="snote">Если выскочило «превышен лимит» – вернитесь в конструктор и скажите: «Поменяй инструкцию, у меня превышен лимит на количество знаков».</p>
-      </div></div>
-      <div class="step"><span class="snum">6</span><div>
-                <h3>Установите новый навык</h3>
-        <p>Скачайте навык, который собрал конструктор, и в любом чате прикрепите zip-архив. Если навык разархивировался сам, снова сожмите его в zip. Навык по ссылке, которую не получается скачать, можно попросить скачать саму нейросеть: выделите текст в переписке → «Спросить у ChatGPT» → «Скачай их мне, пожалуйста».</p>
-        <div class="promptbox stepprompt"><p class="plabel">Вместе с прикреплённым архивом</p><pre>Установи навык.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      </div></div>
-      <div class="step"><span class="snum">7</span><div>
-                <h3>Спросите помощника, как он теперь работает</h3>
-        <p>Откройте помощника и проверьте, видит ли он свои навыки. В идеале он ответит, что использует навыки – например, для редактирования текстов.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Проверка</p><pre>Расскажи, как ты работаешь.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-        <div class="hint">
-          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Чтобы помощник сам подключал навыки, пока лучше работать в проекте в разделе «Работа», а не в режиме чата.</p></div>
-          <div class="hs" data-svc="other"><p class="hlab">Другая нейросеть</p><p>Проверьте, в каком режиме ваша нейросеть умеет подключать навыки, – это можно спросить у неё самой.</p></div>
-        </div>
-      </div></div>
-  </div>
-
-  <div class="donebox">
-    <div class="dc">
-      <p class="dl">Готово, когда</p>
-      <p>Готово, когда ваш помощник получил усиление: вы обновили его инструкцию, добавили навык или доработали, в какой момент какой навык подключается. Если запутались – не стесняйтесь вернуться на шаг назад и спросить в том же чате: «Слушай, я запутался. Правильно ли я понимаю, что мы закончили обновлять помощника?»</p>
-      <p style="margin-top:18px">Если будете делиться результатом урока, обязательно отметьте, какое усиление удалось сделать: какой навык вы добавили или какую инструкцию доработали.</p>
-      <div class="keepbox">
-        <p class="kl">Что сохранить</p>
-        <p style="font-size:16px">Скачанный навык (zip-архив) и финальную инструкцию помощника.</p>
-      </div>
-    </div>
-  </div>
 <div class="pfb" id="portfolio">
   <span class="pfb-tag">Задача для вашего портфолио</span>
   <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
