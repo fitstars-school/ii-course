@@ -225,6 +225,17 @@ a.inl:hover{color:var(--pink)}
 .matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
 .lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
 @media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
 </style>
 </head>
 <body>
@@ -521,7 +532,7 @@ a.inl:hover{color:var(--pink)}
     <div class="dc">
       <p class="dl">Пошагово – на странице практики</p>
       <p>Подробный план в девять шагов, файл Конструктора помощников и подсказки для тех, кто работает с проектами и без них.</p>
-      <div class="btns"><a class="btn" href="praktika/">Открыть практику урока<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+      <div class="btns"><a class="btn btn-praktika" href="praktika/">Открыть инструкцию к практике<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
       <div class="keepbox">
         <p class="kl">Что сохранить</p>
         <p style="font-size:16px">Папку «Мои помощники»: в ней файл Конструктора помощников, инструкция вашего проекта и материалы, которые вы в него добавили. С ней вы без проблем воссоздадите помощника в любой нейросети.</p>
