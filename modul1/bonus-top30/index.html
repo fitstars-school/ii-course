@@ -128,13 +128,15 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 .promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}.promptbox .linkbtn{color:#F3EDF5;border-bottom-color:rgba(255,255,255,.35)}.promptbox .linkbtn:hover{color:var(--pink-soft);border-bottom-color:var(--pink-soft)}
 </style>
 <style id="edge">
-/* Единый левый край (03.10.2026, правило Светланы): блоки и цифры начинаются от левого края страницы.
-   Цифра шага или пункта стоит у края, текст – после неё с отступом. Выделяем плашкой, цветом, стилем, а не сдвигом всего блока. */
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
 .rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
 .dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
-.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / span 10}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
 section.wrap{padding-left:40px;padding-right:40px}
-@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1}}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
 </style>
 </head>
 <body>
