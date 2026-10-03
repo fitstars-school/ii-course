@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Учусь на курсе: эфиры, записи и свой конспект · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Сквозной маршрут для взрослого, который учится: что делать после каждого эфира – запись в текст, конспект урока, проект «Моя учёба» в нейросети, повторение и применение – и 8 готовых промптов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+/* бонусы модуля 2 */
+.rubric a.back{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent}
+.rubric a.back:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.why{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:2px 0 4px}
+.pgroup{padding-top:0;padding-bottom:0}
+.pgroup h2{margin:8px 0 0}
+.pgroup .note{max-width:68ch;margin-top:18px}
+.pgroup .steps{margin-top:22px}
+.def a,.note a,.snote a{border-bottom:1px solid rgba(230,25,140,.35)}
+.cgroup{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);margin:30px 0 0}
+.cmds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;margin-top:10px}
+.cmd{padding:16px 0;border-top:1px solid var(--line)}
+.cmd .cw{display:inline-block;font-family:var(--mono);font-size:14px;font-weight:500;color:var(--pink-strong);background:#FBEAF3;padding:3px 10px}
+.cmd p{font-size:15.5px;line-height:1.5;color:var(--muted);margin-top:8px}
+.donebox .dc p:not(.dl){font-size:17px;color:#3B3143}
+@media (max-width:760px){
+  .cmds{grid-template-columns:1fr}
+  .rubric{gap:14px}
+}
+/* учусь на курсе */
+.help{font-size:16px;color:var(--muted);line-height:1.55}
+.help .hl{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:4px}
+.help a{white-space:nowrap;font-weight:700}
+.step p a,.rulebox a,#notebooklm p a{border-bottom:1px solid rgba(230,25,140,.35)}
+.step p+p:not(.snote){margin-top:12px}
+.step ul{margin-top:12px}
+.step ul li{font-size:16.5px;color:#3B3143;line-height:1.55}
+.def h3{text-wrap:balance}
+.backlink{display:inline-block;margin-top:30px;font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:2px}
+.backlink:hover{color:var(--pink)}
+.dark ul li a{color:var(--pink-soft)}
+@media (max-width:760px){
+  .rubric{flex-wrap:wrap;gap:4px 14px}
+  .rubric .r2{letter-spacing:.14em;line-height:1.5}
+  .kmark{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · бонусный набор «Учиться легче вместе с ИИ»</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Маршрут для тех, кто учится</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Учусь на&nbsp;курсе: <span class="it">эфиры, записи и&nbsp;свой конспект</span></h1>
+      <p class="hlead">Сквозной маршрут для взрослого, который учится: курс, повышение квалификации, вебинары. Что делать после каждого эфира, чтобы материал не терялся, а складывался в ваш конспект.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">15 минут</span></div>
+      <div><span class="mk">Когда открывать</span><span class="mv">В начале любого обучения</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Маршрут из 5 шагов и 8 промптов</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>за минуту</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Учёба теряется не на эфире, а после него: записи копятся, мысли остаются на диктофоне, через месяц первый модуль&nbsp;– как в тумане.</p></div>
+      <div class="mline"><span class="mn">2</span><p>После каждого урока&nbsp;– пять шагов: запись → текст → конспект → проект «Моя учёба» → вернуться и применить.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Один курс&nbsp;– один проект в нейросети. Конспекты копятся там, и помощник отвечает по вашим материалам, а не «вообще».</p></div>
+      <div class="mline"><span class="mn">4</span><p>Здесь&nbsp;– как не потерять материал по дороге. Как собрать из него целостный конспект по всему курсу&nbsp;– в модуле 3.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сначала</p>
+    <h2>Почему материал курса теряется по&nbsp;дороге</h2>
+    <p>Взрослый учится урывками. Эфир&nbsp;– вечером после работы, запись&nbsp;– «посмотрю в выходные», мысли&nbsp;– на диктофон по дороге, полезная ссылка&nbsp;– в чате курса. Материала много, но он лежит в пяти местах и не складывается в одно. А через месяц трудно вспомнить даже, в каком уроке говорили о том, что сейчас нужно.</p>
+    <p>Нейросеть здесь&nbsp;– не замена учёбе, а помощник по хозяйству. Она превращает запись в текст, текст&nbsp;– в конспект, держит конспекты в одном месте и помогает к ним возвращаться. Думать, применять и задавать вопросы спикеру&nbsp;– по-прежнему вам.</p>
+    <p>Маршрут подходит для любого обучения: онлайн-курс, повышение квалификации, профессиональная программа, серия вебинаров. Его можно начать и в середине курса&nbsp;– с ближайшего урока.</p>
+    <p class="rulebox"><b>Как пользоваться.</b> Найдите свою ситуацию в главе «Узнайте себя». Один раз настройте проект «Моя учёба» (промпт 03), а дальше после каждого урока проходите маршрут. В промптах замените то, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>. Промпты работают в любой нейросети: ChatGPT, Claude, Gemini, ГигаЧат, DeepSeek, Perplexity.</p>
+  </div></div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:0">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы маршрута">
+    <a class="navlink" href="#uznayte">Узнайте себя</a>
+    <a class="navlink" href="#marshrut">Маршрут</a>
+    <a class="navlink" href="#primer">Пример</a>
+    <a class="navlink" href="#prompty">Промпты</a>
+    <a class="navlink" href="#notebooklm">NotebookLM</a>
+    <a class="navlink" href="#granica">Граница</a>
+    <a class="navlink" href="#berezhno">Бережность</a>
+    <a class="navlink" href="#sohranit">Что сохранить</a>
+  </nav>
+</section>
+
+<!-- 1. УЗНАЙТЕ СЕБЯ -->
+<section class="wrap pgroup" id="uznayte">
+  <div class="ghead"><span class="glabel">Глава 1</span><span class="grange">4 истории</span></div>
+  <h2>Узнайте себя</h2>
+  <p class="note">Четыре ситуации, с которых обычно и начинается «учиться неудобно». <b>Найдите свою&nbsp;– и сразу переходите к нужному шагу маршрута.</b></p>
+  <div class="defs" style="max-width:68ch">
+    <div class="def"><span class="dn">1</span><div><h3>«На курсе много эфиров&nbsp;– записи копятся, пересматривать некогда»</h3><p class="help"><span class="hl">Что поможет</span> Не пересматривать целиком: превратить запись в текст и попросить конспект&nbsp;– он читается за несколько минут. <a href="#shag1">Шаги 1 и 2 ↓</a></p></div></div>
+    <div class="def"><span class="dn">2</span><div><h3>«Слушаю лекции и записываю мысли на диктофон»</h3><p class="help"><span class="hl">Что поможет</span> Ваши мысли&nbsp;– самое ценное в учёбе. Расшифровать их и превратить в аккуратную заметку к уроку промптом 02. <a href="#shag1">Шаг 1 ↓</a></p></div></div>
+    <div class="def"><span class="dn">3</span><div><h3>«Учусь параллельно с работой, урывками по 15 минут»</h3><p class="help"><span class="hl">Что поможет</span> Один проект на курс: открыли, спросили «где мы остановились», сделали одно маленькое действие&nbsp;– и закрыли. <a href="#shag3">Шаги 3 и 5 ↓</a></p></div></div>
+    <div class="def"><span class="dn">4</span><div><h3>«Через месяц не помню, что было в первом модуле»</h3><p class="help"><span class="hl">Что поможет</span> Конспекты в одном месте и раз в неделю&nbsp;– сводка и самопроверка по пройденному. <a href="#shag4">Шаг 4 ↓</a></p></div></div>
+  </div>
+</section>
+
+<!-- 2. МАРШРУТ -->
+<section class="wrap pgroup" id="marshrut">
+  <div class="ghead"><span class="glabel">Глава 2</span><span class="grange">5 шагов</span></div>
+  <h2>Маршрут после каждого эфира или&nbsp;урока</h2>
+  <p class="note">Первый раз уйдёт около получаса&nbsp;– вместе с настройкой проекта. <b>Дальше маршрут занимает 10–15 минут после урока</b> и ещё столько же раз в неделю на повторение.</p>
+  <div class="steps">
+
+    <div class="step" id="shag1"><span class="snum">1</span><div>
+      <h3>Запись → текст</h3>
+      <p class="why">Что делаем</p>
+      <p>Нейросеть надёжнее всего работает с текстом, поэтому любой урок сначала превращаем в буквы. Если у курса есть готовая расшифровка или субтитры&nbsp;– берите их. Если платформа разрешает скачать запись&nbsp;– расшифруйте её. Свои мысли с диктофона&nbsp;– туда же.</p>
+      <p class="snote">Как расшифровать бесплатно и без мучений&nbsp;– в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация: из голоса и видео в текст»</a>. Если запись скачать нельзя, выручат ваши заметки во время эфира&nbsp;– их тоже можно превратить в конспект. И помните: запись чужого курса&nbsp;– только для вас, подробнее в главе <a href="#berezhno">«Бережность»</a>.</p>
+    </div></div>
+
+    <div class="step" id="shag2"><span class="snum">2</span><div>
+      <h3>Текст → конспект урока</h3>
+      <p class="why">Что делаем</p>
+      <p>В тот же день, пока свежо, отдайте расшифровку нейросети с промптом 01 «Конспект эфира». В нём вы выбираете формат: чтобы запомнить, чтобы применить или чтобы быстро вернуться потом. Мысли с диктофона&nbsp;– отдельно, промптом 02: так ваше не смешается с тем, что сказал спикер.</p>
+      <p class="snote">Автоматическая расшифровка путает термины и имена&nbsp;– пробегите конспект глазами. Нужен другой формат&nbsp;– например, пересказать урок коллегам? Четыре формата с промптами&nbsp;– в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/">«Конспект из чего угодно»</a>.</p>
+    </div></div>
+
+    <div class="step" id="shag3"><span class="snum">3</span><div>
+      <h3>Конспект → проект «Моя учёба»</h3>
+      <p class="why">Что делаем</p>
+      <p>Один курс&nbsp;– одна папка или проект в нейросети. Как собирать проект, вы уже видели в уроке 1 модуля 2: здесь тот же приём, только помощник ведёт вашу учёбу. Текст для инструкции проекта&nbsp;– промпт 03, его вставляют один раз.</p>
+      <p>Конспекты удобно копить в одном файле «Конспект курса» в файлах проекта. После урока попросите промптом 04 добавить новый раздел и связать его с прошлыми, а потом обновите файл в проекте.</p>
+      <p class="snote">Почему файл, а не просто чаты: в части нейросетей помощник в проекте видит другие чаты этого проекта, в части&nbsp;– только инструкцию и файлы. Файл работает везде. Если в вашей нейросети нет проектов&nbsp;– загляните в бонус <a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/">«Помощник там, где нет „Проектов“»</a>, а файл «Конспект курса» прикладывайте в начале нового чата.</p>
+    </div></div>
+
+    <div class="step" id="shag4"><span class="snum">4</span><div>
+      <h3>Возвращаться</h3>
+      <p class="why">Что делаем</p>
+      <p>Конспект, который ни разу не открыли,&nbsp;– просто архив. Возвращаться помогают четыре промпта внутри проекта:</p>
+      <ul>
+        <li><b>Повторить</b>&nbsp;– «Сводка по курсу за неделю» (05) и «Проверь меня по последним трём урокам» (08).</li>
+        <li><b>Найти</b>&nbsp;– «Где мы говорили про [тема]?» (07), когда нужное всплыло в работе.</li>
+        <li><b>Подготовиться к эфиру</b>&nbsp;– «Вопросы к следующему эфиру» (06): спикер ответит на ваши вопросы, а не на чужие.</li>
+      </ul>
+      <p class="snote">Удобный ритм: раз в неделю, в один и тот же день,&nbsp;– сводка и самопроверка. Перед каждым эфиром&nbsp;– вопросы.</p>
+    </div></div>
+
+    <div class="step" id="shag5"><span class="snum">5</span><div>
+      <h3>Применить</h3>
+      <p class="why">Что делаем</p>
+      <p>Одно действие по уроку в течение суток&nbsp;– самое маленькое. Оно уже будет в конце каждого конспекта: промпт 01 просит его отдельной строкой. Сделали&nbsp;– допишите в конспекте «сделано». Тогда сводка за неделю покажет, что вы применили, а что пока только записали.</p>
+      <p class="snote">Отложенное на неделю обычно так и не делается. Пять минут сегодня полезнее, чем идеальный план «когда будет время».</p>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- ПРИМЕР -->
+<section class="wrap blk reveal" id="primer">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сквозной пример · условный</p>
+    <h2>Один вечер после эфира</h2>
+    <p>Косметолог учится на онлайн-курсе по маркетингу для своего дела: два эфира в неделю, записи можно скачать на платформе. Позади пять уроков. Курс, уроки и формулировки в примере условные.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Текст</h3><p>После эфира она скачала запись и отправила её на расшифровку. По дороге домой надиктовала на телефон три минуты мыслей&nbsp;– их тоже расшифровала.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Конспект</h3><p>В проекте «Моя учёба · Маркетинг» запустила промпт 01 с форматом «применить», а надиктованное отдала промптом 02&nbsp;– получилась отдельная заметка с её идеями.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Проект</h3><p>Промптом 04 добавила урок 5 в файл «Конспект курса». Нейросеть заметила, что про портрет клиента уже говорили в уроке 2, а в уроке 5 спикер его уточнил, и отметила, что на один из прошлых вопросов урок ответил.</p></div></div>
+      <div class="def"><span class="dn">4</span><div><h3>Вернуться и применить</h3><p>Перед следующим эфиром&nbsp;– промпт 06 и два коротких вопроса в чат эфира. Действие на сутки&nbsp;– переписать первый абзац описания одной услуги.</p></div></div>
+    </div>
+    <div class="said"><p class="saidlab">Что получилось · фрагмент раздела конспекта</p><p>Урок 5 · Портрет клиента на практике. Связь: продолжает урок 2&nbsp;– там был общий портрет, здесь его делят на три ситуации, с которыми приходят. Вопрос из урока 3 «с чего начинать описание услуги»&nbsp;– закрыт. Новый вопрос к спикеру: как быть, если ситуации пересекаются? Действие на сутки: переписать первый абзац описания пилинга под одну ситуацию&nbsp;– сделано.</p></div>
+    <p class="note">Обратите внимание: в разделе не только «что сказали», но и связь с прошлыми уроками, закрытый вопрос и отметка «сделано». Именно это через месяц превращает стопку конспектов в картину курса.</p>
+  </div></div>
+</section>
+
+<!-- 3. ПРОМПТЫ -->
+<section class="wrap pgroup" id="prompty">
+  <div class="ghead"><span class="glabel">Глава 3</span><span class="grange">01–08</span></div>
+  <h2>Восемь готовых промптов</h2>
+  <p class="note">Промпт 03 вставляется один раз в инструкцию проекта. <b>Остальные&nbsp;– в чат внутри проекта, когда нужны.</b> Если проекта нет, прикладывайте к сообщению файл «Конспект курса».</p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">01</span><div>
+      <h3>Конспект эфира</h3>
+      <p class="why">Когда</p>
+      <p>После каждого эфира или урока, когда есть расшифровка. Шаг 2 маршрута.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт 01 · конспект эфира</p><pre>Сделай конспект эфира с моего курса. Мне нужен не пересказ, а конспект, к которому я буду возвращаться.
+
+Курс: <span class="tok">[название и тема курса]</span>
+Урок: <span class="tok">[номер или название, дата]</span>
+Зачем я учусь на этом курсе: <span class="tok">[одной фразой]</span>
+Формат конспекта: <span class="tok">[выберите один: «запомнить» – главное, вопросы и карточки / «применить» – что делать и чек-лист под мою ситуацию / «вернуться» – одна страница и где искать подробности]</span>
+
+Расшифровка:
+"""
+<span class="tok">[вставьте текст или прикрепите файл]</span>
+"""
+
+Собери конспект в выбранном формате и в конце обязательно добавь три блока:
+– Термины урока – с короткими определениями, как их дал спикер.
+– Вопросы к спикеру – места, где мысль оборвалась, осталась непонятной или противоречит сама себе.
+– Одно действие на ближайшие сутки – самое маленькое, что можно сделать по этому уроку.
+
+Бери только то, что есть в расшифровке, не дописывай из общих знаний. Расшифровка автоматическая: если слово явно распознано с ошибкой – поправь по смыслу и поставь [?]. Тайм-коды ставь, только если они есть в расшифровке.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">02</span><div>
+      <h3>Мои мысли с диктофона → заметка к уроку</h3>
+      <p class="why">Когда</p>
+      <p>Вы надиктовали мысли после лекции или по дороге и уже расшифровали запись. Промпт бережёт ваши формулировки и не смешивает их с конспектом спикера.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт 02 · заметка из диктофона</p><pre>Это мои мысли вслух после урока – расшифровка диктофона. Я говорю сбивчиво, перескакиваю и повторяюсь. Преврати это в аккуратную заметку к уроку.
+
+Курс и урок: <span class="tok">[название курса, номер урока]</span>
+
+Расшифровка моих мыслей:
+"""
+<span class="tok">[вставьте текст]</span>
+"""
+
+Сделай заметку из четырёх частей:
+1. Что меня зацепило – мысли из урока, о которых я говорю, коротко.
+2. Мои идеи – как я хочу применить это у себя. Где мои формулировки живые и точные – сохрани их.
+3. Сомнения и вопросы – с чем я не согласен(на) и что осталось непонятным.
+4. Что сделать – конкретные действия, если я их называю.
+
+Пометь всю заметку как «моё», чтобы не путать с конспектом спикера. Ничего не добавляй от себя и не «улучшай» мои идеи. Если что-то сказано неразборчиво или мысль обрывается – так и отметь: [не разобрать].</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">03</span><div>
+      <h3>Инструкция проекта «Моя учёба»</h3>
+      <p class="why">Когда</p>
+      <p>Один раз, когда создаёте проект на курс. Заполните скобки и вставьте текст в инструкции проекта&nbsp;– в настройках проекта есть поле для инструкций или указаний.</p>
+      <div class="promptbox stepprompt tall"><p class="plabel">Промпт 03 · в инструкцию проекта</p><pre>Ты – мой помощник по учёбе на курсе «<span class="tok">[название курса]</span>». Твоя задача – помогать мне не терять материал по дороге: вести конспекты уроков в одном формате, связывать новое с пройденным, помогать повторять и готовиться к следующим эфирам.
+
+О курсе
+– Тема и автор: <span class="tok">[кратко]</span>
+– Как устроен: <span class="tok">[например: 8 недель, два эфира в неделю, домашние задания]</span>
+– Зачем я учусь: <span class="tok">[что хочу уметь или изменить после курса]</span>
+– Что я уже знаю по теме: <span class="tok">[коротко, чтобы не объяснять очевидное]</span>
+
+Как вести конспекты
+– Каждый урок – в одном формате: «Урок [номер] · [тема] · [дата]», главное в 5–7 пунктах, термины, приёмы и шаги, связь с прошлыми уроками, вопросы к спикеру, одно действие на сутки.
+– Связывай новое с пройденным: если тема уже звучала раньше – напиши, в каком уроке, и что добавилось или поменялось.
+– Вопросы к спикеру веди отдельным списком. Всё, что осталось непонятным или расходится с прошлыми уроками, – туда. Когда урок отвечает на вопрос – отмечай «закрыт».
+– Различай, что сказал спикер, а что моя мысль: мои заметки помечай «моё».
+– Действия, которые я выполнил(а), отмечай «сделано».
+
+Главные правила
+– Опирайся только на материалы курса, которые я загружаю: расшифровки, конспекты, мои заметки, файл «Конспект курса». Общие знания – только если я попрошу, и с пометкой «не из курса».
+– Если ответа в материалах нет – так и скажи, не додумывай.
+– Не придумывай цитаты, тайм-коды и номера уроков.
+– Пиши просто и коротко, без воды.
+
+Что я буду просить
+– конспект нового урока и связь с прошлыми;
+– сводку по курсу за неделю;
+– найти, где говорили про определённую тему;
+– вопросы к следующему эфиру;
+– проверить меня по пройденному – без подсказок.
+
+Если я присылаю материал без пояснений – спроси, что с ним сделать: конспект, заметку или просто сохранить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Хотите, чтобы инструкцию подогнал под вас сам помощник,&nbsp;– отдайте её Конструктору помощников из урока 1 модуля 2 и расскажите про свой курс. Готовый текст сохраните в папку «Мои помощники», рядом с другими помощниками.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">04</span><div>
+      <h3>Добавь новый урок в мой конспект и&nbsp;свяжи с&nbsp;прошлыми</h3>
+      <p class="why">Когда</p>
+      <p>После конспекта урока&nbsp;– чтобы он не остался отдельным листком, а встал в общий конспект курса. Шаг 3 маршрута.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт 04 · новый урок в конспект</p><pre>Вот новый урок моего курса. Добавь его в мой конспект и свяжи с прошлыми уроками.
+
+Урок: <span class="tok">[номер, тема, дата]</span>
+
+Материал урока:
+"""
+<span class="tok">[конспект или расшифровка урока]</span>
+"""
+
+Мой конспект по курсу до этого урока: <span class="tok">[прикрепите файл «Конспект курса» или напишите «он в файлах проекта»]</span>
+
+Сделай:
+1. Раздел нового урока – в том же формате, что и прошлые.
+2. Связи: что в этом уроке продолжает, уточняет или меняет сказанное раньше – с указанием урока.
+3. Вопросы к спикеру из прошлых уроков: на какие этот урок ответил – отметь «закрыт» и дай короткий ответ.
+4. Новые вопросы к спикеру.
+
+Выдай раздел нового урока целиком, чтобы его можно было вставить в конец файла. Остальной конспект не переписывай – только перечисли, что поправить в прошлых разделах, если что-то устарело.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Новый раздел добавьте в конец файла и замените файл в проекте на обновлённый. Так конспект курса растёт урок за уроком.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">05</span><div>
+      <h3>Что я уже прошёл(а)&nbsp;– сводка по&nbsp;курсу за&nbsp;неделю</h3>
+      <p class="why">Когда</p>
+      <p>Раз в неделю, в один и тот же день. Особенно если учитесь урывками и теряете нить между уроками.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт 05 · сводка за неделю</p><pre>Сделай сводку по моему курсу за эту неделю – по материалам проекта и тому, что я пришлю ниже.
+
+Уроки этой недели: <span class="tok">[номера или темы]</span>
+Что ещё учесть: <span class="tok">[мои заметки, домашние задания – или «ничего»]</span>
+
+Структура:
+1. Что я прошёл(а) – по уроку на строку: тема и главная мысль.
+2. Как это складывается с прошлыми неделями: какая общая линия курса видна сейчас.
+3. Что я уже применил(а), а что пока только записал(а) – по отметкам «сделано». Если отметок нет – спроси меня.
+4. Вопросы к спикеру, которые ещё не закрыты.
+5. Что повторить перед следующей неделей – 2–3 пункта.
+
+Коротко, на один экран. Только по материалам курса.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">06</span><div>
+      <h3>Вопросы к&nbsp;следующему эфиру</h3>
+      <p class="why">Когда</p>
+      <p>За день до эфира или за полчаса. Спикер чаще отвечает на конкретный короткий вопрос, чем на «расскажите подробнее».</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт 06 · вопросы к эфиру</p><pre>Скоро следующий эфир курса. Помоги подготовить вопросы к спикеру.
+
+Тема следующего эфира: <span class="tok">[тема или «не знаю»]</span>
+Моя ситуация, к которой хочу применить курс: <span class="tok">[коротко]</span>
+
+По материалам проекта:
+1. Собери мои вопросы из прошлых уроков, которые ещё не закрыты.
+2. Найди места, где в уроках были противоречия или мысль осталась незаконченной.
+3. Предложи 3–5 вопросов под мою ситуацию – таких, на которые спикер может ответить за минуту.
+
+Каждый вопрос – коротко и конкретно, чтобы его можно было задать в чате эфира как есть, без лишних личных подробностей. Отметь звёздочкой один-два самых важных – на случай, если успею задать только их.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">07</span><div>
+      <h3>Где мы говорили про [тема]?</h3>
+      <p class="why">Когда</p>
+      <p>Нужная тема всплыла в работе, а в каком уроке она была&nbsp;– не вспомнить. Работает тем лучше, чем больше конспектов уже лежит в проекте.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт 07 · найти в курсе</p><pre>Где на курсе говорили про «<span class="tok">[тема или вопрос]</span>»?
+
+Поищи по материалам проекта: конспектам, расшифровкам, моим заметкам. Ответь так:
+– в каком уроке это было и, если есть, на каком тайм-коде;
+– что именно сказано – коротко и близко к тексту материала;
+– где эта тема всплывала ещё и что добавлялось.
+
+Если в материалах этого нет – так и скажи и не отвечай из общих знаний. Подскажи, как ещё сформулировать запрос, если тема могла называться по-другому.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">08</span><div>
+      <h3>Проверь меня по&nbsp;последним трём урокам</h3>
+      <p class="why">Когда</p>
+      <p>Раз в неделю или перед новым модулем. Перечитанный конспект создаёт ощущение знания, а вопросы без подсказок показывают, есть ли оно на самом деле.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт 08 · самопроверка</p><pre>Проверь, как я усвоил(а) последние три урока курса: <span class="tok">[номера или темы уроков]</span>.
+
+Правила:
+– Задавай по одному вопросу и жди моего ответа. Не показывай ответы заранее и не давай подсказок в самом вопросе.
+– Вопросы не «что сказал спикер», а «почему», «как применить», «что будет, если». Смешивай уроки между собой.
+– После моего ответа скажи, что верно, что неточно и где это в материалах курса. Если я ошибся(лась) – не давай сразу правильный ответ, а задай наводящий вопрос. Правильный ответ – только если я попрошу или ошибусь второй раз.
+– Всего 7 вопросов. В конце – что я знаю уверенно, а что стоит повторить, с указанием уроков.
+
+Вопросы и проверку строй только по материалам курса в проекте.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если тема так и не укладывается в голове, попросите объяснить её по-другому. Как это делать на вашем уровне&nbsp;– в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-tyutor/">«ИИ-тьютор»</a>.</p>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- 4. NOTEBOOKLM -->
+<section class="wrap pgroup" id="notebooklm">
+  <div class="ghead"><span class="glabel">Глава 4</span><span class="grange">по желанию</span></div>
+  <h2>NotebookLM как&nbsp;читальный зал</h2>
+  <div style="max-width:68ch;margin-top:18px">
+    <p>Если хочется, чтобы ответы были строго по материалам курса и с указанием, откуда взята каждая мысль,&nbsp;– загрузите записи, расшифровки и конспекты в NotebookLM (теперь он называется Gemini Notebook). Один блокнот&nbsp;– один курс. Это не замена проекту «Моя учёба», а читальный зал рядом с ним: в проекте вы ведёте конспект и решаете рабочие задачи, а в блокноте сверяетесь с первоисточником. Как завести блокнот и какие сценарии учёбы там работают&nbsp;– в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-notebooklm/">«NotebookLM: своя база знаний для учёбы»</a>.</p>
+  </div>
+</section>
+
+<!-- 5. ГРАНИЦА -->
+<section class="wrap pgroup" id="granica">
+  <div class="ghead"><span class="glabel">Глава 5</span><span class="grange">честно</span></div>
+  <h2>Что здесь есть, а&nbsp;чего нет</h2>
+  <div style="max-width:68ch;margin-top:18px">
+    <p>Как собрать целостный конспект по всему курсу&nbsp;– красиво, одним документом, со структурой,&nbsp;– разбираем в модуле 3. Здесь задача скромнее: не потерять материал по дороге.</p>
+    <p class="rulebox">Разделы уроков в одном формате, связи между ними, закрытые и открытые вопросы, ваши заметки&nbsp;– из всего этого в модуле 3 и соберётся целое. <b>Чем аккуратнее вы ведёте маршрут сейчас, тем проще будет потом.</b></p>
+  </div>
+</section>
+
+<!-- 6. БЕРЕЖНОСТЬ -->
+<section class="wrap pgroup" id="berezhno">
+  <div class="ghead"><span class="glabel">Глава 6</span><span class="grange">3 правила</span></div>
+  <h2>Бережность</h2>
+  <p class="note">Всё, что вы загружаете в нейросеть, уходит на сервер сервиса. <b>Свои мысли и свои конспекты&nbsp;– пожалуйста. С чужим&nbsp;– аккуратно.</b></p>
+  <div class="defs" style="max-width:68ch">
+    <div class="def"><span class="dn">1</span><div><h3>Записи чужих курсов&nbsp;– только для вас</h3><p>Курс&nbsp;– труд автора. Записи, расшифровки и конспекты&nbsp;– для личной учёбы: не выкладывайте их, не пересылайте и не делайте из них свой продукт. Сомневаетесь, можно ли скачивать запись,&nbsp;– посмотрите правила курса или спросите организаторов.</p></div></div>
+    <div class="def"><span class="dn">2</span><div><h3>Данные других участников не загружаем</h3><p>В эфирах и чатах курса звучат имена, истории и вопросы других людей. Перед загрузкой уберите всё, по чему можно узнать человека: имена, контакты, личные истории. Для вашего конспекта это не нужно.</p></div></div>
+    <div class="def"><span class="dn">3</span><div><h3>Спорное&nbsp;– к спикеру, а&nbsp;не&nbsp;к&nbsp;нейросети</h3><p>Если конспект и ваше понимание урока расходятся, это вопрос к спикеру, а не повод верить нейросети. Как сверить конспект с источником&nbsp;– в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/#sverka">«Конспект из чего угодно»</a>.</p></div></div>
+  </div>
+</section>
+
+<!-- 7. ЧТО СОХРАНИТЬ -->
+<div class="dark" id="sohranit" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить</h2>
+    <div class="dcol">
+      <ul>
+        <li><b>Инструкцию проекта «Моя учёба».</b> Промпт 03 с заполненными скобками&nbsp;– в папку «Мои помощники». На следующий курс понадобится тот же текст, только с другим названием.</li>
+        <li><b>После каждого урока</b>&nbsp;– промпты 01, 02 и 04. Конспект, заметка, раздел в общем конспекте.</li>
+        <li><b>Раз в неделю</b>&nbsp;– промпты 05 и 08. Сводка и самопроверка.</li>
+        <li><b>Перед эфиром и по ходу работы</b>&nbsp;– промпты 06 и 07.</li>
+        <li><b>Файл «Конспект курса».</b> В файлах проекта и копией у себя на компьютере&nbsp;– из него в модуле 3 соберётся целостный конспект.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="closing">
+  <div class="wrap cgrid">
+    <div class="col">
+      <p class="pull">Учёба складывается не на эфире, а в те несколько минут после него.</p>
+      <a class="backlink" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Ко всем материалам набора «Учиться легче вместе с ИИ»</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · модуль 2 · бонусный набор «Учиться легче вместе с ИИ»</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');
+    var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

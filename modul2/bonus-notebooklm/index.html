@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>NotebookLM: своя база знаний для учёбы · Бонус модуля 2 · Нейро-архитектор</title>
-<meta name="description" content="Простой гайд по NotebookLM (теперь Gemini Notebook): как зарегистрироваться, загрузить лекции и книги, получать ответы только по своим материалам со сносками, учиться по майнд-картам, подкастам, карточкам и тестам. 7 готовых запросов.">
+<meta name="description" content="Простой гайд по NotebookLM (теперь Gemini Notebook): как зарегистрироваться, загрузить лекции и книги, получать ответы только по своим материалам со сносками, учиться по майнд-картам, подкастам, карточкам и тестам. 6 сценариев учёбы и 26 готовых запросов.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -246,21 +246,36 @@ footer p{max-width:none}
   .cmp{grid-template-columns:1fr;gap:26px}
   .rubric{gap:14px}
 }
+
+/* Сценарии учёбы */
+.tsub{display:block;font-size:15px;font-weight:500;line-height:1.45;color:var(--muted);margin-top:4px}
+.scn .body .facts{margin:0 0 4px}
+.scn .sh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin:24px 0 10px}
+.scn ol{padding-left:22px}
+.scn ol li{margin-bottom:8px;font-size:17px;color:#3B3143;padding-left:4px}
+.scn ol li::marker{color:var(--pink);font-weight:700}
+.scn .promptbox+.promptbox{margin-top:16px}
+.scn .tool{margin-top:24px;border-left:2px solid var(--pink);padding:4px 0 4px 20px;font-size:16px;color:#3B3143;max-width:68ch}
+.scn .tool .tl{display:block;font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.scn .snote,.scn .note{max-width:68ch}
+.group .task.scn:first-of-type{border-top:1px solid var(--ink)}
+.task.scn:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:760px){.tsub{font-size:14px}.rubric .r2{text-align:right}}
 </style>
 </head>
 <body>
 
 <header class="wrap">
-  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · к уроку 4</span></div>
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · бонусный набор «Учиться легче вместе с&nbsp;ИИ»</span></div>
   <div class="hero" style="padding-top:34px">
     <div class="hgrid">
       <h1>NotebookLM: <span class="it">своя база знаний для&nbsp;учёбы</span></h1>
       <p class="hlead">Простой гайд: как загрузить лекции, книги и конспекты в нейросеть Google, которая отвечает только по ним, объясняет наглядно и тренирует по карточкам.</p>
     </div>
     <div class="meta">
-      <div><span class="mk">Читать</span><span class="mv">15 минут</span></div>
+      <div><span class="mk">Читать</span><span class="mv">20 минут</span></div>
       <div><span class="mk">Понадобится</span><span class="mv">Google-аккаунт и материал, по которому вы учитесь</span></div>
-      <div><span class="mk">Останется</span><span class="mv">Блокнот по теме и 7 готовых запросов</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Блокнот по теме, 6 сценариев и 26 готовых запросов</span></div>
     </div>
   </div>
 </header>
@@ -293,9 +308,8 @@ footer p{max-width:none}
     <a class="navlink" href="#otlichie">Чем отличается</a>
     <a class="navlink" href="#registraciya">Регистрация</a>
     <a class="navlink" href="#marshrut">Маршрут учёбы</a>
+    <a class="navlink" href="#scenarii">Сценарии учёбы</a>
     <a class="navlink" href="#zaprosy">7 запросов</a>
-    <a class="navlink" href="#pomoshnik">Или свой помощник</a>
-    <a class="navlink" href="#roditelyam">Родителям</a>
     <a class="navlink" href="#sohranit">Что сохранить</a>
   </nav>
 </section>
@@ -429,11 +443,215 @@ footer p{max-width:none}
   </div>
 </section>
 
-<section class="wrap blk reveal" id="zaprosy">
+
+<div class="practice" id="scenarii">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Глава 4</p>
+    <h2>Сценарии учёбы</h2>
+    <p class="pmeta">6 ситуаций · 19 запросов</p>
+    <p class="pintro">Маршрут выше&nbsp;– общий. Ниже он разложен на шесть жизненных ситуаций: что загрузить, в каком порядке работать, какие запросы задать и какой инструмент взять. Выберите свою ситуацию и раскройте карточку. Один сценарий&nbsp;– один блокнот.</p>
+  </div>
+</div>
+
+<section class="wrap group" style="padding-top:8px">
+  <p class="note" style="margin-top:34px">Во всех запросах «мои источники»&nbsp;– это то, что загружено в блокнот. Замените то, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>, и вставьте запрос в чат блокнота.</p>
+  <div style="margin-top:26px">
+    <details class="task scn">
+      <summary><span class="num">01</span><span class="tname">Учусь на курсе с эфирами<span class="tsub">записи эфиров и конспекты → ответы по курсу и подготовка к эфиру</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Ситуация</span><p>Курс идёт эфирами: каждую неделю новые записи, материалы разбросаны по чатам и папкам, а через месяц уже не вспомнить, в каком эфире что говорили.</p></div>
+          <div class="fact"><span class="fk">Что загрузить</span><p>Расшифровки или записи эфиров (аудиофайл до 200 МБ можно загрузить как есть, закрытые записи&nbsp;– сначала перевести в текст), ваши конспекты и заметки, материалы к урокам: презентации, PDF, рабочие тетради.</p></div>
+        </div>
+        <p class="sh">Шаги</p>
+        <ol><li>Заведите один блокнот на весь курс и назовите его по названию курса.</li><li>После каждого эфира добавляйте расшифровку и свой конспект. Ещё до загрузки называйте файлы понятно, например «Эфир 3&nbsp;– [тема]»: так в сносках сразу видно, откуда ответ.</li><li>Когда нужно что-то вспомнить, не листайте записи, а спросите блокнот: где говорили про то, что вам нужно.</li><li>Перед следующим эфиром послушайте короткий подкаст по прошлым и соберите свои вопросы к ведущему.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 1.1 · Где говорили про…</p><pre>Найди во всех моих источниках, где говорилось про <span class="tok">[тема или вопрос]</span>.
+Для каждого места:
+– в каком эфире или конспекте это было;
+– что именно сказано – коротко, своими словами, со ссылкой на источник.
+Если в разных эфирах об этом сказано по-разному, отметь это отдельно.
+Если нигде не говорилось, так и скажи – не отвечай из общих знаний.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 1.2 · Сверить конспект с эфиром</p><pre>Сравни мой конспект <span class="tok">[название конспекта]</span> с расшифровкой эфира <span class="tok">[название эфира]</span>.
+1. Что важного из эфира я не записал(а)?
+2. Где я записал(а) неточно или по-другому, чем говорилось? Покажи, как было в эфире, со ссылкой.
+3. Какие задания или договорённости из эфира стоит добавить в конспект?
+Отвечай только по этим двум источникам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 1.3 · Подготовка к следующему эфиру</p><pre>Следующий эфир будет про <span class="tok">[тема, если известна]</span>.
+По моим источникам:
+1. Напомни, на чём мы остановились в прошлый раз и какие задания давали.
+2. Какие темы из прошлых эфиров стоит освежить, чтобы понимать следующий?
+3. Составь 3–5 вопросов, которые мне стоит задать ведущему: там, где в материалах объяснено неполно или где я в конспектах отметил(а), что не понял(а).
+Опирайся только на мои источники.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="tool"><span class="tl">Из панели инструментов</span><b>Подкаст</b> в коротком формате&nbsp;– вспомнить прошлый эфир по дороге. <b>Майнд-карта</b>&nbsp;– увидеть весь курс целиком, когда эфиров накопилось много.</p>
+        <p class="snote">Как не терять материалы курса и собирать свой конспект после каждого эфира – в соседнем гайде <a href="https://aiforlife.ru/ii-course/modul2/bonus-uchus-na-kurse/" target="_top">«Учусь на курсе»</a>. Как перевести записи в текст – в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/" target="_top">«Транскрибация»</a>.</p>
+      </div>
+    </details>
+    <details class="task scn">
+      <summary><span class="num">02</span><span class="tname">Готовлюсь к экзамену, аттестации или собеседованию<span class="tsub">программа, билеты, учебник → план, тесты, карточки, слабые места</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Ситуация</span><p>Есть дата и примерный список того, что спросят. Нужно понять, с чего начать, успеть всё и не провалиться на слабых темах.</p></div>
+          <div class="fact"><span class="fk">Что загрузить</span><p>Программа, список билетов или вопросов к аттестации. Учебник или нужные главы, лекции, свои конспекты. Для собеседования&nbsp;– текст вакансии и материалы по профессии, которым вы доверяете.</p></div>
+        </div>
+        <p class="sh">Шаги</p>
+        <ol><li>Загрузите программу или список вопросов вместе с учебными материалами&nbsp;– вокруг программы строится весь план.</li><li>Попросите план до даты и идите по нему.</li><li>После каждого раздела делайте тест и карточки по этому разделу. Ошибки не прячьте: они и есть ваши слабые места.</li><li>Раз в несколько дней отдавайте блокноту свои ошибки и повторяйте то, что он покажет.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 2.1 · План до экзамена</p><pre>До <span class="tok">[экзамена, аттестации или собеседования]</span> у меня <span class="tok">[сколько дней]</span>. В день могу заниматься <span class="tok">[сколько времени]</span>.
+Возьми программу или список вопросов из моих источников и составь план по дням:
+– какие темы или билеты разбираю в этот день и в каком источнике их искать;
+– короткая самопроверка в конце дня.
+Темы, которым в программе отведено больше всего места, поставь раньше. Последние два дня оставь на повторение и пробный тест.
+Бери только то, что есть в моих источниках.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 2.2 · План ответа на билет</p><pre>Вопрос или билет: <span class="tok">[текст вопроса]</span>.
+Составь план ответа на 2–3 минуты по моим источникам:
+– 3–5 главных тезисов;
+– определения, которые нужно назвать точно, – как они даны в источниках;
+– пример из материалов.
+К каждому пункту – ссылка на источник. Если что-то в источниках не раскрыто, отметь это, а не дописывай сам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 2.3 · Разбор моих ошибок</p><pre>Вот вопросы, на которых я ошибся(лась) в тесте или карточках:
+<span class="tok">[вставьте вопросы или темы]</span>
+Определи, какие темы за ними стоят. Для каждой темы:
+– в каком источнике и разделе её повторить;
+– короткое объяснение по источникам – 3–4 предложения;
+– 3 новых вопроса, чтобы проверить себя ещё раз. Ответы на них дай отдельно в конце.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 2.4 · Вопросы к собеседованию</p><pre>Я готовлюсь к собеседованию на должность <span class="tok">[название должности]</span>. В моих источниках – текст вакансии и материалы по профессии.
+1. Составь 10 вопросов, которые могут задать, исходя из требований вакансии.
+2. К каждому – на что опереться в ответе: факты и формулировки из моих источников со ссылками.
+3. Отметь требования вакансии, по которым в моих материалах ничего нет, – их стоит подготовить отдельно.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="tool"><span class="tl">Из панели инструментов</span><b>Тест</b>&nbsp;– при создании выберите сложность, количество вопросов и напишите, на каком разделе сосредоточиться. <b>Карточки</b>&nbsp;– отмечайте, что знаете: блокнот даст повторить только те, где вы ошиблись. <b>Учебный конспект</b>&nbsp;– для повторения накануне.</p>
+        
+      </div>
+    </details>
+    <details class="task scn">
+      <summary><span class="num">03</span><span class="tname">Осваиваю новую тему или профессию с нуля<span class="tsub">5–10 хороших источников → карта понятий, объяснение для новичка, план на 2 недели</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Ситуация</span><p>Тема новая, информации море, и непонятно, что в ней главное, а что можно пока пропустить.</p></div>
+          <div class="fact"><span class="fk">Что загрузить</span><p>5–10 хороших источников, не больше: вводная книга или учебник, 2–3 обзорные статьи, лекции на YouTube с субтитрами, словарь терминов, если он есть. Лучше меньше, но надёжных: ошибки источника блокнот добросовестно перескажет.</p></div>
+        </div>
+        <p class="sh">Шаги</p>
+        <ol><li>Соберите 5–10 источников и загрузите их в один блокнот.</li><li>Сделайте майнд-карту&nbsp;– увидите тему целиком. Нажмите на непонятную ветку и спросите именно про неё.</li><li>Составьте карту понятий, а трудные понятия разберите через объяснение для новичка.</li><li>Попросите план на две недели. В конце запрос 6 из главы 5 («чего не хватает в моей базе») подскажет, какие материалы добавить.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 3.1 · Карта понятий</p><pre>Составь карту понятий темы <span class="tok">[тема]</span> по моим источникам.
+1. Выбери 10–15 ключевых понятий.
+2. Для каждого: определение простыми словами, с какими другими понятиями оно связано и какое из них нужно понять раньше.
+3. В конце предложи порядок, в котором их изучать.
+Опирайся только на мои источники. Если для какого-то понятия в них нет определения, так и скажи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 3.2 · Объясни новичку из другой сферы</p><pre>Объясни понятие <span class="tok">[понятие]</span> человеку, который совсем не знает эту тему. Я работаю <span class="tok">[ваша профессия или сфера]</span>.
+1. Начни с аналогии из моей сферы – её можешь придумать сам.
+2. Потом объясни, как это понятие описано в моих источниках, и приведи пример из них.
+3. В конце – как это понятие называют и используют специалисты, по источникам.
+Чётко отдели, где твоя аналогия, а где факты из источников.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 3.3 · План на две недели</p><pre>Составь план изучения темы <span class="tok">[тема]</span> на две недели по моим источникам.
+Время в день: <span class="tok">[например, 30 минут]</span>
+Цель: <span class="tok">[что хочу уметь через две недели]</span>
+Неделя 1 – основы, неделя 2 – применение.
+На каждый день: что прочитать или посмотреть – конкретный источник и раздел, одно понятие дня, маленькое практическое задание.
+В конце каждой недели – 5 вопросов для самопроверки.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="tool"><span class="tl">Из панели инструментов</span><b>Майнд-карта</b>&nbsp;– общая картина темы. <b>Видео-обзор</b>&nbsp;– войти в тему за пару минут. <b>Стиль для учёбы</b> в настройках чата (Learning Guide)&nbsp;– разбирает тему по шагам, как репетитор.</p>
+        
+      </div>
+    </details>
+    <details class="task scn">
+      <summary><span class="num">04</span><span class="tname">Читаю сложную книгу или стандарт<span class="tsub">PDF → глава за главой, вопросы к главе, противоречия</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Ситуация</span><p>Плотный текст: профессиональная книга, учебник, стандарт, закон, методичка. Подряд читать тяжело, а пересказ «в общих словах» не годится&nbsp;– важны точные формулировки.</p></div>
+          <div class="fact"><span class="fk">Что загрузить</span><p>PDF или ePub книги, документ стандарта. Один источник&nbsp;– до 500 тысяч слов или до 200 МБ; если документ больше, загрузите его частями. Свои заметки по прочитанному&nbsp;– отдельным текстом.</p></div>
+        </div>
+        <p class="sh">Шаги</p>
+        <ol><li>Загрузите документ и попросите карту: из чего он состоит и какие главы ключевые.</li><li>Читайте сами, глава за главой. После каждой главы&nbsp;– разбор и вопросы к ней.</li><li>Ищите противоречия и двусмысленные места&nbsp;– особенно в стандартах и правилах.</li><li>Удачные разборы сохраняйте в заметки блокнота&nbsp;– со сносками на точное место в тексте.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 4.1 · Карта книги</p><pre>Покажи, как устроен документ <span class="tok">[название]</span>:
+– из каких частей и глав он состоит;
+– главная мысль каждой главы в 1–2 фразах;
+– какие главы опираются на какие.
+Моя цель: <span class="tok">[зачем читаю – например, применить в работе, сдать по нему зачёт]</span>. Подскажи, какие главы для этой цели ключевые, а какие можно прочитать бегло.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 4.2 · Разбор главы</p><pre>Разберём главу или раздел <span class="tok">[номер или название]</span>.
+1. Главная мысль – в трёх предложениях.
+2. Ключевые термины – так, как они определены в тексте, с цитатой и ссылкой.
+3. Самое трудное место главы – объясни проще и приведи пример из самого текста.
+4. Потом задай мне 5 вопросов по главе по одному. Жди моего ответа и после каждого скажи, что верно, а что нет.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 4.3 · Противоречия и двусмысленности</p><pre>Найди в документе <span class="tok">[название]</span> места, где:
+– текст противоречит сам себе;
+– одно правило или требование расходится с другим;
+– формулировку можно понять двумя способами.
+Для каждого места: цитата со ссылкой, в чём проблема, какие есть варианты понимания.
+Не решай, какой вариант правильный, – только покажи. Если таких мест нет, так и скажи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="tool"><span class="tl">Из панели инструментов</span><b>Майнд-карта</b>&nbsp;– структура книги целиком. <b>Карточки и тест</b>&nbsp;– при создании напишите, на какой главе сосредоточиться. Точные формулировки сверяйте по сноскам в чате.</p>
+        
+      </div>
+    </details>
+    <details class="task scn">
+      <summary><span class="num">05</span><span class="tname">Учу язык по своим материалам<span class="tsub">тексты и субтитры → словарь, карточки, пересказ</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Ситуация</span><p>Учебник надоел, хочется учить язык на том, что интересно: статьи по своей профессии, любимые видео, книги.</p></div>
+          <div class="fact"><span class="fk">Что загрузить</span><p>2–5 текстов на языке, который вы учите, своего уровня: статьи, главы книг, ваши собственные тексты. Видео на YouTube с субтитрами&nbsp;– ссылкой. Свои списки слов.</p></div>
+        </div>
+        <p class="sh">Шаги</p>
+        <ol><li>Загрузите тексты, которые вам интересны и по силам.</li><li>Попросите словарь по тексту: слова в контексте, а не список из словаря.</li><li>Сделайте карточки по этим словам и повторяйте.</li><li>Перескажите текст письменно в чате&nbsp;– блокнот сверит пересказ с оригиналом и поправит.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 5.1 · Словарь по тексту</p><pre>Выпиши из источника <span class="tok">[название текста]</span> 20 слов и выражений, которые стоит выучить на моём уровне: <span class="tok">[например, A2, B1 или «начинающий»]</span>.
+Для каждого:
+– слово или выражение;
+– перевод именно в этом контексте;
+– предложение из текста, где оно встречается.
+Сгруппируй по темам. Бери только то, что есть в тексте.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 5.2 · Проверь мой пересказ</p><pre>Вот мой пересказ текста <span class="tok">[название]</span> на <span class="tok">[язык]</span>:
+<span class="tok">[вставьте свой пересказ]</span>
+1. Сравни с оригиналом: что я передал(а) неверно по смыслу или пропустил(а)?
+2. Исправь грамматические ошибки и коротко объясни каждую.
+3. Предложи 3 выражения из оригинала, которые сделают мой пересказ живее.
+Объяснения пиши на русском, примеры – на <span class="tok">[язык]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 5.3 · Вопросы по тексту</p><pre>Задай мне 5 вопросов на <span class="tok">[язык]</span> по тексту <span class="tok">[название]</span> – по одному, от простых к сложным.
+Жди моего ответа. После каждого ответа:
+– скажи, верно ли по смыслу, и покажи место в тексте;
+– исправь ошибки в языке и дай правильный вариант.
+В конце подведи итог: какие слова и конструкции мне стоит повторить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="tool"><span class="tl">Из панели инструментов</span><b>Карточки</b>&nbsp;– при создании напишите, на чём сосредоточиться, например «слова и выражения из текста [название]». <b>Подкаст</b>&nbsp;– если в настройках языка вывода есть язык, который вы учите, можно переключиться на него и послушать обсуждение своих же текстов.</p>
+        
+      </div>
+    </details>
+    <details class="task scn">
+      <summary><span class="num">06</span><span class="tname">Помогаю ребёнку по учебнику<span class="tsub">параграф учебника → объяснение по программе и вопросы для самопроверки</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Ситуация</span><p>Ребёнок не понял тему, а вы сами давно забыли школьную программу. Хочется объяснить так, как в учебнике, и проверить, понял ли он,&nbsp;– без лишнего из интернета и без готовых ответов.</p></div>
+          <div class="fact"><span class="fk">Что загрузить</span><p>Параграф или глава учебника&nbsp;– PDF или фото страниц (картинки тоже можно загружать). Если есть&nbsp;– задания из рабочей тетради или вопросы от учителя.</p></div>
+        </div>
+        <p class="sh">Шаги</p>
+        <ol><li>Работайте в своём аккаунте: загрузите параграф в блокнот, например «[предмет], [класс] класс».</li><li>Сначала разберитесь сами: попросите объяснение для себя и подсказку, как объяснить ребёнку.</li><li>Объясните своими словами, потом задайте вопросы для самопроверки. Ответы&nbsp;– у вас, у ребёнка&nbsp;– только вопросы.</li><li>Если ребёнок застрял на задании&nbsp;– наводящие вопросы вместо готового ответа.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 6.1 · Объясни мне, чтобы я объяснил(а) ребёнку</p><pre>Мой ребёнок учится в <span class="tok">[номер]</span> классе, тема – <span class="tok">[название параграфа]</span>.
+По этому параграфу учебника:
+1. Объясни мне суть простыми словами.
+2. Предложи, как объяснить это ребёнку за 5 минут: с примером из жизни, но без выхода за рамки учебника.
+3. Какие места параграфа могут быть непонятны ребёнку и почему?
+Опирайся только на учебник.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 6.2 · Вопросы для самопроверки</p><pre>Составь 7 вопросов по параграфу <span class="tok">[номер или название]</span> для самопроверки ребёнка, <span class="tok">[номер]</span> класс.
+Сначала простые – вспомнить определение или правило, потом такие, где нужно подумать и применить.
+Ответы дай отдельным списком в самом конце – это для меня – и к каждому укажи, где это в учебнике.
+Ничего сверх учебника.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox"><p class="plabel">Запрос 6.3 · Застрял на задании</p><pre>Ребёнок не может решить задание:
+<span class="tok">[текст задания]</span>
+Не давай готового ответа и не решай за него.
+1. Подскажи 3–4 наводящих вопроса по шагам, которые я могу ему задать.
+2. Назови правило или пример из учебника, на который стоит опереться, со ссылкой.
+3. Как мне понять, что он действительно разобрался, а не угадал?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="tool"><span class="tl">Из панели инструментов</span><b>Карточки</b>&nbsp;– по терминам и правилам параграфа. <b>Майнд-карта</b>&nbsp;– повторить тему перед контрольной. <b>Тест</b>&nbsp;– пройти вместе, вслух.</p>
+        <p class="note">Свой аккаунт подростку можно завести с того возраста, с которого это разрешено в вашей стране (для многих стран&nbsp;– с 13 лет); до 18 лет фильтры строже. С ребёнком помладше занимайтесь вместе, со своего аккаунта. Помощники, которые объясняют тему, но не выдают готовых ответов,&nbsp;– в соседнем бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-uchit-dumat/" target="_top">«Учит думать, а не списывать»</a>.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="zaprosy" style="padding-top:70px">
   <div class="lede" style="padding-top:0"><div class="col">
-    <p class="label">Глава 4</p>
-    <h2>Семь готовых запросов для&nbsp;NotebookLM</h2>
-    <p>Скопируйте запрос в чат блокнота и замените то, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>. Запросы написаны под NotebookLM, но сработают и в ChatGPT, Claude или Gemini, если прикрепить к чату те же материалы.</p>
+    <p class="label">Глава 5</p>
+    <h2>Семь запросов на&nbsp;любой случай</h2>
+    <p>Эти запросы подходят к любому сценарию и к любому блокноту. Скопируйте запрос в чат блокнота и замените то, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>. Запросы написаны под NotebookLM, но сработают и в ChatGPT, Claude или Gemini, если прикрепить к чату те же материалы.</p>
 
     <div class="promptbox stepprompt"><p class="plabel">Запрос 1 · объясни главное как новичку</p><pre>Объясни главное из моих источников так, будто я новичок и читаю о теме впервые.
 1. Начни с пяти ключевых мыслей – по одной-две фразы на каждую.
@@ -481,28 +699,7 @@ footer p{max-width:none}
 4. Чего делать нельзя – по материалам.
 
 Пиши коротко, только то, что есть в источниках. В конце перечисли, из каких источников что взято.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-  </div></div>
-</section>
-
-<section class="wrap blk reveal" id="pomoshnik">
-  <div class="lede" style="padding-top:0"><div class="col">
-    <p class="label">Глава 5</p>
-    <h2>NotebookLM или свой помощник&nbsp;– когда&nbsp;что</h2>
-    <p>Это не соперники, а два разных инструмента. Один помогает разобраться, другой&nbsp;– регулярно делать работу.</p>
-    <div class="cmp">
-      <div class="cbox"><p class="ck">NotebookLM</p><h3>Разобраться и вернуться к базе знаний</h3><p>Изучить курс, книгу или стопку статей. Найти, где это было сказано. Проверить себя перед экзаменом. Отвечает строго по материалам и показывает источник.</p></div>
-      <div class="cbox"><p class="ck">Проект-помощник</p><h3>Регулярно делать задачи по своим правилам</h3><p>Тот самый помощник в ChatGPT или Claude из урока 1 модуля 2. Работает по вашей инструкции, вашим голосом и под ваши задачи: посты, ответы клиентам, планы.</p></div>
-    </div>
-    <p class="rulebox"><b>Как сочетать.</b> Разберитесь в теме в NotebookLM, попросите выжимку запросом 7&nbsp;– и добавьте её в материалы своего помощника. Тогда помощник будет работать с проверенными знаниями из ваших источников, а не с общими представлениями о теме.</p>
-  </div></div>
-</section>
-
-<section class="wrap blk reveal" id="roditelyam">
-  <div class="lede" style="padding-top:0"><div class="col">
-    <p class="label">Глава 6</p>
-    <h2>Для родителей</h2>
-    <p>Если ребёнок учится по учебнику, загрузите учебник или нужные главы в NotebookLM&nbsp;– и ответы будут только по школьной программе, без лишнего из интернета.</p>
-    <p class="note">Свой аккаунт подростку можно завести с того возраста, с которого это разрешено в вашей стране (для многих стран&nbsp;– с 13 лет); до 18 лет фильтры строже. С ребёнком помладше занимайтесь вместе, со своего аккаунта. Помощники, которые объясняют тему, но не выдают готовых ответов,&nbsp;– в соседнем бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-uchit-dumat/" target="_top">«Учит думать, а не списывать»</a>.</p>
+    <p class="rulebox" id="pomoshnik"><b>NotebookLM или свой помощник.</b> NotebookLM&nbsp;– чтобы разобраться в материалах и возвращаться к ним. Проект-помощник из урока 1 модуля 2&nbsp;– чтобы регулярно делать задачи по своим правилам. Выжимку из запроса 7 загрузите в своего помощника&nbsp;– и он будет работать с вашими проверенными знаниями.</p>
   </div></div>
 </section>
 
@@ -516,18 +713,17 @@ footer p{max-width:none}
         <li><b>Выжимку для помощника</b> (запрос 7)&nbsp;– в папку «Мои помощники» из урока 1, рядом с материалами того помощника, которому она нужна.</li>
         <li><b>Эту страницу</b>&nbsp;– в закладки, чтобы запросы были под рукой.</li>
       </ul>
-      <p style="margin-top:22px"><b>Попробуйте сегодня: создайте один блокнот, загрузите в него материал, по которому вы сейчас учитесь, и задайте запрос 1. Откройте пару сносок&nbsp;– и посмотрите, как он работает.</b></p>
+      <p style="margin-top:22px"><b>Попробуйте сегодня: выберите свой сценарий из главы 4, создайте блокнот, загрузите материал, по которому вы сейчас учитесь, и задайте первый запрос сценария. Откройте пару сносок&nbsp;– и посмотрите, как он работает.</b></p>
     </div>
   </div>
 </div>
 
-<div class="wrap back">
-</div>
+<div class="wrap back"><a class="linkbtn" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Все материалы набора</a></div>
 
 </main>
 
 <footer>
-  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 2 к уроку 4: NotebookLM<p style="margin-top:8px">По материалам <a href="https://support.google.com/notebooklm/" target="_blank" rel="noopener">справки Google по NotebookLM</a>, октябрь 2026.</p></div>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">«Учиться легче вместе с&nbsp;ИИ»</a><p style="margin-top:8px">По материалам <a href="https://support.google.com/notebooklm/" target="_blank" rel="noopener">справки Google по NotebookLM</a>, октябрь 2026.</p></div>
 </footer>
 
 <div class="sr" role="status" aria-live="polite" id="say"></div>
