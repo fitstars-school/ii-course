@@ -244,7 +244,7 @@ footer p+p{margin-top:8px}
 @media (max-width:420px){.shots{grid-template-columns:1fr}}
 </style>
 <style id="edge">
-/* Единый левый край (03.10.2026): блоки не сдвигаем отступом – выделяем цветом и плашкой */
+/* Единый левый край (03.10.2026, правило Светланы): блоки не сдвигаем отступом – выделяем цветом, плашкой, стилем */
 .step{grid-template-columns:1fr;gap:0}
 .step .snum{display:block;font-size:40px;margin-bottom:10px}
 .step ol{list-style:none;counter-reset:st;padding-left:0;margin-left:0}
@@ -255,9 +255,9 @@ footer p+p{margin-top:8px}
 .task .body{padding-left:0}
 .def{grid-template-columns:1fr;gap:0}
 .def .dn{display:block;margin-bottom:6px}
-.lede .col,.closing .cgrid .col{grid-column:1 / span 10}
-@media (max-width:760px){.lede .col,.closing .cgrid .col{grid-column:1 / -1}}
-@media (max-width:760px){.step .snum{font-size:32px}}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / span 10}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1}.step .snum{font-size:32px}}
 </style>
 </head>
 <body>
