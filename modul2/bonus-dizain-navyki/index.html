@@ -651,11 +651,6 @@ description: Проверяет готовый макет, слайд, обло�
     }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
   });
 
-  }
-  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
-    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
-  });
-  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
 
   var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
     es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});

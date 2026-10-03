@@ -792,8 +792,7 @@ p.aq+p.aq{margin-top:0}
   }
   function printCard(){
     var card=document.getElementById('famcard');if(!card)return;
-    var text=card.querySelector('.fl').innerText+'
-'+card.querySelector('pre').innerText;
+    var text=card.querySelector('.fl').innerText+'\n'+card.querySelector('pre').innerText;
     var f=document.createElement('iframe');
     f.style.position='fixed';f.style.right='0';f.style.bottom='0';f.style.width='0';f.style.height='0';f.style.border='0';
     document.body.appendChild(f);
@@ -812,8 +811,7 @@ p.aq+p.aq{margin-top:0}
     var pb=btn.closest('.promptbox,.famcard');
     var pre=pb?pb.querySelector('pre'):null;
     var fl=pb?pb.querySelector('.fl'):null;
-    copy((fl?fl.innerText.toUpperCase()+'
-':'')+(pre?pre.innerText:'')).then(function(){
+    copy((fl?fl.innerText.toUpperCase()+'\n':'')+(pre?pre.innerText:'')).then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');
       setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);

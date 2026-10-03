@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Плагины: какие подключения пригодятся вашему помощнику · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Плагины в ChatGPT по шагам со скриншотами: Google Диск, Документы, Календарь и Gmail для всех, специальные подключения под ваши задачи, безопасность и промпт, чтобы выбрать нужное именно вашему помощнику.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* бонусы модуля 2 */
+.matrix{margin-top:28px;border-top:1px solid var(--ink)}
+.mrow{display:grid;grid-template-columns:120px minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:22px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.52;color:#3B3143}
+.mrow.mh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding:12px 0}
+.mrow .mname{font-weight:700;color:var(--ink);font-size:16px}
+.mcap{margin-top:16px;font-size:14px;color:var(--muted)}
+.tree{margin-top:22px;border-left:2px solid var(--pink);padding:16px 0 16px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:#3B3143;white-space:pre-wrap;overflow-wrap:anywhere}
+.tree b{color:var(--ink);font-weight:500}
+.tree i{font-style:normal;color:var(--faint)}
+.sublab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:30px 0 4px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.peek{margin-top:18px}
+.peek summary{display:inline-block;cursor:pointer;list-style:none;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.peek[open] summary{color:var(--pink);border-bottom-color:var(--pink)}
+.peek .promptbox{margin-top:16px}
+.skcode{font-family:var(--mono);font-size:13px;color:var(--faint);font-weight:400;margin-left:6px;white-space:nowrap}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:22px}
+.chain span{font-size:15px;font-weight:600;padding:8px 14px;border:1px solid var(--line);background:#fff}
+.chain em{font-style:normal;color:var(--pink);font-weight:700}
+.backlink{display:inline-block;margin-top:12px;color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px}
+.backlink:hover{color:#fff;border-bottom-color:var(--pink-soft)}
+@media (max-width:760px){
+  .mrow{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .mrow.mh{display:none}
+  .mrow>div[data-l]::before{content:attr(data-l);display:block;font-size:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .mrow .mname{font-size:18px}
+  .tree{font-size:12.5px;padding-left:16px}
+  .peek .promptbox{margin-left:-20px;margin-right:-20px}
+  .step .btns .btn{width:100%}
+}
+
+/* бонус: плагины */
+.shots{margin-top:26px;border-top:1px solid var(--ink)}
+.sstep{display:grid;grid-template-columns:62px 1fr;gap:18px;padding:30px 0;border-bottom:1px solid var(--line)}
+.sstep .snum{font-size:46px}
+.sstep h3{font-family:var(--sans);font-size:20px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.sstep p{font-size:16.5px;color:#3B3143;line-height:1.6}
+.shot{display:block;margin-top:16px;border:1px solid var(--line);background:#fff;cursor:zoom-in;line-height:0}
+.shot img{display:block;width:100%;height:auto}
+.shot:hover{border-color:var(--pink-soft)}
+.sstep .note{margin-top:16px}
+.tip{font-family:var(--serif);font-size:clamp(23px,2.6vw,30px);line-height:1.18;margin:4px 0 14px}
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;border-top:1px solid var(--ink);margin-top:10px}
+.pcard{border-bottom:1px solid var(--line);padding:16px 0 18px}
+.pcard h3{font-family:var(--sans);font-size:17.5px;font-weight:700;line-height:1.3;margin-bottom:5px}
+.pcard p{font-size:15.5px;color:var(--muted);line-height:1.52}
+.pcard .ptag{font-size:13px;font-weight:600;color:var(--faint);margin-top:8px}
+.step .sublab{margin-top:22px}
+.step .snote{margin-top:18px}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(15,11,20,.92);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:100%;width:auto;height:auto;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.lbx{position:absolute;top:12px;right:16px;width:44px;height:44px;border:none;background:transparent;color:#fff;font-size:34px;line-height:1;cursor:pointer}
+.lbx:hover{color:var(--pink-soft)}
+@media (max-width:760px){
+  .sstep{grid-template-columns:1fr;gap:6px;padding:24px 0}
+  .sstep .snum{font-size:34px}
+  .sstep h3{font-size:18.5px}
+  .shot{margin-left:-20px;margin-right:-20px;border-left:none;border-right:none}
+  .pgrid{grid-template-columns:1fr}
+  .lb{padding:10px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · к уроку 3</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонус модуля 2 · Учиться легче</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Плагины: какие подключения <span class="it">пригодятся вашему помощнику</span></h1>
+      <p class="hlead">Плагин – это провод от помощника к вашему Диску, календарю или почте. Разбираем три подключения, полезные всем, специальные под ваши задачи и промпт, который поможет выбрать нужное.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Время</span><span class="mv">15–20 минут</span></div>
+      <div><span class="mk">Где работает</span><span class="mv">ChatGPT подробно, Claude и Gemini – коротко</span></div>
+      <div><span class="mk">Останется</span><span class="mv">1–3 подключения и строка в инструкции помощника</span></div>
+    </div>
+    <nav class="nav" aria-label="Содержание">
+      <a class="navlink" href="#chto">Что такое плагин</a>
+      <a class="navlink" href="#kak">Как подключить</a>
+      <a class="navlink" href="#dlya-vseh">Плагины для всех</a>
+      <a class="navlink" href="#specialnye">Специальные</a>
+      <a class="navlink" href="#bezopasnost">Безопасность</a>
+      <a class="navlink" href="#vybor">Какой нужен вам</a>
+      <a class="navlink" href="#esli-net">Если плагина нет</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Что это за материал</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>В уроке 3 модуля 2 прозвучало, что плагины – непаханое поле: можно ставить график контента в Google Календарь или сохранять материалы в Google Диск. Здесь – <b>обзор и выбор</b>: что бывает, что подключить первым и как проверить, что подключение работает.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Глубокая работа с документами – что копировать из чата, что сохранять на Диск, как вести материалы – будет в модуле 3. Здесь мы только прокладываем провода.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Всё сверено с интерфейсом ChatGPT, справкой OpenAI и каталогом плагинов на <b>3 октября 2026 года</b>. Названия меняются часто: то, что раньше звалось «коннекторами» и «приложениями», сейчас в ChatGPT собрано в разделе «Плагины».</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal" id="chto">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Бытовыми словами</p>
+    <h2>Плагин – это провод к&nbsp;вашим сервисам</h2>
+    <p>Без плагина помощник сидит в чате и ждёт, пока вы принесёте ему файл, скопируете письмо или продиктуете расписание. С плагином он сам идёт в ваш Google Диск, находит нужный документ, смотрит календарь на неделю или готовит черновик ответа в почте. Вы не носите материалы туда-сюда – вы просто ставите задачу.</p>
+    <p>Если вспомнить картинку из урока 3: проект – это стол, за которым работает помощник, навыки – инструменты, которые он берёт со стола под задачу. Плагины – провода от этого стола к вашим папкам, календарю и почте.</p>
+    <div class="chain"><span>Проект – стол</span><em>+</em><span>Навыки – инструменты</span><em>+</em><span>Плагины – провода к сервисам</span></div>
+    <p class="rulebox">В ChatGPT слово «плагин» шире, чем просто провод. Плагин может включать само подключение к сервису и готовые навыки к нему. Например, плагин Google Drive умеет работать сразу с Диском, Документами, Таблицами и Презентациями.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="kak">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">По шагам</p>
+    <h2>Как подключить плагин в&nbsp;ChatGPT</h2>
+    <p>Скриншоты сделаны 3 октября 2026 года, интерфейс на русском. Порядок одинаковый для любого плагина – здесь показан Zoom, Google Диск и Календарь подключаются так же.</p>
+    <p class="snote">Нажмите на картинку, чтобы рассмотреть её крупнее.</p>
+
+    <div class="shots">
+      <div class="sstep"><span class="snum">1</span><div>
+        <h3>Откройте раздел «Плагины»</h3>
+        <p>Он есть в меню слева. Ещё одна кнопка «Плагины» – под строкой ввода, рядом с «Выбрать проект» и «Файлы»: через неё плагин можно позвать прямо в чат.</p>
+        <a class="shot" href="assets/shag-1.jpg" target="_blank" rel="noopener"><img src="assets/shag-1.jpg" loading="lazy" width="1600" height="846" alt="Главный экран ChatGPT в режиме «Работа»: в меню слева пункт «Плагины», под строкой ввода кнопки «Выбрать проект», «Файлы», «Плагины»"></a>
+      </div></div>
+
+      <div class="sstep"><span class="snum">2</span><div>
+        <h3>Посмотрите, что уже подключено</h3>
+        <p>Вверху – поиск «Искать плагины», ниже блок «Установленные» и каталог. Google Drive подписан «Drive, Docs, Sheets or Slides»: Документы, Таблицы и Презентации входят в него. Вкладка «Навыки» рядом – там живут навыки из уроков 2 и 3.</p>
+        <a class="shot" href="assets/shag-2.jpg" target="_blank" rel="noopener"><img src="assets/shag-2.jpg" loading="lazy" width="1600" height="849" alt="Страница «Плагины»: поиск, блок «Установленные», раздел «Популярное» с Gmail, Google Drive, GitHub и другими"></a>
+      </div></div>
+
+      <div class="sstep"><span class="snum">3</span><div>
+        <h3>Кнопка «Добавить» – для тех, кто собирает своё</h3>
+        <p>В ней «Создать плагин», «Загрузить архив плагина» и «Создать пользовательский сервер MCP». Это для продвинутых: чтобы подключить готовый плагин, она не нужна.</p>
+        <a class="shot" href="assets/shag-3.jpg" target="_blank" rel="noopener"><img src="assets/shag-3.jpg" loading="lazy" width="1600" height="802" alt="Открытое меню кнопки «Добавить»: «Создать плагин», «Загрузить архив плагина», «Создать пользовательский сервер MCP»"></a>
+      </div></div>
+
+      <div class="sstep"><span class="snum">4</span><div>
+        <h3>Найдите плагин и нажмите плюсик</h3>
+        <p>Через поиск или по разделам каталога. Рядом с каждым плагином – плюсик, им плагин и добавляется. Нажмите на название, если хотите сначала прочитать, что он умеет.</p>
+        <a class="shot" href="assets/shag-4.jpg" target="_blank" rel="noopener"><img src="assets/shag-4.jpg" loading="lazy" width="1600" height="836" alt="Каталог плагинов по разделам: Teams, Zoom, раздел «Творчество» с Canva и Figma; рядом с каждым плагином плюсик"></a>
+      </div></div>
+
+      <div class="sstep"><span class="snum">5</span><div>
+        <h3>Прочитайте окно подключения</h3>
+        <p>ChatGPT покажет три блока: «Вы все контролируете», «Приложения могут представлять повышенный риск» и «Данные, переданные этому приложению». Дальше – кнопка «Перейти к» и название сервиса.</p>
+        <a class="shot" href="assets/shag-5.jpg" target="_blank" rel="noopener"><img src="assets/shag-5.jpg" loading="lazy" width="1600" height="837" alt="Окно «Подключить Zoom» с тремя блоками о данных и рисках и кнопкой «Перейти к Zoom»"></a>
+        <p class="note"><b>Прочитайте, к чему даёте доступ.</b> Сервис получит доступ к основной информации о вас и краткой сводке того, над чем вы работаете в ChatGPT. Если сервис вам незнаком или не нужен каждую неделю – лучше не подключать.</p>
+      </div></div>
+
+      <div class="sstep"><span class="snum">6</span><div>
+        <h3>Разрешите доступ на стороне сервиса</h3>
+        <p>Откроется страница самого сервиса со списком: что ChatGPT сможет видеть и делать. У Zoom это создание и изменение встреч, просмотр облачных записей и поиск. Allow – разрешить, Decline – отказаться. Google покажет свой похожий экран.</p>
+        <a class="shot" href="assets/shag-6.jpg" target="_blank" rel="noopener"><img src="assets/shag-6.jpg" loading="lazy" width="1600" height="897" alt="Страница Zoom со списком разрешений для ChatGPT и кнопками Allow и Decline"></a>
+      </div></div>
+
+      <div class="sstep"><span class="snum">7</span><div>
+        <h3>Позовите плагин в чат</h3>
+        <p>Наберите @ и выберите плагин из списка – или нажмите «Плагины» под строкой ввода. Можно и просто поставить задачу: установленный плагин ChatGPT подключит сам, если он подходит.</p>
+        <a class="shot" href="assets/shag-7.jpg" target="_blank" rel="noopener"><img src="assets/shag-7.jpg" loading="lazy" width="1400" height="1008" alt="Чат: вопрос «Zoom, что ты умеешь делать?» и ответ ChatGPT таблицей «Что могу / Пример запроса»"></a>
+      </div></div>
+    </div>
+
+    <p class="sublab">Совет</p>
+    <h3 class="tip">Подключили плагин – первым делом спросите: «Что ты умеешь делать?»</h3>
+    <p>На скриншоте выше ChatGPT в ответ на такой вопрос разложил всё таблицей: создавать и менять встречи, находить записи, вытаскивать из расшифровки решения и задачи, сравнивать несколько встреч. За минуту вы узнаёте, чем плагин полезен именно вам, – без чтения справки. Можно попросить сразу и примеры под ваши задачи:</p>
+<div class="promptbox stepprompt"><p class="plabel">Первый вопрос новому плагину</p><pre>@[название плагина] что ты умеешь делать? Ответь таблицей «Что могу / Пример запроса». Примеры бери из моей работы: [кто вы и чем занимаетесь, например: веду консультации и блог про питание]. Отдельно скажи, что ты можешь только смотреть, а что – создавать, менять или удалять.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+    <div class="defs">
+      <div class="def"><span class="dn">↳</span><div><h3>Плагин в проекте</h3><p>В чате проекта плагин зовут так же – через @ или «Плагины» под строкой ввода. А ссылку на файл или папку Google Диска можно добавить в источники проекта: тогда помощник будет опираться на неё.</p></div></div>
+      <div class="def"><span class="dn">↳</span><div><h3>Режим «Работа»</h3><p>Для задач в несколько шагов – «найди в Диске, собери, перенеси в календарь» – переключитесь вверху с «Чата» на «Работу». Это режим для длинных задач: он работает с подключёнными плагинами и файлами, создаёт документы, таблицы и презентации. Доступен на части тарифов.</p></div></div>
+      <div class="def"><span class="dn">↳</span><div><h3>Тарифы и доступ</h3><p>Каталог плагинов OpenAI открывает на всех тарифах, но конкретный плагин или действие может быть доступно только на части тарифов и не во всех странах. Из России ChatGPT официально недоступен – как подключаться, разобрано в <a href="https://aiforlife.ru/ii-course/modul0/gaid-dostup/" target="_blank" rel="noopener">гайде по доступу</a>.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="practice" id="dlya-vseh">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Подключаем первыми</p>
+    <h2>Плагины для всех</h2>
+    <p class="pmeta">Google Диск · Документы и Таблицы · Календарь · Gmail</p>
+    <p class="pintro">Это то, что пригодится почти любому эксперту: файлы, расписание и почта. Все четыре – официальные плагины от OpenAI. После подключения запустите промпт-проверку: он покажет, что провод действительно работает, а не делает вид.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Google Диск</h3>
+      <p>Помощник ищет файлы и папки в вашем Диске, читает их и опирается на них в ответах. По разрешению – создаёт, переносит и обновляет файлы. Видит всё, что открывается в подключённом аккаунте Google, – не больше и не меньше.</p>
+      <p class="sublab">Что можно поручить</p>
+      <ul>
+        <li>«Найди в папке „Клиенты“ анкету [имя] и подготовь вопросы к первой консультации».</li>
+        <li>«Собери из моих конспектов вебинаров за месяц список вопросов слушателей, которые остались без ответа».</li>
+        <li>«Сохрани этот план постов в Диск документом в папку „Контент“».</li>
+      </ul>
+      <p class="snote"><b>Подключение:</b> в каталоге ищите Google Drive. Если у вас несколько аккаунтов Google, подключайте тот, где лежат рабочие файлы: ChatGPT позволяет подключить и второй.</p>
+<div class="promptbox stepprompt"><p class="plabel">Проверка · Google Диск</p><pre>Проверь подключение к Google Диску. Найди в моём Диске папку [название] и перечисли 3–5 последних файлов в ней с датами изменения. Потом открой файл [название] и перескажи его первый абзац своими словами. Ничего не создавай и не меняй.
+Если файл нашёлся, но содержимое прочитать не получилось, – так и скажи, не додумывай. Если доступа нет совсем – подскажи, что мне проверить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Google Документы, Таблицы и Презентации</h3>
+      <p>Отдельно их ставить не нужно: они работают через тот же плагин Google Drive. Помощник читает документ, сравнивает таблицы, а с разрешением – создаёт и дополняет файлы. Сложное редактирование и совместная работа по-прежнему удобнее в самих Google Документах.</p>
+      <p class="sublab">Что можно поручить</p>
+      <ul>
+        <li>«Перепиши описание программы по моему документу „Голос бренда“ – факты не меняй».</li>
+        <li>«Сравни две таблицы учёта заявок за август и сентябрь: что выросло, что просело».</li>
+        <li>«Допиши в документ „Задачи после встречи“ пункты из нашей переписки».</li>
+      </ul>
+      <p class="snote"><b>Подключение:</b> то же, что у Google Диска. При входе Google спросит разрешения на Документы, Таблицы и Презентации – прочитайте список.</p>
+<div class="promptbox stepprompt"><p class="plabel">Проверка · Документы и Таблицы</p><pre>Проверь, как ты работаешь с моими Google Документами и Таблицами.
+1. Найди в Google Диске документ [название] и перескажи его в 5 пунктах.
+2. Найди таблицу [название]: какие в ней столбцы и примерно сколько строк.
+3. Предложи создать новый Google Документ «Проверка помощника» с одной строкой: «Подключение работает». Создай его только после моего «да» и дай ссылку.
+Если какой-то шаг не получился – скажи, какой и почему, ничего не додумывай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Google Календарь</h3>
+      <p>Помощник видит ваше расписание, собирает план дня, ищет свободные окна, а с разрешением – создаёт, переносит и удаляет события. Именно так можно поставить график выхода контента прямо в календарь.</p>
+      <p class="sublab">Что можно поручить</p>
+      <ul>
+        <li>«Посмотри мою неделю и предложи, куда поставить три часа на запись уроков».</li>
+        <li>«Разнеси по календарю план постов на октябрь: каждый пост – событие на 30 минут в 10:00».</li>
+        <li>«Что у меня завтра? Подготовь короткую памятку к каждой встрече».</li>
+      </ul>
+      <p class="snote"><b>Подключение:</b> в каталоге ищите Google Calendar.</p>
+<div class="promptbox stepprompt"><p class="plabel">Проверка · Google Календарь</p><pre>Проверь подключение к Google Календарю. Перечисли мои события на [завтра / эту неделю] со временем. Найди одно свободное окно на 60 минут в рабочее время.
+Потом предложи создать тестовое событие «Проверка помощника» на [дата и время]. Создавай только после моего «да» и сразу скажи, как его удалить.
+Если доступа к календарю нет – так и скажи, не придумывай события.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Gmail – если почта у вас там</h3>
+      <p>Помощник пересказывает переписку, находит нужные письма, готовит черновики ответов и помогает разобрать входящие. Подключайте, если почта – ваш главный канал с клиентами.</p>
+      <p class="sublab">Что можно поручить</p>
+      <ul>
+        <li>«Перескажи переписку с [имя]: о чём договорились и что мне нужно прислать».</li>
+        <li>«Подготовь черновик вежливого ответа на последнее письмо от [имя] – не отправляй».</li>
+        <li>«Найди письма с оплатами за сентябрь и сведи в список: от кого, сумма, дата».</li>
+      </ul>
+      <p class="snote"><b>Подключение:</b> в каталоге ищите Gmail. Почта – самое чувствительное подключение: здесь особенно важно, чтобы ChatGPT спрашивал вас перед каждым действием (об этом – в главе про безопасность).</p>
+<div class="promptbox stepprompt"><p class="plabel">Проверка · Gmail</p><pre>Проверь подключение к Gmail. Найди 3 последних письма от [имя или адрес] и коротко перескажи каждое: о чём и чего от меня ждут.
+Подготовь черновик ответа на последнее письмо. Ничего не отправляй и не удаляй – только покажи текст черновика здесь.
+Если доступа к почте нет – подскажи, что мне проверить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="specialnye">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Под ваши задачи</p>
+    <h2>Специальные плагины</h2>
+    <p>Их подключают не все, а те, кто уже живёт в этих сервисах. Ниже – подборка из официального каталога ChatGPT на 3 октября 2026 года. Правило простое: если сервисом вы не пользуетесь каждую неделю, плагин к нему не нужен.</p>
+    <p class="note">У каждого плагина свои условия: почти всегда нужен аккаунт в самом сервисе, а часть возможностей зависит от тарифа ChatGPT и тарифа сервиса. Точно – на странице плагина в каталоге.</p>
+
+    <p class="sublab">Дизайн и контент</p>
+    <div class="pgrid">
+      <div class="pcard"><h3>Canva</h3><p>Делает из брифа или текста посты, презентации, листовки; правит дизайн, убирает фон, переводит макет в размеры для соцсетей.</p><p class="ptag">Нужен аккаунт Canva</p></div>
+      <div class="pcard"><h3>Figma</h3><p>Создаёт макеты, схемы и презентации в Figma по вашему описанию или документу.</p><p class="ptag">Нужен аккаунт Figma</p></div>
+      <div class="pcard"><h3>Metricool</h3><p>Показывает статистику соцсетей, запланированные посты и удачное время публикации, создаёт и обновляет посты.</p><p class="ptag">Нужен аккаунт Metricool</p></div>
+    </div>
+
+    <p class="sublab">Заметки и база знаний</p>
+    <div class="pgrid">
+      <div class="pcard"><h3>Notion</h3><p>Ищет по вашим страницам и базам, создаёт страницы, задачи и базы данных – удобно, если вся методичка живёт в Notion.</p><p class="ptag">Нужен аккаунт Notion</p></div>
+      <div class="pcard"><h3>Trello</h3><p>Работает с вашими досками и карточками задач: видно, что в работе, что зависло.</p><p class="ptag">Нужен аккаунт Trello</p></div>
+    </div>
+
+    <p class="sublab">Общение и встречи</p>
+    <div class="pgrid">
+      <div class="pcard"><h3>Zoom</h3><p>Находит встречи и облачные записи, пересказывает их, вытаскивает решения и задачи, создаёт и меняет встречи.</p><p class="ptag">Нужен аккаунт Zoom</p></div>
+      <div class="pcard"><h3>Slack</h3><p>Пересказывает каналы за неделю, ищет сообщения, готовит ответы в тоне канала.</p><p class="ptag">Нужен аккаунт Slack</p></div>
+      <div class="pcard"><h3>Outlook Email и Outlook Calendar</h3><p>То же, что Gmail и Google Календарь, – для тех, у кого почта и расписание в Microsoft.</p><p class="ptag">Нужна учётная запись Microsoft</p></div>
+    </div>
+
+    <p class="sublab">Файлы и облака</p>
+    <div class="pgrid">
+      <div class="pcard"><h3>Dropbox</h3><p>Находит и открывает файлы, сохраняет в Dropbox то, что сделано в чате, создаёт ссылку для отправки.</p><p class="ptag">Нужен аккаунт Dropbox</p></div>
+      <div class="pcard"><h3>Box</h3><p>Ищет и читает файлы из Box – для тех, у кого рабочее хранилище там.</p><p class="ptag">Нужен аккаунт Box</p></div>
+    </div>
+
+    <p class="sublab">Продажи и клиенты</p>
+    <div class="pgrid">
+      <div class="pcard"><h3>HubSpot</h3><p>Работает с базой клиентов: сделки, контакты, задачи, отчёты по воронке, подготовка к встрече с клиентом.</p><p class="ptag">Нужен аккаунт HubSpot</p></div>
+      <div class="pcard"><h3>Typeform</h3><p>Создаёт анкеты и формы обратной связи, разбирает ответы и показывает, что улучшить.</p><p class="ptag">Нужен аккаунт Typeform</p></div>
+    </div>
+    <p class="mcap">Список не полный: в каталоге сотни плагинов, и он постоянно меняется. Сторонние плагины от незнакомых разработчиков подключайте с особой осторожностью.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="bezopasnost">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Без сюрпризов</p>
+    <h2>Безопасность: провод работает в&nbsp;обе стороны</h2>
+    <p>Подключая сервис, вы пускаете помощника в свои данные, а сервис – к части контекста из ChatGPT. Поэтому несколько правил:</p>
+    <ul>
+      <li><b>Подключайте только то, чем пользуетесь.</b> Один-три плагина под реальные задачи лучше, чем десять «на всякий случай».</li>
+      <li><b>Помните, что видит плагин.</b> Google Диск открывает помощнику всё, что видит подключённый аккаунт, а не одну папку. Пропишите в инструкции, в какой папке работать, а личное и чувствительное держите в другом аккаунте.</li>
+      <li><b>Начинайте с подтверждений.</b> В «Настройках» в разделе «Плагины» есть «Разрешения»: «Всегда спрашивать», «Разрешить действия чтения», «Разрешить действия с низким риском», «Разрешить все действия». Для начала выберите первый или второй вариант – тогда ничего не уйдёт и не удалится без вашего «да».</li>
+      <li><b>Отключайте ненужное.</b> Там же, в «Плагинах», выберите сервис и отключите его. Учтите: отключение не удаляет старые чаты и то, что ChatGPT уже запомнил, – их проверьте отдельно.</li>
+      <li><b>Рабочие аккаунты – только с разрешения работодателя.</b> Корпоративная почта, диск и CRM – не ваша личная территория, даже если доступ у вас есть.</li>
+      <li><b>Чужие персональные данные – с осторожностью.</b> Анкеты клиентов, медицинские сведения, паспортные данные – не повод подключать всё подряд. Подумайте, нужно ли помощнику видеть именно это.</li>
+    </ul>
+    <p class="rulebox">Подробнее о том, что можно и чего не стоит доверять нейросетям, – в <a href="https://aiforlife.ru/ii-course/modul0/bezopasnost/" target="_blank" rel="noopener">гайде по безопасности</a>.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="vybor">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Главный промпт</p>
+    <h2>Какой плагин поможет именно вашему помощнику</h2>
+    <p>Откройте чат в проекте своего помощника и вставьте промпт. Помощник посмотрит на свою инструкцию и задачи, задаст несколько вопросов и предложит не больше трёх подключений – с объяснением, зачем каждое.</p>
+<div class="promptbox stepprompt"><p class="plabel">Помощнику · выбор плагинов</p><pre>Помоги понять, какие плагины – подключения к моим сервисам – тебе реально пригодятся.
+1. Посмотри на свою инструкцию и материалы проекта: какие задачи ты для меня делаешь. Если инструкции не видишь – попроси меня её вставить.
+2. Задай мне три вопроса одним сообщением, с вариантами ответа:
+– с какими сервисами я работаю каждый день (почта, календарь, облачный диск, заметки, дизайн, соцсети, база клиентов);
+– где лежат мои рабочие файлы;
+– что я до сих пор делаю руками: переношу из чата в документы, ищу файлы, вбиваю встречи в календарь, пересылаю письма.
+3. По моим ответам предложи от одного до трёх подключений, не больше. Для каждого напиши:
+– зачем оно тебе в моих задачах – 2–3 примера;
+– что это подключение будет видеть и что сможет менять;
+– с какого безопасного режима начать: только чтение или подтверждение каждого действия.
+4. Если у тебя есть поиск в интернете, сверься с официальной справкой своей нейросети: есть ли такое подключение сейчас и на каком тарифе. Если поиска нет – так и скажи и пометь, что это нужно проверить мне.
+5. Если подходящего подключения нет, предложи обходной путь: какой файл выгружать и загружать в проект и как часто его обновлять.
+6. В конце дай готовый фрагмент для инструкции проекта: когда использовать каждое подключение, что можно делать без спроса, а что – только после моего подтверждения.
+Не придумывай подключения и названия кнопок. Если не уверен – пиши «проверить».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="snote">Чтобы было с чем сравнить, вот как может выглядеть фрагмент инструкции про подключения. Ваш будет другим – под ваши сервисы и задачи.</p>
+<div class="promptbox stepprompt"><p class="plabel">Пример · фрагмент инструкции про подключения</p><pre>ПОДКЛЮЧЕНИЯ
+– Google Диск: рабочие материалы – в папке «[название]». Другие папки не открывай без моей просьбы. Готовые тексты сохраняй туда же, только после моего «да».
+– Google Календарь: смотреть расписание можно всегда. Создавать, переносить и удалять события – только после моего подтверждения.
+– Gmail: читать и готовить черновики – можно. Отправлять – никогда, отправляю только я.
+– Если подключение не отвечает или файла нет – скажи прямо, не выдумывай содержимое.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="rulebox">Готовый фрагмент лучше нести в Конструктор помощников – тот чат, где вы собирали помощника: пусть он аккуратно впишет его в инструкцию, не сломав то, что уже работает.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="esli-net">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Обходной путь</p>
+    <h2>Если плагина нет в&nbsp;вашей нейросети или на&nbsp;тарифе</h2>
+    <p>Провод – удобство, а не обязательное условие. Без него помощник работает по старинке: вы выгружаете файл из сервиса и загружаете его в проект. Например, скачиваете таблицу заявок или документ с Яндекс Диска – и добавляете в материалы помощника. Раз в неделю или месяц обновляете.</p>
+    <p>Яндекс-сервисов в официальном каталоге плагинов ChatGPT на 3 октября 2026 года нет – мы проверили поиском по каталогу. Для Телеграма там встречаются только сторонние плагины от небольших разработчиков: подключать их ради удобства мы не советуем.</p>
+<div class="promptbox stepprompt"><p class="plabel">Помощнику · работа с выгрузкой</p><pre>Плагина для [сервис] у меня нет. Я буду выгружать из него [что: таблицу заявок / список встреч / заметки] файлом и загружать в проект раз в [неделю / месяц].
+Посмотри на прикреплённый файл: всё ли в нём понятно, каких данных не хватает для моих задач. Предложи, в каком виде мне удобнее выгружать, чтобы тебе было проще работать.
+Потом напиши строку для инструкции проекта: где лежит свежая выгрузка, какой она даты и что делать, если она устарела.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <div class="defs">
+      <div class="def"><span class="dn">↳</span><div><h3>В Claude</h3><p>Подключения называются коннекторами (Connectors): есть каталог, а среди официальных – Google Диск, Gmail и Google Календарь. Помощник, как и в ChatGPT, видит только то, что доступно вашему аккаунту в сервисе.</p></div></div>
+      <div class="def"><span class="dn">↳</span><div><h3>В Gemini</h3><p>Это «Подключенные приложения»: Gmail, Google Календарь, Диск, Документы и другие сервисы Google. Позвать приложение в чат можно так же – через @.</p></div></div>
+      <div class="def"><span class="dn">↳</span><div><h3>В остальных нейросетях</h3><p>Возможности меняются быстро. Спросите <a href="../bonus-gid-po-neiroseti/">Гида по нейросети</a>, есть ли в вашей нейросети подключения к сервисам и где они включаются. Если нет и проектов – соберите помощника по бонусу <a href="../bonus-bez-proektov/">«Помощник там, где нет „Проектов“»</a>.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните в «Мои помощники», рядом с инструкцией вашего помощника, фрагмент про подключения: какие плагины стоят, что помощнику можно без спроса, а что – только с вашего «да».</p>
+      <p style="margin-top:14px">Раз в месяц загляните в «Плагины»: всем ли подключённым вы пользуетесь? Лишнее – отключите. А в модуле 3 мы научим помощника по-настоящему работать с документами – провода к тому времени уже будут проложены.</p>
+      <a class="backlink" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Весь набор «Учиться легче вместе с ИИ»</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 2 к уроку 3: плагины для помощника · сверено с интерфейсом и справкой ChatGPT 3 октября 2026</div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Скриншот крупно" hidden>
+  <button class="lbx" type="button" aria-label="Закрыть">×</button>
+  <img id="lbimg" alt="">
+</div>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');
+    var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),last=null;
+  function closeLb(){lb.hidden=true;lbimg.removeAttribute('src');document.body.style.overflow='';if(last)last.focus();}
+  document.querySelectorAll('a.shot').forEach(function(a){
+    a.addEventListener('click',function(ev){
+      ev.preventDefault();last=a;
+      var im=a.querySelector('img');
+      lbimg.src=a.getAttribute('href');lbimg.alt=im?im.alt:'';
+      lb.hidden=false;document.body.style.overflow='hidden';
+      lb.querySelector('.lbx').focus();
+    });
+  });
+  lb.addEventListener('click',function(ev){if(ev.target!==lbimg)closeLb();});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&!lb.hidden)closeLb();});
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
