@@ -293,6 +293,7 @@ section.wrap{padding-left:40px;padding-right:40px}
   <p class="label">Оглавление</p>
   <nav class="nav" aria-label="Разделы шпаргалки">
     <a class="navlink" href="#tekst">Сначала текст</a>
+    <a class="navlink" href="#po-rolikam">Тема по роликам</a>
     <a class="navlink" href="#formaty">Четыре формата</a>
     <a class="navlink" href="#voda">Без воды</a>
     <a class="navlink" href="#sverka">Сверка с источником</a>
@@ -314,6 +315,39 @@ section.wrap{padding-left:40px;padding-right:40px}
   <div style="max-width:68ch">
   <p class="snote" style="margin-top:22px">Длинный материал – запись на пару часов, толстая глава – лучше давать частями. Одним куском нейросеть может читать по диагонали и упустить середину. Отправьте сначала эту фразу, потом части по очереди:</p>
   <div class="promptbox stepprompt"><p class="plabel">Если материал длинный</p><pre>Я пришлю материал частями. Это часть <span class="tok">[1]</span> из <span class="tok">[3]</span>. Просто прими её и ответь одним словом: «Принято». Конспект не делай, пока я не напишу «Все части отправлены».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div>
+</section>
+
+<!-- СЦЕНАРИЙ ПО РОЛИКАМ -->
+<section class="wrap pgroup" id="po-rolikam">
+  <div class="ghead"><span class="glabel">Сценарий</span><span class="grange">найти → расшифровать → понять → сделать</span></div>
+  <h2>Разобраться в новой теме по&nbsp;роликам</h2>
+  <p class="note">Нужно быстро разобраться в незнакомой теме – новый сервис, налоги для самозанятых, как устроена реклама? Обучающих роликов полно, но смотреть пять штук по часу некогда. <b>Ролики можно превратить в текст, текст – в понятное объяснение, а объяснение – в действия по вашей задаче.</b></p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">01</span><div>
+      <h3>Найти ролики</h3>
+      <p>Попросите нейросеть подобрать ролики по теме – если в ней включён поиск в интернете, она найдёт и даст ссылки. Или найдите сами на YouTube, VK Видео или RuTube. Хватит 2–3 роликов от разных авторов: так видно, где они сходятся, а где каждый говорит своё.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт · подобрать ролики</p><pre>Подбери 3–5 обучающих роликов на русском языке по теме: <span class="tok">[тема]</span>. Я <span class="tok">[новичок / немного разбираюсь]</span>, мне нужно <span class="tok">[зачем – например, настроить рекламу для своей студии]</span>. Для каждого ролика: о чём он, сколько длится, кто автор и почему его стоит посмотреть. Ссылки давай только на страницы, которые открыл сам. Если не уверен в ролике – так и скажи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">02</span><div>
+      <h3>Расшифровать в «Буквице»</h3>
+      <p>Отправьте ссылку на ролик боту «Буквица» в Телеграме – через пару минут он пришлёт текст файлом. Смотреть ролик и скачивать его не нужно. Сохраните файлы к себе. Как пользоваться ботом и что делать, если бесплатные расшифровки закончились, – в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация: из голоса и видео в текст»</a>.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">03</span><div>
+      <h3>Загрузить расшифровки и разобраться</h3>
+      <p>Прикрепите файлы в чат – в тот же, где подбирали ролики, или в проект «Моя учёба», если он у вас есть. И попросите объяснить тему так, как нужно именно вам.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт · разобраться в теме</p><pre>Я сейчас разбираюсь в теме: <span class="tok">[тема]</span>. Прикрепляю расшифровки <span class="tok">[число]</span> роликов. Помоги мне разобраться: объясни простыми словами главное, по шагам. Где авторы говорят одно и то же, а где расходятся – отметь отдельно. Опирайся только на эти расшифровки; если чего-то в них нет – так и скажи, не додумывай. В конце задай мне 2–3 вопроса, чтобы проверить, что я понял(а).</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">04</span><div>
+      <h3>Превратить в действия</h3>
+      <p>Самый важный шаг: чтобы обучение не осталось «посмотрел и забыл», спросите, что из этого забрать в работу под вашу задачу.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт · забрать в работу</p><pre>Моя задача: <span class="tok">[какая задача – например, запустить первую рекламу студии в ВК]</span>. Что из этих материалов я могу забрать себе в работу? Дай 3 конкретных действия на эту неделю – с первого, самого маленького. Для каждого: что сделать, сколько это займёт и как понять, что получилось. Если для моей задачи в роликах чего-то не хватает – скажи, что ещё изучить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
   </div>
 </section>
 
