@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>10 способов учиться с ИИ для ребёнка · Бонус модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="10 готовых запросов для учёбы ребёнка с ИИ: викторины, план повторения, разбор ошибок, объяснить самому, ролики по теме, доклад, книга, язык и репетиция ответа – без готовых ответов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}.promptbox .linkbtn{color:#F3EDF5;border-bottom-color:rgba(255,255,255,.35)}.promptbox .linkbtn:hover{color:var(--pink-soft);border-bottom-color:var(--pink-soft)}
+
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.twhen{display:block;margin-top:5px;font-size:15px;line-height:1.45;font-weight:500;color:var(--muted)}
+.body .note.warn{margin:0 0 20px}
+.tip{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin-top:20px;font-size:16px;color:var(--muted)}
+.tip b{color:var(--ink)}
+.backlink{display:inline-block;margin-top:30px;font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:2px}
+.backlink:hover{color:var(--pink)}
+footer a{color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25)}
+footer a:hover{color:var(--pink-soft)}
+@media (max-width:760px){
+  .twhen{font-size:14.5px}
+  section.wrap.lede{padding-top:34px}
+  .tip{padding-left:16px}
+  .kmark{padding:8px 14px}
+  .kmark .kt{letter-spacing:.14em}
+}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · бонус</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонусный набор · Учиться легче вместе с ИИ</span></div>
+  <div class="hero">
+    <div class="hgrid">
+      <h1>10 способов <span class="it">учиться</span> с ИИ для ребёнка</h1>
+      <p class="hlead">Готовые запросы для занятий вместе с ребёнком. Выберите тот, что нужен сегодня, и подставьте своё в квадратные скобки.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap lede">
+  <div class="col">
+    <p>Нейросеть может стать для ребёнка терпеливым тренером: сыграть в викторину, выслушать его объяснение, поговорить на английском о любимой игре, помочь с планом доклада. Главное условие одно – она не решает за ребёнка, а помогает ему думать самому.</p>
+    <p>Здесь 10 способов в трёх группах. Во все запросы уже вписано: задавать вопросы по одному, давать подсказку вместо ответа и хвалить за старание. Как настроить постоянных помощников и договориться с ребёнком – в гайде <a href="https://aiforlife.ru/ii-course/modul2/bonus-uchit-dumat/">«Учит думать, а не списывать»</a>.</p>
+  </div>
+</section>
+
+<div class="dark">
+  <div class="wrap dgrid">
+    <h2>Три правила для родителя</h2>
+    <div class="dcol">
+      <ul>
+        <li><b>Ваш аккаунт – и вы рядом.</b> Ребёнок занимается в вашем аккаунте, первые 15–20 минут – вместе. Возраст для каждой нейросети смотрите в её правилах: у многих – с 13 или с 18 лет.</li>
+        <li><b>Объяснить, а не решить.</b> Если нейросеть всё-таки выдала готовый ответ, напомните ей: «Не решай за ребёнка, дай подсказку».</li>
+        <li><b>Личное не пишем.</b> Хватит имени и класса. Без фамилии, школы, адреса и фото лица.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="lede" style="padding-top:52px">
+    <div class="col">
+      <p class="label">Как пользоваться списком</p>
+      <h2 style="margin:16px 0 20px">Выберите то, что нужно сейчас</h2>
+      <p>Откройте нужный пункт, скопируйте запрос и замените всё, что в квадратных скобках, на своё. Отправляете вы – дальше ребёнок отвечает сам, лучше голосом.</p>
+      <p style="margin-top:22px">Если нейросеть отвечает слишком сложно или слишком быстро сдаётся, добавьте в начало любого запроса:</p>
+      <div class="promptbox" style="margin-top:16px"><p class="plabel">Добавка к любому запросу</p><pre>Это занятие с моим ребёнком: <span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>. Говори просто, дружелюбно и короткими фразами. Не давай готовых ответов: сначала подсказка, потом вторая попытка, и только потом объяснение. Хвали за старание, а не только за правильный ответ.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать</button></div></div>
+    </div>
+  </div>
+
+  <nav class="nav" aria-label="Разделы" style="margin-top:52px">
+    <a class="navlink" href="#zapomnit">Запомнить и потренироваться</a>
+    <a class="navlink" href="#ponyat">Понять и объяснить</a>
+    <a class="navlink" href="#govorit">Читать, писать, говорить</a>
+  </nav>
+
+    <section class="group reveal" id="zapomnit">
+      <div class="ghead"><p class="glabel">Запомнить и потренироваться</p><span class="grange">01 – 03</span></div>
+      <details class="task">
+        <summary><span class="num">01</span><span class="tname">Викторина и карточки<span class="twhen">Нужно выучить слова, даты, правила, таблицу умножения – а зубрить скучно.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Сыграй с моим ребёнком в викторину. Ребёнок: <span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>. Что учим: <span class="tok">[ТЕМА ИЛИ СПИСОК – слова, даты, правила]</span>.
+Задавай по одному вопросу и жди ответа. Ошибся – дай подсказку, а не ответ, и вторую попытку; только потом объясни. После каждых 5 вопросов – счёт и похвала за старание. В конце – короткий список того, что стоит повторить завтра.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Сфотографируйте страницу учебника с правилами или словами и приложите – викторина будет ровно по программе. Повторите её через день-два: так запоминается надолго.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">02</span><span class="tname">План повторения перед контрольной<span class="twhen">Контрольная через неделю, а повторять «всё сразу» в последний вечер – не работает.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги моему ребёнку подготовиться к контрольной. Ребёнок: <span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>. Предмет: <span class="tok">[ПРЕДМЕТ]</span>, контрольная через <span class="tok">[ЧИСЛО]</span> дней, темы: <span class="tok">[ТЕМЫ]</span>.
+Составь план на каждый день по 15–20 минут: что повторить и как – вопросы, задачи, карточки. Трудное верни через день-два ещё раз. В последний день – мини-проверка. Пиши простыми словами, чтобы ребёнок мог читать план сам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Для самих тренировок по плану подойдёт помощник «Тренер перед контрольной» из гайда <a href="https://aiforlife.ru/ii-course/modul2/bonus-uchit-dumat/">«Учит думать, а не списывать»</a>.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">03</span><span class="tname">Разобрать свои ошибки<span class="twhen">Учитель вернул работу с ошибками – и хочется, чтобы в следующий раз их не было.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мой ребёнок получил проверенную работу. Ребёнок: <span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>, предмет: <span class="tok">[ПРЕДМЕТ]</span>. Прикрепляю фото работы.
+Не исправляй за него. Найди 1–2 повторяющиеся ошибки и объясни простыми словами, почему так бывает. Потом дай 3 похожих задания по одному и жди ответа. Если снова ошибся – подсказка, а не ответ.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Бережно.</b> Фотографируйте только страницу с заданием – так, чтобы в кадр не попали обложка с фамилией и оценки одноклассников.</p>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="ponyat">
+      <div class="ghead"><p class="glabel">Понять и объяснить</p><span class="grange">04 – 06</span></div>
+      <details class="task">
+        <summary><span class="num">04</span><span class="tname">Объясни сам: ребёнок учит нейросеть<span class="twhen">Тема вроде понятна, но рассказать её своими словами ребёнок не может.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Ты – ученик на два класса младше, который совсем не знает тему: <span class="tok">[ТЕМА]</span>. Мой ребёнок (<span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>) будет тебе её объяснять.
+Задавай простые вопросы: «почему?», «а как?», «а если…?». Если он ошибся – не поправляй сразу, спроси так, чтобы он сам заметил. В конце скажи, что он объяснил хорошо, и одну вещь, которую можно добавить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Пусть ребёнок объясняет голосом – так слышно, где он «плавает». Это метод Фейнмана: объяснить другому – лучший способ понять самому.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">05</span><span class="tname">Скучная тема через увлечение<span class="twhen">Тема не цепляет, а ребёнок живёт футболом, танцами или любимой игрой.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мой ребёнок (<span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>) любит <span class="tok">[УВЛЕЧЕНИЕ]</span>. Ему скучно учить <span class="tok">[ТЕМА]</span>.
+Объясни 2–3 главные мысли темы через его увлечение. Потом придумай 5 заданий в этом мире – по одному, и жди ответа. Ответы сразу не подсказывай: сначала подсказка, потом вторая попытка.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Проверьте.</b> Пример из увлечения не должен искажать саму тему. Если сомневаетесь – сверьте с учебником.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">06</span><span class="tname">Ролики по теме урока<span class="twhen">Тема из учебника не заходит – хочется посмотреть, как её объясняют по-другому.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Подбери 2–3 коротких обучающих ролика на русском – до 15 минут – по теме <span class="tok">[ТЕМА]</span> для ребёнка <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>: понятных, без рекламы и взрослого содержания. Ищи на YouTube, VK Видео и RuTube. Для каждого – о чём он, сколько длится и ссылка; ссылки давай только на страницы, которые открыл сам.
+Когда мы посмотрим, задай ребёнку 3 вопроса на понимание – по одному.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Бережно.</b> Сначала посмотрите ролик сами, хотя бы мельком. Длинный ролик можно превратить в текст через «Буквицу» – как в способе 20 из <a href="https://aiforlife.ru/ii-course/modul2/bonus-top20/">«Топ-20 способов учиться с ИИ»</a>.</p>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="govorit">
+      <div class="ghead"><p class="glabel">Читать, писать, говорить</p><span class="grange">07 – 10</span></div>
+      <details class="task">
+        <summary><span class="num">07</span><span class="tname">Доклад или проект – без списывания<span class="twhen">Задали доклад или проект, а с чего начать – непонятно.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мой ребёнок (<span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>) готовит <span class="tok">[ДОКЛАД / ПРОЕКТ]</span> по теме <span class="tok">[ТЕМА]</span>, объём <span class="tok">[СКОЛЬКО]</span>.
+Не пиши текст за него. Помоги по шагам: 1) какие вопросы должен раскрыть доклад; 2) план из 4–5 пунктов; 3) где искать информацию – учебник, детские энциклопедии, сайты музеев и библиотек. Когда он напишет свой текст – задай вопросы, чтобы он улучшил его сам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Проверьте.</b> Даты, цифры и цитаты в докладе сверяйте с учебником или энциклопедией: нейросеть умеет уверенно придумывать.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">08</span><span class="tname">Обсудить прочитанную книгу<span class="twhen">Книгу прочитали, а поговорить о ней не с кем – или нужно подготовиться к уроку литературы.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мой ребёнок (<span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>) прочитал <span class="tok">[ГЛАВУ / КНИГУ, АВТОР]</span>. Вот фрагмент, о котором хотим поговорить: <span class="tok">[ВСТАВЬТЕ ТЕКСТ ИЛИ ПРИКРЕПИТЕ ФОТО]</span>.
+Не пересказывай. Задай по одному 5 вопросов: что произошло, почему герой так поступил, что бы он сделал на его месте. Будь увлечённым собеседником. Если ответ спорный – спроси «а почему ты так думаешь?».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Бережно.</b> Пересказ книги «по памяти» нейросеть может перепутать. Давайте ей сам текст – фрагментом или фото страниц.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">09</span><span class="tname">Иностранный язык: собеседник по интересам<span class="twhen">Слова выучены, а заговорить страшно.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Поговори с моим ребёнком (<span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>) на <span class="tok">[ЯЗЫК]</span>, уровень – <span class="tok">[НАЧИНАЮЩИЙ / СРЕДНИЙ]</span>. Тема – его увлечение: <span class="tok">[УВЛЕЧЕНИЕ]</span>.
+Короткие фразы и простые слова, по одной реплике. Ошибки не исправляй в каждой фразе – в конце покажи 2–3 главные. Не понимает – повтори проще или подскажи слово по-русски.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Включите голосовой режим: говорить вслух полезнее, чем печатать.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">10</span><span class="tname">Репетиция устного ответа<span class="twhen">Завтра отвечать у доски или выступать с докладом – и волнительно.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Ты – учитель <span class="tok">[ПРЕДМЕТ]</span>. Мой ребёнок (<span class="tok">[ИМЯ]</span>, <span class="tok">[ВОЗРАСТ]</span>, <span class="tok">[КЛАСС]</span>) готовится <span class="tok">[ОТВЕЧАТЬ У ДОСКИ / ВЫСТУПАТЬ С ДОКЛАДОМ]</span> по теме <span class="tok">[ТЕМА]</span>.
+Попроси его рассказать. Потом задай 2–3 вопроса, которые может задать учитель, – по одному. В конце: что получилось хорошо и одна вещь, которую стоит улучшить. Мягко, без оценок.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Копировать промпт</button></div></div>
+          <p class="tip"><b>Как выжать больше.</b> Репетируйте голосом и вслух – так, как будет завтра в классе.</p>
+        </div>
+      </details>
+    </section>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Когда одного запроса мало</h2>
+    <div class="dcol">
+      <p>Эти способы – разовые занятия. Если ребёнок занимается с ИИ регулярно, пригодятся соседние гайды набора:</p>
+      <ul>
+        <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-uchit-dumat/" style="color:var(--pink-soft)"><b>«Учит думать, а не списывать»</b></a> – три постоянных помощника для учёбы ребёнка, семейные правила и как поговорить с ребёнком о нейросетях.</li>
+        <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/" style="color:var(--pink-soft)"><b>«Транскрибация»</b></a> – как превратить видеоурок или запись в текст, по которому удобно повторять.</li>
+        <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-top20/" style="color:var(--pink-soft)"><b>«Топ-20 способов учиться с ИИ»</b></a> – то же самое для вас: план обучения, тренажёры, спарринг, язык.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="wrap closing">
+  <div class="cgrid">
+    <div class="col">
+      <p class="pull">Хорошее занятие с ИИ – то, после которого ребёнок может объяснить тему сам, без нейросети.</p>
+      <a class="backlink" href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">← Ко всем материалам набора «Учиться легче вместе с ИИ»</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul2/uchitsya-legche/" target="_top">«Учиться легче вместе с ИИ»</a>, модуль 2</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function textOf(btn){
+    var box=btn.closest('.body')||btn.closest('.col');
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    return pre?pre.innerText:'';
+  }
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      copy(textOf(btn)).then(function(){
+        var old=btn.innerHTML;
+        btn.textContent='Скопировано';btn.classList.add('done');
+        say('Промпт скопирован. Вставьте его в чат');
+        setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+      }).catch(function(){say('Не вышло скопировать – выделите текст промпта вручную');});
+    });
+  });
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
