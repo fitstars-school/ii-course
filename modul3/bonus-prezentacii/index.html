@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Презентации в HTML · Бонус модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Как собрать презентацию одним HTML-файлом, который открывается по ссылке: от тезисов и плана слайдов до проверки, публикации и показа. Готовые промпты на каждый шаг, учебный пример и навык html-slides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* бонусы модуля 2 */
+.matrix{margin-top:28px;border-top:1px solid var(--ink)}
+.mrow{display:grid;grid-template-columns:120px minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:22px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.52;color:#3B3143}
+.mrow.mh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding:12px 0}
+.mrow .mname{font-weight:700;color:var(--ink);font-size:16px}
+.mcap{margin-top:16px;font-size:14px;color:var(--muted)}
+.tree{margin-top:22px;border-left:2px solid var(--pink);padding:16px 0 16px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:#3B3143;white-space:pre-wrap;overflow-wrap:anywhere}
+.tree b{color:var(--ink);font-weight:500}
+.tree i{font-style:normal;color:var(--faint)}
+.sublab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:30px 0 4px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.peek{margin-top:18px}
+.peek summary{display:inline-block;cursor:pointer;list-style:none;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.peek[open] summary{color:var(--pink);border-bottom-color:var(--pink)}
+.peek .promptbox{margin-top:16px}
+.skcode{font-family:var(--mono);font-size:13px;color:var(--faint);font-weight:400;margin-left:6px;white-space:nowrap}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:22px}
+.chain span{font-size:15px;font-weight:600;padding:8px 14px;border:1px solid var(--line);background:#fff}
+.chain em{font-style:normal;color:var(--pink);font-weight:700}
+.backlink{display:inline-block;margin-top:12px;color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px}
+.backlink:hover{color:#fff;border-bottom-color:var(--pink-soft)}
+@media (max-width:760px){
+  .mrow{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .mrow.mh{display:none}
+  .mrow>div[data-l]::before{content:attr(data-l);display:block;font-size:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .mrow .mname{font-size:18px}
+  .tree{font-size:12.5px;padding-left:16px}
+  .peek .promptbox{margin-left:-20px;margin-right:-20px}
+  .step .btns .btn{width:100%}
+}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* бонус М3 · презентации */
+.it{font-style:normal}
+.rubric a.back{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.pgroup{padding-top:0;padding-bottom:0}
+.pgroup h2{margin:8px 0 0}
+.pgroup .note{margin-top:18px}
+.pgroup .steps{margin-top:22px}
+.pgroup .rulebox{margin-top:26px}
+.step ul{margin-top:14px}
+.step ul li{font-size:17px;color:#3B3143}
+.step p + p{margin-top:12px}
+.step .rulebox{margin-top:18px}
+.step .promptbox{margin-top:18px}
+.lede .btns{margin-top:22px}
+html{scroll-padding-top:20px}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · к уроку 4</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Презентации в&nbsp;HTML: <span class="it">слайды, которые открываются по&nbsp;ссылке</span></h1>
+      <p class="hlead">В уроке 4 вы собрали страницу и выложили её по ссылке. Так же можно сделать презентацию к вебинару, консультации, выступлению или отчёту клиенту: слайды листаются прямо в браузере, PowerPoint не нужен.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">12 минут</span></div>
+      <div><span class="mk">Пригодится</span><span class="mv">Паспорт стиля из урока 3 и публикация из урока 4</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Навык html-slides и ваша презентация по ссылке</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>за минуту</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>HTML-презентация – обычная веб-страница со слайдами. Она открывается по ссылке на компьютере и телефоне, листается стрелками или пальцем и сохраняется в PDF.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Сначала смысл, потом вёрстка: тезисы → план слайдов → стиль → сборка → проверка → ссылка → показ. На каждый шаг ниже есть готовый промпт.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Один слайд – одна мысль, заголовок – вывод, не больше 3–5 пунктов. Всё, что не поместилось, уходит в заметки докладчика.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Если заказчик ждёт файл .pptx или презентацию нужно править вместе с коллегами, удобнее PowerPoint или Google Презентации. Как выбрать – в первом разделе.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Сначала посмотрите</p>
+    <h2>Учебный пример: семь слайдов в&nbsp;одном файле</h2>
+    <p>Короткая презентация на нейтральную тему «Неделя на одном листе». Откройте её и попробуйте всё, что умеет такой формат: листать стрелками, пробелом или свайпом, включить полный экран клавишей F, показать заметки докладчика клавишей N, сохранить в PDF через печать – Ctrl+P, на Mac – Cmd+P. Каждый слайд ляжет на отдельный лист.</p>
+    <div class="btns"><a class="btn" href="assets/primer-slaidy.html" target="_blank" rel="noopener">Открыть пример</a><a class="btn ghost" href="assets/primer-slaidy.html" download="primer-slaidy.html">Скачать файл (.html)</a></div>
+    <p class="rulebox">Пример можно взять за основу. Приложите скачанный файл к чату вместе со своими тезисами и напишите: «Сделай так же по устройству, но с моим планом и в моём стиле». Управление и печать нейросеть повторит, а содержание и оформление будут ваши.</p>
+  </div></div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:0">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы гайда">
+    <a class="navlink" href="#vybor">Когда что выбрать</a>
+    <a class="navlink" href="#put">Путь за семь шагов</a>
+    <a class="navlink" href="#iz-dokumenta">Из документа в презентацию</a>
+    <a class="navlink" href="#navyk">Навык html-slides</a>
+    <a class="navlink" href="#zatyki">Частые затыки</a>
+  </nav>
+</section>
+
+<!-- КОГДА ЧТО ВЫБРАТЬ -->
+<section class="wrap pgroup" id="vybor">
+  <div class="ghead"><span class="glabel">Выбор формата</span><span class="grange">три варианта</span></div>
+  <h2>Когда HTML удобнее PowerPoint, а&nbsp;когда нет</h2>
+  <p class="note">HTML-презентация удобна, когда показываете вы сами или отправляете ссылку. <b>Когда презентацию правят другие люди или ждут от вас файл, выбирайте привычные программы.</b></p>
+  <div class="matrix">
+    <div class="mrow mh"><div>Формат</div><div>Берите, когда</div><div>Неудобно, когда</div><div>Как сделать с ИИ</div></div>
+    <div class="mrow"><div class="mname">HTML по&nbsp;ссылке</div><div data-l="Берите, когда">Показываете сами на вебинаре или встрече; хотите отправить ссылку, которая откроется у любого человека на телефоне; нужен свой вид, а не шаблон; PDF на память сохраняется из того же файла.</div><div data-l="Неудобно, когда">Презентацию будут править коллеги или заказчик. Текст в HTML меняется через нейросеть или в коде, а не мышкой на слайде.</div><div data-l="Как сделать с ИИ">По шагам ниже или навыком html-slides.</div></div>
+    <div class="mrow"><div class="mname">Google Презентации</div><div data-l="Берите, когда">Правите вместе с коллегами или заказчиком, нужны комментарии и история изменений.</div><div data-l="Неудобно, когда">Нужен нестандартный вид или у вас и ваших слушателей нестабильный доступ к сервисам Google.</div><div data-l="Как сделать с ИИ">Нейросеть пишет план и тексты слайдов (шаги 1–3 ниже), вы раскладываете их по шаблону.</div></div>
+    <div class="mrow"><div class="mname">PowerPoint (.pptx)</div><div data-l="Берите, когда">Организаторы или заказчик просят файл .pptx; презентацию будут дорабатывать другие люди в PowerPoint.</div><div data-l="Неудобно, когда">Нужно, чтобы презентация открывалась по ссылке без программ, в том числе на телефоне.</div><div data-l="Как сделать с ИИ">План и тексты – по шагам 1–3 ниже. Файл .pptx умеет собирать и сам ChatGPT – см. плашку под таблицей.</div></div>
+  </div>
+  <p class="rulebox"><b>ChatGPT и файлы .pptx</b> (сверено на 4 октября 2026). В справке OpenAI есть статья о том, как ChatGPT в режиме «Работа» создаёт и правит документы, таблицы и презентации, – <a href="https://help.openai.com/en/articles/20001278-creating-and-editing-documents-spreadsheets-and-presentations-with-chatgpt-work" target="_blank" rel="noopener">справка OpenAI</a>. Есть и отдельная надстройка ChatGPT для PowerPoint – боковая панель внутри самой программы: <a href="https://help.openai.com/en/articles/20001242-chatgpt-for-powerpoint" target="_blank" rel="noopener">справка о надстройке</a>. Что доступно на вашем тарифе и в вашей стране, уточните в справке: условия меняются.</p>
+  <p class="snote">Форматы можно совмещать. На вебинаре показываете HTML-версию по ссылке, а организаторам отправляете PDF, сохранённый из неё же.</p>
+</section>
+
+<!-- ПУТЬ -->
+<section class="wrap pgroup" id="put">
+  <div class="ghead"><span class="glabel">Путь</span><span class="grange">01–07</span></div>
+  <h2>От тезисов до показа за&nbsp;семь шагов</h2>
+  <p class="note">Работайте в одном чате от первого шага до последнего: нейросеть будет помнить тезисы, план и стиль. <b>Места для вашего текста – в <span style="color:var(--pink)">[квадратных скобках]</span>.</b> Если поставили навык html-slides, шаги 2–4 он проведёт сам.</p>
+  <div class="steps">
+
+    <div class="step"><span class="snum">01</span><div>
+      <h3>Тезисы: что вы хотите сказать</h3>
+      <p>Соберите сырьё: о чём выступление, кому и что слушатели должны понять или сделать после. Можно голосом и сумбурно. Если у вас уже есть документ, конспект или пост, переходите к промпту <a href="#iz-dokumenta">«Из документа в презентацию»</a>.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт · тезисы</p><pre>Я готовлю <span class="tok">[вебинар / выступление / консультацию / отчёт клиенту]</span> на тему <span class="tok">[тема]</span>.
+Слушатели: <span class="tok">[кто они и что уже знают]</span>. Время: <span class="tok">[сколько минут]</span>.
+После выступления они должны <span class="tok">[понять что / сделать что]</span>.
+
+Вот мои мысли как есть: <span class="tok">[наговорите или вставьте, можно сумбурно]</span>
+
+Помоги собрать тезисы: главная мысль одной фразой, 3–5 опорных мыслей, к каждой – пример или довод из моих слов. Чего не хватает – спроси, не дописывай за меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">02</span><div>
+      <h3>План слайдов: один слайд – одна мысль</h3>
+      <p>Самый важный шаг. Править таблицу легче, чем готовые слайды, поэтому вёрстку начинаем только после согласованного плана. Правила, по которым нейросеть его соберёт:</p>
+      <ul>
+        <li><b>Одна мысль на слайд.</b> Две мысли – два слайда.</li>
+        <li><b>Заголовок – вывод.</b> Не «Продажи», а «Заявки приходят с вебинаров, а не из постов». Слушатель, который прочитал только заголовки, должен понять всё выступление.</li>
+        <li><b>Не больше 3–5 коротких пунктов.</b> Подробности – в заметки докладчика, вы их скажете голосом.</li>
+        <li><b>Слайд-вопрос.</b> В выступлении длиннее 10–15 минут – один-два слайда с вопросом аудитории: крупный вопрос и подсказка, как ответить, например «напишите в чат одним словом».</li>
+        <li><b>Последний слайд – итог и следующий шаг</b> для слушателя, а не просто «Спасибо».</li>
+      </ul>
+<div class="promptbox stepprompt"><p class="plabel">Промпт · план слайдов</p><pre>По этим тезисам собери план презентации таблицей: № · заголовок-вывод · что на слайде · тип слайда (титул, одна мысль, пункты, пример, схема, вопрос аудитории, итог).
+
+Правила:
+– один слайд – одна мысль;
+– заголовок – вывод полным утверждением, а не тема;
+– на слайде не больше 3–5 коротких пунктов, подробности – в заметки докладчика;
+– <span class="tok">[один-два]</span> слайда-вопроса к аудитории;
+– последний слайд – итог и следующий шаг для слушателя.
+Время выступления – <span class="tok">[минут]</span>, сверь с ним количество слайдов.
+
+Цифры, факты и примеры бери только из тезисов. Где их не хватает – поставь [вставить]. Вёрстку пока не начинай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">03</span><div>
+      <h3>Стиль: из вашего паспорта стиля</h3>
+      <p>Возьмите паспорт стиля из урока 3. Если собирали его навыком brand-style из <a href="https://aiforlife.ru/ii-course/modul2/bonus-dizain-navyki/">бонуса модуля 2</a>, просто приложите файл. Паспорта нет – хватит трёх ответов: светлый или тёмный фон, один акцентный цвет, настроение.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт · оформление</p><pre>Вот мой паспорт стиля: <span class="tok">[вставьте или прикрепите]</span>.
+<span class="tok">[Если паспорта нет: фон – светлый / тёмный; акцентный цвет – какой; настроение – строгое / тёплое / яркое.]</span>
+
+Предложи оформление презентации на его основе: цвета фона, текста и акцента с кодами, шрифты, как выглядят титульный слайд, обычный слайд, слайд-вопрос и итог. Не больше четырёх размеров текста: заголовок, подзаголовок, основной текст, метка. Опиши словами, пока без кода.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">04</span><div>
+      <h3>Сборка: один HTML-файл</h3>
+      <p>Теперь всё вместе – в один файл. Используйте ту же нейросеть, в которой собирали страницу в уроке 4. Технические требования длинные, но копировать их нужно целиком: так презентация сразу будет листаться, показывать номер слайда и правильно печататься.</p>
+<div class="promptbox stepprompt tall"><p class="plabel">Промпт · сборка</p><pre>Собери презентацию одним HTML-файлом по согласованному плану и оформлению выше.
+
+Требования:
+– все стили и скрипты внутри файла, без внешних библиотек;
+– каждый слайд – отдельный блок; сцена 16:9 (1280×720) целиком помещается в экран и масштабируется под него; на вертикальном телефоне текст остаётся читаемым;
+– листание: стрелки вправо и влево, пробел, PageDown и PageUp, Home и End; свайп на телефоне; небольшие кнопки «←» и «→» внизу для мыши;
+– номер слайда «N / всего» на каждом слайде; номер слайда в адресе (#3), чтобы ссылка открывала нужный слайд;
+– F – полный экран, Esc – выход; учти русскую раскладку;
+– <span class="tok">[по желанию]</span> заметки докладчика: на экране скрыты, клавиша N показывает заметки текущего слайда;
+– печать в PDF: каждый слайд на отдельном листе 16:9, без кнопок и подсказок, с фоном;
+– цвета и шрифты – переменными в начале CSS с комментариями, чтобы цвет можно было поменять без программиста;
+– основной текст на слайде не меньше 28 px, заголовок не меньше 48 px, контраст текста и фона не ниже 4.5:1;
+– картинки – только мои <span class="tok">[прикрепляю / картинок нет]</span>, никаких картинок с чужих сайтов.
+
+Выдай файл целиком и коротко напиши, как его открыть, листать и сохранить в PDF.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Готовый файл откройте двойным щелчком: он откроется в браузере. Нейросеть прислала только кусок кода – попросите: «Пришли файл целиком».</p>
+    </div></div>
+
+    <div class="step"><span class="snum">05</span><div>
+      <h3>Проверка: глазами слушателя</h3>
+      <p>Прежде чем показывать, посмотрите на презентацию так, как её увидят люди.</p>
+      <ul>
+        <li><b>Последний ряд.</b> Отойдите от экрана на несколько шагов или уменьшите окно браузера вдвое. Текст читается?</li>
+        <li><b>Телефон.</b> Откройте файл или ссылку на телефоне вертикально и горизонтально.</li>
+        <li><b>Контраст.</b> Нет светло-серого на белом и текста поверх картинки без подложки.</li>
+        <li><b>Простыня.</b> Больше пяти пунктов или абзац на слайде – делите слайд или уносите текст в заметки.</li>
+        <li><b>Управление.</b> Стрелки, пробел, свайп, F, печать в PDF – всё работает.</li>
+      </ul>
+<div class="promptbox stepprompt"><p class="plabel">Промпт · проверка глазами слушателя</p><pre>Посмотри на эту презентацию глазами слушателя: <span class="tok">[кто он – например, «специалист, который смотрит вебинар с телефона вечером после работы»]</span>. Прикрепляю файл <span class="tok">[и скриншоты 2–3 слайдов]</span>.
+
+Пройди слайды по порядку и ответь:
+1. На каком слайде слушатель потеряет нить или не поймёт, к чему это.
+2. Где слишком много текста для экрана или телефона.
+3. Где заголовок называет тему, а не вывод.
+4. Что читается плохо: мелкий шрифт, слабый контраст, текст на картинке.
+5. Какие цифры, факты или примеры стоит перепроверить.
+
+Дай три главные правки в формате «слайд № – было → стало» и короткий вердикт: можно показывать или нет. Код пока не трогай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Правки вносите тем же чатом: «Внеси правки 1 и 3, остальное не трогай, пришли файл целиком». Отдельный слайд по скриншоту проверит и навык design-check из <a href="https://aiforlife.ru/ii-course/modul2/bonus-dizain-navyki/">бонуса модуля 2</a>.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">06</span><div>
+      <h3>Публикация: тем же путём, что в&nbsp;уроке 4</h3>
+      <p>Презентация – такой же HTML-файл, как ваша страница-портфолио, и выкладывается тем же путём через GitHub Pages. Удобно завести для каждой презентации отдельную папку в том же репозитории, а файл внутри назвать <b>index.html</b>. Тогда ссылка будет вида «ваш адрес/название-папки/», например <b>…/webinar-oktyabr/</b>. После загрузки подождите несколько минут: страница обновляется не сразу.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт · выложить по ссылке</p><pre>Помоги выложить презентацию по ссылке так же, как мою страницу <span class="tok">[ссылка на вашу страницу из урока 4]</span>. Файл презентации прикрепляю. Хочу ссылку вида <span class="tok">[ваш адрес]</span>/<span class="tok">[название-папки]</span>/. Объясни по шагам, куда положить файл и как назвать, и как проверить, что ссылка открывается на телефоне.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Страницу на GitHub Pages откроет любой, у кого есть ссылка. Не кладите в публичную презентацию личные данные клиентов, внутренние цифры и черновики. Отчёт для одного клиента надёжнее отправить файлом или PDF.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">07</span><div>
+      <h3>Показ: полный экран и&nbsp;PDF</h3>
+      <ul>
+        <li><b>Перед началом</b> откройте ссылку и нажмите F – презентация займёт весь экран. Выход – Esc.</li>
+        <li><b>На вебинаре</b> показывайте вкладку или окно браузера с презентацией. Заметки докладчика (N) увидят все, кто смотрит ваш экран, поэтому на эфире держите их отдельно: распечатанными или на втором устройстве.</li>
+        <li><b>Вернуться к нужному месту</b> поможет номер в конце ссылки: <b>…/#5</b> откроет пятый слайд.</li>
+        <li><b>PDF для организаторов</b> или на память: печать (Ctrl+P, на Mac – Cmd+P) → «Сохранить как PDF». Если в PDF пропал фон, включите в дополнительных настройках печати печать фона; колонтитулы выключите.</li>
+        <li><b>На iPhone</b> полный экран из браузера может не включиться – просто поверните телефон горизонтально.</li>
+      </ul>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- ИЗ ДОКУМЕНТА -->
+<section class="wrap pgroup" id="iz-dokumenta">
+  <div class="ghead"><span class="glabel">Короткий путь</span><span class="grange">документ → слайды</span></div>
+  <h2>Из моего документа или конспекта – в&nbsp;презентацию</h2>
+  <p class="note">Есть статья, конспект, отчёт, расшифровка эфира или раздел «Моего портфолио»? <b>Не просите «сделай презентацию по документу» – получится пересказ подряд.</b> Попросите выбрать главное под цель выступления.</p>
+  <div style="max-width:68ch">
+<div class="promptbox stepprompt"><p class="plabel">Промпт · из документа в план слайдов</p><pre>Прикрепляю <span class="tok">[документ / конспект / статью / расшифровку эфира]</span>. Хочу сделать из него презентацию для <span class="tok">[кого]</span> на <span class="tok">[сколько]</span> минут. Цель: после выступления слушатели <span class="tok">[поймут что / сделают что]</span>.
+
+Не пересказывай документ подряд. Выбери главное под эту цель и собери план слайдов таблицей: № · заголовок-вывод · что на слайде · тип слайда. Один слайд – одна мысль, не больше 3–5 пунктов, подробности – в заметки докладчика.
+
+Отдельным списком перечисли, что из документа в план не вошло, – я решу, что вернуть.
+Цифры, имена и цитаты бери только из документа и отметь, в каком разделе они стоят.
+Вёрстку не начинай, пока я не согласую план.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="snote">Дальше – шаги 3–7 выше: стиль, сборка, проверка, ссылка, показ. Если исходник – видео или эфир, сначала превратите его в текст: как это сделать, разобрано в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/">«Конспект из чего угодно»</a>.</p>
+  </div>
+</section>
+
+<!-- НАВЫК -->
+<div class="practice" id="navyk">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Забираем</p>
+    <h2>Навык html-slides</h2>
+    <p class="pmeta">zip – для нейросетей с навыками · txt – для всех остальных</p>
+    <p class="pintro">Навык ведёт весь путь сам: задаёт вводные, показывает план слайдов на согласование, берёт стиль из вашего паспорта или спрашивает о нём, собирает один HTML-файл с листанием, номером слайда, полным экраном, заметками и печатью в PDF и проверяет его перед выдачей. Ни к чьему фирменному стилю он не привязан.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Скачайте навык</h3>
+      <p>Zip – папка html-slides с файлом SKILL.md внутри, в таком виде навыки загружаются, как в уроках 2 и 3 модуля 2. Текстовая версия – тот же навык одним файлом, чтобы вставить его в инструкцию проекта или в начало чата.</p>
+      <div class="btns"><a class="btn" href="assets/html-slides.zip" download="html-slides.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/html-slides.txt" download="html-slides.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · html-slides</p><pre>---
+name: html-slides
+description: Собирает презентацию одним HTML-файлом из тезисов, конспекта или документа – план слайдов, тексты, оформление в стиле пользователя, листание клавишами и свайпом, номер слайда, полный экран, заметки докладчика и печать в PDF по слайду на лист. Подключай, когда пользователь просит презентацию, слайды, доклад, выступление, материалы к вебинару или консультации, отчёт клиенту в виде слайдов, «чтобы открывалось по ссылке», или приносит текст и говорит «сделай из этого презентацию».
+---
+
+# Презентация в HTML: из тезисов в слайды по ссылке
+
+## Зачем этот навык
+Пользователю нужна презентация, которая открывается в любом браузере по ссылке, листается стрелками или пальцем и не требует PowerPoint. Твоя задача – сначала вместе с ним собрать смысл (план слайдов), потом стиль, и только потом – один HTML-файл, который работает без доработок. Пользователь не программист: он не будет чинить код, поэтому файл должен открываться и листаться с первого раза.
+
+## Порядок работы
+
+### 1. Вводные
+Если этого нет в запросе, задай до пяти вопросов одним сообщением, с вариантами ответа:
+- Где будет показ: вебинар (демонстрация экрана), зал с проектором, встреча один на один, ссылка, которую человек листает сам.
+- Для кого и сколько минут.
+- Главная мысль: что слушатель должен понять или сделать после.
+- Есть ли паспорт стиля (цвета, шрифты, настроение). Если есть – попроси прислать.
+- Нужны ли заметки докладчика.
+Если пользователь торопится – работай по тому, что есть, а свои допущения перечисли одной строкой.
+
+### 2. План слайдов – до любой вёрстки
+Покажи план таблицей: № · заголовок-вывод · что на слайде · тип слайда. Типы: титул, одна мысль, пункты, пример, цифра или схема, вопрос аудитории, призыв или итог.
+Правила плана:
+- Один слайд – одна мысль.
+- Заголовок – вывод полным утверждением, а не тема. Не «Продажи», а «Заявки приходят с вебинаров, а не из постов».
+- На слайде не больше 3–5 пунктов, каждый – одна короткая строка. Всё остальное – в заметки докладчика.
+- В выступлении длиннее 10–15 минут – один-два слайда-вопроса к аудитории: крупный вопрос и подсказка, как ответить («напишите в чат одним словом»).
+- Первый слайд – название и кто выступает. Последний – итог и следующий шаг для слушателя, а не просто «Спасибо».
+- Ориентир по объёму – сверяйся с длительностью: если слайдов заметно больше, чем минут, предложи объединить.
+Если пользователь принёс документ или конспект – не пересказывай его подряд. Выбери главное под цель выступления, а что ушло из плана – перечисли отдельно, чтобы пользователь решил сам.
+Спроси, что поправить в плане. Верстай только после согласия.
+
+### 3. Стиль
+- Есть паспорт стиля – бери из него цвета, шрифты, настроение, запреты. Назови 3–4 пункта паспорта, которые использовал.
+- Паспорта нет – задай три вопроса: светлый или тёмный фон; один акцентный цвет (или «на твоё усмотрение»); настроение – строгое, тёплое, яркое. Либо предложи два спокойных варианта одной строкой каждый.
+- Не копируй стиль чужих брендов и чужих презентаций. Ориентир по настроению – можно, копия – нет.
+- Не больше четырёх текстовых ролей: заголовок, подзаголовок, основной текст, метка. Выделение – жирным или цветом, без курсива.
+- Один левый край: всё выравнивается по одной линии. Блоки выделяй плашкой или цветом, а не сдвигом.
+
+### 4. Сборка файла
+Требования, которые нельзя пропускать:
+- Один файл .html: все стили и скрипты внутри, без внешних библиотек. Шрифты – системные; если паспорт требует веб-шрифт, подключи его так, чтобы без интернета текст показывался запасным шрифтом.
+- Каждый слайд – отдельный блок `&lt;section class="slide"&gt;`. Слайд рисуется на сцене 1280×720 (16:9) и масштабируется под экран целиком, без прокрутки.
+- На вертикальном экране телефона текст должен оставаться читаемым: перестрой сцену в 720×1280 (9:16) или выбери другой способ, при котором основной текст на телефоне не мельче обычного текста в мессенджере.
+- Листание: вперёд – стрелка вправо, стрелка вниз, пробел, PageDown, Enter; назад – стрелка влево, стрелка вверх, PageUp; Home и End – первый и последний слайд. Свайп влево и вправо на телефоне. Для мыши – небольшие кнопки «←» и «→» внизу, которые прячутся, когда мышь не двигается.
+- Номер слайда «N / всего» – на каждом слайде, и в браузере, и в PDF. Номер слайда в адресе (#3), чтобы ссылка открывала нужный слайд.
+- Клавиша F – полный экран, повторное нажатие или Esc – выход. Учти русскую раскладку: та же клавиша даёт «А», а N – «Т».
+- Заметки докладчика (если нужны): `&lt;aside class="notes"&gt;` внутри слайда, на экране скрыты; клавиша N и кнопка показывают панель с заметками текущего слайда.
+- Печать в PDF: `@page { size: 1280px 720px; margin: 0 }`; в `@media print` все слайды видны по одному на лист, кнопки, подсказки и заметки скрыты, анимации отключены, фон печатается (`print-color-adjust: exact`).
+- Подсказка при открытии: какие клавиши что делают; исчезает после первого действия.
+- Все цвета и шрифты – переменными в начале CSS с понятными комментариями, чтобы пользователь мог поменять цвет сам.
+- Размеры на сцене 1280×720: основной текст не меньше 28 px, заголовок не меньше 48 px, метки не меньше 18 px.
+- Контраст текста и фона – не ниже 4.5:1. Никакого текста поверх пёстрой картинки без плашки.
+- Анимации – только мягкая смена слайда; при настройке «уменьшить движение» отключаются.
+- Картинки: только те, что прислал пользователь, или простые формы и схемы средствами HTML и CSS. Не вставляй картинки по ссылкам с чужих сайтов. Если картинка нужна, а её нет – оставь на слайде плашку «[место для фото: что на нём]».
+
+### 5. Самопроверка перед выдачей
+Пройди про себя и исправь, прежде чем отдавать:
+1. Все слайды из согласованного плана на месте, порядок тот же.
+2. Нет ни одного слайда-«простыни»: больше пяти пунктов или абзац длиннее двух строк – режь, остальное в заметки.
+3. Заголовки – выводы, а не темы.
+4. Клавиши, свайп, номер слайда, F, N и печать прописаны в коде; в скрипте нет обращений к несуществующим элементам.
+5. Нет выдуманных цифр, фактов, цитат, отзывов, имён. Чего нет в материалах пользователя – помечено [вставить] или [проверить].
+
+### 6. Выдача
+- Файл целиком одним блоком кода или файлом для скачивания. Имя – латиницей через дефис, например `index.html`, если презентация пойдёт на GitHub Pages.
+- Под файлом коротко: как открыть (двойной щелчок по файлу), как листать, как включить полный экран и заметки, как сохранить в PDF (печать → «Сохранить как PDF», в настройках печати включить фон и выключить колонтитулы, если они появились).
+- Одной строкой: чтобы презентация открывалась по ссылке, её выкладывают как обычную страницу – тем же путём, каким пользователь публикует свои страницы.
+- Спроси, что поправить.
+
+### 7. Правки
+Меняй только то, о чём просили, и называй, что изменил. После правок отдавай файл целиком, а не кусок кода: пользователь не должен ничего склеивать сам.
+
+## Правила
+- Не выдумывай данные, цифры, исследования, кейсы и отзывы. Пример – только нейтральный и помеченный как пример.
+- Не обещай, что презентация «продаст» или «зацепит». Твоя зона – ясность и удобство показа.
+- Если пользователю нужен именно .pptx или совместная правка с коллегами – скажи прямо, что HTML-файл для этого не подходит, и предложи собрать план и тексты слайдов для PowerPoint или Google Презентаций.
+- Если твоя нейросеть не умеет отдавать файлы, отдай код одним блоком и объясни, как сохранить его в файл с расширением .html.
+- Если план длиннее 25 слайдов – предложи разбить на части или убрать второстепенное.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Поставьте</h3>
+      <p><b>ChatGPT.</b> Как в модуле 2: загрузите zip целиком в разделе навыков в настройках или прикрепите его в чат и напишите «Установи навык.». Вызов – через @html-slides. Если архив сам распаковался после скачивания, снова сожмите папку в zip.</p>
+      <p><b>Нейросеть без навыков.</b> Вставьте текст из .txt в инструкцию проекта, Gem или Space – или первым сообщением в новый чат.</p>
+      <p class="rulebox"><b>Claude и Codex: как подключить</b> (сверено на 4 октября 2026). В Claude: раздел Customize → Skills, кнопка «+» → загрузка навыка, выберите zip; нужно включённое выполнение кода, подробности – в <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" target="_blank" rel="noopener">справке Claude</a>. В Codex: положите папку html-slides в <b>~/.agents/skills/</b> или попросите Codex установить навык из архива, подробности – в <a href="https://developers.openai.com/codex/skills" target="_blank" rel="noopener">документации Codex</a>.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Первый запрос</h3>
+<div class="promptbox stepprompt"><p class="plabel">Навык html-slides · первый запрос</p><pre>@html-slides Сделай презентацию к <span class="tok">[вебинару / выступлению / консультации]</span> на <span class="tok">[сколько]</span> минут для <span class="tok">[кого]</span>. Вот мои тезисы: <span class="tok">[вставьте или прикрепите документ]</span>. Паспорт стиля прикрепляю <span class="tok">[или: паспорта нет – спроси]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Навык сначала покажет план слайдов. Перечитайте и поправьте его – только после этого он соберёт файл.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ЗАТЫКИ -->
+<section class="wrap blk reveal" id="zatyki">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Если что-то не так</p>
+    <h2>Частые затыки</h2>
+    <ul>
+      <li><b>Стрелки не листают.</b> Щёлкните мышью по слайду, чтобы окно стало активным. Не помогло – опишите нейросети, что происходит, и попросите прислать исправленный файл целиком.</li>
+      <li><b>Текст вылезает за край слайда.</b> Значит, на слайде слишком много. Попросите разделить его на два, а не уменьшать шрифт.</li>
+      <li><b>В PDF два слайда на листе или пустые страницы.</b> Попросите: «Проверь правила печати: каждый слайд – отдельный лист 1280×720, без полей». В настройках печати выключите колонтитулы.</li>
+      <li><b>На другом компьютере другой шрифт.</b> Если шрифт подгружается из интернета, без сети показывается запасной. Это нормально, текст остаётся читаемым.</li>
+      <li><b>Нейросеть присылает кусок кода.</b> Напишите: «Пришли файл целиком, я не умею склеивать код».</li>
+      <li><b>Заказчик просит .pptx.</b> Соберите план и тексты по шагам 1–3 и перенесите в PowerPoint или Google Презентации – или попросите ChatGPT собрать файл .pptx, если на вашем тарифе это доступно.</li>
+    </ul>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните навык (zip и txt) в «Мои помощники», а файл презентации – рядом с другими материалами к выступлению. Новые правки вносите в этот же файл, а не заводите «презентацию 2».</p>
+      <p style="margin-top:14px">Соберите первую презентацию к ближайшему поводу: эфиру, встрече с клиентом, отчёту. Запишите, где пришлось долго править, и принесите эти наблюдения навыку: «Учти на будущее: …». Так он станет вашим, а не просто скачанным.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 3 к уроку 4: презентации в HTML</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
+

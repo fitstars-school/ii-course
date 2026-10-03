@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Как навыки модуля 3 помогут вам зарабатывать · Бонус модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Бонус модуля 3: как без обещаний «быстрых денег» превратить документ, таблицу, визуал, страницу или нейрофотосессию в услугу для другого человека или в мини-продукт.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* Бонус «Заработок» – общий каркас для всех модулей */
+.nav{border-bottom:none;padding-bottom:0}
+.navwrap{margin-top:40px;border-top:1px solid var(--line);padding-top:18px}
+.roads{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+.road{border-top:1px solid var(--ink);padding-top:20px}
+.road .rl{font-family:var(--serif);font-size:40px;line-height:1;color:var(--pink)}
+.road h3{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:10px 0 8px}
+.road p{font-size:16px;color:var(--muted);line-height:1.55}
+.road ul li{font-size:16px;color:#3B3143}
+.def .dtask{margin-top:8px;color:var(--ink)}
+.def .dtask b{color:var(--pink)}
+.qsign{font-size:var(--fine);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:-10px}
+.msg{margin-top:30px}
+.msg h3{font-family:var(--sans);font-size:19px;font-weight:700;margin-bottom:8px}
+.msg>p{font-size:16px;color:var(--muted);margin-bottom:16px}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:26px}
+.tier{border-top:1px solid var(--ink);padding-top:18px}
+.tier .tk{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}
+.tier .tv{font-family:var(--serif);font-size:clamp(26px,2.8vw,32px);line-height:1.1;margin:10px 0 8px}
+.tier p{font-size:15.5px;color:var(--muted);line-height:1.55}
+.handover{counter-reset:h}
+.handover li{padding-left:34px}
+.handover li::before{counter-increment:h;content:counter(h);background:none;width:auto;height:auto;top:0;left:0;font-family:var(--serif);font-size:24px;line-height:1.2;color:var(--pink)}
+.caseflds{margin-top:18px}
+.caseflds li b{color:var(--ink)}
+a.btn:hover{color:#fff}
+@media (max-width:760px){
+  .roads,.tiers{grid-template-columns:1fr;gap:18px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+.msg .def h3{font-size:17.5px;margin-bottom:5px}
+footer a{color:var(--pink-soft)}
+footer a:hover{color:#fff}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* Бонус «Заработок» М3: переключатель услуг на светлом фоне и ориентир рынка */
+.svcbar.light{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.svcbar.light .svclab{color:var(--muted)}
+.svcbar.light .svcbtn{color:var(--ink);background:#fff;border:1px solid var(--line)}
+.svcbar.light .svcbtn:hover{border-color:var(--pink);color:var(--ink)}
+.svcbar.light .svcbtn.on,.svcbar.light .svcbtn.on:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+.hint{border-left:none;background:#FFF1F8;padding:14px 18px}
+.market li{font-size:16px}
+.market li a{white-space:nowrap}
+.step ul{margin-top:12px}
+@media (max-width:760px){.svcbtn{padding:10px 14px}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · бонус</span></div>
+  <div class="kmark"><span class="kn">3</span><span class="kt">Бонус модуля 3 · Заработок</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Как&nbsp;навыки модуля&nbsp;3 помогут вам зарабатывать</h1>
+      <p class="hlead">Без обещаний миллионов и волшебной кнопки. Как превратить то, что вы сделали в модуле 3, – документ, таблицу, картинки, страницу, портреты – в услугу для другого человека или в мини-продукт. От первого сообщения до сданной работы и отзыва.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Опирается на</span><span class="mv">Уроки 1–5 модуля 3</span></div>
+      <div><span class="mk">Первая работа</span><span class="mv">Бриф 20–30 минут + готовая вещь</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Работа в портфолио и образец для следующих</span></div>
+    </div>
+    <div class="navwrap">
+      <p class="label">На этой странице</p>
+      <nav class="nav" aria-label="Разделы">
+        <a class="navlink" href="#umeete">Что вы умеете</a>
+        <a class="navlink" href="#dorogi">Две дороги</a>
+        <a class="navlink" href="#komu">Что и кому</a>
+        <a class="navlink" href="#predlozhit">Как договориться</a>
+        <a class="navlink" href="#sdelat">Как сделать</a>
+        <a class="navlink" href="#sdat">Как сдать</a>
+        <a class="navlink" href="#mini">Мини-продукт</a>
+        <a class="navlink" href="#skolko">Сколько просить</a>
+        <a class="navlink" href="#ne-obeshchat">Чего не обещать</a>
+        <a class="navlink" href="#portfolio">Портфолио</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. Что вы уже умеете -->
+<div class="dark" id="umeete" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Что&nbsp;вы&nbsp;уже&nbsp;умеете после модуля&nbsp;3</h2>
+    <div class="dcol">
+      <p>В этом модуле вы делали с ИИ не ответы в чате, а готовые вещи, которые можно отдать человеку. Собрали документ: сначала структура, потом текст в редактируемом файле, потом проверка по своим заметкам. Сделали таблицу с понятными столбцами и формулами, проверили формулы на известных значениях и обновили таблицу через ИИ. Записали свой стиль в паспорт и сделали в нём серию картинок. Собрали страницу и разместили её по ссылке. Сделали портреты из своих фото и, если захотели, короткое говорящее видео. Новой теории здесь не будет: всё ниже – про то, как сделать такую же вещь для другого человека или превратить удачную вещь в мини-продукт.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Две дороги -->
+<section class="wrap blk reveal" id="dorogi">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 2 из 9</p>
+    <h2>Две дороги к&nbsp;деньгам</h2>
+    <p>После модуля 1 вы могли собрать человеку промпт, после модуля 2 – помощника. Теперь вы умеете отдавать готовый результат. Его проще всего объяснить: человек видит, за что платит. Дороги две, можно идти по одной или по обеим.</p>
+    <div class="roads">
+      <div class="road">
+        <span class="rl">А</span>
+        <h3>Услуга: делаю вещь для другого человека</h3>
+        <p>Документ, таблица, визуал, страница или портреты под задачу одного заказчика.</p>
+        <ul>
+          <li>Разовая работа под ключ: «соберу памятку», «наведу порядок в таблице», «сделаю страницу о вас».</li>
+          <li>Пакет: например, паспорт стиля и серия обложек в нём.</li>
+          <li>Внутри своей работы – то же для отдела: шаблоны документов, таблицы учёта, презентации. Здесь это чаще работает не на деньги, а на вашу роль в команде.</li>
+        </ul>
+      </div>
+      <div class="road">
+        <span class="rl">Б</span>
+        <h3>Мини-продукт: одна вещь – много людей</h3>
+        <p>Вещь, которая получилась удачной и пригодилась не одному человеку, можно обезличить и предлагать готовой.</p>
+        <ul>
+          <li>Шаблон таблицы с формулами и памяткой.</li>
+          <li>Гайд или памятка для конкретной аудитории.</li>
+          <li>Пакет проверенных промптов под одну задачу.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="quote">Лучший образец для первой услуги – то, что вы уже сделали для себя в уроках модуля.</p>
+    <p style="margin-top:22px">Дальше на странице – сначала услуга по шагам: что предложить, как договориться, сделать и сдать. Потом – как из готовой вещи сделать мини-продукт и сколько за всё это просить.</p>
+  </div></div>
+</section>
+
+<!-- 3. Что и кому -->
+<section class="wrap blk reveal" id="komu">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 3 из 9</p>
+    <h2>Что предложить и&nbsp;кому</h2>
+    <p>Ищите тех, у кого результат нужен, а сил или умения сделать его самому нет. Почти в любом окружении есть такие люди. Ниже – пять направлений, по одному на каждый урок модуля.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div>
+        <h3>Документы · урок 1</h3>
+        <p>Кому: экспертам и специалистам, у которых после каждой встречи остаются заметки, а документа нет, – коучам, консультантам, репетиторам, организаторам. И тем, у кого методичка лежит кусками в разных файлах.</p>
+        <p class="dtask"><b>Что предложить:</b> коммерческое предложение из заметок после разговора, конспект встречи или консультации для клиента, памятку для клиентов – как подготовиться и что делать после, оформление методички из разрозненных материалов в один документ. Маршруты для КП, конспекта и памятки – в гайде <a href="https://aiforlife.ru/ii-course/modul3/bonus-dokumenty/">«Документы под любую задачу»</a>.</p>
+      </div></div>
+      <div class="def"><span class="dn">2</span><div>
+        <h3>Таблицы · урок 2</h3>
+        <p>Кому: мастерам, маленьким школам, блогерам, родительским комитетам – всем, у кого заявки, оплаты и планы живут в заметках и переписке или в таблице, где уже никто не понимает формулы.</p>
+        <p class="dtask"><b>Что предложить:</b> таблицу учёта заявок и оплат, бюджета или контент-плана со статусами и формулами. Или «наведу порядок в вашей таблице»: найти дубли, пустые статусы, ошибки в суммах и итоги, которые не захватывают новые строки, – как в тренажёре «Заявки и оплаты» к уроку 2.</p>
+      </div></div>
+      <div class="def"><span class="dn">3</span><div>
+        <h3>Визуал · урок 3</h3>
+        <p>Кому: экспертам и блогерам, у которых каждая картинка в своём стиле и лента выглядит случайной.</p>
+        <p class="dtask"><b>Что предложить:</b> паспорт стиля – стиль, записанный словами, который можно отдать любой нейросети и дизайнеру; серию обложек к постам или курсу в этом стиле; карусели в том же стиле. Помогут навыки brand-style, art-director-brief и design-check из <a href="https://aiforlife.ru/ii-course/modul2/bonus-dizain-navyki/">бонуса модуля 2</a>.</p>
+      </div></div>
+      <div class="def"><span class="dn">4</span><div>
+        <h3>Интерактив · урок 4</h3>
+        <p>Кому: специалистам без сайта, которым некуда отправлять клиентов, и экспертам, которые собирают подписчиков.</p>
+        <p class="dtask"><b>Что предложить:</b> страницу-портфолио или страницу «обо мне» по документу человека; квиз-лид-магнит; гайд-подарок по закрытой ссылке – как в бонусе <a href="https://aiforlife.ru/ii-course/modul3/bonus-gaid-podpischikam/">«Гайд-подарок для подписчиков»</a>; презентацию в HTML – как в бонусе <a href="https://aiforlife.ru/ii-course/modul3/bonus-prezentacii/">«Презентации в HTML»</a>.</p>
+      </div></div>
+      <div class="def"><span class="dn">5</span><div>
+        <h3>Нейрофотосессия · урок 5</h3>
+        <p>Кому: экспертам, которым нужны фото для аватарки, обложек и постов, а на фотосессию нет времени; небольшим командам, где у всех разные аватарки.</p>
+        <p class="dtask"><b>Что предложить:</b> пакет образов для эксперта – несколько портретов в одном стиле и в нужных форматах: 1:1 для аватарки, 4:5 для ленты, 9:16 для сторис; аватарки для команды в едином стиле; говорящее приветствие – короткое видео из портрета и голоса самого человека.</p>
+      </div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 4. Как предложить и договориться -->
+<section class="wrap blk reveal" id="predlozhit">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 4 из 9</p>
+    <h2>Как&nbsp;предложить и&nbsp;договориться</h2>
+    <p>Первые работы по-прежнему честно предлагать как практику: вы учитесь, вам нужны живые задачи. Новое в модуле 3: вам есть что показать. Приложите к сообщению свою работу из модуля – документ, таблицу, серию картинок или ссылку на страницу-портфолио из урока 4. Один образец объясняет лучше любого описания.</p>
+
+    <div class="msg">
+      <h3>Знакомому эксперту или владельцу бизнеса</h3>
+      <p>Поправьте под себя: оставьте одну вещь, которая подходит именно этому человеку.</p>
+      <div class="promptbox"><p class="plabel">Сообщение знакомому</p><pre>Привет! Я прохожу курс по нейросетям и учусь делать с ИИ готовые вещи: документы, таблицы, картинки в одном стиле, простые страницы. Вот что у меня уже получилось: <span class="tok">[ссылка на работу или страницу-портфолио]</span>.
+
+Мне кажется, тебе могло бы пригодиться <span class="tok">[одно конкретное: памятка для клиентов / таблица для заявок и оплат / серия обложек в одном стиле / страница о тебе / портреты для аватарки и постов]</span>.
+
+Мне для практики нужны живые задачи, поэтому первую работу могу сделать бесплатно. От тебя – разговор на 20–30 минут, твои материалы и честный отзыв после. Если сейчас не актуально – просто скажи, всё нормально.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg">
+      <h3>В рабочий чат</h3>
+      <p>Подходит для дороги А внутри команды: документы и таблицы нужны почти в любом отделе.</p>
+      <div class="promptbox"><p class="plabel">Сообщение в рабочий чат</p><pre>Коллеги, я учусь делать с нейросетями рабочие документы и таблицы: шаблоны писем и предложений, конспекты встреч, памятки, таблицы учёта с формулами, презентации.
+
+Если есть документ, который каждый раз собирается заново, или таблица, в которой все путаются, – давайте попробую навести порядок. Мне это практика, команде – минус кусок рутины.
+
+От вас – 20–30 минут на разговор и пара примеров. Если интересно, напишите мне в личные сообщения.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Прежде чем работать с рабочими документами, уточните, какие данные компании можно загружать во внешние нейросети. Что можно и что нельзя отдавать ИИ – в гайде <a href="https://aiforlife.ru/ii-course/modul0/bezopasnost/">«Безопасность»</a>.</p>
+    </div>
+
+    <div class="msg">
+      <h3>О чём договориться на берегу</h3>
+      <p>Шесть вопросов, которые лучше закрыть до начала работы, а не при сдаче.</p>
+      <ul>
+        <li><b>Что именно на выходе и в каком виде.</b> «Памятка в Word на две страницы», «таблица в Google Таблицах с инструкцией», «портреты в трёх форматах», «страница по ссылке». Чем конкретнее, тем меньше споров при сдаче.</li>
+        <li><b>Какие материалы даёт заказчик и кто отвечает за факты.</b> Цифры, цены, условия и даты – от заказчика. Вы собираете и проверяете, что ничего не потерялось, но не придумываете за него.</li>
+        <li><b>Сколько кругов правок входит.</b> Например, два, дальше – отдельно. Так у работы есть конец.</li>
+        <li><b>Где будет жить результат.</b> В Google Диске заказчика, в его аккаунте GitHub или файлом у него. Пароли от чужих аккаунтов не берите – делайте вместе на созвоне с показом экрана.</li>
+        <li><b>Права и согласия.</b> Для нейрофото – только фото самого заказчика и его согласие на обработку в выбранном сервисе. Для команды – согласие каждого, чьё лицо будет в работе. Картинки, фото и логотипы с чужих сайтов в работу не берём.</li>
+        <li><b>Цена, оплата и чек.</b> Сколько, когда и как вы примете оплату. Об этом – в разделе <a href="#skolko">«Сколько просить»</a>.</li>
+      </ul>
+    </div>
+
+    <div class="msg">
+      <h3>Закрепите договорённость письменно</h3>
+      <p>Короткое сообщение после разговора избавит от «а я думал, это тоже входит». Наговорите заметки и попросите нейросеть собрать текст.</p>
+      <div class="promptbox"><p class="plabel">Сообщение-договорённость</p><pre>Помоги составить короткое сообщение-договорённость для заказчика по итогам нашего разговора. Вот мои заметки: <span class="tok">[что заказчик хочет, в каком виде результат, какие материалы даст, сроки, цена и как оплатить]</span>.
+
+В сообщении должно быть:
+– что я делаю и в каком виде отдаю результат;
+– что входит в работу и что не входит;
+– сколько кругов правок входит;
+– что нужно от заказчика и к какому сроку: материалы, фото, доступы;
+– где будет жить результат;
+– для фото и видео: что заказчик даёт свои фото и согласен на их обработку в <span class="tok">[название сервиса]</span>;
+– цена, когда и как оплатить.
+
+Пиши просто и дружелюбно, без юридических формулировок, не длиннее 12 строк. Ничего не добавляй от себя: если в заметках чего-то не хватает, сначала спроси меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Сообщение-договорённость подходит для небольшой работы со знакомыми. Если заказ крупный или заказчик – компания, понадобится договор или оферта. Какие документы нужны и как принимать оплату – в плагине <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- 5. Как сделать -->
+<section class="wrap blk reveal" id="sdelat">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 5 из 9</p>
+    <h2>Как&nbsp;сделать: от брифа до готовой вещи</h2>
+    <p>Маршрут у всех пяти услуг один, вы проходили его в каждом уроке модуля: сначала план, потом вещь, потом проверка. Разница одна: материалы и вкус теперь чужие, поэтому сначала их нужно собрать у человека.</p>
+    <div class="svcbar light">
+      <p class="svclab">Что делаете – подсказки в шагах поменяются</p>
+      <div class="svcbtns" role="group" aria-label="Выберите услугу">
+        <button class="svcbtn" type="button" data-svcbtn="docs">Документы</button>
+        <button class="svcbtn" type="button" data-svcbtn="tables">Таблицы</button>
+        <button class="svcbtn" type="button" data-svcbtn="visual">Визуал</button>
+        <button class="svcbtn" type="button" data-svcbtn="page">Страница</button>
+        <button class="svcbtn" type="button" data-svcbtn="photo">Нейрофото</button>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Бриф на 20–30 минут</h3>
+      <p>Задаёте вопросы и собираете материалы. С разрешения человека запишите разговор и расшифруйте. Самое ценное – образцы: что нравится и как точно не надо. Вопросы можно подготовить вместе с нейросетью.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Вопросы для брифа</p><pre>Помоги подготовить вопросы для короткого разговора с заказчиком. Я буду делать для него: <span class="tok">[документ / таблицу / паспорт стиля и серию картинок / страницу / нейрофотосессию]</span>. Он <span class="tok">[кто он и чем занимается]</span>.
+
+Нужно 10–12 вопросов простыми словами, в четырёх блоках:
+1) задача – для чего эта вещь, кто будет ей пользоваться или её читать;
+2) материалы – что у заказчика уже есть и что он пришлёт;
+3) вкус – что нравится, что точно не надо, есть ли примеры;
+4) сдача – в каком виде отдать результат, где он будет жить, как заказчик поймёт, что всё получилось.
+
+В конце добавь вопрос о том, что нельзя использовать: личные данные клиентов, чужие фото, темы и слова.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="hint">
+        <div class="hs" data-svc="docs"><p class="hlab">Документы</p><p>Попросите заметки, черновики, старые версии документа и один пример, который нравится. Уточните, кто будет читать: клиент, руководитель, родители.</p></div>
+        <div class="hs" data-svc="tables"><p class="hlab">Таблицы</p><p>Попросите текущую таблицу или выгрузку как есть, со всеми ошибками. Спросите, какие решения человек принимает по этой таблице: каждый столбец должен помогать одному решению.</p></div>
+        <div class="hs" data-svc="visual"><p class="hlab">Визуал</p><p>Попросите 3–5 картинок или страниц, которые нравятся, логотип и цвета, если они есть, и ссылку на ленту. Уточните площадки и форматы: 4:5 для ленты, 9:16 для сторис, 1:1 для аватарки, 16:9 для обложки.</p></div>
+        <div class="hs" data-svc="page"><p class="hlab">Страница</p><p>Попросите текст о себе или документ-портфолио, список услуг, несколько работ и контакт для кнопки «Написать мне». Уточните, что можно показывать всем: страница будет открыта по ссылке.</p></div>
+        <div class="hs" data-svc="photo"><p class="hlab">Нейрофото</p><p>Попросите 3–5 фото при дневном свете: анфас, вполоборота, с улыбкой, без фильтров. Обсудите образы и где фото будут использоваться. Получите согласие человека на обработку его фото в выбранном сервисе и сохраните его, например в переписке.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Сделайте по маршруту урока</h3>
+      <p>Откройте новый чат под этого заказчика, чтобы контексты не смешивались, и переименуйте его так, чтобы было понятно, чья это работа. Пройдите тот же путь, что в уроке. Не прыгайте сразу к готовой вещи: сначала план, и только после согласования с заказчиком – сама вещь.</p>
+      <div class="hint">
+        <div class="hs" data-svc="docs"><p class="hlab">Документы · урок 1</p><p>Сырые заметки → структура → правка структуры → текст в редактируемом документе → точечные правки. Готовые маршруты для КП, конспекта, памятки и письма – в гайде <a href="https://aiforlife.ru/ii-course/modul3/bonus-dokumenty/">«Документы под любую задачу»</a>.</p></div>
+        <div class="hs" data-svc="tables"><p class="hlab">Таблицы · урок 2</p><p>Сначала ИИ предлагает столбцы, лишнее убираете до создания файла. Потом строки, статусы, сводка и формулы, которые работают при добавлении новых строк. Попросите объяснить каждую формулу простыми словами – это объяснение пригодится для памятки.</p></div>
+        <div class="hs" data-svc="visual"><p class="hlab">Визуал · урок 3</p><p>Паспорт стиля по примерам заказчика → ТЗ на картинку → первая картинка → эталон → серия в том же чате. Текст на картинки добавляйте отдельно, в редакторе: нейросети путают буквы, особенно кириллицу.</p></div>
+        <div class="hs" data-svc="page"><p class="hlab">Страница · урок 4</p><p>Документ заказчика и его паспорт стиля → план страницы → страница → интерактив → правки по одной. Квиз собирается тем же способом. Для презентации – бонус <a href="https://aiforlife.ru/ii-course/modul3/bonus-prezentacii/">«Презентации в HTML»</a>.</p></div>
+        <div class="hs" data-svc="photo"><p class="hlab">Нейрофото · урок 5</p><p>Одна сцена – один запрос. Первую удачную картинку объявляете эталоном и держите серию в одном чате. В дело идёт меньшая часть вариантов, поэтому закладывайте время на отбор.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Проверьте глазами заказчика и его читателя</h3>
+      <p>Ошибка в чужой работе бьёт по чужой репутации. Проверяйте так же, как в уроках: сначала по смыслу, потом по виду, потом на риски.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Проверка перед сдачей</p><pre>Вот готовая работа для заказчика: <span class="tok">[вставьте текст, таблицу, картинки или файл страницы]</span>. А вот его исходные материалы и пожелания: <span class="tok">[вставьте]</span>.
+
+Проверь работу по трём линиям:
+1) соответствие – где результат расходится с материалами и пожеланиями заказчика, что додумано, что потеряно;
+2) глазами читателя – что непонятно человеку, который видит это впервые;
+3) риски – личные данные, чужие имена и фото, цифры и факты без источника, обещания, которых заказчик не давал.
+
+Назови не больше пяти главных правок по порядку важности. Пока ничего не переделывай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="hint">
+        <div class="hs" data-svc="docs"><p class="hlab">Документы</p><p>Все факты, цифры и даты – только из материалов заказчика. Спорные места пусть нейросеть отметит пометкой «Вопрос заказчику», а не закроет общими фразами.</p></div>
+        <div class="hs" data-svc="tables"><p class="hlab">Таблицы</p><p>Проверьте каждую формулу на известных значениях: найдите строки, для которых вы знаете правильный ответ, и сравните. Добавьте новую строку – итоги должны её подхватить.</p></div>
+        <div class="hs" data-svc="visual"><p class="hlab">Визуал</p><p>Положите серию рядом: один свет, цвет и манера? Нет ли кривых букв, лишних пальцев, чужих логотипов? Навык design-check из модуля 2 даст три главные правки.</p></div>
+        <div class="hs" data-svc="page"><p class="hlab">Страница</p><p>Откройте страницу на телефоне. Нажмите каждую кнопку и ссылку. Проверьте, что на странице нет телефона, адреса и других данных, которые заказчик не разрешил показывать всем.</p></div>
+        <div class="hs" data-svc="photo"><p class="hlab">Нейрофото</p><p>Человека должен узнавать знакомый. Проверьте лицо, руки, украшения, надписи на фоне. Отбракуйте всё, где лицо стало чужим, даже если кадр красивый.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Соберите памятку для заказчика</h3>
+      <p>Заказчику нужна не только вещь, но и понимание, как с ней жить дальше: как добавить строку в таблицу, где поправить текст на странице, каким промптом сделать новую картинку в той же серии.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Памятка для заказчика</p><pre>Сделай короткую памятку к работе, которую я сделал(а) для заказчика: <span class="tok">[что за работа]</span>. Для человека, который не разбирается в нейросетях. Три части:
+1) что это и как этим пользоваться – 3–4 строки;
+2) как обновлять самому – по шагам: <span class="tok">[например, добавлять строки в таблицу, менять текст на странице, делать новую картинку в той же серии]</span>; если для этого нужен промпт, вставь его отдельным блоком;
+3) когда лучше обратиться ко мне.
+
+Без терминов, не длиннее одной страницы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если ваша нейросеть не создаёт файл, скопируйте текст в документ. Копию памятки и промптов сохраните себе: из них потом может получиться мини-продукт.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- 6. Как сдать -->
+<section class="wrap blk reveal" id="sdat">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 6 из 9</p>
+    <h2>Как&nbsp;сдать</h2>
+    <p>Работа сдана, когда заказчик открыл результат у себя и понял, как им пользоваться. Поэтому отдаёте не только файл.</p>
+    <ul class="handover">
+      <li><b>Результат в рабочем виде:</b> документ, который можно править, а не только PDF; таблица с живыми формулами; картинки в нужных форматах; страница по ссылке в аккаунте заказчика или файл для неё.</li>
+      <li><b>Памятка:</b> как пользоваться и как обновлять самому.</li>
+      <li><b>Короткий показ на 15–20 минут:</b> заказчик при вас открывает результат и пробует сам – меняет строку в таблице, правит абзац, открывает страницу на телефоне.</li>
+      <li><b>Правки по договорённости:</b> столько кругов, сколько обговорили на берегу. Попросите присылать замечания одним списком.</li>
+    </ul>
+
+    <div class="msg">
+      <h3>Сопроводительный текст</h3>
+      <p>Подставьте, что сделано и в каком виде, и уберите строку про фото, если работа не про портреты.</p>
+      <div class="promptbox"><p class="plabel">Сопроводительное сообщение</p><pre>Привет! Работа «<span class="tok">[что сделано]</span>» готова.
+
+Что внутри: <span class="tok">[файл или ссылка]</span> и памятка – как пользоваться и как обновлять самому.
+
+Давай созвонимся на 15–20 минут: ты при мне откроешь результат и попробуешь сам. В работу входят <span class="tok">[число]</span> круга правок – присылай замечания одним списком, так быстрее.
+
+Важно: нейросеть иногда ошибается, поэтому факты, цифры и цены я сверял(а) с твоими материалами. Последнее слово – за тобой: перечитай перед тем, как отправлять дальше.
+<span class="tok">[Для фото: исходники и все варианты храню до [дата], потом удаляю.]</span>
+
+И просьба: напиши потом пару строк отзыва – удобно ли пользоваться и что изменилось. Можно я покажу эту работу в своём портфолио? Без имени и деталей, а портреты – только те, которые ты отметишь.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg" id="mini">
+      <h3>Мини-продукт: одна вещь – много людей</h3>
+      <p>Когда одна и та же вещь понадобилась двум-трём людям, её можно превратить в мини-продукт: обезличить, добавить инструкцию и предлагать готовой.</p>
+      <div class="defs" style="margin-top:0">
+        <div class="def"><span class="dn">1</span><div>
+          <h3>Шаблон таблицы</h3>
+          <p>Таблица с формулами, статусами и листом «Как пользоваться». Без чужих данных, с 2–3 строками для примера. Например, учёт заявок и оплат для мастера или контент-план для блога.</p>
+        </div></div>
+        <div class="def"><span class="dn">2</span><div>
+          <h3>Гайд или памятка</h3>
+          <p>Для конкретной аудитории и одной задачи. Например, «Как подготовиться к первой консультации». Удобно отдавать страницей по ссылке – как в бонусе <a href="https://aiforlife.ru/ii-course/modul3/bonus-gaid-podpischikam/">«Гайд-подарок для подписчиков»</a>.</p>
+        </div></div>
+        <div class="def"><span class="dn">3</span><div>
+          <h3>Пакет промптов</h3>
+          <p>Проверенные промпты под одну задачу с примерами результата. Например, серия обложек в своём стиле или конспект встречи из заметок.</p>
+        </div></div>
+      </div>
+      <div class="promptbox" style="margin-top:18px"><p class="plabel">Упаковать в мини-продукт</p><pre>Я сделал(а) <span class="tok">[что за вещь]</span>, и такая же вещь пригодилась бы другим людям: <span class="tok">[кому]</span>. Помоги превратить её в мини-продукт.
+
+1) Что убрать: все данные заказчика, имена, цены и факты, которые относятся только к нему. Перечисли, что нашёл(ла).
+2) Что добавить: инструкцию «как пользоваться» в 3–5 шагов и 1–2 примера заполнения на выдуманных данных.
+3) Как назвать – три варианта, простыми словами, без обещаний результата.
+4) Описание в 4–5 строк: для кого, какую задачу решает, что внутри, в каком формате.
+
+Ничего не обещай за покупателя и не придумывай отзывы и цифры.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox"><b>Мини-продукт из работы для заказчика – только с его разрешения и без его данных.</b> Надёжнее собрать продукт заново на выдуманном примере. Продавать можно в своём канале или со страницы из урока 4. Какие документы нужны и как подключить приём оплаты – в плагине <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- 7. Сколько просить -->
+<section class="wrap blk reveal" id="skolko">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Раздел 7 из 9</p>
+    <h2>Сколько просить</h2>
+    <p>Логика та же, что в модулях 1 и 2: сначала портфолио, потом деньги. В модуле 3 портфолио собирать проще: готовую вещь легко показать.</p>
+    <div class="tiers">
+      <div class="tier">
+        <p class="tk">Первые 2–3 работы</p>
+        <p class="tv">Бесплатно или символически</p>
+        <p>Взамен – отзыв и разрешение показать работу. Заодно засеките, сколько часов уходит у вас на каждый этап: это основа будущей цены.</p>
+      </div>
+      <div class="tier">
+        <p class="tk">Услуга под ключ</p>
+        <p class="tv">От вашего часа</p>
+        <p>Бриф, сборка, проверка, памятка, показ и правки. Сложите часы и умножьте на свою ставку – ниже есть промпт, который поможет посчитать.</p>
+      </div>
+      <div class="tier">
+        <p class="tk">Мини-продукт</p>
+        <p class="tv">Дешевле работы на&nbsp;заказ</p>
+        <p>Вы делаете вещь один раз, а предлагаете многим. Сравните с похожими шаблонами и гайдами в своей нише.</p>
+      </div>
+    </div>
+
+    <div class="msg">
+      <h3>Ориентир рынка, не обещание</h3>
+      <p>Чтобы понимать порядок цифр, ниже – стартовые цены «от» на двух площадках для заказчиков из Москвы. Это самый простой заказ у самого недорогого исполнителя, а не средний заработок. Сверено 4 октября 2026 года; цифры на площадках меняются.</p>
+      <ul class="market">
+        <li><b>Оформление презентаций</b> – от 1&nbsp;250&nbsp;₽ за услугу, интерактивная презентация – от 1&nbsp;500&nbsp;₽. <a href="https://profi.ru/it_freelance/oformlenie-prezentacii/price/" target="_blank" rel="noopener">Профи.ру</a></li>
+        <li><b>Подготовка коммерческих предложений</b> – от 1&nbsp;500&nbsp;₽ за услугу. <a href="https://profi.ru/it_freelance/podgotovka-kommercheskih-predlozhenii/" target="_blank" rel="noopener">Профи.ру</a></li>
+        <li><b>Создание Google-таблиц, работа в Excel</b> – от 1&nbsp;000&nbsp;₽ за час. <a href="https://profi.ru/it_freelance/programmirovanie-v-excel/price/" target="_blank" rel="noopener">Профи.ру</a></li>
+        <li><b>Дизайн в соцсетях</b> – от 2&nbsp;000&nbsp;₽ за услугу, баннер для соцсетей – от 1&nbsp;000&nbsp;₽. <a href="https://profi.ru/it_freelance/dizajn-v-socialnyh-setyah/" target="_blank" rel="noopener">Профи.ру</a></li>
+        <li><b>Создание лендинга</b> – от 5&nbsp;430&nbsp;₽ за услугу. <a href="https://profi.ru/it_freelance/programmer/sozdanie-saita/landing-page/price/" target="_blank" rel="noopener">Профи.ру</a></li>
+        <li><b>Нейрофотосессия</b> – от 800&nbsp;₽ за услугу на <a href="https://profi.ru/krasota/neirofotosessiya/price/" target="_blank" rel="noopener">Профи.ру</a>; на <a href="https://kwork.ru/categories/imagegeneration/neyrofotosessiya" target="_blank" rel="noopener">Kwork</a> – от 500&nbsp;₽: это минимальная цена услуги на площадке.</li>
+      </ul>
+      <p class="rulebox"><b>Это нижняя планка рынка, а не прайс и не обещание заработка.</b> Ваша цена зависит от задачи, ниши, объёма и работ в портфолио. Проверьте, сколько берут за похожую работу именно в вашей нише, и спросите двух-трёх знакомых, сколько они были бы готовы заплатить. Подписку на нейросеть и сервисы для фото и видео обсудите заранее: чей аккаунт, тот и платит.</p>
+    </div>
+
+    <div class="msg">
+      <h3>Как посчитать от своего часа</h3>
+      <p>Сложите часы на каждый этап и умножьте на ставку, которую готовы брать за час своей работы. Первые бесплатные работы как раз покажут, сколько часов уходит у вас.</p>
+      <div class="promptbox"><p class="plabel">Посчитать цену</p><pre>Помоги посчитать цену работы под ключ. Не опирайся на рыночную статистику – считаем только от моих данных.
+
+Мои данные:
+– что за работа: <span class="tok">[документ / таблица / паспорт стиля и серия / страница / нейрофотосессия]</span>;
+– сколько времени у меня ушло на этапы в прошлый раз: <span class="tok">[бриф, сборка, проверка, памятка, показ, правки]</span>;
+– ставка, которую я хочу получать за час: <span class="tok">[сумма]</span>;
+– сколько кругов правок входит: <span class="tok">[число]</span>;
+– платные сервисы, которые нужны только для этой работы: <span class="tok">[если есть]</span>.
+
+Посчитай итог, добавь запас на правки и предложи две цифры: «минимум, ниже которого мне невыгодно» и «нормальная цена». Отдельно посчитай цену мини-продукта, если на его подготовку у меня уйдёт <span class="tok">[время]</span>, и объясни, от чего она зависит.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <p style="margin-top:28px">На чём держится цена:</p>
+    <ul>
+      <li><b>Ваша экспертиза в нише.</b> Бухгалтер, который делает таблицы для бухгалтеров, понимает задачу с полуслова – это стоит дороже, чем «просто таблица».</li>
+      <li><b>Объём и готовность.</b> Одна картинка – стартовая цена. Паспорт стиля, серия и памятка, как делать новые картинки, – заметно выше.</li>
+      <li><b>Есть ли работы и отзывы.</b> Образцы в портфолио – главный аргумент, чтобы поднять цену.</li>
+    </ul>
+
+    <div class="msg">
+      <h3>Как брать деньги официально</h3>
+      <p>Если вы берёте оплату не разово, а регулярно, оформите статус. В России самый простой путь для частного человека – самозанятость, то есть налог на профессиональный доход. По данным ФНС на 4 октября 2026 года:</p>
+      <ul>
+        <li>регистрация – в приложении «Мой налог», занимает несколько минут;</li>
+        <li>на каждую оплату нужно сформировать чек в приложении и отправить его клиенту;</li>
+        <li>налог – 4&nbsp;% с оплат от частных людей и 6&nbsp;% с оплат от компаний и ИП;</li>
+        <li>режим действует, пока доход за год не больше 2,4 млн&nbsp;₽.</li>
+      </ul>
+      <p style="margin-top:14px">Подробности и актуальные условия – на сайте ФНС <a href="https://npd.nalog.ru/" target="_blank" rel="noopener">npd.nalog.ru</a>. Какие документы нужны, если продаёте через свою страницу, и как подключить приём оплаты – в плагине <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>. Живёте не в России – уточните правила своей страны в официальных источниках.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- 8. Чего не обещать -->
+<div class="dark" id="ne-obeshchat" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Чего не&nbsp;обещать</h2>
+    <div class="dcol">
+      <p>Честность здесь – защита вашей репутации. Одно несбывшееся обещание стоит дороже, чем три удачные работы.</p>
+      <ul>
+        <li><b>Что ИИ всё сделал без ошибок.</b> Вы проверили факты, цифры и формулы, но последнее слово по содержанию – за заказчиком: это его документ и его данные.</li>
+        <li><b>Что таблица выдержит любые переделки.</b> Если заказчик перестроит столбцы, формулы могут сломаться. В памятке напишите, как это заметить и проверить.</li>
+        <li><b>Полное сходство на нейрофото.</b> Нейросеть иногда меняет черты лица. Обещайте отбор: в работу идут только кадры, где человек себя узнаёт.</li>
+        <li><b>Работу с чужими лицами и голосами без согласия.</b> Использовать изображение человека можно только с его согласия – так говорит <a href="https://www.consultant.ru/law/podborki/gk_rf_ispolzovanie_izobrazheniya/" target="_blank" rel="noopener" style="color:var(--pink-soft)">статья 152.1 Гражданского кодекса РФ</a>. Аватарки для команды – согласие каждого, а не только руководителя. Детей не загружаем. Голос для видео записывает сам человек. И предупредите заказчика: фото лица и голос в зарубежном сервисе – данные, которые не забрать обратно.</li>
+        <li><b>Что картинки можно использовать как угодно.</b> Условия коммерческого использования у каждого сервиса свои – уточните их в правилах сервиса. Не копируйте стиль живого художника по имени и не берите чужие фото и логотипы. Пометку «создано с ИИ» обсудите с заказчиком: по <a href="https://www.consultant.ru/document/cons_doc_LAW_540336/" target="_blank" rel="noopener" style="color:var(--pink-soft)">закону от 26.07.2026 № 243-ФЗ</a> для автора она добровольная, а нормы о такой пометке начнут действовать с 1 марта 2027 года (сверено 4 октября 2026).</li>
+        <li><b>Что страница сама соберёт заявки и примет оплату.</b> Простая страница этого не умеет: нужны внешние сервисы и документы, если вы собираете данные людей. Подробнее – в плагине <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/" style="color:var(--pink-soft)">«Свой сайт без программиста»</a>.</li>
+        <li><b>Результат, за который вы не отвечаете.</b> «Продажи вырастут», «подписчиков станет больше» – не ваша зона. Ваша зона – вещь, которая сделана аккуратно, проверена и понятна заказчику.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 9. Портфолио -->
+<section class="wrap closing reveal" id="portfolio">
+  <div class="cgrid"><div class="col">
+    <p class="label">Раздел 9 из 9</p>
+    <h2 style="margin:14px 0 18px">Каждая работа – новая карточка в&nbsp;вашем портфолио</h2>
+    <p>После сдачи вставьте в чат, где делали работу, «Промпт для портфолио» из любого урока модуля 3 – нейросеть оформит работу. Добавьте её в документ «Моё портфолио». Есть страница-портфолио из урока 4 – добавьте карточку и туда: следующие заказчики увидят её первой.</p>
+    <ul class="caseflds">
+      <li><b>Задача</b> – чья и какая, без имени: «нутрициологу – серия обложек в её стиле».</li>
+      <li><b>Что я сделал(а) с помощью ИИ</b> – бриф, план, сборка, проверка, памятка.</li>
+      <li><b>Результат</b> – что получил человек и его отзыв.</li>
+      <li><b>Где это ещё пригодится</b> – каким ещё людям и задачам подойдёт такая работа.</li>
+      <li><b>Какой навык это показывает</b> – одной фразой.</li>
+      <li><b>Образец</b> – обезличенная копия или ссылка, если заказчик разрешил показать.</li>
+    </ul>
+    <div class="btns"><a class="btn" href="https://aiforlife.ru/ii-course/modul3/itog/">«Моё портфолио» и итог модуля 3</a></div>
+    <p class="pull" style="margin-top:44px">Следующая ступень – в модуле 4: вы соберёте свою систему работы с агентом, а потом сможете настраивать такую же под чужой бизнес.</p>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 3 «Заработок» · <a href="https://aiforlife.ru/ii-course/modul3/itog/" target="_top">к итогу модуля 3</a></div>
+</footer>
+
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='zarabotok-m3-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  var s0=null;try{s0=localStorage.getItem(KEY);}catch(e){}
+  setSvc(s0&&document.querySelector('[data-svcbtn="'+s0+'"]')?s0:'docs');
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

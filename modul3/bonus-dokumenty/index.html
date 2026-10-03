@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Документы под любую задачу · Бонус модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Документы под любую задачу: КП, конспект встречи, небольшое исследование, письмо и памятка для клиента. Общий маршрут из пяти шагов, готовые запросы, примеры структуры и чек-листы проверки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Бонусы модуля 2: дополнения к стилю бонусов модуля 1 */
+.blk h3.sub{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:30px 0 8px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:600px;margin-top:24px}
+.shot{margin:24px 0 0;max-width:300px}
+.shots .shot{margin:0;max-width:none}
+.shot.wide{max-width:460px}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.shot figcaption{font-size:14px;line-height:1.5;color:var(--muted);margin-top:10px}
+.step ol{margin:14px 0 0 0;padding-left:22px}
+.step ol li{margin-bottom:8px;font-size:17px;color:#3B3143;padding-left:4px}
+.step ol li::marker{color:var(--pink);font-weight:700}
+.step .btns{margin-top:18px}
+.step a.btn,.dark a.btn{color:#fff}
+.facts{margin:0 0 20px}
+.fact{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.fact:first-child{border-top:none;padding-top:0}
+.fact .fk{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);padding-top:4px}
+.fact p{font-size:16px;line-height:1.55;color:#3B3143}
+.parthead{padding-top:70px}
+.parthead .ptag{display:inline-block;background:var(--pink);color:#fff;font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px}
+.parthead h2{font-size:clamp(32px,4.4vw,52px);margin:16px 0 14px}
+.parthead p{max-width:68ch}
+.back{padding-top:44px}
+.back .linkbtn{font-size:16px}
+footer a{color:#B7A9BD;border-bottom:1px solid rgba(183,169,189,.4)}
+footer a:hover{color:var(--pink-soft)}
+footer p+p{margin-top:8px}
+@media (max-width:760px){
+  .fact{grid-template-columns:1fr;gap:4px}
+  .shot,.shot.wide{max-width:100%}
+  .shots{grid-template-columns:1fr 1fr;gap:14px}
+  .parthead{padding-top:54px}
+}
+@media (max-width:420px){.shots{grid-template-columns:1fr}}
+
+/* NotebookLM: дополнения */
+.rubric a.back{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent}
+.rubric a.back:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.steps .step ul{margin-top:14px}
+.steps .step ul li{font-size:17px;color:#3B3143}
+.lede .promptbox{margin-top:22px}
+.donebox .facts{margin-top:6px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.cbox{border-top:2px solid var(--ink);padding-top:16px}
+.cbox .ck{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.cbox h3{font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.cbox p+p{margin-top:0}
+.cbox p:last-child{font-size:16px;color:var(--muted);line-height:1.55}
+footer p{max-width:none}
+@media (max-width:760px){
+  .cmp{grid-template-columns:1fr;gap:26px}
+  .rubric{gap:14px}
+}
+
+/* Сценарии учёбы */
+.tsub{display:block;font-size:15px;font-weight:500;line-height:1.45;color:var(--muted);margin-top:4px}
+.scn .body .facts{margin:0 0 4px}
+.scn .sh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin:24px 0 10px}
+.scn ol{padding-left:22px}
+.scn ol li{margin-bottom:8px;font-size:17px;color:#3B3143;padding-left:4px}
+.scn ol li::marker{color:var(--pink);font-weight:700}
+.scn .promptbox+.promptbox{margin-top:16px}
+.scn .tool{margin-top:24px;border-left:2px solid var(--pink);padding:4px 0 4px 20px;font-size:16px;color:#3B3143;max-width:68ch}
+.scn .tool .tl{display:block;font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.scn .snote,.scn .note{max-width:68ch}
+.group .task.scn:first-of-type{border-top:1px solid var(--ink)}
+.task.scn:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:760px){.tsub{font-size:14px}.rubric .r2{text-align:right}}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="dok">
+/* Бонус М3 «Документы под любую задачу»: без курсива, чек-листы, якоря карточек */
+.it{font-style:normal}
+.task.scn,.step,#hranit,#pomoshnik{scroll-margin-top:16px}
+.step .facts{margin-bottom:6px}
+.step .fact p{font-size:16px}
+.scn .facts+.sh{margin-top:24px}
+ul.chk{margin-top:6px}
+ul.chk li{padding-left:30px;font-size:16.5px;color:#3B3143}
+ul.chk li::before{top:6px;left:0;width:14px;height:14px;background:transparent;border:1.5px solid var(--pink)}
+.scn .note{margin-top:22px}
+.scn .rulebox{margin:0 0 6px}
+.scn .snote{margin-top:22px}
+.lede .defs .def p{max-width:none}
+
+/* подзаголовки внутри карточек – тёмная плашка (решение Светы 04.10.2026) */
+.body .sh,.scn .sh{display:block;background:var(--dark);color:#fff;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:13px 18px;margin:36px 0 20px;border-left:3px solid var(--pink)}
+.body .sh:first-child{margin-top:8px}
+@media (max-width:600px){.body .sh,.scn .sh{margin-left:-20px;margin-right:-20px;padding:12px 20px}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · бонус</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Документы <span class="it">под любую задачу</span></h1>
+      <p class="hlead">КП, конспект встречи, небольшое исследование, письмо и памятка для клиента: общий маршрут, готовые запросы и чек-листы проверки.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Читать</span><span class="mv">25 минут, дальше – по нужному разделу</span></div>
+      <div><span class="mk">Понадобится</span><span class="mv">Любая нейросеть и материалы под ваш документ</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Маршрут документа, 5 видов документов, 22 запроса</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Главное<br>за минуту</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Любой документ держится на трёх опорах: понятная задача, достаточно исходного материала и способ проверки. Если чего-то из трёх нет, нейросеть заполнит пустоту общими словами.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Сначала структура и ваше «да», потом текст. Править план из шести строк быстрее, чем переписывать готовые три страницы.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Ничего не придумывать. Там, где не хватает фактов, нейросеть ставит пометку «ВОПРОС АВТОРУ», а не сочиняет правдоподобное.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Если один и тот же вид документа нужен вам чаще 2–3 раз в месяц, соберите под него помощника, и объяснять правила каждый раз заново не придётся.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Зачем этот гайд</p>
+    <h2>Повседневные документы по логике урока 1</h2>
+    <p>В уроке 1 мы долго и подробно работали с большим документом: главой книги семейных воспоминаний. Здесь та же логика, только для разовых документов, которые нужны постоянно: коммерческое предложение после созвона, итоги встречи, небольшое исследование перед решением, письмо, памятка для клиента.</p>
+    <p>Сначала прочитайте общий маршрут – он одинаковый для любого документа. Дальше открывайте только тот вид, который нужен вам сейчас: в каждом есть что собрать заранее, пример структуры, готовые запросы и короткий чек-лист проверки.</p>
+    <p class="rulebox"><b>Про чужие данные.</b> В документах часто есть имена клиентов, телефоны, суммы и реквизиты. Отдавайте нейросети только то, что нужно для текста. Реквизиты, паспортные данные и всё личное вписывайте сами в готовый документ перед отправкой.</p>
+    <p style="margin-top:22px">Добавку ниже можно ставить в конец любого запроса с этой страницы. Она защищает от главной беды деловых документов: правдоподобных выдуманных фактов.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Добавка к любому запросу · ничего не придумывать</p><pre>Опирайся только на материалы, которые я дал(а). Не придумывай цифры, даты, имена, кейсы, отзывы и цитаты. Если для какого-то места не хватает фактов, поставь в тексте пометку «ВОПРОС АВТОРУ: что уточнить» и продолжай дальше.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:0">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы гайда">
+    <a class="navlink" href="#marshrut">Маршрут документа</a>
+    <a class="navlink" href="#gde">Где делать документ</a>
+    <a class="navlink" href="#hranit">Где хранить</a>
+    <a class="navlink" href="#kp">КП</a>
+    <a class="navlink" href="#itogi">Итоги встречи</a>
+    <a class="navlink" href="#issledovanie">Исследование</a>
+    <a class="navlink" href="#pismo">Письмо</a>
+    <a class="navlink" href="#pamyatka">Памятка</a>
+    <a class="navlink" href="#pomoshnik">Свой помощник</a>
+  </nav>
+</section>
+
+<div class="practice" id="marshrut">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Глава 1</p>
+    <h2>Общий маршрут любого документа</h2>
+    <p class="pmeta">задача → сырьё → структура → текст → проверка</p>
+    <p class="pintro">Пять шагов, которые мы проходили в уроке на большой главе. Для письма на полстраницы шаги 3 и 4 можно сделать одним запросом, но проверку не пропускайте никогда.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Задача и читатель</h3>
+      <p>Прежде чем просить текст, ответьте себе на три вопроса: кто будет читать, что он должен сделать после прочтения и в каком виде ему удобно читать – страница, письмо, таблица. Одна и та же информация для клиента и для коллеги – это два разных документа.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Запрос · начать любой документ</p><pre>Мне нужен документ: <span class="tok">[вид: КП, итоги встречи, письмо, памятка, справка]</span>.
+Читатель: <span class="tok">[кто будет читать и что он уже знает]</span>.
+После прочтения он должен: <span class="tok">[понять, согласиться, оплатить, сделать по шагам]</span>.
+Формат и объём: <span class="tok">[например, одна страница, письмо на 5 абзацев, таблица]</span>.
+
+Материалы ниже. Прежде чем что-то писать, проверь, хватает ли их. Если не хватает, задай мне вопросы по одному, не больше пяти.
+
+<span class="tok">[МАТЕРИАЛЫ: заметки, переписка, расшифровка, старые документы]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Сырьё: всё, из чего строится документ</h3>
+      <p>Нейросеть не знает вашего клиента, ваших цен и того, о чём вы договорились на созвоне. Всё это нужно принести. Подойдёт любая форма:</p>
+      <ul>
+        <li><b>Заметки и переписка</b> – можно как есть, с опечатками и сокращениями.</li>
+        <li><b>Голос.</b> Наговорите всё, что знаете по задаче, через микрофон на клавиатуре телефона или в самой нейросети. Часто это быстрее и полнее, чем печатать.</li>
+        <li><b>Файлы</b> – прайс, договор, прошлые документы, расшифровка встречи. Прикрепите через значок скрепки.</li>
+        <li><b>Удачные примеры</b> – документ того же вида, который у вас уже получился хорошо.</li>
+      </ul>
+      <p class="snote">Чем больше вашего материала, тем меньше нейросеть додумывает. Если сырья мало, это видно сразу: текст выходит гладким, но ни о чём.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Структура на подтверждение</h3>
+      <p>Попросите сначала план: разделы и одну строку о том, что в каждом. Переставьте, вычеркните лишнее, допишите своё – и только после этого дайте «да» на текст. Так вы управляете документом, а не исправляете за нейросетью готовое.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Запрос · сначала структура</p><pre>По этим материалам предложи структуру документа: названия разделов и по одной строке, что будет в каждом. Отметь разделы, для которых материала не хватает.
+Текст пока не пиши. Жди моего «да» или правок к структуре.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step" id="gde"><span class="snum">4</span><div>
+      <h3>Текст – сразу в документе</h3>
+      <p>Когда структура согласована, просите текст. Есть три способа работать с ним дальше, выбирайте тот, что ближе вашей привычке.</p>
+      <div class="facts" style="margin-top:16px">
+        <div class="fact"><span class="fk">В чате</span><p>Документ открывается в окне, где текст можно править руками или выделить кусок и попросить переписать только его. В ChatGPT с 2026 года вместо холста (Canvas) черновики показываются в редактируемом блоке прямо в чате, его можно развернуть на весь экран. В Claude похожее окно называется артефактом, в Gemini – Canvas, оттуда текст можно выгрузить в Google Документ. Если окно не открылось само, допишите в запрос: «Оформи как документ, который я смогу редактировать».</p></div>
+        <div class="fact"><span class="fk">Файл DOCX</span><p>Удобно, если вы привыкли работать в Word или отправляете документ файлом. Попросите: «Сохрани документ файлом .docx и дай ссылку на скачивание». ChatGPT и Claude умеют создавать такие файлы. В Claude для этого должна быть включена функция создания файлов в настройках, в разделе возможностей. Если файл не создаётся, скопируйте текст в Word вручную – так тоже нормально.</p></div>
+        <div class="fact"><span class="fk">Google Документ</span><p>Удобно, если документ живёт на Google Диске и его правят несколько человек. Для этого к нейросети подключается Google Диск – как это сделать, разобрано в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/#dlya-vseh" target="_top">«Плагины»</a> модуля 2. Помощник создаст документ и перенесёт туда текст, а дальше вы работаете в привычных Google Документах.</p></div>
+      </div>
+      <div class="promptbox stepprompt"><p class="plabel">Запрос · текст в Google Документ</p><pre>Структура подходит. Напиши текст документа по ней. Потом создай на моём Google Диске документ «<span class="tok">[название]</span>» в папке «<span class="tok">[папка]</span>» и перенеси туда текст с заголовками разделов.
+Создай документ только после моего «да» и пришли ссылку. Другие файлы и папки не трогай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Проверка и точечные правки</h3>
+      <p>Проверяем по трём критериям из урока:</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Факты – из моих материалов</h3><p>Каждая цифра, дата, имя и пример взяты из того, что вы дали. Всё, что появилось «само», – под подозрением.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Мои формулировки и детали</h3><p>Вы узнаёте в тексте себя: ваши слова, ваши примеры, ваши подробности. Если текст стал гладким и общим, детали потерялись.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Пробелы отмечены вопросами</h3><p>Там, где фактов не хватало, стоит «ВОПРОС АВТОРУ», а не красивая догадка. Все такие пометки вы закрываете сами перед отправкой.</p></div></div>
+      </div>
+      <div class="promptbox stepprompt"><p class="plabel">Запрос · проверка по трём критериям</p><pre>Проверь документ по трём критериям. Ничего не исправляй, дай только список.
+1. Факты: выпиши всё, чего нет в моих материалах, – цифры, даты, имена, примеры, обещания, которые ты добавил(а) сам(а).
+2. Мои детали: где текст стал общим и потерял мои формулировки и подробности из материалов.
+3. Пробелы: где не хватает фактов, но нет пометки «ВОПРОС АВТОРУ».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p style="margin-top:22px">Правьте точечно. Если попросить «улучши текст», нейросеть перепишет всё, и проверять придётся заново. Называйте конкретное место и добавляйте «остальное не меняй».</p>
+      <div class="promptbox stepprompt"><p class="plabel">Запрос · точечная правка</p><pre>Исправь только <span class="tok">[раздел, абзац или фразу]</span>: <span class="tok">[что не так и как должно быть]</span>.
+Остальное не меняй: ни слова, ни порядок разделов. Покажи только исправленный фрагмент.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+  </div>
+
+  <div class="donebox" id="hranit"><div class="dc">
+    <p class="dl">Где хранить результат</p>
+    <div class="facts">
+      <div class="fact"><span class="fk">Папки</span><p>Одна папка на компьютере или Google Диске для рабочих документов и внутри неё папки по видам: «КП», «Встречи», «Письма», «Памятки». Так нужное находится за минуту, а не поиском по чатам.</p></div>
+      <div class="fact"><span class="fk">Имя файла</span><p>Дата, вид документа и для кого. Например: «2026-10-12 КП для студии йоги». Черновик и итоговую версию различайте пометкой в названии.</p></div>
+      <div class="fact"><span class="fk">Примеры</span><p>Документы, которые получились особенно хорошо, копируйте в отдельную папку «Примеры». Они понадобятся, когда будете собирать своего помощника (глава 3).</p></div>
+      <div class="fact"><span class="fk">Запросы</span><p>Запрос, который сработал, сохраните рядом – в заметку или в инструкцию будущего помощника. В следующий раз начнёте с него, а не с чистого листа.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="practice" id="vidy">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Глава 2</p>
+    <h2>Пять документов, которые нужны постоянно</h2>
+    <p class="pmeta">5 видов · 15 запросов</p>
+    <p class="pintro">Раскройте карточку нужного документа. В каждой: когда он нужен и что собрать заранее, пример структуры, готовые запросы и чек-лист перед отправкой. Структуры – примеры, а не стандарт: меняйте разделы под свою задачу.</p>
+  </div>
+</div>
+
+<section class="wrap group" style="padding-top:8px">
+  <p class="note" style="margin-top:34px">Замените то, что в <span style="color:var(--pink);font-weight:700">[квадратных скобках]</span>, на своё. Запросы внутри карточки идут по порядку: структура, текст, проверка. Писать долго – наговорите голосом.</p>
+  <div style="margin-top:26px">
+
+    <details class="task scn" id="kp">
+      <summary><span class="num">01</span><span class="tname">Коммерческое предложение<span class="tsub">задача клиента, решение, этапы, цена → КП, понятное с первого прочтения</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Когда нужно</span><p>После созвона или переписки клиент говорит: «Пришлите предложение». Хочется ответить быстро, но так, чтобы предложение было про его задачу, а не шаблоном для всех.</p></div>
+          <div class="fact"><span class="fk">Собрать заранее</span><p>Кто клиент и какая у него задача – лучше его же словами из переписки или созвона. Ваше решение: что именно вы сделаете. Этапы и что клиент получит на каждом. Сроки. Цена и что в неё входит. Условия: порядок оплаты, сколько правок, что не входит. Ваши настоящие кейсы и отзывы – только если они есть и их можно показывать.</p></div>
+        </div>
+        <p class="sh">Пример структуры</p>
+        <ol><li>Задача клиента – его словами, чтобы он узнал себя.</li><li>Что предлагаю – решение и результат, который клиент получит.</li><li>Этапы и сроки.</li><li>Что входит и что не входит.</li><li>Стоимость и порядок оплаты.</li><li>Почему я – опыт и кейсы, только реальные.</li><li>Следующий шаг – что сделать клиенту и до какого числа.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 1.1 · структура КП</p><pre>Мне нужно коммерческое предложение. Сначала только структура, текст пока не пиши.
+Клиент: <span class="tok">[кто он, чем занимается]</span>
+Его задача – как он сам её описал: <span class="tok">[слова клиента из переписки или созвона]</span>
+Моё решение: <span class="tok">[что я сделаю]</span>
+Этапы и сроки: <span class="tok">[этапы]</span>
+Стоимость и условия: <span class="tok">[цена, что входит, порядок оплаты, сколько правок]</span>
+Мой опыт и реальные кейсы: <span class="tok">[что есть; если нет – напишите «нет»]</span>
+Кто читает КП и принимает решение: <span class="tok">[роль]</span>. После прочтения он должен <span class="tok">[согласовать, назначить созвон, оплатить]</span>.
+
+Предложи структуру из 5–7 разделов: название и одна строка, что в нём будет. Если для раздела не хватает данных, отметь «ВОПРОС АВТОРУ». Жди моего «да».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 1.2 · текст КП</p><pre>Структура подходит. Напиши текст КП по ней.
+– Только факты из моих материалов: цифры, сроки, цены и кейсы не придумывай.
+– Если чего-то не хватает, оставь в тексте пометку «ВОПРОС АВТОРУ: что уточнить».
+– Задачу клиента опиши его словами.
+– Пиши просто, без канцелярита, так, чтобы КП читалось за 3–5 минут.
+– Этапы, сроки и цены оформи списком или таблицей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 1.3 · проверка глазами клиента</p><pre>Прочитай это КП глазами клиента: <span class="tok">[кто он, чего опасается, с чем сравнивает]</span>. Ответь честно:
+1. Понятно ли с первого экрана, что я предлагаю и какой результат он получит?
+2. Какие вопросы у него останутся после прочтения?
+3. Где текст звучит общими словами, а не про его задачу?
+4. Что может его остановить: цена, сроки, неясные условия?
+КП не переписывай. Дай список замечаний и к каждому укажи раздел.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="note"><b>Чего не делать.</b> Не просите «добавь кейсы и цифры для убедительности»: нейросеть охотно сочинит правдоподобные истории, проценты и отзывы. Если своих кейсов пока нет, честнее подробно описать, как вы будете работать и что клиент получит на каждом этапе.</p>
+        <p class="sh">Проверка перед отправкой</p>
+        <ul class="chk">
+          <li>Задача клиента описана его словами, он узнает себя.</li>
+          <li>Цена, сроки, что входит и что не входит совпадают с тем, о чём вы договорились.</li>
+          <li>Нет кейсов, цифр и отзывов, которых у вас на самом деле нет.</li>
+          <li>Все пометки «ВОПРОС АВТОРУ» закрыты или удалены.</li>
+          <li>В конце понятный следующий шаг.</li>
+          <li>Имя клиента и название компании написаны верно.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="task scn" id="itogi">
+      <summary><span class="num">02</span><span class="tname">Конспект встречи, созвона или вебинара<span class="tsub">расшифровка или заметки → решения, задачи с ответственными и сроками, открытые вопросы</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Когда нужно</span><p>После созвона с клиентом, планёрки, консультации или вебинара. Итоги нужно отправить участникам или сохранить себе, чтобы через неделю не вспоминать, кто что обещал.</p></div>
+          <div class="fact"><span class="fk">Собрать заранее</span><p>Расшифровку записи – или свои заметки, или наговорите всё голосом сразу после встречи, пока помните. Дату, список участников и их роли.</p></div>
+        </div>
+        <p class="rulebox"><b>Чем это отличается от соседних бонусов.</b> Как превратить запись в текст, разобрано в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/" target="_top">«Транскрибация»</a>. Учебный конспект, чтобы понять и запомнить лекцию или книгу, – в <a href="https://aiforlife.ru/ii-course/modul2/bonus-konspekt/" target="_top">«Конспекте из чего угодно»</a>. Здесь – рабочий формат «Итоги встречи»: кто что делает и к какому сроку.</p>
+        <p class="sh">Пример структуры «Итоги встречи»</p>
+        <ol><li>Шапка: тема, дата, участники.</li><li>Решения – что договорились, по одной строке.</li><li>Задачи – таблица «Что сделать – Кто – Срок».</li><li>Открытые вопросы – что обсуждали, но не решили, и кто выясняет.</li><li>Следующая встреча – когда и о чём.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 2.1 · итоги из расшифровки</p><pre>Ниже расшифровка <span class="tok">[созвона, встречи, консультации]</span> от <span class="tok">[дата]</span>. Участники: <span class="tok">[имена и роли]</span>.
+Собери документ «Итоги встречи» строго по расшифровке:
+1. Решения – что договорились, по одной строке.
+2. Задачи – таблица из трёх колонок: «Что сделать», «Кто», «Срок». Если ответственный или срок в разговоре не прозвучали, напиши «не назначен».
+3. Открытые вопросы – что обсуждали, но не решили.
+4. Следующая встреча – если о ней договорились.
+Не пересказывай весь разговор и не добавляй своих выводов. Если место в расшифровке неразборчиво или его можно понять двояко, отметь «ВОПРОС АВТОРУ».
+
+<span class="tok">[РАСШИФРОВКА ИЛИ МОИ ЗАМЕТКИ]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 2.2 · письмо участникам с итогами</p><pre>По этим итогам напиши короткое письмо участникам встречи. В начале одна фраза благодарности за встречу, дальше решения и задачи с ответственными и сроками, в конце дата следующей встречи.
+Тон: <span class="tok">[деловой и тёплый / нейтральный]</span>. Без длинных вступлений: письмо должно читаться за минуту.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 2.3 · итоги вебинара для себя</p><pre>Ниже расшифровка вебинара на тему <span class="tok">[тема]</span>. Мне нужен не пересказ, а итоги для работы. Я <span class="tok">[чем занимаюсь]</span>.
+1. 3–5 идей, которые я могу применить в своей работе.
+2. Конкретные действия на эту неделю, начиная с самого маленького.
+3. Что осталось непонятным и что стоит уточнить у спикера.
+Опирайся только на расшифровку. К каждой идее приведи короткую фразу из расшифровки, где она звучала.
+
+<span class="tok">[РАСШИФРОВКА]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="sh">Проверка перед отправкой</p>
+        <ul class="chk">
+          <li>У каждой задачи есть ответственный и срок – или честная пометка «не назначен».</li>
+          <li>Нет решений, которых на встрече не было: 2–3 главных сверьте с расшифровкой.</li>
+          <li>Имена, даты и суммы верны.</li>
+          <li>Открытые вопросы не потерялись.</li>
+          <li>Убрано то, что не предназначено для всех участников.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="task scn" id="issledovanie">
+      <summary><span class="num">03</span><span class="tname">Небольшое исследование<span class="tsub">вопрос → поиск с источниками и датами → таблица «утверждение – источник – дата» → вывод</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Когда нужно</span><p>Перед решением: выбрать сервис или подрядчика, понять, сколько стоит услуга на рынке, узнать, что изменилось в правилах, собрать примеры, как это делают другие.</p></div>
+          <div class="fact"><span class="fk">Собрать заранее</span><p>Вопрос одной фразой. Какое решение вы примете по итогам. Рамки: страна, период, бюджет. Что вы уже знаете и каким источникам доверяете.</p></div>
+        </div>
+        <p class="sh">Где искать</p>
+        <div class="facts">
+          <div class="fact"><span class="fk">Режим поиска</span><p>Для быстрого вопроса со ссылками. Нейросеть ищет в интернете и показывает источники. В ChatGPT поиск есть и на бесплатном тарифе, в других нейросетях ищите кнопку или режим поиска в строке ввода.</p></div>
+          <div class="fact"><span class="fk">Глубокое исследование</span><p>Когда нужен отчёт по многим источникам. Есть в ChatGPT и Gemini, обычно называется Deep research. Нейросеть сначала показывает план поиска, его можно поправить, потом несколько минут работает и выдаёт отчёт со ссылками. Сколько таких исследований доступно, зависит от тарифа и меняется – проверьте в своём аккаунте.</p></div>
+          <div class="fact"><span class="fk">Свои источники</span><p>Если у вас уже есть надёжные документы – договор, отчёт, официальная страница, – приложите их и попросите опираться только на них.</p></div>
+        </div>
+        <p class="sh">Пример структуры</p>
+        <ol><li>Вопрос и зачем он нужен.</li><li>Короткий ответ – 3–5 предложений.</li><li>Таблица «Утверждение – Источник – Дата».</li><li>Где источники расходятся.</li><li>Чего узнать не удалось.</li><li>Вывод для моего решения.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 3.1 · сформулировать вопрос</p><pre>Я хочу разобраться: <span class="tok">[вопрос]</span>. Мне это нужно, чтобы <span class="tok">[какое решение приму]</span>.
+Прежде чем искать, помоги сформулировать вопрос исследования. Задай мне по одному до трёх уточняющих вопросов: про страну, период, бюджет, что я уже знаю. Потом предложи 3–5 подвопросов, на которые нужно найти ответ.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 3.2 · исследование с источниками</p><pre>Найди в интернете ответ на вопрос: <span class="tok">[вопрос исследования]</span>. Рамки: <span class="tok">[страна, период, другие ограничения]</span>.
+– Опирайся на источники, которые ты действительно открыл. Для каждого дай ссылку и дату публикации или обновления.
+– Предпочитай официальные сайты, документы и справки сервисов. Форумы и блоги отмечай как мнение.
+– Сведения старше <span class="tok">[например, года]</span> отмечай как возможно устаревшие.
+– Если по пункту не нашёл подтверждения, так и напиши, не заполняй догадкой.
+Оформи: короткий ответ в 3–5 предложениях, затем таблица «Утверждение – Источник (ссылка) – Дата», затем где источники расходятся и чего узнать не удалось.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 3.3 · проверить по красным флагам</p><pre>Проверь таблицу выше по красным флагам: точные цифры, цитаты и авторство, обобщения («все», «всегда», «исследования доказали»), свежие новости и законы.
+Для каждого такого утверждения ещё раз открой источник и ответь: подтверждается дословно, частично или не подтверждается. Неподтверждённое отметь и предложи, как сформулировать осторожнее.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="note"><b>Ссылка ещё не доказательство.</b> Нейросеть может дать настоящую ссылку, на странице которой написано другое, или ссылку на несуществующую страницу. Четыре красных флага и как ловить галлюцинации – в <a href="https://aiforlife.ru/ii-course/modul2/urok4/" target="_top">уроке 4 модуля 2</a>.</p>
+        <p class="sh">Проверка перед решением</p>
+        <ul class="chk">
+          <li>Каждую ключевую цифру и вывод вы открыли по ссылке сами.</li>
+          <li>Страницы существуют, и на них написано именно это.</li>
+          <li>Даты достаточно свежие для вашей темы.</li>
+          <li>Законы, цены и тарифы – только с официальных сайтов.</li>
+          <li>В выводе нет того, чего нет в таблице.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="task scn" id="pismo">
+      <summary><span class="num">04</span><span class="tname">Письмо<span class="tsub">клиенту, партнёру, отказ, напоминание об оплате, сложное письмо – вашим тоном</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Когда нужно</span><p>Каждый день: ответить клиенту, договориться с партнёром, отказать, напомнить об оплате. И особенно – когда письмо трудное и его хочется откладывать.</p></div>
+          <div class="fact"><span class="fk">Собрать заранее</span><p>Кому пишете и какие у вас отношения. Что должно произойти после письма. Факты: даты, суммы, договорённости. Предыдущую переписку, если она есть.</p></div>
+          <div class="fact"><span class="fk">Тон</span><p>Если вы собрали навык «Мой голос» в <a href="https://aiforlife.ru/ii-course/modul2/urok2/" target="_top">уроке 2 модуля 2</a>, вызовите его через @ в начале запроса – письмо будет звучать как вы, а не как шаблон.</p></div>
+        </div>
+        <p class="sh">Пример структуры</p>
+        <ol><li>Тема письма – о чём и что нужно.</li><li>Зачем пишу – в первой фразе.</li><li>Факты и контекст – коротко.</li><li>Одна главная просьба или предложение.</li><li>Срок или следующий шаг.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 4.1 · любое письмо</p><pre>Напиши письмо.
+Кому: <span class="tok">[кто, какие у нас отношения]</span>
+Повод: <span class="tok">[что случилось]</span>
+Факты: <span class="tok">[даты, суммы, договорённости – только то, что есть]</span>
+Чего хочу добиться: <span class="tok">[что адресат должен сделать после письма]</span>
+Тон: <span class="tok">[тёплый, деловой, твёрдый, но вежливый]</span>
+Длина: до <span class="tok">[число]</span> предложений, главное – в первых двух фразах. Предложи два варианта темы письма.
+Если для письма не хватает фактов, не придумывай, а отметь «ВОПРОС АВТОРУ».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 4.2 · вежливый отказ</p><pre>Мне нужно отказать <span class="tok">[кому]</span> в <span class="tok">[чём]</span>. Причина: <span class="tok">[настоящая причина, можно коротко]</span>. Хочу <span class="tok">[сохранить отношения / предложить альтернативу / просто вежливо отказать]</span>.
+Напиши письмо: отказ ясно и в начале, без долгих извинений и оправданий, одна фраза благодарности. Если есть альтернатива – предложи её.
+Дай два варианта: помягче и потвёрже.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 4.3 · напоминание об оплате</p><pre>Напиши напоминание об оплате.
+Клиент: <span class="tok">[кто]</span>. Услуга: <span class="tok">[что сделано]</span>. Сумма: <span class="tok">[сумма]</span>. Срок оплаты был: <span class="tok">[дата]</span>. Реквизиты: <span class="tok">[где они – в счёте, в договоре; сами реквизиты я впишу]</span>.
+Тон спокойный и вежливый, без упрёков, но с ясным новым сроком.
+Сделай три версии: первое напоминание; второе через неделю; третье – с тем, что будет дальше по нашему договору: <span class="tok">[что предусмотрено договором; если ничего – напишите «ничего»]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 4.4 · сложное письмо</p><pre>Мне нужно написать сложное письмо: <span class="tok">[ситуация – конфликт, ошибка с моей стороны, плохие новости]</span>.
+Сначала не пиши письмо. Задай мне по одному три вопроса: что я хочу сохранить, что я признаю, чего жду от адресата.
+Потом предложи план письма из 3–4 пунктов. После моего «да» напиши текст: спокойно, без оправданий и обвинений, с конкретным следующим шагом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="note"><b>Следите за обещаниями.</b> Стараясь быть вежливой, нейросеть может пообещать от вашего имени лишнее: скидку, бесплатную доработку, срок, который вы не называли. Такие фразы убирайте до отправки.</p>
+        <p class="sh">Проверка перед отправкой</p>
+        <ul class="chk">
+          <li>Прочитайте вслух: звучит ли это как вы.</li>
+          <li>Главное – в первых двух фразах.</li>
+          <li>Суммы, даты и имена совпадают с договором и перепиской.</li>
+          <li>Одна понятная просьба или следующий шаг.</li>
+          <li>Нет обещаний, которых вы не давали.</li>
+          <li>Отправляете вы сами, после проверки.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="task scn" id="pamyatka">
+      <summary><span class="num">05</span><span class="tname">Памятка или инструкция для клиента<span class="tsub">как вы объясняете вживую → шаги одним действием, «Должно получиться», чек-лист</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <div class="facts">
+          <div class="fact"><span class="fk">Когда нужно</span><p>Клиенты задают одни и те же вопросы: как подготовиться к консультации, как пользоваться материалами, как выполнять упражнение, куда нажать, чтобы войти. Памятка отвечает на них один раз и навсегда.</p></div>
+          <div class="fact"><span class="fk">Собрать заранее</span><p>Как вы объясняете это вживую – проще всего наговорить голосом. Частые вопросы и ошибки клиентов. Точные названия кнопок, разделов и ссылки, которые клиент увидит у себя.</p></div>
+        </div>
+        <p class="sh">Пример структуры</p>
+        <ol><li>Название – что получится в итоге.</li><li>Что понадобится.</li><li>Шаги: один шаг – одно действие, после важных – «Должно получиться».</li><li>Если что-то пошло не так – частые ошибки и что делать.</li><li>Чек-лист «Всё готово».</li><li>Куда писать, если остались вопросы.</li></ol>
+        <p class="sh">Готовые запросы</p>
+        <div class="promptbox"><p class="plabel">Запрос 5.1 · памятка из наговора</p><pre>Сделай памятку для моих клиентов: <span class="tok">[тема, например «как подготовиться к первой консультации»]</span>.
+Читатель: <span class="tok">[кто клиент и насколько он разбирается в теме]</span>.
+Ниже – как я объясняю это вживую.
+
+Сначала предложи план шагов и жди моего «да». Потом напиши памятку:
+– один шаг – одно действие, шаг начинается с глагола;
+– после важных шагов – строка «Должно получиться: …»;
+– в конце – раздел «Если не получилось» с частыми ошибками и чек-лист «Всё готово» на 5–7 пунктов;
+– простые слова; если без термина не обойтись, объясни его в скобках.
+Бери только то, что есть в моём тексте. Если шаг пропущен или непонятен, отметь «ВОПРОС АВТОРУ».
+
+<span class="tok">[НАГОВОР ИЛИ ЗАМЕТКИ]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Запрос 5.2 · проверить на «новичке»</p><pre>Сыграй моего клиента, который <span class="tok">[например: делает это впервые, торопится, плохо разбирается в технике]</span>. Пройди памятку по шагам и на каждом шаге скажи: понятно ли, что делать; где ты бы застрял(а); какой вопрос ты бы мне задал(а).
+Памятку не переписывай, только отметь проблемные места.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="sh">Проверка перед отправкой</p>
+        <ul class="chk">
+          <li>Каждый шаг – одно действие.</li>
+          <li>Названия кнопок и разделов такие, как клиент видит у себя на экране, – сверьте сами.</li>
+          <li>«Должно получиться» стоит там, где легко ошибиться.</li>
+          <li>Памятку прошёл хотя бы один живой человек, а не только нейросеть.</li>
+          <li>Есть контакт, куда писать с вопросами.</li>
+        </ul>
+        <p class="snote">Хочется, чтобы памятка открывалась красивой страницей по ссылке? Как превратить документ в веб-страницу, покажем в уроке 4 этого модуля.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="pomoshnik" style="padding-top:70px">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Глава 3</p>
+    <h2>Когда пора собрать помощника</h2>
+    <p>Если вы делаете один и тот же вид документа чаще 2–3 раз в месяц, каждый раз заново объяснять нейросети, кто ваши клиенты, какие у вас цены и как вы пишете, – лишняя работа. Соберите помощника под этот документ: инструкция, шаблон и примеры удачных документов лежат у него постоянно, а вы приносите только новое сырьё.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Проект</h3><p>Когда документ всегда делается с одними и теми же материалами: прайс, условия, примеры КП. Всё лежит в проекте, вы открываете чат внутри него. Как собирать проекты – <a href="https://aiforlife.ru/ii-course/modul2/urok1/" target="_top">урок 1 модуля 2</a> и Конструктор помощников из <a href="https://aiforlife.ru/ii-course/modul2/urok1/praktika/" target="_top">практики к нему</a>.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Навык</h3><p>Когда правило нужно в любом чате, например «как я пишу письма клиентам» или «как я оформляю итоги встреч». Навык подключается через @ где угодно. Как собрать навык – <a href="https://aiforlife.ru/ii-course/modul2/urok2/" target="_top">урок 2 модуля 2</a>.</p></div></div>
+    </div>
+    <p style="margin-top:22px"><b>Что приготовить:</b> 2–3 документа этого вида, которые у вас получились хорошо (из папки «Примеры»), шаблон или структуру, если она уже есть, и постоянные материалы – прайс, условия, описание услуг.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Запрос · собери мне помощника</p><pre>Собери мне помощника для <span class="tok">[вид документа: КП, итоги встреч, письма клиентам, памятки]</span>. Я делаю такие документы примерно <span class="tok">[сколько раз в месяц]</span>.
+Прикладываю: <span class="tok">[2–3 удачных примера]</span>, <span class="tok">[шаблон или структуру, если есть]</span>, <span class="tok">[прайс, условия, другие постоянные материалы]</span>.
+
+Сначала задай мне по одному до пяти вопросов: кто читает эти документы, что в них должно быть всегда, чего быть не должно, какой тон, как я проверяю результат.
+Потом подготовь:
+1. Инструкцию для проекта: роль помощника и порядок работы – сначала структура на моё «да», потом текст, в конце самопроверка. Правило: ничего не придумывать, пробелы отмечать «ВОПРОС АВТОРУ».
+2. Шаблон документа с разделами.
+3. Чек-лист проверки на 5–7 пунктов.
+4. Список файлов, которые стоит загрузить в проект.
+Если мне больше подойдёт навык, а не проект, скажи почему и оформи инструкцию как навык.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="rulebox"><b>Помощник растёт вместе с вами.</b> Каждый новый удачный документ добавляйте в его примеры, а повторяющиеся правки – в инструкцию. Через месяц-другой первый вариант будет требовать всё меньше правок.</p>
+  </div></div>
+</section>
+
+<div class="dark" id="segodnya" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Попробуйте сегодня</h2>
+    <div class="dcol">
+      <ul style="margin-top:0">
+        <li><b>Выберите один документ,</b> который вам нужен на этой неделе: КП, итоги созвона, письмо, которое вы откладываете.</li>
+        <li><b>Соберите сырьё</b> – заметки, переписку или наговор на пять минут.</li>
+        <li><b>Пройдите маршрут:</b> структура на «да», текст, проверка по трём критериям, точечные правки.</li>
+        <li><b>Сохраните результат</b> в папку по видам документов, а удачный запрос – рядом.</li>
+      </ul>
+      <p style="margin-top:22px"><b>Эту страницу добавьте в закладки: запросы пригодятся каждый раз, когда понадобится новый документ.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 3
+    <p style="margin-top:8px">Возможности нейросетей сверены на 4 октября 2026 по справке сервисов: <a href="https://help.openai.com/en/articles/20001246-working-with-writing-blocks-and-code-blocks-in-chatgpt" target="_blank" rel="noopener">редактируемые блоки в ChatGPT</a>, <a href="https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt" target="_blank" rel="noopener">глубокое исследование в ChatGPT</a>, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">создание файлов в Claude</a>, <a href="https://support.google.com/gemini/answer/16047321" target="_blank" rel="noopener">Canvas в Gemini</a>, <a href="https://support.google.com/gemini/answer/15719111" target="_blank" rel="noopener">Deep Research в Gemini</a>. Интерфейсы и тарифы меняются: если что-то выглядит иначе, уточните в справке своей нейросети.</p>
+  </div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  function openFromHash(){
+    var id=location.hash.slice(1);if(!id)return;
+    var el=document.getElementById(id);
+    if(el&&el.tagName==='DETAILS'){el.open=true;setTimeout(function(){el.scrollIntoView({block:'start'});},30);}
+  }
+  window.addEventListener('hashchange',openFromHash);
+  openFromHash();
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</body>
+</html>

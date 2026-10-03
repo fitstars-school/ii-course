@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Топ-20: ИИ для семейной и личной жизни · Бонус модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Двадцать готовых запросов для дома и семьи: викторины и квесты для детей, праздники, подарки и поездки, бюджет, переезд, бумажные дела, домашние обязанности, правила экранов и сложные разговоры.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}.promptbox .linkbtn{color:#F3EDF5;border-bottom-color:rgba(255,255,255,.35)}.promptbox .linkbtn:hover{color:var(--pink-soft);border-bottom-color:var(--pink-soft)}
+
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.twhen{display:block;margin-top:5px;font-size:15px;line-height:1.45;font-weight:500;color:var(--muted)}
+.body .note.warn{margin:0 0 20px}
+.tip{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin-top:20px;font-size:16px;color:var(--muted)}
+.tip b{color:var(--ink)}
+.backlink{display:inline-block;margin-top:30px;font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:2px}
+.backlink:hover{color:var(--pink)}
+footer a{color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25)}
+footer a:hover{color:var(--pink-soft)}
+@media (max-width:760px){
+  .twhen{font-size:14.5px}
+  section.wrap.lede{padding-top:34px}
+  .tip{padding-left:16px}
+  .kmark{padding:8px 14px}
+  .kmark .kt{letter-spacing:.14em}
+}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* модуль 3: без курсива, пример результата плашкой, красные линии */
+.it{font-style:normal}
+.twhen b{color:var(--ink);font-weight:700}
+.ex{background:#F6F1F8;padding:16px 20px;margin-top:18px}
+.ex .exl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ex p:not(.exl){font-size:15.5px;line-height:1.6;color:#3B3143}
+.ex p+p{margin-top:8px}
+.tip a,.note a{border-bottom:1px solid rgba(230,25,140,.35)}
+.lines{margin-top:64px;padding-top:6px}
+.lines h2{margin:14px 0 18px}
+.lines ul{margin-top:18px}
+.lines li{margin-bottom:12px}
+.lines .rulebox{margin-top:22px;font-size:16px}
+@media (max-width:760px){.ex{padding:14px 16px}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · бонус</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Бонусный набор · ИИ для жизни и семьи</span></div>
+  <div class="hero">
+    <div class="hgrid">
+      <h1>Топ-20: ИИ для <span class="it">семейной и личной</span> жизни</h1>
+      <p class="hlead">Выберите то, что нужно вашей семье сейчас, скопируйте запрос и подставьте своё в квадратные скобки.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap lede">
+  <div class="col">
+    <p>В уроках модуля 3 мы собираем рабочие кейсы. А в жизни нейросеть часто полезнее всего дома: там много мелочей, которые приходится держать в голове, и мало времени, чтобы всё продумать спокойно.</p>
+    <p>Здесь двадцать готовых запросов в четырёх группах: дети, праздники и поездки, дом и бумажные дела, договорённости в семье. У каждого – что вы получите, сам запрос и короткий пример результата для ориентира. Пробовать всё не нужно: возьмите то, что снимает вашу задачу на этой неделе.</p>
+  </div>
+</section>
+
+<div class="dark">
+  <div class="wrap dgrid">
+    <h2>Три правила для домашних запросов</h2>
+    <div class="dcol">
+      <ul>
+        <li><b>Роли и возраст вместо имён.</b> «Старший, 11 лет», «бабушка», «партнёр» – этого хватает для любого запроса здесь. Фамилии, адреса, школы и фото не нужны.</li>
+        <li><b>Цифры и правила проверяйте у источника.</b> Часы работы, цены, списки документов, правила перевозчиков – на официальном сайте. Нейросеть может знать старую версию или додумать.</li>
+        <li><b>Решаете вы.</b> Нейросеть предлагает варианты и черновики. Что подходит вашей семье, видно только вам: смело просите переделать.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="lede" style="padding-top:52px">
+    <div class="col">
+      <p class="label">Как пользоваться списком</p>
+      <h2 style="margin:16px 0 20px">Выберите то, что нужно сейчас</h2>
+      <p>Откройте нужный пункт, скопируйте запрос и замените всё, что в квадратных скобках, на своё. Писать долго – включите голосовой ввод и расскажите своими словами. Пример под запросом показывает, какого рода ответ ждать, – ваш будет про вашу семью.</p>
+      <p style="margin-top:22px">Если ответы получаются слишком общими, добавьте в начало любого запроса:</p>
+      <div class="promptbox" style="margin-top:16px"><p class="plabel">Добавка к любому запросу</p><pre>Прежде чем отвечать, задай мне по одному три вопроса, которые помогут сделать ответ точнее для нашей семьи. Предлагай простые и выполнимые варианты, без идеальной картинки. Если чего-то не знаешь – цен, адресов, правил – так и скажи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+  </div>
+
+  <nav class="nav" aria-label="Разделы" style="margin-top:52px">
+    <a class="navlink" href="#deti">Дети: игры, квесты, сказки</a>
+    <a class="navlink" href="#prazdniki">Праздники, подарки, поездки</a>
+    <a class="navlink" href="#dom">Дом, деньги, бумажные дела</a>
+    <a class="navlink" href="#dogovoritsya">Договориться в семье</a>
+    <a class="navlink" href="#krasnye">Красные линии</a>
+  </nav>
+
+    <section class="group reveal" id="deti">
+      <div class="ghead"><p class="glabel">Дети: игры, квесты, сказки</p><span class="grange">01 – 04</span></div>
+      <details class="task">
+        <summary><span class="num">01</span><span class="tname">Викторина для детей под возраст<span class="twhen"><b>Что получите:</b> весёлую викторину на 15–20 минут для дороги, праздника или семейного вечера – под возраст и интересы ребёнка.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Придумай весёлую викторину для детей. Возраст: <span class="tok">[ВОЗРАСТ]</span>, участников: <span class="tok">[СКОЛЬКО]</span>, где играем: <span class="tok">[В ДОРОГЕ / ДОМА / НА ПРАЗДНИКЕ]</span>. Дети увлекаются: <span class="tok">[ИНТЕРЕСЫ – ДИНОЗАВРЫ, КОСМОС, ЖИВОТНЫЕ, ЛЮБИМЫЙ МУЛЬТФИЛЬМ]</span>.
+
+Нужно 15 вопросов в трёх раундах: «Угадай», «Правда или выдумка», «Покажи без слов». Вопросы короткие и понятные на слух, без школьной программы. Для младших – с вариантами ответа. Ответы дай отдельным списком в конце, чтобы я читал(а) вопросы вслух, не подглядывая. Используй только факты, в которых уверен.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Раунд «Правда или выдумка».</b> У осьминога три сердца. (Ответ в конце: правда.)</p><p><b>Раунд «Покажи без слов».</b> Покажи, как пингвин идёт за рыбой – остальные угадывают животное.</p></div>
+          <p class="tip"><b>Подсказка.</b> Нужна викторина для учёбы, по школьной теме, – она есть в наборе модуля 2: <a href="https://aiforlife.ru/ii-course/modul2/bonus-sposoby-detyam/">«10 способов учиться с ИИ для ребёнка»</a>.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">02</span><span class="tname">Квест по квартире на день рождения<span class="twhen"><b>Что получите:</b> сценарий квеста: маршрут по комнатам, 6–8 записок-подсказок, задание на каждой точке и сюрприз в конце.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги придумать квест по квартире на день рождения. Возраст именинника: <span class="tok">[ВОЗРАСТ]</span>, детей будет: <span class="tok">[СКОЛЬКО]</span>, на квест есть: <span class="tok">[СКОЛЬКО МИНУТ]</span>. Тема: <span class="tok">[ПИРАТЫ, ДЕТЕКТИВЫ, КОСМОС ИЛИ ЛЮБИМЫЙ МУЛЬТФИЛЬМ]</span>. Где можно прятать подсказки: <span class="tok">[КУХНЯ, ВАННАЯ, ДИВАН, ШКАФ В ПРИХОЖЕЙ И ТАК ДАЛЕЕ]</span>. В конце дети находят: <span class="tok">[СЮРПРИЗ]</span>.
+
+Сделай:
+1) маршрут из 6–8 точек;
+2) текст каждой записки – загадкой или в стихах, под возраст;
+3) маленькое задание на каждой точке, чтобы участвовали все дети, а не только самый быстрый;
+4) список, что подготовить заранее и куда что спрятать.
+Не используй опасные места: плиту, окна, балкон, бытовую химию.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Точка 3, ванная.</b> Записка: «Там, где пена и вода, след ведёт тебя туда. Загляни за шторку смело – там тебя ждёт новое дело». Задание: пока ищете следующую записку, все говорят только шёпотом.</p></div>
+          <p class="tip"><b>Подсказка.</b> Попросите «версию для печати»: каждую записку на отдельной странице крупным шрифтом. Как собрать из текста аккуратный документ, разбираем в уроке 1 модуля 3.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">03</span><span class="tname">Сказка с нужным смыслом<span class="twhen"><b>Что получите:</b> короткую сказку на ночь про то, что сейчас важно ребёнку, и 2–3 вопроса, чтобы мягко поговорить после.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Напиши сказку на ночь для ребёнка <span class="tok">[ВОЗРАСТ]</span> лет. Главный герой – <span class="tok">[ЛЮБИМОЕ ЖИВОТНОЕ ИЛИ ИГРУШКА]</span>, а не сам ребёнок. Ситуация, о которой хочется поговорить: <span class="tok">[ЧТО СЕЙЧАС ПРОИСХОДИТ – НОВЫЙ САД, ССОРА С ДРУГОМ, СТРАХ ТЕМНОТЫ, ПОЯВИЛСЯ МЛАДШИЙ]</span>. Мысль, которую хочу донести: <span class="tok">[КАКАЯ]</span>.
+
+Без морали в лоб в конце: пусть герой сам найдёт выход. Длина – на 5–7 минут чтения вслух, простые слова, тёплый финал. После сказки дай 2–3 вопроса, которые можно мягко задать ребёнку.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Начало.</b> Ёжик Тимоша переехал в новый лес и всё утро просидел под корнем: вдруг там никто не захочет с ним играть…</p><p><b>Вопрос после сказки.</b> Как думаешь, почему Тимоша сначала спрятался? А что помогло ему выйти?</p></div>
+          <p class="tip"><b>Подсказка.</b> Имя ребёнка в запросе не нужно. Если хочется, чтобы сказка звучала «про своих», впишите имя героя сами, когда будете читать.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">04</span><span class="tname">Чем занять ребёнка, когда некогда<span class="twhen"><b>Что получите:</b> 10 занятий на 20–40 минут из того, что есть дома, – без экрана и без вашего участия каждые пять минут.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне нужно <span class="tok">[СКОЛЬКО МИНУТ]</span> спокойно поработать или сделать дела. Ребёнку <span class="tok">[ВОЗРАСТ]</span>, он любит <span class="tok">[ИНТЕРЕСЫ]</span>. Дома есть: <span class="tok">[БУМАГА, КАРАНДАШИ, КОНСТРУКТОР, КОРОБКИ, СКОТЧ, КРУПЫ – ЧТО ЕСТЬ]</span>.
+
+Предложи 10 занятий без экрана, которые ребёнок может делать сам или почти сам. Для каждого: что нужно, как объяснить ребёнку за одну минуту, сколько примерно займёт. Отметь, какие занятия тихие, а какие шумные, и после каких нужна уборка. Для детей младше трёх лет – без мелких деталей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Тихое, 20–30 минут: «Город из коробок».</b> Нужно: 3–4 коробки, фломастеры, скотч. Как объяснить: «Построй улицу, где живут твои игрушки. Где у них магазин, а где остановка?»</p></div>
+          <p class="tip"><b>Подсказка.</b> Сохраните удачный список в заметки телефона: в следующий раз не придётся придумывать на ходу.</p>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="prazdniki">
+      <div class="ghead"><p class="glabel">Праздники, подарки, поездки</p><span class="grange">05 – 09</span></div>
+      <details class="task">
+        <summary><span class="num">05</span><span class="tname">Праздник дома без нервов<span class="twhen"><b>Что получите:</b> план подготовки по дням, простое меню на гостей, список покупок и роли: кто что делает.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги спокойно подготовить праздник дома. Повод: <span class="tok">[ПОВОД]</span>, дата: <span class="tok">[ДАТА]</span>, гостей: <span class="tok">[СКОЛЬКО ВЗРОСЛЫХ И ДЕТЕЙ]</span>. Бюджет: <span class="tok">[СУММА ИЛИ «СКРОМНО»]</span>. Готовить хочу: <span class="tok">[МНОГО / МИНИМУМ, ЧАСТЬ КУПИТЬ ГОТОВЫМ]</span>. Кто может помочь: <span class="tok">[КТО ИЗ ДОМАШНИХ И ГОСТЕЙ]</span>.
+
+Составь:
+1) план по дням: что сделать за неделю, за три дня, накануне и в день праздника;
+2) простое меню, где большая часть готовится заранее;
+3) список покупок по отделам;
+4) кто что делает, чтобы всё не легло на одного человека;
+5) что можно не делать без ущерба для праздника.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Накануне.</b> Собрать стол и стулья – партнёр. Нарезать овощи и убрать в контейнеры – вы. Надуть шары и разложить салфетки – дети, 9 и 12 лет.</p><p><b>В день праздника.</b> За два часа до гостей – только разогреть, нарезать хлеб и накрыть.</p></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">06</span><span class="tname">Подарки, которые попадают<span class="twhen"><b>Что получите:</b> 10 идей подарка под конкретного человека и бюджет – вещи, впечатления и то, что можно сделать вместе.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги выбрать подарок. Для кого: <span class="tok">[КЕМ ПРИХОДИТСЯ, ВОЗРАСТ]</span>. Повод: <span class="tok">[ПОВОД]</span>. Бюджет: <span class="tok">[СУММА]</span>. Что я знаю о человеке: <span class="tok">[ЧЕМ УВЛЕКАЕТСЯ, КАК ПРОВОДИТ ВЫХОДНЫЕ, ЧЕГО У НЕГО ТОЧНО МНОГО, ЧТО РАДОВАЛО РАНЬШЕ]</span>.
+
+Сначала задай мне 3 вопроса по одному, чтобы лучше понять человека. Потом предложи 10 идей в трёх группах: вещь, впечатление, сделать своими руками или вместе. Для каждой – почему она может попасть именно в этого человека. Магазины и цены не называй, только идеи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Впечатление.</b> Мастер-класс по керамике на двоих: вы говорили, что сестра давно хотела попробовать что-то руками и любит проводить выходные вместе.</p><p><b>Вместе.</b> Альбом «Наш год» из ваших общих фото с подписями – вечер работы, и такой подарок не повторится.</p></div>
+          <p class="tip"><b>Подсказка.</b> Ищете, где купить, – попросите нейросеть с поиском подобрать варианты, но цену и наличие проверяйте на сайте магазина.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">07</span><span class="tname">Семейный выходной: куда выбраться на день<span class="twhen"><b>Что получите:</b> три варианта выходного по городу или за город – с планом по часам, едой и запасным вариантом на плохую погоду.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Хотим провести выходной всей семьёй. Нас: <span class="tok">[КТО – ВЗРОСЛЫЕ, ДЕТИ И ИХ ВОЗРАСТ]</span>. Живём: <span class="tok">[ГОРОД ИЛИ РАЙОН]</span>, добираемся: <span class="tok">[НА МАШИНЕ / НА ТРАНСПОРТЕ]</span>. Бюджет: <span class="tok">[СУММА]</span>. Любим: <span class="tok">[ПРИРОДА, МУЗЕИ, АКТИВНОЕ, СПОКОЙНОЕ]</span>. Не любим: <span class="tok">[ЧТО]</span>.
+
+Предложи 3 варианта на один день. Для каждого: план по часам с учётом дороги и отдыха, где поесть или что взять с собой, что взять для детей, запасной план на плохую погоду. Часы работы, цены и адреса не придумывай – отметь, что нужно проверить на официальном сайте места.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Вариант 2, спокойный.</b> 10:00 выезд. 11:00 прогулка по парку у воды. 13:00 пикник из дома. 14:30 детская площадка, взрослые – кофе. 16:00 домой. Если дождь: краеведческий музей рядом с парком. Проверить: часы работы музея и цену билетов.</p></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">08</span><span class="tname">Выходные без хвостов: дела и отдых<span class="twhen"><b>Что получите:</b> все дела на выходные, разложенные на «сделать», «перенести», «поручить» и «отпустить», и свободное время, которое никто не съест.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Вот всё, что крутится у меня в голове на эти выходные: <span class="tok">[СПИСОК ДЕЛ – МОЖНО НАГОВОРИТЬ ГОЛОСОМ, КАК ЕСТЬ]</span>. Кто ещё дома и может помочь: <span class="tok">[КТО]</span>.
+
+Помоги разобрать: что правда нужно сделать в эти выходные, что можно перенести на будни, что поручить другим, а что отпустить. Составь план на субботу и воскресенье так, чтобы дела заняли не больше <span class="tok">[СКОЛЬКО ЧАСОВ]</span>, а остальное время осталось свободным. Похожие дела собери вместе: например, все поездки по городу – в один маршрут.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Суббота, 10:00–12:30.</b> Химчистка, пункт выдачи и хозяйственный – одним маршрутом.</p><p><b>Отпустить.</b> Генеральная уборка балкона подождёт до тёплых выходных.</p></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">09</span><span class="tname">Отпуск: план и чек-лист сборов<span class="twhen"><b>Что получите:</b> план подготовки к поездке по неделям, чек-лист вещей на каждого и список дел дома перед отъездом.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мы едем в отпуск: <span class="tok">[КУДА, НА СКОЛЬКО ДНЕЙ, КОГДА]</span>. Нас: <span class="tok">[КТО И ВОЗРАСТ ДЕТЕЙ]</span>. Едем: <span class="tok">[НА ПОЕЗДЕ / САМОЛЁТЕ / МАШИНЕ]</span>. Отдых будет: <span class="tok">[МОРЕ, ГОРОД, ДАЧА, ПОХОДЫ]</span>.
+
+Составь:
+1) план подготовки: что сделать за месяц, за две недели, за неделю и накануне;
+2) чек-лист сборов на каждого и общий – отдельными списками, чтобы можно было распечатать;
+3) что сделать дома перед отъездом: цветы, холодильник, техника, ключи;
+4) чем занять детей в дороге.
+Про документы, визы и правила перевозчика ничего не утверждай: составь список того, что нужно проверить на официальных сайтах.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Чек-лист «Старший, 10 лет».</b> Плавки и полотенце, кепка, две футболки на смену, книга в дорогу, зарядка для часов.</p><p><b>Дома перед отъездом.</b> Оставить ключи соседке для цветов, вынести мусор, выключить из розеток технику.</p></div>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="dom">
+      <div class="ghead"><p class="glabel">Дом, деньги, бумажные дела</p><span class="grange">10 – 15</span></div>
+      <p class="note"><b>Про деньги и документы.</b> Суммы пишите округлённо, без номеров карт, счетов и выписок. Свои документы, сканы и номера в чат не отправляйте: для плана хватит описания своими словами.</p>
+      <details class="task">
+        <summary><span class="num">10</span><span class="tname">Семейный бюджет на месяц<span class="twhen"><b>Что получите:</b> простую таблицу «доходы – обязательные траты – остальное» и 3–5 мест, где можно поправить без ощущения, что во всём себе отказываете.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги разложить семейный бюджет на <span class="tok">[МЕСЯЦ]</span>. Доход за месяц: <span class="tok">[СУММА, МОЖНО ОКРУГЛЁННО]</span>. Обязательные траты: <span class="tok">[ЖИЛЬЁ, КОММУНАЛЬНЫЕ, КРЕДИТЫ, САД ИЛИ КРУЖКИ, ТРАНСПОРТ – С СУММАМИ]</span>. На что обычно уходит остальное: <span class="tok">[ПРОДУКТЫ, ДОСТАВКА, ПОДПИСКИ, ОДЕЖДА – ПРИМЕРНО]</span>. В этом месяце ещё: <span class="tok">[ПРАЗДНИКИ, ПОЕЗДКИ, КРУПНЫЕ ПОКУПКИ]</span>. Цель: <span class="tok">[ОТЛОЖИТЬ / ДОТЯНУТЬ ДО ЗАРПЛАТЫ СПОКОЙНО / ПОНЯТЬ, КУДА УХОДЯТ ДЕНЬГИ]</span>.
+
+Собери таблицу: статья, план на месяц, потрачено (пустая колонка), комментарий. Посчитай, сколько остаётся после обязательных трат, и покажи расчёт. Предложи 3–5 мест, где можно поправить без жёсткой экономии. Про вклады, кредиты и инвестиции не советуй – только как распределить то, что есть.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Строка таблицы.</b> Продукты – план 30 000 – потрачено: … – комментарий: из них доставка не больше 5 000.</p><p><b>Где поправить.</b> Две подписки дублируют друг друга: оставить одну.</p></div>
+          <p class="tip"><b>Подсказка.</b> Попросите нейросеть пересчитать итог ещё раз или проверьте сумму в таблице: в длинных подсчётах она может ошибиться. Как вести бюджет в таблице и обновлять его через ИИ, разбираем в уроке 2 модуля 3.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">11</span><span class="tname">Переезд или ремонт по шагам<span class="twhen"><b>Что получите:</b> план по неделям с порядком дел, что заказать заранее, где нужны мастера, и «коробку первого дня».</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>У нас впереди <span class="tok">[ПЕРЕЕЗД / РЕМОНТ КОМНАТЫ / РЕМОНТ КВАРТИРЫ]</span>. Срок: <span class="tok">[К КАКОЙ ДАТЕ]</span>. Что уже решено и сделано: <span class="tok">[ЧТО КУПЛЕНО, КТО ПОМОГАЕТ]</span>. Где живём в это время: <span class="tok">[ТАМ ЖЕ / В ДРУГОМ МЕСТЕ]</span>. С нами: <span class="tok">[ДЕТИ, ЖИВОТНЫЕ]</span>.
+
+Составь план по неделям: что делать в каком порядке и почему, где нужны мастера, а что можно сделать самим, что заказать заранее, потому что это долго ждать. Для переезда – список коробок по комнатам и «коробку первого дня»: что должно быть под рукой в первый вечер. В конце – 5 мест, где такие дела обычно застревают, и как подстраховаться. Сроки работ и цены не придумывай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Коробка первого дня.</b> Чайник, кружки, бумажные тарелки, туалетная бумага, постельное бельё на всех, зарядки, ножницы, мусорные пакеты, любимая игрушка младшего.</p></div>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">12</span><span class="tname">Сад или школа: бытовая подготовка<span class="twhen"><b>Что получите:</b> список дел до первого дня, утро по минутам и таблицу «кто отводит, кто забирает» – учёбу не трогаем, только быт.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Ребёнок <span class="tok">[ВОЗРАСТ]</span> идёт <span class="tok">[В САД / В ПЕРВЫЙ КЛАСС / В НОВУЮ ШКОЛУ]</span> с <span class="tok">[ДАТА]</span>. Помоги с бытовой стороной, учёбу не трогаем. Наш режим: <span class="tok">[КТО КОГДА РАБОТАЕТ, КТО МОЖЕТ ОТВОДИТЬ И ЗАБИРАТЬ]</span>. Дорога: <span class="tok">[ПЕШКОМ ИЛИ НА ТРАНСПОРТЕ, СКОЛЬКО ЗАНИМАЕТ]</span>. Кружки: <span class="tok">[КАКИЕ И КОГДА]</span>.
+
+Сделай:
+1) список дел и покупок до первого дня – по неделям;
+2) утро буднего дня по минутам, с запасом времени;
+3) таблицу на неделю: кто отводит, кто забирает, кто везёт на кружок;
+4) план Б: кто подстрахует, если взрослый задерживается.
+Требования сада или школы к вещам ты не знаешь – отметь, что уточнить у воспитателя или учителя.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Утро.</b> 7:10 подъём – 7:30 завтрак – 7:50 одеться, рюкзак собран с вечера – 8:05 выход, 10 минут в запасе.</p></div>
+          <p class="tip"><b>Подсказка.</b> Название сада или школы, фамилия ребёнка и адрес для такого плана не нужны.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">13</span><span class="tname">Разобрать шкаф и продать лишнее<span class="twhen"><b>Что получите:</b> порядок разбора на один вечер, правила «оставить – отдать – продать» и готовый текст объявления.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Хочу разобрать <span class="tok">[ШКАФ / ДЕТСКУЮ ОДЕЖДУ / БАЛКОН]</span> за <span class="tok">[СКОЛЬКО ВРЕМЕНИ]</span>. Предложи порядок разбора и короткие правила, по которым решать, что оставить, отдать, продать или выбросить, – чтобы держать их перед глазами.
+
+Потом напиши объявление о продаже. Вещь: <span class="tok">[ЧТО ЭТО]</span>. Марка и размер: <span class="tok">[ЕСЛИ ЕСТЬ]</span>. Состояние: <span class="tok">[ЧЕСТНО – НОВОЕ, НОСИЛИ СЕЗОН, ЕСТЬ ПОТЁРТОСТИ]</span>. Цена: <span class="tok">[СУММА]</span>. Где забрать: <span class="tok">[РАЙОН, БЕЗ ТОЧНОГО АДРЕСА]</span>. Заголовок – до 50 знаков, текст – 3–5 предложений без преувеличений, честно о недостатках. Подскажи, какие 3–4 фото сделать.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Заголовок.</b> Зимний комбинезон, рост 98, тёплый.</p><p><b>Текст.</b> Носили один сезон, без пятен, молния работает. Капюшон отстёгивается. Самовывоз, район [ВАШ РАЙОН]. Отвечу на вопросы в сообщениях.</p></div>
+          <p class="tip"><b>Подсказка.</b> Точный адрес и телефон в текст объявления не пишите: договаривайтесь через сообщения на площадке.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">14</span><span class="tname">Найти и сравнить услугу: кружок, мастер, курсы<span class="twhen"><b>Что получите:</b> таблицу сравнения 2–4 вариантов по вашим критериям и список вопросов, которые стоит задать до решения.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Я выбираю <span class="tok">[КРУЖОК ДЛЯ РЕБЁНКА / МАСТЕРА ДЛЯ РЕМОНТА / КУРСЫ / ДРУГУЮ УСЛУГУ]</span>. Что для меня важно: <span class="tok">[ЦЕНА, ДОРОГА, РАСПИСАНИЕ, ОТЗЫВЫ, ГАРАНТИЯ]</span>. Вот что я нашёл(ла) о вариантах: <span class="tok">[ВСТАВЬТЕ ОПИСАНИЯ, УСЛОВИЯ, ВЫДЕРЖКИ ИЗ ОТЗЫВОВ]</span>.
+
+1) Составь таблицу сравнения по моим критериям – только по тому, что я прислал(а). Где данных нет, пиши «нет данных», не додумывай.
+2) Дай список вопросов, которые стоит задать каждому варианту, прежде чем решать.
+3) Отметь, что в описаниях настораживает, если такое есть.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Строка таблицы.</b> Студия рисования на соседней улице: цена – есть, расписание – вт и чт, пробное занятие – нет данных.</p><p><b>Вопрос.</b> Можно ли прийти на пробное занятие и сколько детей в группе?</p></div>
+          <p class="tip"><b>Подсказка.</b> Сами находите варианты в поиске или просите нейросеть с поиском. Цены и условия всё равно сверяйте на сайте или по телефону.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">15</span><span class="tname">Визит в госорган или МФЦ<span class="twhen"><b>Что получите:</b> план визита, черновой список документов для сверки и вопросы, которые стоит задать, – чтобы не ходить дважды.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <p class="note warn"><b>Обязательно сверьте список документов на Госуслугах (gosuslugi.ru) или на официальном сайте ведомства.</b> Правила меняются, а нейросеть может знать старую редакцию или перепутать регион. Ответ нейросети – только черновик и список вопросов.</p>
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне нужно <span class="tok">[ЧТО СДЕЛАТЬ – ОФОРМИТЬ, ЗАМЕНИТЬ, ПОЛУЧИТЬ]</span>, регион: <span class="tok">[РЕГИОН]</span>. Помоги подготовиться:
+1) куда с этим обычно обращаются и можно ли сделать это онлайн – как варианты для проверки;
+2) черновой список документов, который я сверю на официальном сайте;
+3) вопросы, которые стоит задать, если позвоню или приду;
+4) чек-лист на день визита: что взять с собой, сколько времени заложить.
+Где не уверен в правилах, сроках или списке документов, так и отмечай. Свои документы и номера я сюда не вставляю.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Черновик для сверки.</b> 1. Паспорт заявителя – проверить. 2. Заявление – уточнить, заполняется на месте или онлайн. 3. …</p><p><b>Вопросы.</b> Нужна ли запись заранее? Сколько ждать готовности и как узнать, что всё готово?</p></div>
+        </div>
+      </details>
+    </section>
+    <section class="group reveal" id="dogovoritsya">
+      <div class="ghead"><p class="glabel">Договориться в семье</p><span class="grange">16 – 20</span></div>
+      <p class="note"><b>Про людей.</b> Рассказывайте своими словами, без имён и фамилий. Чужие переписки и скриншоты не загружайте: перескажите суть, этого достаточно.</p>
+      <details class="task">
+        <summary><span class="num">16</span><span class="tname">Поделить домашние дела без ссоры<span class="twhen"><b>Что получите:</b> полный список домашних дел с часами в неделю, два варианта распределения и первые фразы для спокойного разговора.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Хочу спокойно обсудить в семье, кто что делает по дому. Нас: <span class="tok">[КТО ЖИВЁТ ДОМА, ВОЗРАСТ ДЕТЕЙ, КТО СКОЛЬКО РАБОТАЕТ]</span>. Сейчас дела делятся так: <span class="tok">[КАК ЕСТЬ, ЧЕСТНО]</span>.
+
+Помоги:
+1) составить полный список домашних дел, включая невидимые: следить, что заканчивается, планировать меню, помнить про кружки и дни рождения родни;
+2) прикинуть, сколько часов в неделю занимает каждое;
+3) предложить 2 варианта распределения с учётом графиков и возраста детей;
+4) подсказать, как начать этот разговор: без упрёков, фразами от первого лица.
+Ни на чью сторону не вставай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Невидимые дела.</b> Следить, что заканчиваются порошок и хлеб, – около часа в неделю. Помнить про дни рождения родни и поздравлять – полчаса.</p><p><b>Начало разговора.</b> «Я прикинул(а), сколько у нас уходит на дом. Хочется, чтобы это было по-честному. Посмотрим вместе?»</p></div>
+          <p class="tip"><b>Подсказка.</b> Чтобы договорённость жила дальше разговора, планируйте неделю с помощником <a href="https://aiforlife.ru/ii-course/modul3/bonus-semeinaya-nedelya/">«Семейная неделя и быт»</a>: он каждый раз считает часы у каждого.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">17</span><span class="tname">Правила экранов и гаджетов в семье<span class="twhen"><b>Что получите:</b> черновик семейных правил про телефоны, планшеты и телевизор – для всех, включая взрослых, – и как обсудить их с детьми.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги составить семейные правила про экраны. Нас: <span class="tok">[КТО, ВОЗРАСТ ДЕТЕЙ]</span>. Что сейчас не нравится: <span class="tok">[ТЕЛЕФОНЫ ЗА СТОЛОМ, СПОРЫ ИЗ-ЗА ПЛАНШЕТА, ВЗРОСЛЫЕ ТОЖЕ НЕ ОТРЫВАЮТСЯ]</span>. Что важно сохранить: <span class="tok">[МУЛЬТФИЛЬМЫ ПО ВЫХОДНЫМ, ИГРЫ С ДРУЗЬЯМИ, ЗВОНКИ БАБУШКЕ]</span>.
+
+Сделай:
+1) 5–7 правил, которые касаются всех, а не только детей;
+2) к каждому – как понять, что правило выполняется;
+3) что делаем, если правило нарушено, – заранее и без внезапных наказаний;
+4) как обсудить правила с детьми, чтобы они участвовали, а не получили готовый список.
+Не ссылайся на нормы и исследования – только договорённости нашей семьи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Правило 2.</b> За ужином телефоны лежат на полке в прихожей – у всех, включая взрослых. Как понять, что работает: за неделю не больше двух исключений.</p></div>
+          <p class="tip"><b>Подсказка.</b> Правила про нейросети для детей уже есть в наборе модуля 2 – в материале <a href="https://aiforlife.ru/ii-course/modul2/bonus-uchit-dumat/">«Учит думать, а не списывать»</a>. Их можно добавить к общим.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">18</span><span class="tname">Сложный разговор: с подростком, пожилым родителем, партнёром<span class="twhen"><b>Что получите:</b> план разговора, первые фразы, ответы на возможные реакции и репетицию, если хочется потренироваться.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Мне предстоит непростой разговор с <span class="tok">[ПОДРОСТКОМ / ПОЖИЛЫМ РОДИТЕЛЕМ / ПАРТНЁРОМ]</span>. Тема: <span class="tok">[О ЧЁМ]</span>. Чего хочу в итоге: <span class="tok">[ДОГОВОРИТЬСЯ О… / ЧТОБЫ МЕНЯ УСЛЫШАЛИ / ПОНЯТЬ, ЧТО ПРОИСХОДИТ]</span>. Чего боюсь: <span class="tok">[ОБИДЫ, КРИКА, ЧТО ЗАКРОЕТСЯ]</span>. Как обычно реагирует этот человек: <span class="tok">[КОРОТКО]</span>.
+
+Помоги:
+1) выбрать время и место для разговора;
+2) первые 2–3 фразы – от первого лица, без обвинений;
+3) три возможные реакции и как спокойно ответить на каждую;
+4) как закончить, даже если сразу договориться не вышло.
+Если я напишу «репетиция», сыграй этого человека, а после слова «стоп» разбери, что сработало.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Первая фраза</b> (разговор с мамой о помощи по дому). «Мам, я вижу, что с уборкой тебе стало тяжелее, и переживаю. Можно расскажу, что мы придумали, а ты скажешь, что тебе подходит?»</p></div>
+          <p class="tip"><b>Подсказка.</b> Рассказывайте о ситуации своими словами. Переписки и скриншоты другого человека не загружайте.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">19</span><span class="tname">Семейные традиции и ритуалы<span class="twhen"><b>Что получите:</b> 10 идей маленьких традиций под вашу семью – на неделю, сезон и год – и две, с которых проще всего начать.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Хотим завести семейные традиции, которые правда приживутся. Нас: <span class="tok">[КТО, ВОЗРАСТ ДЕТЕЙ]</span>. Свободного времени: <span class="tok">[СКОЛЬКО В БУДНИ И ВЫХОДНЫЕ]</span>. Любим: <span class="tok">[ЧТО]</span>. Уже сложилось: <span class="tok">[ЧТО ЕСТЬ, ДАЖЕ МЕЛОЧИ]</span>.
+
+Предложи 10 идей: 4 маленькие еженедельные (до 30 минут), 3 сезонные, 3 годовые. Для каждой: что делаем, сколько нужно времени и денег, кто может отвечать. Отметь 2 идеи, с которых проще всего начать на этой неделе.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Еженедельная: «Пятничная тройка».</b> За ужином каждый рассказывает одно хорошее за неделю, одно трудное и одно, чего ждёт. 15 минут, бесплатно, ведущий каждый раз новый.</p></div>
+          <p class="tip"><b>Подсказка.</b> Годовую традицию можно связать с книгой семейных воспоминаний из урока 1 модуля 3: каждый год добавлять в неё новую главу.</p>
+        </div>
+      </details>
+      <details class="task">
+        <summary><span class="num">20</span><span class="tname">Письмо-благодарность учителю, воспитателю, врачу<span class="twhen"><b>Что получите:</b> тёплое письмо, открытку или сообщение – конкретное, про ваш случай, без шаблонных фраз.</span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+        <div class="body">
+          <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги написать благодарность. Кому: <span class="tok">[УЧИТЕЛЮ / ВОСПИТАТЕЛЮ / ТРЕНЕРУ / ВРАЧУ]</span>. Обращение: <span class="tok">[ИМЯ И ОТЧЕСТВО – МОЖНО ВПИСАТЬ ПОТОМ САМИМ]</span>. За что хочу поблагодарить: <span class="tok">[КОНКРЕТНЫЙ СЛУЧАЙ ИЛИ ЧТО ЗАМЕТИЛИ ЗА ГОД]</span>. От кого: <span class="tok">[ОТ МЕНЯ / ОТ СЕМЬИ / ОТ РЕБЁНКА]</span>. Формат: <span class="tok">[ОТКРЫТКА В 3–4 ПРЕДЛОЖЕНИЯ / ПИСЬМО / СООБЩЕНИЕ В МЕССЕНДЖЕР]</span>.
+
+Тон тёплый и простой, без пафоса и общих слов вроде «за ваш нелёгкий труд». Опирайся на мой случай. Дай 2 варианта: покороче и подлиннее.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+          <div class="ex"><p class="exl">Пример результата · для ориентира, у вас будет своё</p><p><b>Открытка воспитателю.</b> [Имя Отчество], спасибо за осеннюю прогулку в парке. Дочка до сих пор показывает дома, как вы искали следы белки, и просит идти «как с вами». Нам очень повезло с вашей группой.</p></div>
+          <p class="tip"><b>Подсказка.</b> Благодарность врачу хорошо звучит и без подробностей: диагнозы и детали лечения в запрос не пишите.</p>
+        </div>
+      </details>
+    </section>
+
+  <div class="lines" id="krasnye">
+    <p class="label">Важно</p>
+    <h2>Красные линии: что не загружаем</h2>
+    <p>Для любого запроса с этой страницы хватает описания своими словами. Вот что в чат с нейросетью не отправляем никогда, даже если очень удобно:</p>
+    <ul>
+      <li><b>Паспортные и банковские данные</b> – номера документов, СНИЛС, номера карт и счетов, выписки, коды из СМС.</li>
+      <li><b>Медицинские документы</b> – выписки, анализы, справки, назначения.</li>
+      <li><b>Пароли</b> и доступы к личным кабинетам, почте, Госуслугам.</li>
+      <li><b>Чужие переписки</b> и скриншоты разговоров – перескажите суть своими словами.</li>
+      <li><b>Фото детей</b> и их данные – полные имена, школа, сад, адрес.</li>
+    </ul>
+    <p class="rulebox">Вместо этого: роли и возраст («младшая, 6 лет»), округлённые суммы, район вместо адреса, пересказ вместо скриншота. Нейросети этого достаточно, а вам спокойнее.</p>
+  </div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Когда одного запроса мало</h2>
+    <div class="dcol">
+      <p>Эти двадцать запросов – разовые заходы. Если хочется, чтобы нейросеть помогала с домом каждую неделю, загляните в соседний материал набора:</p>
+      <ul>
+        <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-semeinaya-nedelya/" style="color:var(--pink-soft)"><b>«Семейная неделя и быт»</b></a> – помощник, который собирает расписание недели, меню из того, что есть дома, список покупок и дела на всех и пересобирает план, когда неделя поехала.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="wrap closing">
+  <div class="cgrid">
+    <div class="col">
+      <p class="pull">Дома нейросеть хороша там, где много мелочей и мало времени: списки, планы, черновики. Решения и разговоры остаются за вами.</p>
+      <a class="backlink" href="https://aiforlife.ru/ii-course/modul3/zhizn-i-semya/" target="_top">← Ко всем материалам набора «ИИ для жизни и семьи»</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul3/zhizn-i-semya/" target="_top">«ИИ для жизни и семьи»</a>, модуль 3</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function textOf(btn){
+    var box=btn.closest('.body')||btn.closest('.col');
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    return pre?pre.innerText:'';
+  }
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      copy(textOf(btn)).then(function(){
+        var old=btn.innerHTML;
+        btn.textContent='Скопировано';btn.classList.add('done');
+        say('Промпт скопирован. Вставьте его в чат');
+        setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+      }).catch(function(){say('Не вышло скопировать – выделите текст промпта вручную');});
+    });
+  });
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

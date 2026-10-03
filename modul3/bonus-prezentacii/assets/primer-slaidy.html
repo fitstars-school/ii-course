@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Неделя на одном листе · учебный пример презентации</title>
+<meta name="description" content="Учебный пример HTML-презентации: 7 слайдов, листание стрелками и свайпом, номер слайда, полный экран, заметки докладчика и печать в PDF по слайду на лист.">
+<style>
+/* ===== Настройки стиля: меняйте здесь ===== */
+:root{
+  --bg:#F7F4EE;        /* фон слайда */
+  --ink:#1F2328;       /* основной текст */
+  --muted:#5C6470;     /* второстепенный текст */
+  --accent:#1D6F68;    /* акцент: номер, линии, выделение */
+  --accent-soft:#DCEBE8;
+  --dark:#1F2328;      /* фон тёмных слайдов */
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:#2A2F35;font-family:var(--font);color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+/* Сцена 16:9: слайд всегда 1280×720, масштабируется под экран */
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.deck{position:relative;width:1280px;height:720px;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;background:var(--bg);padding:84px 96px 96px;display:none;flex-direction:column;justify-content:center}
+.slide.on{display:flex}
+.slide.dark{background:var(--dark);color:#F4F1EA}
+
+/* Четыре текстовые роли: заголовок, подзаголовок, текст, метка */
+.label{font-size:20px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.dark .label{color:#8FD0C7}
+h1{font-size:76px;line-height:1.05;font-weight:800;letter-spacing:-.02em;max-width:18ch}
+h2{font-size:54px;line-height:1.1;font-weight:800;letter-spacing:-.015em;max-width:22ch}
+.sub{font-size:30px;line-height:1.35;color:var(--muted);font-weight:500;max-width:36ch}
+.dark .sub{color:#C9CDD2}
+.label + h1,.label + h2{margin-top:22px}
+h1 + .sub,h2 + .sub{margin-top:26px}
+
+ul.points{list-style:none;margin-top:40px;display:grid;gap:22px}
+ul.points li{display:grid;grid-template-columns:64px 1fr;align-items:baseline;font-size:32px;line-height:1.3;font-weight:500}
+ul.points li b{font-weight:800;color:var(--accent);font-size:32px}
+
+.big-q{font-size:68px;line-height:1.12;font-weight:800;max-width:20ch;letter-spacing:-.015em}
+.promptcard{margin-top:34px;background:#fff;border-left:8px solid var(--accent);padding:30px 36px;font-size:27px;line-height:1.5;color:var(--ink);max-width:1000px}
+.promptcard b{color:var(--accent)}
+.foot{position:absolute;left:96px;bottom:40px;font-size:20px;color:var(--muted);font-weight:500}
+.dark .foot{color:#9AA1A9}
+
+/* Номер слайда и полоса прогресса – внутри слайда, попадают и в PDF */
+.num{position:absolute;right:56px;bottom:36px;font-size:20px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.dark .num{color:#9AA1A9}
+.progress{position:absolute;left:0;bottom:0;height:6px;background:var(--accent)}
+
+/* Заметки докладчика: скрыты, клавиша N показывает */
+.notes{display:none}
+.notepanel{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:rgba(18,21,25,.96);color:#E8E6E1;font-size:17px;line-height:1.55;padding:18px 22px 64px;display:none;z-index:5}
+.notepanel.on{display:block}
+.notepanel .nl{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8FD0C7;margin-bottom:6px}
+
+/* Кнопки управления (для мыши и телефона) */
+.bar{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;background:rgba(18,21,25,.82);padding:6px;border-radius:999px;z-index:6;transition:opacity .3s}
+.bar button{font:600 15px var(--font);color:#fff;background:transparent;border:0;min-width:44px;height:44px;padding:0 12px;border-radius:999px;cursor:pointer}
+.bar button:hover,.bar button:focus-visible{background:rgba(255,255,255,.14);outline:none}
+.bar .count{color:#C9CDD2;font:600 15px var(--font);padding:0 8px;font-variant-numeric:tabular-nums;min-width:58px;text-align:center}
+body.idle .bar{opacity:0}
+.hint{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(18,21,25,.82);color:#E8E6E1;font-size:14px;padding:8px 14px;border-radius:8px;z-index:6;transition:opacity .4s;white-space:nowrap}
+.hint.gone{opacity:0;pointer-events:none}
+@media (max-width:640px){.hint{white-space:normal;width:calc(100% - 32px);text-align:center}}
+
+
+/* Телефон вертикально: слайд перестраивается в 9:16, текст остаётся крупным */
+body.portrait .deck{width:720px;height:1280px}
+body.portrait .slide{padding:90px 60px 140px}
+body.portrait .foot{left:60px;bottom:70px}
+body.portrait h1,body.portrait h2,body.portrait .big-q,body.portrait .sub{max-width:none}
+
+/* Печать: каждый слайд – отдельный лист 16:9 */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{height:auto;overflow:visible;background:#fff}
+  .stage{position:static;display:block}
+  .deck{transform:none!important;width:1280px!important;height:auto!important}
+  .slide{position:relative;display:flex!important;width:1280px;height:720px;padding:84px 96px 96px!important;page-break-after:always;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .bar,.hint,.notepanel{display:none!important}
+  .foot{left:96px!important;bottom:40px!important}
+  h1{max-width:18ch!important}h2{max-width:22ch!important}.big-q{max-width:20ch!important}.sub{max-width:36ch!important}
+  .slide,.slide.on{animation:none!important;opacity:1!important}
+}
+@media (prefers-reduced-motion:no-preference){.slide.on{animation:fade .25s ease}}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="stage">
+<div class="deck" id="deck">
+
+  <section class="slide dark">
+    <p class="label">Учебный пример презентации</p>
+    <h1>Неделя на одном листе: планируем вместе с ИИ</h1>
+    <p class="sub">Как собрать план недели за один короткий разговор с нейросетью.</p>
+    <aside class="notes">Поздороваться. Сказать, о чём разговор: как за один короткий заход собрать план недели с помощью нейросети. Предупредить, что в конце будет готовый запрос.</aside>
+  </section>
+
+  <section class="slide">
+    <p class="label">Шаг 1</p>
+    <h2>Сначала выгружаем из головы всё, без сортировки</h2>
+    <ul class="points">
+      <li><b>1</b>Наговорите или напишите дела как есть, вперемешку</li>
+      <li><b>2</b>Встречи и сроки отметьте отдельно: их нельзя двигать</li>
+      <li><b>3</b>Добавьте, сколько примерно времени есть по дням</li>
+    </ul>
+    <aside class="notes">Главное здесь – не пытаться сразу навести порядок. Сортировку сделает нейросеть, наша задача – ничего не забыть.</aside>
+  </section>
+
+  <section class="slide">
+    <p class="label">Шаг 2</p>
+    <h2>ИИ раскладывает варианты, а решаете вы</h2>
+    <ul class="points">
+      <li><b>1</b>Группирует дела по сферам: работа, дом, здоровье</li>
+      <li><b>2</b>Отмечает, что горит, а что можно перенести</li>
+      <li><b>3</b>Предлагает раскладку по дням – вы её правите</li>
+    </ul>
+    <aside class="notes">Подчеркнуть: нейросеть не знает, что для вас важнее. Её раскладка – черновик, последнее слово за человеком.</aside>
+  </section>
+
+  <section class="slide dark">
+    <p class="label">Вопрос залу</p>
+    <p class="big-q">Какое дело у вас переезжает с недели на неделю?</p>
+    <p class="sub" style="margin-top:30px">Напишите в чат одним словом.</p>
+    <aside class="notes">Пауза 30–40 секунд. Прочитать вслух 3–4 ответа. Связать со следующим слайдом: такие дела почти всегда большие и без первого шага.</aside>
+  </section>
+
+  <section class="slide">
+    <p class="label">Шаг 3</p>
+    <h2>Три главных дела – и запас на неожиданное</h2>
+    <ul class="points">
+      <li><b>1</b>Из всего списка выбираем три дела, ради которых неделя</li>
+      <li><b>2</b>Большое дело режем до первого шага на полчаса</li>
+      <li><b>3</b>Оставляем свободное время: неделя всегда вносит правки</li>
+    </ul>
+    <aside class="notes">Если план расписан под завязку, он ломается в первый же день. Свободное окно – часть плана, а не лень.</aside>
+  </section>
+
+  <section class="slide">
+    <p class="label">Забирайте</p>
+    <h2>Готовый запрос для планирования</h2>
+    <div class="promptcard">Вот мои дела на неделю: <b>[список как есть]</b>. Встречи и сроки: <b>[что нельзя двигать]</b>. Разложи дела по дням, выдели три главных, оставь запас времени. Если чего-то не хватает – спроси.</div>
+    <aside class="notes">Показать, что квадратные скобки – места для своего. Предложить сделать это прямо сегодня вечером.</aside>
+  </section>
+
+  <section class="slide dark">
+    <p class="label">Итог</p>
+    <h2>Один лист плана и короткая сверка в пятницу</h2>
+    <p class="sub">В пятницу спросите нейросеть: что сделано, что переезжает и почему.</p>
+    <p class="foot">[Ваше имя · контакт]</p>
+    <aside class="notes">Поблагодарить. Напомнить про пятничную сверку. Ответить на вопросы.</aside>
+  </section>
+
+</div>
+</div>
+
+<div class="notepanel" id="notepanel" aria-live="polite"><p class="nl">Заметки докладчика</p><div id="notetext"></div></div>
+
+<div class="hint" id="hint">← → или пробел – листать · F – полный экран · N – заметки · Ctrl/Cmd+P – сохранить в PDF</div>
+
+<nav class="bar" id="bar" aria-label="Управление презентацией">
+  <button type="button" id="prev" aria-label="Предыдущий слайд">←</button>
+  <span class="count" id="count">1 / 1</span>
+  <button type="button" id="next" aria-label="Следующий слайд">→</button>
+  <button type="button" id="fs" aria-label="Полный экран">⛶</button>
+  <button type="button" id="nt" aria-label="Заметки докладчика">N</button>
+</nav>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(deck.querySelectorAll('.slide'));
+  var total=slides.length, cur=0;
+  var count=document.getElementById('count');
+  var panel=document.getElementById('notepanel'), ntext=document.getElementById('notetext');
+
+  // Номер и полоса прогресса на каждом слайде (видны и в PDF)
+  slides.forEach(function(s,i){
+    var n=document.createElement('span');n.className='num';n.textContent=(i+1)+' / '+total;s.appendChild(n);
+    var p=document.createElement('span');p.className='progress';p.style.width=((i+1)/total*100)+'%';s.appendChild(p);
+  });
+
+  function fit(){
+    var portrait=window.innerWidth/window.innerHeight<0.9;
+    document.body.classList.toggle('portrait',portrait);
+    var W=portrait?720:1280, H=portrait?1280:720;
+    var k=Math.min(window.innerWidth/W,window.innerHeight/H);
+    deck.style.transform='scale('+k+')';
+  }
+  function show(i){
+    cur=Math.max(0,Math.min(total-1,i));
+    slides.forEach(function(s,j){s.classList.toggle('on',j===cur);});
+    count.textContent=(cur+1)+' / '+total;
+    var note=slides[cur].querySelector('.notes');
+    ntext.textContent=note?note.textContent:'Для этого слайда заметок нет.';
+    if(location.hash!=='#'+(cur+1)) history.replaceState(null,'','#'+(cur+1));
+  }
+  function next(){show(cur+1);} function prev(){show(cur-1);}
+  function toggleFS(){
+    var d=document, el=d.documentElement;
+    if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d);}
+    else if(el.requestFullscreen){el.requestFullscreen();}
+    else if(el.webkitRequestFullscreen){el.webkitRequestFullscreen();}
+  }
+  function toggleNotes(){panel.classList.toggle('on');}
+
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();next();}
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev();}
+    else if(k==='Home'){e.preventDefault();show(0);}
+    else if(k==='End'){e.preventDefault();show(total-1);}
+    else if(k==='f'||k==='F'||k==='а'||k==='А'){toggleFS();}
+    else if(k==='n'||k==='N'||k==='т'||k==='Т'){toggleNotes();}
+    hideHint();
+  });
+
+  // Свайп на телефоне и планшете
+  var sx=null, sy=null;
+  document.addEventListener('touchstart',function(e){var t=e.changedTouches[0];sx=t.clientX;sy=t.clientY;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(sx===null)return;
+    var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){dx<0?next():prev();hideHint();}
+    sx=sy=null;
+  },{passive:true});
+
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.getElementById('fs').addEventListener('click',toggleFS);
+  document.getElementById('nt').addEventListener('click',toggleNotes);
+
+  // Подсказка исчезает после первого действия или через 6 секунд
+  var hint=document.getElementById('hint');
+  function hideHint(){hint.classList.add('gone');}
+  setTimeout(hideHint,6000);
+
+  // Кнопки прячутся, когда мышь не двигается (не мешают на проекторе)
+  var idleT;
+  function wake(){document.body.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(function(){document.body.classList.add('idle');},2500);}
+  document.addEventListener('mousemove',wake);document.addEventListener('touchstart',wake,{passive:true});wake();
+
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1),10);if(n&&n-1!==cur)show(n-1);});
+  fit();
+  var start=parseInt(location.hash.slice(1),10);
+  show(start?start-1:0);
+})();
+</script>
+</body>
+</html>

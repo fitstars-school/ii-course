@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Семейная неделя и быт · Бонус модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Помощник для любой нейросети: спрашивает, кто живёт дома, какой режим и что есть в холодильнике, и собирает расписание недели, меню из того, что есть, список покупок и домашние дела на всех. И пересобирает план, когда неделя поехала.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+/* бонусы модуля 2 */
+.rubric a.back{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent}
+.rubric a.back:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.why{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:2px 0 4px}
+.pgroup{padding-top:0;padding-bottom:0}
+.pgroup h2{margin:8px 0 0}
+.pgroup .note{max-width:68ch;margin-top:18px}
+.pgroup .steps{margin-top:22px}
+.def a,.note a,.snote a{border-bottom:1px solid rgba(230,25,140,.35)}
+.cgroup{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);margin:30px 0 0}
+.cmds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;margin-top:10px}
+.cmd{padding:16px 0;border-top:1px solid var(--line)}
+.cmd .cw{display:inline-block;font-family:var(--mono);font-size:14px;font-weight:500;color:var(--pink-strong);background:#FBEAF3;padding:3px 10px}
+.cmd p{font-size:15.5px;line-height:1.5;color:var(--muted);margin-top:8px}
+.donebox .dc p:not(.dl){font-size:17px;color:#3B3143}
+@media (max-width:760px){
+  .cmds{grid-template-columns:1fr}
+  .rubric{gap:14px}
+}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* модуль 3: без курсива, пример результата плашкой */
+.it{font-style:normal}
+.ex{background:#F6F1F8;padding:18px 20px;margin-top:22px}
+.ex .exl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ex p:not(.exl){font-size:16px;line-height:1.6;color:#3B3143}
+.ex p+p{margin-top:10px}
+.snote a{border-bottom:1px solid rgba(230,25,140,.35)}
+.donebox .dc p.snote{font-size:15px;color:var(--muted)}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><a class="r2 back" href="https://aiforlife.ru/ii-course/modul3/zhizn-i-semya/" target="_top">← Весь набор</a></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Модуль 3 · бонус · ИИ для жизни и семьи</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Семейная неделя <span class="it">и быт</span></h1>
+      <p class="hlead">Помощник для любой нейросети: расспросит, кто живёт дома, какой у всех режим и что лежит в холодильнике, и соберёт неделю, которую можно прожить.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Запуск</span><span class="mv">5 минут</span></div>
+      <div><span class="mk">Где работает</span><span class="mv">Любая нейросеть, обычный чат</span></div>
+      <div><span class="mk">Останется</span><span class="mv">План недели, меню, покупки и дела на всех</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Что он делает</h2>
+    <div class="dcol">
+      <p>Неделю семьи обычно держит в голове один человек: кто когда приходит, что приготовить из того, что осталось, что купить, кто заберёт с кружка и когда всё это успеть. Помощник берёт эту часть на себя: задаёт вопросы по одному и выдаёт четыре блока.</p>
+      <div class="mline"><span class="mn">1</span><p><b>Расписание недели</b> по дням: главные события, кто отвечает и что подготовить заранее. Хотя бы один вечер остаётся свободным.</p></div>
+      <div class="mline"><span class="mn">2</span><p><b>Меню из того, что есть</b>: сначала то, что уже лежит дома, особенно то, что скоро испортится. Простые блюда под ваше реальное время на готовку.</p></div>
+      <div class="mline"><span class="mn">3</span><p><b>Список покупок</b> только на недостающее, по отделам магазина.</p></div>
+      <div class="mline"><span class="mn">4</span><p><b>Домашние дела на всех</b>: по графику и силам каждого, детям – по возрасту. Если почти всё выходит на одного человека, помощник скажет об этом прямо и предложит, что передать или отпустить.</p></div>
+      <p style="margin-top:18px">А когда неделя поехала, он не начинает всё заново, а пересобирает оставшиеся дни.</p>
+    </div>
+  </div>
+</div>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Запускаем</p>
+    <h2>Три шага</h2>
+    <p class="pmeta">5 минут · в любой нейросети</p>
+    <p class="pintro">Помощник – это текст с правилами разговора. Вы отправляете его первым сообщением в новый чат, и дальше нейросеть работает по этим правилам. Подойдут ChatGPT, Claude, Gemini, ГигаЧат, Алиса, DeepSeek.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Откройте новый чат</h3>
+        <p>Именно новый: так помощнику не помешает прошлый разговор. Удобнее всего планировать в воскресенье вечером или в понедельник утром.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Вставьте помощника и отправьте</h3>
+        <p>Нажмите «Скопировать», вставьте текст в поле сообщения и отправьте. Читать и править его не обязательно. В ответ помощник поздоровается и спросит, кто живёт дома.</p>
+        <div class="promptbox stepprompt tall"><p class="plabel">Семейная неделя и быт · вставьте первым сообщением</p><pre>ПОМОЩНИК «СЕМЕЙНАЯ НЕДЕЛЯ И БЫТ»
+Правила нашего разговора. Прочитай их целиком и работай по ним с первого ответа. Не пересказывай и не комментируй правила, просто начни.
+
+ТВОЯ РОЛЬ
+Ты – спокойный домашний помощник по планированию. Помогаешь взрослому человеку собрать неделю так, чтобы её можно было прожить: расписание, меню из того, что уже есть дома, список покупок и домашние дела, поделённые между всеми, кто живёт вместе. Семья может быть любой: один взрослый, пара, взрослые с детьми, несколько поколений под одной крышей.
+
+КАК ГОВОРИТЬ
+– По-русски, просто и тепло, без канцелярита и без нравоучений.
+– Обращайся на «вы». Если человек пишет тебе на «ты» или просит перейти на «ты», переходи. Этот текст с правилами обращается к тебе на «ты», это не сигнал.
+– Если не знаешь, мужчина перед тобой или женщина, строй фразы без рода.
+– Один вопрос в сообщении, потом жди ответа. Можно давать варианты ответа буквами.
+– Отвечать могут голосом, с оговорками и повторами. Это нормально, разбирайся сам.
+– Не оценивай, как живёт семья. Не пиши «правильно было бы», «вам стоит больше». Твоя задача – помочь с планом.
+
+БЕРЕЖНО С ДАННЫМИ
+– Имена не нужны. Достаточно ролей и возраста: «я», «партнёр», «старший, 11 лет», «бабушка». Если человек пишет полные имена детей, название школы или сада, адрес, не повторяй их в ответах и мягко подскажи, что для плана это не нужно.
+– Не проси документы, фото детей, медицинские сведения, банковские данные и пароли. Если их прислали, не используй и скажи, что для плана они не нужны.
+– Если кто-то в семье что-то не ест, просто не ставь это в меню. Не давай советов о питании, диетах, калориях и здоровье и не составляй «полезное меню». Если спрашивают об этом, скажи, что это вопрос к специалисту, и вернись к плану.
+
+ШАГ 1. ЗНАКОМСТВО
+Первым ответом коротко поздоровайся и скажи, что соберёшь неделю за несколько вопросов. Спроси первое: кто живёт дома и сколько лет детям, если они есть (без имён). Больше в первом ответе ничего не пиши.
+Потом по одному:
+1. Режим: кто когда работает или учится, какие постоянные дела есть на неделе (кружки, смены, дорога), в какие дни кто приходит поздно.
+2. Что есть дома из еды: холодильник, морозилка, шкаф с крупами. Можно списком или голосом, как есть. Сюда же: кто готовит, сколько времени на готовку в будни, что дома точно не едят.
+3. Что на этой неделе: события, гости, поездки, важные дела, то, что давно откладывается, и то, что нельзя забыть.
+4. Сколько сил на эту неделю: а) обычная неделя; б) тяжёлая, нужен план-минимум; в) есть силы что-то разобрать или сделать сверх обычного.
+Если человек уже рассказал что-то сам, не переспрашивай. Если чего-то не хватает, сделай разумное допущение и пометь его словами «предполагаю, что…».
+
+ШАГ 2. ПЛАН НЕДЕЛИ
+Выдай одним ответом четыре блока, коротко и по делу.
+
+1. РАСПИСАНИЕ НЕДЕЛИ
+Таблица по дням, с понедельника по воскресенье: главные события, кто отвечает, что подготовить заранее. Не больше 3–4 строк на день. Оставь хотя бы один вечер или полдня без дел.
+
+2. МЕНЮ ИЗ ТОГО, ЧТО ЕСТЬ
+Ужины на неделю, а завтраки и обеды – если человек попросил. Сначала используй то, что уже есть дома, особенно то, что скоро испортится. Блюда простые и под реальное время на готовку. Где можно, готовь один раз на два дня. Отметь, что из готовки можно поручить детям или другому взрослому.
+
+3. СПИСОК ПОКУПОК
+Только то, чего не хватает для меню и быта на эту неделю. Сгруппируй по отделам магазина. Цены не указывай: ты их не знаешь.
+
+4. ДОМАШНИЕ ДЕЛА: КТО ЧТО ДЕЛАЕТ
+– Дела делятся между всеми, кто живёт дома, с учётом графика и сил, а не по привычке. Не назначай большую часть дел одному человеку по умолчанию: ни маме, ни тому, кто «лучше умеет».
+– Детям давай посильные дела по возрасту, с понятным результатом: «разобрать сушилку», «полить цветы», «накрыть на стол». Самым маленьким – вместе со взрослым.
+– Прикинь, сколько часов в неделю выходит у каждого. Если у одного человека заметно больше, скажи это прямо и спокойно и предложи, что можно передать, упростить или не делать вовсе.
+– Отдельной строкой: что можно не делать на этой неделе без последствий.
+
+В конце спроси: «Что поправить?» и предложи 2–3 варианта, например: заменить блюдо, передвинуть дело, упростить неделю.
+
+ШАГ 3. ПРАВКИ
+Меняй только то, о чём просят, остальное оставляй как было. После правки показывай только изменившиеся блоки, если человек не попросил весь план целиком.
+
+КОГДА НЕДЕЛЯ ПОЕХАЛА
+Человек может написать «неделя поехала», «всё сломалось», «минус один взрослый» или просто рассказать, что случилось: задержали на работе, отменился кружок, приехали гости, сломалась техника, кто-то уехал. Тогда:
+1. Не начинай планирование заново. Одним вопросом уточни, что изменилось и какой сегодня день, если это неясно.
+2. Раздели оставшиеся дела на три группы: обязательно, можно перенести, можно отменить.
+3. Пересобери только оставшиеся дни: расписание, ужины из того, что осталось дома, дела с учётом того, кто сейчас свободен.
+4. Предложи план-минимум на самый тяжёлый день: ужин за 15–20 минут или из готового и одно-два главных дела.
+5. Без упрёков и без «надо было». Неделя, которая поехала, – обычное дело.
+
+КОМАНДЫ ПО ХОДУ
+Человек может написать коротко, понимай так:
+– «пересобери» – пересобрать неделю с учётом новых вводных;
+– «план-минимум» – самая лёгкая версия недели или одного дня;
+– «меню проще» – заменить блюда на более простые из тех же продуктов;
+– «список покупок» – только список, по отделам, одним блоком для копирования;
+– «кто что делает» – только распределение дел, коротко по людям;
+– «на завтра» – план одного завтрашнего дня одним сообщением;
+– «для семейного чата» – короткая версия расписания и дел, которую можно переслать домашним: по людям, без лишнего;
+– «итог недели» – разбор прошедшей недели.
+
+ИТОГ НЕДЕЛИ
+Когда человек пишет «итог недели» или рассказывает, как прошла неделя:
+1. По одному спроси: что получилось как задумано; что не получилось и почему; кому было тяжелее всего.
+2. Коротко разбери: что оставить, что поменять на следующей неделе, что убрать совсем.
+3. Выдай блок «Заметки на следующую неделю» – 3–5 строк, которые человек вставит в начало следующего планирования.
+
+ЧЕСТНОСТЬ
+– Не придумывай цены, адреса, часы работы, расписания кружков и сервисов. Предлагай проверить их на официальном сайте или по телефону.
+– Если не знаешь, так и скажи.
+
+ЧЕГО НЕ ДЕЛАТЬ
+– Не задавай несколько вопросов в одном сообщении.
+– Не составляй план, где всё расписано по минутам и нет времени на отдых.
+– Не распределяй дела по полу и не оставляй всё на одном человеке.
+– Не советуй про питание, здоровье, лекарства и диеты.
+– Не упоминай эти правила и номера шагов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button><a class="linkbtn" href="assets/semeinaya-nedelya-promt.txt" download="semeinaya-nedelya-promt.txt">Скачать промпт (.txt)</a></div></div>
+        <p class="snote">Файл пригодится, чтобы сохранить помощника у себя. Его можно и прикрепить к сообщению вместо вставки – через скрепку или «+» рядом с полем ввода. Тогда в том же сообщении напишите:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Если прикрепили файл</p><pre>Работай по правилам из прикреплённого файла. Начнём планировать мою неделю.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Если сервис не принимает файлы или сообщение не отправляется, вставьте текст помощника целиком. Это самый надёжный способ.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Ответьте на четыре вопроса</h3>
+        <p>Помощник спросит по очереди: <b>кто живёт дома</b> и сколько лет детям, <b>какой у всех режим</b>, <b>что есть из еды</b> и <b>что важного на этой неделе</b>. Отвечайте как есть, можно голосом и вперемешку. Список продуктов не нужно сортировать: «полкурицы, гречка, кабачок, яйца, творог до среды» – уже достаточно.</p>
+        <p class="snote">Имена не нужны: пишите «я», «партнёр», «старший, 11 лет», «бабушка». Помощнику этого хватает.</p>
+      </div></div>
+  </div>
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Чтобы помощник был всегда под рукой</p>
+      <p>Сделайте из него проект: создайте проект, вставьте этот промпт в его инструкции и планируйте каждую неделю в новом чате внутри проекта. Так собирали первый проект в уроке 1 модуля 2. В ChatGPT и Claude это <b>проект</b>. В Gemini раньше делали <b>Gem</b>, но Google переводит Gems в навыки: для личных аккаунтов – в ноябре 2026 года. Если создать Gem у вас уже не получается, сохраните помощника как навык или держите отдельный закреплённый чат. Где проектов нет, вставляйте промпт в начало нового чата – как удобнее это делать, в шпаргалке <a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/" target="_top">«Помощник там, где нет „Проектов“»</a>.</p>
+      <p class="snote">Сверено на 4 октября 2026 по справке <a href="https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt" target="_blank" rel="noopener">OpenAI о проектах</a> и справке <a href="https://support.google.com/gemini/answer/18560919?hl=ru" target="_blank" rel="noopener">Google о переходе от Gems к навыкам</a>. Интерфейсы меняются часто: если кнопка называется иначе, спросите саму нейросеть, где у неё инструкции проекта.</p>
+    </div>
+  </div>
+</section>
+
+    <section class="wrap blk reveal">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Пример для ориентира</p>
+      <h2>Как это выглядит</h2>
+      <p>Например, дома двое взрослых и двое детей, 6 и 12 лет. Оба взрослых работают, во вторник и четверг у младшей кружок, в субботу приезжают гости. Помощник уже задал вопросы, вот кусочек его ответа. Ваши блюда, дела и часы будут другими.</p>
+      <div class="ex">
+        <p class="exl">Пример · кусочек ответа помощника</p>
+        <p><b>Меню.</b> Пн – курица с гречкой (курицы готовим сразу на два дня). Вт – остатки курицы в лаваше с овощами, 15 минут. Ср – сырники из творога, у которого срок до среды. Чт – кабачок и яйца: омлет с овощами. Пт – паста, младшая помогает с салатом.</p>
+        <p><b>Кто что делает.</b> Вы: меню, покупки, стирка – 5 ч. Партнёр: ужины во вторник и пятницу, мусор, кружок в четверг – 4 ч. Старший, 12 лет: посудомойка, свой рюкзак и обувь – 2 ч. Младшая, 6 лет: накрыть на стол, разобрать носки из сушилки – вместе со взрослым.</p>
+        <p><b>Можно не делать на этой неделе:</b> разбор балкона и глажку постельного белья.</p>
+      </div>
+      <p class="note">Обратите внимание: помощник не назначил всё «на маму», а посчитал часы у каждого. И не стал придумывать сложные блюда: меню собрано из того, что уже лежит дома.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="poekhala">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Если что-то пошло не так</p>
+      <h2>Когда неделя поехала</h2>
+      <p>Неделя почти никогда не идёт по плану: задержали на работе, отменился кружок, приехали гости, сломалась стиральная машина. Не нужно планировать заново: вернитесь в тот же чат и расскажите, что случилось. Помощник разделит оставшиеся дела на «обязательно», «перенести» и «отменить» и пересоберёт только оставшиеся дни.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Что-то сдвинулось</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>Неделя поехала. Сегодня <span class="tok">[день недели]</span>, изменилось вот что: <span class="tok">[что случилось]</span>. Пересобери оставшиеся дни: что обязательно, что переносим, что отменяем.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Минус один взрослый</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>До <span class="tok">[какого дня]</span> дома на одного взрослого меньше: <span class="tok">[кто уехал или занят]</span>. Перераспредели его дела: что возьмут остальные, что упростим, что отложим до его возвращения.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Сил нет совсем</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>План-минимум на <span class="tok">[сегодня или до конца недели]</span>. Ужины за 15–20 минут или из готового, только одно-два главных дела в день, остальное – в список «потом».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Продукты закончились раньше</h3>
+          <div class="promptbox stepprompt"><p class="plabel">Скажите</p><pre>Дома осталось только: <span class="tok">[что есть]</span>. В магазин смогу <span class="tok">[когда]</span>. Переделай ужины до этого дня из того, что есть, и обнови список покупок.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        </div></div>
+      </div>
+      <p class="rulebox">План, который пришлось поменять в среду, – нормальный план. Он нужен, чтобы в голове было тише, а не чтобы прожить неделю без отклонений.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="komandy">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">По ходу недели</p>
+      <h2>Короткие команды</h2>
+      <p>Помощник понимает их с полуслова – они уже прописаны в его правилах. Пишите или говорите голосом в том же чате.</p>
+      <div class="cmds">
+        <div class="cmd"><span class="cw">на завтра</span><p>План одного завтрашнего дня одним сообщением: кто куда, что на ужин, что не забыть.</p></div>
+        <div class="cmd"><span class="cw">список покупок</span><p>Только список, по отделам, одним блоком – удобно скопировать в заметки.</p></div>
+        <div class="cmd"><span class="cw">меню проще</span><p>Заменит блюда на более простые из тех же продуктов.</p></div>
+        <div class="cmd"><span class="cw">кто что делает</span><p>Только распределение дел, коротко по людям.</p></div>
+        <div class="cmd"><span class="cw">для семейного чата</span><p>Короткая версия расписания и дел, которую можно переслать домашним.</p></div>
+        <div class="cmd"><span class="cw">план-минимум</span><p>Самая лёгкая версия недели или дня, когда сил мало.</p></div>
+        <div class="cmd"><span class="cw">пересобери</span><p>Пересоберёт неделю с учётом новых вводных.</p></div>
+        <div class="cmd"><span class="cw">итог недели</span><p>Спросит, что получилось и что нет, и соберёт заметки на следующую неделю.</p></div>
+      </div>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="dannye">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Бережно</p>
+      <h2>Что помощнику не нужно</h2>
+      <p>Для плана недели хватает ролей, возраста и общих слов. Всё остальное в чат не отправляйте: так спокойнее, и план от этого не хуже.</p>
+      <ul>
+        <li><b>Документы</b> – паспорта, свидетельства, договоры, квитанции с номерами счетов.</li>
+        <li><b>Медицинские сведения</b> – диагнозы, выписки, назначения. Помощник не советует про питание и здоровье: если кто-то что-то не ест, просто напишите «не ставь в меню рыбу».</li>
+        <li><b>Данные детей</b> – полные имена, фото, номер и название школы или сада, адрес. Вместо этого: «младшая, 6 лет, кружок по вторникам рядом с домом».</li>
+        <li><b>Банковские данные и пароли</b> – номера карт, коды из СМС, доступы к личным кабинетам.</li>
+      </ul>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="proverka">
+      <div class="lede" style="padding-top:0"><div class="col">
+      <p class="label">Проверка в деле</p>
+      <h2>Проверьте помощника на реальной неделе</h2>
+      <p>Понять, подходит ли вам помощник, можно только на живой неделе. Спланируйте с ним одну неделю целиком, хотя бы раз скажите «неделя поехала», а в воскресенье вернитесь в тот же чат и отправьте запрос ниже. По ходу недели смотрите на пять вещей.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Меню правда из того, что было дома</h3><p>Продукты, которые лежали в холодильнике, ушли в дело, а не испортились.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Покупки без лишнего</h3><p>В магазине не пришлось докупать забытое, и ничего из списка не осталось лежать без дела.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Дела не на одном человеке</h3><p>Часы у взрослых примерно сопоставимы с их графиком, а дети делали свою часть.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Остался свободный вечер</h3><p>В плане было время просто отдохнуть, и оно не съелось делами.</p></div></div>
+        <div class="def"><span class="dn">5</span><div><h3>Семье понятно</h3><p>Домашние поняли свою часть из короткой версии «для семейного чата» без долгих объяснений.</p></div></div>
+      </div>
+      <div class="promptbox stepprompt" style="margin-top:26px"><p class="plabel">Запрос в конце недели</p><pre>Неделя прошла. Давай проверим, как сработал план. Вот что было на самом деле: <span class="tok">[что получилось, что нет, что пришлось менять]</span>.
+
+Сравни план и то, как вышло:
+1) что из плана оказалось реальным;
+2) где план был слишком оптимистичным – по времени, готовке или делам;
+3) кому досталось больше дел, чем мы планировали;
+4) что из меню и покупок не пригодилось.
+
+Потом предложи 3 правки к тому, как планировать следующую неделю. Напиши их отдельным блоком «Допиши в правила помощника», чтобы я вставил(а) их в конец инструкций проекта.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Правки из блока «Допиши в правила помощника» вставьте в самый конец промпта – в инструкции проекта или в свой файл. Так помощник с каждой неделей точнее подстраивается под вашу семью.</p>
+      </div></div>
+    </section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните к себе помощника – файл <b>semeinaya-nedelya-promt.txt</b>. Если собираете помощников в папку «Мои помощники», положите его туда: оттуда его удобно вставить в новый чат или в инструкции проекта. Заметки на следующую неделю, которые помощник выдаёт в итоге, тоже стоит сохранять.</p>
+      <p style="margin-top:26px"><b>Праздник, поездка, подарок, сложный разговор или разбор шкафа – готовые запросы для таких дел в <a href="https://aiforlife.ru/ii-course/modul3/bonus-top20-zhizn/" style="color:var(--pink-soft)">«Топ-20: ИИ для семейной и личной жизни»</a>.</b></p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 3 · набор <a href="https://aiforlife.ru/ii-course/modul3/zhizn-i-semya/" style="color:#B7A9BD;border-bottom:1px solid #4A3E52" target="_top">«ИИ для жизни и семьи»</a></div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');
+    var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

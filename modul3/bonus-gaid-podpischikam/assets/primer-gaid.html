@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>5 шагов: как разобрать почту за 15 минут с ИИ · учебный пример гайда-подарка</title>
+
+<!-- ВХОД ПО ПАРОЛЮ: начало -->
+<style>
+#gate{display:none}
+html.locked body>*:not(#gate){display:none!important}
+html.locked #gate{display:flex}
+@media print{#gate{display:none!important}}
+</style>
+<script>
+/* Пароль хранится не текстом, а хэшем SHA-256 (после обрезки пробелов и перевода в строчные буквы).
+   Чтобы сменить пароль, замените hash. store – имя записи в браузере, у каждого гайда своё. */
+var GATE={hash:'cc61d1221d02b1cd33f6c973abec50f0add84d21603f259d5eca62420de37208',store:'primer-pochta-vhod'};
+function sha256(s){
+  var K=[],H=[],p=2,n=0,i,j;
+  function frac(x){return (x-Math.floor(x))*4294967296|0}
+  while(n<64){for(j=2;j*j<=p;j++)if(p%j===0)break;if(j*j>p){if(n<8)H[n]=frac(Math.pow(p,1/2));K[n++]=frac(Math.pow(p,1/3));}p++;}
+  var b=unescape(encodeURIComponent(s)),l=b.length,w=[];
+  for(i=0;i<l;i++)w[i>>2]|=b.charCodeAt(i)<<(24-(i%4)*8);
+  w[l>>2]|=0x80<<(24-(l%4)*8);w[((l+8>>6)<<4)+15]=l*8;
+  for(i=0;i<w.length;i+=16){
+    var a=H.slice(0),W=[];
+    for(j=0;j<64;j++){
+      if(j<16)W[j]=w[i+j]|0;else{var x=W[j-15],y=W[j-2];W[j]=(((x>>>7|x<<25)^(x>>>18|x<<14)^(x>>>3))+W[j-7]+((y>>>17|y<<15)^(y>>>19|y<<13)^(y>>>10))+W[j-16])|0;}
+      var e=a[4],t1=a[7]+((e>>>6|e<<26)^(e>>>11|e<<21)^(e>>>25|e<<7))+((e&a[5])^(~e&a[6]))+K[j]+W[j],c=a[0],
+          t2=((c>>>2|c<<30)^(c>>>13|c<<19)^(c>>>22|c<<10))+((c&a[1])^(c&a[2])^(a[1]&a[2]));
+      a=[(t1+t2)|0].concat(a);a[4]=(a[4]+t1)|0;a.pop();
+    }
+    for(j=0;j<8;j++)H[j]=(H[j]+a[j])|0;
+  }
+  var o='';for(i=0;i<8;i++)o+=('00000000'+(H[i]>>>0).toString(16)).slice(-8);return o;
+}
+function gateHash(p){return sha256(String(p||'').trim().toLowerCase());}
+(function(){
+  var ok=false;
+  try{
+    var q=new URLSearchParams(location.search),k=q.get('k');
+    if(k!==null){
+      if(gateHash(k)===GATE.hash){ok=true;try{localStorage.setItem(GATE.store,GATE.hash);}catch(e){}}
+      q.delete('k');var qs=q.toString();
+      try{history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash);}catch(e){}
+    }
+  }catch(e){}
+  if(!ok){try{ok=localStorage.getItem(GATE.store)===GATE.hash;}catch(e){}}
+  if(!ok)document.documentElement.classList.add('locked');
+})();
+</script>
+<!-- ВХОД ПО ПАРОЛЮ: конец -->
+
+<style>
+:root{
+  --ink:#1F2B2D; --muted:#5B6A6C; --line:#DCE3E1; --paper:#FAF8F3; --card:#FFFFFF;
+  --accent:#2F6F62; --accent-soft:#E5F0EC; --dark:#1D2A2B;
+  --t-title:clamp(30px,6vw,46px); --t-sub:21px; --t-text:17px; --t-label:12px;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--t-text);line-height:1.6;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+b,strong{font-weight:700}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.label{font-size:var(--t-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:var(--t-title);line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:12px 0 14px}
+h2{font-size:var(--t-sub);line-height:1.3;font-weight:800;margin:0 0 10px}
+h3{font-size:var(--t-sub);line-height:1.3;font-weight:700;margin:0 0 8px}
+p+p{margin-top:12px}
+.lead{color:var(--muted)}
+
+/* экран входа */
+#gate{position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;padding:20px;background:var(--dark)}
+.gbox{width:100%;max-width:440px;background:var(--paper);padding:30px 24px 26px;border-top:6px solid var(--accent)}
+.gtitle{font-size:var(--t-sub);font-weight:800;line-height:1.3;margin:10px 0 10px}
+.gbox p{color:var(--muted);font-size:16px}
+.gbox input{display:block;width:100%;margin-top:16px;font:inherit;font-size:17px;padding:13px 14px;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:0}
+.gbox input:focus{border-color:var(--accent);outline:none}
+.gerr{min-height:24px;margin-top:10px;color:#A33A2B!important;font-weight:600}
+.ghint{margin-top:6px;font-size:var(--t-label)!important;letter-spacing:.04em}
+
+/* прогресс чтения */
+.progress{position:fixed;top:0;left:0;right:0;height:4px;background:transparent;z-index:20}
+.progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+header{padding:40px 0 8px}
+.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.meta .label{display:block;color:var(--muted);margin-bottom:2px}
+.meta div{font-size:16px;font-weight:600}
+
+section{padding:30px 0 4px}
+.plate{background:var(--accent-soft);padding:16px 18px;margin-top:16px}
+.plate .label{display:block;margin-bottom:6px}
+.plate.warn{background:#FBEDE6}
+.plate.warn .label{color:#A33A2B}
+ul.list{list-style:none;margin-top:10px}
+ul.list li{position:relative;padding-left:22px;margin-bottom:8px}
+ul.list li::before{content:"";position:absolute;left:0;top:12px;width:10px;height:2px;background:var(--accent)}
+
+/* шаги: номер у края, текст с отступом */
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;padding:22px 0;border-top:1px solid var(--line)}
+.snum{font-size:var(--t-sub);font-weight:800;line-height:1.3;color:var(--accent)}
+.got{margin-top:12px;font-size:16px;color:var(--muted)}
+.got b{color:var(--ink)}
+
+/* промпт с кнопкой */
+.prompt{background:var(--dark);padding:18px 18px 16px;margin-top:14px}
+.prompt .label{color:#A9D3C7;display:block;margin-bottom:10px}
+.prompt pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:14px;line-height:1.7;color:#E4ECEA}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;font:inherit;font-size:16px;font-weight:700;padding:11px 20px;border:none;border-radius:0;cursor:pointer;background:var(--accent);color:#fff;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
+.prompt .btn{margin-top:14px;background:#fff;color:var(--ink)}
+.btn.done{background:#2E8B57!important;color:#fff!important}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+
+/* подробнее */
+details.more{margin-top:12px}
+details.more summary{cursor:pointer;font-weight:700;color:var(--accent);list-style:none;display:inline-block;padding:4px 0;border-bottom:1px solid currentColor}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"+ "}
+details.more[open] summary::before{content:"− "}
+details.more div{margin-top:10px;font-size:16px;color:var(--muted)}
+
+/* чек-лист */
+.check{margin-top:12px}
+.check label{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--accent)}
+.check label.on span{color:var(--muted);text-decoration:line-through}
+.ccount{margin-top:10px;font-size:var(--t-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.next{background:var(--dark);color:#E4ECEA;padding:28px 0 30px;margin-top:40px}
+.next h2{color:#fff}
+.next .label{color:#A9D3C7}
+.next .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.next .btn.ghost{color:#fff;box-shadow:inset 0 0 0 1.5px #fff}
+.demo-note{margin-top:12px;font-size:15px;color:#A9D3C7;min-height:22px}
+footer{padding:22px 0 34px;font-size:var(--t-label);letter-spacing:.04em;color:var(--muted)}
+
+@media (max-width:560px){
+  .meta{grid-template-columns:1fr;gap:8px}
+  .step{grid-template-columns:34px minmax(0,1fr);gap:10px}
+  .btn{width:100%}
+  .prompt{margin-left:-20px;margin-right:-20px}
+}
+@media print{
+  @page{margin:0}
+  body{background:#fff;padding:14mm 16mm}
+  .progress,.btn,.demo-note{display:none!important}
+  .prompt{background:#fff;border:1px solid var(--line);margin:10px 0}
+  .prompt pre,.prompt .label{color:var(--ink)}
+  .next{background:#fff;color:var(--ink);padding:16px 0}
+  .next h2{color:var(--ink)}
+  .wrap{padding:0;max-width:none}
+  .step,.plate,.prompt{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <form class="gbox" id="gate-form" autocomplete="on">
+    <p class="label">Гайд-подарок · учебный пример</p>
+    <p class="gtitle" id="gate-title">5 шагов: как разобрать почту за 15 минут с ИИ</p>
+    <p>Введите пароль из сообщения, где вы получили ссылку.</p>
+    <label for="gate-pass" class="label" style="display:block;margin-top:18px">Пароль</label>
+    <input id="gate-pass" type="password" autocomplete="current-password" autocapitalize="none" spellcheck="false" style="margin-top:6px">
+    <p class="gerr" id="gate-err" aria-live="polite"></p>
+    <button class="btn" type="submit" style="width:100%">Открыть гайд</button>
+    <p class="ghint">Это учебный пример: пароль указан на странице бонуса.</p>
+  </form>
+</div>
+
+<div class="progress" aria-hidden="true"><span id="bar"></span></div>
+
+<header class="wrap">
+  <p class="label">Гайд-подарок · учебный пример</p>
+  <h1>5 шагов: как разобрать почту за 15 минут с ИИ</h1>
+  <p class="lead">Для тех, у кого во «Входящих» копятся письма и непонятно, с чего начать. Вы разложите письма по четырём стопкам и ответите на самые важные.</p>
+  <div class="meta">
+    <div><span class="label">Время</span>15 минут</div>
+    <div><span class="label">Понадобится</span>Почта и любая нейросеть</div>
+    <div><span class="label">Результат</span>Понятно, что делать с каждым письмом</div>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap" id="chto">
+  <h2>Что получится</h2>
+  <p>Каждое письмо из «Входящих» окажется в одной из четырёх стопок: ответить сегодня, ответить позже или передать, прочитать, когда будет время, и архив. На три самых важных письма вы ответите сразу, с черновиками от нейросети.</p>
+  <h2 style="margin-top:24px">Что понадобится</h2>
+  <ul class="list">
+    <li>Почта на компьютере или телефоне.</li>
+    <li>Нейросеть, в которой вы обычно работаете.</li>
+    <li>Таймер на 15 минут.</li>
+  </ul>
+  <div class="plate warn"><span class="label">Бережно с чужими данными</span>Не вставляйте в нейросеть письма целиком, если в них есть чужие имена, телефоны, номера договоров или суммы. Для разбора хватает темы письма и того, от кого оно.</div>
+</section>
+
+<section class="wrap" id="shagi">
+  <p class="label">Часть 1 · Разложить</p>
+  <div class="step"><span class="snum">1</span><div>
+    <h3>Поставьте таймер на 15 минут</h3>
+    <p>Откройте папку «Входящие» и запустите таймер. Ограничение по времени помогает не застрять на первом же письме.</p>
+    <p class="got"><b>Должно получиться:</b> таймер идёт, перед вами список писем.</p>
+  </div></div>
+  <div class="step"><span class="snum">2</span><div>
+    <h3>Скопируйте список писем</h3>
+    <p>Выпишите тему и отправителя, по одной строке на письмо. Имена можно сократить до имени без фамилии.</p>
+    <details class="more"><summary>Подробнее</summary><div>Если писем очень много, возьмите последние 30. Остальные разберёте в следующий раз тем же способом: так первый разбор точно уложится в 15 минут.</div></details>
+  </div></div>
+  <div class="step"><span class="snum">3</span><div>
+    <h3>Попросите нейросеть разложить письма по стопкам</h3>
+    <p>Скопируйте запрос, вставьте свой список вместо текста в квадратных скобках и отправьте.</p>
+    <div class="prompt"><span class="label">Запрос · разложить по стопкам</span><pre>Вот список писем из моей почты: тема и от кого, по одной строке. Разложи их по четырём стопкам:
+1) ответить сегодня;
+2) ответить позже или передать;
+3) прочитать, когда будет время;
+4) архив.
+Для каждой стопки дай список писем. Если не понимаешь, куда отнести письмо, вынеси его отдельно и спроси меня.
+
+[вставьте список писем]</pre><button class="btn" type="button" data-copy>Скопировать</button></div>
+    <p class="got"><b>Должно получиться:</b> четыре списка и, возможно, несколько писем с вопросом к вам.</p>
+  </div></div>
+  <div class="plate"><span class="label">Заберите в практику</span>Четыре стопки работают и без нейросети. Открывая письмо, спросите себя: в какую оно стопку? Решение за пять секунд экономит возвращения к одному и тому же письму.</div>
+
+  <p class="label" style="margin-top:34px">Часть 2 · Ответить и закрыть</p>
+  <div class="step"><span class="snum">4</span><div>
+    <h3>Ответьте на три письма из стопки «сегодня»</h3>
+    <p>Начните с самого важного. Перескажите письмо своими словами и скажите, что хотите ответить, а нейросеть предложит черновик.</p>
+    <div class="prompt"><span class="label">Запрос · черновик ответа</span><pre>Помоги ответить на письмо. Суть письма: [перескажите своими словами, без личных данных]. Я хочу ответить так: [согласиться / отказать / уточнить / перенести]. Напиши короткий вежливый ответ в 3–5 предложений. Пиши просто, как я: [как вы обычно пишете письма].</pre><button class="btn" type="button" data-copy>Скопировать</button></div>
+    <details class="more"><summary>Подробнее</summary><div>Перед отправкой проверьте имена, даты и суммы: нейросеть может их перепутать. Если ответ звучит не как вы, попросите: «Короче и проще, без вежливых оборотов в начале».</div></details>
+  </div></div>
+  <div class="step"><span class="snum">5</span><div>
+    <h3>Закройте остальные стопки</h3>
+    <p>Письма из стопки «архив» выделите и отправьте в архив. «Прочитать» перенесите в отдельную папку. «Позже или передать» перешлите или отметьте флажком.</p>
+    <p class="got"><b>Должно получиться:</b> во «Входящих» остались только письма, которых вы сознательно решили подождать.</p>
+  </div></div>
+  <div class="plate"><span class="label">Заберите в практику</span>Повторяйте разбор раз в неделю, в одно и то же время. Запрос из шага 3 сохраните в заметки, чтобы не искать его снова.</div>
+</section>
+
+<section class="wrap" id="cheklist">
+  <h2>Чек-лист</h2>
+  <p class="lead">Отмечайте по ходу: галочки сохранятся в этом браузере.</p>
+  <div class="check" id="check">
+    <label><input type="checkbox" data-id="c1"><span>Таймер на 15 минут запущен</span></label>
+    <label><input type="checkbox" data-id="c2"><span>Список писем скопирован без чужих личных данных</span></label>
+    <label><input type="checkbox" data-id="c3"><span>Письма разложены по четырём стопкам</span></label>
+    <label><input type="checkbox" data-id="c4"><span>Отправлены ответы на три важных письма</span></label>
+    <label><input type="checkbox" data-id="c5"><span>Архив и папка «Прочитать» разобраны</span></label>
+  </div>
+  <p class="ccount" id="ccount">Отмечено 0 из 5</p>
+</section>
+
+<section class="wrap" id="esli">
+  <h2>Если не получилось</h2>
+  <ul class="list">
+    <li><b>Нейросеть просит текст писем целиком.</b> Ответьте, что для разбора хватит темы и отправителя, и попросите разложить по этим данным.</li>
+    <li><b>Писем слишком много.</b> Возьмите последние 30, остальные – в следующий раз.</li>
+    <li><b>Не уложились в 15 минут.</b> В первый раз так бывает. Остановитесь по таймеру и продолжите завтра с шага 3.</li>
+  </ul>
+</section>
+
+<div class="next">
+  <div class="wrap">
+    <p class="label">Что дальше</p>
+    <h2>Хотите больше таких коротких разборов?</h2>
+    <p>Здесь автор гайда одной-двумя фразами говорит, что ещё полезного есть у него, и даёт одну кнопку.</p>
+    <div class="btns">
+      <a class="btn" href="#" id="demo-cta">Перейти в канал автора</a>
+      <button class="btn ghost" type="button" id="print">Сохранить в PDF</button>
+    </div>
+    <p class="demo-note" id="demo-note" aria-live="polite"></p>
+  </div>
+</div>
+
+</main>
+
+<footer class="wrap">Учебный пример гайда-подарка · курс «Нейро-архитектор», модуль 3, бонус к уроку 4</footer>
+
+<script>
+(function(){
+  /* вход по паролю */
+  var form=document.getElementById('gate-form');
+  if(form)form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var inp=document.getElementById('gate-pass'),err=document.getElementById('gate-err');
+    if(gateHash(inp.value)===GATE.hash){
+      try{localStorage.setItem(GATE.store,GATE.hash);}catch(e){}
+      document.documentElement.classList.remove('locked');
+      err.textContent='';window.scrollTo(0,0);
+    }else{
+      err.textContent='Пароль не подошёл. Проверьте раскладку клавиатуры и попробуйте ещё раз.';
+      inp.select();
+    }
+  });
+  if(document.documentElement.classList.contains('locked')){var gp=document.getElementById('gate-pass');if(gp)gp.focus();}
+
+  /* копирование промптов */
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('[data-copy]');if(!b)return;
+    var pre=b.closest('.prompt').querySelector('pre');
+    copy(pre.innerText).then(function(){
+      b.textContent='Скопировано';b.classList.add('done');
+      setTimeout(function(){b.textContent='Скопировать';b.classList.remove('done');},2200);
+    }).catch(function(){b.textContent='Выделите текст вручную';});
+  });
+
+  /* прогресс чтения */
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?Math.min(100,h.scrollTop/m*100):0)+'%';}
+  window.addEventListener('scroll',prog,{passive:true});prog();
+
+  /* чек-лист с запоминанием */
+  var KEY='primer-pochta-cheklist',saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  var boxes=document.querySelectorAll('#check input');
+  function count(){
+    var n=0;boxes.forEach(function(b){b.parentNode.classList.toggle('on',b.checked);if(b.checked)n++;});
+    document.getElementById('ccount').textContent='Отмечено '+n+' из '+boxes.length;
+  }
+  boxes.forEach(function(b){
+    b.checked=!!saved[b.dataset.id];
+    b.addEventListener('change',function(){saved[b.dataset.id]=b.checked;try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}count();});
+  });
+  count();
+
+  /* печать: раскрыть «Подробнее» */
+  window.addEventListener('beforeprint',function(){document.querySelectorAll('details').forEach(function(d){d.dataset.was=d.open?'1':'';d.open=true;});});
+  window.addEventListener('afterprint',function(){document.querySelectorAll('details').forEach(function(d){d.open=!!d.dataset.was;});});
+  document.getElementById('print').addEventListener('click',function(){window.print();});
+
+  /* учебная кнопка */
+  document.getElementById('demo-cta').addEventListener('click',function(ev){
+    ev.preventDefault();
+    document.getElementById('demo-note').textContent='Это учебный пример. В вашем гайде здесь будет ссылка на ваш канал, эфир или продукт.';
+  });
+})();
+</script>
+</body>
+</html>

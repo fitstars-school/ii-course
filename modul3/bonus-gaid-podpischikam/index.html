@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Гайд-подарок для подписчиков: от запроса до ссылки · Бонус модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Как собрать для подписчиков гайд-подарок в виде страницы, которую удобно читать с телефона, закрыть его паролем и отдавать по ссылке: путь по шагам, готовые промпты, навык-методолог и учебный пример.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* бонусы модуля 2 */
+.matrix{margin-top:28px;border-top:1px solid var(--ink)}
+.mrow{display:grid;grid-template-columns:120px minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:22px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.52;color:#3B3143}
+.mrow.mh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding:12px 0}
+.mrow .mname{font-weight:700;color:var(--ink);font-size:16px}
+.mcap{margin-top:16px;font-size:14px;color:var(--muted)}
+.tree{margin-top:22px;border-left:2px solid var(--pink);padding:16px 0 16px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:#3B3143;white-space:pre-wrap;overflow-wrap:anywhere}
+.tree b{color:var(--ink);font-weight:500}
+.tree i{font-style:normal;color:var(--faint)}
+.sublab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:30px 0 4px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.peek{margin-top:18px}
+.peek summary{display:inline-block;cursor:pointer;list-style:none;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.peek[open] summary{color:var(--pink);border-bottom-color:var(--pink)}
+.peek .promptbox{margin-top:16px}
+.skcode{font-family:var(--mono);font-size:13px;color:var(--faint);font-weight:400;margin-left:6px;white-space:nowrap}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:22px}
+.chain span{font-size:15px;font-weight:600;padding:8px 14px;border:1px solid var(--line);background:#fff}
+.chain em{font-style:normal;color:var(--pink);font-weight:700}
+.backlink{display:inline-block;margin-top:12px;color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px}
+.backlink:hover{color:#fff;border-bottom-color:var(--pink-soft)}
+@media (max-width:760px){
+  .mrow{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .mrow.mh{display:none}
+  .mrow>div[data-l]::before{content:attr(data-l);display:block;font-size:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .mrow .mname{font-size:18px}
+  .tree{font-size:12.5px;padding-left:16px}
+  .peek .promptbox{margin-left:-20px;margin-right:-20px}
+  .step .btns .btn{width:100%}
+}
+
+/* из бонуса «Транскрибация»: шаги со списками и заголовки частей */
+.blk h3.sub{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:30px 0 8px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:600px;margin-top:24px}
+.shot{margin:24px 0 0;max-width:300px}
+.shots .shot{margin:0;max-width:none}
+.shot.wide{max-width:460px}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.shot figcaption{font-size:14px;line-height:1.5;color:var(--muted);margin-top:10px}
+.step ol{margin:14px 0 0 0;padding-left:22px}
+.step ol li{margin-bottom:8px;font-size:17px;color:#3B3143;padding-left:4px}
+.step ol li::marker{color:var(--pink);font-weight:700}
+.step .btns{margin-top:18px}
+.step a.btn,.dark a.btn{color:#fff}
+.facts{margin:0 0 20px}
+.fact{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.fact:first-child{border-top:none;padding-top:0}
+.fact .fk{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);padding-top:4px}
+.fact p{font-size:16px;line-height:1.55;color:#3B3143}
+.parthead{padding-top:70px}
+.parthead .ptag{display:inline-block;background:var(--pink);color:#fff;font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px}
+.parthead h2{font-size:clamp(32px,4.4vw,52px);margin:16px 0 14px}
+.parthead p{max-width:68ch}
+.back{padding-top:44px}
+.back .linkbtn{font-size:16px}
+footer a{color:#B7A9BD;border-bottom:1px solid rgba(183,169,189,.4)}
+footer a:hover{color:var(--pink-soft)}
+footer p+p{margin-top:8px}
+@media (max-width:760px){
+  .fact{grid-template-columns:1fr;gap:4px}
+  .shot,.shot.wide{max-width:100%}
+  .shots{grid-template-columns:1fr 1fr;gap:14px}
+  .parthead{padding-top:54px}
+}
+@media (max-width:420px){.shots{grid-template-columns:1fr}}
+
+/* бонус: гайд-подарок */
+.step ul{margin-top:12px}
+.step ul li{font-size:17px;color:#3B3143}
+.parthead p{color:var(--muted)}
+.hashbox label.plabel{display:block}
+.hashbox input{display:block;width:100%;font-family:var(--mono);font-size:16px;padding:13px 14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;border-radius:0}
+.hashbox input:focus{outline:none;border-color:var(--pink-soft)}
+.hashbox input::placeholder{color:#9C8AA6}
+.hashlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin:18px 0 8px}
+.hashbox pre{overflow-wrap:anywhere;word-break:break-all;min-height:24px}
+.practice .pintro a{border-bottom:1px solid rgba(255,143,198,.5)}
+@media (max-width:760px){.hashbox{margin-left:-20px;margin-right:-20px}}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · к уроку 4</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Гайд-подарок для подписчиков: <span class="it">от&nbsp;запроса до&nbsp;ссылки</span></h1>
+      <p class="hlead">Соберите для подписчиков полезный подарок в виде страницы, которую удобно читать с телефона, и отдавайте его по ссылке с паролем. Внутри – путь по шагам, готовые промпты и навык, который проведёт по сборке.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Время</span><span class="mv">2–3 часа, можно частями</span></div>
+      <div><span class="mk">Понадобится</span><span class="mv">Ваши материалы по теме и GitHub из урока 4</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Гайд по ссылке с паролем и навык для следующих</span></div>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Разделы" style="margin-top:34px">
+    <a class="navlink" href="#zachem">Зачем</a>
+    <a class="navlink" href="#karkas">Каркас</a>
+    <a class="navlink" href="#shagi">По шагам</a>
+    <a class="navlink" href="#parol">Пароль</a>
+    <a class="navlink" href="#navyk">Навык</a>
+    <a class="navlink" href="#primer">Пример</a>
+    <a class="navlink" href="#zatyki">Затыки</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="dark mainbox" id="zachem" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Зачем гайд-подарок и&nbsp;почему страница удобнее PDF</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p><b>Подарок, который даёт первый результат.</b> Гайд-подарок (его ещё называют лид-магнитом) – небольшой полезный материал, который вы дарите за подписку, за комментарий или просто новым читателям. Человек за 15–30 минут получает маленький результат и видит, как вы думаете и объясняете.</p></div>
+      <div class="mline"><span class="mn">2</span><p><b>Читается с телефона.</b> PDF на телефоне приходится растягивать пальцами. Страница сама подстраивается под экран: крупный текст, удобные кнопки, промпт копируется одним нажатием.</p></div>
+      <div class="mline"><span class="mn">3</span><p><b>Обновляется по той же ссылке.</b> Нашли опечатку или добавили шаг – поправили файл, и все, у кого есть ссылка, видят новую версию. Скачанный PDF так не исправить.</p></div>
+      <div class="mline"><span class="mn">4</span><p><b>Закрывается паролем и показывает, что забрать в практику.</b> Пароль отсекает случайных людей и поисковики, а блоки «Заберите в практику», чек-лист с галочками и раскрывающиеся «Подробнее» помогают дочитать и сделать. Кому нужен файл, сохранит страницу в PDF через печать.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal" id="karkas">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Каркас</p>
+    <h2>Из чего состоит хороший гайд-подарок</h2>
+    <p>Один гайд – один результат, который реально получить за 15–30 минут. Если тем три, это три гайда. А внутри каждого – один и тот же каркас.</p>
+    <div class="chain"><span>Что получится</span><em>→</em><span>Понадобится</span><em>→</em><span>Шаги</span><em>→</em><span>Заберите в практику</span><em>→</em><span>Если не получилось</span><em>→</em><span>Что дальше</span></div>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Что получится</h3><p>Результат одной-двумя фразами. Человек должен понять, его ли это гайд, ещё до первого шага.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Понадобится</h3><p>Что нужно заранее: сервис, файл, время. Если нужен платный тариф или VPN, говорим здесь, а не на пятом шаге.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Шаги</h3><p>3–7 шагов, каждый начинается с глагола и содержит одно действие. После шагов, где что-то меняется, – строка «Должно получиться».</p></div></div>
+      <div class="def"><span class="dn">4</span><div><h3>Заберите в практику</h3><p>Плашка в конце каждой части: 1–2 действия, которые читатель повторит уже без гайда.</p></div></div>
+      <div class="def"><span class="dn">5</span><div><h3>Если не получилось</h3><p>2–4 частые ошибки и что делать. Это снимает тревогу и экономит вам ответы в личных сообщениях.</p></div></div>
+      <div class="def"><span class="dn">6</span><div><h3>Что дальше</h3><p>Одно следующее действие и мягкая кнопка: на ваш канал, эфир, консультацию или продукт. Без давления и без «осталось три места».</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<div class="practice" id="shagi">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Собираем</p>
+    <h2>Десять шагов от&nbsp;запроса до&nbsp;ссылки</h2>
+    <p class="pmeta">Содержание · страница · пароль и публикация</p>
+    <p class="pintro">Работайте в одном чате или в проекте-помощнике, чтобы нейросеть помнила, что уже решено. Места для своего текста в промптах – в [квадратных скобках], скобки потом уберите. Если поставите навык <a href="#navyk" style="color:var(--pink-soft)">«Методолог гайда»</a>, он проведёт по этим же шагам сам и не пойдёт дальше, пока вы не подтвердите предыдущий.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="parthead" style="padding-top:44px"><span class="ptag">Часть 1</span><h2>Содержание</h2><p>Сначала человек и результат, потом план, потом текст. Переделать план дешевле, чем страницу.</p></div>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Тема и читатель</h3>
+      <p>Начните с человека, а не с темы. Кто ваш подписчик, с чем он приходит и что хочет получить. Точка А – где он сейчас, точка Б – что он сможет сделать после гайда. Результат один, и его реально получить за 15–30 минут.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 1 · тема и читатель</p><pre>Помоги мне выбрать тему гайда-подарка для подписчиков моего блога. Я [кто вы и о чём ваш блог]. Мои подписчики – [кто они, чем заняты, что их волнует]. Чаще всего они спрашивают меня о [2–3 частых вопроса]. После гайда я хочу позвать их [в канал / на эфир / на консультацию / в продукт – какой].
+
+Если чего-то не хватает, задай мне до 5 вопросов. Потом предложи 3 темы. Для каждой: точка А – где читатель сейчас, его словами; точка Б – что он сможет сделать после гайда; один результат, который реально получить за 15–30 минут; как эта тема ведёт к [куда хочу позвать]. Не выдумывай факты обо мне и моей аудитории – если не знаешь, спроси.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote"><b>Должно получиться:</b> одна тема и фраза, которой вы объясните, что получит подписчик. Например: «После гайда вы разберёте почту за 15 минут и ответите на важные письма».</p>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>План гайда</h3>
+      <p>Собираем план по каркасу и выбираем обещание – фразу, которая станет заголовком. Текст пока не пишем.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 2 · план и обещание</p><pre>Тема гайда: [тема]. Читатель: [кто]. Точка А: [где он сейчас]. Точка Б: [что сможет после гайда].
+
+Собери план по каркасу: «Что получится» → «Понадобится» → шаги (3–7, каждый – одно действие и начинается с глагола; если больше – раздели на части) → «Заберите в практику» в конце каждой части → «Если не получилось» → «Что дальше» с мягкой кнопкой на [канал / продукт]. Под каждым шагом одной строкой напиши, что читатель должен увидеть или получить после него.
+
+Сначала покажи только план, текст пока не пиши. Предложи 3 варианта обещания гайда одной фразой – без громких слов и без цифр, которые я не смогу подтвердить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Текст из своих материалов</h3>
+      <p>Самое ценное в гайде – ваш опыт: посты, ответы подписчикам, заметки, расшифровки эфиров и голосовых. Как превратить голос в текст, мы разбирали в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация»</a>. Нейросеть собирает текст только из этого, а там, где материала нет, оставляет пометку, а не придумывает.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 3 · текст по плану</p><pre>Напиши текст гайда по утверждённому плану. Источник – только мои материалы, прикрепляю: [посты, заметки, расшифровки].
+
+Правила:
+– не выдумывай опыт, истории, цифры, исследования и отзывы;
+– если для шага в материалах ничего нет, поставь пометку [уточнить: что нужно] и иди дальше;
+– сохраняй мои формулировки и словечки, обращение к читателю на «вы»;
+– абзацы по 2–4 строки, каждый шаг начинается с глагола.
+
+После текста дай список: какой раздел из какого материала взят и где стоят пометки [уточнить].</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 4 · сверка с источником</p><pre>Сверь текст гайда с моими материалами. Найди всё, чего в материалах нет: факты, цифры, примеры, советы, обещания. Покажи списком: фраза → есть ли она в материалах → что предлагаешь (убрать, смягчить или спросить меня). Сам текст пока не меняй.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Прочитайте текст сами, лучше вслух. Всё, что звучит не как вы, правьте сейчас: на готовой странице это дольше. Пометок [уточнить] к следующему шагу остаться не должно.</p>
+    </div></div>
+  </div>
+
+  <div class="parthead"><span class="ptag">Часть 2</span><h2>Страница</h2><p>Тот же текст становится страницей в вашем стиле, с блоками, которые помогают дочитать и сделать.</p></div>
+  <div class="steps">
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Страница в своём стиле</h3>
+      <p>Возьмите паспорт стиля из урока 3: цвета, шрифты, настроение. Если паспорта ещё нет, его поможет собрать навык brand-style из бонуса <a href="https://aiforlife.ru/ii-course/modul2/bonus-dizain-navyki/">«Навыки для дизайн-помощника»</a>.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 5 · сверстать страницу</p><pre>Сверстай гайд одной HTML-страницей. Текст прикрепляю – меняй только оформление, слова не трогай. Стиль – по моему паспорту стиля: [прикрепите паспорт или опишите цвета, шрифты, настроение].
+
+Требования:
+– один файл index.html, стили и скрипты внутри, без картинок и шрифтов с чужих сайтов;
+– сначала телефон: на экране шириной 375 пикселей текст читается без прокрутки вбок, по бокам есть поля, кнопки удобно нажимать пальцем;
+– не больше 4 размеров текста: заголовок, подзаголовок, основной текст, мелкая метка; без курсива, выделение жирным;
+– все блоки начинаются от одного левого края: номер шага у края, текст после него; важное выделяй плашкой и цветом, а не сдвигом;
+– страница аккуратно сохраняется в PDF через печать.
+Отдай файл целиком.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Сохраните файл к себе с именем index.html и откройте двойным щелчком: он откроется в браузере так, как его увидит подписчик. Чтобы прикинуть вид на телефоне, сузьте окно браузера до узкой полоски.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Блоки, которые помогают читать</h3>
+      <p>Гайд читают урывками, с телефона, между делами. Эти блоки помогают не потеряться и дойти до результата:</p>
+      <ul>
+        <li><b>Короткие шаги</b> с номером у края и строкой «Должно получиться».</li>
+        <li><b>«Заберите в практику»</b> – плашка в конце каждой части.</li>
+        <li><b>Чек-лист</b> в конце: галочки запоминаются в браузере.</li>
+        <li><b>Промпт в тёмном окне</b> с кнопкой «Скопировать».</li>
+        <li><b>«Подробнее»</b> – раскрывающиеся пояснения для тех, кому нужно «почему».</li>
+        <li><b>Полоса прогресса</b> вверху: видно, сколько осталось.</li>
+      </ul>
+      <p>Не обязательно всё сразу: возьмите те блоки, которые нужны вашему гайду.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 6 · блоки для лёгкого чтения</p><pre>Добавь на страницу блоки для лёгкого чтения, сам текст не меняй: [оставьте нужное]
+– тонкая полоса прогресса чтения вверху экрана;
+– строка «Должно получиться» после шагов, где у читателя что-то меняется;
+– плашка «Заберите в практику» в конце каждой части, 1–2 действия;
+– чек-лист в конце с галочками, которые запоминаются в браузере, и счётчиком «Отмечено N из M»;
+– промпты в тёмном окне с кнопкой «Скопировать»;
+– длинные пояснения – в раскрывающиеся блоки «Подробнее»;
+– кнопка «Сохранить в PDF».
+При печати все «Подробнее» раскрываются, кнопки и полоса прогресса не печатаются. Покажи списком, что добавил, и отдай файл целиком.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">6</span><div>
+      <h3>Проверка глазами подписчика и на телефоне</h3>
+      <p>Сначала пусть нейросеть посмотрит на гайд глазами вашего читателя, потом проверьте руками.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 7 · глазами подписчика</p><pre>Посмотри на гайд глазами моего подписчика: [кто он, что уже знает]. Он открыл ссылку с телефона в перерыве. Ответь:
+– понятно ли с первого экрана, что он получит и сколько это займёт;
+– где он застрянет или бросит;
+– какие слова ему незнакомы;
+– есть ли шаги, где склеены два действия;
+– понятно ли в «Что дальше», куда нажать и зачем.
+Дай 3 главные правки в формате «что – где – как исправить», остальное одной строкой.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote"><b>Руками:</b> на узком окне или телефоне нет прокрутки вбок; все кнопки «Скопировать» копируют; галочки чек-листа остаются после перезагрузки; сохранение в PDF через печать выглядит аккуратно. И лучшая проверка – дать гайд одному живому человеку из вашей аудитории до публикации.</p>
+    </div></div>
+  </div>
+
+  <div class="parthead"><span class="ptag">Часть 3</span><h2>Пароль, публикация и&nbsp;выдача</h2><p>Закрываем гайд от случайных глаз, выкладываем тем же путём, что портфолио в уроке 4, и решаем, как отдавать ссылку.</p></div>
+  <div class="steps">
+    <div class="step"><span class="snum">7</span><div>
+      <h3>Поставьте пароль</h3>
+      <p>Что пароль на бесплатной странице закрывает, а что нет, и как его поставить, разобрано ниже, в разделе <a href="#parol">«Пароль – честно»</a>. Там же готовый промпт и окошко, где можно посчитать хэш пароля.</p>
+      <p class="snote"><b>Должно получиться:</b> страница открывается с экрана входа; неверный пароль не пускает, верный открывает гайд.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">8</span><div>
+      <h3>Опубликуйте через GitHub Pages</h3>
+      <p>Тем же путём, что страница-портфолио в уроке 4: файлы – в репозиторий на GitHub, включаете GitHub Pages и получаете ссылку. Подробные шаги со скриншотами – в <a href="https://aiforlife.ru/ii-course/modul3/urok4/">конспекте урока 4</a>.</p>
+      <ul>
+        <li><b>Главный файл называется index.html.</b> GitHub Pages открывает его по адресу сайта.</li>
+        <li><b>Имена файлов и папок – латиницей, без пробелов:</b> gaid-pochta, а не «Гайд почта финал».</li>
+        <li><b>Где положить.</b> Можно отдельной папкой в тот же репозиторий, где портфолио: тогда адрес гайда – адрес портфолио плюс /имя-папки/. Или завести для гайда отдельный репозиторий.</li>
+      </ul>
+      <p class="rulebox"><b>Важно знать.</b> На бесплатном тарифе GitHub Pages работает из публичного репозитория, а опубликованная страница доступна в интернете всем, у кого есть ссылка. Значит, файл гайда с текстом лежит в открытом репозитории. Поэтому в гайде не должно быть ничего, что нельзя показывать всем. Сверено на 4 октября 2026 по документации GitHub: <a href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans">тарифы</a>, <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">создание сайта</a>.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 8 · подготовить к публикации</p><pre>Подготовь гайд к публикации на GitHub Pages. Проверь:
+– главный файл называется index.html;
+– все остальные файлы и картинки названы латиницей, без пробелов;
+– все ссылки внутри страницы относительные и ведут на существующие файлы;
+– в тексте и в коде нет моих личных данных, чужих имён, телефонов и ссылок, которые я не хочу показывать.
+Предложи короткое имя папки латиницей. Выдай список файлов, которые я загружаю, и что проверить после публикации.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">После публикации откройте ссылку на телефоне и пройдите вход по паролю ещё раз – уже на настоящем адресе.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">9</span><div>
+      <h3>Отдавайте ссылку и пароль</h3>
+      <p>Выберите, где человек получает подарок:</p>
+      <ul>
+        <li><b>В ответ на подписку</b> – в приветственном сообщении бота или в первом письме рассылки.</li>
+        <li><b>В ответ на комментарий</b> с кодовым словом – вручную или через бот и сервис автоответов, если вы ими уже пользуетесь.</li>
+        <li><b>В закреплённом посте или в шапке профиля.</b> Ссылку видят все, поэтому пароль лучше отправлять отдельно, в личном сообщении.</li>
+        <li><b>Ссылкой с ключом</b> вида адрес-гайда/?k=пароль. Гайд откроется сразу, без ввода. Удобно для личных сообщений, но помните: пересланная ссылка откроется у любого.</li>
+      </ul>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 9 · сообщение с подарком</p><pre>Напиши короткое сообщение, которым я отправлю гайд-подарок подписчику [в ответ на комментарий / в приветствии бота / в личные сообщения]. Внутри: приветствие в моём тоне; одна фраза – что человек получит и сколько это займёт; ссылка [ссылка]; пароль [пароль]; подсказка, что удобнее открыть с телефона и что браузер запомнит пароль. Без давления и без восклицательных знаков подряд. Дай 3 варианта: короткий, средний и с вопросом в конце, чтобы человек ответил.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Сохраните готовое сообщение в заметках: будете вставлять его каждый раз. Если в обмен на гайд вы собираете контакты – почту или телефон, это уже обработка персональных данных: уточните, какие правила для этого действуют в вашей стране.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">10</span><div>
+      <h3>Обновляйте по той же ссылке</h3>
+      <p>Исправить гайд – значит поправить тот же index.html и загрузить его поверх старого в тот же репозиторий. Ссылка не меняется. По документации GitHub, изменения появляются на сайте в течение примерно 10 минут; видите старую версию – подождите и обновите страницу.</p>
+      <p>Сменить пароль – заменить хэш в коде. После этого всем, включая тех, кто уже заходил, придётся ввести новый пароль.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 10 · внести правки</p><pre>Вот текущая версия гайда [прикрепите index.html] и что нужно поменять: [ваши правки]. Внеси только эти правки, остальное не трогай. Покажи списком «было → стало» и отдай файл целиком.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="parol">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Пароль – честно</p>
+    <h2>Что пароль закрывает, а&nbsp;что нет</h2>
+    <p>Бесплатная страница на GitHub Pages – просто файл, своего сервера, который проверял бы пароль, у неё нет. Поэтому пароль проверяется прямо в браузере читателя.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Закрывает</h3><p>Гайд от случайных людей, которым переслали ссылку без пароля. А вместе со строкой noindex в коде страницы – от поисковиков: она просит их не показывать страницу в поиске (<a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing">справка Google</a>, сверено на 4 октября 2026).</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Не закрывает</h3><p>От того, кто специально полезет в код страницы или в ваш открытый репозиторий: текст гайда лежит там целиком. Короткий простой пароль к тому же можно подобрать.</p></div></div>
+    </div>
+    <p class="rulebox"><b>Поэтому в такой гайд не кладём</b> личные данные – свои и чужие, материалы платного курса целиком и всё, что нельзя показывать всем. Для подарка, который и так бесплатный, этого уровня защиты обычно достаточно.</p>
+
+    <h3 class="sub">Как выбрать пароль</h3>
+    <p>Простое слово, которое легко набрать на телефоне и которое вы нигде больше не используете. Пароли от своих аккаунтов – никогда. Регистр букв в нашем варианте не важен: «Podarok» и «podarok» подойдут одинаково.</p>
+
+    <h3 class="sub">Посчитайте хэш пароля</h3>
+    <p>Хэш – это «отпечаток» пароля: по нему страница проверяет, верный ли пароль ввели, а сам пароль в коде не лежит. Наберите пароль ниже и скопируйте хэш в промпт. Считается прямо в вашем браузере, пароль никуда не отправляется.</p>
+    <div class="promptbox stepprompt hashbox">
+      <label class="plabel" for="pw">Пароль для гайда</label>
+      <input id="pw" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="например, podarok">
+      <p class="hashlab">Хэш SHA-256</p>
+      <pre id="hashout">Наберите пароль – здесь появится хэш</pre>
+      <div class="btns"><button class="btn" id="hashcopy" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать хэш</button></div>
+    </div>
+
+    <h3 class="sub">Промпт: добавить вход по паролю</h3>
+    <p>Отправьте в тот же чат, где верстали гайд, и прикрепите index.html, если нейросеть его уже не видит.</p>
+<div class="promptbox stepprompt"><p class="plabel">Промпт 11 · вход по паролю</p><pre>Добавь на страницу вход по паролю. Требования:
+1. Пока пароль не введён, виден только экран входа в стиле страницы – те же цвета и шрифты: название гайда, фраза «Введите пароль из сообщения, где вы получили ссылку», поле, кнопка «Открыть гайд».
+2. Пароль не храни в коде открытым текстом. Вот его хэш SHA-256: [вставьте хэш]. Перед сравнением убирай пробелы по краям введённого и переводи в строчные буквы. SHA-256 считай функцией на чистом JavaScript внутри страницы, чтобы вход работал и на сайте, и когда файл открыт с компьютера.
+3. Неверный пароль – спокойное сообщение под полем, без перезагрузки страницы.
+4. После верного пароля браузер запоминает вход (localStorage, ключ с названием гайда латиницей), и в следующий раз страница открывается сразу. Храни там хэш, а не пароль.
+5. Ключ в ссылке: если адрес заканчивается на ?k=пароль, страница открывается без ввода, запоминает вход и убирает ключ из адресной строки.
+6. В head добавь meta name="robots" content="noindex, nofollow".
+7. Если хранилище браузера недоступно, вход всё равно работает, просто без запоминания.
+8. При печати экран входа не печатается.
+Отдай страницу целиком одним файлом и напиши, как проверить: что ввести и что должно открыться.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="snote">Если поставили навык «Методолог гайда», в нём уже лежит готовый проверенный код входа – достаточно написать: «Добавь вход по паролю из навыка, хэш: [хэш]».</p>
+    <p class="snote"><b>Проверьте сами:</b> неверный пароль не пускает; верный открывает; после перезагрузки гайд открыт сразу; в окне инкогнито ссылка с ?k=пароль открывает гайд без ввода.</p>
+
+    <details class="peek"><summary>Подробнее: если нужна защита сильнее</summary>
+      <div class="note" style="margin-top:16px">Есть открытый инструмент <a href="https://github.com/robinmoisson/staticrypt">StatiCrypt</a>: он шифрует всю страницу паролем, и в репозитории лежит уже нечитаемый текст, который расшифровывается в браузере после ввода пароля (сверено на 4 октября 2026). У этого свои неудобства: после каждой правки страницу нужно шифровать заново, забытый пароль не восстановить, а простой пароль всё равно подбирается. Для гайда-подарка обычно хватает обычного входа. Если материал по-настоящему закрытый, ему место на платформе с личным кабинетом.</div>
+    </details>
+  </div></div>
+</section>
+
+<div class="practice" id="navyk">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Забираем</p>
+    <h2>Навык «Методолог гайда»</h2>
+    <p class="pmeta">zip – для нейросетей с навыками · txt – для всех остальных</p>
+    <p class="pintro">Навык ведёт вас по сборке гайда-подарка шаг за шагом и на каждом шаге ждёт вашего «да». Он не выдумывает опыт за вас, ставит пометки [уточнить] там, где не хватает материала, и знает, как сверстать страницу под телефон и поставить вход по паролю.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Методолог гайда-подарка <span class="skcode">gaid-podarok</span></h3>
+      <p>Девять шагов с «воротами»: читатель и точка А → Б, обещание одной фразой, план, текст только из ваших материалов, структура для лёгкого чтения, вёрстка одной страницей, вход по паролю, проверка глазами подписчика с тремя главными правками и подготовка к публикации. Внутри – два справочных файла: каркас и блоки страницы и готовый код входа по паролю.</p>
+      <div class="btns"><a class="btn" href="assets/gaid-podarok.zip" download="gaid-podarok.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/gaid-podarok.txt" download="gaid-podarok.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · gaid-podarok</p><pre>---
+name: gaid-podarok
+description: Методолог гайда-подарка (лид-магнита) для подписчиков блога. Ведёт автора по шагам с подтверждением на каждом: читатель и точка А → Б, обещание одной фразой, план, текст только из материалов автора, структура для лёгкого чтения, вёрстка одной HTML-страницей под телефон, вход по паролю, проверка глазами подписчика и подготовка к публикации. Подключай, когда пользователь хочет сделать гайд-подарок, лид-магнит, полезный подарок за подписку или комментарий, чек-лист или мини-гайд для подписчиков, интерактивную страницу вместо PDF, или просит закрыть такую страницу паролем.
+---
+
+# Методолог гайда-подарка
+
+## Зачем этот навык
+Гайд-подарок – небольшой полезный материал, который автор блога дарит подписчикам: за подписку, за комментарий или просто новым читателям. Хороший гайд даёт человеку один маленький результат за 15–30 минут и показывает, как автор думает и объясняет. Плохой – это пересказ всего, что автор знает, или красивые общие слова.
+
+Твоя задача – провести автора от темы до готовой страницы: одна HTML-страница, которая легко читается с телефона, открывается по ссылке с паролем и обновляется по той же ссылке.
+
+## Как ты работаешь
+- Идёшь по шагам ниже строго по порядку. Каждый шаг заканчивается **воротами**: коротко покажи итог шага и спроси «Идём дальше или правим?». Следующий шаг – только после явного «да» от автора.
+- Если автор пришёл с середины (например, текст уже есть), спроси, что готово, проверь это по критериям пропущенных шагов и начни с первого шага, который не закрыт.
+- За один раз задавай не больше 5 вопросов, с вариантами ответа, где это уместно.
+- Обращение к автору – как он сам пишет. Обращение к читателю в гайде – одно на весь текст, по умолчанию «вы».
+
+## Нерушимые правила
+- **Ничего не выдумывай.** Опыт, истории, кейсы, цифры, исследования, отзывы, результаты учеников – только из материалов автора. Нет фактуры – ставь пометку `[уточнить: что нужно]` и иди дальше.
+- Сохраняй слова и обороты автора. Чистить можно повторы и мусор расшифровки, менять смысл нельзя.
+- Никаких громких обещаний: «гарантированно», «навсегда», «за 5 минут без усилий». Обещание должно быть проверяемым.
+- Факты о сервисах, тарифах, законах и кнопках интерфейса – только если ты их проверил или автор дал источник. Иначе – осторожная формулировка и пометка «уточните на сайте сервиса».
+- В гайд не кладём личные данные (свои и чужие), материалы платного продукта целиком и всё, что нельзя показывать всем: пароль на бесплатной странице – защита от случайных глаз, а не от взлома.
+
+## Шаг 1. Читатель и точка А → Б
+Выясни:
+1. Кто подписчик: чем занят, что его волнует, как он сам называет свою проблему.
+2. Точка А – где читатель сейчас, его словами.
+3. Точка Б – что он сможет сделать после гайда. Одно действие или один результат.
+4. Можно ли получить этот результат за 15–30 минут. Если нет – сузь тему.
+5. Что дальше: куда автор хочет позвать читателя после гайда (канал, эфир, консультация, продукт).
+Если автор не знает тему, попроси 2–3 частых вопроса подписчиков и предложи 3 темы с точками А и Б.
+
+**Ворота 1:** карточка «Читатель · Точка А · Точка Б · Результат за 15–30 минут · Что дальше».
+
+## Шаг 2. Обещание одной фразой
+Предложи 3 варианта обещания гайда. Каждое: что читатель получит или сделает, за какое время, без громких слов. Пример формы: «После гайда вы [действие] за [время]». Проверь каждое вопросами: понятно ли за 3 секунды, можно ли проверить, есть ли у автора материал, чтобы его выполнить. Автор выбирает одно – это заголовок или подзаголовок гайда.
+
+**Ворота 2:** выбранное обещание.
+
+## Шаг 3. План
+Собери план по каркасу (подробно – `references/karkas-i-bloki.md`):
+1. Что получится – результат одной-двумя фразами.
+2. Понадобится – что нужно заранее: сервис, файл, время. Если нужен платный тариф или VPN – сказать здесь.
+3. Шаги – 3–7 штук, каждый начинается с глагола, одно действие на шаг. Если шагов больше 7 – разбей на части.
+4. «Заберите в практику» – в конце каждой части, 1–2 действия, которые читатель повторит без гайда.
+5. Если не получилось – 2–4 частые ошибки и что делать.
+6. Что дальше – одно следующее действие и мягкая кнопка на канал или продукт автора, без давления и искусственной срочности.
+Под каждым шагом одной строкой – что читатель увидит или получит после него. Покажи только план, без текста.
+
+**Ворота 3:** утверждённый план.
+
+## Шаг 4. Текст из материалов автора
+1. Попроси материалы: посты, ответы подписчикам, заметки, расшифровки эфиров и голосовых, конспекты консультаций (без чужих личных данных).
+2. Пиши текст по плану только из этих материалов. Чего нет – `[уточнить: …]`.
+3. После текста дай таблицу сверки: раздел гайда → из какого материала взято → где пометки `[уточнить]`.
+4. Пройди по тексту ещё раз и найди всё, чего нет в материалах: факты, цифры, советы, обещания. Покажи списком и предложи убрать, смягчить или спросить автора. Сам ничего не дописывай.
+5. Предложи автору прочитать текст вслух: всё, что звучит не как он, правим сейчас.
+
+**Ворота 4:** автор подтвердил текст, пометок `[уточнить]` не осталось.
+
+## Шаг 5. Структура для лёгкого чтения
+Перестрой утверждённый текст под чтение с телефона, не меняя смысла:
+- заголовки разделов отвечают на вопрос читателя («Как разложить письма по стопкам»), а не называют тему («Сортировка»);
+- шаг – одно действие, начинается с глагола; склеенные шаги разделяй;
+- «Должно получиться» – после шагов, где у читателя что-то меняется;
+- абзацы по 2–4 строки; длинные «почему так» – в раскрывающиеся «Подробнее»;
+- запросы к нейросети – отдельными блоками с кнопкой «Скопировать», места для своего текста – в [квадратных скобках];
+- «Заберите в практику» – в конце каждой части;
+- чек-лист в конце – 4–7 пунктов, по которым читатель поймёт, что всё сделал;
+- одно следующее действие в конце.
+Покажи структуру списком блоков сверху вниз.
+
+**Ворота 5:** структура подтверждена.
+
+## Шаг 6. Вёрстка одной HTML-страницей
+Требования (подробно – `references/karkas-i-bloki.md`):
+- один файл `index.html`, стили и скрипты внутри, без картинок и шрифтов с чужих сайтов (системные шрифты или шрифты автора с кириллицей);
+- стиль – по паспорту стиля автора: цвета, шрифты, настроение. Паспорта нет – спроси 3 вещи: цвета, настроение, пример, который нравится;
+- не больше 4 текстовых ролей: заголовок, подзаголовок, основной текст, метка; без курсива, выделение жирным;
+- один левый край: номер шага у края, текст после него с отступом; важное выделяется плашкой и цветом, а не сдвигом блока;
+- сначала телефон: на ширине 375 px нет прокрутки вбок, поля по бокам, кнопки высотой от 44 px, основной текст от 16 px;
+- блоки: полоса прогресса чтения, «Должно получиться», «Подробнее», запросы с «Скопировать», «Заберите в практику», чек-лист с галочками, которые запоминаются в браузере, кнопка «Сохранить в PDF»;
+- печать: при печати и сохранении в PDF «Подробнее» раскрыты, кнопки и полоса прогресса скрыты, блоки не рвутся посередине;
+- слова текста не меняй – только оформление.
+Отдай файл целиком и напиши, как посмотреть: открыть файл в браузере, сузить окно до ширины телефона, нажать печать.
+
+**Ворота 6:** автор посмотрел страницу.
+
+## Шаг 7. Вход по паролю
+Сначала честно объясни: бесплатная страница (например, на GitHub Pages) – просто файл, своего сервера у неё нет, поэтому пароль проверяется в браузере. Он закрывает гайд от случайных людей и поисковиков, но не от того, кто специально откроет код страницы или открытый репозиторий: текст гайда лежит там целиком. Если автору этого мало – скажи, что нужна платформа с личным кабинетом или шифрование страницы паролем, и что у шифрования свои неудобства.
+
+Затем поставь вход строго по `references/vhod-po-parolyu.md`:
+- экран входа в стиле страницы;
+- в коде только хэш SHA-256 пароля, сам пароль – никогда;
+- после верного пароля вход запоминается в браузере;
+- ссылка с ключом `?k=пароль` открывает гайд сразу и убирает ключ из адресной строки;
+- `&lt;meta name="robots" content="noindex, nofollow"&gt;`.
+Хэш считай кодом, не в уме. Не можешь запустить код – так и скажи и попроси автора прислать готовый хэш.
+Посоветуй пароль: простое слово, которое легко набрать на телефоне и которое автор нигде больше не использует.
+
+**Ворота 7:** автор ввёл пароль у себя, гайд открылся; неверный пароль не пускает.
+
+## Шаг 8. Проверка глазами подписчика
+Представь подписчика из шага 1: он открыл ссылку с телефона в перерыве. Пройди гайд его глазами и ответь:
+- понятно ли с первого экрана, что он получит и сколько это займёт;
+- где он застрянет или бросит;
+- какие слова ему незнакомы;
+- есть ли склеенные шаги и шаги без «Должно получиться» там, где оно нужно;
+- понятно ли, куда нажать в «Что дальше» и зачем.
+Выдай **три главные правки** в формате «что – где – как исправить», остальное одной строкой. Затем технический чек-лист: нет прокрутки вбок на 375 px, все «Скопировать» копируют, галочки чек-листа сохраняются после перезагрузки, печать в PDF выглядит аккуратно, неверный пароль не пускает, ссылка с ключом открывает.
+Посоветуй дать гайд одному живому человеку из аудитории до публикации.
+
+**Ворота 8:** правки внесены.
+
+## Шаг 9. Подготовка к публикации
+- Главный файл – `index.html`. Остальные файлы и папки – латиницей, строчными, через дефис, без пробелов (`gaid-pochta`, `checklist.pdf`).
+- Все ссылки внутри страницы относительные и ведут на существующие файлы.
+- Финальная проверка на личные данные, чужие имена, рабочие ссылки и всё, что нельзя показывать: если страница публикуется из открытого репозитория, её код виден всем.
+- Предложи короткое имя папки латиницей и список файлов для загрузки.
+- Подготовь сообщение для выдачи: приветствие в тоне автора, одна фраза о том, что получит читатель, ссылка, пароль, подсказка «браузер запомнит пароль». 2–3 варианта: в ответ на комментарий, в приветствии бота, в личных сообщениях. Если ссылка лежит открыто (в закреплённом посте или шапке профиля), пароль лучше отправлять отдельно. Ссылка с `?k=` открывает гайд без пароля – её можно отправлять лично, но пересланная, она откроется у любого.
+- Как обновлять: править тот же `index.html` и загружать поверх, ссылка не меняется. Сменить пароль – заменить хэш: всем придётся ввести новый.
+- Если в обмен на гайд автор собирает контакты (почту, телефон), напомни, что это обработка персональных данных и правила зависят от страны – пусть уточнит требования.
+
+## Формат ответа на каждом шаге
+1. Заголовок шага: «Шаг N из 9. Название».
+2. Результат шага или вопросы.
+3. Ворота: «Идём дальше или правим?»
+
+## Файлы навыка
+- `references/karkas-i-bloki.md` – каркас гайда, блоки страницы, требования к вёрстке, чек-лист.
+- `references/vhod-po-parolyu.md` – вход по паролю: требования и готовый проверенный код.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Ставим</p>
+    <h2>Как поставить</h2>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>ChatGPT</h3><p>Как в модуле 2: «Настроить → Плагины → Навыки → Создать → Загрузить с компьютера» и загрузить zip целиком – или прикрепить zip в чат и написать «Установи навык.». Вызывать через @. Если архив сам распаковался после скачивания, снова сожмите папку в zip.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Claude и Codex</h3><p><b>Claude:</b> «Customize → Skills», кнопка «+», затем «Create skill» и «Upload a skill» – загрузить zip (<a href="https://support.claude.com/en/articles/12512180-using-skills-in-claude">справка Claude</a>; в русском интерфейсе пункты могут называться иначе), или прикрепить zip в чат. <b>Codex:</b> положить папку навыка в ~/.agents/skills/ или попросить Codex установить навык (<a href="https://learn.chatgpt.com/docs/build-skills">документация Codex</a>). Сверено на 4 октября 2026.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Если навыков нет</h3><p>Скачайте текстовую версию и вставьте её в инструкцию проекта, Gem или Space – или приложите файлом к материалам. Нет и проектов – вставьте текст в начало чата.</p></div></div>
+    </div>
+<div class="promptbox stepprompt"><p class="plabel">Первый запрос к навыку</p><pre>@gaid-podarok Хочу собрать гайд-подарок для подписчиков. Мой блог – о [тема], подписчики – [кто они]. Материалы по теме прикрепляю: [посты, заметки, расшифровки]. Веди меня по шагам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="primer">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Учебный пример</p>
+    <h2>Как это выглядит у&nbsp;подписчика</h2>
+    <p>Короткий гайд-подарок «5 шагов: как разобрать почту за 15 минут с ИИ», собранный по этому каркасу. Тема нейтральная, кнопка «Что дальше» никуда не ведёт. Посмотрите на устройство: экран входа, шаги, «Заберите в практику», чек-лист, «Подробнее» – и попробуйте сохранить его в PDF.</p>
+    <p class="rulebox"><b>Пароль для примера: podarok</b></p>
+    <div class="btns"><a class="btn" href="assets/primer-gaid.html" target="_blank" rel="noopener">Открыть пример</a><a class="btn ghost" href="assets/primer-gaid.html?k=podarok" target="_blank" rel="noopener">Открыть по ссылке с ключом</a></div>
+    <p class="snote">Браузер запомнит вход. Чтобы снова увидеть экран входа, откройте пример в окне инкогнито.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="zatyki">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Если что-то не так</p>
+    <h2>Частые затыки</h2>
+    <ul>
+      <li><b>Пароль верный, а страница не пускает.</b> Проверьте раскладку клавиатуры. Затем попросите нейросеть сверить: совпадает ли хэш в коде с посчитанным и убираются ли пробелы и заглавные буквы перед сравнением.</li>
+      <li><b>Подписчик уже вводил пароль, а его снова просят.</b> Браузер запоминает вход только на этом устройстве и в этом браузере. Встроенный браузер мессенджера или соцсети – отдельный браузер, там вход придётся повторить.</li>
+      <li><b>Поправили файл, а по ссылке старая версия.</b> Подождите несколько минут и обновите страницу.</li>
+      <li><b>На телефоне текст уезжает вбок.</b> Напишите нейросети: «На экране шириной 375 пикселей страница прокручивается вбок. Найди блок, который шире экрана, и исправь, больше ничего не меняя».</li>
+      <li><b>Нейросеть дописала то, чего вы не говорили.</b> Пройдите промптом 4 – сверкой с источником.</li>
+      <li><b>Гайд разросся.</b> Оставьте один результат за 15–30 минут, остальное – в следующий гайд или в ваш продукт.</li>
+    </ul>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните в одну папку index.html гайда, текст в документе, хэш и сообщение для выдачи. Сам пароль храните там же, где держите остальные пароли.</p>
+      <p style="margin-top:14px">Добавьте гайд в «Моё портфолио»: для кого он, какой результат даёт, ссылка. Через пару недель спросите тех, кто его забрал, что пригодилось, и обновите страницу по той же ссылке.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 3 к уроку 4: гайд-подарок для подписчиков · факты о сервисах сверены на 4 октября 2026</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  function done(btn){
+    var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+    say('Скопировано. Вставьте в чат');
+    setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){done(btn);}).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  /* хэш пароля: считается в браузере, никуда не отправляется */
+  function sha256(s){
+    var K=[],H=[],p=2,n=0,i,j;
+    function frac(x){return (x-Math.floor(x))*4294967296|0}
+    while(n<64){for(j=2;j*j<=p;j++)if(p%j===0)break;if(j*j>p){if(n<8)H[n]=frac(Math.pow(p,1/2));K[n++]=frac(Math.pow(p,1/3));}p++;}
+    var b=unescape(encodeURIComponent(s)),l=b.length,w=[];
+    for(i=0;i<l;i++)w[i>>2]|=b.charCodeAt(i)<<(24-(i%4)*8);
+    w[l>>2]|=0x80<<(24-(l%4)*8);w[((l+8>>6)<<4)+15]=l*8;
+    for(i=0;i<w.length;i+=16){
+      var a=H.slice(0),W=[];
+      for(j=0;j<64;j++){
+        if(j<16)W[j]=w[i+j]|0;else{var x=W[j-15],y=W[j-2];W[j]=(((x>>>7|x<<25)^(x>>>18|x<<14)^(x>>>3))+W[j-7]+((y>>>17|y<<15)^(y>>>19|y<<13)^(y>>>10))+W[j-16])|0;}
+        var e=a[4],t1=a[7]+((e>>>6|e<<26)^(e>>>11|e<<21)^(e>>>25|e<<7))+((e&a[5])^(~e&a[6]))+K[j]+W[j],c=a[0],
+            t2=((c>>>2|c<<30)^(c>>>13|c<<19)^(c>>>22|c<<10))+((c&a[1])^(c&a[2])^(a[1]&a[2]));
+        a=[(t1+t2)|0].concat(a);a[4]=(a[4]+t1)|0;a.pop();
+      }
+      for(j=0;j<8;j++)H[j]=(H[j]+a[j])|0;
+    }
+    var o='';for(i=0;i<8;i++)o+=('00000000'+(H[i]>>>0).toString(16)).slice(-8);return o;
+  }
+  var pw=document.getElementById('pw'),out=document.getElementById('hashout'),hc=document.getElementById('hashcopy');
+  var EMPTY=out?out.textContent:'';
+  function upd(){var v=String(pw.value||'').trim().toLowerCase();out.textContent=v?sha256(v):EMPTY;}
+  if(pw){pw.addEventListener('input',upd);upd();}
+  if(hc)hc.addEventListener('click',function(){
+    if(!pw.value.trim()){say('Сначала наберите пароль');pw.focus();return;}
+    copy(out.textContent).then(function(){done(hc);}).catch(function(){say('Не вышло скопировать – выделите хэш вручную');});
+  });
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

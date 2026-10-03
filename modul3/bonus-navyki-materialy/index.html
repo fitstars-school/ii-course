@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Навыки: от сырья до готового материала · Бонус модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Пять готовых навыков для документов, конспектов, гайдов, страниц и квизов: план из сырья, сверка с источником, страница из плана, проверка глазами читателя, квиз и рабочий лист. Zip для нейросетей с навыками и текстовые версии для остальных.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* бонус: помощник */
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.said{margin-top:24px;border-left:3px solid var(--line);padding:6px 0 6px 22px}
+.said p:not(.saidlab){font-size:16.5px;line-height:1.6;color:#3B3143;font-style:italic}
+.saidlab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.chat{margin-top:30px}
+.cl{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cl .who{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+.cl p{font-size:16px;line-height:1.55;color:var(--muted)}
+.cl.me .who{color:var(--pink)}
+.cl.me p{color:var(--ink);font-weight:600}
+.chat + .promptbox{margin-top:26px}
+.def .promptbox{margin-top:12px}
+.def .btns{margin-top:14px}
+@media (max-width:760px){
+  .cl{grid-template-columns:1fr;gap:2px}
+  .def .promptbox{margin-left:0;margin-right:0}
+  .tall pre{max-height:300px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* бонусы модуля 2 */
+.matrix{margin-top:28px;border-top:1px solid var(--ink)}
+.mrow{display:grid;grid-template-columns:120px minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:22px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.52;color:#3B3143}
+.mrow.mh{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding:12px 0}
+.mrow .mname{font-weight:700;color:var(--ink);font-size:16px}
+.mcap{margin-top:16px;font-size:14px;color:var(--muted)}
+.tree{margin-top:22px;border-left:2px solid var(--pink);padding:16px 0 16px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:#3B3143;white-space:pre-wrap;overflow-wrap:anywhere}
+.tree b{color:var(--ink);font-weight:500}
+.tree i{font-style:normal;color:var(--faint)}
+.sublab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:30px 0 4px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.peek{margin-top:18px}
+.peek summary{display:inline-block;cursor:pointer;list-style:none;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.peek[open] summary{color:var(--pink);border-bottom-color:var(--pink)}
+.peek .promptbox{margin-top:16px}
+.skcode{font-family:var(--mono);font-size:13px;color:var(--faint);font-weight:400;margin-left:6px;white-space:nowrap}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:22px}
+.chain span{font-size:15px;font-weight:600;padding:8px 14px;border:1px solid var(--line);background:#fff}
+.chain em{font-style:normal;color:var(--pink);font-weight:700}
+.backlink{display:inline-block;margin-top:12px;color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px}
+.backlink:hover{color:#fff;border-bottom-color:var(--pink-soft)}
+@media (max-width:760px){
+  .mrow{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .mrow.mh{display:none}
+  .mrow>div[data-l]::before{content:attr(data-l);display:block;font-size:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+  .mrow .mname{font-size:18px}
+  .tree{font-size:12.5px;padding-left:16px}
+  .peek .promptbox{margin-left:-20px;margin-right:-20px}
+  .step .btns .btn{width:100%}
+}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* бонус М3: без курсива по канону (4 роли: заголовок, подзаголовок, текст, метка) */
+.it,.said p:not(.saidlab){font-style:normal}
+.rulebox p+p{margin-top:10px}
+.said{border-left:none;background:#FFF1F8;padding:16px 20px}
+code{font-family:var(--mono);font-size:.9em;background:rgba(33,24,41,.06);padding:1px 5px;overflow-wrap:anywhere}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · к урокам 1 и 4</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Навыки: от сырья до <span class="it">готового материала</span></h1>
+      <p class="hlead">Пять навыков для тех, кто делает документы, конспекты, гайды, страницы и квизы: из заметок и записей – в план, из плана – в страницу, а перед выкладкой – две проверки.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Время</span><span class="mv">20–30 минут</span></div>
+      <div><span class="mk">Где работает</span><span class="mv">Нейросети с навыками, в остальных – текстом</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Пять навыков в папке «Мои помощники»</span></div>
+    </div>
+    <nav class="nav" aria-label="Разделы страницы">
+      <a class="navlink" href="#kogda">Когда какой</a>
+      <a class="navlink" href="#skachat">Скачать</a>
+      <a class="navlink" href="#postavit">Как поставить</a>
+      <a class="navlink" href="#svyazat">Связать в помощнике</a>
+      <a class="navlink" href="#nachat">Первые запросы</a>
+      <a class="navlink" href="#zatyki">Если что-то не так</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>Что это за набор</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>В первом уроке вы собираете документ под задачу, в четвёртом – страницу-портфолио и, по желанию, квиз. В обоих случаях путь похожий: есть сырьё – записи, заметки, наговор, – а нужен материал, который понятен другому человеку. <b>Эти пять навыков ведут по этому пути шаг за шагом.</b></p></div>
+      <div class="mline"><span class="mn">2</span><p>Каждый навык отвечает за свой момент: собрать план, сверить с источником, сверстать страницу, проверить глазами читателя, сделать квиз или рабочий лист. Поэтому они не мешают друг другу и хорошо работают вместе.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Ставить все пять не обязательно. Правило то же, что в модуле 2: без каши из навыков. Начните с того, что закрывает ваше узкое место сейчас, – чаще всего это план материала.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk reveal" id="kogda">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Когда какой нужен</p>
+    <h2>Пять навыков – пять моментов в&nbsp;работе над материалом</h2>
+    <div class="chain"><span>Сырьё</span><em>→</em><span>План</span><em>→</em><span>Сверка</span><em>→</em><span>Страница</span><em>→</em><span>Проверка читателем</span></div>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>План материала <span class="skcode">material-plan</span></h3><p><b>Когда:</b> есть сырьё – расшифровка, заметки, наговор, старый документ, – а материала ещё нет. <b>Что даёт:</b> сначала задаёт вопросы на берегу: для кого, какой результат у читателя, формат, глубина, обращение, будет ли материал публичным. Потом формулирует цель одной фразой, собирает 3–5 глав по логике читателя, а не по порядку записи, и показывает план списком. Пока вы его не подтвердите, дальше не идёт: переделать план дешевле, чем страницу.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Сверка с источником <span class="skcode">source-check</span></h3><p><b>Когда:</b> текст собран из записи или заметок, и нужно убедиться, что нейросеть ничего не дописала от себя. <b>Что даёт:</b> помечает каждое утверждение – «есть в источнике», «добавлено ИИ» или «искажено», отдельно проверяет цифры, имена и даты. Ничего не досочиняет: где не уверен, ставит пометку [уточнить: …]. Текст не переписывает, а отдаёт вам отчёт. Запускайте в новом чате – так взгляд свежее.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Страница из плана <span class="skcode">page-builder</span></h3><p><b>Когда:</b> план и текст готовы, нужна аккуратная страница – конспект, гайд, памятка, портфолио. <b>Что даёт:</b> один файл index.html, в котором всё внутри: стили и картинки. Стиль берёт из паспорта стиля (навык brand-style из модуля 2) или спрашивает. Держит порядок: не больше 4 видов текста, один левый край, нормальные поля на телефоне. Умеет готовые блоки – шаг, «Должно получиться», промпт с кнопкой «Скопировать», раскрывающееся «Подробнее», чек-лист – и печать в PDF.</p></div></div>
+      <div class="def"><span class="dn">4</span><div><h3>Глазами читателя <span class="skcode">reader-check</span></h3><p><b>Когда:</b> материал готов и его пора показывать людям. <b>Что даёт:</b> проходит материал в роли конкретного читателя – новичка, клиента, подписчика с телефона. Смотрит, понятно ли с первого экрана, есть ли путь «что делать», нет ли прыжков между частями и непонятных слов, как страница выглядит на телефоне. Отдаёт три главные правки в формате «было → стало», а не переписывает всё.</p></div></div>
+      <div class="def"><span class="dn">5</span><div><h3>Квиз и рабочий лист <span class="skcode">quiz-and-form</span></h3><p><b>Когда:</b> нужен интерактив – квиз, тест, рабочий лист или чек-лист. <b>Что даёт:</b> спрашивает, как идти по вопросам – свободной прокруткой или по шагам без проскока, – и чередует механики: не только выбор варианта, но и шкала, порядок, пары, свой ответ. Результат ведёт к следующему действию. Ответы сохраняются в браузере, есть кнопки «Скопировать ответы» и «Сохранить в PDF». И честно говорит, где нужен внешний сервис для сбора ответов.</p></div></div>
+    </div>
+    <p class="rulebox"><b>К какому уроку что.</b> Документ из урока 1 проходит путь «план → сверка → читатель». Страница-портфолио из урока 4 – «план → страница → читатель». Квиз – по желанию, навык 5.</p>
+  </div></div>
+</section>
+
+<div class="practice" id="skachat">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Забираем</p>
+    <h2>Скачать навыки</h2>
+    <p class="pmeta">zip – для нейросетей с навыками · txt – для всех остальных</p>
+    <p class="pintro">Каждый навык – папка с файлом SKILL.md внутри, упакованная в zip-архив: в таком виде навыки и загружаются, как в модуле 2. Текстовая версия – тот же навык одним файлом, чтобы вставить его в инструкцию проекта или в начало чата.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>План материала</h3>
+      <p>Превращает сырьё в план: цель, опорные вопросы, главы с заголовками-ответами и один из трёх каркасов – конспект для учеников, пошаговый гайд или страница о себе и услуге. Показывает план и ждёт вашего «да».</p>
+      <div class="btns"><a class="btn" href="assets/material-plan.zip" download="material-plan.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/material-plan.txt" download="material-plan.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · material-plan</p><pre>---
+name: material-plan
+description: Из сырья (заметки, расшифровка, наговор, документ) собирает план материала до любой вёрстки. Подключай, когда просят конспект, гайд, памятку, страницу или лендинг, а плана ещё нет.
+---
+
+# План материала: из сырья – в понятную структуру
+
+## Зачем этот навык
+Пользователь приносит сырьё: расшифровку урока, заметки, наговор голосом, старый документ, переписку. Если сразу верстать, получится пересказ в порядке записи, а не материал, по которому читателю удобно идти. Твоя задача – до любой вёрстки договориться, для кого материал и что читатель должен получить, и собрать план. План показываешь списком и ждёшь подтверждения: переделать план дешевле, чем страницу.
+
+## Шаг 1. Вопросы на берегу
+Задай вопросы одним сообщением, с вариантами ответа (а, б, в, «или своё»). Не больше шести:
+1. Для кого материал: ученики, клиенты, подписчики, коллеги, семья – кто именно.
+2. Какой результат у читателя в конце: понял, сделал руками, выбрал, записался, сохранил себе.
+3. Формат: конспект, пошаговый гайд, памятка, страница о себе или услуге, лендинг, документ для печати.
+4. Глубина: только главное «здесь и сейчас» или подробно, с дополнительным материалом.
+5. Обращение: на «вы», на «ты» или безлично.
+6. Будет ли материал публичным: если да – отметим, что нельзя выносить наружу (личные данные, чужие имена, внутренние цифры).
+Если что-то уже понятно из сырья или из разговора – не спрашивай, а напиши, что ты предположил.
+
+## Шаг 2. Цель одной фразой
+Сформулируй цель материала одной фразой по формуле «кто → что сможет после чтения». Например: «Новичок после этого гайда сам настроит рассылку и отправит первое письмо».
+Добавь 2–4 опорных вопроса, на которые материал отвечает. Это вопросы читателя, а не названия тем. Всё, что не помогает ответить на них, – кандидат на вынос в приложение или удаление.
+
+## Шаг 3. Главы по логике
+Разложи сырьё на 3–5 глав. Порядок глав – по логике читателя (от простого к сложному, от «зачем» к «как», от проблемы к решению), а не по порядку, в котором автор это рассказывал. Если в сырье мысль повторяется в трёх местах – собери её в одно.
+Заголовок главы отвечает на вопрос читателя: «Как выбрать время для рассылки», а не «Время рассылки». Ориентир – «как кому достичь чего».
+
+## Шаг 4. Каркас под формат
+Выбери один из трёх каркасов и наполни его главами.
+
+**Конспект для учеников**
+Шапка (что это, для кого, сколько времени) → главное одним абзацем → 3–5 глав по опорным вопросам → промпты и примеры из источника → что сделать после чтения.
+
+**Пошаговый гайд**
+Что получится (результат одной-двумя фразами) → Понадобится (аккаунты, тариф, файлы, время; если нужен платный тариф или VPN – сказать здесь) → шаги, по 7–8 в части; если шагов больше – разбей на части → Если не получилось (частые ошибки и что делать) → Проверьте себя (2–4 пункта «всё получилось, если…»).
+Один шаг – одно действие, начинается с глагола.
+
+**Лендинг или страница о себе, услуге, продукте**
+Для кого (аудитория) → точка А (с чем человек приходит, его словами) → точка Б (что у него будет после) → результат (конкретно, без громких обещаний) → шаги или как устроена работа – на языке клиента, а не на профессиональном жаргоне → что сделать дальше.
+
+## Шаг 5. Показать план и ждать
+Покажи план списком:
+- цель одной фразой и опорные вопросы;
+- выбранный каркас;
+- главы с заголовками-ответами, под каждой – 1–2 строки, что в ней будет и из какого места сырья это взято;
+- чего в сырье не хватает: например, нет примера, непонятен шаг, нет цифры – с пометкой [уточнить: …];
+- что предлагаешь убрать или вынести в приложение.
+В конце спроси: «Подтверждаете план или что поправить?» Ничего не верстай и не пиши целиком, пока пользователь не подтвердил.
+
+## Правила
+- Ничего не досочиняй: примеры, цифры, истории, имена – только из сырья или со слов пользователя. Где данных нет – [уточнить: …].
+- Если в сырье противоречие или дыра – это вопрос автору, а не догадка.
+- Не больше 5 глав. Если не помещается – предложи разбить на два материала.
+- Пиши простым языком, как для знакомого. Термины – с расшифровкой.
+- После подтверждения плана предложи следующий шаг: собрать текст, сверить его с источником (навык source-check), сверстать страницу (навык page-builder).</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Сверка с источником</h3>
+      <p>Сравнивает готовый текст с записью или заметками и показывает, что добавлено и что искажено. Особенно внимателен к цифрам, именам и датам. Решение, что исправлять, остаётся за вами.</p>
+      <div class="btns"><a class="btn" href="assets/source-check.zip" download="source-check.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/source-check.txt" download="source-check.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · source-check</p><pre>---
+name: source-check
+description: Сверяет готовый материал с источником: что есть в источнике, что добавлено ИИ, что искажено. Подключай перед выкладкой конспекта, гайда, статьи или страницы, собранных из записи или заметок.
+---
+
+# Сверка с источником
+
+## Зачем этот навык
+Нейросеть, которая собирала материал, часто «помогает»: дописывает правдоподобный пример, округляет цифру, меняет порядок шагов, приписывает автору мысль, которой он не говорил. Сама она этого обычно не замечает. Твоя задача – как внимательный редактор сверить готовый материал с источником и показать автору, где расхождения. Текст ты не переписываешь.
+
+## Как запускать
+Лучше всего – в новом чате, где нет истории работы над материалом. Тогда ты смотришь свежим взглядом и не опираешься на то, что «и так обсудили». Если пользователь запускает тебя в том же чате, где материал собирался, мягко предложи перенести сверку в новый.
+
+Нужны два файла или текста:
+1. Источник – расшифровка, запись, заметки, документ автора.
+2. Материал – то, что получилось: конспект, гайд, статья, страница.
+Если чего-то нет – попроси прислать. По памяти не сверяй.
+
+## Порядок работы
+1. Разбей материал на утверждения: каждая мысль, совет, шаг, пример, цитата.
+2. Каждое утверждение найди в источнике и пометь одной из трёх меток:
+   - **есть в источнике** – смысл совпадает, даже если слова другие;
+   - **добавлено ИИ** – в источнике этого нет совсем: новый пример, совет, вывод, «как показывают исследования»;
+   - **искажено** – в источнике есть похожее, но смысл, акцент или условие изменились.
+3. Отдельным проходом проверь факты, где ошибки стоят дороже всего:
+   - цифры, суммы, проценты, сроки;
+   - имена, названия, должности;
+   - даты и последовательности («сначала… потом…»);
+   - цитаты: дословно ли они взяты.
+4. Проверь порядок: не переставлены ли шаги так, что меняется смысл.
+5. Проверь, не потерялось ли важное: что из источника автор явно подчёркивал, а в материал не попало.
+
+## Формат ответа
+**Итог одной фразой:** насколько материал верен источнику и сколько мест требуют решения.
+
+**Добавлено ИИ:**
+- [цитата из материала] – в источнике нет – [убрать / спросить автора]
+
+**Искажено:**
+- [цитата из материала] – в источнике: [как было] – [что поменялось]
+
+**Цифры, имена, даты:**
+- [что] – в материале: [...] – в источнике: [...]
+
+**Потеряно:** [что важное из источника не попало – или «ничего важного»]
+
+**Вопросы автору:** [места, где нельзя решить без него]
+
+Утверждения с меткой «есть в источнике» не перечисляй – только итоговое число.
+
+## Правила
+- Не переписывай материал. Твой результат – отчёт автору. Исправлять или нет, решает он.
+- Не досочиняй и не угадывай. Если в источнике неразборчиво или неполно, вместо догадки ставь пометку [уточнить: что именно].
+- Цитируй точно: и из материала, и из источника. Указывай, где это место (раздел, абзац, минута записи, если есть).
+- Не считай расхождением типографику: кавычки, тире, регистр, разбивку на абзацы, исправленные опечатки.
+- Пересказ своими словами – это нормально, если смысл не изменился. Помечай его как «есть в источнике».
+- Если материал сознательно дополнен автором (например, он сам попросил добавить пример), спроси, какие куски так задуманы, и не помечай их как ошибку.
+- Если расхождений нет – так и скажи, без поиска недостатков ради отчёта.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Страница из плана</h3>
+      <p>Верстает одну HTML-страницу из готового плана: спокойное единое оформление, удобно на телефоне, промпты с кнопкой «Скопировать», практика отдельным разделом и печать в PDF без обрезанных блоков.</p>
+      <div class="btns"><a class="btn" href="assets/page-builder.zip" download="page-builder.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/page-builder.txt" download="page-builder.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · page-builder</p><pre>---
+name: page-builder
+description: Верстает одну HTML-страницу из готового плана: конспект, гайд, памятку, портфолио. Подключай, когда план и текст есть и нужна аккуратная страница для телефона, ссылки или печати в PDF.
+---
+
+# Страница из готового плана
+
+## Зачем этот навык
+Когда план материала подтверждён и текст собран, его нужно превратить в страницу, которую удобно читать с телефона, отправить ссылкой и распечатать. Твоя задача – собрать один файл index.html: все стили и картинки внутри, ничего не ломается на телефоне, оформление спокойное и единое.
+
+## Перед вёрсткой
+1. Проверь, что есть план и текст. Если плана нет – предложи сначала собрать его (навык material-plan): верстать без плана – значит переделывать.
+2. Стиль. Если у пользователя есть паспорт стиля (навык brand-style или свой документ) – возьми из него цвета, шрифты, настроение и запреты. Если паспорта нет – задай одним сообщением три вопроса с вариантами: какие 2–3 цвета (или «подбери спокойные»), какое настроение (строгое, тёплое, яркое), нужен ли логотип или фото автора.
+3. Уточни, будет ли страница печататься в PDF. Если да – учти это сразу.
+
+## Правила оформления
+- **Не больше 4 текстовых ролей:** заголовок, подзаголовок, основной текст, метка (мелкие заглавные над разделом). Больше размеров и начертаний не вводи. Курсив не используй, выделение – жирным.
+- **Один левый край.** Все блоки начинаются с одной вертикали. Номер шага стоит у левого края, текст – после него с отступом.
+- **Плашки вместо сдвига.** Подсказку, правило, «важно» выделяй светлой плашкой или цветом, а не сдвигом блока вправо.
+- **Поля на телефоне.** Слева и справа не меньше 16–20 px, текст не прилипает к краю. Нет прокрутки вбок: таблицы перестраиваются в карточки или прокручиваются внутри своей рамки. Кнопки – крупные, нажимаются пальцем.
+- **Заголовки отвечают на вопрос читателя**, как в плане.
+- Короткие абзацы, 2–4 строки.
+- Все стили – в одном блоке в начале файла. Не разбрасывай стили по тегам.
+
+## Готовые блоки
+Используй по смыслу, не все сразу:
+- **Шаг** – номер у края, заголовок с глаголом («Откройте…»), текст. Один шаг – одно действие.
+- **Должно получиться** – после шага, где экран заметно меняется: что человек увидит.
+- **Промпт с кнопкой «Скопировать»** – тёмное окошко с текстом промпта и кнопкой, которая копирует его в буфер. Места для своего текста – в [квадратных скобках].
+- **Подробнее** – раскрывающийся по нажатию блок для длинных пояснений «почему так», чтобы не мешали тем, кто просто делает.
+- **Чек-лист** – пункты с галочками, отметки запоминаются в браузере.
+- **Практика** – отдельным разделом в конце или после теории, а не вперемешку с ней: заголовок, что сделать, промпт, что должно получиться.
+
+## Картинки
+- Картинки вшиваются внутрь файла (в формате base64), чтобы страница была одним файлом и ничего не терялось. Перед этим их стоит сжать: страница с тяжёлыми картинками долго открывается на телефоне.
+- Если ты не можешь вшить картинку сам – поставь аккуратную заглушку с подписью, что здесь будет, и скажи пользователю, как вставить картинку.
+- Не бери картинки с чужих сайтов по ссылке.
+- У каждой картинки – подпись-описание (атрибут alt): что на ней, одной фразой.
+
+## Печать в PDF
+Если страница будет печататься:
+- добавь правила для печати: `@page{margin:0}` и свои поля внутри страницы, чтобы браузер не дописывал адрес и дату по краям;
+- запрети разрывать посередине шаги, плашки, промпты и картинки (`break-inside: avoid`), а крупные разделы начинай с новой страницы, где это уместно;
+- скрой при печати кнопки «Скопировать» и меню;
+- раскрой при печати блоки «Подробнее», чтобы их текст не пропал.
+Подскажи пользователю: открыть страницу в браузере → «Печать» → «Сохранить как PDF».
+
+## Порядок работы
+1. Коротко перескажи, что будет на странице: разделы по плану и какие блоки где.
+2. Сверстай файл index.html целиком.
+3. Сам проверь перед отдачей: 4 роли текста, один левый край, нет прокрутки вбок на ширине телефона, кнопки «Скопировать» работают, все разделы из плана на месте, нет выдуманного текста.
+4. Отдай файл и скажи, как его открыть: сохранить как index.html и открыть двойным нажатием в браузере. Предложи проверку глазами читателя (навык reader-check).
+
+## Правила
+- Текст из плана не меняй по смыслу и не дописывай. Если чего-то не хватает – [уточнить: …].
+- Итог – один файл index.html. Без внешних картинок, без лишних файлов рядом.
+- Не обещай, что страница сама опубликуется: чтобы она открывалась по ссылке, её нужно выложить (например, на GitHub Pages или свой хостинг).</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Глазами читателя</h3>
+      <p>Проходит материал в роли того, для кого он сделан, и находит места, где человек споткнётся. В ответе – три правки «было → стало» и короткий вердикт: можно выкладывать или нет.</p>
+      <div class="btns"><a class="btn" href="assets/reader-check.zip" download="reader-check.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/reader-check.txt" download="reader-check.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · reader-check</p><pre>---
+name: reader-check
+description: Проверяет материал глазами конкретного читателя перед выкладкой и даёт 3 главные правки «было → стало». Подключай, когда конспект, гайд, страница или квиз готовы и их пора показывать людям.
+---
+
+# Проверка глазами читателя
+
+## Зачем этот навык
+Автор знает материал наизусть и уже не видит, где читатель споткнётся: термин без расшифровки, пропущенный шаг, непонятно, что делать в конце. Твоя задача – пройти материал так, как его пройдёт конкретный человек, и показать три самых важных места, которые стоит поправить до выкладки.
+
+## Перед проверкой
+Уточни одним сообщением, если это не ясно из контекста:
+1. Кто читатель. Предложи варианты: новичок, который впервые слышит о теме; клиент, который выбирает, обращаться ли; подписчик, который листает с телефона между делами; или свой вариант.
+2. Что он должен сделать после чтения: понять, повторить по шагам, записаться, пройти тест, сохранить себе.
+Если пользователь не ответил – возьми новичка и отметь, что ты так предположил.
+
+## Как проходишь материал – целиком, про себя
+Войди в роль читателя: что он знает, сколько у него времени, с какого устройства читает. Пройди материал от начала до конца по порядку.
+1. Первый экран. Понятно ли за несколько секунд, что это, для кого и зачем читать дальше?
+2. Путь «что делать». Есть ли понятное действие: первый шаг, следующий шаг, что сделать в конце? Нет ли места, где читатель не знает, куда идти?
+3. Стыки. Как одна часть переходит в другую: нет ли прыжка, пропущенной темы, места «а это здесь зачем»?
+4. Термины. Есть ли слова, которые этот читатель не знает? Расшифрованы ли они при первом упоминании?
+5. Шаги. Один шаг – одно действие? Названия кнопок и мест понятны? Видно ли, что должно получиться?
+6. Длина. Нет ли кусков, которые этот читатель пропустит, потому что они для другого?
+7. Телефон. Если это страница: не прилипает ли текст к краям экрана, нет ли прокрутки вбок, влезают ли таблицы, нажимаются ли кнопки пальцем, читается ли мелкий текст. Если ты не видишь страницу на телефоне – попроси скриншот с телефона или напиши, что именно проверить самому.
+
+## Как выбрать три правки
+Ранжируй по тому, насколько это мешает читателю дойти до результата:
+1. Сначала то, из-за чего он бросит или не поймёт: первый экран, путь «что делать», пропущенный шаг.
+2. Потом стыки и термины.
+3. Потом длина, оформление, мелочи.
+
+## Формат ответа
+**Читатель:** кто и в какой ситуации (одна строка).
+
+**Как прошло чтение:** 2–3 фразы от лица читателя: где было понятно, где споткнулся.
+
+**Три главные правки:**
+1. Где: [раздел или место]
+   Было: [цитата или описание]
+   Стало: [конкретный вариант]
+   Почему: [что это даст читателю]
+2. …
+3. …
+
+**По желанию:** не больше трёх коротких пунктов одной строкой – или «остальное в порядке».
+
+**Вердикт:** «можно выкладывать», «поправить три пункта – и можно» или «стоит пересобрать план» – и одна фраза почему.
+
+## Правила
+- Не переписывай материал целиком, даже если хочется. Три правки «было → стало» – и всё.
+- «Стало» – готовый текст или конкретное действие, а не «сделать понятнее».
+- Смотри глазами выбранного читателя, а не своими. Если что-то понятно тебе, но не ему – это правка.
+- Не меняй смысл и факты автора. Если сомневаешься в факте – отметь «проверьте», а сверку с источником предложи отдельно (навык source-check).
+- Хвали коротко и по делу, без восторгов.
+- Когда пользователь присылает исправленную версию, сначала проверь, исправлены ли три правки, и только потом ищи новые.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Квиз и рабочий лист</h3>
+      <p>Собирает квиз, тест, рабочий лист или чек-лист одной страницей: разные виды вопросов, результат со следующим шагом, ответы не теряются после закрытия страницы.</p>
+      <div class="btns"><a class="btn" href="assets/quiz-and-form.zip" download="quiz-and-form.zip">Скачать навык (.zip)</a><a class="btn ghost" href="assets/quiz-and-form.txt" download="quiz-and-form.txt">Текстом (.txt)</a></div>
+      <details class="peek"><summary>Посмотреть, что внутри</summary>
+<div class="promptbox stepprompt tall"><p class="plabel">SKILL.md · quiz-and-form</p><pre>---
+name: quiz-and-form
+description: Собирает квиз, тест, рабочий лист или чек-лист одной HTML-страницей: разные механики вопросов, результат со следующим шагом, сохранение ответов. Подключай, когда нужен интерактив.
+---
+
+# Квиз, тест, рабочий лист, чек-лист
+
+## Зачем этот навык
+Интерактив удерживает внимание лучше, чем текст: человек отвечает, видит результат и понимает, что делать дальше. Твоя задача – собрать такую страницу одним файлом index.html, чтобы ей было удобно пользоваться с телефона, ответы не терялись, а результат вёл к понятному следующему действию.
+
+## Вопросы на берегу
+Одним сообщением, с вариантами ответа:
+1. Что это: квиз (результат-профиль), тест (правильные ответы), рабочий лист (человек пишет свои ответы), чек-лист (отмечает пункты).
+2. Для кого и зачем: проверить знания учеников, помочь клиенту выбрать, дать подписчику полезный разбор.
+3. Навигация: **свободная прокрутка** (все вопросы на одной странице) или **по шагам без проскока** (следующий вопрос открывается только после ответа на текущий).
+4. Что на выходе: результат с пояснением, разбор ошибок, список ответов, следующий шаг (урок, материал, запись, консультация).
+5. Нужно ли автору получать ответы. Если да – см. раздел «Сбор ответов» ниже, скажи об этом сразу.
+6. Стиль: паспорт стиля (навык brand-style), если есть, или 2–3 цвета и настроение.
+
+## Механики вопросов
+Не делай весь квиз из «выберите один вариант». Чередуй механики по смыслу:
+- выбор одного варианта;
+- выбор нескольких;
+- шкала («насколько вам это близко от 1 до 5»);
+- расставить по порядку;
+- сопоставить пары;
+- короткий свой ответ;
+- развёрнутый ответ (для рабочего листа);
+- отметить пункты чек-листа.
+Для теста меняй механику, а не только цифры и слова в похожих вопросах. Правильные ответы проверь отдельно, прежде чем отдавать.
+
+## Результат ведёт к действию
+- К баллам или профилю добавь пояснение: что это значит и что делать дальше: какой материал прочитать, какой шаг сделать, куда записаться.
+- Для квиза с профилями: 3–4 результата, у каждого – описание простыми словами и одно следующее действие.
+- Для теста: разбор ошибок – где ошибся, какой правильный ответ и почему.
+- Не пугай и не ставь диагнозов. Без громких обещаний.
+
+## Что должно работать на странице
+- **Ответы сохраняются в браузере** (localStorage): если человек закрыл страницу и вернулся, ответы на месте. Есть кнопка «Начать заново».
+- **«Скопировать ответы»** – кнопка, которая копирует все вопросы и ответы текстом, чтобы человек мог вставить их в чат или отправить автору.
+- **«Сохранить в PDF»** – кнопка, которая открывает печать; при печати видны вопросы и ответы, кнопки скрыты, блоки не рвутся посередине.
+- Удобно на телефоне: поля по краям, нет прокрутки вбок, варианты ответа крупные и нажимаются пальцем, видно, сколько вопросов осталось.
+- Не больше 4 текстовых ролей, один левый край, выделение плашками и цветом.
+
+## Сбор ответов – говори честно
+Простая HTML-страница сама ответы никуда не отправляет: они остаются в браузере того, кто проходил. Автор их не увидит.
+Если автору нужно собирать ответы, есть такие пути:
+1. Человек нажимает «Скопировать ответы» и присылает их автору в мессенджер или почту. Подходит для небольших групп.
+2. Для настоящего сбора – внешний сервис форм, например Яндекс Формы или Google Формы. Тогда квиз собирается там, а на странице – ссылка или встроенная форма.
+3. Если собираются имена, телефоны, почты или другие контакты – это персональные данные. Автору понадобятся документы о персональных данных и согласие человека. Не составляй эти документы как окончательные и не давай юридических гарантий: предложи разобраться с ними отдельно.
+Не пиши код, который якобы отправляет ответы «куда-то», если сервиса для этого нет.
+
+## Порядок работы
+1. Задай вопросы на берегу.
+2. Покажи план списком: тип, навигация, вопросы с механикой каждого, результаты и следующий шаг. Дождись подтверждения.
+3. Собери index.html целиком.
+4. Проверь сам: все вопросы на месте, правильные ответы верные, результат считается, сохранение работает, «Скопировать ответы» и «Сохранить в PDF» работают, нет прокрутки вбок на телефоне.
+5. Отдай файл и скажи, как его открыть и проверить: пройти самому до конца, обновить страницу и убедиться, что ответы на месте.
+
+## Правила
+- Не выдумывай факты в вопросах. Содержание – из материала пользователя.
+- Без ловушек и подвохов, если пользователь сам их не просил.
+- Не обещай сбор ответов там, где его нет.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk reveal" id="postavit">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Ставим</p>
+    <h2>Как поставить</h2>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div><h3>Если в нейросети есть навыки</h3><p>Как в модуле 2: в ChatGPT загрузите zip-архив целиком в разделе навыков – «Настроить» → «Плагины» → «Навыки» → «Создать» → «Загрузить с компьютера», – или прикрепите его в любой чат и напишите «Установи навык.». Вызвать навык можно через @. Если архив сам распаковался после скачивания, снова сожмите папку в zip.</p></div></div>
+      <div class="def"><span class="dn">2</span><div><h3>Если навыков нет</h3><p>Скачайте текстовую версию (.txt) и вставьте её в инструкцию проекта, Gem или Space – или приложите файлом к материалам помощника. Нет и проектов – вставьте текст в начало чата. Все пять текстов в поле инструкции могут не поместиться: возьмите два-три нужных или соедините их запросом ниже.</p></div></div>
+      <div class="def"><span class="dn">3</span><div><h3>Сохраните к себе</h3><p>Zip и txt – в папку «Мои помощники». Если потом будете докручивать навык под себя, правьте этот файл, а не заводите «навык 2».</p></div></div>
+    </div>
+    <div class="rulebox"><p><b>Claude и Codex: как подключить.</b> В Claude: «Customize» → «Skills» → «+» → «Create skill» → «Upload a skill», затем выберите zip. Перед этим в «Settings» → «Capabilities» должно быть включено «Code execution and file creation». По справке Claude, свои навыки можно загружать на всех тарифах, включая бесплатный. В Codex: распакуйте zip и положите папку навыка в <code>~/.agents/skills/</code> (раньше Codex читал папку <code>~/.codex/skills/</code>) или попросите сам Codex установить навык из этой папки. Если навык не появился – перезапустите Codex.</p><p>Названия пунктов – как в английском интерфейсе, в русском они могут звучать иначе. Сверено на 4 октября 2026 по <a href="https://support.claude.com/en/articles/12512180-using-skills-in-claude" target="_blank" rel="noopener">справке Claude</a> и <a href="https://developers.openai.com/codex/skills" target="_blank" rel="noopener">документации Codex</a>.</p></div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="svyazat">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Собираем систему</p>
+    <h2>Как связать навыки в&nbsp;одном помощнике</h2>
+    <p>Поставить навыки мало: в инструкции проекта должно быть прописано, в какой момент какой навык подключается. Тогда помощник не забудет о навыке и не будет хвататься за все сразу. Эту инструкцию проще всего попросить у самого помощника или у Конструктора помощников.</p>
+<div class="promptbox stepprompt"><p class="plabel">Помощнику или Конструктору · навыки есть</p><pre>Свяжи эти навыки в инструкции моего проекта: когда какой подключать.
+Навыки: material-plan – план материала из сырья; source-check – сверка с источником; page-builder – HTML-страница из готового плана; reader-check – проверка глазами читателя; quiz-and-form – квиз, тест, рабочий лист. [Удалите те, что не поставили.]
+Вот моя инструкция сейчас: [вставьте её или напишите «инструкции пока нет – сначала задай мне вопросы»].
+Перепиши инструкцию целиком, чтобы помощник сам понимал, в каком порядке навыки работают и когда какой включается. Названия навыков пиши точно так, как в файлах. Если какой-то навык мне не нужен или повторяет то, что уже есть, – скажи прямо. Проверь, чтобы инструкция уложилась в лимит знаков для настроек проекта. Выдай итог одним блоком, который останется просто вставить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="snote">Чтобы было с чем сравнить, вот как может выглядеть кусок такой инструкции. Ваш будет другим – под ваши задачи.</p>
+<div class="promptbox stepprompt"><p class="plabel">Пример · фрагмент инструкции про навыки</p><pre>КОГДА ПОДКЛЮЧАТЬ НАВЫКИ
+– Принесли сырьё (записи, заметки, наговор) и просят материал – сначала material-plan: вопросы на берегу и план списком. Дальше – только после моего «да».
+– Текст собран из записи или заметок – перед вёрсткой предложи сверку через source-check в новом чате.
+– План и текст готовы, нужна страница – page-builder. Стиль бери из паспорта стиля, если он есть в материалах.
+– Материал готов к выкладке – reader-check: три правки «было → стало».
+– Просят квиз, тест, рабочий лист или чек-лист – quiz-and-form.
+Порядок: material-plan → source-check → page-builder → reader-check.
+Если задача короткая (письмо, пост, ответ клиенту), навыки по материалам не подключай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="snote">Если навыков в вашей нейросети нет – соберите из текстов одну инструкцию:</p>
+<div class="promptbox stepprompt"><p class="plabel">Помощнику или Конструктору · навыков нет</p><pre>В моей нейросети нет навыков. Прикрепляю тексты навыков: [перечислите, какие]. Собери из них одну инструкцию для [проекта / Gem / Space / начала чата]. Сохрани логику: когда какой режим включается и в каком порядке они работают. Убери повторы. Если всё не помещается в [лимит знаков, если знаете], предложи, что вынести в отдельный файл материалов. Ничего не добавляй от себя. Выдай одним блоком для копирования.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="rulebox">Проверить, что всё связалось, можно так же, как в модуле 2: спросите помощника «Расскажи, как ты работаешь». В ответе он должен назвать навыки и момент, когда подключает каждый. Если какой-то навык не прозвучал – верните его в инструкцию.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="nachat">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Первые запросы</p>
+    <h2>С чего начать</h2>
+    <p>По одному запросу на каждый навык. Можно наговорить голосом – главное, чтобы в запросе было, для кого материал и что вы прикладываете.</p>
+<div class="promptbox stepprompt"><p class="plabel">План материала</p><pre>Прикрепляю [расшифровку / заметки / наговор / документ]. Хочу сделать из этого [конспект / гайд / памятку / страницу о себе] для [кого]. Сначала задай вопросы на берегу, потом покажи план списком. Ничего не пиши целиком, пока я не подтвержу план.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox stepprompt"><p class="plabel">Сверка с источником · в новом чате</p><pre>Сверь материал с источником. Источник – [расшифровка / заметки], материал – [конспект / гайд / страница], оба прикрепляю. Отметь, что добавлено и что искажено, отдельно проверь цифры, имена и даты. Текст не переписывай, дай отчёт.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox stepprompt"><p class="plabel">Страница из плана</p><pre>Вот подтверждённый план и текст: [вставьте или прикрепите]. Сверстай одну HTML-страницу [конспект / гайд / портфолио]. Стиль – по моему паспорту стиля [прикрепляю / его нет, спроси меня]. Страница будет [только на экране / ещё и печататься в PDF].</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox stepprompt"><p class="plabel">Глазами читателя</p><pre>Проверь материал глазами читателя перед выкладкой. Читатель – [новичок / клиент / подписчик, который читает с телефона]. После чтения он должен [понять / сделать / записаться]. Прикрепляю [файл или скриншоты с телефона]. Дай три главные правки «было → стало».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+<div class="promptbox stepprompt"><p class="plabel">Квиз и рабочий лист</p><pre>Хочу [квиз / тест / рабочий лист / чек-лист] для [кого] по теме [какая]. Материал, из которого брать вопросы, прикрепляю. После прохождения человек должен [узнать свой результат / увидеть ошибки / перейти к следующему шагу]. Сначала задай вопросы на берегу и покажи план.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Учебный пример</p>
+    <h2>Из наговора – в&nbsp;план</h2>
+    <p>Пример условный. Человек собирает книгу семейных воспоминаний, как в уроке 1, и наговаривает голосом всё подряд. Вот что может показать навык «План материала» после вопросов на берегу.</p>
+    <div class="said"><p class="saidlab">До · наговор голосом</p><p>«Хочу собрать для детей книжку про бабушку. Она пекла пироги по воскресеньям, это все помнят. Потом про переезд, когда мама была маленькая. Ещё есть письма деда с фронта, но их надо разобрать. И фотографии, много. Не знаю, с чего начать».</p></div>
+<div class="promptbox stepprompt"><p class="plabel">После · план на подтверждение</p><pre>Цель: дети и внуки узнают историю бабушки и семьи и захотят сохранить её дальше.
+Опорные вопросы: Какой была бабушка? Как семья оказалась там, где живёт сейчас? Что из этого мы храним?
+Каркас: семейная книга, главы по времени жизни.
+
+1. Какой была бабушка – воскресные пироги и то, что о них помнят родные.
+2. Как семья переехала – история переезда со слов мамы.
+3. Что рассказывают письма деда – [уточнить: письма ещё не разобраны, глава появится после разбора].
+4. Что мы храним – фотографии и подписи к ним.
+
+Не хватает: имён, дат и мест – [уточнить: год и город переезда].
+Предлагаю: рецепт пирога вынести в приложение, если он сохранился.
+Подтверждаете план или что поправить?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="note">Обратите внимание: навык не придумал ни года переезда, ни содержания писем. Там, где данных нет, стоит пометка [уточнить: …], и это вопрос к вам, а не догадка.</p>
+  </div></div>
+</section>
+
+<section class="wrap blk reveal" id="zatyki">
+  <div class="lede" style="padding-top:0"><div class="col">
+    <p class="label">Если что-то не так</p>
+    <h2>Частые затыки</h2>
+    <ul>
+      <li><b>Помощник сразу пишет текст, без плана.</b> Назовите навык прямо: «Используй навык material-plan, сначала план». В ChatGPT навыки надёжнее подключаются в режиме «Работа».</li>
+      <li><b>Сверка ничего не нашла, а вы сомневаетесь.</b> Проверьте, что запускали её в новом чате и приложили именно источник, а не пересказ. Спросите отдельно про цифры и имена.</li>
+      <li><b>Страница на телефоне едет вбок.</b> Пришлите скриншот с телефона навыку «Глазами читателя» или попросите: «Убери горизонтальную прокрутку на ширине 375 пикселей».</li>
+      <li><b>Квиз не присылает вам ответы.</b> Так и должно быть: простая страница ответы не собирает, они остаются в браузере человека. Для сбора нужен внешний сервис форм – например, <a href="https://forms.yandex.ru/" target="_blank" rel="noopener">Яндекс Формы</a> или <a href="https://forms.google.com/" target="_blank" rel="noopener">Google Формы</a>. Если собираете имена и контакты, понадобятся документы о персональных данных – об этом в плагине <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>.</li>
+      <li><b>Стиль страницы каждый раз разный.</b> Соберите паспорт стиля навыком brand-style из <a href="https://aiforlife.ru/ii-course/modul2/bonus-dizain-navyki/">бонуса модуля 2</a> и положите его в материалы помощника.</li>
+    </ul>
+  </div></div>
+</section>
+
+<div class="dark" style="margin-top:64px">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Сохраните навыки (zip и txt) и обновлённую инструкцию помощника в «Мои помощники». Готовые материалы – документ из урока 1 и страницу из урока 4 – добавьте в «Моё портфолио».</p>
+      <p style="margin-top:14px">Поработайте с навыками на двух-трёх своих материалах и отметьте, где они промахиваются. Эти наблюдения несите помощнику или Конструктору – так навыки станут вашими, а не просто скачанными.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 3 к урокам 1 и 4: навыки от сырья до готового материала</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
+
