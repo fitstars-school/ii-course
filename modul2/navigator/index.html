@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Навигатор по нейросетям: как это называется у вас и что собрать под задачу · Вводный урок модуля 2 · Нейро-архитектор</title>
+<meta name="description" content="Интерактивный навигатор: выберите нейросеть, тариф и задачу – и получите свой набор: проект, свой помощник, навыки, плагины, регулярные задачи. Плюс словарь – как это называется в ChatGPT, Claude, Gemini, Gemini Notebook, ГигаЧате, DeepSeek, Perplexity и Алисе AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+section.wrap.blk{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap.blk{padding-left:20px;padding-right:20px}}
+.pgroup{margin-top:20px}
+.pgroup .btns{margin-top:14px}
+.donebox .btns .btn{background:var(--pink);font-size:16px;padding:16px 28px}
+.donebox .btns .btn:hover{background:var(--pink-strong);color:#fff}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+
+/* навигатор по нейросетям */
+.blk{padding-top:52px}
+.vocab{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 34px;margin-top:22px;border-top:1px solid var(--ink)}
+.voc{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.voc .vn{font-family:var(--serif);font-size:30px;line-height:1;color:var(--pink)}
+.voc h3{font-family:var(--sans);font-size:17px;font-weight:700;line-height:1.35;margin-bottom:3px}
+.voc h3 i{font-style:normal;color:var(--pink-strong)}
+.voc p{font-size:15.5px;line-height:1.5;color:var(--muted)}
+.checked{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:baseline;margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px;font-size:15.5px;color:var(--muted)}
+.checked b{color:var(--ink)}
+.checked a,.rnote a,.dcard a,.alt a,.why2 a{border-bottom:1px solid rgba(230,25,140,.35)}
+
+.modes{display:inline-grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink);margin-top:14px}
+.mode{font-family:var(--sans);font-size:16px;font-weight:700;padding:14px 26px;background:transparent;color:var(--ink);border:none;cursor:pointer;transition:background .2s,color .2s}
+.mode+.mode{border-left:1px solid var(--ink)}
+.mode:hover{color:var(--pink)}
+.mode.on,.mode.on:hover{background:var(--ink);color:#fff}
+.modehint{margin-top:12px;font-size:15px;color:var(--muted);max-width:62ch}
+
+.pane[hidden]{display:none}
+.st{padding:34px 0 8px;border-top:1px solid var(--line);margin-top:26px}
+.st:first-child{border-top:1px solid var(--ink)}
+.sthead{display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:baseline}
+.stn{font-family:var(--serif);font-size:44px;line-height:.9;color:var(--pink)}
+.sthead h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3}
+.sthead .stsub{display:block;font-size:15px;font-weight:500;color:var(--muted);margin-top:3px}
+.stbody{padding:18px 0 0 72px}
+.linkish{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:1px solid var(--line);padding:0 0 2px;cursor:pointer}
+.linkish:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tile{font-family:var(--sans);text-align:left;background:#fff;border:1px solid var(--line);padding:18px 18px 16px;cursor:pointer;color:var(--ink);transition:border-color .2s,background .2s,color .2s;min-height:84px;display:flex;flex-direction:column;justify-content:space-between;gap:6px}
+.tile b{font-size:18px;font-weight:700;line-height:1.2}
+.tile span{font-size:13px;font-weight:500;color:var(--faint);line-height:1.35}
+.tile:hover{border-color:var(--pink)}
+.tile.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.tile.on span{color:#CFC4D4}
+.plans{display:flex;flex-wrap:wrap;gap:10px}
+.plans .tile{min-height:0;padding:14px 20px}
+.plans .tile b{font-size:16.5px}
+.pnote{margin-top:14px;font-size:15px;color:var(--muted);max-width:66ch}
+
+.recipes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:4px}
+.recipe{font-family:var(--sans);text-align:left;background:#FBEAF3;border:1px solid transparent;padding:14px 16px;cursor:pointer;color:var(--ink);font-size:15.5px;font-weight:700;line-height:1.3;transition:border-color .2s}
+.recipe span{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-top:4px}
+.recipe:hover{border-color:var(--pink)}
+.recipe.on{border-color:var(--pink);background:#fff}
+.orline{display:flex;align-items:center;gap:14px;margin:26px 0 18px;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--line)}
+.qbox{border:1px solid var(--ink);background:#fff;padding:26px 28px}
+.qprog{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.qbar{display:flex;gap:4px;margin-top:10px}
+.qbar i{flex:1;height:3px;background:var(--line)}
+.qbar i.done{background:var(--pink)}
+.qtext{font-family:var(--serif);font-size:clamp(25px,3vw,32px);line-height:1.18;margin-top:20px}
+.qhint{font-size:15.5px;color:var(--muted);margin-top:10px;max-width:60ch}
+.qbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;max-width:420px}
+.yn{font-family:var(--sans);font-size:17px;font-weight:700;padding:15px 18px;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
+.yn:hover{background:var(--ink);color:#fff}
+.yn.yes{background:var(--ink);color:#fff}
+.yn.yes:hover{background:var(--pink);border-color:var(--pink)}
+.qnav{margin-top:18px}
+.ownt{margin-top:18px}
+.ownt label{display:block;font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ownt input{width:100%;font-family:var(--sans);font-size:16px;font-weight:500;color:var(--ink);border:1px solid var(--line);background:#fff;padding:13px 14px;border-radius:0}
+.ownt input:focus{outline:2px solid var(--pink);outline-offset:0;border-color:var(--pink)}
+
+.result{margin-top:34px;border-top:3px solid var(--pink);background:#fff;box-shadow:0 1px 0 var(--line);padding:30px 30px 32px}
+.rlab{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink)}
+.result h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.05;margin-top:10px}
+.rmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.rmeta span{font-size:13.5px;font-weight:700;background:#F4EFF5;padding:5px 12px;color:var(--ink)}
+.start{margin-top:22px;background:var(--ink);color:#fff;padding:18px 22px;font-size:17px;line-height:1.5}
+.start b{color:var(--pink-soft)}
+.start p+p{margin-top:8px;color:#CFC4D4;font-size:15.5px}
+.ents{margin-top:22px;border-top:1px solid var(--ink)}
+.ent{display:grid;grid-template-columns:190px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.ent .ek{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding-top:4px}
+.ent .ek b{display:block;font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);line-height:1.1;margin-top:6px}
+.ent .en{font-size:18px;font-weight:700;line-height:1.35}
+.ent p{font-size:15.5px;line-height:1.55;color:#3B3143;margin-top:8px}
+.ent p.where{color:var(--muted)}
+.ent.opt{opacity:.92}
+.ch{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.04em;padding:4px 10px;margin-top:8px;line-height:1.3}
+.ch.ok{background:#DDF3E4;color:#145F31}
+.ch.part{background:#FFF0C2;color:#6B4E00}
+.ch.no,.ch.none{background:#ECE7EE;color:#5E5266}
+.alt{margin-top:10px;border-left:2px solid var(--pink);padding:2px 0 2px 14px;font-size:15.5px;color:#3B3143}
+.alt b{color:var(--ink)}
+.why2{font-size:15px;color:var(--muted);margin-top:6px}
+.rnote{margin-top:18px;font-size:15px;color:var(--muted)}
+.result .promptbox{margin-top:26px}
+.rbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.rbtns .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+.rbtns .btn.ghost:hover{background:var(--ink);color:#fff}
+
+.ebtns{display:flex;flex-wrap:wrap;gap:8px}
+.ebtn{font-family:var(--sans);font-size:15px;font-weight:700;padding:11px 18px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:all .2s}
+.ebtn:hover{border-color:var(--pink)}
+.ebtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+.dintro{margin-top:24px;font-size:16.5px;max-width:66ch}
+.dintro b{font-weight:700}
+.dcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+.dcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--ink);padding:18px 20px 20px}
+.dcard.none{border-top-color:var(--line);background:#FBF8FA}
+.dcard .dn2{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.dcard h4{font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.3;margin-top:6px}
+.dcard p{font-size:15px;line-height:1.5;color:#3B3143;margin-top:8px}
+.dcard p.dt{color:var(--ink)}
+.dcard p.dw{color:var(--muted)}
+.dcard .src{display:inline-block;margin-top:10px;font-size:13px;font-weight:600}
+.dcard .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.dcard .chips .ch{margin-top:4px}
+
+@media (max-width:760px){
+  .vocab{grid-template-columns:1fr}
+  .voc{grid-template-columns:36px 1fr;gap:12px}
+  .voc .vn{font-size:25px}
+  .modes{display:grid;width:100%}
+  .mode{padding:13px 10px;font-size:15px}
+  .sthead{grid-template-columns:40px 1fr;gap:12px}
+  .sthead .linkish{grid-column:2;justify-self:start}
+  .stn{font-size:34px}
+  .sthead h3{font-size:19px}
+  .stbody{padding-left:0}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .tile{padding:14px 14px 12px;min-height:74px}
+  .tile b{font-size:16.5px}
+  .plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .plans .tile{padding:13px 14px}
+  .recipes{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .recipe{padding:12px 13px;font-size:14.5px}
+  .qbox{padding:20px 18px}
+  .qbtns{max-width:none}
+  .result{padding:22px 18px 24px;margin-left:-20px;margin-right:-20px}
+  .ent{grid-template-columns:1fr;gap:4px;padding:18px 0}
+  .ent .ek b{font-size:22px}
+  .result .promptbox{margin-left:-18px;margin-right:-18px}
+  .rbtns .btn{width:100%;justify-content:center}
+  .dcards{grid-template-columns:1fr}
+  .ebtn{padding:10px 14px;font-size:14.5px}
+}
+.joinbox,.coursebox{margin-top:26px;border-top:1px solid var(--ink);padding-top:18px}
+.joinbox ul,.coursebox ul{margin-top:12px}
+.joinbox li,.coursebox li{font-size:15.5px;line-height:1.55;color:#3B3143}
+.joinbox li b{color:var(--ink)}
+.coursebox a,.jrule a{border-bottom:1px solid rgba(230,25,140,.35);font-weight:700}
+.jrule{margin-top:14px;border-left:2px solid var(--pink);padding:4px 0 4px 16px;font-size:15.5px;color:#3B3143}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · вводный урок</span></div>
+  <div class="kmark"><span class="kn">0</span><span class="kt">Вводный урок · навигатор</span></div>
+  <div class="hero" style="padding-top:34px">
+    <div class="hgrid">
+      <h1>Навигатор по нейросетям: <span class="it">как это называется у вас</span> и что собрать под задачу</h1>
+      <p class="hlead">Проекты, свои помощники, навыки, плагины, регулярные задачи – в каждой нейросети они называются по-своему и открыты на разных тарифах. Выберите свою нейросеть, тариф и задачу – и получите готовый набор с подсказкой, с чего начать.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Время</span><span class="mv">3–5 минут</span></div>
+      <div><span class="mk">Нейросети</span><span class="mv">ChatGPT, Claude, Gemini, Gemini Notebook, ГигаЧат, DeepSeek, Perplexity, Алиса AI</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Свой набор под задачу и ссылки на уроки</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox" style="margin-top:44px">
+  <div class="wrap dgrid">
+    <h2>С чего<br>начинаем модуль</h2>
+    <div class="dcol">
+      <p>В этом модуле мы собираем помощников – таких, которые помнят ваши правила, работают в вашем стиле, берут данные из ваших сервисов и сами приходят с результатом в нужное время. Для этого в нейросетях есть проекты, свои помощники, навыки, плагины и регулярные задачи.</p>
+      <p>Сложность в том, что в каждой нейросети эти вещи называются по-своему и открыты на разных тарифах. В одной есть проекты, в другой их роль играют свои помощники, в третьей нет ни того ни другого. Где-то навыки доступны бесплатно, где-то только на платном тарифе.</p>
+      <p>Навигатор поможет понять, что есть именно у вас, и выбрать набор под вашу задачу – без лишнего. Возвращайтесь к нему в каждом уроке: когда соберёте проект, навык или регулярную задачу, здесь можно проверить, как это называется в вашей нейросети и чем заменить, если на вашем тарифе этого нет.</p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk" id="slovar">
+  <p class="label">Сначала словарь</p>
+  <h2 style="margin:14px 0 6px">Семь слов за минуту</h2>
+  <p style="max-width:66ch;color:var(--muted)">Названия у нейросетей разные, а суть одна. Если запомнить суть, любую кнопку узнаете сами.</p>
+  <div class="vocab">
+    <div class="voc"><span class="vn">1</span><div><h3>Память и «о себе» – <i>что ассистент знает о вас</i></h3><p>Один раз рассказали, кто вы и как вам отвечать, – и это действует во всех чатах.</p></div></div>
+    <div class="voc"><span class="vn">2</span><div><h3>Проект – <i>кабинет, рабочий стол</i></h3><p>Где мы работаем: инструкция, материалы и все чаты на одну тему в одном месте.</p></div></div>
+    <div class="voc"><span class="vn">3</span><div><h3>Свой помощник – <i>сотрудник с должностной инструкцией</i></h3><p>Отдельный готовый собеседник со своими правилами: GPTs в ChatGPT, Gems в Gemini и похожие.</p></div></div>
+    <div class="voc"><span class="vn">4</span><div><h3>Навык – <i>умение, инструмент на столе</i></h3><p>Как мы решаем задачу. Ставится один раз и работает в любом чате и проекте.</p></div></div>
+    <div class="voc"><span class="vn">5</span><div><h3>Плагин или подключение – <i>провод к другому сервису</i></h3><p>Даёт нейросети доступ к вашей почте, календарю, Диску, таблицам.</p></div></div>
+    <div class="voc"><span class="vn">6</span><div><h3>Регулярная задача – <i>будильник и курьер</i></h3><p>Когда запускать: в нужное время нейросеть сама делает работу и приносит результат.</p></div></div>
+    <div class="voc"><span class="vn">7</span><div><h3>Агентный режим – <i>исполнитель с поручением</i></h3><p>Сам проходит много шагов: открывает сайты, собирает данные, готовит файл. В ChatGPT это режим «Работа» из урока.</p></div></div>
+  </div>
+  <div class="checked">
+    <span><b>Проверено 3 октября 2026</b> по официальным справкам и страницам тарифов.</span>
+    <span>Интерфейсы и тарифы меняются – если у себя видите иначе, уточните у <a href="https://aiforlife.ru/ii-course/modul2/bonus-gid-po-neiroseti/">Гида по нейросети</a>.</span>
+  </div>
+</section>
+
+<section class="wrap blk" id="navigator" style="padding-top:44px">
+  <p class="label">Навигатор</p>
+  <div class="modes" role="tablist" aria-label="Режим навигатора">
+    <button class="mode on" type="button" role="tab" aria-selected="true" data-mode="pick">Подобрать набор</button>
+    <button class="mode" type="button" role="tab" aria-selected="false" data-mode="dict">Словарь</button>
+  </div>
+  <p class="modehint" id="modehint" data-pick="Три шага: нейросеть, тариф, задача. В конце – ваш набор, где что найти и в каком уроке это разбираем." data-dict="Выберите, что ищете, – и увидите, как это называется в каждой нейросети и на каких тарифах есть.">Три шага: нейросеть, тариф, задача. В конце – ваш набор, где что найти и в каком уроке это разбираем.</p>
+
+  <div class="pane" id="pane-pick">
+    <div class="st" id="st1">
+      <div class="sthead"><span class="stn">1</span><h3>Ваша нейросеть<span class="stsub">Где вы работаете чаще всего</span></h3></div>
+      <div class="stbody"><div class="tiles" id="nets"></div></div>
+    </div>
+    <div class="st" id="st2" hidden>
+      <div class="sthead"><span class="stn">2</span><h3>Ваш тариф<span class="stsub" id="st2sub"></span></h3></div>
+      <div class="stbody"><div class="plans" id="plans"></div><p class="pnote">Не помните тариф – выберите «Не знаю»: подберём набор, который точно работает бесплатно. Свой тариф обычно видно в настройках профиля.</p></div>
+    </div>
+    <div class="st" id="st3" hidden>
+      <div class="sthead"><span class="stn">3</span><h3>Ваша задача<span class="stsub">Выберите готовый рецепт или ответьте на вопросы</span></h3></div>
+      <div class="stbody">
+        <div class="recipes" id="recipes"></div>
+        <div class="orline">или ответьте на вопросы</div>
+        <div class="qbox" id="qbox"></div>
+      </div>
+    </div>
+    <div id="resultwrap" hidden>
+      <div class="result" id="result" tabindex="-1"></div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-dict" hidden>
+    <div class="st" style="border-top:1px solid var(--ink)">
+      <div class="sthead"><span class="stn">?</span><h3>Что ищете<span class="stsub">Нажмите на нужное слово</span></h3></div>
+      <div class="stbody">
+        <div class="ebtns" id="ebtns"></div>
+        <div id="dict"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dark" style="margin-top:64px" id="sohranit">
+  <div class="wrap dgrid">
+    <h2>Что сохранить и&nbsp;что дальше</h2>
+    <div class="dcol">
+      <p>Вернитесь сюда в каждом уроке модуля. Собираете проект, навык или регулярную задачу – загляните в «Словарь»: как это называется именно в вашей нейросети и есть ли на вашем тарифе. Задача поменялась – пройдите «Подобрать набор» заново.</p>
+      <p style="margin-top:14px">Начните с одной сущности – той, что в карточке стоит первой. Добавляйте следующую, когда первая заработает: так проще понять, что именно помогает.</p>
+      <p style="margin-top:14px">В вашем тарифе чего-то нет? Почти всё заменяется обычным текстом – способы в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/" style="color:var(--pink-soft)">«Помощник там, где нет „Проектов“»</a>. А если кнопка у вас называется иначе – спросите <a href="https://aiforlife.ru/ii-course/modul2/bonus-gid-po-neiroseti/" style="color:var(--pink-soft)">Гида по нейросети</a>.</p>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · вводный урок модуля 2</div>
+</footer>
+
+
+<script>
+/* ===== ДАННЫЕ. Чтобы обновить навигатор, правьте только этот объект. =====
+   st – статус на тарифе: ok = есть, part = есть с ограничениями, no = нет.
+   Ключи st совпадают с id тарифов в plans. none:true – функции в нейросети нет совсем. */
+var DATA = {
+  checked: "3 октября 2026",
+  entities: [
+    {id:"memory", name:"Память и «о себе»", role:"Фон для всех чатов", analogy:"что ассистент знает о вас",
+     def:"Один раз рассказали о себе и о том, как отвечать, – и это действует во всех чатах. Память – когда нейросеть сама запоминает факты из прошлых разговоров.",
+     alt:"Держите короткий текст «о себе» в заметке и вставляйте его в начало чата или в инструкцию проекта.", altShort:"текст «о себе» в начале чата", altLink:false},
+    {id:"project", name:"Проект", role:"Где работаем", analogy:"кабинет, рабочий стол",
+     def:"Инструкция, материалы и все чаты на одну тему в одном месте. Каждый новый чат внутри проекта сразу знает правила.",
+     alt:"Одна ветка = один помощник или инструкция-обёртка, которую вы вставляете первым сообщением в новый чат.", altShort:"одна ветка или инструкция-обёртка", altLink:true},
+    {id:"gpt", name:"Свой помощник", role:"Отдельный собеседник", analogy:"сотрудник с должностной инструкцией",
+     def:"Отдельный помощник со своей инструкцией и файлами: к нему приходят с задачами, как к коллеге. Похож на проект, но без папки с чатами.",
+     alt:"Инструкция-обёртка в начале нового чата – работает в любой нейросети.", altShort:"инструкция-обёртка в начале чата", altLink:true},
+    {id:"skill", name:"Навык", role:"Как решаем задачу", analogy:"умение, инструмент на столе",
+     def:"Способ работы, упакованный один раз: нейросеть подключает его в любом чате и проекте. Обычно ставится zip-архивом.",
+     alt:"Откройте файл навыка и вставьте его текст в инструкцию проекта или в начало чата – он сработает как обёртка.", altShort:"текст навыка в инструкции проекта", altLink:true},
+    {id:"plugin", name:"Плагин или подключение", role:"Доступ к сервисам", analogy:"провод к другому сервису",
+     def:"Разрешение нейросети заглянуть в вашу почту, календарь, Диск, таблицы или другой сервис и взять оттуда данные.",
+     alt:"Принесите данные сами: скопируйте письма или события, скачайте таблицу и приложите файлом.", altShort:"скопировать данные или приложить файл", altLink:false},
+    {id:"schedule", name:"Регулярная задача", role:"Когда запускать", analogy:"будильник и курьер",
+     def:"Нейросеть сама делает работу по расписанию – каждое утро, раз в неделю – и присылает результат.",
+     alt:"Поставьте напоминание в телефоне на нужное время, а готовый промпт держите в заметке: по сигналу открыли чат и вставили.", altShort:"напоминание в телефоне + готовый промпт", altLink:false},
+    {id:"agent", name:"Агентный режим", role:"Много шагов", analogy:"исполнитель с поручением",
+     def:"Нейросеть сама проходит длинную цепочку шагов: открывает сайты, собирает данные, заполняет и готовит файлы, а вы смотрите и подтверждаете.",
+     alt:"Разбейте задачу на шаги и пройдите их в обычном чате: один шаг – одно сообщение, ссылки и файлы приносите сами.", altShort:"разбить на шаги в обычном чате", altLink:false}
+  ],
+  questions: [
+    {id:"once", text:"Задача разовая – сделать один раз и забыть?", hint:"Например, переписать одно письмо или разобраться с одним вопросом. Если будете возвращаться – отвечайте «нет»."},
+    {id:"project", ent:"project", text:"Вы возвращаетесь к одной теме с одними и теми же материалами?", hint:"Контент для блога, работа с одним клиентом, учёба по курсу: каждый раз нужны одни правила и одни файлы."},
+    {id:"skill", ent:"skill", text:"Один и тот же способ работы нужен в разных местах?", hint:"Писать в вашем голосе, проверять факты, оформлять по одному шаблону – в разных чатах и проектах."},
+    {id:"plugin", ent:"plugin", text:"Нужны данные из почты, календаря, Диска или таблиц?", hint:"Чтобы нейросеть сама взяла письма, события или файлы, а не вы копировали их вручную."},
+    {id:"schedule", ent:"schedule", text:"Это нужно делать по расписанию?", hint:"Каждое утро, по понедельникам, раз в месяц – и чтобы нейросеть сама присылала результат."},
+    {id:"agent", ent:"agent", text:"В задаче много шагов и сайтов?", hint:"Найти, сравнить, собрать в таблицу, заполнить – когда в обычном чате пришлось бы вести нейросеть за руку на каждом шаге."}
+  ],
+  recipes: [
+    {id:"voice", name:"Контент в своём голосе", sub:"проект + навык «Мой голос»", task:"писать посты и тексты в моём голосе", ans:["project","skill"], note:'Какие ещё навыки пригодятся для текстов – в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-navyki-temy/">«Навыки: где взять свои тексты и какие навыки собрать»</a>.'},
+    {id:"clients", name:"Ответы клиентам", sub:"проект с частыми вопросами + голос", task:"готовить ответы клиентам на частые вопросы по моим услугам", ans:["project","skill"]},
+    {id:"report", name:"Еженедельный отчёт", sub:"проект + расписание + таблица", task:"собирать еженедельный отчёт по данным из моей таблицы", ans:["project","plugin","schedule"]},
+    {id:"study", name:"Учёба по курсу", sub:"проект или Gemini Notebook", task:"учиться по материалам курса: конспекты, вопросы, повторение", ans:["project"], note:'Для учёбы удобен Gemini Notebook: блокнот с материалами курса – это и есть проект, и он работает бесплатно. Как его собрать – в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-notebooklm/">«NotebookLM: своя база знаний для учёбы»</a>.'},
+    {id:"digest", name:"Сводка почты и календаря", sub:"подключения + расписание", task:"каждое утро получать сводку: важные письма и встречи на сегодня", ans:["plugin","schedule"]},
+    {id:"facts", name:"Проверка фактов", sub:"навык фактчекинга", task:"проверять факты, цифры и ссылки в текстах для блога", ans:["skill"], note:'Навык фактчекинга собираем в уроке 4 модуля 2. Если навыков на вашем тарифе нет – текст навыка можно положить в инструкцию проекта.'}
+  ],
+  nets: [
+    {id:"chatgpt", name:"ChatGPT", by:"OpenAI",
+     plans:[{id:"free",name:"Free",sub:"бесплатный"},{id:"go",name:"Go"},{id:"plus",name:"Plus"},{id:"pro",name:"Pro"},{id:"business",name:"Business",sub:"для команд"},{id:"enterprise",name:"Enterprise и Edu",sub:"для компаний и вузов"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     join:"В ChatGPT навыки надёжнее всего подключаются в режиме «Работа»: в обычном чате они могут не сработать – так показано в уроке 2 модуля 2.",
+     f:{
+      memory:{name:"Персонализация: инструкции и память", st:{free:"part",go:"part",plus:"ok",pro:"ok",business:"ok",enterprise:"ok"},
+        tariffs:"На всех тарифах. На Free и Go память урезана, а текст инструкций короче.", where:"настройки профиля, раздел персонализации",
+        src:"https://help.openai.com/en/articles/8590148-memory-faq"},
+      project:{name:"Проекты (Projects)", st:{free:"part",go:"ok",plus:"ok",pro:"ok",business:"ok",enterprise:"ok"},
+        tariffs:"На всех тарифах, включая бесплатный. На Free – меньше файлов в проекте.", where:"раздел с проектами в меню слева",
+        src:"https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt"},
+      gpt:{name:"GPTs – уходят, переезжают в плагины", st:{free:"part",go:"part",plus:"part",pro:"part",business:"part",enterprise:"part"},
+        tariffs:"Новые GPT можно создать только на Business, Enterprise и Edu и только до 26 октября 2026. 11 декабря 2026 GPT отключат. Уже созданными пока можно пользоваться на всех тарифах.",
+        limit:"Не стройте нового помощника на GPT – соберите проект: он останется.", where:"раздел GPT в меню слева",
+        src:"https://help.openai.com/en/articles/20001519"},
+      skill:{name:"Навыки (Skills) – внутри раздела плагинов", st:{free:"no",go:"no",plus:"no",pro:"no",business:"ok",enterprise:"ok"},
+        tariffs:"По справке – на Business, Enterprise и Edu. На личных тарифах Free, Go, Plus и Pro навыков нет.", where:"раздел плагинов в меню слева, вкладка с навыками; свой навык загружается с компьютера",
+        src:"https://help.openai.com/en/articles/20001066"},
+      plugin:{name:"Плагины и приложения (Plugins, Apps)", st:{free:"part",go:"part",plus:"ok",pro:"ok",business:"ok",enterprise:"ok"},
+        tariffs:"Каталог плагинов открыт на всех тарифах; на Free и Go – только базовые подключения. Бывшие «коннекторы» теперь называются приложениями и живут в каталоге плагинов.", where:"раздел плагинов в меню слева",
+        src:"https://help.openai.com/en/articles/20001256"},
+      schedule:{name:"Запланированные задачи (Scheduled tasks)", st:{free:"part",go:"part",plus:"ok",pro:"ok",business:"ok",enterprise:"ok"},
+        tariffs:"На всех тарифах. На Free и Go – до трёх задач, на Free не чаще раза в день. На платных – больше задач и чаще.", where:"раздел «Запланировано» в меню; задачу можно поставить и просьбой в чате",
+        src:"https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt"},
+      agent:{name:"Режим «Работа» (ChatGPT Work)", st:{free:"part",go:"part",plus:"ok",pro:"ok",business:"ok",enterprise:"ok"},
+        tariffs:"На всех тарифах – в программе для компьютера (macOS и Windows). На сайте и в телефоне – с тарифа Plus. Прежний режим агента (ChatGPT agent) отключён, его заменил «Работа».",
+        limit:"На Free и Go – только в программе для компьютера.", where:"переключатель между обычным чатом и «Работой» – как в уроке 2 модуля 2",
+        src:"https://help.openai.com/en/articles/20001275"}
+     }},
+
+    {id:"claude", name:"Claude", by:"Anthropic",
+     plans:[{id:"free",name:"Free",sub:"бесплатный"},{id:"pro",name:"Pro"},{id:"max",name:"Max"},{id:"team",name:"Team",sub:"для команд"},{id:"enterprise",name:"Enterprise",sub:"для компаний"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     f:{
+      memory:{name:"Инструкции для Claude и память (Memory)", st:{free:"part",pro:"ok",max:"ok",team:"ok",enterprise:"ok"},
+        tariffs:"Инструкции и память – на всех тарифах. Поиск по прошлым чатам – только на платных. В Team и Enterprise память разрешает владелец аккаунта.", where:"настройки профиля",
+        src:"https://support.claude.com/en/articles/11817273"},
+      project:{name:"Проекты (Projects)", st:{free:"part",pro:"ok",max:"ok",team:"ok",enterprise:"ok"},
+        tariffs:"На всех тарифах. На Free – до пяти проектов, на платных – без этого ограничения. Делиться проектом с коллегами – в Team и Enterprise.", where:"раздел с проектами в меню слева",
+        src:"https://support.claude.com/en/articles/9517075"},
+      gpt:{none:true, note:"Отдельных «своих помощников» нет – их роль играют проекты и навыки."},
+      skill:{name:"Навыки (Skills)", st:{free:"ok",pro:"ok",max:"ok",team:"ok",enterprise:"ok"},
+        tariffs:"На всех тарифах, включая бесплатный. Ставятся zip-архивом. В настройках должно быть включено выполнение кода и создание файлов.", where:"настройки, раздел навыков; новый навык – загрузкой архива",
+        src:"https://support.claude.com/en/articles/12512180"},
+      plugin:{name:"Коннекторы (Connectors) и плагины (Plugins)", st:{free:"part",pro:"ok",max:"ok",team:"ok",enterprise:"ok"},
+        tariffs:"Коннекторы к сервисам – на всех тарифах, на Free можно добавить только один свой. Плагины (набор навыков и коннекторов) – только на платных.", where:"настройки, разделы коннекторов и плагинов; часть доступна из меню у поля ввода",
+        src:"https://support.claude.com/en/articles/13837440"},
+      schedule:{name:"Запланированные задачи (Scheduled tasks)", st:{free:"no",pro:"ok",max:"ok",team:"part",enterprise:"part"},
+        tariffs:"Только на платных тарифах. Работают в Cowork; с 16 сентября 2026 постепенно появляются прямо в чате – сначала на Pro и Max. На Free нет.",
+        limit:"В Team и Enterprise – через Cowork; в общем чате появятся позже.", where:"пункт с расписанием в меню слева",
+        src:"https://support.claude.com/en/articles/13854387"},
+      agent:{name:"Cowork и Claude in Chrome", st:{free:"no",pro:"ok",max:"ok",team:"ok",enterprise:"part"},
+        tariffs:"Только на платных тарифах. Cowork работает с вашими файлами и сервисами по шагам, Claude in Chrome – действует в браузере. В Enterprise включает администратор.", where:"режим Cowork в программе Claude для компьютера, на сайте и в телефоне; Claude in Chrome – расширение для браузера",
+        src:"https://support.claude.com/en/articles/13345190"}
+     }},
+
+    {id:"gemini", name:"Gemini", by:"Google",
+     plans:[{id:"free",name:"Без подписки",sub:"бесплатно"},{id:"plus",name:"Google AI Plus"},{id:"pro",name:"Google AI Pro"},{id:"ultra",name:"Google AI Ultra"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     f:{
+      memory:{name:"Персональный ИИ: память и инструкции для Gemini", st:{free:"ok",plus:"ok",pro:"ok",ultra:"ok"},
+        tariffs:"Без подписки тоже. Только личный аккаунт Google, память – с 18 лет и при включённой истории действий.", where:"«Настройки и справка» → «Персональный ИИ»",
+        src:"https://support.google.com/gemini/answer/16598469?hl=ru"},
+      project:{name:"Блокноты (Notebooks)", st:{free:"part",plus:"part",pro:"part",ultra:"part"},
+        tariffs:"Тарифы в справке не указаны. Функция открывается постепенно. Блокноты синхронизируются с Gemini Notebook.",
+        limit:"Если блокнотов у вас ещё нет – используйте Gem-бота или навык.", where:"меню слева",
+        src:"https://support.google.com/gemini/answer/16972047?hl=ru"},
+      gpt:{name:"Gem-боты (Gems)", st:{free:"ok",plus:"ok",pro:"ok",ultra:"ok"},
+        tariffs:"На всех тарифах, включая бесплатный.", where:"раздел с Gem-ботами в меню слева",
+        note:"Google переводит Gem-ботов в навыки: на личных аккаунтах они переедут автоматически в ноябре 2026.",
+        src:"https://support.google.com/gemini/answer/18560919?hl=ru"},
+      skill:{name:"Навыки (Skills)", st:{free:"ok",plus:"ok",pro:"ok",ultra:"ok"},
+        tariffs:"Без подписки тоже: личный аккаунт, 18+, включённая история действий. Ставятся zip-архивом, загрузка – в веб-версии. Для рабочих и учебных аккаунтов пока нет.", where:"веб-версия Gemini, раздел навыков",
+        src:"https://support.google.com/gemini/answer/17094296?hl=ru"},
+      plugin:{name:"Подключённые приложения (Connected Apps)", st:{free:"ok",plus:"ok",pro:"ok",ultra:"ok"},
+        tariffs:"На всех тарифах. Раньше назывались «расширения». Gmail, Календарь и другие сервисы Google и партнёров.", where:"«Настройки и справка» → приложения; в запросе можно назвать сервис через @",
+        src:"https://support.google.com/gemini/answer/13695044?hl=ru"},
+      schedule:{name:"Запланированные действия (Scheduled actions)", st:{free:"part",plus:"ok",pro:"ok",ultra:"ok"},
+        tariffs:"По таблице тарифов – с Google AI Plus. В статье о функции сказано, что она постепенно открывается для всех личных аккаунтов. До 10 активных действий.",
+        limit:"Без подписки может ещё не появиться – проверьте у себя.", where:"раздел запланированных действий в настройках; поставить можно и просьбой в чате",
+        src:"https://support.google.com/gemini/answer/16316416?hl=ru"},
+      agent:{name:"Gemini Spark", st:{free:"no",plus:"no",pro:"ok",ultra:"ok"},
+        tariffs:"Google AI Pro и Ultra, личный аккаунт, 18+. Работает не во всех странах. Глубокое исследование (Deep Research) есть на всех тарифах.", where:"отдельный раздел Spark в Gemini",
+        src:"https://support.google.com/gemini/answer/16596215?hl=ru"}
+     }},
+
+    {id:"notebook", name:"Gemini Notebook", by:"бывший NotebookLM",
+     plans:[{id:"free",name:"Standard",sub:"бесплатно"},{id:"plus",name:"Google AI Plus"},{id:"pro",name:"Google AI Pro"},{id:"ultra",name:"Google AI Ultra"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     extra:"Gemini Notebook – инструмент для учёбы и работы с источниками. Блокнот здесь – это проект. Навыков, подключений и расписания нет: для них выберите другую нейросеть, например Gemini.",
+     f:{
+      memory:{name:"Настройка чата в каждом блокноте", st:{free:"ok",plus:"ok",pro:"ok",ultra:"ok"},
+        tariffs:"Общей памяти о вас нет. В каждом блокноте можно выбрать стиль ответов или задать свой.", where:"настройки чата внутри блокнота",
+        src:"https://support.google.com/gemininotebook/answer/16179559?hl=ru"},
+      project:{name:"Блокноты (notebooks)", st:{free:"ok",plus:"ok",pro:"ok",ultra:"ok"},
+        tariffs:"На всех тарифах, включая бесплатный. На платных – больше блокнотов и источников в каждом.", where:"главная страница сервиса",
+        src:"https://support.google.com/gemininotebook/answer/16213268?hl=ru"},
+      gpt:{none:true, note:"Ближе всего – свой стиль ответов в настройке чата блокнота."},
+      skill:{none:true},
+      plugin:{none:true, note:"Подключений к сервисам нет, но источники можно брать с Google Диска, из интернета, YouTube и файлов."},
+      schedule:{none:true},
+      agent:{none:true, note:"Есть глубокое исследование (Deep Research) – поиск источников внутри блокнота."}
+     }},
+
+    {id:"gigachat", name:"ГигаЧат", by:"Сбер",
+     plans:[{id:"free",name:"Бесплатно",sub:"вход по Сбер ID"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     extra:"ГигаЧат для частных пользователей бесплатный. Своих помощников, навыков и подключений в нём нет – помощника удобнее держать в одной ветке или в инструкции-обёртке. Своих ИИ-агентов можно создавать только в корпоративном «ГигаЧат Бизнес».",
+     f:{
+      memory:{name:"Долгосрочная память", st:{free:"ok"},
+        tariffs:"Бесплатно. Нейросеть запоминает факты о вас и помнит их в вебе, в приложении и в Телеграм-боте. Отдельного поля «о себе» нет.", where:"профиль, раздел «Память»",
+        src:"https://sber.pro/publication/sber-predstavil-masshtabnoe-obnovlenie-ii-pomoschnika-gigachat/"},
+      project:{none:true, note:"Раздел «Проекты» есть, но это редактор документов и презентаций, а не место для инструкции и материалов помощника."},
+      gpt:{none:true, note:"Своих ИИ-агентов можно создавать только в корпоративном «ГигаЧат Бизнес»."},
+      skill:{none:true, note:"Навыки есть только в отдельном продукте для бизнеса «ГигаАгент»."},
+      plugin:{none:true, note:"Есть поиск в интернете и работа с файлами, но подключений к почте, календарю и Диску нет."},
+      schedule:{none:true},
+      agent:{none:true, note:"Есть режимы «Исследование» и «Рассуждение», агентного режима нет."}
+     }},
+
+    {id:"deepseek", name:"DeepSeek", by:"DeepSeek",
+     plans:[{id:"free",name:"Бесплатно",sub:"сайт и приложение"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     extra:"Чат DeepSeek бесплатный и очень простой: ни проектов, ни памяти, ни навыков в нём нет. Помощник здесь живёт в инструкции-обёртке. У DeepSeek есть отдельная программа-агент DeepSeek Harness с навыками, плагинами и расписанием, но она в стадии превью, рассчитана на продвинутых и работает через платный ключ для разработчиков.",
+     f:{
+      memory:{none:true, note:"Памяти и настроек «о себе» в официальных источниках нет."},
+      project:{none:true},
+      gpt:{none:true},
+      skill:{none:true, note:"Навыки есть только в отдельной программе DeepSeek Harness."},
+      plugin:{none:true},
+      schedule:{none:true},
+      agent:{none:true, note:"Режимы Expert и Instant – это разные модели для ответа, а не агент."}
+     }},
+
+    {id:"perplexity", name:"Perplexity", by:"Perplexity AI",
+     plans:[{id:"free",name:"Free",sub:"бесплатный"},{id:"pro",name:"Pro"},{id:"max",name:"Max"},{id:"enterprise",name:"Enterprise",sub:"Enterprise Pro и Max"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     f:{
+      memory:{name:"Профиль «о себе» и память (Memory)", st:{free:"part",pro:"ok",max:"ok",enterprise:"ok"},
+        tariffs:"Рассказать о себе можно в профиле. Память официально объявлена для Pro и Max; на Free – не подтверждено.", where:"настройки, разделы профиля и памяти",
+        src:"https://www.perplexity.ai/help-center/en/articles/10968016-memory"},
+      project:{name:"Проекты (Projects, бывшие Spaces)", st:{free:"part",pro:"ok",max:"ok",enterprise:"ok"},
+        tariffs:"С 30 июля 2026 пространства (Spaces) называются проектами: файлы, инструкции и подключения в одном месте. Полностью – на Pro, Max и Enterprise.",
+        limit:"На Free проекты урезаны или недоступны – проверьте у себя.", where:"раздел с проектами в меню слева",
+        src:"https://www.perplexity.ai/hub/blog/spaces-are-now-projects"},
+      gpt:{none:true, note:"Роль своих помощников играют проекты с инструкцией."},
+      skill:{name:"Навыки (Skills) в Perplexity Computer", st:{free:"no",pro:"ok",max:"ok",enterprise:"ok"},
+        tariffs:"Pro, Max и Enterprise – везде, где есть Perplexity Computer. Свой навык можно загрузить zip-архивом.", where:"раздел навыков в Perplexity Computer",
+        src:"https://www.perplexity.ai/help-center/en/articles/13914413-how-to-use-computer-skills"},
+      plugin:{name:"Коннекторы (Connectors)", st:{free:"no",pro:"ok",max:"ok",enterprise:"ok"},
+        tariffs:"Pro, Max и Enterprise: Gmail, Google Календарь, Google Диск, Outlook, Slack и другие. Часть коннекторов – только на Max и Enterprise. На Free подключений нет.", where:"настройки, раздел коннекторов",
+        src:"https://www.perplexity.ai/help-center/en/articles/12168040-connecting-perplexity-with-gmail-and-google-calendar"},
+      schedule:{name:"Автоматизации (Automations)", st:{free:"no",pro:"ok",max:"ok",enterprise:"ok"},
+        tariffs:"Pro, Max и Enterprise, расходуют кредиты. Запускаются по расписанию или по событию, например по новому письму. С 29 сентября 2026 заменили прежние запланированные задачи.", where:"Perplexity Computer, раздел автоматизаций",
+        src:"https://www.perplexity.ai/hub/blog/computer-adds-automations-for-ongoing-work"},
+      agent:{name:"Perplexity Computer и браузер Comet", st:{free:"part",pro:"ok",max:"ok",enterprise:"ok"},
+        tariffs:"Perplexity Computer – на Pro, Max и Enterprise. Браузер Comet с ассистентом – бесплатно для всех.",
+        limit:"На Free – только браузер Comet.", where:"Perplexity Computer в меню; Comet – отдельный браузер",
+        src:"https://www.perplexity.ai/help-center/en/articles/13837784-what-is-computer"}
+     }},
+
+    {id:"alice", name:"Алиса AI", by:"Яндекс",
+     plans:[{id:"free",name:"Бесплатно"},{id:"plus",name:"Алиса Плюс",sub:"опция к Яндекс Плюсу"},{id:"pro",name:"Алиса Про",sub:"в тарифах Яндекс 360"},{id:"business",name:"Алиса AI для бизнеса",sub:"для организаций"},{id:"unknown",name:"Не знаю",sub:"считаем как бесплатный",asFree:true}],
+     f:{
+      memory:{name:"Персонализированное общение", st:{free:"ok",plus:"ok",pro:"ok",business:"ok"},
+        tariffs:"Бесплатно. Алиса сама запоминает факты о вас из разговоров; попросить забыть можно словами. Отдельного поля «о себе» нет.", where:"настройки чата с Алисой",
+        src:"https://alice.yandex.ru/support/ru/assistant/personalization"},
+      project:{name:"Проекты – в Алисе Про, базы знаний – для бизнеса", st:{free:"no",plus:"no",pro:"ok",business:"ok"},
+        tariffs:"В бесплатной Алисе AI и с Алисой Плюс проектов нет. В Алисе Про (Яндекс 360) есть проекты, в Алисе AI для бизнеса – базы знаний с инструкциями.", where:"раздел проектов или баз знаний в Алисе Про и бизнес-версии",
+        src:"https://alice.yandex.ru/support/ru/assistant/alice-business/knowledge-bases"},
+      gpt:{name:"Персонажи", st:{free:"part",plus:"part",pro:"part",business:"part"},
+        tariffs:"Бесплатно. Можно создать своего персонажа: имя, описание, стиль общения. Только текст – без файлов и поиска. С Алисой Плюс переписка с персонажем хранится бессрочно, без неё – 14 дней.",
+        limit:"Это скорее собеседник со своим стилем, чем рабочий помощник: материалы ему не приложить.", where:"раздел с персонажами в чате с Алисой",
+        src:"https://alice.yandex.ru/support/ru/assistant/chat/characters"},
+      skill:{none:true, note:"«Навыки Алисы» – это сценарии для колонки и голосового помощника, а не навыки в смысле курса."},
+      plugin:{name:"Агент «Почта»; плагины – в бизнес-версии", st:{free:"part",plus:"part",pro:"part",business:"ok"},
+        tariffs:"Бесплатно – агент «Почта»: читает только Яндекс Почту и письма не отправляет. В Алисе AI для бизнеса – плагины к Почте, Календарю, Диску, Битрикс24, amoCRM, 1С и другим.",
+        limit:"Только Яндекс Почта и только чтение.", where:"агенты в чате с Алисой; плагины – в режиме «Задачи» бизнес-версии",
+        src:"https://alice.yandex.ru/support/ru/assistant/chat/agent-mail"},
+      schedule:{none:true, note:"ИИ-задач по расписанию нет. Есть обычные напоминания и будильники – их можно взять как замену."},
+      agent:{name:"ИИ-агенты Алисы AI", st:{free:"part",plus:"ok",pro:"part",business:"part"},
+        tariffs:"Агенты «Исследовать», «Находит дешевле», «Почта» и другие, часть – в бете. Открываются постепенно. С Алисой Плюс – больше запросов к агенту «Исследовать».",
+        limit:"Агенты открываются постепенно – у вас может быть не весь список.", where:"раздел с агентами в чате с Алисой",
+        src:"https://alice.yandex.ru/support/ru/assistant/chat/agents"}
+     }}
+  ]
+
+};
+</script>
+
+<script>
+(function(){
+  var BEZ='https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/';
+  var GID='https://aiforlife.ru/ii-course/modul2/bonus-gid-po-neiroseti/';
+  var CHIP={ok:'Есть на вашем тарифе',part:'Есть, с ограничениями',no:'Нет на этом тарифе',none:'Нет в этой нейросети'};
+  var CHIPD={ok:'есть',part:'с ограничениями',no:'нет'};
+  var S={net:null,plan:null,ans:{},qi:0,recipe:null};
+  function $(id){return document.getElementById(id);}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function net(){return DATA.nets.filter(function(n){return n.id===S.net;})[0];}
+  function ent(id){return DATA.entities.filter(function(e){return e.id===id;})[0];}
+  function recipe(){return S.recipe?DATA.recipes.filter(function(x){return x.id===S.recipe;})[0]:null;}
+  function planObj(){var n=net();return n?n.plans.filter(function(p){return p.id===S.plan;})[0]:null;}
+  function effPlan(){var p=planObj();return p&&p.asFree?net().plans[0].id:S.plan;}
+  function stOf(f){if(!f||f.none)return 'none';return (f.st&&f.st[effPlan()])||'no';}
+  function has(id){var s=stOf(net().f[id]);return s==='ok'||s==='part';}
+  function short(t){return t.replace(/\s*\([^)]*\)/g,'').split(' – ')[0];}
+  function absent(id){return stOf(net().f[id])==='none'?'в '+net().name+' этого нет':'на вашем тарифе этого нет';}
+  function lc(t){return t.charAt(0).toLowerCase()+t.slice(1);}
+  function show(el,on){el.hidden=!on;}
+  function go(el){if(!el)return;setTimeout(function(){var r=el.getBoundingClientRect();if(r.top<0||r.top>window.innerHeight*0.55){window.scrollTo({top:window.scrollY+r.top-16,behavior:'smooth'});}},40);}
+
+  /* шаг 1 */
+  function drawNets(){
+    $('nets').innerHTML=DATA.nets.map(function(n){
+      return '<button type="button" class="tile'+(S.net===n.id?' on':'')+'" aria-pressed="'+(S.net===n.id)+'" data-net="'+n.id+'"><b>'+esc(n.name)+'</b><span>'+esc(n.by)+'</span></button>';
+    }).join('');
+  }
+  /* шаг 2 */
+  function drawPlans(){
+    var n=net();
+    $('st2sub').textContent='Тарифы '+n.name+' – как они называются в официальных источниках';
+    $('plans').innerHTML=n.plans.map(function(p){
+      return '<button type="button" class="tile'+(S.plan===p.id?' on':'')+'" aria-pressed="'+(S.plan===p.id)+'" data-plan="'+p.id+'"><b>'+esc(p.name)+'</b>'+(p.sub?'<span>'+esc(p.sub)+'</span>':'')+'</button>';
+    }).join('');
+  }
+  /* шаг 3 */
+  function drawRecipes(){
+    $('recipes').innerHTML=DATA.recipes.map(function(r){
+      return '<button type="button" class="recipe'+(S.recipe===r.id?' on':'')+'" aria-pressed="'+(S.recipe===r.id)+'" data-recipe="'+r.id+'">'+esc(r.name)+'<span>'+esc(r.sub)+'</span></button>';
+    }).join('');
+  }
+  function drawQ(){
+    var qs=DATA.questions, q=qs[S.qi];
+    var bar=qs.map(function(x,i){return '<i class="'+(i<S.qi?'done':'')+'"></i>';}).join('');
+    var h='<div class="qprog"><span>Вопрос '+(S.qi+1)+' из '+qs.length+'</span>'+(S.qi>0?'<button type="button" class="linkish" data-qback>← Назад</button>':'<span></span>')+'</div><div class="qbar">'+bar+'</div>';
+    h+='<p class="qtext">'+esc(q.text)+'</p><p class="qhint">'+esc(q.hint)+'</p>';
+    h+='<div class="qbtns"><button type="button" class="yn yes" data-yn="1">Да</button><button type="button" class="yn" data-yn="0">Нет</button></div>';
+    $('qbox').innerHTML=h;
+  }
+  function answer(yes){
+    var q=DATA.questions[S.qi];
+    S.ans[q.id]=yes; S.recipe=null; drawRecipes();
+    if(q.id==='once'&&yes){finish();return;}
+    if(S.qi<DATA.questions.length-1){S.qi++;drawQ();}
+    else finish();
+  }
+
+  /* результат */
+  function needed(){
+    if(S.ans.once)return [];
+    return DATA.questions.filter(function(q){return q.ent&&S.ans[q.id];}).map(function(q){return q.ent;});
+  }
+  function entCard(id,opt){
+    var n=net(), e=ent(id), f=n.f[id], st=stOf(f);
+    var h='<div class="ent'+(opt?' opt':'')+'"><div class="ek">'+esc(opt?'По желанию':e.role)+'<b>'+esc(e.name)+'</b></div><div>';
+    h+='<div class="en">'+esc(f.none?'В '+n.name+' этого нет':f.name)+'</div>';
+    h+='<span class="ch '+st+'">'+CHIP[st]+'</span>';
+    if(!f.none&&f.tariffs)h+='<p class="why2">'+esc(f.tariffs)+'</p>';
+    if(!f.none&&f.where&&st!=='no')h+='<p class="where">Где найти: '+esc(f.where)+'</p>';
+    if(st==='no'||st==='none'){
+      var alt='';
+      if(id==='project'&&has('gpt'))alt+='<b>Ближайшая замена здесь – '+esc(n.f.gpt.name)+'.</b> '+(n.f.gpt.where?esc('Где найти: '+n.f.gpt.where+'. '):'');
+      alt+=esc(e.alt);
+      h+='<p class="alt"><b>Чем заменить.</b> '+alt+(e.altLink?' Подробно – в бонусе <a href="'+BEZ+'">«Помощник там, где нет „Проектов“»</a>.':'')+'</p>';
+    } else if(st==='part'&&f.limit){
+      h+='<p class="alt">'+esc(f.limit)+'</p>';
+    }
+    if(f.note)h+='<p class="where">'+esc(f.note)+'</p>';
+    return h+'</div></div>';
+  }
+  function joinBlock(need){
+    var n=net(), L=[];
+    if(need.indexOf('project')>=0&&!has('project')&&!has('gpt'))L.push('<b>Проекта у вас нет – стол заменяет обёртка.</b> Инструкция и материалы лежат в одном тексте, который вы вставляете в начало нового чата. Инструкция в нём – менеджер-специалист: он знает, как делать эту работу.');
+    else if(need.indexOf('project')>=0)L.push('<b>Проект – стол.</b> На нём лежат инструкция и материалы. Инструкция – менеджер-специалист: он знает, как делать эту работу и к какому результату идти.');
+    if(need.indexOf('skill')>=0)L.push(need.indexOf('project')>=0?'<b>Навыки – инструменты на столе.</b> Помощник берёт их сам, когда нужно. Чтобы он не забывал, в инструкции проекта пропишите, когда какой навык подключать и когда он не нужен.':'<b>Навык – инструмент.</b> Его можно взять в любой чат: назовите навык в запросе, чтобы нейросеть точно его подключила.');
+    if(need.indexOf('plugin')>=0)L.push('<b>Подключение – провод к вашим сервисам.</b> По нему помощник берёт свежие данные из почты, календаря или таблицы. Напишите в задаче, откуда и что именно брать.');
+    if(need.indexOf('schedule')>=0)L.push('<b>Регулярная задача – курьер.</b> В нужное время прибегает и приносит свежую сводку. В задании курьеру укажите, что принести и в каком виде.');
+    if(need.indexOf('agent')>=0)L.push('<b>Агентный режим – менеджер выходит из-за стола.</b> Сам открывает сайты, собирает данные, готовит файл. Включайте его для длинных задач, а не для каждого вопроса.');
+    if(need.indexOf('skill')>=0&&!has('skill'))L.push('<b>Навыков у вас нет?</b> Положите текст навыка в инструкцию проекта или в начало чата – инструмент будет лежать прямо на столе.');
+    if(n.join&&need.indexOf('skill')>=0&&has('skill'))L.push(esc(n.join));
+    var h='<div class="joinbox"><p class="rlab">Как это соединить</p><ul>'+L.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+    h+='<p class="jrule"><b>Не зоопарк из навыков и подключений.</b> Начните с одного, проверьте на живой задаче и добавляйте следующее, когда упрётесь в узкое место. Подробно – урок 3 модуля 2.</p></div>';
+    return h;
+  }
+  function courseBlock(need){
+    var L=[], r=recipe();
+    if(need.indexOf('project')>=0)L.push('<b>Проект</b> – урок 1 модуля 2');
+    if(need.indexOf('skill')>=0)L.push('<b>Навык</b> – урок 2 модуля 2');
+    if(need.length>1)L.push(need.indexOf('project')>=0&&need.indexOf('skill')>=0?'<b>Как соединить проект и навыки в одном помощнике</b> – урок 3 модуля 2':'<b>Как собрать несколько частей в одного помощника</b> – урок 3 модуля 2');
+    if((r&&r.id==='facts')||need.indexOf('skill')>=0)L.push('<b>Фактчекинг и навык проверки</b> – урок 4 модуля 2');
+    if(need.indexOf('plugin')>=0)L.push('<b>Плагины</b> – бонус к уроку 3 модуля 2: <a href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">какие подключения пригодятся помощнику</a>');
+    if(need.indexOf('schedule')>=0)L.push('<b>Регулярные задачи</b> – урок 4 модуля 1: там вы уже поставили первую повторяющуюся задачу, которую нейросеть делает сама');
+    if(need.indexOf('agent')>=0)L.push('<b>Агентный режим</b> – разберём дальше в курсе');
+    if(!L.length)L.push('<b>Хороший запрос в обычном чате</b> – модуль 1. Помощников собираем начиная с урока 1 модуля 2');
+    return '<div class="coursebox"><p class="rlab">Где это разбираем в курсе</p><ul>'+L.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>';
+  }
+  function finish(){
+    var n=net(), p=planObj(), need=needed(), r=recipe();
+    var h='<p class="rlab">Ваш набор</p><h3>'+(need.length?need.map(function(id){return ent(id).name;}).join(' + '):'Обычный чат')+'</h3>';
+    h+='<div class="rmeta"><span>'+esc(n.name)+'</span><span>'+esc(p.name)+(p.asFree?' – считаем как бесплатный':'')+'</span>'+(r?'<span>'+esc(r.name)+'</span>':'')+'</div>';
+    if(!need.length){
+      h+='<div class="start"><p>Вам хватит <b>обычного чата</b>.</p><p>'+esc(S.ans.once?'Для разовой задачи помощник не нужен: откройте новый чат, опишите задачу и приложите материалы. Собирать проект или навык под одну задачу – лишняя работа.':'По вашим ответам хватит обычного чата с хорошим запросом. Если начнёте возвращаться к этой теме с одними материалами – пройдите навигатор ещё раз.')+'</p></div>';
+      h+='<div class="ents">'+entCard('memory',true)+'</div>';
+    } else if(need.length===1){
+      var one=need[0];
+      h+='<div class="start"><p>Вам хватит одного: <b>'+esc(lc(ent(one).name))+'</b>'+(has(one)?' (у '+esc(n.name)+' это «'+esc(short(n.f[one].name))+'»)':' – '+absent(one)+', ниже замена')+'.</p><p>Больше ничего собирать не нужно. Правило из уроков: одна сущность, если задачу решает одна.</p></div>';
+      h+='<div class="ents">'+entCard(one,false)+(one!=='memory'?entCard('memory',true):'')+'</div>';
+    } else {
+      var avail=need.filter(has);
+      var startId=avail.length?avail[0]:need[0];
+      var rest=need.filter(function(id){return id!==startId;});
+      h+='<div class="start"><p>Начните с одного: <b>'+esc(lc(ent(startId).name))+'</b>'+(has(startId)?' (у '+esc(n.name)+' это «'+esc(short(n.f[startId].name))+'»)':' – через замену ниже: '+absent(startId))+'.</p>';
+      h+='<p>Остальное добавьте, когда первое заработает: '+rest.map(function(id){return lc(ent(id).name);}).join(', ')+'.</p></div>';
+      h+='<div class="ents">'+need.map(function(id){return entCard(id,false);}).join('')+entCard('memory',true)+'</div>';
+      h+=joinBlock(need);
+    }
+    if(n.extra)h+='<p class="rnote">'+esc(n.extra)+'</p>';
+    if(r&&r.note)h+='<p class="rnote">'+r.note+'</p>';
+    h+=courseBlock(need);
+    h+='<p class="rnote">Названия и тарифы – по официальным источникам на '+esc(DATA.checked)+'. Видите у себя иначе – спросите <a href="'+GID+'">Гида по нейросети</a>.</p>';
+    h+='<div class="rbtns"><button type="button" class="btn ghost" data-edit>Изменить ответы</button><button type="button" class="btn ghost" data-reset>Начать заново</button></div>';
+    $('result').innerHTML=h;
+    show($('resultwrap'),true);
+    go($('resultwrap'));
+  }
+
+  /* словарь */
+  var dictEnt='project';
+  function drawDict(){
+    $('ebtns').innerHTML=DATA.entities.map(function(e){return '<button type="button" class="ebtn'+(dictEnt===e.id?' on':'')+'" aria-pressed="'+(dictEnt===e.id)+'" data-ent="'+e.id+'">'+esc(e.name)+'</button>';}).join('');
+    var e=ent(dictEnt);
+    var h='<p class="dintro"><b>'+esc(e.name)+' – '+esc(e.analogy)+'.</b> '+esc(e.def)+'</p><div class="dcards">';
+    h+=DATA.nets.map(function(n){
+      var f=n.f[dictEnt];
+      if(f.none)return '<div class="dcard none"><p class="dn2">'+esc(n.name)+'</p><h4>Нет</h4>'+(f.note?'<p class="dw">'+esc(f.note)+'</p>':'')+'<p class="dw">Чем заменить: '+esc(e.altShort)+'.</p></div>';
+      var chips=n.plans.filter(function(p){return !p.asFree;}).map(function(p){var s=(f.st&&f.st[p.id])||'no';return '<span class="ch '+s+'">'+esc(p.name)+': '+CHIPD[s]+'</span>';}).join('');
+      return '<div class="dcard"><p class="dn2">'+esc(n.name)+'</p><h4>'+esc(f.name)+'</h4><div class="chips">'+chips+'</div>'+(f.tariffs?'<p class="dt">'+esc(f.tariffs)+'</p>':'')+(f.where?'<p class="dw">Где найти: '+esc(f.where)+'</p>':'')+(f.note?'<p class="dw">'+esc(f.note)+'</p>':'')+(f.src?'<a class="src" href="'+esc(f.src)+'" target="_blank" rel="noopener">Официальный источник ↗</a>':'')+'</div>';
+    }).join('');
+    $('dict').innerHTML=h+'</div>';
+  }
+
+  function resetAll(){S={net:null,plan:null,ans:{},qi:0,recipe:null};drawNets();show($('st2'),false);show($('st3'),false);show($('resultwrap'),false);go($('st1'));}
+
+  document.addEventListener('click',function(ev){
+    var t;
+    if((t=ev.target.closest('[data-mode]'))){
+      var m=t.getAttribute('data-mode');
+      document.querySelectorAll('.mode').forEach(function(b){var on=b===t;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});
+      show($('pane-pick'),m==='pick');show($('pane-dict'),m==='dict');
+      $('modehint').textContent=m==='pick'?$('modehint').getAttribute('data-pick'):$('modehint').getAttribute('data-dict');
+      if(m==='dict')drawDict();
+      return;
+    }
+    if((t=ev.target.closest('[data-net]'))){
+      S.net=t.getAttribute('data-net');S.plan=null;drawNets();drawPlans();show($('st2'),true);show($('st3'),false);show($('resultwrap'),false);go($('st2'));return;
+    }
+    if((t=ev.target.closest('[data-plan]'))){
+      S.plan=t.getAttribute('data-plan');drawPlans();show($('st3'),true);
+      if(!$('resultwrap').hidden){finish();return;}
+      S.qi=0;S.ans={};drawRecipes();drawQ();go($('st3'));return;
+    }
+    if((t=ev.target.closest('[data-recipe]'))){
+      var r=DATA.recipes.filter(function(x){return x.id===t.getAttribute('data-recipe');})[0];
+      S.recipe=r.id;S.ans={};
+      DATA.questions.forEach(function(q){S.ans[q.id]=r.ans.indexOf(q.id)>=0;});
+      S.qi=0;drawRecipes();drawQ();finish();return;
+    }
+    if((t=ev.target.closest('[data-yn]'))){answer(t.getAttribute('data-yn')==='1');return;}
+    if(ev.target.closest('[data-qback]')){if(S.qi>0){S.qi--;drawQ();}return;}
+    if(ev.target.closest('[data-edit]')){S.qi=0;S.recipe=null;drawRecipes();drawQ();show($('resultwrap'),false);go($('st3'));return;}
+    if(ev.target.closest('[data-reset]')){resetAll();return;}
+    if((t=ev.target.closest('[data-ent]'))){dictEnt=t.getAttribute('data-ent');drawDict();return;}
+  });
+  drawNets();
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
