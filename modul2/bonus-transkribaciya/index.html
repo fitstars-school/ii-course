@@ -244,20 +244,13 @@ footer p+p{margin-top:8px}
 @media (max-width:420px){.shots{grid-template-columns:1fr}}
 </style>
 <style id="edge">
-/* Единый левый край (03.10.2026, правило Светланы): блоки не сдвигаем отступом – выделяем цветом, плашкой, стилем */
-.step{grid-template-columns:1fr;gap:0}
-.step .snum{display:block;font-size:40px;margin-bottom:10px}
-.step ol{list-style:none;counter-reset:st;padding-left:0;margin-left:0}
-.step ol li{counter-increment:st;position:relative;padding-left:28px}
-.step ol li::before{content:counter(st) ".";position:absolute;left:0;top:0;color:var(--pink);font-weight:700}
+/* Единый левый край (03.10.2026, правило Светланы): блоки и цифры начинаются от левого края страницы.
+   Цифра шага или пункта стоит у края, текст – после неё с отступом. Выделяем плашкой, цветом, стилем, а не сдвигом всего блока. */
 .rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
 .dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
-.task .body{padding-left:0}
-.def{grid-template-columns:1fr;gap:0}
-.def .dn{display:block;margin-bottom:6px}
 .lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / span 10}
 section.wrap{padding-left:40px;padding-right:40px}
-@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1}.step .snum{font-size:32px}}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1}}
 </style>
 </head>
 <body>
