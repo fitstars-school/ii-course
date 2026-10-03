@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Навигатор по нейросетям: как это называется у вас и что собрать под задачу · Вводный урок модуля 2 · Нейро-архитектор</title>
+<title>Навигатор и помощник по нейросетям · Модуль 2 · к уроку 1 · Нейро-архитектор</title>
 <meta name="description" content="Интерактивный навигатор: выберите нейросеть, тариф и задачу – и получите свой набор: проект, свой помощник, навыки, плагины, регулярные задачи. Плюс словарь – как это называется в ChatGPT, Claude, Gemini, Gemini Notebook, ГигаЧате, DeepSeek, Perplexity и Алисе AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -375,23 +375,37 @@ a.inl:hover{color:var(--pink)}
 .joinbox li b{color:var(--ink)}
 .coursebox a,.jrule a{border-bottom:1px solid rgba(230,25,140,.35);font-weight:700}
 .jrule{margin-top:14px;border-left:2px solid var(--pink);padding:4px 0 4px 16px;font-size:15.5px;color:#3B3143}
+.tall pre{max-height:360px;overflow:auto;padding-right:10px}
+.tall pre::-webkit-scrollbar{width:6px}
+.tall pre::-webkit-scrollbar-thumb{background:rgba(255,143,198,.35)}
+.btns .linkbtn{display:inline-block}
+.gnets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 34px;margin-top:18px;border-top:1px solid var(--ink)}
+.gnet{padding:18px 0;border-bottom:1px solid var(--line)}
+.gnet .gn{font-weight:800;font-size:17px;margin-bottom:8px}
+.gnet .gn span{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-top:3px}
+.gnet ol{margin:0;padding-left:20px}
+.gnet ol li{font-size:15.5px;line-height:1.55;color:#3B3143;margin:4px 0}
+.gnet .gnote{font-size:14.5px;color:var(--muted);margin-top:10px}
+.gcmd{margin-top:12px}
+.gcmd li{font-size:15.5px;line-height:1.55;color:#3B3143}
+@media (max-width:760px){.gnets{grid-template-columns:1fr}.tall pre{max-height:300px}}
 </style>
 </head>
 
 <body>
 
 <header class="wrap">
-  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · вводный урок</span></div>
-  <div class="kmark"><span class="kn">0</span><span class="kt">Вводный урок · навигатор</span></div>
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · к уроку 1</span></div>
+  <div class="kmark"><span class="kn">1</span><span class="kt">Навигатор и помощник по нейросетям</span></div>
   <div class="hero" style="padding-top:34px">
     <div class="hgrid">
       <h1>Навигатор по нейросетям: <span class="it">как это называется у вас</span> и что собрать под задачу</h1>
-      <p class="hlead">Проекты, свои помощники, навыки, плагины, регулярные задачи – в каждой нейросети они называются по-своему и открыты на разных тарифах. Выберите свою нейросеть, тариф и задачу – и получите готовый набор с подсказкой, с чего начать.</p>
+      <p class="hlead">Проекты, свои помощники, навыки, плагины, регулярные задачи – в каждой нейросети они называются по-своему и открыты на разных тарифах. Выберите свою нейросеть, тариф и задачу – и получите готовый набор с подсказкой, с чего начать. А в конце соберите первый проект – своего помощника по нейросетям.</p>
     </div>
     <div class="meta">
-      <div><span class="mk">Время</span><span class="mv">3–5 минут</span></div>
+      <div><span class="mk">Время</span><span class="mv">10–15 минут</span></div>
       <div><span class="mk">Нейросети</span><span class="mv">ChatGPT, Claude, Gemini, Gemini Notebook, ГигаЧат, DeepSeek, Perplexity, Алиса AI</span></div>
-      <div><span class="mk">Останется</span><span class="mv">Свой набор под задачу и ссылки на уроки</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Свой набор под задачу и личный помощник по нейросетям</span></div>
     </div>
   </div>
 </header>
@@ -424,7 +438,7 @@ a.inl:hover{color:var(--pink)}
   </div>
   <div class="checked">
     <span><b>Проверено 3 октября 2026</b> по официальным справкам и страницам тарифов.</span>
-    <span>Интерфейсы и тарифы меняются – если у себя видите иначе, уточните у <a href="https://aiforlife.ru/ii-course/modul2/bonus-gid-po-neiroseti/">Гида по нейросети</a>.</span>
+    <span>Интерфейсы и тарифы меняются – если у себя видите иначе, уточните у <a href="#gid">своего помощника по нейросетям</a>.</span>
   </div>
 </section>
 
@@ -469,13 +483,125 @@ a.inl:hover{color:var(--pink)}
   </div>
 </section>
 
+<section class="wrap blk" id="gid" style="padding-top:64px">
+  <p class="label">Ваш помощник по нейросетям</p>
+  <h2 style="margin:14px 0 6px">Соберите первый проект – <span class="it">своего помощника по нейросетям</span></h2>
+  <p style="max-width:66ch;color:var(--muted)">Помощник – ваш личный тьютор по нейросетям. В первом разговоре он спросит, для чего вы её используете, а дальше простыми словами подскажет, куда нажать и как сделать то, что нужно, – и сверится с официальной справкой. Никаких сложных промптов: одна готовая инструкция и 5 минут.</p>
+
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Скопируйте инструкцию помощника</h3>
+      <p>Читать и править её не обязательно. В самом конце есть строка «Для чего я использую нейросеть» – можно дописать сразу, а можно оставить пустой: помощник спросит сам и подскажет, что туда вставить.</p>
+      <div class="promptbox stepprompt tall"><p class="plabel">Мой помощник по нейросетям · инструкция</p><pre>МОЙ ПОМОЩНИК ПО НЕЙРОСЕТЯМ
+Правила нашего разговора. Работай по ним с первого ответа и не пересказывай их.
+
+КТО ТЫ
+Ты – мой терпеливый помощник и тьютор по нейросети, в которой мы сейчас работаем. Я – взрослый новичок, не программист. Твоя задача – простыми словами объяснять, где что находится и как сделать то, что мне нужно, по шагам.
+
+ПЕРВЫЙ РАЗГОВОР
+1. Коротко поздоровайся и назови нейросеть, в которой мы работаем. Если не уверен – спроси.
+2. Спроси по одному вопросу: для чего я хочу использовать нейросеть (работа, учёба, дом, блог – что угодно) и откуда захожу – с телефона или с компьютера.
+3. Когда отвечу, собери 2–3 строки обо мне и предложи дописать их в конец этой инструкции, под заголовок «Для чего я использую нейросеть». Подскажи, где у меня эта инструкция лежит, чтобы я смог(ла) её поправить.
+4. Предложи 3 первых шага под мои цели: что попробовать в этой нейросети в первую очередь.
+Если под заголовком «Для чего я использую нейросеть» уже что-то написано – не спрашивай заново. Поздоровайся и спроси: «Что хотите сделать сегодня?»
+
+КАК ОБЪЯСНЯТЬ
+– По-русски, тепло, без терминов. Если без термина никак – объясни его бытовым сравнением: «проект – как отдельный кабинет со своими правилами и папками».
+– Один ответ – один шаг. Один вопрос в сообщении, потом жди ответа.
+– Схема: что это – зачем это мне (пример под мои цели) – где найти (шаги 1, 2, 3) – как понять, что получилось.
+– Если шагов больше трёх – давай по одному-два и спрашивай: «Получилось? Что видите на экране?»
+– Если я не нахожу кнопку – не повторяй то же самое. Попроси скрин и подскажи по тому, что вижу я.
+– Обращайся на «вы» и без рода: «у вас получилось». Если я пишу на «ты» – переходи на «ты».
+
+ТОЛЬКО ОФИЦИАЛЬНАЯ СПРАВКА
+Кнопки, тарифы и функции меняются каждый месяц, поэтому про устройство нейросети опирайся на её официальную справку, а не на память, форумы и видео.
+– Если есть поиск в интернете – перед ответом открой справку и в конце дай ссылку на страницу, где это написано.
+– Если поиска нет – скажи: «Это по моим данным, интерфейс мог измениться». Опиши место словами («значок с тремя полосками слева вверху») и попроси скрин.
+– Не придумывай названия кнопок, цены, даты и ссылки.
+Где официальные справки: ChatGPT – help.openai.com · Claude – support.claude.com · Gemini – support.google.com/gemini · ГигаЧат – giga.chat/help · Алиса AI – alice.yandex.ru/support/ru/assistant/chat-alice · DeepSeek – deepseek.com/en (подробной справки по чату мало, говори об этом честно) · Perplexity – perplexity.ai/help-center. Для другой нейросети найди раздел помощи на её официальном сайте.
+
+ЧЕСТНО
+– Если функции нет в этой нейросети или на моём тарифе – скажи прямо и предложи, как обойтись без неё. Сначала покажи, что можно сделать бесплатно, и не уговаривай покупать подписку.
+– Не путай нейросети между собой и не переноси кнопки одной на другую.
+– Советуй не загружать пароли, данные карт, паспорта и чужие личные данные.
+– Ты не служба поддержки: с оплатой и восстановлением аккаунта подскажи, как связаться с официальной поддержкой.
+
+КОРОТКИЕ КОМАНДЫ
+«экскурсия» – 5–7 главных мест на экране, по строчке: где это и зачем.
+«как сделать…» – объяснение по шагам.
+«я застрял(а)» – разбор по скрину: одна вероятная причина и один следующий шаг.
+«проще» – объясни заново, другими словами и без терминов.
+«что нового» – свежие изменения по официальным новостям сервиса, с датами и ссылками.
+
+ДЛЯ ЧЕГО Я ИСПОЛЬЗУЮ НЕЙРОСЕТЬ
+(допишите сами или оставьте пустым – помощник спросит в первом разговоре и предложит, что сюда вставить)</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button><a class="linkbtn" href="assets/moi-pomoshnik-po-neirosetyam.txt" download="moi-pomoshnik-po-neirosetyam.txt">Скачать инструкцию (.txt)</a></div></div>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Положите её туда, где помощник будет жить</h3>
+      <p>Выберите свою нейросеть. Там, где есть проекты или Gem-боты, помощник запомнит инструкцию и будет ждать вас в каждом новом чате. Где их нет – просто вставьте инструкцию в чат.</p>
+      <div class="gnets">
+        <div class="gnet">
+          <p class="gn">ChatGPT <span>проект · на всех тарифах</span></p>
+          <ol>
+            <li>В меню слева откройте раздел с проектами и создайте новый проект.</li>
+            <li>Назовите его «Мой помощник по нейросетям».</li>
+            <li>Откройте настройки проекта, найдите поле для инструкций и вставьте текст помощника. Сохраните.</li>
+            <li>Начните новый чат внутри проекта и напишите: «Привет».</li>
+          </ol>
+        </div>
+        <div class="gnet">
+          <p class="gn">Claude <span>проект · на всех тарифах</span></p>
+          <ol>
+            <li>В меню слева откройте раздел с проектами и создайте новый проект.</li>
+            <li>Назовите его «Мой помощник по нейросетям».</li>
+            <li>Внутри проекта найдите поле для инструкций и вставьте текст помощника. Сохраните.</li>
+            <li>Начните новый чат внутри проекта и напишите: «Привет».</li>
+          </ol>
+        </div>
+        <div class="gnet">
+          <p class="gn">Gemini <span>Gem-бот · на всех тарифах</span></p>
+          <ol>
+            <li>В меню слева откройте раздел с Gem-ботами и создайте нового.</li>
+            <li>Назовите его «Мой помощник по нейросетям».</li>
+            <li>В поле «Инструкции» вставьте текст помощника. Сохраните.</li>
+            <li>Откройте своего Gem-бота и напишите: «Привет».</li>
+          </ol>
+        </div>
+        <div class="gnet">
+          <p class="gn">ГигаЧат, Алиса AI, DeepSeek, Perplexity и другие <span>обычный чат</span></p>
+          <ol>
+            <li>Откройте новый чат.</li>
+            <li>Вставьте инструкцию помощника первым сообщением и отправьте.</li>
+            <li>Сохраните этот чат: переименуйте в «Мой помощник» или закрепите – и возвращайтесь в него с вопросами.</li>
+          </ol>
+          <p class="gnote">Разговор стал длинным и помощник начал забывать правила – откройте новый чат и вставьте инструкцию снова.</p>
+        </div>
+      </div>
+      <p class="snote">Кнопки у вас называются иначе или проект не создаётся – это нормально: интерфейсы меняются. Запустите помощника в обычном чате и спросите его: «Как создать проект в этой нейросети?» – он проведёт по шагам.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Спрашивайте своими словами</h3>
+      <p>Можно голосом и как есть: «не могу найти, где история чатов», «хочу загрузить файл и спросить по нему». Не находите кнопку – пришлите скрин. А ещё помощник понимает короткие команды:</p>
+      <ul class="gcmd">
+        <li><b>экскурсия</b> – главные места на экране, по строчке: где это и зачем</li>
+        <li><b>как сделать…</b> – объяснит по шагам</li>
+        <li><b>я застрял(а)</b> – разберёт по скрину и даст один следующий шаг</li>
+        <li><b>проще</b> – объяснит заново, без терминов</li>
+        <li><b>что нового</b> – свежие изменения по официальным новостям</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
 <div class="dark" style="margin-top:64px" id="sohranit">
   <div class="wrap dgrid">
     <h2>Что сохранить и&nbsp;что дальше</h2>
     <div class="dcol">
       <p>Вернитесь сюда в каждом уроке модуля. Собираете проект, навык или регулярную задачу – загляните в «Словарь»: как это называется именно в вашей нейросети и есть ли на вашем тарифе. Задача поменялась – пройдите «Подобрать набор» заново.</p>
       <p style="margin-top:14px">Начните с одной сущности – той, что в карточке стоит первой. Добавляйте следующую, когда первая заработает: так проще понять, что именно помогает.</p>
-      <p style="margin-top:14px">В вашем тарифе чего-то нет? Почти всё заменяется обычным текстом – способы в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/" style="color:var(--pink-soft)">«Помощник там, где нет „Проектов“»</a>. А если кнопка у вас называется иначе – спросите <a href="https://aiforlife.ru/ii-course/modul2/bonus-gid-po-neiroseti/" style="color:var(--pink-soft)">Гида по нейросети</a>.</p>
+      <p style="margin-top:14px">В вашем тарифе чего-то нет? Почти всё заменяется обычным текстом – способы в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/" style="color:var(--pink-soft)">«Помощник там, где нет „Проектов“»</a>. А если кнопка у вас называется иначе – спросите <a href="#gid" style="color:var(--pink-soft)">своего помощника по нейросетям</a>.</p>
     </div>
   </div>
 </div>
@@ -484,7 +610,7 @@ a.inl:hover{color:var(--pink)}
 </main>
 
 <footer>
-  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · вводный урок модуля 2</div>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · модуль 2, к уроку 1: навигатор и помощник по нейросетям</div>
 </footer>
 
 
@@ -720,7 +846,7 @@ var DATA = {
 <script>
 (function(){
   var BEZ='https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/';
-  var GID='https://aiforlife.ru/ii-course/modul2/bonus-gid-po-neiroseti/';
+  var GID='#gid';
   var CHIP={ok:'Есть на вашем тарифе',part:'Есть, с ограничениями',no:'Нет на этом тарифе',none:'Нет в этой нейросети'};
   var CHIPD={ok:'есть',part:'с ограничениями',no:'нет'};
   var S={net:null,plan:null,ans:{},qi:0,recipe:null};
@@ -847,7 +973,7 @@ var DATA = {
     if(n.extra)h+='<p class="rnote">'+esc(n.extra)+'</p>';
     if(r&&r.note)h+='<p class="rnote">'+r.note+'</p>';
     h+=courseBlock(need);
-    h+='<p class="rnote">Названия и тарифы – по официальным источникам на '+esc(DATA.checked)+'. Видите у себя иначе – спросите <a href="'+GID+'">Гида по нейросети</a>.</p>';
+    h+='<p class="rnote">Названия и тарифы – по официальным источникам на '+esc(DATA.checked)+'. Видите у себя иначе – спросите <a href="'+GID+'">своего помощника по нейросетям</a>.</p>';
     h+='<div class="rbtns"><button type="button" class="btn ghost" data-edit>Изменить ответы</button><button type="button" class="btn ghost" data-reset>Начать заново</button></div>';
     $('result').innerHTML=h;
     show($('resultwrap'),true);
@@ -914,5 +1040,32 @@ ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
 
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');
+    var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в инструкцию или в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+})();
+</script>
 </body>
 </html>
