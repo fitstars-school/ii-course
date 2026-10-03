@@ -206,6 +206,17 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 .pfb .pfb-btn:hover{background:#FF8FC6}
 .pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
 @media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
 </style>
 </head>
 <body>
@@ -307,73 +318,13 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
     <h2>Практика</h2>
     <p class="pmeta">15–20 минут · поставьте видео на паузу</p>
     <p class="pintro">Берём длинный диалог, в котором вы уже вносили бесконечные правки, и собираем из него свой промпт – подход к этой задаче, которым можно пользоваться дальше.</p>
-    <div class="svcbar">
-      <p class="svclab">Где вы работаете</p>
-      <div class="svcbtns">
-          <button class="svcbtn on" type="button" data-svcbtn="chatgpt">ChatGPT</button>
-          <button class="svcbtn" type="button" data-svcbtn="claude">Claude</button>
-          <button class="svcbtn" type="button" data-svcbtn="gemini">Gemini</button>
-          <button class="svcbtn" type="button" data-svcbtn="giga">ГигаЧат</button>
-          <button class="svcbtn" type="button" data-svcbtn="deepseek">DeepSeek</button>
-      </div>
+    <div class="btns">
+      <a class="btn btn-praktika" href="praktika/">Открыть инструкцию к практике<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
   </div>
 </div>
 
 <section class="wrap">
-  <div class="steps">
-      <div class="step"><span class="snum">1</span><div>
-                <h3>Откройте свой длинный диалог</h3>
-        <p>Тот самый, где вы уже вносили правки, спорили, уточняли и в итоге пришли к какому-то варианту. Подойдёт диалог из второго урока или любой новый. Важно, чтобы в нём были ваши замечания – именно они и есть материал.</p>
-        <p class="snote">Если замечаний пока нет – сначала скажите, что в результате вам подходит, а что нет. Это уже правки.</p>
-      </div></div>
-      <div class="step"><span class="snum">2</span><div>
-                <h3>Давайте обратную связь тем способом, который вам удобен</h3>
-        <p>Переписывать за нейросеть руками не нужно – вы остаётесь в режиме взаимодействия. Мне, например, в ответах не нравятся рубленые фразы и «ИИшный налёт»: искусственные противопоставления, нейросетевая драматургия. Я это так и говорю – и конкретизирую, что именно не нравится.</p>
-        <p>Отдельный приём для текстов: включите диктовку и прочитайте текст вслух, как будете его произносить. Где спотыкаетесь – там же и говорите: «вот здесь не ложится, тут я бы зашла иначе». Так вы и правки собираете, и заодно репетируете.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Смотри, я сейчас прочитаю этот текст вслух. Возможно, я буду что-то править и говорить, что мне не нравится и обо что я спотыкаюсь. Выпиши, пожалуйста, все мои правки и наблюдения, скажи, как бы ты поправил текст, и предложи вариант.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      </div></div>
-      <div class="step"><span class="snum">3</span><div>
-                <h3>Попросите собрать ваш подход в промпт</h3>
-        <p>Это ключевой шаг урока: диалог превращается в инструкцию. Все идеи, методы и подходы, которые рождались по ходу, надо собрать – и нейросеть в этой сборке полезнее всего.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Промпт урока</p><pre>Мы с тобой долго дорабатывали эту задачу. Проанализируй, пожалуйста, все мои правки, комментарии и выборы и скажи, что ты понял о том, как мне лучше решать такие задачи. Собери это в готовый промпт, которым я смогу пользоваться для похожих задач дальше.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      
-        <p style="margin-top:26px">Можно проще – я сама обычно говорю так:</p>
-        <div class="promptbox stepprompt"><p class="plabel">Как говорю я</p><pre>Собери, пожалуйста, в один подход всё, что я предлагала, критиковала и правила в нашем диалоге, – чтобы мне дальше было проще решать такие задачи.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      </div></div>
-      <div class="step"><span class="snum">4</span><div>
-                <h3>Прочитайте, что получилось, и поправьте</h3>
-        <p>У меня вышло так: «Тебе нужен не сценарий рилса в привычном смысле, а живая устная мысль, которую можно снять. Тебе важнее ситуация, чем термин. Предпочитаешь, чтобы вывод рождался из истории». Многое из этого я действительно говорила – а часть он додумал и добавил от себя. Помните третий принцип: проверяйте и убирайте то, чего вы не говорили.</p>
-      </div></div>
-      <div class="step"><span class="snum">5</span><div>
-                <h3>Проверьте промпт в новом чате</h3>
-        <p>Скопируйте получившийся промпт, откройте новый чат и допишите к нему другую тему. Я, например, дописала: «Хочу поднимать тему, как пережить развод», – и он сразу начал писать сценарии в моём подходе.</p>
-        <div class="hint">
-          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Новый чат – кнопка вверху боковой панели. Промпт вставьте первым сообщением и допишите новую тему.</p></div>
-          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Новый чат – кнопка вверху слева. Промпт вставьте первым сообщением.</p></div>
-          <div class="hs" data-svc="gemini"><p class="hlab">Gemini</p><p>Новый чат – в панели слева. Промпт вставьте первым сообщением.</p></div>
-          <div class="hs" data-svc="giga"><p class="hlab">ГигаЧат</p><p>Новый чат – кнопкой «+» или в списке слева. Промпт вставьте первым сообщением.</p></div>
-          <div class="hs" data-svc="deepseek"><p class="hlab">DeepSeek</p><p>Новый чат – кнопкой слева. Промпт вставьте первым сообщением.</p></div>
-        </div>
-      </div></div>
-      <div class="step"><span class="snum">6</span><div>
-                <h3>Сохраните промпт к себе</h3>
-        <p>Сохраните промпт к себе – например, отдельным файлом. Если ваша нейросеть не создаёт файл (так бывает в ГигаЧате и DeepSeek), просто скопируйте текст в документ. Назовите понятно, по задаче: например, «Сценарий – мой подход».</p>
-        <p>Поздравляю: это ваш первый промпт, который вы создали самостоятельно, сами того не подозревая. И это уже не просто промпт, а ваша методология решения задачи. С этой инструкцией во втором модуле мы будем настраивать помощников, а сам файл обязательно пригодится в портфолио.</p>
-      </div></div>
-  </div>
-
-  <div class="donebox">
-    <div class="dc">
-      <p class="dl">Готово, когда</p>
-      <p>Готово, когда у вас есть отдельный файл с собственным промптом – вашим подходом к одной конкретной задаче – и ощущение «я составил свой промпт на своём подходе работы».</p>
-      <p style="margin-top:18px">Рядом запишите одну задачу или часть процесса, которая съедает время, утомляет либо могла бы получаться лучше. Полную карту будем собирать в четвёртом уроке.</p>
-      <div class="keepbox">
-        <p class="kl">Что сохранить</p>
-        <p style="font-size:16px">Описание этого урока для портфолио – промпт в розовом блоке ниже. Сам промпт приложите к портфолио – в строку «Мои инструменты».</p>
-      </div>
-    </div>
-  </div>
 <div class="pfb" id="portfolio">
   <span class="pfb-tag">Задача для вашего портфолио</span>
   <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>

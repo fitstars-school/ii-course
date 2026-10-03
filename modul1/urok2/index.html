@@ -206,6 +206,17 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 .pfb .pfb-btn:hover{background:#FF8FC6}
 .pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
 @media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
 </style>
 </head>
 <body>
@@ -312,72 +323,13 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
     <h2>Практика</h2>
     <p class="pmeta">15–20 минут · поставьте видео на паузу</p>
     <p class="pintro">Возьмите свою задачу – можно ту же, что и в прошлом уроке, можно новую. Сейчас важно отработать сам подход: держать в голове контекст, задачу и результат и добавить один-два приёма. Главное – не застревать на выборе, просто начинаем делать.</p>
-    <div class="svcbar">
-      <p class="svclab">Где вы работаете</p>
-      <div class="svcbtns">
-          <button class="svcbtn on" type="button" data-svcbtn="chatgpt">ChatGPT</button>
-          <button class="svcbtn" type="button" data-svcbtn="claude">Claude</button>
-          <button class="svcbtn" type="button" data-svcbtn="gemini">Gemini</button>
-          <button class="svcbtn" type="button" data-svcbtn="giga">ГигаЧат</button>
-          <button class="svcbtn" type="button" data-svcbtn="deepseek">DeepSeek</button>
-      </div>
+    <div class="btns">
+      <a class="btn btn-praktika" href="praktika/">Открыть инструкцию к практике<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
   </div>
 </div>
 
 <section class="wrap">
-  <div class="steps">
-      <div class="step"><span class="snum">1</span><div>
-                <h3>Откройте свою нейросеть и новый чат</h3>
-        <p>Подойдёт любая, к которой есть доступ. Если повторяете за мной – ChatGPT. Если есть выбор модели рассуждений, поставьте ту, что думает подольше: мы даём большой запрос.</p>
-      </div></div>
-      <div class="step"><span class="snum">2</span><div>
-                <h3>Включите голосовой ввод</h3>
-        <p>Печатать контекст, задачу и результат каждый раз долго. Голосом получается быстрее и подробнее: наговариваются детали, которые руками вы бы не написали. Можно надиктовать кусок, нажать стоп, прочитать расшифровку и продолжить дальше.</p>
-        <div class="hint">
-          <div class="hs on" data-svc="chatgpt"><p class="hlab">ChatGPT</p><p>Кнопка микрофона рядом с полем ввода – «начать диктовку». В приложении на телефоне удобнее всего.</p></div>
-          <div class="hs" data-svc="claude"><p class="hlab">Claude</p><p>Своего голосового ввода может не быть – пользуйтесь системной диктовкой телефона или компьютера. Это надстройка, но работает так же.</p></div>
-          <div class="hs" data-svc="gemini"><p class="hlab">Gemini</p><p>Своя расшифровка речи – кнопка микрофона рядом с полем ввода.</p></div>
-          <div class="hs" data-svc="giga"><p class="hlab">ГигаЧат</p><p>Кнопка микрофона в приложении. Если её нет – системная диктовка телефона.</p></div>
-          <div class="hs" data-svc="deepseek"><p class="hlab">DeepSeek</p><p>Своего голосового ввода может не быть – пользуйтесь системной диктовкой. Готовый промпт можно просто скопировать и вставить.</p></div>
-        </div>
-        <p class="snote">Если голосовой ввод не сразу понравился или пока не получается легко – ничего страшного, пробуйте дальше. Структура со временем начнёт держаться фоном.</p>
-      </div></div>
-      <div class="step"><span class="snum">3</span><div>
-                <h3>Наговорите три части подряд</h3>
-        <p>Не причёсывайте речь. Просто расскажите, держа в голове структуру: сначала контекст, потом задача, потом какой результат вам нужен. Вот как это звучало у меня на уроке – не как образец формулировки, а как пример объёма и свободы речи.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Как я наговаривала это на уроке</p><pre>Контекст. Мне нужно создать короткий ролик для женщин на тему отношений. У меня небольшой блог на 300 человек, в основном женщины 35–45 лет, кто-то в разводе, кто-то нет. Кризис отношений так или иначе переживают практически все, об этом мне пишут подписчики. Я хочу, чтобы ролик был про типы привязанности и про то, как они влияют на отношения с мужчиной.
-
-Задача. Мне нужен сценарий рилса длительностью максимум полторы минуты. Я точно не хочу формат говорящей головы, я стесняюсь записывать себя. Буду рада, если предложишь идеи, которые можно снять через детали и предметы.
-
-Результат. Хочу три разных варианта таблицей: слева время, справа текстовки, которые мне надо говорить. И подсказки, чем проиллюстрировать, если не говорящая голова.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-        <p class="snote">Если по ходу непонятно, контекст это или задача, – не разбирайтесь. Я сама на уроке думала: «я не люблю рилсы с говорящей головой – это контекст или задача?» Просто говорите, нейросеть разберётся.</p>
-      </div></div>
-      <div class="step"><span class="snum">4</span><div>
-                <h3>Добавьте один-два приёма</h3>
-        <p>Не все семь сразу. Выберите то, что подходит вашей задаче. Я на уроке взяла самый интересный – разбор с трёх позиций.</p>
-        <div class="promptbox stepprompt"><p class="plabel">Приём, который я добавила</p><pre>И когда ты предложишь эти варианты, в конце сделай, пожалуйста, разбор. С позиции сценариста: где можно сделать интереснее с точки зрения истории, где нужна зацепка. С позиции эксперта-психолога по отношениям: чтобы это звучало профессионально и не превращалось в попсу. И обязательно посмотри глазами моей зрительницы: интересно ли ей, понятно ли, о чём эти ролики, что её может зацепить. Пусть каждый из них предложит улучшения и сделает итоговый вывод.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      </div></div>
-      <div class="step"><span class="snum">5</span><div>
-                <h3>Сравните с прошлым ответом</h3>
-        <p>Откройте ответ из первого урока и новый. Смотрите не на «красивее», а на то, стал ли ответ подходящим именно вам. Довольны ли вы им больше, чем обычным своим запросом?</p>
-      </div></div>
-      <div class="step"><span class="snum">6</span><div>
-                <h3>Уточните, если не попал</h3>
-        <p>Не начинайте новый запрос с нуля. Скажите, что именно вы имели в виду, и попросите переделать этот же ответ. Эта итеративность и спокойное отношение к результату – и есть навык.</p>
-      </div></div>
-  </div>
-
-  <div class="donebox">
-    <div class="dc">
-      <p class="dl">Готово, когда</p>
-      <p>Готово, когда у вас есть два ответа на одну задачу – прежний и новый – и вы можете назвать, чем новый подходит лучше. Идеальным он быть не обязан: важно, что дался легче и попал точнее.</p>
-      <div class="keepbox">
-        <p class="kl">Что сохранить</p>
-        <p style="font-size:16px">Описание этого урока для портфолио – промпт в розовом блоке ниже. Сами диалоги не удаляйте: дальше мы будем вытаскивать из них ваши правила.</p>
-      </div>
-    </div>
-  </div>
 <div class="pfb" id="portfolio">
   <span class="pfb-tag">Задача для вашего портфолио</span>
   <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
