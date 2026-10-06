@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Практикум 1 · Планируем с нейросетью · Нейро-архитектор</title>
+<meta name="description" content="Практикум 1 модуля 2: план недели с окнами для главного, что из плана закроет ИИ, план работы перед задачей и помощник по планированию.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
+/* страница практики: ссылка назад к конспекту */
+.backlink{margin-top:26px;font-size:15px;font-weight:700}
+.backlink a{color:var(--pink);text-decoration:none}
+.backlink a:hover{color:var(--pink-strong)}
+.backbox{border-top:1px solid var(--line);margin-top:56px;padding-top:26px}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="praktikum">
+/* Практикум 1: план встречи, раскрывающиеся блоки, вопросы */
+.tl{margin-top:24px;border-top:1px solid var(--ink)}
+.tlrow{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.tt{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);padding-top:6px}
+.tlrow p{margin:0}
+.rulebox{margin-top:26px}
+.rulebox p+p{margin-top:12px}
+#tema .keepbox{margin-top:16px}
+details.extra{margin-top:22px;background:#FFF1F8;padding:16px 20px}
+details.extra summary{cursor:pointer;font-weight:700;list-style:none;display:flex;gap:12px;align-items:baseline}
+details.extra summary::-webkit-details-marker{display:none}
+details.extra summary::before{content:"+";color:var(--pink);font-weight:800}
+details.extra[open] summary::before{content:"–"}
+details.extra[open] summary{margin-bottom:12px}
+.opts{margin-top:22px}
+.opt{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.opt:last-child{border-bottom:1px solid var(--line)}
+.opt .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.opt h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;margin-bottom:6px}
+.opt p{margin:0}
+.opt p+p{margin-top:8px}
+.group .task .body p+p{margin-top:12px}
+.closing ul{margin-top:18px}
+.subh{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.3;margin-top:40px}
+#voprosy .group{margin-top:22px}
+#voprosy .chev{font-size:20px}
+.closing{padding-bottom:0}
+@media (max-width:760px){
+  .tlrow{grid-template-columns:1fr;gap:4px}
+  .tt{padding-top:0}
+  .opt{grid-template-columns:40px 1fr;gap:14px}
+  .opt .dn{font-size:27px}
+  details.extra{margin-left:-20px;margin-right:-20px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 2 · живой практикум</span></div>
+  <div class="kmark"><span class="kn">1</span><span class="kt">Практикум</span></div>
+  <div class="hero" style="padding-top:20px">
+    <div class="hgrid">
+      <h1>Планируем с&nbsp;нейросетью: свою неделю и&nbsp;свою работу</h1>
+      <p class="hlead">Раскладываем неделю так, чтобы главное в ней точно случилось, видим, что из плана может закрыть ИИ, и учимся просить план работы перед любой задачей.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Формат</span><span class="mv">Живая встреча, 90 минут</span></div>
+      <div><span class="mk">Получится</span><span class="mv">План недели · карта «что закроет ИИ» · план и первый шаг одной задачи</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Инструкция вашего помощника по планированию</span></div>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Разделы">
+    <a class="navlink" href="#plan">План встречи</a>
+    <a class="navlink" href="#proshli">Что мы уже выяснили</a>
+    <a class="navlink" href="#vybor">Как выбрать нейросеть</a>
+    <a class="navlink" href="#tema">Две стороны планирования</a>
+    <a class="navlink" href="#praktika">Практика</a>
+    <a class="navlink" href="#zakrepit">Закрепить в помощника</a>
+    <a class="navlink" href="#voprosy">Частые вопросы</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="wrap blk" id="plan">
+  <p class="glabel">План встречи</p>
+  <h2>90 минут: от&nbsp;знакомства до&nbsp;готового первого шага</h2>
+  <p>Держите открытым чат с нейросетью – той, где вы работаете на курсе. Все промпты ниже копируются кнопкой и работают в любой нейросети.</p>
+  <div class="tl">
+    <div class="tlrow"><span class="tt">0–5 мин</span><p><b>Открытие.</b> Как пойдём и где что лежит.</p></div>
+    <div class="tlrow"><span class="tt">5–30 мин</span><p><b>Знакомство и вопросы.</b> Каждый рассказывает о себе, называет задачу, которая сейчас буксует, и задаёт свой вопрос по курсу.</p></div>
+    <div class="tlrow"><span class="tt">30–37 мин</span><p><b>Что мы уже выяснили и как выбирать нейросеть.</b> Две стороны планирования. Показываю, как ставлю встречи одной фразой.</p></div>
+    <div class="tlrow"><span class="tt">37–50 мин</span><p><b>Шаг 1.</b> План недели и окна для того, что вы откладываете.</p></div>
+    <div class="tlrow"><span class="tt">50–60 мин</span><p><b>Шаг 2.</b> Что из этого плана закроет ИИ – и как именно.</p></div>
+    <div class="tlrow"><span class="tt">60–80 мин</span><p><b>Шаг 3.</b> План работы по одной задаче и первый шаг вместе с нейросетью.</p></div>
+    <div class="tlrow"><span class="tt">80–90 мин</span><p><b>Итог.</b> Как закрепить это в помощника, что добавить в портфолио, что дальше в курсе.</p></div>
+  </div>
+  <div class="rulebox"><p><b>Чтобы познакомиться:</b> подготовьте 3 строки – кто вы и чем занимаетесь, какая задача у вас сейчас буксует, ваш вопрос по курсу. Задачу из второй строки мы возьмём в работу в шаге 3.</p></div>
+</section>
+
+<div class="dark" id="proshli">
+  <div class="wrap">
+    <div class="dgrid">
+      <h2>Что мы уже выяснили за&nbsp;полтора модуля</h2>
+      <div class="dcol mainbox">
+        <div class="mline"><span class="mn">1</span><p><b>Чат – это чат.</b> Каждый новый чат начинается с нуля: нейросеть знает ровно то, что вы ей рассказали в этом разговоре.</p></div>
+        <div class="mline"><span class="mn">2</span><p><b>Помощник – это помощник.</b> Инструкция, ваши файлы и навыки живут в нём постоянно. Не нужно каждый раз объяснять, кто вы и как вам надо.</p></div>
+        <div class="mline"><span class="mn">3</span><p><b>Поэтому нейросеть выбираем не по принципу «какая умнее».</b> Смотрим, можно ли в ней поселить помощника и умеет ли она работать с вашими материалами: таблицами, документами, страницами.</p></div>
+        <div class="mline"><span class="mn">4</span><p><b>Сегодня – следующая ступень.</b> Помощник не только делает работу, но и помогает решить, что делать, когда и в каком порядке.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap blk" id="vybor">
+  <p class="glabel">Если ChatGPT недоступен</p>
+  <h2>Как выбрать нейросеть под&nbsp;себя по&nbsp;понятным признакам</h2>
+  <p>Бывает, что ChatGPT закрыт на рабочем компьютере или его не получается оплатить. Тогда ищем другую нейросеть – не наугад, а по 6 вопросам.</p>
+  <div class="opts">
+    <div class="opt"><span class="dn">1</span><div><h3>Открывается ли без VPN</h3><p>В том числе на рабочем компьютере и в телефоне.</p></div></div>
+    <div class="opt"><span class="dn">2</span><div><h3>Можно ли поселить помощника</h3><p>Инструкция и файлы, которые живут постоянно: проекты, «джемы», свои помощники. Если такого нет – помощник живёт в инструкции, которую вы вставляете в начало чата.</p></div></div>
+    <div class="opt"><span class="dn">3</span><div><h3>С какими материалами она работает</h3><p>Читает ли ваши таблицы, документы и PDF и умеет ли отдавать готовый файл: таблицу, документ, страницу. Если ваша работа – таблицы или HTML-страницы, это решающий признак.</p></div></div>
+    <div class="opt"><span class="dn">4</span><div><h3>Как за неё платить</h3><p>Подписка с фиксированной ценой в месяц или списание денег за каждый запрос. Это большая разница – смотрите ниже.</p></div></div>
+    <div class="opt"><span class="dn">5</span><div><h3>Есть ли голос и приложение на телефоне</h3><p>Надиктовывать задачи голосом – самый быстрый способ работать с помощником.</p></div></div>
+    <div class="opt"><span class="dn">6</span><div><h3>Как она пишет на ваших задачах</h3><p>Дайте одно и то же задание 2–3 нейросетям и сравните. Чужие рейтинги тут не помогут.</p></div></div>
+  </div>
+  <div class="rulebox" id="dengi"><p><b>Осторожно: оплата за каждый запрос.</b> Агрегаторы – сервисы, через которые из России открывают GPT и Claude с оплатой российской картой, – часто берут деньги не за месяц, а за каждый запрос. В длинном чате каждое новое сообщение дороже предыдущего: сервис заново отправляет нейросети всю переписку и файлы. А внутренняя валюта – «токены», «капсы», «искры» – прячет цену в рублях. Так за несколько дней легко потратить 2000 ₽, хотя подписка ChatGPT Plus стоит около 20 $ в месяц и сверх этого ничего не списывается.</p><p>Если всё же выбираете агрегатор: узнайте цену одного запроса в рублях, ставьте лимит на баланс, начинайте новый чат на каждую тему и для черновиков берите модель попроще.</p></div>
+  <h3 class="subh">Что можно потестировать, если ChatGPT нет</h3>
+  <div class="opts">
+    <div class="opt"><span class="dn">1</span><div><h3>ГигаЧат</h3><p>Бесплатно и без VPN, есть голос, читает документы. Проверьте, есть ли у вас раздел «Проекты»: туда можно положить инструкцию помощника.</p></div></div>
+    <div class="opt"><span class="dn">2</span><div><h3>Алиса AI</h3><p>Бесплатно и без VPN, есть голос. Проектов нет – помощник живёт в инструкции в начале чата. В бесплатной версии история хранится 14 дней.</p></div></div>
+    <div class="opt"><span class="dn">3</span><div><h3>DeepSeek</h3><p>Бесплатно и без VPN, хорошо рассуждает и читает файлы. Своего помощника и готовых файлов нет – инструкцию вставляйте в начало чата.</p></div></div>
+    <div class="opt"><span class="dn">4</span><div><h3>Claude</h3><p>Если ChatGPT закрыт только на работе. Есть проекты и навыки, отдаёт готовые таблицы и документы, показывает HTML-страницы. Из России – как с ChatGPT: нужны VPN и зарубежная карта.</p></div></div>
+    <div class="opt"><span class="dn">5</span><div><h3>Агрегатор</h3><p>Доступ к GPT и Claude с российской картой. Подходит, если вы следите за балансом – правила выше.</p></div></div>
+  </div>
+  <p class="snote">Проверено 6 октября 2026 года – сервисы меняются быстро. Что выбрать под вашу нейросеть, тариф и задачу, – в <a class="inl" href="https://aiforlife.ru/ii-course/modul2/navigator/">навигаторе по нейросетям</a>.</p>
+
+</section>
+
+<section class="wrap blk" id="tema">
+  <p class="glabel">Тема практикума</p>
+  <h2>У планирования две стороны: время и&nbsp;работа</h2>
+  <div class="defs">
+    <div class="def"><span class="dn">1</span><div><h3>Планировать время</h3><p>Разложить день или неделю, когда в голове каша. Нейросеть не устаёт от ваших «а ещё вот это», видит всё целиком и честно показывает, что в неделю не помещается.</p></div></div>
+    <div class="def"><span class="dn">2</span><div><h3>Планировать работу</h3><p>Перед тем как что-то делать, попросить нейросеть составить план: какие шаги, в каком порядке, что делает она, а что вы. Вы это уже видели: в модуле 1 мы делили задачу на этапы, а в режиме «Работа» нейросеть сама строит план перед большой задачей.</p></div></div>
+  </div>
+  <div class="rulebox"><p><b>Приём: ставьте главное в календарь как встречу с собой.</b> Если на приоритетные задачи вечно не хватает времени, посмотрите на неделю обратным ходом: где были окна, что вы делали вместо главного, что отложили. Потом поставьте приоритет в календарь конкретным днём и часом – как встречу, которую нельзя пропустить. Это разгружает голову: решать «когда же я это сделаю» больше не нужно.</p><p>Тот же приём работает с клиентами. Если клиенту нужно внедрить привычку или точно что-то сделать, помогите ему разложить это в его календарь маленькими слотами – промпт для этого есть ниже.</p></div>
+  <div class="keepbox"><p class="kl">Лайфхак: встречи одной фразой</p><p>В ChatGPT можно подключить Google Календарь и Zoom и объединить их в один свой плагин. Тогда на просьбу «поставь встречу в Zoom на четверг в 15:00» он сам создаёт встречу с отдельной ссылкой и вписывает её в календарь. Как подключить – по шагам со скриншотами в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">«Плагины»</a>.</p></div>
+</section>
+
+<div class="practice" id="praktika">
+  <div class="wrap">
+    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <h2>Практика</h2>
+    <p class="pmeta">3 шага на вашей собственной неделе</p>
+    <p class="pintro">Работаем в одном чате от начала до конца: каждый следующий шаг опирается на то, что получилось в предыдущем. Надиктовывайте голосом – так быстрее и честнее.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Выгрузите неделю – и найдите окна для главного</h3>
+      <p>Скопируйте промпт и отправьте. Потом нажмите на микрофон и надиктуйте всё подряд, не сортируя: дела, встречи, обещания и то, что вы давно откладываете. Нейросеть сначала задаст вопросы – ответьте на них, и только потом она соберёт план.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт: план недели</p><pre>Помоги мне спланировать неделю до воскресенья. Сейчас я выгружу всё, что у меня висит: дела, встречи, обещания и то, что я давно откладываю.
+Сначала ничего не планируй. Задай мне до 5 вопросов: сколько у меня реально свободных часов по дням, что горит, что для меня главное на этой неделе, в какое время у меня больше сил.
+Потом:
+1) разложи дела по дням, оставь запас на непредвиденное;
+2) найди окна для того, что я откладываю, и поставь это в план как встречу с собой – с конкретным днём и временем;
+3) назови 3 главных дела на завтра.
+Покажи таблицей: день – время – дело.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если в ChatGPT подключён Google Календарь, добавьте в начало: «Посмотри мой календарь на эту неделю и учти уже стоящие встречи». А когда план готов: «Внеси встречи с собой и 3 главных дела на завтра в мой календарь отдельными событиями».</p>
+      <details class="extra"><summary>Дополнительно: обратный ход – если на главное вечно не хватает времени</summary>
+        <p>Иногда полезнее посмотреть не вперёд, а назад: куда на самом деле ушла прошлая неделя.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Промпт: обратный ход</p><pre>Давай посмотрим назад, а не вперёд. Вот как на самом деле прошла моя прошлая неделя: [расскажите своими словами или попросите посмотреть календарь, если он подключён].
+Покажи:
+– куда утекло время;
+– где были окна, которые я не заметил(а);
+– что я отложил(а) и почему, по-твоему, так вышло.
+Мой главный приоритет сейчас – [какой]. Предложи, куда на этой неделе его поставить, чтобы он точно случился.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </details>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Спросите, что из этого плана закроет ИИ</h3>
+      <p>План готов – теперь посмотрим на него глазами помощника. Чаще всего выясняется, что половину дел можно не делать в одиночку: где-то нейросеть сделает черновик, где-то соберёт структуру, где-то будет напоминать сама.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт: что закроет ИИ</p><pre>Посмотри на мой план и пройди по каждой задаче. Раздели их на 3 группы:
+1) ИИ сделает почти целиком – я только проверю;
+2) ИИ поможет – черновик, структура, вопросы, проверка;
+3) только я – встречи, решения, живое общение.
+Для первых двух групп напиши по каждой задаче: что тебе дать на вход, что получится на выходе и где это удобнее делать – в обычном чате, в проекте-помощнике, навыком, регулярной задачей или через подключённый календарь. Учитывай, что я работаю в [ваша нейросеть].
+В конце назови одну задачу, с которой выгоднее всего начать прямо сейчас, и объясни почему.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Смотрите на ответ как на карту ваших будущих помощников: задачи из первых двух групп, которые повторяются каждую неделю, – кандидаты в отдельного помощника или навык.</p>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Попросите план работы – и сделайте первый шаг</h3>
+      <p>Возьмите задачу, которую нейросеть назвала в конце шага 2, или ту, что вы назвали при знакомстве. Главное правило: сначала вопросы и план, потом работа. Так результат получается вашим, а не усреднённым.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт: план работы перед задачей</p><pre>Возьмём задачу: [какая задача].
+Пока ничего не делай. Сначала задай мне до 7 вопросов, без которых результат получится усреднённым. Спрашивай по одному блоку.
+Потом составь план работы по шагам: что на каждом шаге делаешь ты, что делаю я, что получится на выходе и где я проверяю.
+Жди моего «ок» – после него делаем шаг 1.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Если план не нравится – правьте его словами: «шаг 3 убери», «сначала я хочу увидеть структуру», «добавь проверку перед отправкой». Это ваш план, нейросеть его только предлагает.</p>
+    </div></div>
+  </div>
+
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>Готово, когда у вас есть план до конца недели с окнами для главного, вы знаете, какие задачи из него может закрыть ИИ, и по одной задаче план работы одобрен, а первый шаг сделан.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p>Чат целиком – из него в конце мы соберём инструкцию помощника по планированию.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap blk" id="zakrepit">
+  <p class="glabel">После практикума</p>
+  <h2>Закрепите это в&nbsp;помощника по&nbsp;планированию</h2>
+  <p>Чтобы не объяснять всё заново каждую неделю, попросите нейросеть собрать из сегодняшнего чата инструкцию. Её можно положить в проект, а если проектов в вашей нейросети нет – вставлять в начало нового чата. Как это сделать там, где нет проектов, – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/">«Помощник там, где нет „Проектов"»</a>.</p>
+  <div class="promptbox stepprompt"><p class="plabel">Промпт: инструкция помощника по планированию</p><pre>Собери из нашего разговора инструкцию для моего помощника по планированию. Включи:
+– кто я и чем занимаюсь;
+– мои ограничения: сколько у меня реально часов, когда больше сил, что всегда стоит в расписании;
+– мои приоритеты и то, что я обычно откладываю;
+– в каком виде мне удобен план;
+– правила: сначала вопросы, потом план; то, что я откладываю, ставить в план как встречу с собой; после плана – разбор «что из этого закроет ИИ».
+Напиши инструкцию одним блоком, чтобы её можно было вставить в проект или в начало нового чата в любой нейросети.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p style="margin-top:22px">А чтобы помощник сам напоминал о планировании, сделайте регулярную задачу – как в уроке 3. Например:</p>
+  <div class="promptbox stepprompt"><p class="plabel">Регулярная задача</p><pre>Каждое воскресенье в 18:00 напоминай мне спланировать неделю: спроси, что у меня висит, и помоги разложить это по дням по инструкции моего помощника по планированию.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+  <details class="extra" style="margin-top:30px"><summary>Для тех, кто работает с клиентами: помогите клиенту внедрить привычку</summary>
+    <p>Тот же приём с календарём работает, когда клиенту нужно что-то точно сделать: начать тренироваться, вести учёт, выполнять задания между встречами.</p>
+    <div class="promptbox stepprompt"><p class="plabel">Промпт: план для клиента</p><pre>Моему клиенту нужно внедрить [что именно: например, делать упражнения 3 раза в неделю]. Его ситуация: [сколько у него времени, что мешает].
+Составь для него план на 2 недели:
+– конкретные слоты в календаре – маленькие, чтобы точно получилось;
+– самый маленький первый шаг на завтра;
+– короткие тексты-напоминания от меня к каждому слоту.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  </details>
+
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: добавьте практикум в своё портфолио</h3>
+  <p class="pfb-p">Вставьте этот промпт в тот же чат, где работали на практикуме. Нейросеть задаст 1–2 вопроса и опишет вашу работу. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 2», отдельной строкой «Практикум». Если вы собрали помощника по планированию, его можно показать в итоговом задании модуля.</p>
+  <p class="pfb-p pfb-what"><b>В описание попадёт:</b> как вы спланировали неделю, что из плана взяли на себя ИИ и какую задачу вы сделали по плану работы.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+  <p class="pfb-p">Шаблон портфолио и итоговое задание – на странице <a href="https://aiforlife.ru/ii-course/modul2/itog/">итог модуля 2</a>.</p>
+</div>
+</section>
+
+<section class="wrap blk" id="voprosy">
+  <p class="glabel">Частые вопросы</p>
+  <h2>Коротко о&nbsp;том, что спрашивают чаще всего</h2>
+  <div class="group">
+    <details class="task"><summary><span class="num">1</span><span class="tname">Где живут помощники в разных нейросетях?</span><span class="chev">⌄</span></summary><div class="body">
+      <p>В ChatGPT – в проектах и в своих GPT. В Claude – в проектах. В Gemini – в «джемах» (Gems). В ГигаЧате проверьте раздел «Проекты» в меню слева.</p>
+      <p>Там, где проектов нет, – Алиса, DeepSeek и другие, – помощник живёт в отдельной ветке чата и в инструкции, которую вы вставляете в начало. Как это устроить – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/">«Помощник там, где нет „Проектов"»</a>.</p>
+    </div></details>
+    <details class="task"><summary><span class="num">2</span><span class="tname">На работе нет доступа к ChatGPT – что делать?</span><span class="chev">⌄</span></summary><div class="body">
+      <p>Выбрать нейросеть, которая открывается на рабочем компьютере, по 6 признакам <a class="inl" href="#vybor">выше</a>. Помощника не нужно собирать заново: попросите его в ChatGPT собрать инструкцию для переноса и поселите её в новой нейросети. Пошагово – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/">«Помощник там, где нет „Проектов"»</a>, раздел «Как перенести помощника в другую нейросеть».</p>
+      <p>Рабочие данные – по правилам вашей компании: данные клиентов и коллег в сторонние сервисы не отправляем.</p>
+    </div></details>
+    <details class="task"><summary><span class="num">3</span><span class="tname">Как докручивать помощника, чтобы он не стал хуже?</span><span class="chev">⌄</span></summary><div class="body">
+      <p>Не дописывайте новые правила поверх старых: от груды инструкций помощник тонет. Попросите его собрать единую инструкцию из того, что накопилось, и замените старую.</p>
+      <p>То, что повторяется в работе, выносите в навыки, а то, что повторяется по времени, – в регулярные задачи. Подробно – в <a class="inl" href="https://aiforlife.ru/ii-course/modul2/urok3/">уроке 3 модуля 2</a>.</p>
+    </div></details>
+    <details class="task"><summary><span class="num">4</span><span class="tname">Почему сервис списывает деньги так быстро?</span><span class="chev">⌄</span></summary><div class="body">
+      <p>Скорее всего, он берёт деньги за каждый запрос, а не за месяц, и в длинном чате каждое сообщение обходится дороже предыдущего. Как это устроено и как не потратить лишнего – <a class="inl" href="#dengi">в блоке про оплату</a>.</p>
+    </div></details>
+    <details class="task"><summary><span class="num">5</span><span class="tname">План составили, а он не выполняется. Что не так?</span><span class="chev">⌄</span></summary><div class="body">
+      <p>Посмотрите на неделю обратным ходом – промпт есть в шаге 1: куда ушло время и где были окна. Главное ставьте в календарь как встречу с собой, конкретным днём и часом, а не списком «сделать на неделе». И пересматривайте план с помощником раз в неделю – для этого регулярная задача в блоке «Закрепите это в помощника».</p>
+    </div></details>
+
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="closing">
+    <p class="glabel">Что забрать</p>
+    <ul>
+      <li>Сначала вопросы, потом план, потом работа – и в планировании недели, и перед любой задачей.</li>
+      <li>То, что вы откладываете, ставьте в календарь как встречу с собой – конкретным днём и часом.</li>
+      <li>Любой план можно отдать нейросети на разбор: «что из этого ты можешь закрыть за меня и как».</li>
+      <li>Нейросеть выбираем по понятным признакам: можно ли поселить помощника, с какими материалами она работает, как за неё платить.</li>
+    </ul>
+  </div>
+  <div class="matbox">
+    <p class="ml">Материалы к практикуму</p>
+    <ul>
+      <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">Плагины: какие подключения пригодятся вашему помощнику</a><span>Как подключить Google Календарь и Zoom в ChatGPT и собрать их в один плагин.</span></li>
+      <li><a href="https://aiforlife.ru/ii-course/modul2/navigator/">Навигатор и помощник по нейросетям</a><span>Семь слов за минуту и что выбрать под вашу нейросеть, тариф и задачу.</span></li>
+      <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/">Помощник там, где нет «Проектов»</a><span>Как поселить помощника в любой нейросети и перенести его из одной в другую.</span></li>
+      <li><a href="https://aiforlife.ru/ii-course/modul2/urok3/">Урок 3: навыки, проекты и регулярные задачи</a><span>Как докручивать помощника и не превращать его в зоопарк из инструкций.</span></li>
+      <li><a href="https://aiforlife.ru/ii-course/modul2/itog/">Итог модуля 2</a><span>Соберите заметки уроков и практикума в портфолио и пришлите документ.</span></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · практикум 1, модуль 2</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
+    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
+    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
+    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>
