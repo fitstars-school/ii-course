@@ -58,13 +58,6 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
 .foot{position:absolute;left:96px;right:96px;bottom:34px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#A495AB}
 .dark .foot{color:#7E6F86}
 
-/* титул */
-.title .kmark{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:#fff;padding:12px 22px;align-self:flex-start}
-.title .kmark span{font-size:15px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
-.title .meta{display:flex;gap:56px;margin-top:auto;border-top:1px solid var(--line);padding-top:26px}
-.title .meta p{color:var(--muted)}
-.title .meta b{display:block;color:var(--ink)}
-
 /* план встречи */
 .tl{margin-top:30px;border-top:2px solid var(--ink)}
 .tlr{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline}
@@ -112,6 +105,27 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
 .section h1{margin-top:auto}
 .section .lead{max-width:1100px;margin-bottom:auto}
 
+
+/* обложка – как обложки видеоуроков курса (1920×1080, здесь в масштабе 1600×900) */
+.slide.cover{background:#1B1420;padding:0;color:#F3EDF5}
+.cover .foot{display:none}
+.cover .glow1{position:absolute;top:-300px;right:-217px;width:917px;height:917px;background:radial-gradient(circle,rgba(230,25,140,.34),transparent 66%);pointer-events:none}
+.cover .glow2{position:absolute;bottom:-350px;left:-233px;width:833px;height:833px;background:radial-gradient(circle,rgba(178,58,224,.26),transparent 68%);pointer-events:none}
+.cover .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
+.cover .frame{position:relative;height:100%;padding:63px 87px;display:flex;flex-direction:column}
+.cover .ctop{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.16);padding-bottom:25px}
+.cover .clogo{height:43px;width:auto;display:block}
+.cover .cbrand{font-size:17px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:#CFC4D4}
+.cover .cmid{flex:1;display:flex;align-items:center;gap:63px;padding-top:43px}
+.cover .cnum{font-family:var(--serif);font-size:333px;line-height:.74;color:transparent;-webkit-text-stroke:2.5px #E6198C;flex:none;padding-top:18px}
+.cover .ctxt{flex:1;min-width:0}
+.cover .cmod{font-size:19px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#FF8FC6;margin-bottom:28px;line-height:1.3}
+.cover .ch{font-family:var(--serif);font-weight:400;font-size:72px;line-height:1.02;letter-spacing:-.015em;color:#fff;margin:0}
+.cover .ch .it{font-style:italic;color:#FF8FC6;display:block}
+.cover .cbot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.16);padding-top:23px}
+.cover .clnum{font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4D4}
+.cover .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#E6198C;margin-right:12px;vertical-align:middle}
+
 /* навигация */
 .navbtn{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(27,20,32,.55);color:#fff;font-size:24px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center}
 .navbtn:hover{background:var(--pink)}
@@ -125,15 +139,24 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
 <body>
 <div id="viewport"><div id="stage">
 
-<!-- 1. Титул -->
-<section class="slide title">
-  <div class="kmark"><span>Нейро-архитектор · модуль 2 · практикум 1</span></div>
-  <h1>Планируем с&nbsp;нейросетью:<br>свою неделю и&nbsp;свою работу</h1>
-  <p class="lead">Раскладываем неделю так, чтобы главное в ней точно случилось, видим, что из плана может закрыть ИИ, и учимся просить план работы перед любой задачей.</p>
-  <div class="meta">
-    <p><b>Формат</b>Живая встреча, 90 минут</p>
-    <p><b>Получится</b>План недели · что закроет ИИ · первый шаг задачи</p>
-    <p><b>Останется</b>Помощник по планированию</p>
+<!-- 1. Обложка – в стиле обложек уроков (Уроки/Обложки видео) -->
+<section class="slide cover">
+  <div class="glow1"></div><div class="glow2"></div><div class="grid"></div>
+  <div class="frame">
+    <div class="ctop">
+      <img class="clogo" src="data:image/png;base64,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" alt="FitStars">
+      <span class="cbrand">Нейро-архитектор</span>
+    </div>
+    <div class="cmid">
+      <div class="cnum">1</div>
+      <div class="ctxt">
+        <p class="cmod">Модуль 2 · Живой практикум</p>
+        <h1 class="ch">Планируем с&nbsp;нейросетью:<span class="it">свою неделю и&nbsp;свою работу</span></h1>
+      </div>
+    </div>
+    <div class="cbot">
+      <span class="clnum"><span class="dot"></span>Практикум 1</span>
+    </div>
   </div>
 </section>
 
