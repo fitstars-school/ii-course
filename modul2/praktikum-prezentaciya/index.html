@@ -127,6 +127,11 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
 .cover .clnum{font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4D4}
 .cover .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#E6198C;margin-right:12px;vertical-align:middle}
 
+.ex2{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:30px}
+.ex2 .plate{margin-top:0}
+.ex2 .lab{margin-bottom:10px}
+.exnote{margin-top:22px}
+
 /* навигация */
 .navbtn{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(27,20,32,.55);color:#fff;font-size:24px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center}
 .navbtn:hover{background:var(--pink)}
@@ -317,12 +322,13 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
 <!-- 14. Шаг 1: как выгружать -->
 <section class="slide">
   <p class="lab">Шаг 1 · 37–50 мин</p>
-  <h2>Выгрузите из&nbsp;головы цель на&nbsp;месяц – и&nbsp;весь хаос</h2>
+  <h2>Выгрузите из&nbsp;головы цель на&nbsp;месяц – и&nbsp;весь&nbsp;хаос</h2>
   <p class="lead">Надиктуйте всё как есть, не сортируя: главную цель на ближайший месяц, дела, которые висят, обязательства и то, что отвлекает. Нейросеть поможет честно увидеть, помещается ли это в вашу жизнь, – и оставить время на отдых.</p>
-  <div class="plate">
-    <p><b>Например:</b> «Через месяц хочу заключить B2B-проект в своём городе. Для этого нужно подготовить предложение, найти контакты, провести встречи. А ещё у меня хаос: клиенты, дом, дети – и я совсем не отдыхаю».</p>
-    <p><b>Добавьте и курс:</b> какой из 3 приоритетов берёте на эти недели.</p>
+  <div class="ex2">
+    <div class="plate"><p class="lab">Рабочая цель</p><p>«Через месяц хочу заключить B2B-проект в своём городе. Для этого нужно подготовить предложение, найти контакты, провести встречи. А ещё у меня хаос: клиенты, дом, дети – и я совсем не отдыхаю».</p></div>
+    <div class="plate"><p class="lab">Личная цель</p><p>«Хочу за месяц спланировать семейный отпуск и вернуть себе спорт 3 раза в неделю. Но в ворохе личных дел – школа и кружки детей, врачи, ремонт, помощь родителям – ничего не успеваю и откладываю себя на потом».</p></div>
   </div>
+  <p class="exnote"><b>Добавьте и курс:</b> какой из 3 приоритетов берёте на эти недели.</p>
 </section>
 
 <!-- 15. Шаг 1: промпт -->
