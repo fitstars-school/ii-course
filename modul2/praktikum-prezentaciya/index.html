@@ -117,7 +117,6 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
 .navbtn:hover{background:var(--pink)}
 #prev{left:14px}#next{right:14px}
 #bar{position:fixed;left:0;bottom:0;height:4px;background:linear-gradient(90deg,#E6198C,#B23AE0,#FF6B57);z-index:6;transition:width .25s}
-#count{position:fixed;right:18px;bottom:12px;font-family:var(--sans);font-size:13px;font-weight:700;color:#9C8AA6;z-index:6;letter-spacing:.1em}
 @media (max-width:700px){.navbtn{width:40px;height:40px;font-size:18px;top:auto;bottom:18px;transform:none}#prev{left:10px}#next{right:60px}}
 @media (prefers-reduced-motion:reduce){#bar{transition:none}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -486,7 +485,6 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
 <button class="navbtn" id="prev" type="button" aria-label="Предыдущий слайд">←</button>
 <button class="navbtn" id="next" type="button" aria-label="Следующий слайд">→</button>
 <div id="bar"></div>
-<div id="count"></div>
 <div class="sr" role="status" aria-live="polite" id="say"></div>
 
 <script>
@@ -503,10 +501,10 @@ a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underl
     i=Math.max(0,Math.min(total-1,n));
     slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
     document.getElementById('bar').style.width=((i+1)/total*100)+'%';
-    document.getElementById('count').textContent=(i+1)+' / '+total;
     if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
   }
   addEventListener('resize',fit);fit();
+  addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1),10);if(n&&n-1!==i)go(n-1);});
   var h=parseInt((location.hash||'').slice(1),10);go(h?h-1:0);
   document.getElementById('prev').onclick=function(){go(i-1);};
   document.getElementById('next').onclick=function(){go(i+1);};
