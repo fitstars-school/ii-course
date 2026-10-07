@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Практикум 1 · Планируем с нейросетью · слайды · Нейро-архитектор</title>
+<meta name="description" content="Слайды практикума 1 модуля 2: план недели, что из плана закроет ИИ, план работы перед задачей и помощник по планированию.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Шкала – 4 роли:
+   Р1 заголовок – Instrument Serif, 66px (титул – 96px, один раз)
+   Р2 подзаголовок – Manrope 700, 30px
+   Р3 текст – Manrope 500, 25px, один цвет на фон
+   Р4 метка – Manrope 800, 15px, CAPS с разрядкой, розовый
+   Промпты – JetBrains Mono, как в конспектах курса. */
+:root{
+  --ink:#211829; --muted:#5E5066; --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --wash:#FFF1F8;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#120D16;overflow:hidden}
+body{font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1600px;height:900px;position:relative;flex:none;transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--paper);padding:76px 96px 84px;display:none;flex-direction:column;overflow:hidden}
+.slide.on{display:flex}
+.slide.dark{background:var(--dark);color:#F3EDF5}
+
+/* Р4 метка */
+.lab{font-size:15px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink)}
+.dark .lab{color:var(--pink-soft)}
+/* Р1 заголовок */
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.01em}
+h1{font-size:96px;margin-top:26px}
+h2{font-size:66px;margin-top:18px}
+.dark h1,.dark h2{color:#fff}
+/* Р2 подзаголовок */
+h3{font-family:var(--sans);font-size:30px;font-weight:700;line-height:1.25}
+/* Р3 текст */
+p,li{font-size:25px;line-height:1.5;font-weight:500;color:var(--ink)}
+.dark p,.dark li{color:#E4DBE8}
+b{font-weight:800}
+.dark b{color:#fff}
+a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.dark a{color:var(--pink-soft)}
+
+.lead{margin-top:26px}
+.grow{flex:1;min-height:0}
+.foot{position:absolute;left:96px;right:96px;bottom:34px;display:flex;justify-content:space-between;font-size:15px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#A495AB}
+.dark .foot{color:#7E6F86}
+
+/* титул */
+.title .kmark{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:#fff;padding:12px 22px;align-self:flex-start}
+.title .kmark span{font-size:15px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.title .meta{display:flex;gap:56px;margin-top:auto;border-top:1px solid var(--line);padding-top:26px}
+.title .meta p{color:var(--muted)}
+.title .meta b{display:block;color:var(--ink)}
+
+/* план встречи */
+.tl{margin-top:30px;border-top:2px solid var(--ink)}
+.tlr{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tlr .lab{color:var(--pink)}
+
+/* нумерованные пункты: цифра у края, текст с отступом */
+.nums{margin-top:34px;display:grid;gap:0}
+.num{display:grid;grid-template-columns:76px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line)}
+.dark .num{border-top-color:rgba(255,255,255,.14)}
+.num .n{font-family:var(--serif);font-size:56px;line-height:.9;color:var(--pink)}
+.dark .num .n{color:var(--pink-soft)}
+.num h3{margin-bottom:6px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:38px}
+.card{background:#fff;border:1px solid var(--line);padding:30px 32px}
+.card h3{margin-bottom:12px}
+.card .n{font-family:var(--serif);font-size:52px;line-height:1;color:var(--pink);display:block;margin-bottom:14px}
+
+/* плашка */
+.plate{background:var(--wash);padding:30px 34px;margin-top:34px}
+.plate p+p{margin-top:16px}
+.dark .plate{background:rgba(255,143,198,.10)}
+
+/* слайд с промптом: слева текст, справа промпт */
+.split{display:grid;grid-template-columns:5fr 7fr;gap:56px;flex:1;min-height:0;margin-top:30px}
+.split .txt p+p{margin-top:18px}
+.pbox{background:var(--dark);padding:30px 34px 28px;display:flex;flex-direction:column;align-self:start;max-height:100%}
+.dark .pbox{background:#0F0B14}
+.pbox .lab{color:#FFC2E0;margin-bottom:16px}
+.pbox pre{font-family:var(--mono);font-size:20px;line-height:1.6;color:#E2DAE7;white-space:pre-wrap;word-wrap:break-word;overflow:auto}
+.copy{margin-top:22px;align-self:flex-start;font-family:var(--sans);font-size:18px;font-weight:800;border:none;padding:14px 26px;background:#fff;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:10px}
+.copy:hover{background:var(--pink-soft)}
+.copy.done{background:#1FA24E;color:#fff}
+.pbox.small pre{font-size:22px}
+.stack{display:grid;gap:22px;align-self:start}
+
+/* список «что забрать» */
+.ticks{list-style:none;margin-top:30px}
+.ticks li{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--line)}
+.dark .ticks li{border-top-color:rgba(255,255,255,.14)}
+.ticks li::before{content:"";width:18px;height:3px;background:var(--pink);margin-top:19px}
+.dark .ticks li::before{background:var(--pink-soft)}
+
+/* раздел-разделитель */
+.section h1{margin-top:auto}
+.section .lead{max-width:1100px;margin-bottom:auto}
+
+/* навигация */
+.navbtn{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(27,20,32,.55);color:#fff;font-size:24px;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center}
+.navbtn:hover{background:var(--pink)}
+#prev{left:14px}#next{right:14px}
+#bar{position:fixed;left:0;bottom:0;height:4px;background:linear-gradient(90deg,#E6198C,#B23AE0,#FF6B57);z-index:6;transition:width .25s}
+#count{position:fixed;right:18px;bottom:12px;font-family:var(--sans);font-size:13px;font-weight:700;color:#9C8AA6;z-index:6;letter-spacing:.1em}
+@media (max-width:700px){.navbtn{width:40px;height:40px;font-size:18px;top:auto;bottom:18px;transform:none}#prev{left:10px}#next{right:60px}}
+@media (prefers-reduced-motion:reduce){#bar{transition:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+<!-- 1. Титул -->
+<section class="slide title">
+  <div class="kmark"><span>Нейро-архитектор · модуль 2 · практикум 1</span></div>
+  <h1>Планируем с&nbsp;нейросетью:<br>свою неделю и&nbsp;свою работу</h1>
+  <p class="lead">Раскладываем неделю так, чтобы главное в ней точно случилось, видим, что из плана может закрыть ИИ, и учимся просить план работы перед любой задачей.</p>
+  <div class="meta">
+    <p><b>Формат</b>Живая встреча, 90 минут</p>
+    <p><b>Получится</b>План недели · что закроет ИИ · первый шаг задачи</p>
+    <p><b>Останется</b>Помощник по планированию</p>
+  </div>
+</section>
+
+<!-- 2. План встречи -->
+<section class="slide">
+  <p class="lab">План встречи</p>
+  <h2>90 минут: от&nbsp;знакомства до&nbsp;готового первого шага</h2>
+  <div class="tl">
+    <div class="tlr"><span class="lab">0–5 мин</span><p><b>Открытие.</b> Как пойдём и где что лежит.</p></div>
+    <div class="tlr"><span class="lab">5–30 мин</span><p><b>Знакомство и вопросы.</b> О себе, задача, которая буксует, ваш вопрос.</p></div>
+    <div class="tlr"><span class="lab">30–37 мин</span><p><b>Что мы уже выяснили.</b> Как выбирать нейросеть, две стороны планирования.</p></div>
+    <div class="tlr"><span class="lab">37–50 мин</span><p><b>Шаг 1.</b> План недели и окна для того, что вы откладываете.</p></div>
+    <div class="tlr"><span class="lab">50–60 мин</span><p><b>Шаг 2.</b> Что из этого плана закроет ИИ – и как именно.</p></div>
+    <div class="tlr"><span class="lab">60–80 мин</span><p><b>Шаг 3.</b> План работы по одной задаче и первый шаг.</p></div>
+    <div class="tlr"><span class="lab">80–90 мин</span><p><b>Итог.</b> Закрепить в помощника, портфолио, что дальше.</p></div>
+  </div>
+</section>
+
+<!-- 3. Знакомство -->
+<section class="slide">
+  <p class="lab">Знакомимся</p>
+  <h2>Расскажите о&nbsp;себе в&nbsp;3&nbsp;строки</h2>
+  <div class="nums">
+    <div class="num"><span class="n">1</span><div><h3>Кто вы и чем занимаетесь</h3><p>Коротко: сфера, клиенты, чем живёте сейчас.</p></div></div>
+    <div class="num"><span class="n">2</span><div><h3>Какая задача у вас сейчас буксует</h3><p>Её мы возьмём в работу в шаге 3 – план работы и первый шаг вместе с нейросетью.</p></div></div>
+    <div class="num"><span class="n">3</span><div><h3>Ваш вопрос по курсу</h3><p>Что непонятно, где застряли, что хочется докрутить.</p></div></div>
+  </div>
+</section>
+
+<!-- 4. Что выяснили -->
+<section class="slide dark">
+  <p class="lab">Что мы уже выяснили</p>
+  <h2>За полтора модуля мы поняли главное</h2>
+  <div class="nums cols2">
+    <div class="num"><span class="n">1</span><div><h3>Чат – это чат</h3><p>Каждый новый чат начинается с нуля: нейросеть знает ровно то, что вы рассказали в этом разговоре.</p></div></div>
+    <div class="num"><span class="n">2</span><div><h3>Помощник – это помощник</h3><p>Инструкция, файлы и навыки живут в нём постоянно. Не нужно каждый раз объяснять, кто вы.</p></div></div>
+    <div class="num"><span class="n">3</span><div><h3>Нейросеть выбираем не по «какая умнее»</h3><p>Смотрим, можно ли поселить помощника и работает ли она с вашими таблицами, документами, страницами.</p></div></div>
+    <div class="num"><span class="n">4</span><div><h3>Сегодня – следующая ступень</h3><p>Помощник не только делает работу, но и помогает решить, что делать, когда и в каком порядке.</p></div></div>
+  </div>
+</section>
+
+<!-- 5. Агрегаторы -->
+<section class="slide">
+  <p class="lab">Если ChatGPT недоступен</p>
+  <h2>Выручают агрегаторы с&nbsp;проектами и&nbsp;файлами</h2>
+  <p class="lead">В одном окне – разные нейросети, в том числе GPT и Claude, оплата российской картой. Выбирайте те, где можно создавать проекты, работать с файлами и писать код: тогда наработки с курса пригодятся и на работе.</p>
+  <div class="cols3">
+    <div class="card"><span class="n">1</span><h3><a href="https://chadgpt.ru" target="_blank" rel="noopener">ChadGPT</a></h3><p>Много текстовых нейросетей в одной подписке, проекты, файлы и код, презентации.</p></div>
+    <div class="card"><span class="n">2</span><h3><a href="https://epicai.ru" target="_blank" rel="noopener">EpicAI</a></h3><p>Нейросети для текста и кода, картинок и аудио, проекты и работа с файлами.</p></div>
+    <div class="card"><span class="n">3</span><h3><a href="https://mashagpt.ru/" target="_blank" rel="noopener">MashaGPT</a></h3><p>Проекты с памятью между сессиями, анализ файлов, документы, правка кода в чате.</p></div>
+  </div>
+</section>
+
+<!-- 6. Тарифы -->
+<section class="slide">
+  <p class="lab">Перед оплатой</p>
+  <h2>Внимательно изучите тарифы</h2>
+  <div class="plate">
+    <p>Тарифы у агрегаторов устроены по-разному, и <b>безлимита «за чашку кофе» там обычно нет</b>: чаще всего есть ограничения по объёму работы – сколько запросов входит в тариф, какие нейросети в нём доступны.</p>
+    <p>Объём быстрее расходуется в длинных чатах с файлами, поэтому новую тему удобнее начинать в новом чате.</p>
+    <p><b>Выбирайте тариф под свои цели и возможности.</b> Попробуйте сервис на своих задачах – и потом решите, подходит он вам или нет.</p>
+  </div>
+</section>
+
+<!-- 7. Признаки -->
+<section class="slide">
+  <p class="lab">Как понять, что сервис вам подходит</p>
+  <h2>6 вопросов перед выбором</h2>
+  <div class="nums cols2">
+    <div class="num"><span class="n">1</span><div><h3>Открывается ли без VPN</h3><p>В том числе на рабочем компьютере и в телефоне.</p></div></div>
+    <div class="num"><span class="n">4</span><div><h3>Как устроен тариф</h3><p>Что входит, какие ограничения, хватит ли на ваши задачи.</p></div></div>
+    <div class="num"><span class="n">2</span><div><h3>Можно ли поселить помощника</h3><p>Проекты, инструкция и файлы, которые живут постоянно.</p></div></div>
+    <div class="num"><span class="n">5</span><div><h3>Есть ли голос и приложение</h3><p>Надиктовывать задачи – самый быстрый способ.</p></div></div>
+    <div class="num"><span class="n">3</span><div><h3>С какими материалами работает</h3><p>Таблицы, документы, PDF, HTML-страницы – и отдаёт ли готовый файл.</p></div></div>
+    <div class="num"><span class="n">6</span><div><h3>Как справляется с вашими задачами</h3><p>Одно задание в 2–3 местах – и сравните.</p></div></div>
+  </div>
+</section>
+
+<!-- 8. Раздел: тема -->
+<section class="slide dark section">
+  <p class="lab">Тема практикума</p>
+  <h1>Планирование</h1>
+  <p class="lead">Нейросеть не устаёт от ваших «а ещё вот это», видит всё целиком и честно показывает, что в неделю не помещается.</p>
+</section>
+
+<!-- 9. Две стороны -->
+<section class="slide">
+  <p class="lab">Тема практикума</p>
+  <h2>У планирования две стороны: время и&nbsp;работа</h2>
+  <div class="cols3" style="grid-template-columns:1fr 1fr">
+    <div class="card"><span class="n">1</span><h3>Планировать время</h3><p>Разложить день или неделю, когда в голове каша. Увидеть, что помещается, а что нет, и где окна для главного.</p></div>
+    <div class="card"><span class="n">2</span><h3>Планировать работу</h3><p>Перед тем как что-то делать, попросить план: какие шаги, в каком порядке, что делает нейросеть, а что вы. В модуле 1 мы делили задачу на этапы, а в режиме «Работа» нейросеть сама строит план перед большой задачей.</p></div>
+  </div>
+</section>
+
+<!-- 10. Приём -->
+<section class="slide">
+  <p class="lab">Приём</p>
+  <h2>Ставьте главное в&nbsp;календарь как встречу с&nbsp;собой</h2>
+  <div class="plate">
+    <p>Если на приоритетные задачи вечно не хватает времени, посмотрите на неделю <b>обратным ходом</b>: где были окна, что вы делали вместо главного, что отложили.</p>
+    <p>Потом поставьте приоритет в календарь <b>конкретным днём и часом</b> – как встречу, которую нельзя пропустить. Решать «когда же я это сделаю» больше не нужно.</p>
+    <p><b>С клиентами работает так же:</b> если клиенту нужно внедрить привычку, помогите ему разложить её в календарь маленькими слотами.</p>
+  </div>
+</section>
+
+<!-- 11. Лайфхак -->
+<section class="slide dark">
+  <p class="lab">Лайфхак</p>
+  <h2>Встречи одной фразой: Zoom + Google Календарь</h2>
+  <div class="split">
+    <div class="txt">
+      <p>В ChatGPT можно подключить Google Календарь и Zoom и объединить их в один свой плагин.</p>
+      <p>Тогда на просьбу «поставь встречу в Zoom» он сам создаёт встречу с отдельной ссылкой и вписывает её в календарь.</p>
+      <p>По шагам со скриншотами – в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/" target="_blank" rel="noopener">«Плагины»</a>.</p>
+    </div>
+    <div class="pbox small"><p class="lab">Попробуйте сказать</p><pre>Поставь встречу в Zoom на четверг в 15:00, добавь её в мой календарь и впиши в описание повестку: [о чём встреча].</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 12. Раздел: практика -->
+<section class="slide dark section">
+  <p class="lab">Теперь делаем</p>
+  <h1>Практика: 3 шага на&nbsp;вашей неделе</h1>
+  <p class="lead">Работаем в одном чате от начала до конца: каждый следующий шаг опирается на предыдущий. Надиктовывайте голосом – так быстрее и честнее.</p>
+</section>
+
+<!-- 13. Обзор шагов -->
+<section class="slide">
+  <p class="lab">Практика</p>
+  <h2>Что сделаем за 40 минут</h2>
+  <div class="cols3">
+    <div class="card"><span class="n">1</span><h3>План недели</h3><p>Выгружаете всё, что висит, – нейросеть раскладывает по дням и находит окна для того, что вы откладываете.</p></div>
+    <div class="card"><span class="n">2</span><h3>Что закроет ИИ</h3><p>Нейросеть проходит по плану и показывает, что может сделать за вас, с чем помочь и где.</p></div>
+    <div class="card"><span class="n">3</span><h3>План работы</h3><p>Одна задача: сначала вопросы и план по шагам, потом вместе делаем первый шаг.</p></div>
+  </div>
+</section>
+
+<!-- 14. Шаг 1 -->
+<section class="slide">
+  <p class="lab">Шаг 1 · 37–50 мин</p>
+  <h2>Выгрузите неделю</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Скопируйте промпт и отправьте. Потом нажмите на микрофон и надиктуйте всё подряд, не сортируя: дела, встречи, обещания, то, что давно откладываете.</p>
+      <p>Нейросеть сначала задаст вопросы – ответьте, и только потом она соберёт план.</p>
+    </div>
+    <div class="pbox"><p class="lab">Промпт: план недели</p><pre>Помоги мне спланировать неделю до воскресенья. Сейчас я выгружу всё, что у меня висит: дела, встречи, обещания и то, что я давно откладываю.
+Сначала ничего не планируй. Задай мне до 5 вопросов: сколько у меня реально свободных часов по дням, что горит, что для меня главное на этой неделе, в какое время у меня больше сил.
+Потом:
+1) разложи дела по дням, оставь запас на непредвиденное;
+2) найди окна для того, что я откладываю, и поставь это в план как встречу с собой – с конкретным днём и временем;
+3) назови 3 главных дела на завтра.
+Покажи таблицей: день – время – дело.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 15. Шаг 1: календарь и обратный ход -->
+<section class="slide">
+  <p class="lab">Шаг 1 · дополнительно</p>
+  <h2>Если подключён календарь – и&nbsp;обратный ход</h2>
+  <div class="split" style="grid-template-columns:1fr 1fr">
+    <div class="stack">
+      <div class="pbox small"><p class="lab">В начало промпта</p><pre>Посмотри мой календарь на эту неделю и учти уже стоящие встречи.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+      <div class="pbox small"><p class="lab">Когда план готов</p><pre>Внеси встречи с собой и 3 главных дела на завтра в мой календарь отдельными событиями.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+    </div>
+    <div class="pbox"><p class="lab">Обратный ход: если на главное не хватает времени</p><pre>Давай посмотрим назад, а не вперёд. Вот как на самом деле прошла моя прошлая неделя: [расскажите или попросите посмотреть календарь].
+Покажи:
+– куда утекло время;
+– где были окна, которые я не заметил(а);
+– что я отложил(а) и почему, по-твоему, так вышло.
+Мой главный приоритет сейчас – [какой]. Предложи, куда на этой неделе его поставить, чтобы он точно случился.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 16. Шаг 2 -->
+<section class="slide">
+  <p class="lab">Шаг 2 · 50–60 мин</p>
+  <h2>Спросите, что из&nbsp;плана закроет ИИ</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Посмотрим на план глазами помощника. Чаще всего половину дел не нужно делать в одиночку: где-то нейросеть сделает черновик, где-то соберёт структуру, где-то будет напоминать сама.</p>
+      <p><b>Смотрите на ответ как на карту будущих помощников:</b> то, что повторяется каждую неделю, – кандидат в помощника или навык.</p>
+    </div>
+    <div class="pbox"><p class="lab">Промпт: что закроет ИИ</p><pre>Посмотри на мой план и пройди по каждой задаче. Раздели их на 3 группы:
+1) ИИ сделает почти целиком – я только проверю;
+2) ИИ поможет – черновик, структура, вопросы, проверка;
+3) только я – встречи, решения, живое общение.
+Для первых двух групп напиши по каждой задаче: что тебе дать на вход, что получится на выходе и где это удобнее делать – в обычном чате, в проекте-помощнике, навыком, регулярной задачей или через подключённый календарь. Учитывай, что я работаю в [ваша нейросеть].
+В конце назови одну задачу, с которой выгоднее всего начать прямо сейчас, и объясни почему.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 17. Шаг 3 -->
+<section class="slide">
+  <p class="lab">Шаг 3 · 60–80 мин</p>
+  <h2>Попросите план работы – и&nbsp;сделайте первый шаг</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Возьмите задачу, которую нейросеть назвала в шаге 2, или ту, что назвали при знакомстве.</p>
+      <p><b>Правило: сначала вопросы и план, потом работа.</b> Так результат получается вашим, а не усреднённым.</p>
+      <p>План не нравится – правьте словами: «шаг 3 убери», «сначала покажи структуру».</p>
+    </div>
+    <div class="pbox"><p class="lab">Промпт: план работы перед задачей</p><pre>Возьмём задачу: [какая задача].
+Пока ничего не делай. Сначала задай мне до 7 вопросов, без которых результат получится усреднённым. Спрашивай по одному блоку.
+Потом составь план работы по шагам: что на каждом шаге делаешь ты, что делаю я, что получится на выходе и где я проверяю.
+Жди моего «ок» – после него делаем шаг 1.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 18. Готово, когда -->
+<section class="slide">
+  <p class="lab">Готово, когда</p>
+  <h2>Проверьте себя</h2>
+  <div class="nums">
+    <div class="num"><span class="n">1</span><div><h3>Есть план до конца недели</h3><p>С окнами для главного – встречами с собой на конкретный день и час.</p></div></div>
+    <div class="num"><span class="n">2</span><div><h3>Понятно, что закроет ИИ</h3><p>Какие задачи сделает нейросеть, с какими поможет и где это делать.</p></div></div>
+    <div class="num"><span class="n">3</span><div><h3>Одна задача сдвинулась</h3><p>План работы одобрен, первый шаг сделан. Чат сохраните – он пригодится дальше.</p></div></div>
+  </div>
+</section>
+
+<!-- 19. Помощник -->
+<section class="slide dark">
+  <p class="lab">После практикума</p>
+  <h2>Закрепите это в&nbsp;помощника по&nbsp;планированию</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Чтобы не объяснять всё заново каждую неделю, соберите из сегодняшнего чата инструкцию.</p>
+      <p>Положите её в проект. Нет проектов – вставляйте в начало нового чата: бонус <a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/" target="_blank" rel="noopener">«Помощник там, где нет „Проектов"»</a>.</p>
+    </div>
+    <div class="pbox"><p class="lab">Промпт: инструкция помощника</p><pre>Собери из нашего разговора инструкцию для моего помощника по планированию. Включи:
+– кто я и чем занимаюсь;
+– мои ограничения: сколько у меня реально часов, когда больше сил, что всегда стоит в расписании;
+– мои приоритеты и то, что я обычно откладываю;
+– в каком виде мне удобен план;
+– правила: сначала вопросы, потом план; то, что я откладываю, ставить в план как встречу с собой; после плана – разбор «что из этого закроет ИИ».
+Напиши инструкцию одним блоком, чтобы её можно было вставить в проект или в начало нового чата в любой нейросети.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 20. Регулярная задача + клиент -->
+<section class="slide">
+  <p class="lab">Ещё 2 промпта</p>
+  <h2>Помощник напоминает сам – и&nbsp;помогает клиентам</h2>
+  <div class="split" style="grid-template-columns:1fr 1fr">
+    <div class="pbox"><p class="lab">Регулярная задача – как в уроке 3</p><pre>Каждое воскресенье в 18:00 напоминай мне спланировать неделю: спроси, что у меня висит, и помоги разложить это по дням по инструкции моего помощника по планированию.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+    <div class="pbox"><p class="lab">Для экспертов: привычка для клиента</p><pre>Моему клиенту нужно внедрить [что именно: например, делать упражнения 3 раза в неделю]. Его ситуация: [сколько у него времени, что мешает].
+Составь для него план на 2 недели:
+– конкретные слоты в календаре – маленькие, чтобы точно получилось;
+– самый маленький первый шаг на завтра;
+– короткие тексты-напоминания от меня к каждому слоту.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 21. Портфолио -->
+<section class="slide">
+  <p class="lab">Задача для портфолио · 1 минута</p>
+  <h2>Добавьте практикум в&nbsp;портфолио</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Вставьте промпт в тот же чат, где работали. Ответ скопируйте в документ «Моё портфолио» – раздел «Модуль 2», строкой «Практикум».</p>
+      <p>Собрали помощника по планированию – его можно показать в <a href="https://aiforlife.ru/ii-course/modul2/itog/" target="_blank" rel="noopener">итоговом задании модуля 2</a>.</p>
+    </div>
+    <div class="pbox"><p class="lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, сначала задай мне 1–2 вопроса.</pre><button class="copy" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+
+<!-- 22. Что забрать -->
+<section class="slide dark">
+  <p class="lab">Что забрать</p>
+  <h2>4 мысли с&nbsp;практикума</h2>
+  <ul class="ticks">
+    <li>Сначала вопросы, потом план, потом работа – и в планировании недели, и перед любой задачей.</li>
+    <li>То, что вы откладываете, ставьте в календарь как встречу с собой – конкретным днём и часом.</li>
+    <li>Любой план можно отдать нейросети на разбор: «что из этого ты можешь закрыть за меня и как».</li>
+    <li>Нейросеть выбираем по понятным признакам: можно ли поселить помощника, с какими материалами работает, что входит в тариф.</li>
+  </ul>
+</section>
+
+<!-- 23. Материалы -->
+<section class="slide">
+  <p class="lab">Материалы</p>
+  <h2>Всё это – на&nbsp;странице практикума</h2>
+  <p class="lead">Промпты, ответы на частые вопросы и ссылки на бонусы: <a href="https://aiforlife.ru/ii-course/modul2/praktikum/" target="_blank" rel="noopener">aiforlife.ru/ii-course/modul2/praktikum</a></p>
+  <div class="cols3">
+    <div class="card"><h3><a href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/" target="_blank" rel="noopener">Плагины</a></h3><p>Google Календарь и Zoom в ChatGPT, свой плагин из двух подключений.</p></div>
+    <div class="card"><h3><a href="https://aiforlife.ru/ii-course/modul2/bonus-bez-proektov/" target="_blank" rel="noopener">Помощник без «Проектов»</a></h3><p>Как поселить помощника в любой нейросети и перенести его.</p></div>
+    <div class="card"><h3><a href="https://aiforlife.ru/ii-course/modul2/urok3/" target="_blank" rel="noopener">Урок 3 модуля 2</a></h3><p>Навыки, проекты и регулярные задачи: как докручивать помощника.</p></div>
+  </div>
+</section>
+
+</div></div>
+
+<button class="navbtn" id="prev" type="button" aria-label="Предыдущий слайд">←</button>
+<button class="navbtn" id="next" type="button" aria-label="Следующий слайд">→</button>
+<div id="bar"></div>
+<div id="count"></div>
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'),slides=[].slice.call(document.querySelectorAll('.slide')),i=0;
+  var total=slides.length;
+  slides.forEach(function(s,k){
+    var f=document.createElement('div');f.className='foot';
+    f.innerHTML='<span>Нейро-архитектор · практикум 1</span><span>'+(k+1)+' / '+total+'</span>';
+    s.appendChild(f);
+  });
+  function fit(){var sc=Math.min(innerWidth/1600,innerHeight/900);stage.style.transform='scale('+sc+')';}
+  function go(n){
+    i=Math.max(0,Math.min(total-1,n));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
+    document.getElementById('bar').style.width=((i+1)/total*100)+'%';
+    document.getElementById('count').textContent=(i+1)+' / '+total;
+    if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
+  }
+  addEventListener('resize',fit);fit();
+  var h=parseInt((location.hash||'').slice(1),10);go(h?h-1:0);
+  document.getElementById('prev').onclick=function(){go(i-1);};
+  document.getElementById('next').onclick=function(){go(i+1);};
+  addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>=0){e.preventDefault();go(i+1);}
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){e.preventDefault();go(i-1);}
+    else if(e.key==='Home')go(0);else if(e.key==='End')go(total-1);
+    else if(e.key==='f'||e.key==='F'||e.key==='а'||e.key==='А'){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+  var x0=null;
+  addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)go(dx<0?i+1:i-1);x0=null;});
+
+  function say(t){var s=document.getElementById('say');s.textContent=t;setTimeout(function(){s.textContent='';},2500);}
+  function copy(t){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t);
+    return new Promise(function(res,rej){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');res();}catch(x){rej(x);}document.body.removeChild(a);});
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-copy]');if(!b)return;
+    var pre=b.closest('.pbox').querySelector('pre');
+    copy(pre.innerText).then(function(){b.textContent='Скопировано';b.classList.add('done');say('Скопировано');setTimeout(function(){b.textContent='Скопировать';b.classList.remove('done');},2200);},function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</body>
+</html>
