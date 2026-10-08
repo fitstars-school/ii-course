@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Мини-инструкции: как опубликовать страницу · урок 4 · Нейро-архитектор</title>
+<meta name="description" content="Мини-инструкции к практике урока 4 модуля 3 курса «Нейро-архитектор»: 3 пути опубликовать страницу – «Сайты» ChatGPT, GitHub Pages со своим доменом и Тильда.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ШКАЛА (МЕТОД B2) – 4 текстовые роли:
+   Р1 Заголовок – Instrument Serif 400: h1 var(--h1), h2 var(--h2).
+   Р2 Подзаголовок – Manrope 700, var(--sub) 20px (.step h3, .fork .fw).
+   Р3 Текст – Manrope 500, var(--text) 17px, один цвет: var(--ink) на светлом, #DDD5E2 на тёмном. Выделение – только жирным.
+      Текст промптов – тот же Р3 в моноширинном наборе 13.5px, как во всех промпт-окнах курса.
+   Р4 Метка – Manrope 700–800, CAPS с разрядкой, var(--label) 13px (.label, .plate, .plabel, .rubric, .kmark).
+   Крупные цифры шагов (.snum) – декоративные, не роль.
+   Курсив не используем. Инлайн font-size/color/font-weight в разметке запрещены. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(33px,4.6vw,60px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --label:13px; --code:13.5px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-wrap:break-word}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:40px;padding-right:40px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+b,strong{font-weight:700}
+a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:14px}
+
+/* Р4 – метки */
+.label,.rubric span,.kmark .kt,.plate,.plabel{font-family:var(--sans);font-size:var(--label);line-height:1.4;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.label{color:var(--pink)}
+
+/* шапка урока */
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric .r2{color:var(--muted)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:var(--sub);line-height:1;color:var(--pink-soft)}
+.backlink{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 28px}
+.backlink a{text-decoration:none;color:var(--pink)}
+.backlink a:hover{color:var(--pink-strong)}
+.hero{padding-top:20px;padding-bottom:8px}
+.hero h1{margin-top:6px}
+.hlead{margin-top:20px}
+
+/* оглавление */
+.toc{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);list-style:none;display:flex;flex-wrap:wrap;gap:6px 26px}
+.toc a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;font-weight:600}
+.toc a:hover{border-bottom-color:var(--pink)}
+
+/* блоки */
+.blk{padding-top:56px;padding-bottom:8px}
+.blk h2{margin:12px 0 18px}
+
+/* развилка */
+.fork{margin-top:22px;border-top:1px solid var(--ink)}
+.frow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.fork .fw{font-size:var(--sub);font-weight:700;line-height:1.3}
+.fork .fp a{text-decoration:none}
+
+/* шаги: цифра у левого края, текст после неё */
+.steps{margin-top:22px}
+.step{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:26px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:46px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.3;margin-bottom:8px}
+
+/* подзаголовок-плашка */
+.plate{display:block;background:var(--dark);color:#fff;border-left:3px solid var(--pink);padding:10px 16px;margin-top:34px;margin-bottom:16px}
+
+/* светлая плашка-правило */
+.rulebox{background:#FFF1F8;padding:16px 20px;margin-top:18px}
+
+/* промпт-окно */
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink);margin-top:18px}
+.plabel{color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:var(--code);line-height:1.8;color:#DDD5E2}
+.btns{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px}
+.btn{font-family:var(--sans);font-weight:700;font-size:var(--text);border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink-soft)}
+.btn.done,.btn.done:hover{background:#1FA24E;color:#fff}
+
+ul.list{list-style:none;margin-top:12px}
+ul.list li{position:relative;padding-left:24px;margin-bottom:8px}
+ul.list li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:1.5px;background:var(--pink)}
+* + ul.list{margin-top:12px}
+ul.list + p{margin-top:14px}
+.step p + .rulebox,.step ul + .rulebox{margin-top:16px}
+.plate + p{margin-top:0}
+
+.checked{background:#FFF1F8;padding:16px 20px;margin-top:44px}
+.backbox{border-top:1px solid var(--line);margin-top:40px;padding-top:26px;padding-bottom:20px}
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:760px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .frow{grid-template-columns:minmax(0,1fr);gap:6px}
+  .step{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:22px 0}
+  .snum{font-size:34px}
+  .promptbox{padding:20px}
+  .btn{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · урок 4 · мини-инструкции</span></div>
+  <div class="kmark"><span class="kn">4</span><span class="kt">Мини-инструкции</span></div>
+  <p class="backlink"><a href="../">← К инструкции к практике</a><a href="../../">← К конспекту урока</a></p>
+  <div class="hero">
+    <h1>Как опубликовать страницу: 3&nbsp;пути</h1>
+    <p class="hlead">Страница готова, и теперь хочется отправить её клиентам ссылкой. Здесь 3 пути, по шагам и по кликам. Выберите 1 путь – остальные можно не читать.</p>
+    <ul class="toc">
+      <li><a href="#vybor">Какой путь выбрать</a></li>
+      <li><a href="#programma">Программа ChatGPT</a></li>
+      <li><a href="#sites">Путь 1. «Сайты»</a></li>
+      <li><a href="#github">Путь 2. GitHub</a></li>
+      <li><a href="#tilda">Путь 3. Тильда</a></li>
+      <li><a href="#zastryali">Если застряли</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap blk" id="vybor">
+  <p class="label">С чего начать</p>
+  <h2>Какой путь выбрать</h2>
+  <p>Опубликовать – значит положить страницу в интернет, чтобы она открывалась по ссылке у любого человека. Путей 3, и каждый подходит для своей задачи. Найдите свою строку:</p>
+  <div class="fork">
+    <div class="frow"><p class="fw">Нужно быстро показать</p><p class="fp"><a href="#sites">Путь 1. «Сайты» в ChatGPT</a> – в России открывается только с VPN.</p></div>
+    <div class="frow"><p class="fw">Нужна постоянная бесплатная ссылка или свой домен</p><p class="fp"><a href="#github">Путь 2. GitHub Pages</a> – основной и самый надёжный.</p></div>
+    <div class="frow"><p class="fw">У вас уже есть сайт на Тильде</p><p class="fp"><a href="#tilda">Путь 3. Вставить HTML в Тильду</a> – страница станет частью вашего сайта.</p></div>
+  </div>
+  <p class="rulebox">Если страницу не нужно рассылать, её можно вообще не публиковать. Скачайте последнюю версию HTML-файлом – его можно отправить клиенту или открыть у себя на компьютере на сессии или консультации.</p>
+</section>
+
+<section class="wrap blk" id="programma">
+  <p class="label">Сначала</p>
+  <h2>Программа ChatGPT на&nbsp;компьютере</h2>
+  <p>Для публикации удобнее всего программа ChatGPT, которая ставится на компьютер, – не сайт в браузере, а отдельная программа. Она умеет сама открыть браузер, нажать нужные кнопки и взять нужные файлы. Вам остаётся только то, что за вас делать нельзя: ввести пароль, оплатить, подтвердить.</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Скачайте программу</h3>
+      <p>Зайдите на <b>chatgpt.com/download</b>, скачайте программу для своего компьютера и установите её. На Mac она работает на macOS 14 и новее. Для Windows требования смотрите на той же странице загрузки.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Войдите и выберите режим Work</h3>
+      <p>Войдите в свой аккаунт ChatGPT. С 9 июля 2026 года в программе 3 режима:</p>
+      <ul class="list">
+        <li><b>Chat</b> – обычная переписка, как на сайте.</li>
+        <li><b>Work</b> – помощник-агент: с вашего разрешения работает с файлами и программами, у него свой браузер, он может управлять компьютером. Для публикации нужен именно он. Доступен на тарифах Plus и выше.</li>
+        <li><b>Codex</b> – режим для работы с кодом.</li>
+      </ul>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Нет программы – присылайте скриншоты</h3>
+      <p>Если установить программу не получается, работайте в браузере. Делайте скриншот экрана, прикладывайте его в чат и спрашивайте: «Куда мне здесь нажать?» Помощники к уроку настроены отвечать и по скриншотам.</p>
+    </div></div>
+  </div>
+  <p class="rulebox"><b>Главное правило.</b> Пароли, коды из писем и СМС и данные карты вводите только сами, прямо на сайте. Никогда не пишите их в чат – ни в программе, ни в браузере.</p>
+</section>
+
+<section class="wrap blk" id="sites">
+  <p class="label">Путь 1</p>
+  <h2>«Сайты» в&nbsp;ChatGPT</h2>
+  <p>Самый быстрый путь: страница уже лежит в ChatGPT, и он публикует её сам, когда вы напишете «Публикуй». Раздел работает на тарифах Plus и выше и пока в тестовом режиме (бета).</p>
+  <p class="rulebox"><b>Важно до начала.</b> В России такие страницы открываются только с VPN и в любой момент могут перестать открываться. Принимать оплату картой на такой странице нельзя. Если удалить сайт, вернуть его не получится.</p>
+
+  <p class="plate">Где найти «Сайты»</p>
+  <ul class="list">
+    <li>В программе на компьютере – раздел <b>Sites</b> («Сайты»).</li>
+    <li>На сайте chatgpt.com – меню <b>More → Sites</b> (в русском интерфейсе – <b>«Обзор» → «Сайты»</b>) или сразу адрес <b>chatgpt.com/sites</b>.</li>
+    <li>Или напишите в любом чате <b>@Sites</b>.</li>
+  </ul>
+
+  <p class="plate">Какой будет адрес</p>
+  <p>Ссылка получится вида <b>имя.chatgpt.site</b>. Часть «имя» можно поменять в настройках сайта: от 5 символов, латинские буквы, цифры и дефис. Окончание chatgpt.site останется.</p>
+
+  <p class="plate">Свой домен</p>
+  <p>Если у вас есть свой адрес, например купленный на reg.ru, его можно привязать к сайту. Честно скажу, на этом варианте я предлагаю не фокусироваться: в нём много мелких нюансов, и страница может перестать открываться. Для своего домена надёжнее <a href="#github">путь 2</a>. Если всё же хотите здесь:</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Откройте настройки сайта</h3>
+      <p>В разделе «Сайты» откройте свой сайт, перейдите в настройки и нажмите <b>Add domain</b>.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Введите домен и скопируйте записи адреса</h3>
+      <p>Впишите свой домен. ChatGPT покажет записи адреса – технические строчки, которые связывают домен с сайтом. Скопируйте их.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Добавьте записи у регистратора</h3>
+      <p>Зайдите в личный кабинет там, где купили домен, например на reg.ru, и добавьте эти записи. Где именно это делается в reg.ru, смотрите в <a href="#regru">пути 2</a>, только записи берите те, что показал ChatGPT.</p>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Обновите статус</h3>
+      <p>Через несколько минут вернитесь в настройки сайта в ChatGPT и обновите статус домена, как покажет интерфейс.</p>
+    </div></div>
+  </div>
+  <div class="promptbox"><p class="plabel">Промпт: подключить домен с помощником</p><pre>Помоги подключить мой домен [домен] к сайту в Sites. Я в личном кабинете reg.ru. Веди по одному шагу, жди моего «готово» или скриншота.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+</section>
+
+<section class="wrap blk" id="github">
+  <p class="label">Путь 2 · основной</p>
+  <h2>GitHub Pages и&nbsp;свой домен</h2>
+  <p>GitHub – место, где разработчики хранят код. Там же можно бесплатно разместить свою страницу и получить постоянную ссылку. Так устроен и сайт курса aiforlife.ru: под капотом у него GitHub. Подробно по шагам вас проведёт навык «Размещение» из плагина <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>. Здесь – короткая карта, чтобы понимать, куда вы идёте.</p>
+
+  <p class="plate">5 этапов публикации</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Заведите аккаунт</h3>
+      <p>Зарегистрируйтесь на GitHub: почта и пароль. Имя пользователя (username) выбирайте аккуратно – оно будет в ссылке на ваш сайт.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Создайте папку для сайта</h3>
+      <p>Создайте новую папку на GitHub – в интерфейсе она называется repository (репозиторий). Сделайте её открытой: выберите <b>Public</b>.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Загрузите файл страницы</h3>
+      <p>В папке нажмите <b>Upload files</b> и загрузите свою страницу. Файл должен называться <b>index.html</b> и лежать сразу в папке, а не внутри другой папки.</p>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Включите публикацию</h3>
+      <p>Откройте <b>Settings → Pages</b>. Выберите <b>Deploy from a branch</b>, ветку <b>main</b> и папку <b>/(root)</b>, сохраните.</p>
+    </div></div>
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Получите ссылку</h3>
+      <p>Когда публикация пройдёт, страница откроется по адресу <b>логин.github.io/имя-папки/</b>. Ссылка бесплатная и постоянная.</p>
+    </div></div>
+  </div>
+
+  <div class="promptbox"><p class="plabel">Промпт для программы ChatGPT, режим Work</p><pre>Опубликуй мою страницу [файл или папка на компьютере] через GitHub Pages. Я уже вошла в GitHub в браузере. Нажимай за меня, пароли и коды введу сама. После каждого этапа покажи, что получилось.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+
+  <p class="plate" id="regru">Свой домен с reg.ru</p>
+  <p>Если хочется адрес вида вашеимя.ru, купите домен, например на reg.ru, и привяжите его к странице на GitHub. Порядок важен: сначала GitHub, потом reg.ru.</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Впишите домен в GitHub</h3>
+      <p>В своей папке на GitHub откройте <b>Settings → Pages</b>, в поле <b>Custom domain</b> впишите домен и нажмите <b>Save</b>.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Откройте записи адреса в reg.ru</h3>
+      <p>В личном кабинете reg.ru: <b>Домены</b> → ваш домен → <b>«DNS-серверы и управление зоной»</b> → <b>«Изменить»</b> → <b>«Добавить запись»</b>.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Добавьте 4 записи типа A</h3>
+      <p>Для имени <b>@</b> (это сам домен, без www) добавьте 4 записи типа <b>A</b> – по одной на каждый адрес:</p>
+      <div class="promptbox"><p class="plabel">4 записи A для «@»</p><pre>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Добавьте запись для www</h3>
+      <p>Для имени <b>www</b> добавьте запись типа <b>CNAME</b> со значением <b>логин.github.io</b> – только ваш логин, без названия папки.</p>
+      <p class="rulebox">В reg.ru нельзя держать запись A и запись CNAME на одном и том же имени. Если для www уже есть запись A, CNAME не добавится – напишите в чат со скриншотом, помощник подскажет.</p>
+    </div></div>
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Подождите и включите защищённое соединение</h3>
+      <p>Изменения вступают в силу за 15–60 минут, иногда до 24 часов. Когда сайт откроется по вашему домену, вернитесь в <b>Settings → Pages</b> и поставьте галочку <b>Enforce HTTPS</b> – тогда адрес будет с замочком. Галочка становится доступна в течение 24 часов.</p>
+    </div></div>
+  </div>
+  <p class="rulebox">Эти записи работают, если домен обслуживают серверы reg.ru – <b>ns1.reg.ru</b> и <b>ns2.reg.ru</b>. Если вы меняли серверы или домен куплен в другом месте, пришлите скриншот в чат, и помощник подскажет, где добавлять записи.</p>
+  <p class="rulebox"><b>Честно о рисках.</b> В июле 2026 года были жалобы на то, что GitHub не открывается в России. Если у вас или ваших клиентов он не открывается, путь – российский хостинг. По шагам проведёт навык «Свой сервер» в том же плагине <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>.</p>
+</section>
+
+<section class="wrap blk" id="tilda">
+  <p class="label">Путь 3</p>
+  <h2>Страница внутри вашей Тильды</h2>
+  <p>Если у вас уже есть сайт на Тильде, страницу можно вставить туда кодом. Раньше вы собирали бы её в Тильде руками, а теперь приносите готовую.</p>
+  <p class="rulebox"><b>Что нужно знать заранее.</b> Нужен платный тариф: Personal – 750 ₽ в месяц при оплате помесячно или 500 ₽ в месяц при оплате за год. На бесплатном тарифе блоки ограничены. Поддержка Тильды со своим кодом не помогает, поэтому с вопросами идите в чат к помощнику.</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Подготовьте код в ChatGPT</h3>
+      <p>Вернитесь в чат, где делали страницу, и вставьте промпт:</p>
+      <div class="promptbox"><p class="plabel">Промпт: код для Тильды</p><pre>Подготовь этот сайт одним HTML-кодом для вставки в блок T123 Тильды: все стили и скрипты внутри, картинки – ссылками. Проверь, что ничего не сломается внутри чужой страницы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Добавьте блок для кода</h3>
+      <p>В Тильде создайте новую страницу. Откройте <b>Библиотеку блоков</b> → раздел <b>«Другое»</b> → блок <b>T123 «HTML-код»</b>. Другой вариант – элемент <b>«HTML»</b> внутри Zero Block.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Вставьте код целиком</h3>
+      <p>Откройте содержимое блока, как покажет интерфейс, и вставьте весь код, который прислал ChatGPT. Отдельного режима «вставить целую страницу» в Тильде нет, поэтому страница целиком живёт внутри одного блока. Подойдёт любой код, кроме PHP.</p>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Опубликуйте и проверьте</h3>
+      <p>В редакторе код виден просто текстом – так и должно быть. Опубликуйте страницу и откройте её по ссылке: код начинает работать только после публикации.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk" id="zastryali">
+  <p class="label">Если застряли</p>
+  <h2>3 способа сдвинуться с&nbsp;места</h2>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Скриншот в чат</h3>
+      <p>Сделайте скриншот того, что видите, и спросите помощника: «Куда мне здесь нажать?»</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Навыки плагина</h3>
+      <p>Подключите навыки из плагина <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a> – они ведут по шагам и ждут вашего «готово».</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Отдайте файл специалисту</h3>
+      <p>Передайте готовый HTML-файл любому техническому специалисту – он доведёт его до публикации. Самую большую часть работы, саму страницу, вы уже сделали.</p>
+    </div></div>
+  </div>
+
+  <p class="checked">Проверено 8 октября 2026 года. Интерфейсы меняются – ориентируйтесь на то, что видите на экране.</p>
+
+  <div class="backbox"><p class="backlink"><a href="../">← К инструкции к практике</a><a href="../../">← К конспекту урока</a></p></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · мини-инструкции к практике урока 4, модуль 3</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</body>
+</html>

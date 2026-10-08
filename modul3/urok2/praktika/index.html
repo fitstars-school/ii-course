@@ -7,12 +7,19 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Практика урока 2 · Таблицы и данные: расчёты, статусы и обновление · Нейро-архитектор</title>
-<meta name="description" content="Инструкция к практике урока 2 модуля 3 курса «Нейро-архитектор».">
+<title>Практика · Урок 2 · Таблицы и данные: расчёты, статусы и обновление · Нейро-архитектор</title>
+<meta name="description" content="Инструкция к практике урока 2 модуля 3: учёт поступлений в Google Таблице через нейросеть и контент-план в источниках проекта помощника.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* Шкала – 4 текстовые роли (МЕТОД, раздел B2):
+   Р1 заголовок – Instrument Serif 400: h1 (--h1), h2 (--h2);
+   Р2 подзаголовок – Manrope 700: h3 карточек, плашки-подзаголовки;
+   Р3 текст – Manrope 500, 17px (--text), один цвет --ink (на тёмном – #CFC4D4);
+   Р4 метка – Manrope 700, 11px (--label) CAPS с разрядкой.
+   Декоративные цифры, кнопки, промпты (mono) и общий блок портфолио ролями не считаются.
+   Инлайн font-size / color / font-weight в разметке не используем. */
 :root{
   --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
   --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
@@ -234,11 +241,6 @@ a.inl:hover{color:var(--pink)}
 @keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
 @media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
-/* страница практики: ссылка назад к конспекту */
-.backlink{margin-top:26px;font-size:15px;font-weight:700}
-.backlink a{color:var(--pink);text-decoration:none}
-.backlink a:hover{color:var(--pink-strong)}
-.backbox{border-top:1px solid var(--line);margin-top:56px;padding-top:26px}
 </style>
 <style id="edge">
 /* Единый левый край и полная ширина (03.10.2026, правила Светланы):
@@ -251,6 +253,38 @@ main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs
 section.wrap{padding-left:40px;padding-right:40px}
 @media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
 </style>
+<style id="m3">
+/* Дополнения конспектов М3 – вместо инлайн-стилей образца */
+.hero.hero-top{padding-top:34px}
+.mainbox-top{margin-top:44px}
+.blk .lede{padding-top:0}
+.practice .label{color:var(--pink-soft)}
+.dark-end{margin-top:64px}
+.dark .dcol p+p{margin-top:14px}
+.dark .qlabel{margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.dark .qlist{margin-top:12px}
+.dark .nextline{margin-top:26px}
+main .def p{font-size:var(--text);color:var(--ink)}
+main .rulebox{font-size:var(--text);margin-top:22px}
+main .defs+p{margin-top:22px}
+.stepprompt{margin-top:22px}
+/* Подзаголовок внутри блока – тёмная плашка */
+p.subplate{display:block;background:#1B1420;color:#fff;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;padding:10px 16px 10px 14px;border-left:3px solid var(--pink);margin-top:36px;margin-bottom:20px}
+p.subplate+p{margin-top:0}
+</style>
+<style id="praktika">
+/* Страница практики: ссылка назад к конспекту и отступы вместо инлайн-стилей */
+.backlink{margin-top:26px;font-size:15px;font-weight:700}
+.backlink a{color:var(--pink);text-decoration:none}
+.backlink a:hover{color:var(--pink-strong)}
+.backbox{border-top:1px solid var(--line);margin-top:56px;padding-top:26px}
+.hero.hero-back{padding-top:20px}
+.practice.practice-top{margin-top:44px}
+.blk>.steps{margin-top:22px}
+.step .rulebox{margin-top:16px}
+.step p+p{margin-top:12px}
+.keepbox p{font-size:16px}
+</style>
 </head>
 <body>
 
@@ -258,29 +292,187 @@ section.wrap{padding-left:40px;padding-right:40px}
   <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · урок 2 · практика</span></div>
   <div class="kmark"><span class="kn">2</span><span class="kt">Инструкция к практике</span></div>
   <p class="backlink"><a href="../">← К конспекту урока</a></p>
-  <div class="hero" style="padding-top:20px">
+  <div class="hero hero-back">
     <div class="hgrid">
-      <h1>Таблицы и данные: расчёты, статусы и обновление</h1>
-      <p class="hlead">Собираем минимальную таблицу под своё решение, добавляем формулы, проверяем их и делаем первое обновление через ИИ.</p>
+      <h1>Таблицы и&nbsp;данные: расчёты, статусы и&nbsp;обновление</h1>
+      <p class="hlead">Собираем в Google Таблице учёт поступлений с прогнозом и контент-план, который становится базой знаний для вашего помощника.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Практика</span><span class="mv">2 части: 24 + 19 минут, повторяйте за мной по видео</span></div>
+      <div><span class="mk">Останется у вас</span><span class="mv">Таблица учёта поступлений и контент-план в источниках проекта</span></div>
     </div>
   </div>
 </header>
 
 <main>
 
-<div class="practice" style="margin-top:44px">
+<div class="practice practice-top">
   <div class="wrap">
-    <p class="label" style="color:var(--pink-soft)">Теперь делаем</p>
+    <p class="label">Теперь делаем</p>
     <h2>Практика</h2>
-    <p class="pmeta">инструкция готовится</p>
-    <p class="pintro">Пошаговая инструкция к этой практике появится на этой странице в ближайшие дни. А пока практику можно сделать вместе со мной по видео урока: включите практическую часть и ставьте видео на паузу на каждом шаге.</p>
+    <p class="pmeta">Повторяйте за мной · ставьте видео на паузу</p>
+    <p class="pintro">Я показываю на ChatGPT и Google Таблицах. Сначала собираем простой учёт поступлений: нейросеть сама придумывает структуру и формулы, а мы только рассказываем о себе и надиктовываем платежи. Потом делаем таблицу контент-плана и подключаем её к контент-помощнику так, чтобы он всегда брал данные оттуда. Мои примеры учебные – подставляйте свои данные.</p>
   </div>
 </div>
 
-<section class="wrap">
+<section class="wrap blk">
+  <p class="label">Часть 1 · 24 минуты</p>
+  <h2>Учёт поступлений с&nbsp;формулами и&nbsp;прогнозом</h2>
+  <p>Финансы – это всегда расчёты и формулы, и непонятно, как это всё структурировать. Поэтому начинаем с жизненного примера. Представим, что мы работаем как индивидуальный предприниматель, доход нерегулярный, мы не понимаем, куда уходят деньги и сколько нам вообще заплатят. И нам наконец порекомендовали завести Google Таблицу.</p>
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Проверьте, что Google Диск подключён</h3>
+        <p>Откройте ChatGPT и посмотрите в подключениях, работает ли у вас Google Диск. Google Таблиц отдельной строкой там может не быть: если подключён Google Drive, по умолчанию включена вся экосистема Google – Drive, Docs, Sheets и Slides. Интерфейс иногда меняется, поэтому не обращайте внимания на названия. Главное – убедиться, что Google Диск работает. Как его подключить, разобрано в гайде <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">«Плагины»</a> модуля 2.</p>
+        <p>Таблицы можно создавать и локально, разницу мы разбирали в прошлом уроке. Я показываю на Google Таблицах, потому что мне важно иметь доступ к любому файлу из любой точки: с любого компьютера, с любого телефона.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Решите, где будет жить чат</h3>
+        <p>Для практики подойдёт и приложение на компьютере, и браузерная версия: с Google документами разницы нет. Проект подключать не обязательно, можно работать и без него.</p>
+        <p>В приложении на компьютере можно выбрать, где запустить чат: на вашем компьютере или в облаке. На компьютере можно подключать локальные файлы и папки. Но такой чат вы не увидите ни с телефона, ни в браузерной версии. Я поставила облако.</p>
+        <p class="rulebox">Выработайте для себя единый стандарт: работаете вы на компьютере или с телефона и везде. Если потеряли чат, просто вспомните, где вы его запускали.</p>
+        <p class="snote">Я работаю в режиме «Работа» (Work) – это режим агентов. Степень размышления поставила невысокую, мне её хватило. Если вам нужно, ставьте выше.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Опишите задачу и попросите задать вопросы</h3>
+        <p>Я собрала тестовый промпт. В нём важно сказать, что вы хотите видеть в итоге, попросить не усложнять и задать вам вопросы – используем навыки, которые уже приобрели на курсе. Подставьте свою ситуацию:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Я работаю как <span class="tok">[индивидуальный предприниматель / самозанятый / кто вы]</span>, доход у меня нерегулярный. Мне нужна простая система учёта финансов в Google Таблице, чтобы я могла быстро понимать, сколько у меня вообще будет денег, – это меня беспокоит. Мне нужна не просто таблица со списком платежей, а небольшая рабочая система учёта.
+
+Не усложняй, пожалуйста: я не финансист, вести таблицу мне нужно самой. Задай мне 4–5 коротких вопросов, чтобы собрать таблицу под меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Если у вас уже есть таблица, которая вам нравится, приложите её как образец и дальше ведите её с помощью ChatGPT.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>Ответьте на его вопросы</h3>
+        <p>Нейросеть спросит, как вы работаете и что учитывать. Отвечайте на то, что поняли. Если какой-то вопрос непонятен, не тратьте на него время. Вот как ответила я:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мои ответы на уроке</p><pre>Я работаю одна. Проекты оплачиваются частями – каждую оплату показываем отдельной строкой. Поступления в рублях. Учитываем только доходы. Можно сразу считать плановый налог: у меня <span class="tok">[система налогообложения и ставка, например УСН 6%]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <h3>Дождитесь таблицы и откройте её</h3>
+        <p>В режиме «Работа» видно, какие агенты куда ходили и что делают: один проектировал 2 вкладки, другой собирал оформление, дальше таблицу импортировали в Google Таблицы и проверили структуру. Это занимает время – можно пока заняться другими делами.</p>
+        <p>Готовую таблицу нейросеть сразу создаёт файлом и поясняет, что внутри. Мне она ещё и предложила настроить напоминания обновлять финансовый прогноз. Откройте файл во внешнем браузере. У меня таблица даже была раскрашена: ставка налога, текущий месяц, прогноз поступлений, платежи.</p>
+        <p>Если непонятно, как этим пользоваться, это нормально. Попросите:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Объясни пошагово, как мне пользоваться этой таблицей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+        <h3>Надиктуйте свои поступления</h3>
+        <p>Вместо того чтобы вносить данные руками, проверим, что получится, если надиктовать реальные платежи – текущие и ожидаемые. Наша задача – увидеть нужный результат: понять, что ждёт нас в ближайшие 3 месяца. Вспоминайте вслух через диктовку, от кого и какие поступления вы ждёте, и наговаривайте всё, что хранится в голове.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Шаблон, наговорите своё</p><pre>Внеси в таблицу мои поступления.
+<span class="tok">[дата]</span> должна получить <span class="tok">[сумма]</span> от <span class="tok">[клиент]</span>.
+<span class="tok">[клиент]</span> должен доплатить <span class="tok">[сумма]</span> <span class="tok">[когда]</span>.
+С <span class="tok">[клиент]</span> обсуждаем проект на <span class="tok">[сумма]</span>, оплата пока не подтверждена.
+<span class="tok">[остальные поступления, которые вы помните]</span></pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Я надиктовала примерно так: 25 октября должна получить 60 тысяч рублей, клиент «Сфера» должен доплатить, с компанией «Вектор» обсуждаем проект. Нейросеть сама решила, какие навыки подключить, и минуты за 3 добавила всё в таблицу и перепроверила за собой.</p>
+        <p>Только когда таблица заполнилась данными, мне стало понятно, почему она так устроена. Видно, сколько получено в текущем месяце и сколько денег ожидается подтверждённых. В прогнозе у меня получилось: получено пока 40 тысяч, ожидается к получению 175 тысяч в октябре и 150 тысяч в декабре, потенциально ещё 120 тысяч в ноябре. Отдельно – базовый приток по подтверждённым деньгам, возможный максимум и сколько я заплачу налогов.</p>
+      </div></div>
+      <div class="step"><span class="snum">7</span><div>
+        <h3>Обновляйте статусы и задавайте вопросы</h3>
+        <p>Статусы платежей нейросеть ставит не случайно: за ними стоят формулы. Если вы не суперэксперт в Excel, с первого раза такую формулу не пропишешь. Менять статусы можно тоже голосом:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Например</p><pre><span class="tok">[клиент]</span> прислал деньги. Остальные перенесли сроки поступлений на <span class="tok">[месяц]</span> – в этом месяце не успеваем.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p>И спрашивайте в этой же ветке чата всё, что нужно:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Например</p><pre>Напомни, пожалуйста, сколько мне должен заплатить <span class="tok">[клиент]</span> за этот проект?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">8</span><div>
+        <h3>Попросите посмотреть глазами финансиста</h3>
+        <p>Перепроверять за нейросетью важно: где-то она может сложить не так. Формулы можно отправить на перепроверку ей же:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Посмотри на эту таблицу глазами финансиста. Как её можно упростить? Где в формулах ты мог ошибиться? Как это лучше организовать?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Практика покажет, что в таблице, возможно, надо будет поправить под ваше удобство. Её можно переструктурировать, пересобирать, добавлять вкладки, просить объяснить формулы. Главное, чтобы вам было понятно.</p>
+      </div></div>
+      <div class="step"><span class="snum">9</span><div>
+        <h3>Решите, как будете вести таблицу дальше</h3>
+        <p>Таблицу можно поддерживать руками, а можно с помощью ChatGPT в этой же ветке. Ветку можно закрепить или вынести в отдельный проект. Можно поставить себе встречу в календарь «Разбираюсь с финансами» раз в неделю: наговаривать в чат, смотреть, что поменялось в таблице, и спрашивать, что из неё понятно. Можно сохранить таблицу как шаблон и вести вручную. А можно один раз посмотреть, выдохнуть и больше к ней не возвращаться – это уже ваше дело.</p>
+        <p class="subplate">Если у вас много выгрузок или чеков</p>
+        <p>В таблицу можно загружать самые разные отчёты: отправить, например, 5 выгрузок и попросить свести их в таблицу нужной формы. Я для одного проекта собрала так 25 разных чеков в единую таблицу не руками: нейросеть правильно их собрала, разложила по категориям и назвала. Бывает, что она косячит с таблицами, но очень старается.</p>
+        <p class="rulebox">Перед отправкой затрите личные данные: обрежьте их в файле или замажьте. Личные данные я потом внесла в таблицу руками.</p>
+      </div></div>
+  </div>
+</section>
+
+<section class="wrap blk">
+  <p class="label">Часть 2 · 19 минут</p>
+  <h2>Контент-план как база знаний помощника</h2>
+  <p>Таблицы – это не только расчёты. Это очень удобный формат для календарей, графиков, расписаний. В первом и втором модулях мы создавали контент-помощника. Если у него должен быть конечный результат, физический файл, я бы представляла его в виде контент-плана в таблице. Маркетологи и SMM-специалисты обычно ведут контент-планы именно в таблицах: удобно фильтровать по дате, искать, отмечать.</p>
+  <p>Ходить в такую таблицу самим не обязательно. Важно собрать её так, чтобы помощнику было удобно искать для вас информацию: чтобы он не искал по чатам и не путался в датах, а шёл в конкретную таблицу и видел, что в строке 5 на 1 октября у нас такой-то контент. Так мы сводим к минимуму риск галлюцинаций и додумываний.</p>
+  <div class="steps">
+      <div class="step"><span class="snum">10</span><div>
+        <h3>Выберите помощника и откройте его проект</h3>
+        <p>Я открываю в режиме «Работа» проект своего контент-помощника. Он в облаке, поэтому доступен мне и с телефона. Привязываться именно к контент-помощнику не обязательно: таблица может пригодиться для системы питания, планирования личных дел или чего-то ещё. Если не знаете, для какого помощника она нужна, спросите:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Для какого из моих помощников было бы удобно сделать таблицу, к которой он обращался бы как к базе знаний?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">11</span><div>
+        <h3>Попросите таблицу контент-плана</h3>
+        <p>Промпт простой, его можно и наговорить голосом. Я ввела заготовленный текст:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Смотри, я хочу сделать таблицу для работы моего контент-помощника, чтобы в ней был актуальный план контента. Хочу видеть в ней такие данные: <span class="tok">[какие столбцы вам нужны, например дата, площадка, тема, формат, статус]</span>. Сделай отдельную вкладку на каждый месяц, начиная с <span class="tok">[месяц]</span>. Предложи, пожалуйста, темы. Не усложняй таблицу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Он спросил, на какой период делать, и предложил варианты. Я ответила: пока на октябрь–декабрь.</p>
+      </div></div>
+      <div class="step"><span class="snum">12</span><div>
+        <h3>Посмотрите и поправьте план</h3>
+        <p>Не оценивайте пока таблицу строго по структуре и содержанию: контент-план можно докручивать – добавлять свои принципы, чередование видов контента и так далее. У меня получилась таблица, где понятно, что и на каких площадках мы публикуем, всё расписано по датам.</p>
+        <p>Готового текста постов в ней нет, и это мой выбор: я хочу план тематик, по которому иду в блоге, а тексты докручивать в нейросети или сама. Править план можно руками, голосом через нейросеть («в контент-плане хочу поменять вот это») или отправить таблицу через настройки доступа, например, наставнику по контенту за замечаниями.</p>
+      </div></div>
+      <div class="step"><span class="snum">13</span><div>
+        <h3>Спросите, как закрепить таблицу в источниках</h3>
+        <p>Я хочу, чтобы таблица всегда была в памяти контент-помощника. Скопируйте ссылку на таблицу, вернитесь в чат и спросите:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Объясни мне, как закрепить эту таблицу <span class="tok">[ссылка на таблицу]</span> в источниках проекта, чтобы ты всегда к ней обращался по запросам о том, какой у нас сегодня контент, и когда нужно обновить контент-план. Главный файл, который ты держишь, – мой контент-план в виде этой таблицы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Мне он ответил: лучше закреплять живую Google Таблицу, тогда он будет читать её актуальное состояние. Добавить её в источники проекта и отдельно прописать правила в инструкции. Помните, мы обновляли помощника во втором модуле? Теперь обновим его тем, что Google Таблица станет основным источником знаний. Поменяли дату в таблице – помощник уже в курсе, объяснять ничего не нужно.</p>
+      </div></div>
+      <div class="step"><span class="snum">14</span><div>
+        <h3>Добавьте таблицу в источники проекта</h3>
+        <p>Откройте настройки проекта, раздел источников. В приложении на компьютере у меня добавить Google Таблицу туда не получилось. Тогда переходите в браузерную версию: приложение и браузер пока синхронизируются не во всём, не отчаивайтесь, если что-то не выходит.</p>
+        <p>В браузере: проект контент-помощника → источники → добавить источник → Google Диск → вставьте ссылку на таблицу → «Добавить». Таблица подключится и начнёт синхронизироваться. Так удобно подключать документы с Google Диска, которые будут обновляться, в отличие от файлов, которые мы раньше загружали один раз.</p>
+        <p class="snote">Переименовать таблицу можно. А если вы сделаете копию или новую таблицу с другой ссылкой, её нужно будет снова добавить в источники.</p>
+      </div></div>
+      <div class="step"><span class="snum">15</span><div>
+        <h3>Добавьте правила в инструкцию проекта</h3>
+        <p>Второй совет помощника – вставить текст правил в инструкцию проекта. Он сам предложит этот текст. Откройте главную страницу проекта → настройки → инструкция и добавьте правила в конец.</p>
+        <p class="rulebox">В инструкции лимит – 8000 знаков. Если с правилами текст не помещается, не удаляйте куски наугад. Лучше отправьте нейросети всю инструкцию целиком и попросите её подсократить.</p>
+      </div></div>
+      <div class="step"><span class="snum">16</span><div>
+        <h3>Проверьте в новом чате</h3>
+        <p>Вернитесь в чат и спросите, как проверить, что всё работает. Мне помощник сам дал тестовый запрос и контрольный ответ и посоветовал проверять в новом чате. Откройте новый чат в проекте и попробуйте. Мне он назвал публикацию на 6 октября, и я сразу попросила:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Помоги мне, пожалуйста, написать короткую заметку на эту тему, которую я бы опубликовала <span class="tok">[дата]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">17</span><div>
+        <h3>Смените статус через помощника и проверьте связь</h3>
+        <p>Попросите ближайшие публикации – помощник покажет дату, формат и статус. Когда публикация вышла, скажите ему об этом:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Я уже опубликовала. Смени, пожалуйста, статус с «Идея» на «Опубликовано».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p>Зайдите в таблицу и проверьте, что статус поменялся на «Опубликовано», – у меня он ещё и раскрасил ячейку. Теперь проверим обратную связь: сами поставьте в таблице у следующих публикаций статусы, например «В работе», «В работе», «Отложено». И спросите в чате:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Мой запрос на уроке</p><pre>Проверь статус ближайших трёх публикаций.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">У меня он ответил ровно то, что я поставила: в работе, в работе, отложено – и сослался на источник. Значит, помощник держит связь с таблицей.</p>
+      </div></div>
+  </div>
+
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>У вас есть Google Таблица учёта поступлений с прогнозом, которую можно пополнять голосом. И есть контент-план в источниках проекта помощника: вы меняете статус в таблице, и помощник уже в курсе, а когда просите его поменять статус, он меняет его в таблице.</p>
+      <p>Теперь с помощником можно настроить регулярную работу над контентом: «Слушай, я всё забыла, что у нас дальше?» – и пусть он вас ведёт. Таблицу вы можете открыть сами, отправить другому человеку или подключить к другой нейросети, например к ГигаЧату или Алисе. Публиковать контент нейросеть пока за вас не будет – как это сделать, разберём в модуле 4.</p>
+      <div class="keepbox">
+        <p class="kl">Что сохранить</p>
+        <p>Ссылки на обе таблицы. Ветку чата с учётом поступлений закрепите или вынесите в проект, чтобы возвращаться к ней раз в неделю.</p>
+      </div>
+    </div>
+  </div>
+
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
+  <p class="pfb-p">Когда закончите практику, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и опишет вашу работу так, чтобы её было интересно прочитать работодателю или клиенту. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 3», под «Урок 2».</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> какую таблицу вы собрали, что вы из неё вытаскиваете и как подключили её к своему помощнику.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+  <p class="pfb-p">Больше ничего собирать не нужно: в конце модуля вы просто пришлёте этот документ – <a href="https://aiforlife.ru/ii-course/modul3/itog/">итог модуля 3</a>.</p>
+</div>
 <div class="matbox">
   <p class="ml">Материалы к уроку</p>
-  <ul><li><a href="assets/demo-tablica-zayavki.xlsx" download>Тренажёр по желанию «Заявки и оплаты: найдите ошибки»</a><span>Файл Excel – скачайте и попросите ИИ найти ошибки в таблице.</span></li></ul>
+  <ul>
+    <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">Плагины: какие подключения пригодятся вашему помощнику</a><span>Как подключить Google Диск – по шагам со скриншотами.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-zarabotok/">Как навыки модуля 3 помогут вам зарабатывать</a><span>Таблица учёта заявок и оплат, бюджета или контент-плана как услуга – и «наведу порядок в вашей таблице».</span></li>
+  </ul>
 </div>
 </section>
 
@@ -290,11 +482,11 @@ section.wrap{padding-left:40px;padding-right:40px}
 
 </main>
 
+
+
 <footer>
   <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · практика урока 2, модуль 3</div>
 </footer>
-
-
 
 <div class="sr" role="status" aria-live="polite" id="say"></div>
 
@@ -314,8 +506,10 @@ section.wrap{padding-left:40px;padding-right:40px}
   document.addEventListener('click',function(ev){
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
-    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
-    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
+    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
+    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
+    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');
@@ -355,6 +549,7 @@ k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNo
 ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
 
 <script>
 (function(){
