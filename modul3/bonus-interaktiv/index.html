@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Интерактивные материалы: 21 вид с примерами и промптами · Нейро-архитектор</title>
+<meta name="description" content="Бонус к уроку 4 модуля 3: квизы, тесты, рабочие тетради, конспекты, гайды, трекеры, калькуляторы и другие интерактивные материалы – примеры из реальных проектов и промпты, чтобы собрать такой же под свою задачу.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Шкала текста – 4 роли:
+   Р1 заголовки – Instrument Serif (h2 раздела, h1 в меню);
+   Р2 подзаголовки – Manrope 17–18px/800;
+   Р3 основной текст – Manrope 17px/500, цвет --ink;
+   Р4 метки и плашки – Manrope 11–13px/800 капсом. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6; --pink-light:#FFC2E0; --pink-bg:#FFF1F8;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --side:320px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;font-weight:500}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.shell{display:grid;grid-template-columns:var(--side) 1fr;height:100vh;height:100dvh}
+
+/* меню слева */
+.side{background:var(--dark);color:#F3EDF5;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow-y:auto;position:sticky;top:0}
+.brand{padding:28px 26px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.brand .rub{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#9C8AA6}
+.brand .home{display:block;margin-top:14px;text-decoration:none}
+.brand h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1;letter-spacing:-.01em}
+.brand h1 i{color:var(--pink-soft)}
+.brand p{margin-top:8px;font-size:14px;color:#BFB2C6;line-height:1.5}
+.grp{padding:16px 14px 4px}
+.grp .gl{padding:0 12px 8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft)}
+.item{display:grid;grid-template-columns:30px 1fr;gap:8px;align-items:start;width:100%;text-align:left;padding:8px 12px;border-left:3px solid transparent;color:#E6DDEA;font-size:15px;line-height:1.35;font-weight:600;transition:background .15s;text-decoration:none}
+.item .n{font-family:var(--serif);font-size:20px;line-height:1;color:#8E7C98}
+.item small{display:block;font-size:12.5px;font-weight:500;color:#A898B0;margin-top:2px}
+.item:hover{background:rgba(255,255,255,.05)}
+.item.on{background:rgba(230,25,140,.16);border-left-color:var(--pink);color:#fff}
+.item.on .n{color:var(--pink-soft)}
+.side .foot{margin-top:auto;padding:18px 26px 24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#9C8AA6;line-height:1.5}
+.side .foot a{color:var(--pink-light);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(255,194,224,.4)}
+
+/* правая часть */
+.main{min-width:0;height:100vh;height:100dvh;overflow-y:auto;scroll-behavior:smooth}
+.panel{display:none;padding:56px 56px 72px;max-width:980px}
+.panel.on{display:block}
+.panel .kicker{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink)}
+.panel h2{font-family:var(--serif);font-weight:400;font-size:clamp(38px,4.6vw,58px);line-height:1.02;letter-spacing:-.015em;margin-top:12px}
+.panel h2 i{color:var(--pink)}
+.panel .lead{margin-top:16px;font-size:18px;line-height:1.6;color:var(--ink);max-width:62ch}
+.panel p{font-size:17px;line-height:1.65}
+.panel p + p{margin-top:12px}
+.panel h3{font-size:18px;font-weight:800;line-height:1.3;margin-top:22px}
+.panel a{color:var(--pink-strong);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(192,17,110,.3)}
+.panel a:hover{border-bottom-color:var(--pink-strong)}
+
+/* тёмная плашка-подзаголовок (решение 04.10) */
+.plate{display:block;margin:36px 0 20px;background:var(--dark);color:#fff;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:10px 14px 10px 16px;border-left:4px solid var(--pink);width:fit-content;max-width:100%}
+
+/* списки */
+.uses,.check{list-style:none;display:grid;gap:10px}
+.uses li,.check li{position:relative;padding-left:28px;font-size:17px;line-height:1.6}
+.uses li:before{content:"";position:absolute;left:4px;top:.62em;width:10px;height:10px;background:var(--pink);border-radius:50%}
+.check li:before{content:"✓";position:absolute;left:2px;top:0;color:var(--pink);font-weight:800}
+.inside,.steps{list-style:none;counter-reset:n;display:grid;gap:14px}
+.inside li,.steps li{counter-increment:n;position:relative;padding-left:54px;font-size:17px;line-height:1.6;min-height:36px}
+.inside li:before,.steps li:before{content:counter(n);position:absolute;left:0;top:-4px;font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.inside b,.steps b{font-weight:800}
+
+/* скриншоты */
+.shots{display:grid;gap:22px}
+.shots.two{grid-template-columns:1fr 1fr}
+.shot{margin:0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(33,24,41,.10);cursor:zoom-in;background:#fff}
+.shot figcaption{margin-top:10px;font-size:15px;line-height:1.55;color:var(--muted)}
+.shot figcaption b{color:var(--ink);font-weight:800}
+
+/* живое демо */
+.demo{border:2px dashed var(--pink-light);background:var(--pink-bg);border-radius:14px;padding:22px 22px 24px}
+.demo .dl{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--pink-strong);margin-bottom:12px}
+.demo .dbtn{display:inline-block;background:var(--pink);color:#fff;font-weight:800;font-size:15px;padding:11px 18px;border-radius:999px;margin-top:12px}
+.demo .dbtn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.demo input[type=text],.demo input[type=number],.demo textarea,.demo select{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;width:100%}
+.demo textarea{min-height:90px;resize:vertical}
+.demo label{display:block;font-size:15px;font-weight:700;margin:12px 0 6px}
+.demo .opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px;font-size:16px;font-weight:600;line-height:1.4;transition:border-color .15s}
+.demo .opt:hover{border-color:var(--pink)}
+.demo .opt.sel{border-color:var(--pink);background:#fff;box-shadow:inset 3px 0 0 var(--pink)}
+.demo .opt.ok{border-color:#2E9D64;box-shadow:inset 3px 0 0 #2E9D64}
+.demo .opt.no{border-color:#D6455D;box-shadow:inset 3px 0 0 #D6455D}
+.demo .res{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
+.demo .bar{height:8px;background:#fff;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.demo .bar i{display:block;height:100%;width:0;background:var(--pink);transition:width .3s}
+
+/* промпт */
+.promptbox{position:relative;background:var(--dark2);border-radius:12px;padding:20px 20px 64px;margin-top:4px}
+.promptbox .plabel{font-size:13px;font-weight:800;color:var(--pink-light);margin-bottom:12px}
+.promptbox pre{font-family:var(--mono);font-size:14px;line-height:1.65;color:#F3EDF5;white-space:pre-wrap;word-break:break-word}
+.promptbox .copy{position:absolute;right:16px;bottom:16px;background:#fff;color:var(--ink);font-size:14px;font-weight:800;padding:9px 14px;border-radius:999px}
+.promptbox .copy.done{background:var(--pink);color:#fff}
+.note{margin-top:14px;font-size:15px;line-height:1.55;color:var(--muted)}
+
+/* навигация между видами */
+.pnav{display:flex;justify-content:space-between;gap:12px;margin-top:56px;padding-top:22px;border-top:1px solid var(--line)}
+.pnav button{font-size:15px;font-weight:800;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.pnav button:hover{border-color:var(--pink);color:var(--pink-strong)}
+
+/* стартовый экран */
+.cards{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{display:block;text-align:left;border:1px solid var(--line);background:#fff;padding:16px 16px 14px;border-radius:10px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--pink);transform:translateY(-2px)}
+.card .cn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink)}
+.card h3{margin-top:8px;font-size:16px;font-weight:800;line-height:1.3}
+.card p{margin-top:4px;font-size:14px;line-height:1.45;color:var(--muted)}
+.sep{margin:34px 0 0;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+
+/* увеличение скриншота */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(15,11,20,.92);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:100%;border-radius:8px}
+
+/* телефон */
+.topbar{display:none}
+@media (max-width:860px){
+  .shell{display:block;height:auto}
+  .side{position:fixed;inset:0;z-index:20;height:100dvh;transform:translateX(-100%);transition:transform .25s}
+  body.menu .side{transform:none}
+  .closem{display:block;position:absolute;top:18px;right:18px;font-size:14px;font-weight:700;color:#F3EDF5;border:1px solid rgba(255,255,255,.25);padding:8px 12px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:10;background:var(--dark);color:#F3EDF5;padding:10px 16px;height:56px}
+  .topbar .tt{font-family:var(--serif);font-size:22px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
+  .topbar .tt i{color:var(--pink-soft)}
+  .topbar button{flex:none;background:var(--pink);color:#fff;font-weight:800;font-size:14px;padding:9px 14px}
+  .main{height:auto;overflow:visible}
+  .panel{padding:30px 20px 48px}
+  .shots.two{grid-template-columns:1fr}
+  .demo{padding:18px 16px 20px}
+  .promptbox{margin-left:-20px;margin-right:-20px;border-radius:0;padding:20px 20px 64px}
+  .inside li,.steps li{padding-left:44px}
+}
+@media (min-width:861px){.closem{display:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="tt" href="#" data-home>Интерактивные <i>материалы</i></a>
+  <button type="button" id="openMenu">Виды</button>
+</div>
+
+<div class="shell">
+  <aside class="side" id="side" aria-label="Виды интерактивных материалов">
+    <button class="closem" type="button" id="closeMenu">Закрыть</button>
+    <div class="brand">
+      <div class="rub">Нейро-архитектор · Модуль 3 · урок 4</div>
+      <a class="home" href="#" data-home><h1>Интерактивные <i>материалы</i></h1></a>
+      <p>21 вид: примеры из реальных проектов и промпты, чтобы собрать такой же под свою задачу.</p>
+    </div>
+    <nav class="grp">
+      <div class="gl">Учить и объяснять</div>
+      <a class="item" href="#konspekt" data-go="konspekt"><span class="n">1</span><span>Конспект<small>урок, эфир, встреча</small></span></a>
+      <a class="item" href="#gaid" data-go="gaid"><span class="n">2</span><span>Гайд по шагам<small>инструкция с отметками «Готово»</small></span></a>
+      <a class="item" href="#tetrad" data-go="tetrad"><span class="n">3</span><span>Рабочая тетрадь<small>поля для ответов и прогресс</small></span></a>
+      <a class="item" href="#kniga" data-go="kniga"><span class="n">4</span><span>Интерактивная книга<small>листалка, закладки, практики</small></span></a>
+      <a class="item" href="#slaidy" data-go="slaidy"><span class="n">5</span><span>Презентация<small>слайды по ссылке</small></span></a>
+    </nav>
+    <nav class="grp">
+      <div class="gl">Проверять и вовлекать</div>
+      <a class="item" href="#kviz" data-go="kviz"><span class="n">6</span><span>Квиз<small>результат-профиль и следующий шаг</small></span></a>
+      <a class="item" href="#test" data-go="test"><span class="n">7</span><span>Тест<small>верные ответы, балл, разбор</small></span></a>
+      <a class="item" href="#kartochki" data-go="kartochki"><span class="n">8</span><span>Карточки и игры<small>перевёртыши, задания, таймер</small></span></a>
+      <a class="item" href="#trenazher" data-go="trenazher"><span class="n">9</span><span>Тренажёр<small>отработка навыка по шагам</small></span></a>
+      <a class="item" href="#shema" data-go="shema"><span class="n">10</span><span>Интерактивная схема<small>нажал на часть – объяснение</small></span></a>
+    </nav>
+    <nav class="grp">
+      <div class="gl">Организовать работу</div>
+      <a class="item" href="#cheklist" data-go="cheklist"><span class="n">11</span><span>Чек-лист<small>отметки и прогресс</small></span></a>
+      <a class="item" href="#treker" data-go="treker"><span class="n">12</span><span>Трекер<small>привычки, тренировки, задачи</small></span></a>
+      <a class="item" href="#raspisanie" data-go="raspisanie"><span class="n">13</span><span>Расписание<small>календарь программы</small></span></a>
+      <a class="item" href="#kalkulyator" data-go="kalkulyator"><span class="n">14</span><span>Калькулятор<small>цена, порции, бюджет</small></span></a>
+      <a class="item" href="#navigator" data-go="navigator"><span class="n">15</span><span>Навигатор<small>фильтры: выбрал – увидел своё</small></span></a>
+      <a class="item" href="#kabinet" data-go="kabinet"><span class="n">16</span><span>Кабинет и дашборд<small>прогресс клиента или ученика</small></span></a>
+    </nav>
+    <nav class="grp">
+      <div class="gl">Показать и собрать</div>
+      <a class="item" href="#lending" data-go="lending"><span class="n">17</span><span>Лендинг<small>страница услуги или продукта</small></span></a>
+      <a class="item" href="#portfolio" data-go="portfolio"><span class="n">18</span><span>Портфолио<small>ваши работы по ссылке</small></span></a>
+      <a class="item" href="#portal" data-go="portal"><span class="n">19</span><span>Портал материалов<small>всё о программе на 1 странице</small></span></a>
+      <a class="item" href="#anketa" data-go="anketa"><span class="n">20</span><span>Анкета и бриф<small>ответы и заявки</small></span></a>
+      <a class="item" href="#redaktor" data-go="redaktor"><span class="n">21</span><span>Редактор и генератор<small>человек сам собирает результат</small></span></a>
+    </nav>
+    <div class="foot"><p>Как собрать страницу и выложить её по ссылке – в <a href="https://aiforlife.ru/ii-course/modul3/urok4/">уроке 4 модуля 3</a>. Навыки для сборки – в бонусе <a href="https://aiforlife.ru/ii-course/modul3/bonus-navyki-materialy/">«От сырья до готового материала»</a>.</p></div>
+  </aside>
+
+  <main class="main" id="main">
+    <section class="panel on" id="start" data-title="Все виды">
+      <p class="kicker">Бонус к уроку 4 · модуль 3</p>
+      <h2>Интерактивные материалы: <i>21 вид</i> с примерами и промптами</h2>
+      <p class="lead">В уроке 4 вы собрали страницу-портфолио. Тем же способом собирается почти всё, с чем человек что-то делает: отвечает на вопросы, отмечает шаги, считает, листает, выбирает. Здесь – 21 вид таких материалов. У каждого: когда он пригодится, как он выглядит в моих проектах, мини-пример прямо на странице и промпт, чтобы собрать такой же под свою задачу.</p>
+      <p class="plate">Как пользоваться</p>
+      <ol class="steps">
+        <li><b>Выберите вид</b> в меню слева или в карточках ниже – начните с того, что нужно вашим клиентам, ученикам или подписчикам прямо сейчас.</li>
+        <li><b>Посмотрите пример</b> – скриншот из реального проекта, а где-то и рабочий мини-пример: его можно потрогать прямо здесь.</li>
+        <li><b>Скопируйте промпт</b> и заполните то, что в квадратных скобках. Нейросеть сначала задаст вопросы и покажет план, потом соберёт файл.</li>
+        <li><b>Проверьте и выложите по ссылке</b> – так же, как страницу-портфолио в <a href="https://aiforlife.ru/ii-course/modul3/urok4/">уроке 4</a>. Чек-лист «Проверьте перед тем, как отдавать» – в конце каждого раздела.</li>
+      </ol>
+      <p class="sep">Учить и объяснять</p>
+      <div class="cards">
+        <button class="card" type="button" data-go="konspekt"><span class="cn">1</span><h3>Конспект</h3><p>урок, эфир, встреча</p></button>
+        <button class="card" type="button" data-go="gaid"><span class="cn">2</span><h3>Гайд по шагам</h3><p>инструкция с отметками «Готово»</p></button>
+        <button class="card" type="button" data-go="tetrad"><span class="cn">3</span><h3>Рабочая тетрадь</h3><p>поля для ответов и прогресс</p></button>
+        <button class="card" type="button" data-go="kniga"><span class="cn">4</span><h3>Интерактивная книга</h3><p>листалка, закладки, практики</p></button>
+        <button class="card" type="button" data-go="slaidy"><span class="cn">5</span><h3>Презентация</h3><p>слайды по ссылке</p></button>
+      </div>
+      <p class="sep">Проверять и вовлекать</p>
+      <div class="cards">
+        <button class="card" type="button" data-go="kviz"><span class="cn">6</span><h3>Квиз</h3><p>результат-профиль и следующий шаг</p></button>
+        <button class="card" type="button" data-go="test"><span class="cn">7</span><h3>Тест</h3><p>верные ответы, балл, разбор</p></button>
+        <button class="card" type="button" data-go="kartochki"><span class="cn">8</span><h3>Карточки и игры</h3><p>перевёртыши, задания, таймер</p></button>
+        <button class="card" type="button" data-go="trenazher"><span class="cn">9</span><h3>Тренажёр</h3><p>отработка навыка по шагам</p></button>
+        <button class="card" type="button" data-go="shema"><span class="cn">10</span><h3>Интерактивная схема</h3><p>нажал на часть – объяснение</p></button>
+      </div>
+      <p class="sep">Организовать работу</p>
+      <div class="cards">
+        <button class="card" type="button" data-go="cheklist"><span class="cn">11</span><h3>Чек-лист</h3><p>отметки и прогресс</p></button>
+        <button class="card" type="button" data-go="treker"><span class="cn">12</span><h3>Трекер</h3><p>привычки, тренировки, задачи</p></button>
+        <button class="card" type="button" data-go="raspisanie"><span class="cn">13</span><h3>Расписание</h3><p>календарь программы</p></button>
+        <button class="card" type="button" data-go="kalkulyator"><span class="cn">14</span><h3>Калькулятор</h3><p>цена, порции, бюджет</p></button>
+        <button class="card" type="button" data-go="navigator"><span class="cn">15</span><h3>Навигатор</h3><p>фильтры: выбрал – увидел своё</p></button>
+        <button class="card" type="button" data-go="kabinet"><span class="cn">16</span><h3>Кабинет и дашборд</h3><p>прогресс клиента или ученика</p></button>
+      </div>
+      <p class="sep">Показать и собрать</p>
+      <div class="cards">
+        <button class="card" type="button" data-go="lending"><span class="cn">17</span><h3>Лендинг</h3><p>страница услуги или продукта</p></button>
+        <button class="card" type="button" data-go="portfolio"><span class="cn">18</span><h3>Портфолио</h3><p>ваши работы по ссылке</p></button>
+        <button class="card" type="button" data-go="portal"><span class="cn">19</span><h3>Портал материалов</h3><p>всё о программе на 1 странице</p></button>
+        <button class="card" type="button" data-go="anketa"><span class="cn">20</span><h3>Анкета и бриф</h3><p>ответы и заявки</p></button>
+        <button class="card" type="button" data-go="redaktor"><span class="cn">21</span><h3>Редактор и генератор</h3><p>человек сам собирает результат</p></button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="lb" id="lb" aria-hidden="true"><img alt=""></div>
+
+<script>
+(function(){
+  var panels=[].slice.call(document.querySelectorAll('.panel'));
+  var items=[].slice.call(document.querySelectorAll('.item'));
+  var main=document.getElementById('main');
+  var order=panels.map(function(p){return p.id;}).filter(function(id){return id!=='start';});
+  function title(id){var p=document.getElementById(id);return p?(p.dataset.title||id):'';}
+  panels.forEach(function(p){
+    if(p.id==='start')return;
+    var i=order.indexOf(p.id), nav=document.createElement('div');nav.className='pnav';
+    var prev=order[i-1], next=order[i+1];
+    nav.innerHTML=(prev?'<button type="button" data-go="'+prev+'">← '+title(prev)+'</button>':'<button type="button" data-home>← Все виды</button>')+
+                  (next?'<button type="button" data-go="'+next+'">'+title(next)+' →</button>':'<button type="button" data-home>Все виды →</button>');
+    p.appendChild(nav);
+  });
+  function show(id,push){
+    document.body.classList.remove('menu');
+    if(!id||!document.getElementById(id)||!document.getElementById(id).classList.contains('panel'))id='start';
+    panels.forEach(function(p){p.classList.toggle('on',p.id===id);});
+    items.forEach(function(b){b.classList.toggle('on',b.dataset.go===id);});
+    main.scrollTop=0;window.scrollTo(0,0);
+    if(push)history.replaceState(null,'',id==='start'?location.pathname:'#'+id);
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-go]');
+    if(b){e.preventDefault();show(b.dataset.go,true);return;}
+    var h=e.target.closest('[data-home]');
+    if(h){e.preventDefault();show('start',true);return;}
+    var c=e.target.closest('.copy');
+    if(c){
+      var pre=c.closest('.promptbox').querySelector('pre');
+      var txt=pre?pre.innerText:'';
+      var done=function(){var o=c.textContent;c.textContent='Скопировано';c.classList.add('done');setTimeout(function(){c.textContent=o;c.classList.remove('done');},1800);};
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done);}
+      else{var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(err){}document.body.removeChild(ta);}
+      return;
+    }
+    var im=e.target.closest('.shot img');
+    if(im){var lb=document.getElementById('lb');lb.querySelector('img').src=im.src;lb.classList.add('on');return;}
+    if(e.target.closest('#lb')){document.getElementById('lb').classList.remove('on');}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lb').classList.remove('on');});
+  document.getElementById('openMenu').addEventListener('click',function(){document.body.classList.add('menu');});
+  document.getElementById('closeMenu').addEventListener('click',function(){document.body.classList.remove('menu');});
+  show(location.hash.slice(1),false);
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1),false);});
+})();
+</script>
+
+<!-- Yandex.Metrika counter 112003701 (Курс ИИ) -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+</body>
+</html>
