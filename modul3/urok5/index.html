@@ -7,18 +7,19 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Урок 5 · Нейрофотосессия и видеоаватар · Нейро-архитектор</title>
-<meta name="description" content="Конспект урока 5 модуля 3: портрет по своим фото, проверка сходства, 1 правка и короткое говорящее видео из фото и записи голоса.">
+<title>Урок 5 · Нейрофотосессии и видеоаватары · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 5 модуля 3: портрет по своим настоящим фото, 5 параметров кадра, проверка сходства 3 вопросами, 1 точечная правка, второй кадр той же съёмки и короткое говорящее видео из фото и своего голоса.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ШКАЛА – 4 текстовые роли (МЕТОД.md, B2). Не добавлять новых размеров и цветов текста.
-   Р1 Заголовок – Instrument Serif 400: h1 var(--h1), h2 var(--h2)
-   Р2 Подзаголовок – Manrope 700, var(--sub) 20px: h3 в секциях и пунктах
-   Р3 Текст – Manrope 500, var(--text) 17px, цвет var(--ink); на тёмном фоне #CFC4D4
-   Р4 Метка – Manrope 700, CAPS с разрядкой: .label 11px; плашки-подзаголовки и метки промптов 13px/800
-   Декоративные цифры (.kn, .mn, .dn) и блок портфолио .pfb (единый для всех уроков) ролями не считаются. Курсива нет. */
+/* ШКАЛА (МЕТОД B2) – 4 текстовые роли:
+   Р1 Заголовок – Instrument Serif 400: h1 var(--h1), h2 var(--h2); крупная цифра урока и номера пунктов – декоративные, не роль.
+   Р2 Подзаголовок – Manrope 700, на ступень крупнее текста (.def h3).
+   Р3 Текст – Manrope 500, var(--text) 17px, один цвет: var(--ink) на светлом, #CFC4D4 на тёмном. Выделение – только жирным.
+   Р4 Метка – Manrope 700–800, CAPS с разрядкой, 11–13px (.label, .plate, .plabel).
+   Курсив не используем. Инлайн font-size/color/font-weight в разметке запрещены.
+   Блок «Задача для портфолио» (.pfb) – единый для всех уроков, его стили не трогаем. */
 :root{
   --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
   --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
@@ -37,7 +38,6 @@ body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--i
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
 h1{font-size:var(--h1)}
 h2{font-size:var(--h2)}
-.it{font-style:italic;color:var(--pink)}
 b,strong{font-weight:700}
 a{color:var(--pink);text-decoration:none}
 a:hover{color:var(--pink-strong)}
@@ -49,23 +49,19 @@ p+p{margin-top:14px}
 .rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
 .rubric .r2{font-weight:500;color:var(--muted)}
 
-.hero{padding:60px 0 8px}
+.hero{padding-top:60px;padding-bottom:8px}
 .hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
 .hgrid h1{grid-column:span 8}
-.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+.hlead{grid-column:span 4;line-height:1.62}
 
-section{padding:30px 0}
-.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
-.lede .col{grid-column:4 / span 9}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.lede .col{grid-column:1 / -1}
 
-.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark{background:var(--dark);color:#F3EDF5;padding-top:56px;padding-bottom:56px;margin-top:56px}
 .dark h2{color:#fff}
-.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
 .dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
 .dark .dgrid h2{grid-column:span 5}
 .dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
-.dark ul li{color:#CFC4D4}
-.dark ul li::before{background:var(--pink-soft)}
 .dark b{color:#fff}
 
 ul{list-style:none;margin-top:16px}
@@ -73,47 +69,17 @@ ul li{position:relative;padding-left:24px;margin-bottom:10px}
 ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
 
 .label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
-.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
-.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
-
-.group{padding:0}
-.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
-.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
-.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
-.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
-.note b{color:var(--ink)}
-
-.task{border-top:1px solid var(--line)}
-.group .task:first-of-type{border-top:1px solid var(--ink)}
-.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
-.task summary::-webkit-details-marker{display:none}
-.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
-.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
-.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
-.task summary:hover .num,.task[open] .num{color:var(--pink)}
-.task summary:hover .chev{color:var(--pink)}
-.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
-.body{padding:0 0 34px 78px}
 
 .promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
 .plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
 .promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
-.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
 
 .btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
 .btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
 .btn:hover{background:var(--pink)}
 .btn.done{background:#1FA24E}
-.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
-.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
 
-.closing{padding:56px 0 10px}
-.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
-.closing .cgrid .col{grid-column:4 / span 8}
-.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
-
-footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+footer{background:var(--dark2);color:#8A7C90;padding-top:30px;padding-bottom:40px;font-size:var(--fine);margin-top:56px}
 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -121,17 +87,13 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 
 @media (max-width:760px){
   .wrap{padding:0 20px}
-  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hgrid h1,.hlead,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
   .hlead{margin-top:20px}
-  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
-  .num{font-size:29px}
-  .tname{font-size:17.5px}
-  .body{padding-left:0;padding-bottom:28px}
   .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
   .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
   .btns{gap:18px}
   .btn{width:100%;justify-content:center}
-  .dark{padding:44px 0}
+  .dark{padding-top:44px;padding-bottom:44px}
 }
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
@@ -142,61 +104,33 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(-
 .meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
 .meta div{padding:2px 0}
 .meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
-.meta .mv{font-size:16px;font-weight:600}
+.meta .mv{font-weight:600}
 .mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
 .mainbox .mline:last-child{border-bottom:none}
 .mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
-.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.mainbox p{color:#CFC4D4;line-height:1.55}
 .blk{padding-top:46px;padding-bottom:0}
 .blk h2{margin:14px 0 18px}
 .defs{margin-top:22px}
 .def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
 .def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
-.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
-.def p{font-size:16px;color:var(--muted);line-height:1.55}
-.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
-.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+.def h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.3;letter-spacing:0;margin-bottom:5px}
+.def p{line-height:1.55}
+.rulebox{background:#FFF1F8;padding:16px 20px;margin-top:22px}
 
-.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice{background:var(--dark);color:#F3EDF5;padding-top:60px;padding-bottom:54px;margin-top:66px;position:relative}
 .practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .label{color:var(--pink-soft)}
 .practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
-.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
-.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
-.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
-.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
-.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
-.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
-.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
-
-.steps{padding:8px 0 0}
-.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
-.step:first-child{border-top:1px solid var(--ink)}
-.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
-.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
-.step p{font-size:17px;color:#3B3143;line-height:1.6}
-.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
-.hint .hs{display:none}
-.hint .hs.on{display:block}
-.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
-.hint p{font-size:16px;color:var(--muted)}
-.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.practice .pintro{color:#CFC4D4;margin-top:22px}
 .stepprompt{margin-top:18px}
-.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
-.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
-.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
-.donebox p{font-size:18px;line-height:1.55}
-.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
-.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 @media (max-width:760px){
-  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
-  .snum{font-size:36px}
-  .step h3{font-size:19px}
   .def{grid-template-columns:40px 1fr;gap:14px}
   .def .dn{font-size:27px}
+  .def h3{font-size:18px}
   .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
-  .donebox .dc{grid-column:1 / -1}
   .meta{gap:0 22px}
-  .practice{padding:44px 0 40px}
+  .practice{padding-top:44px;padding-bottom:40px}
 }
 .promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
 
@@ -223,11 +157,11 @@ a.inl:hover{color:var(--pink)}
 .matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
 .matbox ul{list-style:none;margin:0;padding:0}
 .matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li::before{display:none}
 .matbox li:first-child{border-top:0;padding-top:0}
-.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a{font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-soft)}
 .matbox li a:hover{border-bottom-color:var(--pink)}
-.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
-.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+.matbox li span{display:block;margin-top:4px;line-height:1.5}
 @media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
 /* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
 .btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
@@ -252,28 +186,17 @@ main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs
 section.wrap{padding-left:40px;padding-right:40px}
 @media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
 </style>
-<style id="u5">
-/* Урок 5 М3: приведение к 4 ролям и классы вместо инлайн-стилей */
-.hero-top{padding-top:34px}
-.mainbox-first{margin-top:44px}
-.dark-end{margin-top:64px}
-.blk .lede{padding-top:0}
-.hlead,.meta .mv,.def p,.rulebox,.note{font-size:var(--text);color:var(--ink);font-weight:500}
-.def h3,.blk .col>h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.3;letter-spacing:0;text-wrap:balance}
-.blk .col>h3{margin:34px 0 10px}
-.def h3:only-child{margin-bottom:0}
-.defs+p,.rulebox+p,.note+p{margin-top:22px}
-.after-box{margin-top:26px}
-.label-dark{color:var(--pink-soft)}
-.label-q{margin-top:22px;color:#9C8AA6}
-.dark ul.qlist{margin-top:12px}
-/* Подзаголовок внутри блока – тёмная плашка */
-.plate{display:block;background:#1B1420;color:#fff;font-family:var(--sans);font-size:13px;font-weight:800;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;border-left:3px solid var(--pink);padding:10px 16px;margin:36px 0 20px}
-.plate+ul{margin-top:0}
-/* Материалы к уроку – в ту же шкалу: метка, подзаголовок-ссылка, текст */
-.matbox .ml{font-size:var(--label);font-weight:700;letter-spacing:.22em}
-.matbox li a{font-size:var(--text);font-weight:700}
-.matbox li span{font-size:var(--text);color:var(--ink)}
+<style id="m3">
+/* Модуль 3 · урок 5 */
+.hero.htop{padding-top:34px}
+.dark.mainbox{margin-top:44px}
+.dark.takeaway{margin-top:64px}
+.blk ul{margin-bottom:14px}
+.blk .defs+p,.blk .promptbox+p{margin-top:18px}
+/* Подзаголовок внутри блока – тёмная плашка, а не розовая метка */
+.plate{display:block;background:#1B1420;color:#fff;font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-left:3px solid var(--pink);padding:10px 16px;margin-top:36px;margin-bottom:20px}
+p+p.plate,.defs+p.plate,.rulebox+p.plate,ul+p.plate{margin-top:36px}
+.plate+p,.plate+.rulebox,.plate+ul{margin-top:0}
 </style>
 </head>
 <body>
@@ -281,185 +204,200 @@ section.wrap{padding-left:40px;padding-right:40px}
 <header class="wrap">
   <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · урок 5</span></div>
   <div class="kmark"><span class="kn">5</span><span class="kt">Конспект урока</span></div>
-  <div class="hero hero-top">
+  <div class="hero htop">
     <div class="hgrid">
-      <h1>Нейрофотосессия и&nbsp;видеоаватар</h1>
-      <p class="hlead">Как из своих обычных фотографий получить портрет, в котором вы узнаёте себя, а из портрета и записи голоса – короткое говорящее видео. И что проверить, прежде чем показывать это людям.</p>
+      <h1>Нейрофотосессии и&nbsp;видеоаватары</h1>
+      <p class="hlead">Как получить новую фотографию себя без организации съёмки: объяснить нейросети кадр, проверить, что на снимке правда вы, и сделать так, чтобы фотография заговорила вашим голосом.</p>
     </div>
     <div class="meta">
-      <div><span class="mk">Видео</span><span class="mv">около 20 минут</span></div>
-      <div><span class="mk">Практика</span><span class="mv">Свой портрет и говорящее видео</span></div>
-      <div><span class="mk">Останется у вас</span><span class="mv">Портрет для своей задачи и тестовый ролик</span></div>
+      <div><span class="mk">Видео</span><span class="mv">Около 22 минут: фотосессия около 15, видеоаватар около 7</span></div>
+      <div><span class="mk">Практика</span><span class="mv">Около 40 минут</span></div>
+      <div><span class="mk">Результат</span><span class="mv">1 узнаваемый портрет, второй кадр в том же стиле и короткое говорящее видео</span></div>
     </div>
   </div>
 </header>
 
 <main>
 
-<div class="dark mainbox mainbox-first">
+<div class="dark mainbox">
   <div class="wrap dgrid">
     <h2>Главное<br>из урока</h2>
     <div class="dcol">
-      <div class="mline"><span class="mn">1</span><p>Нейросеть может сделать очень реалистичный кадр, на котором человек лишь немного похож на вас. Поэтому проверяем 2 вещи отдельно: выглядит ли кадр естественно и узнаёте ли вы на нём себя.</p></div>
-      <div class="mline"><span class="mn">2</span><p>Источник внешности – только ваши настоящие фотографии: 1 основная и несколько дополнительных. Уже созданный портрет оригиналы не заменяет, иначе его мелкие изменения переходят в следующие кадры.</p></div>
-      <div class="mline"><span class="mn">3</span><p>Понравившийся чужой кадр сначала превращаем в описание сцены без чужой внешности и только потом соединяем со своими фото.</p></div>
-      <div class="mline"><span class="mn">4</span><p>Правка – 1 за раз, и в ней перечислено, что должно остаться. Если каждая правка уводит сходство дальше, кадр проще начать заново.</p></div>
-      <div class="mline"><span class="mn">5</span><p>Говорящее видео начинаем с настоящего фото и своей записи голоса, смотрим ролик целиком и в публичных материалах честно обозначаем, что это ИИ-аватар.</p></div>
+      <div class="mline"><span class="mn">1</span><p>Нейросеть – не фотограф с волшебной кнопкой. Ей можно объяснить задачу: свет, ракурс, план, что вы делаете в кадре, – а потом проверить, насколько результат похож на вас.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Реалистичность и сходство – разные критерии. Снимок может выглядеть как настоящая фотография, но на нём будете не вы. Каждый кадр проверяем 3 вопросами: «Это я? Выглядит естественно? Подходит задаче?»</p></div>
+      <div class="mline"><span class="mn">3</span><p>Оригиналы отвечают за лицо, удачный кадр – за атмосферу. Источник внешности – только ваши настоящие фото, а не сгенерированные портреты.</p></div>
+      <div class="mline"><span class="mn">4</span><p>1 правка – 1 цель. После каждой правки снова сверяемся с оригиналом, а если лицо уходит, начинаем заново с настоящих фото.</p></div>
+      <div class="mline"><span class="mn">5</span><p>Для видеоаватара берём настоящее фото и свой голос на 15–30 секунд. Ролик смотрим целиком, а если показываем людям, обозначаем, что он создан с ИИ.</p></div>
     </div>
   </div>
 </div>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
-      <p class="label">С чего начинаем</p>
-      <h2>Красиво и похоже – это 2&nbsp;разные проверки</h2>
-      <p>Портрет с помощью нейросети пригодится и для работы, и просто для себя: для анонса, страницы специалиста или презентации. Я, например, хотела спокойный рабочий кадр у окна – и без организации отдельной съёмки.</p>
-      <p>Сразу важная вещь. Фотография может выглядеть очень реалистично, но человек на ней будет лишь немного похож на вас. Поэтому в этом уроке мы всё время держим в голове 2 отдельных вопроса: выглядит ли кадр естественно и узнаю ли я на нём себя. Красивый свет и хорошая рубашка не должны отвлекать от того, что лицо стало чужим.</p>
-      <p>И ещё развилка, которую полезно знать с самого начала. Есть генерация по вашим фотографиям: вы загружаете несколько снимков в чат и описываете, какой кадр нужен. А есть отдельное обучение модели вашей внешности: сервису сначала дают набор фотографий, он учится, и только потом создаёт новые кадры. В уроке мы начинаем с генерации по фото – это самый короткий путь к первому результату.</p>
-      </div></div>
-    </section>
-
-    <section class="wrap blk reveal">
-      <div class="lede"><div class="col">
-      <p class="label">Выбор инструмента</p>
-      <h2>3 пути к своему портрету – и&nbsp;как выбрать свой</h2>
-      <p>Под разные задачи подходят разные способы. Выбирайте по тому, сколько кадров вам нужно и как часто.</p>
-      <div class="defs">
-        <div class="def"><span class="dn">1</span><div><h3>Генерация по вашим фото в чате</h3><p>Подходит, когда нужен 1 портрет под конкретную задачу. С этого пути мы и начинаем: свои оригиналы, описание сцены, проверка сходства, 1 правка.</p></div></div>
-        <div class="def"><span class="dn">2</span><div><h3>Сервис с обучением на вашей внешности</h3><p>Имеет смысл, если нужны регулярные серии в разных образах. Это другой процесс: вы готовите набор фотографий, запускаете обучение, а потом создаёте кадры и отбираете лучшие. Сколько фото нужно, какие шаги и настройки – смотрите в текущей инструкции конкретного сервиса: у каждого они свои.</p></div></div>
-        <div class="def"><span class="dn">3</span><div><h3>Специалист</h3><p>Задачу можно отдать человеку, который делает это за вас.</p></div></div>
-      </div>
-      <p class="rulebox">Честно сравнить инструменты можно только на одинаковых исходниках и одинаковых сюжетах: те же фото, та же сцена. Тогда видно, где сходство лучше, а не где просто удачнее свет.</p>
+      <p class="label">Зачем это нужно</p>
+      <h2>Новая фотография себя без&nbsp;организации съёмки</h2>
+      <p>Для новой фотографии не всегда нужно организовывать съёмку. Допустим, вам нужен портрет для анонса, для страницы специалиста, для профиля эксперта, обложки или поста. Сегодня я покажу не коллекцию красивых чужих лиц, а способ получить фотографию себя.</p>
+      <p>Нейросеть при этом – не фотограф с волшебной кнопкой. Ей можно объяснить задачу: задать свет, ракурс, план, положение героя в кадре. А потом проверить, насколько результат похож на исходного человека.</p>
+      <p class="plate">Красиво и похоже – это 2 разные проверки</p>
+      <p>Проверять снимок будем по отдельности: выглядит ли он естественно и узнаю ли я себя. Реалистичность и сходство – разные критерии. «Фотореалистично» не значит «точно похоже на человека»: нейросеть может нарисовать очень правдоподобную фотографию, на которой будет кто-то похожий, но не вы.</p>
+      <p class="plate">Чего ждать от первого раза</p>
+      <p>Идеальной фотосессии за 15 минут не будет, и обещать её я не стану. Реальный результат урока скромнее и полезнее: 1 выбранный портрет, на котором вы себя узнаёте, второй кадр в сходном стиле и понимание, как сделать короткое говорящее видео.</p>
       </div></div>
     </section>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
       <p class="label">Подготовка</p>
-      <h2>Какие фото дать нейросети</h2>
-      <p>Начинаем с того, что даём нейросети сведения о своей внешности. Студийные снимки для этого не нужны. Для первого теста хватит 3–5 обычных фотографий – это стартовый набор для нашей демонстрации, а не норма для любого сервиса: у некоторых свои требования, их стоит посмотреть заранее.</p>
-      <p class="plate">Что важно в исходниках</p>
+      <h2>Оригиналы: 3–5 настоящих фото и&nbsp;1&nbsp;главное</h2>
+      <p>Вашу внешность нейросеть понимает по фотографиям, которые вы ей дадите. Одна фотография помогает понять, как вы выглядите, другие показывают вас под другим углом и с другой мимикой. Если хотите на портрете улыбку, покажите свою настоящую улыбку.</p>
       <ul>
-        <li><b>Лицо чёткое и хорошо видно.</b> Не закрыто волосами или очками.</li>
-        <li><b>Без фильтров и сильной ретуши.</b> Особенно таких, которые уже изменили нос или губы.</li>
-        <li><b>Небольшие повороты и разный свет.</b> На одном фото лицо прямо, на других – чуть повёрнуто или при другом освещении.</li>
-        <li><b>Вы сейчас.</b> Фото, где у вас актуальный возраст и нынешний внешний вид.</li>
-        <li><b>Нужна улыбка – дайте свою настоящую улыбку.</b> Хотите образ с собранными волосами – добавьте фото с открытым лицом и убранными волосами.</li>
+        <li><b>Чёткое лицо анфас.</b> Это фото №1 – главный ориентир внешности, остальные будут дополнительными.</li>
+        <li><b>Небольшой поворот головы</b> – чтобы нейросеть видела лицо не только спереди.</li>
+        <li><b>Естественная улыбка</b> – если улыбка нужна на портрете.</li>
+        <li><b>Открытое лицо</b> – если в новом образе волосы будут убраны.</li>
+        <li><b>Без сильных фильтров</b> – иначе нейросеть возьмёт за основу обработку, а не вас.</li>
       </ul>
-      <p>Основной назначьте 1 фотографию, остальные – дополнительными. В своей демонстрации основной я сделала настоящий портрет в красном, а другие снимки – дополнительными.</p>
-      <p class="rulebox">Каждый новый кадр сверяйте с оригиналами, а не с удачными генерациями. Созданная нейросетью фотография может быть красивой, но в ней уже есть небольшие изменения. Если дальше опираться только на неё, эти изменения перейдут в следующие кадры.</p>
+      <p class="rulebox">Не используйте уже сгенерированный портрет вместо оригинала. В нём могут быть небольшие ошибки, и с каждым новым кадром они накапливаются: лицо постепенно становится чужим. Источник внешности – только ваши настоящие фото.</p>
       </div></div>
     </section>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
-      <p class="label">Из моего опыта</p>
-      <h2>Как взять понравившийся кадр без чужого лица</h2>
-      <p>Придумать сцену можно 3 способами: описать её самой, попросить помощи у чата или взять пример, который нравится, и описать его без чужой внешности. Третий способ я и показываю.</p>
-      <p>Мне понравилось настроение кадра-примера. Но лицо девушки на нём мне не нужно. Поэтому я не загружаю её фото вместе со своими, а сначала прошу нейросеть описать сцену: как человек сидит, какая одежда, откуда идёт свет. Проверяю, чтобы в описании не осталось характеристик чужой внешности. Затем убираю чужую фотографию и использую это описание вместе со своими фото.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Запрос: описать сцену с примера</p><pre>Опиши эту фотографию как задание для портретной съёмки: поза, выражение лица, положение рук, одежда, кадрирование, направление света и фон. Не описывай индивидуальные черты лица, возраст, цвет глаз и волос человека. Не добавляй новых предметов. Дай один короткий абзац, который я смогу использовать для фотографии себя.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      <p class="after-box">Если ответ получился длинным, допишите: «Сократи до одного абзаца, оставь только видимые условия съёмки».</p>
-      <p>Это один из способов уменьшить влияние чужого лица на результат. Сходства он не гарантирует, зато помогает разделить задачу: отдельно – какая сцена, отдельно – чья внешность.</p>
-      </div></div>
-    </section>
-
-    <section class="wrap blk reveal">
-      <div class="lede"><div class="col">
-      <p class="label">Запрос на портрет</p>
-      <h2>Из чего состоит хороший запрос на&nbsp;портрет</h2>
-      <p>Вместо «сделай красиво» описываем свет и условия съёмки. В моём запросе для рабочего портрета у окна 3 части.</p>
+      <p class="label">Виртуальная камера</p>
+      <h2>5 параметров кадра: говорим с&nbsp;нейросетью как с&nbsp;фотографом</h2>
+      <p>Представьте, что даёте задачу фотографу. Можно попросить «сделай красиво», а можно сказать: «сними по грудь, на уровне глаз, возле окна, свет слева, спокойная улыбка». Профессиональные настройки камеры знать не нужно, достаточно описать, что вы хотите увидеть. Для этого есть 5 параметров.</p>
       <div class="defs">
-        <div class="def"><span class="dn">1</span><div><h3>Какие фото отвечают за внешность</h3><p>Называем, какие из загруженных фото – ваши оригиналы, какое из них основное и что внешность берём только из них. У меня: «Фото 1 – основной ориентир лица, фото 2–3 – дополнительные. Используй только их как источник внешности». Номера фото поправьте под свои вложения.</p></div></div>
-        <div class="def"><span class="dn">2</span><div><h3>Какую сцену вы хотите</h3><p>Где вы, во что одеты, какой кадр, куда смотрите, какое выражение лица, какой свет и фон, какой формат. У меня: сижу у окна в белой рубашке, кадр по грудь, взгляд в камеру, спокойная лёгкая улыбка с закрытым ртом, мягкий дневной свет сбоку, размытый фон кабинета, вертикальный формат 4:5, без надписей. Если вы взяли описание с примера, оно встаёт на это место.</p></div></div>
-        <div class="def"><span class="dn">3</span><div><h3>Что нужно сохранить</h3><p>Узнаваемые черты лица, форму носа и губ, овал лица, возраст и естественные пропорции. Плюс естественная текстура кожи и ткани – без сглаживающей ретуши и изменения внешности.</p></div></div>
+        <div class="def"><span class="dn">1</span><div><h3>Крупность</h3><p>Насколько крупно вас видно: крупно, по грудь, по пояс или в полный рост.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Ракурс</h3><p>Откуда смотрит камера: на уровне глаз или сбоку.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Свет</h3><p>Откуда он падает и какой: например, мягкий дневной свет из окна слева.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Композиция</h3><p>Где вы в кадре: в центре, слева или справа. Для обложки так можно оставить свободное место под текст.</p></div></div>
+        <div class="def"><span class="dn">5</span><div><h3>Действие и взгляд</h3><p>Что вы делаете и куда смотрите: сидите у окна или стоите вполоборота, смотрите в камеру или слегка в сторону.</p></div></div>
       </div>
-      <p>Для первой попытки выбирайте спокойное выражение и простой ракурс. Сложные эмоции, сильный поворот и несколько людей в кадре оставьте на следующий эксперимент.</p>
-      <p>Сколько ждать генерацию, зависит от инструмента и его загрузки. В видео я это ожидание сокращаю, а у вас оно может занять больше времени – это нормально.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Запрос</p>
+      <h2>Как устроен запрос: внешность, ситуация и&nbsp;что не&nbsp;менять</h2>
+      <p>В запросе на портрет 3 части, и каждая отвечает за своё.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Источник внешности</h3><p>Какие фото – ваши настоящие и какое из них главный ориентир лица.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Ситуация</h3><p>Где вы, во что одеты, что делаете, какой свет и фон, какой формат кадра. Здесь работают те самые 5 параметров.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Что не менять</h3><p>Узнаваемые черты лица, форма носа, губ и овала, естественный возраст и пропорции. И просьба о реалистичной коже без сглаживающей бьюти-ретуши.</p></div></div>
+      </div>
+      <p>Вот как это выглядит в запросе, который я показываю на уроке:</p>
+      <div class="promptbox stepprompt"><p class="plabel">Промпт из урока: рабочий портрет</p><pre>Фото 1–3 – мои настоящие фотографии одного человека. Фото 1 – основной ориентир лица, остальные – дополнительные. Создай 1 реалистичный портрет: я сижу у окна в белой рубашке, кадр по грудь, камера на уровне глаз, взгляд в камеру, лёгкая спокойная улыбка с закрытым ртом. Мягкий дневной свет из окна слева, неброский фон кабинета. Сохрани узнаваемые черты лица, форму носа, губ и овала лица, естественный возраст и пропорции. Реалистичная кожа, фактура ткани, естественные пряди волос и тени, без сглаживающей бьюти-ретуши. Вертикальный формат 4:5. Без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Писать «8K», тип камеры и десяток эффектов не обязательно: сначала проверьте, что получилось. Версия этого промпта с местами для своего – в <a class="inl" href="praktika/">инструкции к практике</a>. А конструктор промпта и библиотека из 10 сюжетов под разные задачи – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-neirofotosessiya/">«Нейрофотосессия своими руками»</a>.</p>
       </div></div>
     </section>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
       <p class="label">Проверка</p>
-      <h2>Сначала лицо, потом всё остальное</h2>
-      <p>Когда результат готов, положите рядом оригинал и новый портрет. Сначала смотрите только на лицо: узнаёте ли вы себя? Похожи ли нос, губы, глаза, овал лица? Не стал ли человек заметно моложе или старше? Улыбка тоже меняет лицо, поэтому здесь важна именно ваша собственная оценка.</p>
-      <p>И только потом – на фотографию целиком: свет, волосы, одежда, фон. Если в кадре есть руки, проверьте пальцы и положение кистей.</p>
-      <p class="plate">3 вопроса к каждому кадру</p>
+      <h2>3 вопроса к&nbsp;каждому кадру</h2>
+      <p>Положите оригинал и результат рядом. Сначала приблизьте лицо, потом посмотрите на руки и на кадр целиком.</p>
       <div class="defs">
-        <div class="def"><span class="dn">1</span><div><h3>Это я?</h3></div></div>
-        <div class="def"><span class="dn">2</span><div><h3>Кадр выглядит естественно?</h3></div></div>
-        <div class="def"><span class="dn">3</span><div><h3>Он подходит моей задаче?</h3></div></div>
+        <div class="def"><span class="dn">1</span><div><h3>Это я?</h3><p>Сначала смотрю не на красоту света, а на лицо: мои ли это нос, глаза, губы, мой ли возраст.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Выглядит естественно?</h3><p>Потом оцениваю освещение, волосы, руки, одежду и фон.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Подходит задаче?</h3><p>Смогу ли я правда использовать этот кадр там, где задумала: на аватарке, обложке, в посте.</p></div></div>
       </div>
-      <p class="rulebox">Если сходство плохое, такой вариант не берём, даже если он очень красивый. Возвращаемся к оригиналам и упрощаем сцену, а не устраиваем длинную серию исправлений.</p>
+      <p class="rulebox">Если фото красивое, но на нём не вы, не берите его. Нейросеть может точно выполнить композицию и при этом ошибиться во внешности.</p>
       </div></div>
     </section>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
-      <p class="label">Правка и серия</p>
-      <h2>1 правка за раз – и снова сверка с&nbsp;оригиналом</h2>
-      <p>Если портрет почти устраивает, просите об 1 конкретном изменении и перечисляйте, что должно остаться. Не стоит в одном сообщении менять и лицо, и причёску, и улыбку, и фон. Я, например, хотела чуть выровнять наклон головы.</p>
-      <div class="promptbox stepprompt"><p class="plabel">Запрос: 1 правка</p><pre>Чуть выровняй наклон головы. Сохрани узнаваемые черты лица, выражение, одежду, кадрирование, фон и освещение. Продолжай использовать мои оригинальные фотографии как ориентир внешности. Измени только положение головы и необходимые для этого детали шеи и волос.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
-      <p class="after-box">После правки снова сверяйте лицо с оригиналом. Бывает, что правка ухудшает сходство, – тогда оставьте предыдущий вариант. А если каждое исправление уводит сходство всё дальше, разумнее начать кадр заново. Спасать любую генерацию не обязательно.</p>
-      <h3>Как получить несколько образов</h3>
-      <p>Выбранный вариант сохраните с понятным названием, например «Портрет_анонс_01». Для следующей сцены снова берите свои оригиналы и описывайте новый кадр, а не отталкивайтесь от прошлой генерации. Цель – собрать несколько фотографий, на которых вы узнаёте себя, а не просто много красивых картинок.</p>
-      <p>Если серии в разных образах нужны регулярно, тогда пора смотреть в сторону сервиса с обучением на вашей внешности – второго пути из начала урока.</p>
+      <p class="label">Правка</p>
+      <h2>1 правка – 1 цель</h2>
+      <p>В первом результате почти всегда что-то не так: голова наклонена, появились серьги, которых вы не носите. Правим по одной вещи. В запросе называем, что изменить, и перечисляем всё, что нужно сохранить: лицо, выражение, волосы, одежду, фон, освещение, кадрирование и возраст. И просим нейросеть продолжать сверять внешность с оригинальными фотографиями.</p>
+      <p>После правки снова проверяем сходство теми же 3 вопросами.</p>
+      <p class="rulebox">Если правка испортила портрет, оставьте предыдущий вариант. А если несколько попыток подряд уводят лицо от оригинала, лучше начать заново с настоящих фото и более простого запроса: ракурс попроще, эмоция спокойнее.</p>
+      <p>Готовые запросы для точечных правок и исправления неудачной генерации собраны в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-neirofotosessiya/">«Нейрофотосессия своими руками»</a>.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Серия</p>
+      <h2>Второй кадр той же&nbsp;съёмки</h2>
+      <p>Когда 1 кадр получился, можно сделать второй – так, словно это та же съёмка: тот же свет, обработка, цвета и настроение, но другая поза и план. Например, в первом кадре вы сидите у окна и смотрите в камеру, а во втором стоите вполоборота и смотрите слегка в сторону.</p>
+      <p>Для серии разделяем 2 вещи: <b>оригиналы отвечают за ваше лицо, удачный кадр – за атмосферу съёмки.</b> Поэтому для второго кадра снова прикрепите свои настоящие фото, а удачный портрет дайте только как пример атмосферы.</p>
+      <p class="rulebox">Даже в одном чате сходство не гарантировано, поэтому каждую фотографию проверяйте отдельно. И не пытайтесь получить сразу 10 снимков: двигайтесь по 1 кадру.</p>
+      <p>Идеи для следующих сюжетов – в библиотеке ситуаций в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-neirofotosessiya/">«Нейрофотосессия своими руками»</a>.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Сохранение</p>
+      <h2>Сохраняем то, что подходит задаче</h2>
+      <p>Выбирайте не самую эффектную картинку, а ту, где вы узнаёте себя и которую действительно сможете использовать. Сохраните 1–2 результата и назовите файлы так, чтобы потом их найти: «Портрет_профиль_01», «Портрет_блог_02».</p>
+      <p>Формат кадра лучше задать сразу в запросе, как в промпте урока: «Вертикальный формат 4:5». Вот для чего какой подходит:</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>1:1 – квадрат</h3><p>Аватарка в профиле и квадратный пост. Для аватарки нужно крупное лицо.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>4:5 – вертикальный портрет</h3><p>Пост в ленте и фотография на странице специалиста.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>9:16 – во весь экран телефона</h3><p>Сторис и вертикальные видео.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>16:9 – горизонтальный</h3><p>Обложка, презентация, баннер. Для обложки часто нужно свободное место под текст.</p></div></div>
+      </div>
       </div></div>
     </section>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
       <p class="label">Видеоаватар</p>
-      <h2>Как фотография начинает говорить</h2>
-      <p>Короткое видео, в котором говорит ваша фотография, пригодится для небольшого приглашения, приветствия или пояснения.</p>
-      <p>Здесь тоже 2 разных пути. Есть оживление фотографии – говорящее фото. И есть цифровой двойник: для него сначала записывают видео самого человека. В уроке я показываю самый короткий маршрут – настоящее фото и моя запись голоса. Сам ролик создаёт внешний сервис, а в чате можно подготовить текст и исходные материалы.</p>
-      <p class="rulebox">Для первого теста не соединяйте всё сразу: нейрофотосессию, синтетический голос и анимацию. Когда меняется что-то одно, гораздо проще понять, что получилось, а что нет. Клонирование голоса, цифровой двойник по видеозаписи и подключение сервисов – отдельные маршруты, для первого теста они не нужны.</p>
-      <h3>Какое фото взять</h3>
-      <p>Настоящую фотографию, а не сгенерированный портрет: лицо хорошо видно, глаза открыты, взгляд близко к камере, волосы и предметы не перекрывают рот. Так вы проверяете именно анимацию и не смешиваете её с ошибками сгенерированного портрета.</p>
-      <h3>Голос</h3>
-      <p>Короткий текст запишите своим голосом заранее. Создавать копию голоса для этого не нужно. Для теста достаточно чистой записи в тихом месте – без музыки и сильного фонового шума.</p>
-      <p class="plate">Мой текст для записи, примерно 20–25 секунд</p>
-      <p class="note">Привет! Я Светлана. На этом практикуме мы попробуем использовать нейросети для реальной рабочей задачи: подготовим фотографию и короткое видеоприглашение. Начнём с простого результата, который можно проверить и доработать. Возьмите свои исходные фотографии и выберите, для чего вам нужен новый кадр.</p>
-      <h3>Перед запуском</h3>
-      <p>Проверьте фото, аудио и параметры – например, вертикальный формат, если он доступен и нужен. Если сервис показывает стоимость или расход кредитов, посмотрите на них до генерации, а не после.</p>
+      <h2>Как сделать так, чтобы фотография заговорила</h2>
+      <p>Видеоаватар – это ролик, в котором ваше фото говорит вашим голосом. Сделать его можно 2 способами.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Оживление готовой фотографии</h3><p>Быстрый вариант: сервис берёт фото и аудиозапись и превращает их в видео. С него и начинаем.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Цифровой двойник по видеозаписи</h3><p>Сервис сначала изучает вашу видеозапись и только потом создаёт ролики. Об этом пути – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-neirofoto-instrumenty/">«Что дальше: инструменты, обучение внешности, апскейл»</a>.</p></div></div>
+      </div>
+      <p>Не будем усложнять первый опыт: возьмём настоящее фото и свой настоящий голос.</p>
+      <p class="plate">Почему настоящее фото</p>
+      <p>Для видео берите именно настоящую фотографию, а не генерацию. Тогда ошибки изображения не смешаются с ошибками анимации, и будет понятно, что именно пошло не так. Подойдёт портрет, где лицо повёрнуто прямо, взгляд в камеру, глаза открыты, рот виден.</p>
+      <p class="plate">Свой голос: 15–30 секунд</p>
+      <p>Достаточно обычной записи речи в тихой комнате длиной 15–30 секунд. Синтез и клонирование голоса – отдельные возможности, для первого раза они не нужны.</p>
+      <p class="plate">Как идёт работа: фото + аудио → видео → проверка</p>
+      <p>Вы загружаете в сервис фото и своё аудио, проверяете формат и запускаете создание. Перед запуском посмотрите условия сервиса и стоимость: сколько уйдёт кредитов или что входит в тариф. Ожидание может занять время.</p>
+      <p>В уроке я показываю HeyGen. Бесплатно в нём можно сделать 3 видео в месяц длиной до 1 минуты, с водяным знаком, а оплата российскими картами не проходит. Пошаговая памятка с кнопками и альтернативы – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-govoryashchee-foto/">«Говорящая фотография на русском»</a>.</p>
       </div></div>
     </section>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
       <p class="label">Проверка видео</p>
-      <h2>Смотрите ролик целиком, а не первый кадр</h2>
-      <p>Включите видео со звуком от начала до конца, а потом остановитесь в показательном месте и рассмотрите его.</p>
+      <h2>Смотрим ролик целиком: 5&nbsp;точек проверки</h2>
+      <p>Важно не только то, что фотография заговорила. Посмотрите ролик целиком, от начала до конца, а движения губ – крупно.</p>
       <div class="defs">
-        <div class="def"><span class="dn">1</span><div><h3>Лицо</h3><p>Не меняются ли лицо и зубы по ходу ролика.</p></div></div>
-        <div class="def"><span class="dn">2</span><div><h3>Губы и речь</h3><p>Совпадают ли движения губ с тем, что звучит.</p></div></div>
-        <div class="def"><span class="dn">3</span><div><h3>Взгляд</h3><p>Выглядит ли он естественно.</p></div></div>
-        <div class="def"><span class="dn">4</span><div><h3>Движения</h3><p>Нет ли странных, неживых движений головы и лица.</p></div></div>
-        <div class="def"><span class="dn">5</span><div><h3>Звук</h3><p>Как слышны голос и произношение.</p></div></div>
+        <div class="def"><span class="dn">1</span><div><h3>Губы и речь</h3><p>Совпадают ли губы с русской речью? Не деформируется ли рот?</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Лицо</h3><p>Узнаёте ли вы себя на протяжении всего ролика?</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Взгляд</h3><p>Естественно ли моргание, живой ли взгляд?</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Движения</h3><p>Двигаются ли голова и лицо естественно, без рывков и странностей?</p></div></div>
+        <div class="def"><span class="dn">5</span><div><h3>Звук</h3><p>Чисто ли звучит ваш голос, совпадает ли он с картинкой?</p></div></div>
       </div>
-      <p>Удачный портрет ещё не гарантирует удачное видео. Если результат странный, сначала попробуйте более простой исходник или короткий фрагмент речи. Если ролик всё равно выглядит неестественно, не выдавайте его за удачный. А для материала, где важны ваша живая реакция и эмоции, честнее и проще записать себя на видео.</p>
+      <p class="rulebox">Если результат странный, попробуйте более ровный исходный портрет и короткий звук. А иногда проще и честнее просто записать живое видео.</p>
       </div></div>
     </section>
 
     <section class="wrap blk reveal">
       <div class="lede"><div class="col">
-      <p class="label">Безопасность</p>
+      <p class="label">Честность и безопасность</p>
       <h2>Своё лицо, свой голос и&nbsp;честная пометка</h2>
-      <h3>Чьи фото загружаем</h3>
-      <p>Только свои – своё лицо и свой голос. Если хотите сделать аватар другого человека, сначала получите его согласие. И помните про пример с чужим кадром: чужое лицо в запрос не загружаем, а описываем сцену словами.</p>
-      <h3>Что происходит с вашим лицом и голосом</h3>
-      <p>Фото лица и запись голоса вы отдаёте внешнему сервису. Поэтому до загрузки посмотрите в выбранном сервисе, как он хранит исходники и можно ли их удалить.</p>
-      <h3>Маркировка</h3>
-      <p>Перед публикацией обязательно посмотрите видео целиком. Если это публичный материал, обозначьте, что использован ИИ-аватар, – особенно когда зритель может принять его за обычную запись.</p>
+      <p>Сохраните удачный ролик, но публиковать его не обязательно. Если решите показать его людям, держите в голове 3 правила.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Обозначьте ИИ</h3><p>Если зритель может принять ролик за настоящую видеосъёмку, напишите, что он создан с ИИ, например «Видеоаватар, создан с ИИ».</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Чужое лицо и голос – только с разрешения</h3><p>С фотографией или голосом другого человека работаем, только если он на это согласился.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Прочитайте условия хранения данных</h3><p>Фото и аудио вы загружаете во внешний сервис, поэтому ознакомьтесь с тем, как он хранит ваши данные.</p></div></div>
+      </div>
       </div></div>
     </section>
 
 <div class="practice">
   <div class="wrap">
-    <p class="label label-dark">Теперь делаем</p>
+    <p class="label">Теперь делаем</p>
     <h2>Практика</h2>
-    <p class="pmeta">Свой портрет и говорящее видео · около 30 минут</p>
-    <p class="pintro">Выберите 1 задачу – анонс, страницу специалиста, презентацию или свою, подготовьте свои фотографии и создайте 1 портрет. Проверьте сходство, сделайте 1 конкретную правку, если она нужна, и сохраните выбранный вариант. Потом из своего настоящего фото и записи голоса сделайте тестовый ролик на 15–30 секунд и решите, подходит ли он вашей задаче. Публиковать его не обязательно. В итоге у вас будет портрет, в котором вы узнаёте себя, короткая оценка «что получилось, что изменилось, где применю» и первый говорящий ролик.</p>
+    <p class="pmeta">Портрет и говорящее фото · около 40 минут · ставьте видео на паузу</p>
+    <p class="pintro">Выберите, для чего вам нужен портрет, загрузите 3–5 своих настоящих фото и создайте 1 узнаваемый портрет. Если нужно, сделайте 1 точечную правку, а потом второй кадр в том же настроении. Во второй части оживите своё настоящее фото записью своего голоса на 15–30 секунд. В уроке я показываю на ChatGPT – из России он работает только через VPN. Без VPN попробуйте ГигаЧат или Алису: они умеют работать с вашим фото, но сходство лица не гарантируют. Все промпты с местами для своего – в инструкции.</p>
     <div class="btns">
       <a class="btn btn-praktika" href="praktika/">Открыть инструкцию к практике<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
@@ -471,7 +409,7 @@ section.wrap{padding-left:40px;padding-right:40px}
   <span class="pfb-tag">Задача для вашего портфолио</span>
   <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
   <p class="pfb-p">Когда закончите практику, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и опишет вашу работу так, чтобы её было интересно прочитать работодателю или клиенту. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 3», под «Урок 5».</p>
-  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> какие образы вы сделали, для каких площадок и что получилось с видео.</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> какие образы вы сделали, для каких задач и что получилось с видео.</p>
   <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
 Посмотри наш диалог и напиши пять коротких пунктов:
 1. Задача – какую проблему я решал(а) и для кого.
@@ -485,29 +423,26 @@ section.wrap{padding-left:40px;padding-right:40px}
 <div class="matbox">
   <p class="ml">Материалы к уроку</p>
   <ul>
-    <li><a href="https://aiforlife.ru/ii-course/modul3/itog/">Итог модуля 3</a><span>Соберите заметки 5 уроков в «Задачу для портфолио 3» и пришлите документ.</span></li>
-    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-zarabotok/">Как навыки модуля 3 помогут вам зарабатывать</a><span>В том числе нейрофотосессия: кому предложить пакет образов и говорящее приветствие.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-neirofotosessiya/">Нейрофотосессия своими руками: конструктор, 10 сюжетов, правки</a><span>Конструктор промпта, библиотека ситуаций под разные задачи и запросы для точечных правок.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-neirofotosessiya/assets/neirofoto-promty.txt">Промпты для фото</a><span>Файл с промптами: откройте и копируйте нужный в чат.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-govoryashchee-foto/">Говорящая фотография на русском</a><span>Пошаговая памятка с кнопками: фото и своё русское аудио превращаются в видеоаватар, плюс проверка результата.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-neirofoto-instrumenty/">Что дальше: инструменты, обучение внешности, апскейл</a><span>Для тех, кто хочет глубже: какие бывают сервисы, цифровой двойник и как улучшить качество снимка.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-zarabotok/">Как навыки модуля 3 помогут вам зарабатывать</a><span>В том числе нейрофотосессия: кому и что можно предложить.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/itog/">Итог модуля 3</a><span>Соберите заметки уроков в «Моё портфолио» и пришлите документ.</span></li>
   </ul>
 </div>
 </section>
 
-<div class="dark dark-end">
+<div class="dark takeaway">
   <div class="wrap dgrid">
     <h2>Что забрать<br>из урока</h2>
     <div class="dcol">
-      <p>От нейрофотосессии для себя не стоит ждать целой фотосессии за 15 минут. Её цель скромнее и полезнее: несколько кадров, на которых вы правда узнаёте себя. Держится всё на простых привычках: внешность – только из ваших оригиналов, сцена – отдельно от чужого лица, правка – 1 за раз, и каждый кадр проходит 3 вопроса: это я, это естественно, это подходит задаче.</p>
-      <p>С видео то же самое: настоящее фото, свой голос, просмотр целиком и честная пометка, если ролик уходит к людям. А где важны живые эмоции, по-прежнему лучше всего работает обычная запись себя.</p>
-      <p class="label label-q">Вопросы к себе</p>
-      <ul class="qlist">
-        <li>Для какой задачи мне нужен портрет – и в каком кадре я хочу там быть?</li>
-        <li>На каких своих фото лицо видно чётко и без фильтров?</li>
-        <li>Узнаю ли я себя на результате – или он просто красивый?</li>
-        <li>Где мне подойдёт говорящее фото, а где лучше записать себя на видео?</li>
-      </ul>
+      <p>Нейрофотосессия не заменит целую съёмку за 15 минут, зато даст 1–2 кадра, на которых вы правда узнаёте себя и которые подходят под задачу. Держится всё на простых привычках: внешность – только из ваших оригиналов, кадр – описан словами, как для фотографа, правки – по одной, и каждый результат сверяется с настоящим фото.</p>
+      <p>С видео то же самое: настоящее фото, свой голос, просмотр целиком и честная пометка, если ролик уходит к людям. А там, где важны живые эмоции, иногда проще и честнее записать себя на обычное видео.</p>
+      <p><b>Добавьте этот урок в «Моё портфолио» и пришлите документ – это итог модуля 3.</b></p>
     </div>
   </div>
 </div>
-
 
 </main>
 
@@ -516,7 +451,6 @@ section.wrap{padding-left:40px;padding-right:40px}
 </footer>
 
 <div class="sr" role="status" aria-live="polite" id="say"></div>
-
 
 <script>
 (function(){
@@ -534,33 +468,13 @@ section.wrap{padding-left:40px;padding-right:40px}
   document.addEventListener('click',function(ev){
     var btn=ev.target.closest('[data-copy]');
     if(!btn)return;
-    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
-    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
-    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
-    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
+    var pbx=btn.closest('.promptbox'),pre=pbx?pbx.querySelector('pre'):null;
     copy(pre?pre.innerText:'').then(function(){
       var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
       say('Скопировано. Вставьте в чат');
       setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
     }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
   });
-
-  var KEY='konspekt-svc';
-  function setSvc(k){
-    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
-    document.querySelectorAll('.hint').forEach(function(h){
-      var found=false;
-      h.querySelectorAll('.hs').forEach(function(s){
-        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
-      });
-      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
-    });
-    try{localStorage.setItem(KEY,k);}catch(e){}
-  }
-  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
-    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
-  });
-  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
 
   var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
     es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
@@ -577,7 +491,6 @@ k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNo
 ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
-
 
 <script>
 (function(){
