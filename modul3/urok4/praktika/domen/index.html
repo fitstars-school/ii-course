@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Свой домен на reg.ru: купить и подключить · урок 4 · Нейро-архитектор</title>
+<meta name="description" content="Мини-инструкция к практике урока 4 модуля 3 курса «Нейро-архитектор»: как купить домен на reg.ru и внести записи для GitHub Pages, «Сайтов» ChatGPT, хостинга, своего сервера или Тильды – самой или руками ChatGPT в режиме Work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ШКАЛА (МЕТОД B2) – 4 текстовые роли:
+   Р1 Заголовок – Instrument Serif 400: h1 var(--h1), h2 var(--h2).
+   Р2 Подзаголовок – Manrope 700, var(--sub) 20px (.step h3, .dcard h3, .fork .fw).
+   Р3 Текст – Manrope 500, var(--text) 17px, один цвет: var(--ink) на светлом, #DDD5E2 на тёмном. Выделение – только жирным.
+      Текст промптов – тот же Р3 в моноширинном наборе 13.5px, как во всех промпт-окнах курса.
+   Р4 Метка – Manrope 700–800, CAPS с разрядкой, var(--label) 13px (.label, .plate, .plabel, .rubric, .kmark).
+   Крупные цифры шагов (.snum) – декоративные, не роль.
+   Курсив не используем. Инлайн font-size/color/font-weight в разметке запрещены. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(33px,4.6vw,60px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --label:13px; --code:13.5px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-wrap:break-word}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:40px;padding-right:40px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+b,strong{font-weight:700}
+a{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--pink)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:14px}
+
+/* Р4 – метки */
+.label,.rubric span,.kmark .kt,.plate,.plabel{font-family:var(--sans);font-size:var(--label);line-height:1.4;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.label{color:var(--pink)}
+
+/* шапка урока */
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric .r2{color:var(--muted)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:var(--sub);line-height:1;color:var(--pink-soft)}
+.backlink{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 28px}
+.backlink a{text-decoration:none;color:var(--pink)}
+.backlink a:hover{color:var(--pink-strong)}
+.hero{padding-top:20px;padding-bottom:8px}
+.hero h1{margin-top:6px}
+.hlead{margin-top:20px}
+
+/* оглавление */
+.toc{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);list-style:none;display:flex;flex-wrap:wrap;gap:6px 26px}
+.toc a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;font-weight:600}
+.toc a:hover{border-bottom-color:var(--pink)}
+
+/* блоки */
+.blk{padding-top:56px;padding-bottom:8px}
+.blk h2{margin:12px 0 18px}
+
+/* развилка */
+.fork{margin-top:22px;border-top:1px solid var(--ink)}
+.frow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.fork .fw{font-size:var(--sub);font-weight:700;line-height:1.3}
+.fork .fp a{text-decoration:none}
+
+/* шаги: цифра у левого края, текст после неё */
+.steps{margin-top:22px}
+.step{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:26px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:46px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.3;margin-bottom:8px}
+
+/* подзаголовок-плашка */
+.plate{display:block;background:var(--dark);color:#fff;border-left:3px solid var(--pink);padding:10px 16px;margin-top:34px;margin-bottom:16px}
+
+/* светлая плашка-правило */
+.rulebox{background:#FFF1F8;padding:16px 20px;margin-top:18px}
+
+/* промпт-окно */
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink);margin-top:18px}
+.plabel{color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:var(--code);line-height:1.8;color:#DDD5E2}
+.btns{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px}
+.btn{font-family:var(--sans);font-weight:700;font-size:var(--text);border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink-soft)}
+.btn.done,.btn.done:hover{background:#1FA24E;color:#fff}
+
+ul.list{list-style:none;margin-top:12px}
+ul.list li{position:relative;padding-left:24px;margin-bottom:8px}
+ul.list li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:1.5px;background:var(--pink)}
+* + ul.list{margin-top:12px}
+ul.list + p{margin-top:14px}
+.step p + .rulebox,.step ul + .rulebox{margin-top:16px}
+.plate + p{margin-top:0}
+
+.checked{background:#FFF1F8;padding:16px 20px;margin-top:44px}
+.backbox{border-top:1px solid var(--line);margin-top:40px;padding-top:26px;padding-bottom:20px}
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* карточки направлений – плашка от того же левого края */
+.dcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--ink);padding:24px 26px;margin-top:26px}
+.dcard h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.3;margin:6px 0 10px}
+.dcard .steps{margin-top:6px}
+.dcard .step:first-child{border-top:none}
+.dcard .step:last-child{border-bottom:none;padding-bottom:4px}
+.dcard .fork{margin-top:14px}
+.dcard .rulebox{margin-top:14px}
+.frow p+p{margin-top:0}
+.rulebox ul.list{margin-top:8px}
+.rulebox ul.list li{margin-bottom:4px}
+.rulebox ul.list + p{margin-top:10px}
+
+@media (max-width:760px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .frow{grid-template-columns:minmax(0,1fr);gap:6px}
+  .step{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:22px 0}
+  .snum{font-size:34px}
+  .promptbox{padding:20px}
+  .btn{width:100%;justify-content:center}
+  .dcard{padding:18px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · урок 4 · мини-инструкции</span></div>
+  <div class="kmark"><span class="kn">4</span><span class="kt">Свой домен</span></div>
+  <p class="backlink"><a href="../publikaciya/">← К мини-инструкциям</a><a href="../">← К инструкции к практике</a><a href="../../">← К конспекту урока</a></p>
+  <div class="hero">
+    <h1>Свой домен на&nbsp;reg.ru: купить и&nbsp;подключить</h1>
+    <p class="hlead">Своя страница уже открывается по длинной технической ссылке, а хочется короткий адрес вида вашеимя.ru, который не стыдно написать на визитке. Купить домен вы сможете сами – это почти как заказ в интернет-магазине. Самую капризную часть, записи адреса, можно поручить ChatGPT: он внесёт их в кабинете reg.ru за вас. Здесь всё по шагам и по кликам.</p>
+    <ul class="toc">
+      <li><a href="#chto">Что такое домен</a></li>
+      <li><a href="#pered">Перед покупкой</a></li>
+      <li><a href="#pokupka">Покупка</a></li>
+      <li><a href="#podklyuchenie">Подключение</a></li>
+      <li><a href="#chatgpt">ChatGPT за вас</a></li>
+      <li><a href="#proverka">Проверка</a></li>
+      <li><a href="#zastryali">Если что-то не так</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap blk" id="chto">
+  <p class="label">Сначала понять</p>
+  <h2>Домен и записи адреса простыми словами</h2>
+  <p><b>Домен</b> – это ваш собственный адрес сайта, например вашеимя.ru. Сама страница при этом живёт в другом месте: на GitHub, в «Сайтах» ChatGPT, на хостинге или в Тильде. Домен похож на табличку с адресом на двери, а <b>DNS-записи</b>, или записи адреса, – на подсказки для интернета: по какому адресу на самом деле искать ваш сайт.</p>
+  <p>В кабинете reg.ru вам встретятся 3 вида записей:</p>
+  <ul class="list">
+    <li><b>A</b> – «этот адрес ведёт вот на этот компьютер-сервер». Значение записи – набор цифр с точками.</li>
+    <li><b>CNAME</b> – «этот адрес – другое имя вот того адреса». Значение – адрес, например логин.github.io.</li>
+    <li><b>TXT</b> – записка для проверки, что домен действительно ваш.</li>
+  </ul>
+
+  <p class="plate">Кто что делает</p>
+  <div class="fork">
+    <div class="frow"><p class="fw">Делаете только вы</p><p>Входите в личный кабинет reg.ru и на Госуслуги своим паролем, проходите подтверждение личности, вводите данные карты и оплачиваете.</p></div>
+    <div class="frow"><p class="fw">Может сделать ChatGPT</p><p>В программе ChatGPT на компьютере в режиме Work он сам нажимает кнопки в кабинете reg.ru: смотрит, какие записи уже есть, вносит новые и проверяет результат. Без режима Work он ведёт вас по скриншотам, по одному шагу.</p></div>
+  </div>
+  <p class="rulebox"><b>Главное правило.</b> Пароли, коды из СМС и писем и данные карты никогда не пишите в чат. Если такое случайно попало в чат, удалите сообщение и смените пароль. Удалять старые записи и менять DNS-серверы ChatGPT может только после вашего «да».</p>
+</section>
+
+<section class="wrap blk" id="pered">
+  <p class="label">Перед покупкой</p>
+  <h2>2 вещи, которые стоит решить заранее</h2>
+
+  <p class="plate">Госуслуги для .ru и .рф</p>
+  <p>С 1 сентября 2026 года для доменов .ru и .рф нужна <b>подтверждённая учётная запись на Госуслугах</b>, упрощённой не хватит. ФИО в кабинете reg.ru должно совпадать с ФИО на Госуслугах буква в букву. Для домена .com это не нужно.</p>
+
+  <p class="plate">Как придумать имя</p>
+  <p>Хорошее имя домена короткое, написано латиницей, без двойных дефисов, и его легко продиктовать по телефону так, чтобы человек записал с первого раза. Если вариантов нет, попросите ChatGPT накидать идеи и сразу проверить, какие из них свободны:</p>
+  <div class="promptbox"><p class="plabel">Промпт: придумать имя домена</p><pre>Придумай 10 вариантов домена для [кто я, чем занимаюсь]: коротко, латиницей, легко продиктовать по телефону, без двойных дефисов. Проверь на reg.ru, какие свободны.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+</section>
+
+<section class="wrap blk" id="pokupka">
+  <p class="label">Часть 1</p>
+  <h2>Покупка домена по&nbsp;шагам</h2>
+  <p>Если домен у вас уже есть, переходите сразу к <a href="#podklyuchenie">подключению</a>.</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Войдите на reg.ru</h3>
+      <p>Зарегистрируйтесь на reg.ru или войдите в свой кабинет – сами, своим паролем.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Подберите имя</h3>
+      <p>Впишите имя в поле на главной странице reg.ru и нажмите <b>«Подобрать»</b>.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Перейдите к заказу</h3>
+      <p>Если домен свободен, нажмите на блок с ним и затем <b>«Перейти к заказу»</b>.</p>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Укажите владельца</h3>
+      <p>Тип владельца – <b>«Физ. лицо»</b>. Данные заполняете сами, ФИО – как на Госуслугах.</p>
+    </div></div>
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Проверьте корзину</h3>
+      <p>Дополнительные услуги в заказе включаются переключателями. Посмотрите, что включено, и выключите лишнее.</p>
+      <div class="rulebox"><p><b>Что снять в корзине.</b> Если сайт будет на GitHub Pages, в «Сайтах» ChatGPT или в Тильде, вам не нужны:</p>
+        <ul class="list">
+          <li>хостинг;</li>
+          <li>конструктор сайтов;</li>
+          <li>переадресация;</li>
+          <li>SSL-сертификат – GitHub и Тильда выпускают его сами;</li>
+          <li>свидетельство о регистрации.</li>
+        </ul>
+        <p>Почта на домене – по желанию: она пригодится, только если нужен ящик вида имя@ваш-домен.ru.</p>
+      </div>
+    </div></div>
+    <div class="step"><span class="snum">6</span><div>
+      <h3>Оплатите</h3>
+      <p>Цену покажет корзина. Оплачиваете вы сами, данные карты вводите только на сайте reg.ru.</p>
+    </div></div>
+    <div class="step"><span class="snum">7</span><div>
+      <h3>Подтвердите личность, если reg.ru попросит</h3>
+      <p>Откройте <b>«Домены»</b> → блок <b>«Не идентифицированы данные администратора…»</b> → <b>«Пройти идентификацию»</b> → войдите на Госуслуги → разрешите доступ <b>«Рег.ру Домены Хостинг»</b>. Статус виден в карточке домена на вкладке <b>«Контакты»</b>, результат придёт на почту.</p>
+    </div></div>
+    <div class="step"><span class="snum">8</span><div>
+      <h3>Дождитесь активации</h3>
+      <p>По справке reg.ru домен активируется в течение 15 минут после оплаты.</p>
+    </div></div>
+    <div class="step"><span class="snum">9</span><div>
+      <h3>Включите автопродление</h3>
+      <p>Карточка домена → <b>«Автопродление»</b> → включить. Для этого нужна привязанная карта или автопополнение баланса. Без автопродления через год домен можно потерять, а вместе с ним и адрес, который уже знают ваши клиенты.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk" id="podklyuchenie">
+  <p class="label">Часть 2</p>
+  <h2>Подключение: куда вести домен</h2>
+  <p>Домен куплен, и теперь нужно сказать интернету, где лежит ваш сайт. Для этого в кабинете reg.ru вносят записи адреса. Какие именно – зависит от того, где живёт страница. Этот раздел можно пройти руками, а можно <a href="#chatgpt">поручить ChatGPT</a>: тогда читайте его, чтобы понимать, что он делает.</p>
+
+  <p class="plate">Сначала проверьте DNS-серверы</p>
+  <p>Записи в кабинете reg.ru можно править, только если у домена стоят DNS-серверы <b>ns1.reg.ru</b> и <b>ns2.reg.ru</b>. Откройте <b>«Домены»</b> → ваш домен → <b>«DNS-серверы и управление зоной»</b> и посмотрите, какие серверы указаны.</p>
+  <ul class="list">
+    <li>Стоят ns1.reg.ru и ns2.reg.ru – всё в порядке, идём дальше.</li>
+    <li>Стоят другие – вспомните, откуда они: хостинг, прошлый подрядчик. Если домен ни к чему не подключён, переключите его: нажмите <b>«DNS-серверы»</b> → выберите ns1.reg.ru и ns2.reg.ru → <b>«Да»</b>. Смена применяется до 24 часов.</li>
+  </ul>
+
+  <p class="plate">Где вносить записи</p>
+  <p><b>«Домены»</b> → ваш домен → <b>«DNS-серверы и управление зоной»</b> → <b>«Изменить»</b> → <b>«Добавить запись»</b> → выбрать тип записи. В поле имени (Subdomain) для главного домена пишут <b>@</b>, для поддомена – только его часть до точки, например <b>portfolio</b> для portfolio.ваш-домен.ru.</p>
+  <p>Если на домене уже работает сайт или почта, удобнее взять поддомен: нужна одна запись, а основной сайт останется как был.</p>
+  <p class="rulebox"><b>Правило для всех путей.</b> Записи почты – MX и TXT для почты – не трогайте. А вот старые записи A и CNAME для того же имени (@, www или ваш поддомен) удалите: они мешают, и reg.ru не даёт держать на одном имени и A, и CNAME.</p>
+
+  <div class="dcard">
+    <p class="label">Направление 1</p>
+    <h3>GitHub Pages</h3>
+    <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <p>Сначала GitHub, потом reg.ru – так советует сам GitHub. В репозитории откройте <b>«Settings»</b> → <b>«Pages»</b> → поле <b>«Custom domain»</b>, впишите домен без https:// и нажмите <b>«Save»</b>.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <p>Для главного домена в reg.ru добавьте 4 записи типа <b>A</b> с именем <b>@</b> – по одной на каждый адрес:</p>
+        <div class="promptbox"><p class="plabel">4 записи A для «@»</p><pre>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <p>Для www – запись <b>CNAME</b>, имя <b>www</b>, значение <b>логин.github.io</b>: только ваш логин, без имени репозитория.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <p>Если вместо главного домена берёте поддомен, нужна одна запись <b>CNAME</b>: имя – поддомен, значение – <b>логин.github.io</b>. Запись «*» на все поддомены сразу не ставьте.</p>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <p>Через 15 минут – 24 часа, когда GitHub в <b>«Settings»</b> → <b>«Pages»</b> покажет, что проверка DNS прошла, поставьте галочку <b>«Enforce HTTPS»</b>. Если она серая, вернитесь позже.</p>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+        <p>По желанию подтвердите домен: настройки профиля GitHub → <b>«Pages»</b> → <b>«Add a domain»</b>. GitHub покажет запись TXT – внесите её в reg.ru и потом не удаляйте.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="dcard">
+    <p class="label">Направление 2</p>
+    <h3>«Сайты» в&nbsp;ChatGPT</h3>
+    <p>В настройках сайта нажмите <b>«Add domain»</b> и впишите домен или поддомен. ChatGPT покажет записи – внесите в reg.ru ровно их, буква в букву, ничего не добавляя от себя.</p>
+    <p>Если в поле имени ChatGPT показывает полный адрес, например _что-то.ваш-домен.ru, в reg.ru впишите только часть до вашего домена. Через несколько минут обновите статус домена в ChatGPT.</p>
+    <p class="rulebox">Сайты ChatGPT в России открываются только с VPN.</p>
+  </div>
+
+  <div class="dcard">
+    <p class="label">Направление 3</p>
+    <h3>Российский хостинг: Timeweb или Beget</h3>
+    <p>Здесь 2 способа – выберите один.</p>
+    <div class="fork">
+      <div class="frow"><p class="fw">Проще для начала</p><p>Оставьте DNS-серверы reg.ru и поменяйте только записи A для <b>@</b> и <b>www</b> на IP-адрес, который показывает кабинет хостинга. Почта и остальные записи остаются в reg.ru.</p></div>
+      <div class="frow"><p class="fw">Отдать управление хостингу</p><p>Смените DNS-серверы домена на серверы хостинга – их показывает кабинет хостинга. У Timeweb это ns1.timeweb.ru, ns2.timeweb.ru, ns3.timeweb.org, ns4.timeweb.org. У Beget – ns1.beget.com, ns2.beget.com, ns1.beget.pro, ns2.beget.pro, и сначала домен нужно добавить в панели Beget. Смена применяется от 3 до 72 часов. После этого все записи, включая почту, правятся уже у хостинга.</p></div>
+    </div>
+  </div>
+
+  <div class="dcard">
+    <p class="label">Направление 4</p>
+    <h3>Свой сервер</h3>
+    <p>Добавьте 2 записи типа <b>A</b>: имя <b>@</b> – значение IP-адрес сервера, имя <b>www</b> – тот же IP-адрес. Дальше домен прописывают в панели сервера – по шагам проведёт навык «Свой сервер» из плагина <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>.</p>
+  </div>
+
+  <div class="dcard">
+    <p class="label">Направление 5</p>
+    <h3>Тильда</h3>
+    <p>Тильда показывает нужные записи в настройках сайта → <b>«Домен»</b>. Перед добавлением она попросит удалить уже имеющиеся записи A для этого имени. По шагам – в справке reg.ru <a href="https://help.reg.ru/support/dns-servery-i-nastroyka-zony/nastroyka-populyarnykh-servisov/kak-podklyuchit-domen-k-tilda">«Как подключить домен к Tilda»</a>.</p>
+  </div>
+</section>
+
+<section class="wrap blk" id="chatgpt">
+  <p class="label">Главное</p>
+  <h2>Пусть ChatGPT внесёт записи за&nbsp;вас</h2>
+  <p>Записи адреса – та часть, где новички чаще всего ошибаются: лишняя точка, забытая старая запись, не то имя. Хорошая новость в том, что эту работу можно отдать ChatGPT. В программе ChatGPT на компьютере в режиме Work он сам открывает кабинет reg.ru, нажимает кнопки и вносит записи, а вы только входите в кабинет и говорите «да».</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Установите навык «Свой домен»</h3>
+      <p>Навык sait-domen лежит в плагине <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>. Скачайте его и установите так же, как остальные навыки плагина.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Войдите в кабинет reg.ru</h3>
+      <p>Откройте программу ChatGPT, выберите режим Work и войдите в кабинет reg.ru в браузере сами, своим паролем.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Вставьте промпт и подставьте своё</h3>
+      <p>В квадратных скобках укажите свой домен и куда его вести. ChatGPT сначала покажет, какие записи уже есть и что он хочет удалить и добавить. Прочитайте и ответьте «да» – только тогда он начнёт.</p>
+    </div></div>
+  </div>
+  <div class="promptbox"><p class="plabel">Промпт для режима Work · с навыком</p><pre>@sait-domen Подключи мой домен [домен] к [GitHub Pages: логин.github.io / «Сайтам» ChatGPT / хостингу / серверу с IP …]. Я уже вошла (вошёл) в кабинет reg.ru в браузере. Сначала покажи, какие записи сейчас есть и что ты предлагаешь удалить и добавить, – и жди моего «да». Пароли и оплату делаю сама. В конце проверь записи через reg.ru/nettools/dig.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="plate">Если навык не установлен</p>
+  <p>Подойдёт тот же текст без имени навыка. В нём есть приписка, чтобы ChatGPT не спешил и шёл по одному шагу.</p>
+  <div class="promptbox"><p class="plabel">Промпт без навыка</p><pre>Подключи мой домен [домен] к [GitHub Pages: логин.github.io / «Сайтам» ChatGPT / хостингу / серверу с IP …]. Я уже вошла (вошёл) в кабинет reg.ru в браузере. Сначала покажи, какие записи сейчас есть и что ты предлагаешь удалить и добавить, – и жди моего «да». Пароли и оплату делаю сама. В конце проверь записи через reg.ru/nettools/dig. Веди меня по reg.ru по одному шагу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="rulebox">Нет программы ChatGPT или режима Work – работайте в браузере: делайте скриншот кабинета reg.ru, прикладывайте в чат и спрашивайте, куда нажать. ChatGPT поведёт по одному шагу.</p>
+</section>
+
+<section class="wrap blk" id="proverka">
+  <p class="label">Проверка</p>
+  <h2>Как понять, что всё заработало</h2>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Подождите</h3>
+      <p>Обычно записи начинают работать за 15 минут – 1 час. После смены DNS-серверов – до 24 часов. Если сайт не открылся сразу, это нормально.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Проверьте записи на reg.ru</h3>
+      <p>Откройте <b>reg.ru/nettools/dig</b>, впишите домен, выберите тип записи и нажмите <b>«Проверить»</b>. Сравните ответ с тем, что вносили.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Откройте сайт с телефона</h3>
+      <p>Откройте сайт по домену на компьютере и на телефоне через мобильный интернет, выключив Wi-Fi. Адрес должен открываться с https – с замочком в адресной строке.</p>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Для GitHub – загляните в настройки</h3>
+      <p>Если сайт на GitHub Pages, проверьте статус домена в <b>«Settings»</b> → <b>«Pages»</b>.</p>
+    </div></div>
+  </div>
+  <p class="rulebox">Когда домен заработал, обновите ссылку везде, где она стоит: в соцсетях, рассылках, на визитках и в подписи.</p>
+</section>
+
+<section class="wrap blk" id="zastryali">
+  <p class="label">Если что-то не так</p>
+  <h2>Частые затыки и&nbsp;что с&nbsp;ними делать</h2>
+  <div class="fork">
+    <div class="frow"><p class="fw">В Whois написано «Домен не делегирован»</p><p>Домен ещё не активирован или не прошла идентификация. Проверьте почту и вкладку «Контакты» в карточке домена.</p></div>
+    <div class="frow"><p class="fw">Открывается заглушка reg.ru</p><p>Осталась старая запись A. Найдите её в «DNS-серверы и управление зоной» и удалите.</p></div>
+    <div class="frow"><p class="fw">reg.ru не даёт добавить CNAME</p><p>На это имя уже есть запись A, или вы пытаетесь поставить CNAME на «@» – так нельзя.</p></div>
+    <div class="frow"><p class="fw">GitHub пишет, что DNS не настроен</p><p>Подождите до 24 часов и проверьте все 4 записи A по одной.</p></div>
+    <div class="frow"><p class="fw">Экран не совпадает с описанием</p><p>reg.ru меняет интерфейс. Сделайте скриншот и пришлите в чат – ChatGPT поведёт по тому, что вы видите.</p></div>
+  </div>
+
+  <p class="checked">Проверено 8 октября 2026 года по справке reg.ru и GitHub. Интерфейсы меняются – ориентируйтесь на то, что видите на экране.</p>
+
+  <div class="backbox"><p class="backlink"><a href="../publikaciya/">← К мини-инструкциям</a><a href="../">← К инструкции к практике</a><a href="../../">← К конспекту урока</a></p></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · мини-инструкции к практике урока 4, модуль 3</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+</body>
+</html>
