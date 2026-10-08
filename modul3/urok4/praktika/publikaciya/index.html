@@ -8,17 +8,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Мини-инструкции: как опубликовать страницу · урок 4 · Нейро-архитектор</title>
-<meta name="description" content="Мини-инструкции к практике урока 4 модуля 3 курса «Нейро-архитектор»: 3 пути опубликовать страницу – «Сайты» ChatGPT, GitHub Pages со своим доменом и Тильда.">
+<meta name="description" content="Мини-инструкции к практике урока 4 модуля 3 курса «Нейро-архитектор»: карта из 5 способов опубликовать страницу и шаги по кликам для «Сайтов» ChatGPT, GitHub Pages со своим доменом и Тильды.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ШКАЛА (МЕТОД B2) – 4 текстовые роли:
    Р1 Заголовок – Instrument Serif 400: h1 var(--h1), h2 var(--h2).
-   Р2 Подзаголовок – Manrope 700, var(--sub) 20px (.step h3, .fork .fw).
+   Р2 Подзаголовок – Manrope 700, var(--sub) 20px (.step h3).
    Р3 Текст – Manrope 500, var(--text) 17px, один цвет: var(--ink) на светлом, #DDD5E2 на тёмном. Выделение – только жирным.
       Текст промптов – тот же Р3 в моноширинном наборе 13.5px, как во всех промпт-окнах курса.
-   Р4 Метка – Manrope 700–800, CAPS с разрядкой, var(--label) 13px (.label, .plate, .plabel, .rubric, .kmark).
+   Р4 Метка – Manrope 700–800, CAPS с разрядкой, var(--label) 13px (.label, .plate, .plabel, .rubric, .kmark, .mk).
    Крупные цифры шагов (.snum) – декоративные, не роль.
    Курсив не используем. Инлайн font-size/color/font-weight в разметке запрещены. */
 :root{
@@ -46,7 +46,7 @@ a:hover{color:var(--pink)}
 p+p{margin-top:14px}
 
 /* Р4 – метки */
-.label,.rubric span,.kmark .kt,.plate,.plabel{font-family:var(--sans);font-size:var(--label);line-height:1.4;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.label,.rubric span,.kmark .kt,.plate,.plabel,.mk{font-family:var(--sans);font-size:var(--label);line-height:1.4;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .label{color:var(--pink)}
 
 /* шапка урока */
@@ -70,11 +70,12 @@ p+p{margin-top:14px}
 .blk{padding-top:56px;padding-bottom:8px}
 .blk h2{margin:12px 0 18px}
 
-/* развилка */
-.fork{margin-top:22px;border-top:1px solid var(--ink)}
-.frow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
-.fork .fw{font-size:var(--sub);font-weight:700;line-height:1.3}
-.fork .fp a{text-decoration:none}
+/* карта публикации: карточка = шаг, внутри 3 строки «Когда / Цена / Важно» */
+.mrows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 26px;margin-top:4px}
+.mk{display:block;color:var(--pink);margin-bottom:2px}
+.mrows p+p{margin-top:0}
+.promptbox + p{margin-top:16px}
+.step h3 a{text-decoration:none}
 
 /* шаги: цифра у левого края, текст после неё */
 .steps{margin-top:22px}
@@ -114,7 +115,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
 
 @media (max-width:760px){
   .wrap{padding-left:20px;padding-right:20px}
-  .frow{grid-template-columns:minmax(0,1fr);gap:6px}
+  .mrows{grid-template-columns:minmax(0,1fr);gap:10px}
   .step{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:22px 0}
   .snum{font-size:34px}
   .promptbox{padding:20px}
@@ -130,14 +131,14 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
   <div class="kmark"><span class="kn">4</span><span class="kt">Мини-инструкции</span></div>
   <p class="backlink"><a href="../">← К инструкции к практике</a><a href="../../">← К конспекту урока</a></p>
   <div class="hero">
-    <h1>Как опубликовать страницу: 3&nbsp;пути</h1>
-    <p class="hlead">Страница готова, и теперь хочется отправить её клиентам ссылкой. Здесь 3 пути, по шагам и по кликам. Выберите 1 путь – остальные можно не читать.</p>
+    <h1>Как опубликовать страницу: 5&nbsp;способов</h1>
+    <p class="hlead">Страница готова, и теперь хочется отправить её клиентам ссылкой. Здесь карта из 5 способов, а для 3 из них – шаги по кликам. Выберите 1 способ – остальные можно не читать.</p>
     <ul class="toc">
-      <li><a href="#vybor">Какой путь выбрать</a></li>
+      <li><a href="#vybor">Карта публикации</a></li>
       <li><a href="#programma">Программа ChatGPT</a></li>
-      <li><a href="#sites">Путь 1. «Сайты»</a></li>
-      <li><a href="#github">Путь 2. GitHub</a></li>
-      <li><a href="#tilda">Путь 3. Тильда</a></li>
+      <li><a href="#sites">Способ 2. «Сайты»</a></li>
+      <li><a href="#github">Способ 3. GitHub</a></li>
+      <li><a href="#tilda">Способ 4. Тильда</a></li>
       <li><a href="#zastryali">Если застряли</a></li>
     </ul>
   </div>
@@ -147,14 +148,43 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
 
 <section class="wrap blk" id="vybor">
   <p class="label">С чего начать</p>
-  <h2>Какой путь выбрать</h2>
-  <p>Опубликовать – значит положить страницу в интернет, чтобы она открывалась по ссылке у любого человека. Путей 3, и каждый подходит для своей задачи. Найдите свою строку:</p>
-  <div class="fork">
-    <div class="frow"><p class="fw">Нужно быстро показать</p><p class="fp"><a href="#sites">Путь 1. «Сайты» в ChatGPT</a> – в России открывается только с VPN.</p></div>
-    <div class="frow"><p class="fw">Нужна постоянная бесплатная ссылка или свой домен</p><p class="fp"><a href="#github">Путь 2. GitHub Pages</a> – основной и самый надёжный.</p></div>
-    <div class="frow"><p class="fw">У вас уже есть сайт на Тильде</p><p class="fp"><a href="#tilda">Путь 3. Вставить HTML в Тильду</a> – страница станет частью вашего сайта.</p></div>
+  <h2>Карта публикации</h2>
+  <p>Опубликовать – значит положить страницу в интернет, чтобы она открывалась по ссылке у любого человека. Способов 5, и каждый подходит для своей задачи. Найдите свой:</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Не публиковать – отдать файлом</h3>
+      <div class="mrows"><p><span class="mk">Когда</span>Показать на консультации, квиз для близких, 1–2 получателя.</p><p><span class="mk">Цена</span>Бесплатно.</p><p><span class="mk">Важно</span>Открывается в браузере у получателя.</p></div>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3><a href="#sites">«Сайты» ChatGPT</a></h3>
+      <div class="mrows"><p><span class="mk">Когда</span>Быстро показать, черновик.</p><p><span class="mk">Цена</span>Входит в тариф Plus и выше.</p><p><span class="mk">Важно</span>В России открывается только с VPN и может перестать открываться. Оплату не принять.</p></div>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3><a href="#github">GitHub Pages – основной</a></h3>
+      <div class="mrows"><p><span class="mk">Когда</span>Постоянная бесплатная ссылка: портфолио, лендинг, конспект.</p><p><span class="mk">Цена</span>Бесплатно.</p><p><span class="mk">Важно</span>Всё, что загружено, видно всем. В России иногда открывается не у всех.</p></div>
+    </div></div>
+    <div class="step"><span class="snum">4</span><div>
+      <h3><a href="#tilda">Тильда</a></h3>
+      <div class="mrows"><p><span class="mk">Когда</span>У вас уже есть сайт на Тильде и есть кто им занимается.</p><p><span class="mk">Цена</span>Платный тариф Тильды.</p><p><span class="mk">Важно</span>Код вставляется в блок. Поддержка Тильды со своим кодом не помогает.</p></div>
+    </div></div>
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Российский хостинг или свой сервер</h3>
+      <div class="mrows"><p><span class="mk">Когда</span>Данные клиентов, оплата на своём сайте, сайт должен точно открываться в России, приложение.</p><p><span class="mk">Цена</span>От нескольких сотен рублей в месяц.</p><p><span class="mk">Важно</span>Продвинутый уровень – навык «Свой сервер» из плагина <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>.</p></div>
+    </div></div>
   </div>
-  <p class="rulebox">Если страницу не нужно рассылать, её можно вообще не публиковать. Скачайте последнюю версию HTML-файлом – его можно отправить клиенту или открыть у себя на компьютере на сессии или консультации.</p>
+  <p class="rulebox"><b>Свой домен</b> – не отдельный способ, а надстройка: его подключают к способам 2–5, когда сайт уже открывается по технической ссылке. Подробно – <a href="../domen/">Свой домен на reg.ru</a>.</p>
+  <div class="promptbox"><p class="plabel">Промпт: выбери мне способ</p><pre>Помоги выбрать способ публикации по карте: 1) отдать файлом, 2) «Сайты» ChatGPT, 3) GitHub Pages, 4) Тильда, 5) российский хостинг или свой сервер; свой домен – надстройка к 2–5.
+Мой материал: [лендинг / портфолио / квиз / конспект / гайд].
+Зачем публикую: [показать 1–2 людям / постоянная ссылка для соцсетей и клиентов / продавать и собирать заявки].
+Собирает данные или оплату: [да / нет].
+Кто будет открывать: [люди в России / за рубежом / и те и другие].
+Бюджет: [только бесплатно / несколько сотен рублей в месяц / больше].
+Уже есть: [сайт на Тильде / аккаунт GitHub / свой домен / ничего].
+С техникой я: [боюсь, сделайте за меня / по шагам справлюсь / уверенно].
+Работаю: [в программе ChatGPT на компьютере / в браузере / только с телефона], тариф [бесплатный / Plus и выше].
+Предложи 1 способ, объясни в 2 строках почему и скажи, что делать первым шагом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p>Установили плагин <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>? Тогда просто напишите <b>@sait-publikaciya</b> – навык задаст эти вопросы сам и пройдёт публикацию за вас.</p>
+  <p class="rulebox"><b>Способ 1 – отдать файлом.</b> Если страницу не нужно рассылать, её можно вообще не публиковать. Скачайте последнюю версию HTML-файлом – его можно отправить клиенту или открыть у себя на компьютере на сессии или консультации.</p>
 </section>
 
 <section class="wrap blk" id="programma">
@@ -180,11 +210,29 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
       <p>Если установить программу не получается, работайте в браузере. Делайте скриншот экрана, прикладывайте его в чат и спрашивайте: «Куда мне здесь нажать?» Помощники к уроку настроены отвечать и по скриншотам.</p>
     </div></div>
   </div>
+  <p class="plate" id="oblako">Облако или компьютер: где работает Work</p>
+  <p>Work умеет работать в 2 местах – в вашем браузере на компьютере и в своём браузере в облаке. От этого зависит, что он сможет сделать за вас.</p>
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Локально в программе – лучше всего</h3>
+      <p>Work работает через расширение в вашем браузере, где вы уже вошли в GitHub, reg.ru, Тильду. Для каждого нового сайта расширение спросит разрешение – выбирайте <b>Allow for this site</b>. Чтобы помощник мог загружать файлы, в настройках расширения в Chrome включите <b>Allow access to file URLs</b>. На Mac система попросит разрешения «Запись экрана» и «Универсальный доступ». Компьютер должен быть включён и разблокирован. Лучше всего подходит для GitHub, reg.ru и Тильды.</p>
+    </div></div>
+    <div class="step"><span class="snum">2</span><div>
+      <h3>В облаке</h3>
+      <p>У Work свой браузер на компьютере OpenAI. Он работает даже с телефона и когда ноутбук закрыт. Ваших входов там нет: когда нужен вход, задача встаёт на паузу, вы сами вводите пароль в защищённой форме – ChatGPT его не видит – и нажимаете <b>I'm done</b>. Входы сохраняются для следующих задач, стереть их можно в <b>Settings → Cloud browser → Browser data</b>. Файлы с вашего компьютера облаку недоступны – только те, что вы приложили в чат. Адрес у облачного браузера зарубежный, поэтому reg.ru и Госуслуги могут не пустить. Облачный браузер есть только на платных тарифах.</p>
+    </div></div>
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Codex, подключённый к GitHub</h3>
+      <p>Удобен для обновлений уже опубликованного сайта: сам меняет файл на сайте и сохраняет изменение. Если он откроет запрос на изменение, нажмите <b>Merge</b> сами.</p>
+    </div></div>
+  </div>
+  <p class="rulebox">Нет Work – работайте в браузере по скриншотам: «Куда мне здесь нажать?»</p>
+  <p class="rulebox"><b>Ограничения.</b> Перед оплатой, отправкой данных и удалением ChatGPT спрашивает подтверждение. Капча может остановить задачу. Облачные задачи быстрее расходуют лимит тарифа.</p>
   <p class="rulebox"><b>Главное правило.</b> Пароли, коды из писем и СМС и данные карты вводите только сами, прямо на сайте. Никогда не пишите их в чат – ни в программе, ни в браузере.</p>
 </section>
 
 <section class="wrap blk" id="sites">
-  <p class="label">Путь 1</p>
+  <p class="label">Способ 2</p>
   <h2>«Сайты» в&nbsp;ChatGPT</h2>
   <p>Самый быстрый путь: страница уже лежит в ChatGPT, и он публикует её сам, когда вы напишете «Публикуй». Раздел работает на тарифах Plus и выше и пока в тестовом режиме (бета).</p>
   <p class="rulebox"><b>Важно до начала.</b> В России такие страницы открываются только с VPN и в любой момент могут перестать открываться. Принимать оплату картой на такой странице нельзя. Если удалить сайт, вернуть его не получится.</p>
@@ -200,7 +248,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
   <p>Ссылка получится вида <b>имя.chatgpt.site</b>. Часть «имя» можно поменять в настройках сайта: от 5 символов, латинские буквы, цифры и дефис. Окончание chatgpt.site останется.</p>
 
   <p class="plate">Свой домен</p>
-  <p>Если у вас есть свой адрес, например купленный на reg.ru, его можно привязать к сайту. Честно скажу, на этом варианте я предлагаю не фокусироваться: в нём много мелких нюансов, и страница может перестать открываться. Для своего домена надёжнее <a href="#github">путь 2</a>. Если всё же хотите здесь:</p>
+  <p>Если у вас есть свой адрес, например купленный на reg.ru, его можно привязать к сайту. Честно скажу, на этом варианте я предлагаю не фокусироваться: в нём много мелких нюансов, и страница может перестать открываться. Для своего домена надёжнее <a href="#github">способ 3</a>. Если всё же хотите здесь:</p>
   <div class="steps">
     <div class="step"><span class="snum">1</span><div>
       <h3>Откройте настройки сайта</h3>
@@ -212,7 +260,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
     </div></div>
     <div class="step"><span class="snum">3</span><div>
       <h3>Добавьте записи у регистратора</h3>
-      <p>Зайдите в личный кабинет там, где купили домен, например на reg.ru, и добавьте эти записи. Где именно это делается в reg.ru, смотрите в <a href="#regru">пути 2</a>, только записи берите те, что показал ChatGPT.</p>
+      <p>Зайдите в личный кабинет там, где купили домен, например на reg.ru, и добавьте эти записи. Где именно это делается в reg.ru, смотрите в <a href="#regru">способе 3</a>, только записи берите те, что показал ChatGPT.</p>
     </div></div>
     <div class="step"><span class="snum">4</span><div>
       <h3>Обновите статус</h3>
@@ -224,7 +272,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
 </section>
 
 <section class="wrap blk" id="github">
-  <p class="label">Путь 2 · основной</p>
+  <p class="label">Способ 3 · основной</p>
   <h2>GitHub Pages и&nbsp;свой домен</h2>
   <p>GitHub – место, где разработчики хранят код. Там же можно бесплатно разместить свою страницу и получить постоянную ссылку. Так устроен и сайт курса aiforlife.ru: под капотом у него GitHub. Подробно по шагам вас проведёт навык «Размещение» из плагина <a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>. Здесь – короткая карта, чтобы понимать, куда вы идёте.</p>
 
@@ -289,7 +337,7 @@ footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;margin-top:40px
 </section>
 
 <section class="wrap blk" id="tilda">
-  <p class="label">Путь 3</p>
+  <p class="label">Способ 4</p>
   <h2>Страница внутри вашей Тильды</h2>
   <p>Если у вас уже есть сайт на Тильде, страницу можно вставить туда кодом. Раньше вы собирали бы её в Тильде руками, а теперь приносите готовую.</p>
   <p class="rulebox"><b>Что нужно знать заранее.</b> Нужен платный тариф: Personal – 750 ₽ в месяц при оплате помесячно или 500 ₽ в месяц при оплате за год. На бесплатном тарифе блоки ограничены. Поддержка Тильды со своим кодом не помогает, поэтому с вопросами идите в чат к помощнику.</p>
