@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 4 · Интерактивные материалы: страница-портфолио по ссылке · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 4 модуля 3: интерактивные материалы без кода. Документ «Моё портфолио» и паспорт стиля превращаются в страницу с раскрывающимися карточками работ, фильтром по темам и кнопкой «Написать мне» – и выкладываются по ссылке на GitHub Pages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ШКАЛА (МЕТОД B2) – 4 текстовые роли:
+   Р1 Заголовок – Instrument Serif 400: h1 var(--h1), h2 var(--h2); крупная цифра урока и номера пунктов – декоративные, не роль.
+   Р2 Подзаголовок – Manrope 700, на ступень крупнее текста (.def h3, .tname).
+   Р3 Текст – Manrope 500, var(--text) 17px, один цвет: var(--ink) на светлом, #CFC4D4 на тёмном. Выделение – только жирным.
+   Р4 Метка – Manrope 700–800, CAPS с разрядкой, 11–13px (.label, .plate, .plabel).
+   Курсив не используем. Инлайн font-size/color/font-weight в разметке запрещены.
+   Блок «Задача для портфолио» (.pfb) – единый для всех уроков, его стили не трогаем. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* Модуль 3 · урок 4: то, что в образце было инлайн-стилями, и выравнивание текста под роль Р3 */
+.hero.htop{padding-top:34px}
+.blk .lede{padding-top:0}
+.dark.mainbox{margin-top:44px}
+.dark.takeaway{margin-top:64px}
+.practice .label{color:var(--pink-soft)}
+.hlead,.def p,.rulebox,.matbox li span,.meta .mv{font-size:var(--text);color:var(--ink)}
+.matbox li a{font-size:var(--text)}
+.blk ul{margin-bottom:14px}
+/* Подзаголовок внутри блока – тёмная плашка, а не розовая метка */
+.plate{display:block;background:#1B1420;color:#fff;font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-left:3px solid var(--pink);padding:10px 16px;margin-top:36px;margin-bottom:20px}
+p+p.plate{margin-top:36px}
+.plate+p,.plate+.rulebox{margin-top:0}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 3 · урок 4</span></div>
+  <div class="kmark"><span class="kn">4</span><span class="kt">Конспект урока</span></div>
+  <div class="hero htop">
+    <div class="hgrid">
+      <h1>Интерактивные материалы: страница-портфолио по&nbsp;ссылке</h1>
+      <p class="hlead">Собираем то, что открывается по ссылке и с чем человек что-то делает. Код читать не нужно: ИИ пишет файл страницы, а ваша задача – объяснить, что нужно, и проверить результат.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Видео</span><span class="mv">около 20 минут</span></div>
+      <div><span class="mk">Практика</span><span class="mv">Своя страница-портфолио, 30–40 минут</span></div>
+      <div><span class="mk">Результат</span><span class="mv">Страница по ссылке: карточки работ, фильтр, кнопка «Написать мне»</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox">
+  <div class="wrap dgrid">
+    <h2>Главное<br>из урока</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Интерактивный материал – тот, с которым человек что-то делает: открывает карточку, выбирает тему, жмёт кнопку и пишет вам. Его удобно листать с телефона, и его охотнее пересылают.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Код пишет нейросеть, читать его не нужно. Ваша работа та же, что во всём курсе: поставить задачу, проверить результат и довести его до рабочего состояния.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Задача для страницы – это 4 ответа: что это, для кого, что человек получит в конце и как это выглядит. Стиль берём из паспорта стиля прошлого урока, и обязательно просим, чтобы страница хорошо выглядела на телефоне.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Сначала план страницы, потом сама страница. Правки – по одной: «сделай красивее» ломает и то, что уже получилось.</p></div>
+      <div class="mline"><span class="mn">5</span><p>Страница живёт по ссылке на GitHub Pages – бесплатно и через обычный сайт. Сама она не собирает заявки и не принимает оплату: для этого под уроком есть плагин «Свой сайт без программиста».</p></div>
+    </div>
+  </div>
+</div>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Новый вид материала</p>
+      <h2>Материалы, с&nbsp;которыми человек что-то делает</h2>
+      <p>До сих пор мы делали материалы, которые человек читает: документ, таблицу, картинку. Сегодня собираем то, с чем он что-то делает: нажимает на карточку и видит подробности, выбирает тему, жмёт кнопку и пишет вам. Такие материалы называют интерактивными.</p>
+      <p>Их проще листать с телефона, их охотнее пересылают, и они хорошо работают там, где вас должны быстро понять: на консультации, в отклике на вакансию, в подарке для подписчиков.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Из моего опыта</p>
+      <h2>Код пишет ИИ, а&nbsp;вы ставите задачу и&nbsp;проверяете</h2>
+      <p>Почти всё, что вы видите в этом курсе, собрано именно так: конспекты уроков, навигатор по нейросетям, бонусные страницы. Код для них писал ИИ, а я объясняла, что нужно, и проверяла результат.</p>
+      <p>У этого подхода есть название – <b>вайбкодинг</b>. Звучит пугающе, но смысл простой: вы описываете обычными словами, что хотите получить, нейросеть пишет файл страницы, а вы смотрите на результат и говорите, что поправить.</p>
+      <p>Читать код не нужно. Ваша работа та же, что во всех уроках курса: поставить задачу, проверить результат и довести его до рабочего состояния.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Что можно собрать</p>
+      <h2>5 видов страниц, которые собираются одним способом</h2>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Страница-портфолио или страница о себе</h3><p>С неё начинаем сегодня.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Квиз или тест с результатом в конце</h3><p>Хорошо работает как подарок подписчикам. Промпт для квиза – в инструкции к практике.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Интерактивная памятка или чек-лист</h3><p>Например, памятка для ваших клиентов. Как собрать для подписчиков целый гайд-подарок, удобный для чтения с телефона и закрытый паролем, – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-gaid-podpischikam/">«Гайд-подарок для подписчиков: от запроса до ссылки с паролем»</a>.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Мини-лендинг под продукт или консультацию</h3><p>Например, под консультацию – с понятной кнопкой, куда идти дальше.</p></div></div>
+        <div class="def"><span class="dn">5</span><div><h3>Презентация, которая открывается в браузере</h3><p>Как собрать её одним файлом и показывать по ссылке – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-prezentacii/">«Презентации в HTML»</a>.</p></div></div>
+      </div>
+      <p>Сегодня я показываю всё на портфолио, которое мы оформим в виде небольшого сайта, потому что оно уже есть у каждого из вас. С первого модуля вы после каждого урока добавляли заметку в документ «Моё портфолио». Это готовое содержание: задачи, что вы сделали с ИИ, результаты. Осталось превратить документ в страницу, которую не стыдно отправить клиенту или работодателю.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Постановка задачи</p>
+      <h2>4 вопроса, с&nbsp;которых начинается любая страница</h2>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Что это</h3><p>Портфолио, квиз, памятка.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Для кого</h3><p>Кто будет смотреть и что этот человек должен понять.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Что человек получает в конце</h3><p>Например, кнопку «Написать мне», чтобы ему было куда пойти дальше.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Как это выглядит</h3><p>Здесь пригодится паспорт стиля из прошлого урока. И обязательно добавьте «должно хорошо выглядеть на телефоне»: большинство откроет вашу ссылку именно с телефона.</p></div></div>
+      </div>
+      <p class="plate">Главное правило</p>
+      <p class="rulebox"><b>Сначала план страницы, потом сама страница.</b> Интерактивные материалы съедают много токенов – то есть быстро расходуют лимит вашего чата. Поправить 6 блоков плана проще, чем переделывать готовую страницу.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Интерактив</p>
+      <h2>Интерактив, который помогает читателю</h2>
+      <p>В нашем случае интерактив – это не анимация ради эффекта, а то, что помогает читателю. На странице-портфолио это 3 вещи.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Карточки работ раскрываются по клику</h3><p>Сначала человек видит короткий список, а подробности открывает, только если ему интересно.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Фильтр по темам</h3><p>Тексты, документы, таблицы, визуал, помощники – человек выбирает то, что ему ближе.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Кнопка «Написать мне»</h3><p>Чтобы после просмотра человеку было куда пойти дальше.</p></div></div>
+      </div>
+      <p class="plate">Правки – по одной</p>
+      <p>Просите одно изменение за раз:</p>
+      <ul>
+        <li>«Поменяй цвет кнопки на главный цвет из паспорта».</li>
+        <li>«Убери этот блок».</li>
+        <li>«Сделай текст крупнее на телефоне».</li>
+      </ul>
+      <p>Если попросить «сделай красивее», нейросеть переделает всё сразу, и хорошее тоже.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Показ на уроке</p>
+      <h2>От документа до ссылки: 7 шагов</h2>
+      <p>На видео я прохожу весь путь на демо-портфолио вымышленной участницы курса – Ольги Смирновой, бухгалтера для самозанятых и ИП. В её документе «Моё портфолио» заполнены модули 1 и 2 и первые 3 урока модуля 3, а в «Моих инструментах» лежит паспорт стиля: спокойный зелёный, тёплый крем, горчичный акцент, шрифты Manrope и PT Serif. Ровно так будет выглядеть и ваш документ к этому уроку.</p>
+      <p>Для своей страницы подготовьте 2 вещи: документ «Моё портфолио» с заметками за модули 1–3 и паспорт стиля из прошлого урока. Если заметок пока мало, ничего страшного: страницу можно собрать и из 3 работ, а потом дополнить.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>План страницы</h3><p>Прикрепляем документ и паспорт стиля и просим план: не больше 6 блоков и ничего сверх документа. Читаем: тот ли порядок, нет ли блока, которого у вас на самом деле нет. Делаем 1 правку и утверждаем.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Сама страница</h3><p>Нейросеть собирает страницу по плану в вашем стиле. Каждая работа – карточка «задача – что я сделал(а) – результат». В ChatGPT страница появится в ответе блоком кода: вверху блока переключитесь с «Код» на «Предпросмотр». В других нейросетях похожая кнопка может называться иначе. Если предпросмотра нет, попросите файл, скачайте его и откройте двойным щелчком – он откроется в браузере.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Интерактив</h3><p>Добавляем раскрывающиеся карточки, фильтр по темам и кнопку «Написать мне» со ссылкой на ваш Telegram. Остальное просим не менять.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Правки по одной</h3><p>1 правка по дизайну и 1 – по виду на телефоне.</p></div></div>
+        <div class="def"><span class="dn">5</span><div><h3>Проверка глазами читателя и на личные данные</h3><p>Просим нейросеть посмотреть на страницу глазами незнакомого человека: что непонятно, что лишнее. И отдельно – нет ли на странице ваших личных данных, данных клиентов или чужих имён. Берём 3 главные правки, не больше.</p></div></div>
+        <div class="def"><span class="dn">6</span><div><h3>Один файл index.html</h3><p>Картинки и стили – внутри файла. Имя index.html важно: так GitHub поймёт, что это главная страница.</p></div></div>
+        <div class="def"><span class="dn">7</span><div><h3>Ссылка через сайт GitHub</h3><p>Заводим на GitHub хранилище для страницы (там оно называется репозиторием) с именем portfolio, загружаем файл и включаем страницу в настройках. Через 1–3 минуты появляется ссылка. Открываем её на телефоне и пробуем карточку, фильтр и кнопку.</p></div></div>
+      </div>
+      <p class="rulebox">Все промпты и путь по кнопкам GitHub – в инструкции к практике. Если хотите, чтобы нейросеть сама держала такой порядок работы, загляните в бонус <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-navyki-materialy/">«Навыки: от сырья до готового материала»</a>: там готовые навыки, в том числе сборка страницы из плана, проверка глазами читателя, квиз и форма.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Размещение</p>
+      <h2>Где страница будет жить</h2>
+      <p>В этом уроке я пользуюсь GitHub Pages: это бесплатно, работает через обычный сайт github.com, без программ. Понадобится аккаунт, регистрация тоже бесплатная.</p>
+      <p>Бесплатная страница включается только для открытого хранилища, поэтому её увидит любой, у кого есть ссылка. Оставьте на ней только имя и ссылку для связи – без телефона и чужих данных. Для этого и нужна проверка на личные данные перед выкладкой.</p>
+      <p>Позже к такой странице можно подключить свой домен, то есть адрес личного сайта: сайт этого курса живёт ровно так. А если ссылка пока не нужна, страницу можно оставить одним файлом и отправлять его в Telegram или по почте – человек откроет его в браузере.</p>
+      <p class="plate">Как обновлять</p>
+      <p>Добавили новую работу – попросите нейросеть обновить страницу, скачайте новый index.html и загрузите его поверх старого. Ссылка не меняется, изменения появляются через 1–2 минуты. В модуле 4 это за вас будет делать агент.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Честная оговорка</p>
+      <h2>Чего простая страница не умеет – и&nbsp;где взять остальное</h2>
+      <p>Простая страница, которую мы собираем сегодня, не умеет сама собирать заявки и принимать оплату. Для этого нужны внешние сервисы. А если вы собираете имена, телефоны или почту, нужны ещё и документы: политика обработки данных, согласие.</p>
+      <p>Чтобы не разбираться в этом в одиночку, под уроком есть плагин <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a> и инструкция к нему. Он проведёт по шагам: где разместить страницу, какие документы нужны именно вам, как подключить оплату и как потом обновлять сайт.</p>
+      <p class="plate">Где это пригодится</p>
+      <p>Само портфолио – ваш аргумент для клиента и работодателя. Тем же способом можно собрать квиз-лид-магнит, мини-лендинг под консультацию или интерактивную памятку для клиентов. И, конечно, делать такие страницы на заказ – об этом в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-zarabotok/">«Как навыки модуля 3 помогут вам зарабатывать»</a>.</p>
+      </div></div>
+    </section>
+
+<div class="practice">
+  <div class="wrap">
+    <p class="label">Теперь делаем</p>
+    <h2>Практика</h2>
+    <p class="pmeta">Своя страница-портфолио по ссылке · 30–40 минут · поставьте видео на паузу</p>
+    <p class="pintro">Откройте документ «Моё портфолио», возьмите паспорт стиля и пройдите те же шаги: план, страница, интерактив, правки, проверка. Если хотите ссылку – выложите страницу через GitHub по шагам из инструкции. Если пока не готовы регистрироваться, остановитесь на файле: отправьте его себе в Telegram и откройте на телефоне – это тоже готовый результат. По желанию тем же способом соберите квиз: промпт для него есть в инструкции.</p>
+    <div class="btns">
+      <a class="btn btn-praktika" href="praktika/">Открыть инструкцию к практике<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
+  <p class="pfb-p">Когда закончите практику, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и опишет вашу работу так, чтобы её было интересно прочитать работодателю или клиенту. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 3», под «Урок 4».</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> ваша страница-портфолио – для кого она, что на ней можно сделать и ссылка на неё.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+  <p class="pfb-p">Больше ничего собирать не нужно: в конце модуля вы просто пришлёте этот документ – <a href="https://aiforlife.ru/ii-course/modul3/itog/">итог модуля 3</a>.</p>
+</div>
+<div class="matbox">
+  <p class="ml">Под уроком</p>
+  <ul>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">Плагин «Свой сайт без программиста»</a><span>Где разместить страницу, какие документы нужны для заявок и оплаты, как подключить оплату и обновлять сайт.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-prezentacii/">Презентации в HTML</a><span>Презентация одним файлом, которая открывается по ссылке в браузере.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-gaid-podpischikam/">Гайд-подарок для подписчиков</a><span>От запроса до ссылки с паролем: гайд, который удобно читать с телефона.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-navyki-materialy/">Навыки: от сырья до готового материала</a><span>Готовые навыки для нейросети, в том числе сборка страницы, квиз и форма.</span></li>
+  </ul>
+</div>
+</section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">После практики</p>
+      <h2>Посмотрите на страницу с телефона и&nbsp;чужими глазами</h2>
+      <p>Пройдите свою страницу ещё раз с телефона. Если что-то съехало, не просите «почини всё»: опишите одно место – что вы видите и что ожидали, – как мы делали с формулами в таблицах.</p>
+      <p>По желанию поделитесь ссылкой в чате курса: коллеги посмотрят вашу страницу свежим взглядом и скажут, что понятно с первого экрана, а что нет. Это лучшая проверка глазами читателя.</p>
+      </div></div>
+    </section>
+
+<div class="dark takeaway">
+  <div class="wrap dgrid">
+    <h2>Что забрать<br>из урока</h2>
+    <div class="dcol">
+      <p>Сегодня ваш документ «Моё портфолио» стал страницей, с которой человек взаимодействует, и вы выложили её по ссылке, не написав ни строчки кода. Мы начали с плана, применили свой стиль, добавили интерактив, проверили страницу глазами читателя и на личные данные и разобрались, как её обновлять.</p>
+      <p>Если вашей странице нужно больше – собирать заявки, принимать оплату, жить на своём домене, – откройте плагин <a class="inl" href="https://aiforlife.ru/ii-course/modul3/bonus-svoi-sait/">«Свой сайт без программиста»</a>: он проведёт по шагам. А в модуле 4 мы вернёмся к этой странице вместе с агентом и докрутим её.</p>
+      <p><b>В следующем уроке поработаем с ещё одним видом визуала – вашим собственным образом: сделаем нейрофотосессию и короткое видео, в котором вы говорите своим голосом. Хорошая фотография, кстати, пригодится и для портфолио.</b></p>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · конспект урока 4, модуль 3</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
+    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
+    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
+    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>
