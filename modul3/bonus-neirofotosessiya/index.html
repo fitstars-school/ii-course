@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Нейрофотосессия своими руками · Бонус к уроку 5 модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Нейрофотосессия своими руками: какие фото загрузить, 5 рычагов виртуальной камеры, конструктор запроса, 10 готовых сюжетов, второй кадр, точечные правки и проверка сходства.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ТИПОГРАФИЧЕСКАЯ ШКАЛА – 4 роли (МЕТОД, раздел B2). Новых размеров, цветов и начертаний не вводить.
+   Р1 Заголовок    – Instrument Serif 400: шапка var(--h1), разделы var(--h2)
+   Р2 Подзаголовок – Manrope 700, var(--sub) 19px: заголовки карточек, рычагов, шагов
+   Р3 Текст        – Manrope 500, var(--text) 17px, цвет var(--ink); на тёмном фоне – var(--ondark). Всё остальное, включая промпты и кнопки
+   Р4 Метка        – Manrope 800, var(--label) 12px, CAPS с разрядкой, магента
+   Крупные цифры шагов и сюжетов (Instrument Serif) – декоративные, ролями не считаются.
+   Курсива нет. Инлайн-стилей в разметке нет. Один левый край: выделяем плашкой, а не сдвигом. */
+:root{
+  --ink:#211829; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --wash:#FFF1F8; --wash-line:#F1D9EC;
+  --dark:#1B1420; --dark2:#0F0B14; --ondark:#E9E1EE;
+  --maxw:1000px;
+  --h1:clamp(36px,5.6vw,66px); --h2:clamp(27px,3.4vw,40px);
+  --sub:19px; --text:17px; --label:12px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-wrap:break-word}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:40px;padding-right:40px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2);margin-top:12px;margin-bottom:18px}
+h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.32}
+.it{color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none;border-bottom:1px solid rgba(230,25,140,.35)}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:14px}
+.label{font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);line-height:1.45}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* шапка */
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-bottom:1px solid var(--ink);padding-top:34px;padding-bottom:13px}
+.rubric .r2{text-align:right}
+.hero{padding-top:38px;padding-bottom:8px}
+.hlead{margin-top:22px}
+.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 30px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.meta .label{display:block;margin-bottom:4px}
+.meta p{font-weight:600}
+
+/* кнопки */
+.btns{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:26px}
+.btn{font-family:var(--sans);font-size:var(--text);font-weight:700;line-height:1.3;border:none;border-radius:0;padding:14px 22px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+a.btn{border-bottom:none;color:#fff}
+.btn:hover{background:var(--pink);color:#fff}
+.btn.pink{background:var(--pink)}
+.btn.pink:hover{background:var(--pink-strong)}
+.btn.done,.btn.done:hover{background:#1FA24E;color:#fff}
+.linkbtn{font-weight:700;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:1px}
+.linkbtn:hover{color:var(--pink)}
+
+/* оглавление */
+.toc{padding-top:48px}
+.nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:12px;padding-bottom:24px;border-bottom:1px solid var(--ink)}
+.nav a{color:var(--ink);font-weight:600;border-bottom:2px solid transparent;padding-bottom:1px}
+.nav a:hover{border-bottom-color:var(--pink)}
+
+/* разделы */
+section.blk{padding-top:68px;padding-bottom:8px;scroll-margin-top:8px}
+.plate{background:var(--wash);padding:16px 20px;margin-top:22px}
+.blk h3.sub{margin-top:40px;margin-bottom:10px}
+ul{list-style:none;margin-top:12px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:.8em;width:9px;height:2px;background:var(--pink)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+.cbox{border-top:2px solid var(--ink);padding-top:16px}
+.cbox.minus li::before{background:var(--faint)}
+
+/* промпты */
+.promptbox{background:var(--dark);padding:24px 26px;border-left:3px solid var(--pink);margin-top:22px}
+.plabel{font-size:var(--label);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#FFC2E0;line-height:1.45;margin-bottom:12px}
+.promptbox pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--sans);font-size:var(--text);font-weight:500;line-height:1.65;color:var(--ondark)}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+.promptbox .btns{margin-top:18px}
+.promptbox .btn{background:#fff;color:var(--ink)}
+.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}
+.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* шаги и рычаги: цифра у левого края, текст после неё */
+.steps{margin-top:24px;border-top:1px solid var(--ink)}
+.step{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:24px 0;border-bottom:1px solid var(--line)}
+.dnum{font-family:var(--serif);font-size:46px;line-height:.9;color:var(--pink)}
+.step h3{margin-bottom:6px}
+.step ul{margin-top:10px}
+.say{background:var(--wash);padding:12px 16px;margin-top:14px}
+.say .label{display:block;margin-bottom:2px}
+
+/* глава «10 сюжетов» на тёмной ленте с кнопками-чипами */
+.band{background:var(--dark);color:var(--ondark);padding-top:60px;padding-bottom:52px;margin-top:76px;scroll-margin-top:0}
+.band h2{color:#fff}
+.band .label{color:var(--pink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{display:inline-flex;align-items:baseline;gap:8px;font-weight:600;line-height:1.3;color:var(--ondark);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.18);padding:10px 14px;transition:background .2s,border-color .2s}
+.chip .cn{color:var(--pink-soft);font-weight:800}
+.chip:hover,.chip.on{background:var(--pink);border-color:var(--pink);color:#fff}
+.chip:hover .cn,.chip.on .cn{color:#fff}
+
+/* карточки сюжетов */
+.cards{padding-top:34px}
+details.scn{border-top:1px solid var(--line);scroll-margin-top:10px}
+details.scn:first-child{border-top:1px solid var(--ink)}
+details.scn:last-child{border-bottom:1px solid var(--line)}
+.scn summary{display:grid;grid-template-columns:60px minmax(0,1fr) 24px;align-items:center;gap:14px;padding:22px 0;cursor:pointer;list-style:none}
+.scn summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{display:block;font-size:var(--sub);font-weight:700;line-height:1.32}
+.tsub{display:block;margin-top:2px;font-weight:500}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.scn summary:hover .num,.scn[open] .num{color:var(--pink)}
+.scn[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding-bottom:34px}
+.sh{display:block;background:var(--dark);color:#fff;font-size:var(--label);font-weight:800;letter-spacing:.14em;text-transform:uppercase;line-height:1.45;padding:13px 18px;border-left:3px solid var(--pink);margin-top:28px}
+.sh+.promptbox{margin-top:10px}
+.promptbox+p:not(.plate),.steps+p:not(.plate){margin-top:22px}
+.sh+.plate{margin-top:10px}
+.plate+.plate{margin-top:10px}
+.facts{margin-top:4px}
+.fact{display:grid;grid-template-columns:140px minmax(0,1fr);gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.fact:first-child{border-top:none}
+.fact .label{padding-top:4px}
+.backlink{margin-top:22px}
+
+/* проверка */
+.check{margin-top:24px;border-top:1px solid var(--ink)}
+.cgroup{display:grid;grid-template-columns:140px minmax(0,1fr);gap:6px 14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cgroup .label{padding-top:6px}
+.ck{display:flex;gap:12px;align-items:flex-start;padding:4px 0;cursor:pointer}
+.ck input{flex:none;width:20px;height:20px;margin-top:3px;accent-color:var(--pink);cursor:pointer}
+.fork{background:var(--wash);padding:16px 20px;margin-top:22px}
+.fork .label{display:block;margin-bottom:4px}
+.frow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:2px 18px;padding:10px 0;border-top:1px solid var(--wash-line)}
+.fork .label+.frow{border-top:none}
+
+/* ссылки на соседние материалы */
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+a.lcard{display:block;background:#fff;color:var(--ink);border:1px solid var(--line);border-top:3px solid var(--pink);padding:20px;transition:border-color .2s}
+a.lcard:hover{border-color:var(--pink);color:var(--ink)}
+.lcard h3{margin-top:8px;margin-bottom:6px}
+.lcard .go{display:block;margin-top:12px;font-weight:700;color:var(--pink)}
+
+/* тёмный итог */
+.dark{background:var(--dark);color:var(--ondark);padding-top:58px;padding-bottom:58px;margin-top:76px}
+.dark h2{color:#fff}
+.dark .label{color:var(--pink-soft)}
+.dark .steps{border-top-color:rgba(255,255,255,.4)}
+.dark .step{border-bottom-color:rgba(255,255,255,.12)}
+.dark .dnum{color:var(--pink-soft)}
+.dark .plate{background:rgba(255,143,198,.12)}
+.dark b{color:#fff}
+
+footer{background:var(--dark2);color:#B7A9BD;padding-top:30px;padding-bottom:40px}
+footer a{color:#B7A9BD;border-bottom:1px solid rgba(183,169,189,.4)}
+footer a:hover{color:var(--pink-soft)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:760px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .rubric{flex-direction:column;align-items:flex-start;gap:4px}
+  .rubric .r2{text-align:left}
+  .meta,.cmp,.links{grid-template-columns:1fr}
+  .meta{gap:14px}
+  .btns .btn{width:100%;justify-content:center}
+  .step{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:22px 0}
+  .dnum{font-size:34px}
+  .scn summary{grid-template-columns:42px minmax(0,1fr) 22px;gap:10px;padding:20px 0}
+  .num{font-size:29px}
+  .fact,.cgroup,.frow{grid-template-columns:1fr;gap:2px}
+  .promptbox{padding:20px 20px 20px 17px;margin-left:-20px;margin-right:-20px}
+  .sh{margin-left:-20px;margin-right:-20px;padding:12px 20px 12px 17px}
+  .band{padding-top:48px;padding-bottom:42px}
+  .dark{padding-top:46px;padding-bottom:46px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span class="label">Нейро-архитектор</span><span class="label r2">Модуль 3 · урок 5 · бонус</span></div>
+  <div class="hero">
+    <h1>Нейрофотосессия <span class="it">своими руками</span></h1>
+    <p class="hlead">Конструктор запроса, 10&nbsp;готовых сюжетов и команды для правок, чтобы повторить урок на своих фото и получить снимок под свою задачу: для страницы специалиста, аватарки, обложки или личного поста.</p>
+    <div class="meta">
+      <div><span class="label">Результат</span><p>1&nbsp;узнаваемый портрет под вашу задачу, 1&nbsp;точечная правка и второй кадр в том же стиле</p></div>
+      <div><span class="label">Понадобится</span><p>3–5&nbsp;ваших настоящих фото и 20–30&nbsp;минут</p></div>
+      <div><span class="label">Где делать</span><p>В нейросети, которая работает с фото,&nbsp;– варианты <a href="#gde">в конце гайда</a></p></div>
+    </div>
+    <div class="btns">
+      <a class="btn pink" href="assets/neirofoto-promty.txt" download="Промпты для нейрофотосессии.txt"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M5 21h14"></path></svg>Скачать все промпты одним файлом</a>
+      <a class="linkbtn" href="#syuzhety">Сразу к 10&nbsp;сюжетам</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap blk" id="kak">
+  <p class="label">Как устроен гайд</p>
+  <h2>Тот же путь, что в&nbsp;уроке, только под вашу задачу</h2>
+  <p>В уроке мы сделали 1&nbsp;портрет у окна. Здесь тот же путь, но выбор за вами: для чего нужен снимок, где вы на нём находитесь, во что одеты и как падает свет. Сначала подготовьте свои фото, потом соберите запрос в конструкторе или возьмите готовый сюжет, проверьте результат и поправьте то, что не устроило.</p>
+  <p>Держите в голове главную мысль урока: нейросеть&nbsp;– не фотограф с волшебной кнопкой. Ей можно подробно объяснить задачу, но узнаёте ли вы себя на снимке, каждый раз решаете вы сами. Естественный кадр и кадр, на котором вы похожи на себя,&nbsp;– 2&nbsp;разные проверки, и нужен снимок, который проходит обе.</p>
+  <p class="plate">Замените то, что в <b>[квадратных скобках]</b>, на своё. Все промпты со страницы есть в одном текстовом файле&nbsp;– его удобно сохранить в заметки и копировать оттуда.</p>
+</section>
+
+<section class="wrap toc">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы гайда">
+    <a href="#nachalo">С чего начать</a>
+    <a href="#foto">Какие фото загрузить</a>
+    <a href="#kamera">Виртуальная камера</a>
+    <a href="#konstruktor">Конструктор запроса</a>
+    <a href="#syuzhety">10&nbsp;сюжетов</a>
+    <a href="#vtoroy">Второй кадр</a>
+    <a href="#pravki">Точечные правки</a>
+    <a href="#proverka">Проверка</a>
+    <a href="#gde">Где делать</a>
+    <a href="#chestno">Честно и безопасно</a>
+  </nav>
+</section>
+
+<section class="wrap blk" id="nachalo">
+  <p class="label">С чего начать</p>
+  <h2>Не знаете, какой кадр нужен,&nbsp;– пусть нейросеть сначала побудет фотографом</h2>
+  <p>Хороший фотограф не начинает снимать с порога. Сначала он спрашивает, для чего снимок, кто будет его смотреть и каким вы хотите выглядеть. Запрос ниже просит нейросеть сделать так же: задать вам 3–4&nbsp;вопроса, предложить 5&nbsp;разных сюжетов, помочь выбрать 1&nbsp;сюжет и собрать по нему готовый запрос. Генерировать она начнёт только после вашего «да».</p>
+  <p>Как запустить: откройте новый чат, нажмите на скрепку или «+» рядом с полем ввода и прикрепите 3–5&nbsp;своих фото&nbsp;– какие подойдут, рассказано <a href="#foto">в следующем разделе</a>. Затем вставьте запрос и отправьте. На вопросы отвечайте как есть, своими словами, можно голосом.</p>
+  <div class="promptbox"><p class="plabel">Запрос 0 · нейросеть как фотограф</p><pre>Помоги мне спланировать нейрофотосессию. Ничего не генерируй, пока мы не договоримся.
+Сначала задай мне 3–4 вопроса по очереди: для чего фото (площадка и задача), кто будет смотреть, какое впечатление я хочу произвести, что мне важно сохранить во внешности.
+Потом предложи 5 разных сюжетов. Для каждого: где я нахожусь, во что я одет(а), что делаю, план (крупно / по пояс / в полный рост), свет, формат кадра. Пиши простыми словами, без фотографических терминов.
+Помоги выбрать 1 сюжет, собери по нему готовый запрос и покажи его мне. Генерируй только после моего «да».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="plate">Если вы уже знаете, какой снимок нужен, этот шаг можно пропустить и сразу перейти к <a href="#konstruktor">конструктору запроса</a> или <a href="#syuzhety">готовым сюжетам</a>.</p>
+</section>
+
+<section class="wrap blk" id="foto">
+  <p class="label">Исходные фото</p>
+  <h2>Какие фото загрузить, чтобы нейросеть узнала вас</h2>
+  <p>Нейросеть не знает, как вы выглядите, она видит только то, что вы ей показали. Поэтому от исходных фото, или исходников, сходство зависит не меньше, чем от самого запроса. Для быстрой съёмки возьмите 3–5&nbsp;снимков: это удобный стартовый набор, а не строгое правило.</p>
+  <div class="cmp">
+    <div class="cbox">
+      <h3>Что подходит</h3>
+      <ul>
+        <li><b>Фото 1&nbsp;– главное:</b> чёткое лицо анфас, то есть прямо в камеру. Загружайте его первым, в запросах оно называется «фото 1».</li>
+        <li><b>1–2&nbsp;фото с небольшим поворотом головы,</b> чтобы нейросеть увидела лицо с разных сторон.</li>
+        <li><b>Фото с вашей настоящей улыбкой,</b> если хотите улыбку в кадре. Иначе нейросеть придумает улыбку сама.</li>
+        <li><b>Фото с открытым лицом,</b> если хотите в кадре убранные волосы.</li>
+      </ul>
+    </div>
+    <div class="cbox minus">
+      <h3>Что мешает</h3>
+      <ul>
+        <li><b>Сильные фильтры и ретушь:</b> нейросеть примет их за вашу кожу и черты лица.</li>
+        <li><b>Закрытые глаза</b> и лицо, наполовину закрытое рукой, очками или волосами.</li>
+        <li><b>Размытые снимки,</b> на которых плохо видны черты лица.</li>
+        <li><b>Другие люди в кадре:</b> нейросеть может взять черты не у вас. Обрежьте фото так, чтобы остались только вы.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="plate"><b>Почему не стоит брать сгенерированный кадр как источник лица.</b> Даже удачная генерация немного отличается от вас: чуть другой нос, другая линия губ. Если загрузить её вместо оригинала, нейросеть повторит эти отличия и добавит свои, и от кадра к кадру сходство будет уходить. Поэтому лицо всегда берём с настоящих фото, а удачный кадр используем только как пример атмосферы.</p>
+  <p class="plate"><b>Для тех, кто хочет дальше.</b> Есть другой путь&nbsp;– обучение внешности: сервис изучает вас по набору фото и потом держит лицо в целой серии снимков. Такую обученную модель часто называют LoRA. Для неё нужен другой набор фото, обычно намного больше, и свои правила подготовки, а точного сходства обучение тоже не гарантирует. Этот путь разобран в бонусе <a href="https://aiforlife.ru/ii-course/modul3/bonus-neirofoto-instrumenty/" target="_top">«Что дальше»</a>.</p>
+</section>
+
+<section class="wrap blk" id="kamera">
+  <p class="label">Управление кадром</p>
+  <h2>Виртуальная камера: 5&nbsp;рычагов, которыми вы управляете снимком</h2>
+  <p>Представьте, что даёте задачу фотографу. Можно попросить «сделай красиво», а можно сказать: «сними по грудь, на уровне глаз, возле окна, свет слева, спокойная улыбка». Во втором случае вы получите то, что задумали. Знать профессиональные настройки камеры не нужно, достаточно описать 5&nbsp;вещей обычными словами.</p>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div>
+      <h3>Крупность&nbsp;– насколько близко камера</h3>
+      <ul>
+        <li><b>Крупно лицо и плечи</b>&nbsp;– для аватарки, которую смотрят маленьким кружком.</li>
+        <li><b>По грудь</b>&nbsp;– портрет для профиля и страницы специалиста.</li>
+        <li><b>По пояс</b>&nbsp;– видны руки и то, что вы делаете: работа, чашка, микрофон.</li>
+        <li><b>В полный рост</b>&nbsp;– видны одежда и место, например на прогулке. Лицо при этом мелкое, и сходство сложнее проверить.</li>
+      </ul>
+      <p class="say"><span class="label">Как написать</span>«кадр по грудь»</p>
+    </div></div>
+    <div class="step"><span class="dnum">2</span><div>
+      <h3>Ракурс&nbsp;– откуда смотрит камера</h3>
+      <ul>
+        <li><b>На уровне глаз</b>&nbsp;– самый естественный вариант, как при разговоре лицом к лицу.</li>
+        <li><b>Чуть снизу</b>&nbsp;– как будто снимают из зала, подходит для выступления.</li>
+        <li><b>Чуть сбоку</b>&nbsp;– вы заняты делом, а камера будто подсмотрела.</li>
+        <li><b>Чуть сверху</b>&nbsp;– камера немного выше ваших глаз.</li>
+      </ul>
+      <p class="say"><span class="label">Как написать</span>«камера на уровне глаз»</p>
+    </div></div>
+    <div class="step"><span class="dnum">3</span><div>
+      <h3>Свет&nbsp;– откуда он падает и какой</h3>
+      <ul>
+        <li><b>Мягкий дневной из окна сбоку</b>&nbsp;– живо и естественно, как в уроке.</li>
+        <li><b>Рассеянный спереди</b>&nbsp;– ровный свет без резких теней, для делового портрета.</li>
+        <li><b>Тёплый от гирлянд или ламп</b>&nbsp;– праздник и уют.</li>
+        <li><b>Боковой с мягкими тенями на тёмном фоне</b>&nbsp;– для чёрно-белого портрета.</li>
+      </ul>
+      <p class="say"><span class="label">Как написать</span>«мягкий дневной свет из окна слева»</p>
+    </div></div>
+    <div class="step"><span class="dnum">4</span><div>
+      <h3>Положение в кадре&nbsp;– где вы на снимке</h3>
+      <p>Фотографы называют это композицией.</p>
+      <ul>
+        <li><b>В центре</b>&nbsp;– аватарка и обычный портрет.</li>
+        <li><b>В левой или правой трети</b>&nbsp;– рядом остаётся свободное место, например под заголовок на обложке.</li>
+      </ul>
+      <p class="say"><span class="label">Как написать</span>«я в правой трети кадра, слева спокойный однотонный фон без предметов»</p>
+    </div></div>
+    <div class="step"><span class="dnum">5</span><div>
+      <h3>Действие и взгляд&nbsp;– что вы делаете и куда смотрите</h3>
+      <ul>
+        <li><b>Смотрю в камеру</b>&nbsp;– снимок обращается к зрителю: аватарка, деловой портрет, обложка.</li>
+        <li><b>Смотрю на работу или в окно</b>&nbsp;– живой кадр, будто вас застали за делом.</li>
+        <li><b>Действие руками:</b> держу чашку, пишу в блокноте, говорю в микрофон.</li>
+        <li><b>Выражение лица:</b> спокойная улыбка с закрытым ртом, открытая улыбка, сосредоточенное лицо.</li>
+      </ul>
+      <p class="say"><span class="label">Как написать</span>«смотрю в камеру, спокойная улыбка с закрытым ртом»</p>
+    </div></div>
+  </div>
+  <p class="plate"><b>И формат кадра.</b> 1:1&nbsp;– квадрат для аватарки. 4:5&nbsp;– вертикальный снимок для поста. 9:16&nbsp;– вертикальный во весь экран телефона, для сторис. 16:9&nbsp;– горизонтальный, для обложки видео, баннера или шапки страницы.</p>
+</section>
+
+<section class="wrap blk" id="konstruktor">
+  <p class="label">Конструктор</p>
+  <h2>Конструктор запроса: заполните пункты по порядку</h2>
+  <p>Шаблон идёт в том же порядке, в каком фотограф думает о кадре: для чего снимок, чьё лицо, где и в чём вы, затем 5&nbsp;рычагов камеры, реализм и формат. Замените то, что в квадратных скобках, на своё, а лишние варианты внутри скобок удалите. В первой строке вместо [3] поставьте число своих фото. Если какой-то пункт вам неважен, его можно убрать, и нейросеть решит сама.</p>
+  <div class="promptbox"><p class="plabel">Запрос 1 · шаблон</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии одного человека. Фото 1 – основной ориентир лица, остальные – дополнительные ракурсы.
+Создай один реалистичный портрет.
+Для чего: <span class="tok">[площадка и задача – например, аватарка в Телеграме / фото на страницу специалиста]</span>.
+Где и в чём: <span class="tok">[место, одежда]</span>.
+План: <span class="tok">[крупно лицо / по грудь / по пояс / в полный рост]</span>.
+Камера: <span class="tok">[на уровне глаз / чуть сверху / чуть снизу / сбоку]</span>.
+Свет: <span class="tok">[откуда и какой – например, мягкий дневной свет из окна слева]</span>.
+Композиция: <span class="tok">[я в центре / слева, справа свободное место под текст]</span>.
+Выражение и действие: <span class="tok">[например, спокойная улыбка с закрытым ртом, смотрю в камеру]</span>.
+Сохрани узнаваемые черты лица, форму носа, губ и овала лица, естественный возраст и пропорции. Реалистичная кожа, фактура ткани, естественные пряди волос и тени, без сглаживающей бьюти-ретуши.
+Формат: <span class="tok">[1:1 / 4:5 / 9:16 / 16:9]</span>. Без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p>Так шаблон выглядит заполненным&nbsp;– этот запрос мы запускали в уроке:</p>
+  <div class="promptbox"><p class="plabel">Пример из урока · портрет у окна</p><pre>Фото 1–3 – мои настоящие фотографии одного человека. Фото 1 – основной ориентир лица, остальные – дополнительные. Создай один реалистичный портрет: я сижу у окна в белой рубашке, кадр по грудь, камера на уровне глаз, взгляд в камеру, лёгкая спокойная улыбка с закрытым ртом. Мягкий дневной свет из окна слева, неброский фон кабинета. Сохрани узнаваемые черты лица, форму носа, губ и овала лица, естественный возраст и пропорции. Реалистичная кожа, фактура ткани, естественные пряди волос и тени, без сглаживающей бьюти-ретуши. Вертикальный формат 4:5. Без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <h3 class="sub">Добавка «Сохрани мою внешность»</h3>
+  <p>В шаблоне уже есть короткая просьба сохранить черты лица. Если лицо всё равно уходит, добавьте в конец любого запроса этот блок. Он подробнее объясняет, откуда брать внешность и что нельзя менять «для красоты».</p>
+  <div class="promptbox"><p class="plabel">Запрос 2 · сохрани мою внешность</p><pre>Внешность бери только с моих настоящих фото: фото 1 – главное, остальные – дополнительные ракурсы. Сохрани форму лица, носа, глаз, губ и бровей, цвет глаз, линию роста волос, естественный возраст и пропорции тела. Не омолаживай, не худей, не меняй черты «для красоты». Если не уверен(а) в какой-то детали – оставь как на фото 1.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="plate"><b>Честно о сходстве.</b> Эта просьба повышает шанс сходства, но не гарантирует его. Нейросеть может идеально выполнить свет и композицию и при этом ошибиться в лице. Каждый результат сверяйте с оригиналом по <a href="#proverka">чек-листу проверки</a>.</p>
+</section>
+
+<div class="band" id="syuzhety">
+  <div class="wrap">
+    <p class="label">Библиотека сюжетов</p>
+    <h2>10&nbsp;готовых сюжетов: для работы и для себя</h2>
+    <p>Нажмите на сюжет под свою задачу, и его карточка раскроется. В каждой&nbsp;– для чего подходит снимок, формат, готовый запрос, подсказка и типичный риск, на который стоит посмотреть в результате. Перед запросом прикрепите свои 3–5&nbsp;фото, главное&nbsp;– первым.</p>
+    <nav class="chips" aria-label="Сюжеты">
+      <a class="chip" href="#s1"><span class="cn">1</span>Деловой портрет</a>
+      <a class="chip" href="#s2"><span class="cn">2</span>За работой</a>
+      <a class="chip" href="#s3"><span class="cn">3</span>Кофейня</a>
+      <a class="chip" href="#s4"><span class="cn">4</span>Дома</a>
+      <a class="chip" href="#s5"><span class="cn">5</span>Обложка</a>
+      <a class="chip" href="#s6"><span class="cn">6</span>Прогулка</a>
+      <a class="chip" href="#s7"><span class="cn">7</span>Выступление</a>
+      <a class="chip" href="#s8"><span class="cn">8</span>Праздник</a>
+      <a class="chip" href="#s9"><span class="cn">9</span>Аватарка</a>
+      <a class="chip" href="#s10"><span class="cn">10</span>Чёрно-белый</a>
+    </nav>
+  </div>
+</div>
+
+<section class="wrap cards">
+<details class="scn" id="s1">
+  <summary><span class="num">01</span><span class="tname">Деловой портрет<span class="tsub">страница специалиста, профиль на сайте, презентация о себе · 4:5</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Страница специалиста, профиль на сайте, презентация о себе.</p></div>
+      <div class="fact"><span class="label">Формат</span><p>4:5&nbsp;– вертикальный снимок для поста</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.1 · Деловой портрет</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии одного человека, фото 1 – основной ориентир лица. Создай реалистичный деловой портрет: я в <span class="tok">[пиджаке нейтрального цвета / однотонной рубашке]</span>, кадр по грудь, камера на уровне глаз, смотрю в камеру, спокойная уверенная улыбка с закрытым ртом. Светлый однотонный фон без деталей, мягкий рассеянный свет спереди и чуть сбоку. Сохрани узнаваемые черты лица, естественный возраст и пропорции, реалистичную кожу без ретуши. Вертикальный формат 4:5, без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> Чем проще фон и свет, тем выше сходство.</p>
+    <p class="plate"><b>Риск.</b> «Глянцевая» кожа и слишком ровные зубы&nbsp;– выглядит как реклама, а не как вы.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s2">
+  <summary><span class="num">02</span><span class="tname">Эксперт за работой<span class="tsub">пост о том, как вы работаете; страница услуг · 4:5</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Пост о том, как вы работаете; страница услуг.</p></div>
+      <div class="fact"><span class="label">Формат</span><p>4:5&nbsp;– вертикальный снимок для поста</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.2 · Эксперт за работой</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный кадр: я за рабочим столом в <span class="tok">[кабинете / коворкинге / студии]</span>, работаю с <span class="tok">[ноутбуком / блокнотом / материалами по профессии – например, тетради ученика, план питания, ткань]</span>, кадр по пояс, камера чуть сбоку на уровне глаз, взгляд на работу, сосредоточенное спокойное лицо. Дневной свет из окна, естественный беспорядок на столе. Сохрани мою внешность, возраст и пропорции. Формат 4:5, без надписей и логотипов на технике.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> Назовите предметы своей профессии&nbsp;– так кадр становится вашим, а не стоковым.</p>
+    <p class="plate"><b>Риск.</b> Лишние пальцы и «склеенные» руки на клавиатуре&nbsp;– смотрите на руки отдельно.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s3">
+  <summary><span class="num">03</span><span class="tname">Уютная кофейня<span class="tsub">личный пост, сторителлинг, «знакомство со мной» · 4:5</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Личный пост, сторителлинг, «знакомство со мной».</p></div>
+      <div class="fact"><span class="label">Формат</span><p>4:5&nbsp;– вертикальный снимок для поста</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.3 · Уютная кофейня</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный кадр: я сижу в небольшой кофейне у окна с чашкой <span class="tok">[капучино / чая]</span>, в <span class="tok">[свитере / повседневной одежде]</span>, кадр по грудь, камера на уровне глаз, взгляд в сторону окна, лёгкая улыбка. Тёплый мягкий свет из окна, размытый фон кафе без людей в фокусе. Сохрани мою внешность и естественный возраст. Формат 4:5, без надписей и вывесок.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> «Размытый фон без людей в фокусе» избавляет от чужих лиц в кадре.</p>
+    <p class="plate"><b>Риск.</b> Надписи на чашке и вывесках превращаются в «кракозябры»&nbsp;– просите «без надписей».</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s4">
+  <summary><span class="num">04</span><span class="tname">Повседневное фото дома<span class="tsub">тёплый личный контент, сторис, «за кадром» · 4:5</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Тёплый личный контент, сторис, «за кадром».</p></div>
+      <div class="fact"><span class="label">Формат</span><p>4:5&nbsp;– вертикальный снимок для поста</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.4 · Повседневное фото дома</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичное повседневное фото: я дома <span class="tok">[на кухне / на диване / у книжной полки]</span>, в домашней одежде <span class="tok">[цвет]</span>, <span class="tok">[держу кружку / читаю книгу]</span>, кадр по пояс, камера на уровне глаз, естественная полуулыбка. Мягкий дневной свет, уютная, но не идеальная обстановка, как на обычной фотографии с телефона. Сохрани мою внешность. Формат 4:5, без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> Слова «как на обычной фотографии с телефона» убирают «студийность».</p>
+    <p class="plate"><b>Риск.</b> Слишком идеальный интерьер&nbsp;– выглядит как каталог мебели.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s5">
+  <summary><span class="num">05</span><span class="tname">Обложка с местом под текст<span class="tsub">обложка видео, баннер вебинара, шапка страницы · 16:9</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Обложка видео, баннер вебинара, шапка страницы.</p></div>
+      <div class="fact"><span class="label">Формат</span><p>16:9&nbsp;– горизонтальный кадр</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.5 · Обложка с местом под текст</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный горизонтальный кадр: я стою в правой трети кадра, по пояс, в <span class="tok">[одежда]</span>, смотрю в камеру, открытая доброжелательная улыбка. Левая половина кадра – спокойный однотонный фон <span class="tok">[цвет]</span> без предметов: там будет заголовок. Мягкий свет спереди. Сохрани мою внешность. Формат 16:9, без надписей – текст я добавлю сам(а).</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> Заголовок добавляйте потом в редакторе (Canva, редактор каруселей)&nbsp;– нейросеть часто ошибается в буквах.</p>
+    <p class="plate"><b>Риск.</b> Нейросеть «украшает» пустую половину предметами&nbsp;– повторите «без предметов».</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s6">
+  <summary><span class="num">06</span><span class="tname">Прогулка в городе<span class="tsub">сторис, обложка короткого вертикального видео, пост «где я сейчас» · 9:16</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Сторис, обложка короткого вертикального видео, пост «где я сейчас».</p></div>
+      <div class="fact"><span class="label">Формат</span><p>9:16&nbsp;– вертикальный во весь экран телефона</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.6 · Прогулка в городе</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный кадр: я иду по <span class="tok">[тихой улице старого города / набережной / парку]</span> в <span class="tok">[пальто / лёгкой куртке]</span>, в полный рост или по колено, камера на уровне груди чуть сбоку, взгляд вперёд, естественный шаг. Пасмурный мягкий дневной свет, прохожие далеко и размыты. Сохрани мою внешность и пропорции тела. Вертикальный формат 9:16, без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> При полном росте лицо мелкое&nbsp;– проверяйте сходство на увеличении.</p>
+    <p class="plate"><b>Риск.</b> «Чужое» тело и неестественные ноги при ходьбе.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s7">
+  <summary><span class="num">07</span><span class="tname">Выступление&nbsp;– постановочная иллюстрация<span class="tsub">анонс эфира или выступления, страница «обо мне» · 16:9</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Анонс эфира или выступления, страница «обо мне».</p></div>
+      <div class="fact"><span class="label">Формат</span><p>16:9&nbsp;– горизонтальный кадр</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.7 · Выступление</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный кадр: я выступаю на небольшой сцене <span class="tok">[конференц-зал / уютный лекторий]</span>, в <span class="tok">[одежда]</span>, с <span class="tok">[микрофоном в руке / кликером]</span>, кадр по пояс, камера из зала чуть снизу, жест открытой ладонью, живая эмоция. Свет сцены сверху и спереди, зал размыт, лица людей не видны. Сохрани мою внешность. Формат 16:9, без надписей и логотипов.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Важно.</b> Если вы не выступали на этом мероприятии, не выдавайте кадр за реальный&nbsp;– подпишите «иллюстрация» или используйте для анонса будущего эфира.</p>
+    <p class="plate"><b>Риск.</b> Экран за спиной с «текстом» и чужими логотипами.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s8">
+  <summary><span class="num">08</span><span class="tname">Праздничный портрет<span class="tsub">поздравление подписчиков, новогодний или юбилейный пост · 4:5</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Поздравление подписчиков, новогодний или юбилейный пост.</p></div>
+      <div class="fact"><span class="label">Формат</span><p>4:5&nbsp;– вертикальный снимок для поста</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.8 · Праздничный портрет</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный праздничный портрет: я <span class="tok">[у ёлки с гирляндами / за праздничным столом / с букетом]</span>, в <span class="tok">[нарядная одежда]</span>, кадр по грудь, камера на уровне глаз, радостная улыбка. Тёплый свет гирлянд, мягкий размытый фон с огоньками. Сохрани мою внешность и естественный возраст, без ретуши кожи. Формат 4:5, без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> Тёплый свет «прощает» мелкие неточности кожи, но проверьте глаза и зубы.</p>
+    <p class="plate"><b>Риск.</b> Блёстки и огоньки «прилипают» к лицу и волосам.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s9">
+  <summary><span class="num">09</span><span class="tname">Аватарка<span class="tsub">фото профиля в мессенджерах и соцсетях · 1:1</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>Фото профиля в мессенджерах и соцсетях.</p></div>
+      <div class="fact"><span class="label">Формат</span><p>1:1&nbsp;– квадрат</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.9 · Аватарка</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный портрет для аватарки: крупно лицо и плечи, лицо в центре кадра и занимает больше половины его высоты, камера на уровне глаз, смотрю в камеру, лёгкая улыбка. Однотонный фон <span class="tok">[цвет – лучше контрастный к волосам]</span>, мягкий свет спереди. Сохрани мою внешность. Квадратный формат 1:1, без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> Аватарку смотрят маленьким кружком&nbsp;– проверьте, узнаётесь ли вы в размере ногтя.</p>
+    <p class="plate"><b>Риск.</b> Обрезанная макушка или подбородок в круглой рамке.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+
+<details class="scn" id="s10">
+  <summary><span class="num">10</span><span class="tname">Чёрно-белый портрет<span class="tsub">«серьёзное» фото для книги, статьи, страницы автора · 4:5</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+  <div class="body">
+    <div class="facts">
+      <div class="fact"><span class="label">Для чего</span><p>«серьёзное» фото для книги, статьи, страницы автора.</p></div>
+      <div class="fact"><span class="label">Формат</span><p>4:5&nbsp;– вертикальный снимок для поста</p></div>
+    </div>
+    <p class="sh">Запрос</p>
+    <div class="promptbox"><p class="plabel">Сюжет 3.10 · Чёрно-белый портрет</p><pre>Фото 1–<span class="tok">[3]</span> – мои настоящие фотографии, фото 1 – основной ориентир лица. Создай реалистичный чёрно-белый портрет: кадр по грудь, камера на уровне глаз, взгляд в камеру или чуть в сторону, спокойное выражение. Тёмный фон, свет сбоку, мягкие тени, видна фактура кожи и ткани, классическая плёночная эстетика. Сохрани мою внешность и естественный возраст. Формат 4:5, без надписей.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    <p class="sh">На что смотреть в результате</p>
+    <p class="plate"><b>Подсказка.</b> В ч/б сходство держится на форме лица и тенях&nbsp;– сравнивайте с оригиналом тоже в ч/б.</p>
+    <p class="plate"><b>Риск.</b> Слишком контрастный свет старит и «рубит» лицо.</p>
+    <p class="backlink"><a class="linkbtn" href="#syuzhety">↑ Ко всем сюжетам</a></p>
+  </div>
+</details>
+</section>
+
+<section class="wrap blk" id="vtoroy">
+  <p class="label">Серия</p>
+  <h2>Второй кадр той же съёмки</h2>
+  <p>Когда первый портрет получился, можно сделать второй снимок в том же настроении: другая поза и план, но тот же свет и цвет. Здесь важно разделить роли. Ваши оригинальные фото отвечают за лицо, а удачный кадр&nbsp;– только за атмосферу съёмки. Если взять за образец лица сам удачный кадр, его мелкие отличия от вас начнут накапливаться.</p>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div><p>Оставайтесь в том же чате, где получился удачный кадр.</p></div></div>
+    <div class="step"><span class="dnum">2</span><div><p>Вставьте запрос ниже. В скобках опишите новую позу и план, например «я стою вполоборота, кадр по пояс, взгляд в сторону», и укажите формат.</p></div></div>
+    <div class="step"><span class="dnum">3</span><div><p>Проверьте новый кадр по <a href="#proverka">чек-листу</a> так же строго, как первый: даже в одном чате сходство не гарантировано.</p></div></div>
+    <div class="step"><span class="dnum">4</span><div><p>Если сходство начало уходить, прикрепите заново свои оригинальные фото и повторите запрос.</p></div></div>
+  </div>
+  <div class="promptbox"><p class="plabel">Запрос 4 · второй кадр той же съёмки</p><pre>Создай второй кадр, словно это та же съёмка. Сохрани свет, обработку, цветовую гамму и атмосферу предыдущего удачного кадра. Теперь <span class="tok">[новая поза и план – например, я стою вполоборота, кадр по пояс, взгляд в сторону]</span>. Для моей внешности используй прежде всего мои оригинальные фотографии, а предыдущий удачный портрет – только как пример атмосферы. Реалистичная поза, одежда и кожа. Формат <span class="tok">[формат]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="plate">Не пытайтесь получить сразу 10&nbsp;снимков. Делайте по одному кадру и проверяйте каждый.</p>
+</section>
+
+<section class="wrap blk" id="pravki">
+  <p class="label">Правки</p>
+  <h2>Точечные правки: одна команда&nbsp;– одна цель</h2>
+  <p>Почти в каждом удачном кадре находится что-то, что хочется поменять: голова наклонена, появились серьги, которых вы не носите, на фоне лишний предмет. Генерировать всё заново не нужно&nbsp;– попросите изменить только эту деталь. В каждой команде ниже 2&nbsp;части: что изменить и что оставить как было.</p>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div><h3>Одна правка&nbsp;– одна цель</h3><p>Не просите в одном сообщении выровнять голову и поменять цвет свитера. Так легче понять, какая правка сработала.</p></div></div>
+    <div class="step"><span class="dnum">2</span><div><h3>После правки&nbsp;– снова проверка</h3><p>Сравните результат с оригиналом по <a href="#proverka">чек-листу</a>: узнаёте ли вы себя по-прежнему.</p></div></div>
+    <div class="step"><span class="dnum">3</span><div><h3>2–3&nbsp;попытки хуже&nbsp;– начните заново</h3><p>Если 2–3&nbsp;правки подряд делают снимок хуже, остановитесь. Вернитесь к последнему удачному варианту или откройте новый чат, прикрепите оригиналы и начните с более простого запроса.</p></div></div>
+  </div>
+  <p class="plate"><b>Честно о правках.</b> Даже когда вы просите изменить 1&nbsp;деталь, нейросеть пересоздаёт снимок и может заодно поменять и другое: черты лица, пряди волос, складки одежды. Поэтому после правки смотрите на весь кадр, а не только на то место, которое просили исправить.</p>
+  <h3 class="sub">6&nbsp;команд на правку</h3>
+  <div class="promptbox"><p class="plabel">Правка 5.1 · Выровнять голову</p><pre>Отредактируй только положение головы: сделай его более ровным. Сохрани лицо, выражение, волосы, одежду, фон, освещение, кадрирование и возраст как в предыдущем результате. Продолжай сверять внешность с моими оригинальными фотографиями.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <div class="promptbox"><p class="plabel">Правка 5.2 · Убрать волосы назад</p><pre>Убери волосы назад, открой лицо и уши. Не добавляй серьги и украшения. Сохрани форму лица, выражение, одежду, фон и свет как в предыдущем результате.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <div class="promptbox"><p class="plabel">Правка 5.3 · Чуть изменить выражение</p><pre>Измени только выражение лица: <span class="tok">[более мягкая улыбка / серьёзнее / улыбка без зубов]</span>. Сохрани черты лица, возраст, причёску, одежду, фон, свет и кадр как в предыдущем результате.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <div class="promptbox"><p class="plabel">Правка 5.4 · Поменять цвет одежды</p><pre>Измени только цвет <span class="tok">[рубашки / свитера]</span> на <span class="tok">[цвет]</span>. Фасон, ткань, складки, лицо, волосы, фон и свет оставь как в предыдущем результате.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <div class="promptbox"><p class="plabel">Правка 5.5 · Убрать лишний предмет</p><pre>Убери из кадра <span class="tok">[предмет – например, кружку слева / человека на фоне]</span> и естественно восстанови фон на его месте. Всё остальное, включая моё лицо и позу, оставь как в предыдущем результате.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <div class="promptbox"><p class="plabel">Правка 5.6 · Освободить место под текст</p><pre>Сдвинь меня в <span class="tok">[правую / левую]</span> треть кадра и сделай <span class="tok">[левую / правую]</span> половину спокойным однотонным фоном без предметов – там будет заголовок. Лицо, позу, одежду и свет сохрани.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <h3 class="sub">Если лицо «уплыло», а что не так&nbsp;– непонятно</h3>
+  <p>Бывает, что после правок или во втором кадре вы перестаёте узнавать себя, но не можете сказать, что именно изменилось. Попросите нейросеть сравнить результат с оригиналами: она назовёт отличия и предложит, как их исправить, а генерировать будет только после вашего «да».</p>
+  <div class="promptbox"><p class="plabel">5.7 · диагностика: если лицо «уплыло»</p><pre>Сравни последний результат с моими оригинальными фото. Назови до 3 отличий во внешности: нос, глаза, губы, форма лица, возраст, причёска. Сначала предложи, как это исправить, и дождись моего ответа. Генерируй только после моего «да».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+</section>
+
+<section class="wrap blk" id="proverka">
+  <p class="label">Проверка</p>
+  <h2>Проверка результата: похоже, естественно, подходит задаче</h2>
+  <p>Откройте оригинал и результат рядом и увеличьте лицо. Сначала смотрите на лицо, потом на свет, волосы, руки и фон. Красивый кадр, на котором вы себя не узнаёте, не подходит, каким бы эффектным он ни был.</p>
+  <div class="check">
+    <div class="cgroup"><span class="label">Сходство</span><div>
+      <label class="ck"><input type="checkbox"><span>Я узнаю себя по носу, губам, глазам и овалу лица.</span></label>
+      <label class="ck"><input type="checkbox"><span>Возраст и пропорции&nbsp;– мои.</span></label>
+    </div></div>
+    <div class="cgroup"><span class="label">Реализм</span><div>
+      <label class="ck"><input type="checkbox"><span>Свет, кожа и волосы выглядят правдоподобно.</span></label>
+      <label class="ck"><input type="checkbox"><span>Нет ошибок в руках, украшениях, надписях.</span></label>
+    </div></div>
+    <div class="cgroup"><span class="label">Задача</span><div>
+      <label class="ck"><input type="checkbox"><span>Кадр подходит площадке и формату.</span></label>
+    </div></div>
+  </div>
+  <div class="fork">
+    <span class="label">Что делать</span>
+    <div class="frow"><b>Похоже и естественно</b><span>Сохраните. Дайте файлу понятное имя, например «Портрет_профиль_01».</span></div>
+    <div class="frow"><b>Красиво, но не я</b><span>Вернитесь к оригиналам и упростите запрос.</span></div>
+    <div class="frow"><b>Не так только фон или причёска</b><span>1 <a href="#pravki">точечная правка</a>.</span></div>
+    <div class="frow"><b>2–3&nbsp;правки подряд делают хуже</b><span>Новый чат с оригиналами.</span></div>
+  </div>
+</section>
+
+<section class="wrap blk" id="gde">
+  <p class="label">Сервисы</p>
+  <h2>Где делать: 4&nbsp;нейросети и&nbsp;что о&nbsp;них важно знать</h2>
+  <p>Запросы с этой страницы рассчитаны на нейросети, которые принимают ваши фото как образец и создают по ним новый снимок. Ни один сервис не гарантирует точного сходства, поэтому чек-лист проверки нужен везде.</p>
+  <div class="facts">
+    <div class="fact"><span class="label">ChatGPT</span><p>Нажмите на «+» или скрепку рядом с полем ввода, загрузите свои фото и опишите, что нужно. Создавать картинки можно на всех тарифах, но точный лимит для бесплатного тарифа OpenAI не публикует. Из России сервис официально не работает, понадобится VPN. Справка: <a href="https://help.openai.com/en/articles/11084440-images-in-chatgpt" target="_blank" rel="noopener">картинки в ChatGPT</a>, <a href="https://help.openai.com/en/articles/5347006" target="_blank" rel="noopener">страны, где работает сервис</a>.</p></div>
+    <div class="fact"><span class="label">Gemini</span><p>Тоже создаёт снимки по вашим фото, лимиты зависят от тарифа. Но с 14.08.2026 Gemini недоступен из России, и у части пользователей не помогает даже VPN. Справка: <a href="https://support.google.com/gemini/answer/16275805" target="_blank" rel="noopener">лимиты Gemini</a>.</p></div>
+    <div class="fact"><span class="label">ГигаЧат</span><p>Нейросеть Сбера, работает из России без VPN и бесплатно. Можно загрузить своё фото и попросить изменить его, а в режиме «нейрофотосессия» получить серию кадров из 1&nbsp;снимка. Сходство лица не гарантировано: по отзывам пользователей, лицо может немного меняться. Подробнее: <a href="https://ppc.world/news/sber-obnovil-model-kandinsky-v-gigachat-do-versii-60/" target="_blank" rel="noopener">новость об обновлении</a>.</p></div>
+    <div class="fact"><span class="label">Алиса AI</span><p>Нейросеть Яндекса, работает из России без VPN и бесплатно, но при высокой нагрузке без подписки Алиса Плюс функция может быть недоступна. Нажмите «Редактировать фото», загрузите снимок и выберите шаблон или опишите, что изменить. Загрузить фото как образец, чтобы получить себя в новой сцене, нельзя: Алиса меняет сам загруженный снимок. Сходство тоже не гарантировано. Справка: <a href="https://alice.yandex.ru/support/ru/assistant/chat/picture" target="_blank" rel="noopener">картинки в Алисе</a>.</p></div>
+  </div>
+  <p class="plate">Если сервис принимает только 1&nbsp;фото, уберите из запроса строки про «фото 1–3», а описание места, одежды, света и кадра оставьте.</p>
+  <p class="plate"><b>Проверено 09.10.2026.</b> Сервисы меняют возможности и условия. Если что-то выглядит иначе, загляните в справку по ссылке.</p>
+</section>
+
+<section class="wrap blk" id="chestno">
+  <p class="label">Правила</p>
+  <h2>Честно и безопасно: 3&nbsp;правила</h2>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div>
+      <h3>Только свои фото или фото человека, который разрешил</h3>
+      <p>По статье 152.1 Гражданского кодекса изображение человека можно использовать только с его согласия. Сделать нейрофотосессию подруге, маме или клиенту можно, когда человек сам попросил или ясно разрешил. Текст статьи&nbsp;– в <a href="https://www.consultant.ru/document/cons_doc_LAW_5142/" target="_blank" rel="noopener">Гражданском кодексе на КонсультантПлюс</a>.</p>
+    </div></div>
+    <div class="step"><span class="dnum">2</span><div>
+      <h3>Не выдавайте постановочный кадр за реальное событие</h3>
+      <p>Снимок на сцене, если вы не выступали на этом мероприятии,&nbsp;– иллюстрация. Подпишите его так или используйте для анонса будущего эфира. Если зритель может принять кадр за настоящую фотографию события, честнее написать, что он создан с ИИ.</p>
+    </div></div>
+    <div class="step"><span class="dnum">3</span><div>
+      <h3>Не загружайте фото клиентов в зарубежные сервисы за них</h3>
+      <p>Свои фото вы загружаете во внешний сервис на свой риск, поэтому прочитайте его условия хранения данных. А фото клиента&nbsp;– это его персональные данные. Загрузить их в зарубежный сервис&nbsp;– значит передать данные за границу, и для этого нужно письменное согласие человека (закон о персональных данных 152-ФЗ, статья 12). Проще и надёжнее, чтобы каждый загружал свои фото сам. В сложных случаях посоветуйтесь с юристом.</p>
+    </div></div>
+  </div>
+</section>
+
+<div class="dark" id="segodnya">
+  <div class="wrap">
+    <p class="label">Попробуйте сегодня</p>
+    <h2>Ваша первая нейрофотосессия за 5&nbsp;шагов</h2>
+    <div class="steps">
+      <div class="step"><span class="dnum">1</span><div><p><b>Выберите 1&nbsp;задачу:</b> аватарка, фото для страницы специалиста, обложка, личный пост.</p></div></div>
+      <div class="step"><span class="dnum">2</span><div><p><b>Подготовьте 3–5&nbsp;своих фото,</b> главное&nbsp;– первым.</p></div></div>
+      <div class="step"><span class="dnum">3</span><div><p><b>Соберите запрос</b> в конструкторе или возьмите готовый сюжет.</p></div></div>
+      <div class="step"><span class="dnum">4</span><div><p><b>Проверьте результат</b> по чек-листу и, если нужно, сделайте 1&nbsp;точечную правку.</p></div></div>
+      <div class="step"><span class="dnum">5</span><div><p><b>Сделайте второй кадр</b> в том же стиле.</p></div></div>
+    </div>
+    <p class="plate"><b>Готово, когда</b> у вас есть хотя бы 1&nbsp;снимок, на котором вы узнаёте себя и который действительно подходит для вашей задачи. Выбирайте не самую эффектную картинку, а самую похожую и полезную.</p>
+  </div>
+</div>
+
+<section class="wrap blk" id="dalshe">
+  <p class="label">К уроку 5</p>
+  <h2>Что ещё есть к&nbsp;этому уроку</h2>
+  <div class="links">
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul3/bonus-govoryashchee-foto/" target="_top"><span class="label">Бонус</span><h3>Говорящая фотография на русском</h3><span>Как оживить своё настоящее фото с вашей записью голоса и проверить, попадают ли губы в речь.</span><span class="go">Открыть →</span></a>
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul3/bonus-neirofoto-instrumenty/" target="_top"><span class="label">Бонус</span><h3>Что дальше</h3><span>Для тех, кто хочет дальше: обучение внешности, улучшение качества снимков и сравнение сервисов.</span><span class="go">Открыть →</span></a>
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul3/urok5/" target="_top"><span class="label">Урок 5</span><h3>Нейрофотосессии и видеоаватары</h3><span>Вернуться к видео урока.</span><span class="go">К уроку →</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус к уроку 5&nbsp;модуля 3</p>
+    <p>Возможности сервисов сверены 09.10.2026 по их справкам. Интерфейсы и условия меняются: если что-то выглядит иначе, уточните в справке сервиса.</p>
+  </div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='0';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,ta.value.length);
+      var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+      document.body.removeChild(ta);
+      ok?res():rej();
+    });
+  }
+  function syncChips(){
+    document.querySelectorAll('.chip').forEach(function(c){
+      var d=document.getElementById(c.getAttribute('href').slice(1));
+      c.classList.toggle('on',!!(d&&d.open));
+    });
+  }
+  function openCard(id,smooth){
+    var el=document.getElementById(id);
+    if(!el||el.tagName!=='DETAILS')return false;
+    el.open=true;syncChips();
+    setTimeout(function(){el.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});},30);
+    return true;
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(btn){
+      var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+      copy(pre?pre.innerText:'').then(function(){
+        var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+        say('Скопировано. Вставьте в чат');
+        setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+      }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+      return;
+    }
+    var a=ev.target.closest('a[href^="#"]');
+    if(a){
+      var id=a.getAttribute('href').slice(1);
+      if(openCard(id,true)){ev.preventDefault();if(history.replaceState)history.replaceState(null,'','#'+id);}
+    }
+  });
+  document.querySelectorAll('details.scn').forEach(function(d){d.addEventListener('toggle',syncChips);});
+  function openFromHash(){var id=location.hash.slice(1);if(id)openCard(id,false);}
+  window.addEventListener('hashchange',openFromHash);
+  openFromHash();
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img class="sr" src="https://mc.yandex.ru/watch/112003701" alt=""></div></noscript>
+</body>
+</html>
