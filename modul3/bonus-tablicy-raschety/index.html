@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Таблицы с ИИ: как точно поставить задачу на расчёты и аналитику · Бонус к уроку 2 модуля 3 · Нейро-архитектор</title>
+<meta name="description" content="Как поставить нейросети задачу на расчёты по таблице так, чтобы ей нечего было додумывать: 5 причин ошибок, шаблон из 7 пунктов, примеры «было → стало», 6 ролей и 9 усилителей для анализа, 11 готовых промптов и чек-лист.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ТИПОГРАФИЧЕСКАЯ ШКАЛА – 4 роли (МЕТОД, раздел B2). Новых размеров, цветов и начертаний не вводить.
+   Р1 Заголовок    – Instrument Serif 400: шапка var(--h1), разделы var(--h2)
+   Р2 Подзаголовок – Manrope 700, var(--sub) 19px: заголовки карточек и пунктов шаблона
+   Р3 Текст        – Manrope 500, var(--text) 17px, цвет var(--ink); на тёмном фоне – var(--ondark). Всё остальное, включая промпты и кнопки
+   Р4 Метка        – Manrope 800, var(--label) 12px, CAPS с разрядкой, магента; тёмные плашки-подзаголовки – тоже Р4
+   Крупные цифры пунктов (Instrument Serif) – декоративные, ролями не считаются.
+   Курсива нет. Инлайн-стилей в разметке нет. Один левый край: выделяем плашкой, а не сдвигом. */
+:root{
+  --ink:#211829; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --wash:#FFF1F8; --wash-line:#F1D9EC;
+  --dark:#1B1420; --dark2:#0F0B14; --ondark:#E9E1EE;
+  --maxw:1000px;
+  --h1:clamp(36px,5.6vw,66px); --h2:clamp(27px,3.4vw,40px);
+  --sub:19px; --text:17px; --label:12px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-wrap:break-word}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:40px;padding-right:40px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2);margin-top:12px;margin-bottom:18px}
+h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.32}
+.it{color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none;border-bottom:1px solid rgba(230,25,140,.35)}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:14px}
+.label{font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);line-height:1.45}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* шапка */
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-bottom:1px solid var(--ink);padding-top:34px;padding-bottom:13px}
+.rubric .r2{text-align:right}
+.hero{padding-top:38px;padding-bottom:8px}
+.hlead{margin-top:22px}
+.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 30px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.meta .label{display:block;margin-bottom:4px}
+.meta p{font-weight:600}
+
+/* кнопки */
+.btns{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:26px}
+.btn{font-family:var(--sans);font-size:var(--text);font-weight:700;line-height:1.3;border:none;border-radius:0;padding:14px 22px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+a.btn{border-bottom:none;color:#fff}
+.btn:hover{background:var(--pink);color:#fff}
+.btn.pink{background:var(--pink)}
+.btn.pink:hover{background:var(--pink-strong)}
+.btn.done,.btn.done:hover{background:#1FA24E;color:#fff}
+.linkbtn{font-weight:700;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:1px}
+.linkbtn:hover{color:var(--pink)}
+
+/* оглавление */
+.toc{padding-top:48px}
+.nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:12px;padding-bottom:24px;border-bottom:1px solid var(--ink)}
+.nav a{color:var(--ink);font-weight:600;border-bottom:2px solid transparent;padding-bottom:1px}
+.nav a:hover{border-bottom-color:var(--pink)}
+
+/* разделы */
+section.blk{padding-top:68px;padding-bottom:8px;scroll-margin-top:8px}
+.plate{background:var(--wash);padding:16px 20px;margin-top:22px}
+.blk h3.sub{margin-top:40px;margin-bottom:10px}
+
+/* пункты: цифра у левого края, текст после неё */
+.steps{margin-top:24px;border-top:1px solid var(--ink)}
+.step{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:24px 0;border-bottom:1px solid var(--line)}
+.dnum{font-family:var(--serif);font-size:46px;line-height:.9;color:var(--pink)}
+.step h3{margin-bottom:6px}
+.steps+p{margin-top:22px}
+
+/* пример в светлой плашке */
+.ex{background:var(--wash);padding:14px 18px;margin-top:12px}
+.ex .label{display:block;margin-bottom:2px}
+
+/* 5 причин: карточки */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px}
+.wcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--ink);padding:20px 22px}
+.wcard .label{display:block;margin-bottom:8px}
+.wcard h3{margin-bottom:6px}
+.wcard.go{background:var(--dark);color:var(--ondark);border-color:var(--dark);border-top-color:var(--pink)}
+.wcard.go h3{color:#fff}
+.wcard.go .label,.wcard.go a{color:var(--pink-soft)}
+.rcard{display:flex;flex-direction:column}
+.phrase{background:var(--wash);padding:14px 16px;margin-top:auto}
+.rcard p+.phrase{margin-top:14px}
+.phrase .label{display:block;margin-bottom:4px}
+.phrase .btns{margin-top:10px}
+.phrase .btn{background:transparent;color:var(--ink);padding:0 0 2px;border-bottom:2px solid var(--pink)}
+.phrase .btn:hover{background:transparent;color:var(--pink)}
+.phrase .btn.done,.phrase .btn.done:hover{background:transparent;color:#1FA24E;border-bottom-color:#1FA24E}
+
+/* было → стало */
+.pairs .sh,.inner .sh{margin-top:40px}
+.inner .sh+p{margin-top:14px}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:14px;margin-top:12px}
+.was{background:#F4F0F5;border-left:3px solid var(--line);padding:16px 20px}
+.now{background:var(--wash);border-left:3px solid var(--pink);padding:16px 20px}
+.was .label,.now .label{display:block;margin-bottom:4px}
+
+/* промпты на тёмной ленте с чипами */
+.band{background:var(--dark);color:var(--ondark);padding-top:60px;padding-bottom:52px;margin-top:76px;scroll-margin-top:0}
+.band h2{color:#fff}
+.band .label{color:var(--pink-soft)}
+.band b{color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{display:inline-flex;align-items:baseline;gap:8px;font-weight:600;line-height:1.3;color:var(--ondark);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.18);padding:10px 14px;transition:background .2s,border-color .2s}
+.chip .cn{color:var(--pink-soft);font-weight:800}
+.chip:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+.chip:hover .cn{color:#fff}
+.prompts{padding-top:16px;padding-bottom:8px}
+.pr{padding-top:44px;scroll-margin-top:8px}
+.sh{display:block;background:var(--dark);color:#fff;font-size:var(--label);font-weight:800;letter-spacing:.14em;text-transform:uppercase;line-height:1.45;padding:13px 18px;border-left:3px solid var(--pink)}
+.sh+p{margin-top:14px}
+.promptbox{background:var(--dark);padding:24px 26px;border-left:3px solid var(--pink);margin-top:16px}
+.plabel{font-size:var(--label);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#FFC2E0;line-height:1.45;margin-bottom:12px}
+.promptbox pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--sans);font-size:var(--text);font-weight:500;line-height:1.65;color:var(--ondark)}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+.promptbox .btns{margin-top:18px}
+.promptbox .btn{background:#fff;color:var(--ink)}
+.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}
+.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+.backlink{margin-top:16px}
+
+/* чек-лист */
+.check{margin-top:24px;border-top:1px solid var(--ink)}
+.ck{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.ck input{flex:none;width:20px;height:20px;margin-top:3px;accent-color:var(--pink);cursor:pointer}
+
+/* ссылки */
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+a.lcard{display:block;background:#fff;color:var(--ink);border:1px solid var(--line);border-top:3px solid var(--pink);padding:20px;transition:border-color .2s}
+a.lcard:hover{border-color:var(--pink);color:var(--ink)}
+.lcard h3{margin-top:8px;margin-bottom:6px}
+.lcard .go{display:block;margin-top:12px;font-weight:700;color:var(--pink)}
+
+footer{background:var(--dark2);color:#B7A9BD;padding-top:30px;padding-bottom:40px;margin-top:76px}
+footer a{color:#B7A9BD;border-bottom:1px solid rgba(183,169,189,.4)}
+footer a:hover{color:var(--pink-soft)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:760px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .rubric{flex-direction:column;align-items:flex-start;gap:4px}
+  .rubric .r2{text-align:left}
+  .meta,.why,.pair,.links{grid-template-columns:1fr}
+  .meta{gap:14px}
+  .btns .btn{width:100%;justify-content:center}
+  .step{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:22px 0}
+  .dnum{font-size:34px}
+  .wcard{padding:18px 18px 20px}
+  .pair{gap:8px}
+  .promptbox{padding:20px 20px 20px 17px;margin-left:-20px;margin-right:-20px}
+  .sh{margin-left:-20px;margin-right:-20px;padding:12px 20px 12px 17px}
+  .pairs .sh,.inner .sh{margin-left:0;margin-right:0;padding:12px 16px}
+  .phrase .btns .btn{width:auto}
+  .band{padding-top:48px;padding-bottom:42px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span class="label">Нейро-архитектор</span><span class="label r2">Модуль 3 · урок 2 · бонус</span></div>
+  <div class="hero">
+    <h1>Таблицы с&nbsp;ИИ: <span class="it">как точно поставить задачу на&nbsp;расчёты и&nbsp;аналитику</span></h1>
+    <p class="hlead">Когда нейросеть «ошибается в цифрах», чаще всего дело не в ней, а в задаче. «Посчитай выручку» можно понять 5&nbsp;способами: с возвратами или без, по дате оплаты или по дате заказа, с НДС или без. Человек-аналитик переспросит, а нейросеть додумает. В этом гайде&nbsp;– как поставить задачу так, чтобы додумывать было нечего, и как проверить, что посчитано именно то, что вы имели в виду.</p>
+    <div class="meta">
+      <div><span class="label">Для кого</span><p>Для тех, кто считает в Excel или Google Таблицах вместе с нейросетью: бюджет, оплаты, продажи, заявки, статистика, отчёты</p></div>
+      <div><span class="label">Внутри</span><p>5&nbsp;причин ошибок, шаблон задачи из 7&nbsp;пунктов, 4&nbsp;примера «было → стало», 6&nbsp;ролей и 9&nbsp;усилителей для анализа, 11&nbsp;готовых промптов и чек-лист</p></div>
+    </div>
+    <div class="btns">
+      <a class="linkbtn" href="#shablon">Сразу к шаблону</a>
+      <a class="linkbtn" href="#promty">К 11&nbsp;готовым промптам</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap blk" id="glavnoe">
+  <p class="label">Главное за минуту</p>
+  <h2>5&nbsp;шагов к точной задаче на&nbsp;расчёт</h2>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div><p><b>Сначала вопрос и решение, потом цифры.</b> Что вы хотите понять и что сделаете с ответом.</p></div></div>
+    <div class="step"><span class="dnum">2</span><div><p><b>Определения словами.</b> Что такое «выручка», «активный клиент», «просрочка» именно у вас.</p></div></div>
+    <div class="step"><span class="dnum">3</span><div><p><b>Правила и исключения.</b> Что не считаем, что делать с пустыми ячейками, дублями, возвратами.</p></div></div>
+    <div class="step"><span class="dnum">4</span><div><p><b>Форма ответа.</b> Число, таблица, график или формула&nbsp;– и с какой точностью.</p></div></div>
+    <div class="step"><span class="dnum">5</span><div><p><b>Проверка.</b> Заранее назовите 2–3&nbsp;строки, где ответ знаете, и сверьте.</p></div></div>
+  </div>
+</section>
+
+<section class="wrap toc">
+  <p class="label">Оглавление</p>
+  <nav class="nav" aria-label="Разделы гайда">
+    <a href="#prichiny">Почему ИИ считает неправильно</a>
+    <a href="#shablon">Шаблон задачи</a>
+    <a href="#bylo">Было → стало</a>
+    <a href="#promty">11&nbsp;готовых промптов</a>
+    <a href="#roli">Роли и усилители</a>
+    <a href="#limit">Лимит и время</a>
+    <a href="#proverka">Проверьте себя</a>
+    <a href="#dalshe">Ссылки</a>
+  </nav>
+</section>
+
+<section class="wrap blk" id="prichiny">
+  <p class="label">Откуда ошибки</p>
+  <h2>Почему ИИ «считает неправильно»: 5&nbsp;причин</h2>
+  <p>Почти всегда ошибка в цифрах начинается раньше расчёта&nbsp;– в том, как сформулирована задача и что нейросеть видит в файле.</p>
+  <div class="why">
+    <div class="wcard"><span class="label">Причина 1</span><h3>Расплывчатое слово</h3><p>«Прибыль», «средний чек», «за месяц»&nbsp;– у каждого своё определение. Нейросеть выберет одно и не скажет какое.</p></div>
+    <div class="wcard"><span class="label">Причина 2</span><h3>Не названы исключения</h3><p>Возвраты, тестовые заявки, отменённые заказы, пустые ячейки попадут в расчёт.</p></div>
+    <div class="wcard"><span class="label">Причина 3</span><h3>Неизвестны форматы</h3><p>Дата «03.04»&nbsp;– это 3&nbsp;апреля или 4&nbsp;марта? «1,5»&nbsp;– число или текст? Рубли или тысячи рублей?</p></div>
+    <div class="wcard"><span class="label">Причина 4</span><h3>Не та таблица целиком</h3><p>Нейросеть видит только часть файла или путает листы и считает по неполным данным.</p></div>
+    <div class="wcard"><span class="label">Причина 5</span><h3>Счёт «в уме»</h3><p>Языковая модель плохо складывает длинные столбцы. Считать должна формула или код.</p></div>
+    <div class="wcard go"><span class="label">Что с этим делать</span><h3>Поставить задачу по шаблону</h3><p>Каждый из 7&nbsp;пунктов <a href="#shablon">шаблона ниже</a> закрывает одну из этих дыр.</p></div>
+  </div>
+</section>
+
+<section class="wrap blk" id="shablon">
+  <p class="label">Шаблон</p>
+  <h2>Шаблон постановки задачи: 7&nbsp;пунктов</h2>
+  <p>Пройдите по пунктам по порядку. Примеры&nbsp;– из таблицы оплат онлайн-школы или частного специалиста. Готовый шаблон для копирования&nbsp;– <a href="#p1">промпт&nbsp;1</a>.</p>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div>
+      <h3>Вопрос и решение</h3>
+      <p>Что хотите понять и что сделаете с ответом.</p>
+      <p class="ex"><span class="label">Пример</span>«Хочу понять, какие услуги приносят больше всего денег, чтобы решить, что продвигать в ноябре».</p>
+    </div></div>
+    <div class="step"><span class="dnum">2</span><div>
+      <h3>Данные</h3>
+      <p>Какая таблица, какой лист, какие столбцы и строки, сколько строк.</p>
+      <p class="ex"><span class="label">Пример</span>«Лист „Оплаты“, столбцы A–F, строки 2–480».</p>
+    </div></div>
+    <div class="step"><span class="dnum">3</span><div>
+      <h3>Определения</h3>
+      <p>Что значит каждое ключевое слово именно в вашей таблице.</p>
+      <p class="ex"><span class="label">Пример</span>«Выручка&nbsp;– сумма столбца „Сумма“ по строкам со статусом „Оплачено“, без возвратов. Месяц&nbsp;– по дате оплаты, не по дате заявки».</p>
+    </div></div>
+    <div class="step"><span class="dnum">4</span><div>
+      <h3>Правила и исключения</h3>
+      <p>Что не считаем и что делать с пустыми ячейками, дублями, возвратами.</p>
+      <p class="ex"><span class="label">Пример</span>«Тестовые оплаты (клиент „Тест“) не считаем. Пустая сумма&nbsp;– не ноль, а пропуск: выведи такие строки отдельно».</p>
+    </div></div>
+    <div class="step"><span class="dnum">5</span><div>
+      <h3>Форматы</h3>
+      <p>Даты, валюта, единицы, программа и язык.</p>
+      <p class="ex"><span class="label">Пример</span>«Даты в формате ДД.ММ.ГГГГ, суммы в рублях с копейками, Google Таблицы, русская версия».</p>
+    </div></div>
+    <div class="step"><span class="dnum">6</span><div>
+      <h3>Форма ответа</h3>
+      <p>Число, таблица, график или формула, округление и сортировка.</p>
+      <p class="ex"><span class="label">Пример</span>«Таблица: услуга&nbsp;– выручка&nbsp;– доля в %&nbsp;– число оплат, по убыванию выручки, округление до рубля. И формула, чтобы пересчитывалось само».</p>
+    </div></div>
+    <div class="step"><span class="dnum">7</span><div>
+      <h3>Проверка</h3>
+      <p>Строки или итог, которые вы знаете сами.</p>
+      <p class="ex"><span class="label">Пример</span>«За сентябрь я знаю итог&nbsp;– 184&nbsp;300&nbsp;₽. Сначала посчитай сентябрь и сверь с этим числом».</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk pairs" id="bylo">
+  <p class="label">Было → стало</p>
+  <h2>4&nbsp;примера: от&nbsp;расплывчатой просьбы к&nbsp;точной задаче</h2>
+  <p>Слева&nbsp;– как обычно просят, справа&nbsp;– та же просьба, в которой нейросети нечего додумывать.</p>
+
+  <p class="sh">1 · Расчёт</p>
+  <div class="pair">
+    <div class="was"><span class="label">Было</span><p>«Посчитай выручку за месяц».</p></div>
+    <div class="now"><span class="label">Стало</span><p>«Посчитай сумму по столбцу D „Сумма“ для строк, где в столбце E статус „Оплачено“ и дата оплаты в столбце B&nbsp;– с 01.09.2026 по 30.09.2026. Возвраты (статус „Возврат“) вычти. Ответ&nbsp;– 1&nbsp;число и формула для Google Таблиц».</p></div>
+  </div>
+
+  <p class="sh">2 · Сравнение</p>
+  <div class="pair">
+    <div class="was"><span class="label">Было</span><p>«Сравни, как идут продажи».</p></div>
+    <div class="now"><span class="label">Стало</span><p>«Сравни выручку сентября и августа по каждой услуге: абсолютная разница в рублях и в процентах. Отметь услуги, где падение больше 20%. Ответ&nbsp;– таблица по убыванию падения».</p></div>
+  </div>
+
+  <p class="sh">3 · Поиск проблем</p>
+  <div class="pair">
+    <div class="was"><span class="label">Было</span><p>«Найди ошибки в таблице».</p></div>
+    <div class="now"><span class="label">Стало</span><p>«Найди строки, где: сумма пустая или ноль; дата оплаты раньше даты заявки; статус не из списка „Новая / Оплачено / Возврат“; один и тот же клиент и сумма повторяются в один день. Выведи номера строк и причину, ничего не исправляй».</p></div>
+  </div>
+
+  <p class="sh">4 · Выводы</p>
+  <div class="pair">
+    <div class="was"><span class="label">Было</span><p>«Сделай выводы по таблице».</p></div>
+    <div class="now"><span class="label">Стало</span><p>«Ответь на 3 вопроса: какие 3 услуги дают 80% выручки; в какие дни недели больше всего оплат; у скольких клиентов больше 1&nbsp;оплаты. Для каждого вывода&nbsp;– цифра и как посчитано. Если для ответа не хватает данных&nbsp;– скажи, чего».</p></div>
+  </div>
+</section>
+
+<div class="band" id="promty">
+  <div class="wrap">
+    <p class="label">Типовые задачи</p>
+    <h2>11&nbsp;готовых промптов для расчётов и&nbsp;аналитики</h2>
+    <p>Нажмите на нужную задачу, и страница перейдёт к промпту. Замените то, что в <b>[квадратных скобках]</b>, на своё, лишние варианты внутри скобок удалите.</p>
+    <nav class="chips" aria-label="Промпты">
+      <a class="chip" href="#p1"><span class="cn">1</span>Универсальный шаблон</a>
+      <a class="chip" href="#p2"><span class="cn">2</span>Сначала уточни</a>
+      <a class="chip" href="#p3"><span class="cn">3</span>Показатель формулой</a>
+      <a class="chip" href="#p4"><span class="cn">4</span>Сравнение периодов</a>
+      <a class="chip" href="#p5"><span class="cn">5</span>Сводная таблица</a>
+      <a class="chip" href="#p6"><span class="cn">6</span>Ошибки и аномалии</a>
+      <a class="chip" href="#p7"><span class="cn">7</span>Ответы на вопросы</a>
+      <a class="chip" href="#p8"><span class="cn">8</span>Всё ли ты видишь</a>
+      <a class="chip" href="#p9"><span class="cn">9</span>Проверка результата</a>
+      <a class="chip" href="#p10"><span class="cn">10</span>С ролью и усилителями</a>
+      <a class="chip" href="#p11"><span class="cn">11</span>Мой аналитик</a>
+    </nav>
+  </div>
+</div>
+
+<section class="wrap prompts">
+
+<div class="pr" id="p1">
+  <p class="sh">1 · Универсальный шаблон задачи</p>
+  <p>Все 7&nbsp;пунктов шаблона в одном запросе. Нейросеть сначала перескажет задачу и задаст вопросы, а потом посчитает.</p>
+  <div class="promptbox"><p class="plabel">Промпт 1</p><pre>Помоги посчитать по моей таблице. Прежде чем считать, перескажи задачу своими словами и задай вопросы, если что-то можно понять двояко.
+Вопрос и решение: <span class="tok">[что хочу понять и что сделаю с ответом]</span>.
+Данные: <span class="tok">[таблица, лист, столбцы, строки]</span>.
+Определения: <span class="tok">[что значит каждое ключевое слово – выручка, клиент, месяц и т. п.]</span>.
+Правила и исключения: <span class="tok">[что не считаем, что делать с пустыми ячейками, дублями, возвратами]</span>.
+Форматы: <span class="tok">[даты, валюта, единицы; Google Таблицы / Excel, русская версия]</span>.
+Форма ответа: <span class="tok">[число / таблица / график / формула; округление; сортировка]</span>.
+Проверка: <span class="tok">[строки или итог, который я знаю: …]</span>.
+Считай формулой или кодом, не в уме. После расчёта покажи, как считал(а), и сверь с моей проверкой.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p2">
+  <p class="sh">2 · Сначала уточни&nbsp;– потом считай</p>
+  <p>Когда задача пока в голове и вы не уверены, что описали её точно. Нейросеть найдёт двусмысленные места и соберёт постановку по 7&nbsp;пунктам.</p>
+  <div class="promptbox"><p class="plabel">Промпт 2</p><pre>Вот моя задача: <span class="tok">[опишите, как получится]</span>. Не считай пока. Найди в ней слова и места, которые можно понять по-разному (определения, периоды, исключения, единицы), и задай мне по ним вопросы списком – максимум 7. После моих ответов собери точную постановку задачи по 7 пунктам: вопрос, данные, определения, исключения, форматы, форма ответа, проверка – и покажи мне.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p3">
+  <p class="sh">3 · Расчёт показателя формулой</p>
+  <p>Нужен показатель, который будет пересчитываться сам. Нейросеть пишет формулу, а считает таблица.</p>
+  <div class="promptbox"><p class="plabel">Промпт 3</p><pre>Нужна формула для <span class="tok">[Google Таблиц / Excel]</span>, русская версия.
+Посчитать: <span class="tok">[показатель]</span> – это <span class="tok">[определение словами]</span>.
+Данные: столбцы <span class="tok">[буквы и названия]</span>, строки с <span class="tok">[2]</span> по <span class="tok">[последняя]</span>.
+Условия: <span class="tok">[период, статус, исключения]</span>.
+Дай формулу, готовую к вставке, ячейку для неё, объяснение в 1 предложении и проверку на 2 строках, где ответ я знаю: <span class="tok">[строки и ожидаемый результат]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p4">
+  <p class="sh">4 · Сравнение периодов</p>
+  <p>Как изменился показатель от периода к периоду и где сильнее всего.</p>
+  <div class="promptbox"><p class="plabel">Промпт 4</p><pre>Сравни <span class="tok">[показатель]</span> за <span class="tok">[период 1]</span> и <span class="tok">[период 2]</span> в разрезе <span class="tok">[услуги / клиенты / каналы]</span>.
+Определение показателя: <span class="tok">[как считается]</span>. Период – по <span class="tok">[какой дате]</span>.
+Ответ: таблица «<span class="tok">[разрез]</span> – период 1 – период 2 – разница в ₽ – разница в %», по убыванию <span class="tok">[чего]</span>. Отметь строки, где изменение больше <span class="tok">[порог]</span> %.
+Отдельно напиши, какие строки есть только в одном из периодов. Считай формулами или кодом.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p5">
+  <p class="sh">5 · Сводная таблица</p>
+  <p>Сгруппировать данные по услугам, клиентам или месяцам прямо в таблице&nbsp;– с пошаговой инструкцией, куда нажать.</p>
+  <div class="promptbox"><p class="plabel">Промпт 5</p><pre>Хочу сводную таблицу в <span class="tok">[Google Таблицах / Excel]</span>: строки – <span class="tok">[по чему группировать]</span>, столбцы – <span class="tok">[например, месяцы]</span>, значения – <span class="tok">[сумма / количество / среднее чего]</span>.
+Фильтр: <span class="tok">[что исключить]</span>.
+Объясни пошагово, куда нажать, чтобы её создать, и как обновлять, когда добавятся новые строки.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p6">
+  <p class="sh">6 · Поиск ошибок и аномалий</p>
+  <p>Найти ошибки по вашим правилам, ничего не исправляя, и отдельно получить список подозрительного.</p>
+  <div class="promptbox"><p class="plabel">Промпт 6</p><pre>Проверь таблицу на ошибки. Ничего не исправляй – только найди и покажи.
+Считай ошибкой: <span class="tok">[список правил – пустая сумма; дата позже сегодняшней; статус не из списка …; повтор клиента и суммы в один день; сумма больше … ₽]</span>.
+Ответ: номер строки – столбец – значение – какое правило нарушено. В конце – сколько ошибок каждого типа.
+Если найдёшь что-то подозрительное вне моих правил – вынеси отдельным списком «Проверить вручную».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p7">
+  <p class="sh">7 · Аналитика: ответы на конкретные вопросы</p>
+  <p>Вместо «сделай выводы»&nbsp;– ваши вопросы, и к каждому ответу цифра и способ расчёта.</p>
+  <div class="promptbox"><p class="plabel">Промпт 7</p><pre>Ответь по таблице на вопросы:
+1) <span class="tok">[вопрос 1]</span>;
+2) <span class="tok">[вопрос 2]</span>;
+3) <span class="tok">[вопрос 3]</span>.
+Для каждого ответа: цифра, как посчитано (формула или шаги), и насколько ответ надёжен – хватает ли данных. Не делай выводов, которые не следуют из цифр, и не давай советов, пока я не попрошу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p8">
+  <p class="sh">8 · Сверка «всё ли ты видишь»</p>
+  <p>Перед любым расчётом по загруженному файлу: нейросеть называет, что видит, а вы сверяете с таблицей.</p>
+  <div class="promptbox"><p class="plabel">Промпт 8</p><pre>Перед любым расчётом: назови лист, число строк и столбцов, заголовки, итог по столбцу <span class="tok">[название]</span> и число пустых ячеек в нём. Я сверю с таблицей. Если видишь не все строки или лист – скажи сразу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p9">
+  <p class="sh">9 · Проверка результата</p>
+  <p>После расчёта: пересчёт другим способом, сверка с известным итогом и проверка исключений.</p>
+  <div class="promptbox"><p class="plabel">Промпт 9</p><pre>Вот твой результат: <span class="tok">[вставьте]</span>. Проверь его сам(а):
+1) пересчитай другим способом (другой формулой или кодом) и сравни;
+2) сверь с итогом, который я знаю: <span class="tok">[число]</span>;
+3) проверь, не попали ли в расчёт исключения: <span class="tok">[список]</span>.
+Если что-то не сходится – найди причину и покажи исправленный расчёт.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p10">
+  <p class="sh">10 · Анализ с ролью и усилителями</p>
+  <p>Роль, проверка качества данных, план, двойной расчёт и взгляд скептика в одном запросе. Подробнее о ролях и усилителях&nbsp;– <a href="#roli">в разделе ниже</a>.</p>
+  <div class="promptbox"><p class="plabel">Промпт 10</p><pre>Выступи как <span class="tok">[роль: аналитик данных / финансовый аналитик / ревизор / маркетолог-аналитик]</span>.
+Задача: <span class="tok">[постановка по 7 пунктам или коротко: вопрос, данные, определения, исключения, форма ответа, проверка]</span>.
+Работай так:
+1) сначала проверь качество данных: пропуски, дубли, выбросы, странные значения – и скажи, что нашёл(ла);
+2) напиши план анализа и перечисли допущения – дождись моего «да»;
+3) считай кодом или формулами, не в уме; ключевые цифры посчитай 2 способами;
+4) у каждого вывода – цифра, как посчитано и надёжность (высокая / средняя / низкая);
+5) в конце выступи как скептик: 3 слабых места выводов и каких данных не хватает.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+<div class="pr" id="p11">
+  <p class="sh">11 · Собрать помощника «Мой аналитик»</p>
+  <p>Для тех, кто считает по таблицам регулярно. Нейросеть расспросит вас о таблицах и показателях и напишет инструкцию для проекта или навыка.</p>
+  <div class="promptbox"><p class="plabel">Промпт 11</p><pre>Помоги собрать инструкцию для моего помощника-аналитика (проект или навык). Задай мне вопросы по очереди: какие таблицы я веду, что в них за столбцы, как я считаю ключевые показатели (выручка, расходы, конверсия и т. п.), какие решения принимаю по цифрам, в какой программе работаю.
+Потом напиши инструкцию на 1 страницу: роль, описание таблиц, мои определения показателей, правила и исключения, усилители (план до расчёта, допущения вслух, счёт кодом или формулой, надёжность выводов, проверка «критиком»), форма ответа по умолчанию. Пиши так, чтобы я мог(ла) вставить её в инструкцию проекта без правок.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="backlink"><a class="linkbtn" href="#promty">↑ Ко всем промптам</a></p>
+</div>
+
+</section>
+
+<section class="wrap blk inner" id="roli">
+  <p class="label">Роли и усилители</p>
+  <h2>Роли и усилители: как сделать анализ точнее и&nbsp;честнее</h2>
+  <p>Роль задаёт нейросети угол зрения и стандарт работы: аналитик проверяет данные, финансист думает о деньгах, скептик ищет слабые места. Усилитель&nbsp;– это короткая добавка к любому запросу, которая делает анализ точнее и честнее. Роль не заменяет <a href="#shablon">постановку задачи из 7&nbsp;пунктов</a>, а добавляется к ней сверху.</p>
+
+  <p class="sh">Роли&nbsp;– кого «позвать»</p>
+  <p>Выберите роль под задачу и вставьте фразу в начало запроса. Готовый запрос, где роль уже соединена с усилителями,&nbsp;– <a href="#p10">промпт&nbsp;10</a>.</p>
+  <div class="why roles">
+    <div class="wcard rcard"><span class="label">Роль 1</span><h3>Аналитик данных</h3><p><b>Когда звать:</b> когда нужно разобраться в таблице и найти закономерности.</p>
+      <div class="phrase"><span class="label">Фраза для запроса</span><p class="ptext">Выступи как аналитик данных: сначала проверь качество данных&nbsp;– пропуски, дубли, выбросы,&nbsp;– и только потом считай.</p><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div></div>
+    <div class="wcard rcard"><span class="label">Роль 2</span><h3>Финансовый аналитик</h3><p><b>Когда звать:</b> бюджет, выручка, расходы, окупаемость.</p>
+      <div class="phrase"><span class="label">Фраза для запроса</span><p class="ptext">Выступи как финансовый аналитик малого бизнеса: считай по кассовому принципу&nbsp;– по дате оплаты, разделяй разовые и регулярные поступления.</p><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div></div>
+    <div class="wcard rcard"><span class="label">Роль 3</span><h3>Бухгалтер-ревизор</h3><p><b>Когда звать:</b> сверка, поиск ошибок и расхождений.</p>
+      <div class="phrase"><span class="label">Фраза для запроса</span><p class="ptext">Выступи как ревизор: ничего не исправляй, найди расхождения и для каждого укажи строку и правило, которое нарушено.</p><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div></div>
+    <div class="wcard rcard"><span class="label">Роль 4</span><h3>Маркетолог-аналитик</h3><p><b>Когда звать:</b> заявки, конверсия, каналы, воронка.</p>
+      <div class="phrase"><span class="label">Фраза для запроса</span><p class="ptext">Выступи как маркетолог-аналитик: посчитай конверсию по шагам воронки и покажи, где теряется больше всего людей.</p><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div></div>
+    <div class="wcard rcard"><span class="label">Роль 5</span><h3>Скептик</h3><p><b>Когда звать:</b> когда выводы уже есть и нужно их проверить.</p>
+      <div class="phrase"><span class="label">Фраза для запроса</span><p class="ptext">Выступи как скептик: найди 3 слабых места в этих выводах и скажи, какие данные их подтвердили бы или опровергли.</p><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div></div>
+    <div class="wcard rcard"><span class="label">Роль 6</span><h3>Руководитель, который принимает решение</h3><p><b>Когда звать:</b> когда нужно перейти от цифр к действию.</p>
+      <div class="phrase"><span class="label">Фраза для запроса</span><p class="ptext">Выступи как руководитель: по этим цифрам предложи 2–3 решения, для каждого&nbsp;– риск и что проверить через месяц.</p><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div></div>
+  </div>
+
+  <p class="sh">Усилители&nbsp;– добавки к любому запросу</p>
+  <p>Добавьте 1–2&nbsp;фразы в конец своего запроса, когда от ответа зависит решение.</p>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div>
+      <h3>План до расчёта</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Сначала напиши план анализа по шагам и дождись моего „да“.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">2</span><div>
+      <h3>Допущения вслух</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Перечисли все допущения, которые ты делаешь,&nbsp;– я подтвержу или поправлю.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">3</span><div>
+      <h3>Считай кодом</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Считай кодом, если умеешь его запускать, и покажи код или формулу.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">4</span><div>
+      <h3>Двойной расчёт</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Посчитай 2 разными способами и сравни результаты.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">5</span><div>
+      <h3>Надёжность вывода</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«У каждого вывода отметь надёжность: высокая / средняя / низкая&nbsp;– и почему.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">6</span><div>
+      <h3>Альтернативные объяснения</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Для главной закономерности предложи 3 разных объяснения и скажи, какие данные помогут выбрать верное.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">7</span><div>
+      <h3>Чего не хватает</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Скажи, каких данных не хватает для уверенного ответа, и что мне досчитать или спросить.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">8</span><div>
+      <h3>Приём «Критик» (из модуля&nbsp;2)</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Теперь перечитай свой ответ как строгий критик: что могло быть посчитано неверно? Исправь и покажи разницу.»</p>
+    </div></div>
+    <div class="step"><span class="dnum">9</span><div>
+      <h3>Наглядность</h3>
+      <p class="ex"><span class="label">Добавьте к запросу</span>«Покажи результат графиком: какой тип графика лучше подходит и почему; данные для него&nbsp;– отдельной таблицей.»</p>
+    </div></div>
+  </div>
+
+  <p class="sh">Навык или проект «Мой аналитик»</p>
+  <p>Если вы считаете по таблицам регулярно, 1&nbsp;раз соберите помощника, как в <a href="https://aiforlife.ru/ii-course/modul2/urok1/" target="_top">модуле&nbsp;2</a>: в инструкцию проекта или в навык положите описание таблицы, ваши определения показателей, роль и усилители. Тогда каждый новый запрос будет короче, а ответы&nbsp;– одинаково аккуратными. Промпт для сборки&nbsp;– <a href="#p11">промпт&nbsp;11</a>.</p>
+</section>
+
+<section class="wrap blk" id="limit">
+  <p class="label">Экономия</p>
+  <h2>Как беречь лимит и время: 5&nbsp;приёмов</h2>
+  <div class="steps">
+    <div class="step"><span class="dnum">1</span><div>
+      <h3>Нужна формула&nbsp;– не загружайте всю таблицу</h3>
+      <p>Хватит заголовков и 5–10&nbsp;строк примера.</p>
+    </div></div>
+    <div class="step"><span class="dnum">2</span><div>
+      <h3>Нужен анализ&nbsp;– загружайте чистый файл</h3>
+      <p>Только нужный лист и столбцы, без картинок и оформления, лучше в формате CSV. Личные данные клиентов замените на номера.</p>
+    </div></div>
+    <div class="step"><span class="dnum">3</span><div>
+      <h3>1&nbsp;раз опишите таблицу</h3>
+      <p>Столбцы, форматы, определения. Вставляйте это описание в начало чата или положите его в проект, как в <a href="https://aiforlife.ru/ii-course/modul2/urok1/" target="_top">модуле&nbsp;2</a>.</p>
+    </div></div>
+    <div class="step"><span class="dnum">4</span><div>
+      <h3>Вопросы списком в 1&nbsp;сообщении</h3>
+      <p>А не по одному в отдельных сообщениях.</p>
+    </div></div>
+    <div class="step"><span class="dnum">5</span><div>
+      <h3>Длинный чат&nbsp;– в новый</h3>
+      <p>Попросите резюме: «паспорт таблицы, что сделали, что осталось», и начните новый чат с него.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap blk" id="proverka">
+  <p class="label">Проверьте себя</p>
+  <h2>Чек-лист, прежде чем доверять цифрам</h2>
+  <p>Пройдитесь по пунктам перед расчётом и после него. Отметьте то, что уже сделали.</p>
+  <div class="check">
+    <label class="ck"><input type="checkbox"><span>В задаче есть вопрос и решение, а не только «посчитай».</span></label>
+    <label class="ck"><input type="checkbox"><span>Каждое ключевое слово определено.</span></label>
+    <label class="ck"><input type="checkbox"><span>Названы исключения и что делать с пустыми ячейками.</span></label>
+    <label class="ck"><input type="checkbox"><span>Указаны программа, язык и форматы.</span></label>
+    <label class="ck"><input type="checkbox"><span>Нейросеть сначала пересказала задачу и сверила число строк и итог.</span></label>
+    <label class="ck"><input type="checkbox"><span>Для важного анализа подключены <a href="#roli">роль и усилители</a>: план до расчёта, допущения вслух, проверка «критиком».</span></label>
+    <label class="ck"><input type="checkbox"><span>Считала формула или код, а не «в уме».</span></label>
+    <label class="ck"><input type="checkbox"><span>Результат совпал с 2–3&nbsp;известными значениями.</span></label>
+  </div>
+</section>
+
+<section class="wrap blk" id="dalshe">
+  <p class="label">К уроку 2</p>
+  <h2>Где продолжить</h2>
+  <div class="links">
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul3/urok2/" target="_top"><span class="label">Урок 2</span><h3>Таблицы и данные</h3><span>Вернуться к видео урока.</span><span class="go">К уроку →</span></a>
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul3/urok2/praktika/" target="_top"><span class="label">Практика</span><h3>Заявки и оплаты: найдите ошибки</h3><span>Тренажёр к уроку 2.</span><span class="go">Открыть →</span></a>
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/" target="_top"><span class="label">Гайд</span><h3>Плагины</h3><span>Как подключить Google Диск.</span><span class="go">Открыть →</span></a>
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul2/urok1/" target="_top"><span class="label">Модуль 2 · урок 1</span><h3>Проект-помощник</h3><span>Куда положить описание таблицы.</span><span class="go">К уроку →</span></a>
+    <a class="lcard" href="https://aiforlife.ru/ii-course/modul3/bonus-zarabotok/" target="_top"><span class="label">Бонус</span><h3>Как навыки модуля 3 помогут вам зарабатывать</h3><span>Как превратить это в услугу.</span><span class="go">Открыть →</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус к уроку 2&nbsp;модуля 3</p>
+  </div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='0';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,ta.value.length);
+      var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+      document.body.removeChild(ta);
+      ok?res():rej();
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var pb=btn.closest('.promptbox,.phrase');var pre=pb?pb.querySelector('pre,.ptext'):null;
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img class="sr" src="https://mc.yandex.ru/watch/112003701" alt=""></div></noscript>
+</body>
+</html>
