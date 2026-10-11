@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- na-gate: доступ по ключу из урока (?k=...) -->
+<style>html.na-locked body>*:not(#na-gate){display:none!important}html.na-locked,html.na-locked body{overflow:hidden}</style>
+<script>
+(function(){
+  var HS=[3632319418];
+  function kh(s){var h=5381;for(var i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))>>>0}return h}
+  function good(k){return !!k&&HS.indexOf(kh(k))>=0}
+  var ok=false,k=null;
+  try{
+    var q=new URLSearchParams(location.search);k=q.get('k');
+    if(good(k)){
+      ok=true;window.NA_KEY=k;
+      try{localStorage.setItem('na-key',k)}catch(e){}
+      q.delete('k');var qs=q.toString();
+      try{history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash)}catch(e){}
+    }
+    if(!ok){var s=null;try{s=localStorage.getItem('na-key')}catch(e){}if(good(s)){ok=true;window.NA_KEY=s}}
+  }catch(e){}
+  if(ok)return;
+  document.documentElement.classList.add('na-locked');
+  function show(){
+    if(document.getElementById('na-gate'))return;
+    var d=document.createElement('div');d.id='na-gate';
+    d.setAttribute('style','position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:#1B1420;font-family:Manrope,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif');
+    d.innerHTML='<div style="max-width:460px;background:#FFFDFB;padding:38px 32px;border-left:6px solid #E6198C;color:#211829">'+
+      '<div style="font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#E6198C;margin-bottom:14px">Нейро-архитектор · бонусы модуля 3</div>'+
+      '<div style="font-family:Instrument Serif,Georgia,serif;font-size:34px;line-height:1.05;margin-bottom:14px">Этот материал доступен участникам курса</div>'+
+      '<p style="font-size:16px;line-height:1.6;color:#3B3143;margin:0 0 20px">Откройте его по ссылке из урока на платформе – дальше браузер запомнит доступ, и всё будет открываться как обычно.</p>'+
+      '<a href="https://aiforlife.ru/ii-course/" style="display:inline-block;background:#E6198C;color:#fff;font-weight:800;font-size:15px;padding:13px 22px;text-decoration:none">О курсе «Нейро-архитектор»</a>'+
+      '</div>';
+    document.body.appendChild(d);
+  }
+  if(document.body)show();else document.addEventListener('DOMContentLoaded',show);
+})();
+</script>
+
+<title>Финальная анкета курса · Нейро-архитектор</title>
+<meta name="description" content="Финальная анкета курса «Нейро-архитектор»: 17 вопросов, 7–9 минут. После отправки открывается «Библиотека курса».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ТИПОГРАФИЧЕСКАЯ ШКАЛА – 4 роли (МЕТОД, раздел B2). Новых размеров, цветов и начертаний не вводить.
+   Р1 Заголовок    – Instrument Serif 400: шапка анкеты var(--h1), названия шагов var(--h2)
+   Р2 Подзаголовок – Manrope 700, var(--sub) 19px: текст вопроса
+   Р3 Текст        – Manrope 500, var(--text) 17px, цвет var(--ink); на тёмном фоне – var(--ondark). Всё остальное:
+                     варианты ответов, поля, подсказки, кнопки, цифры шкал. Выделение – жирностью и магентой
+   Р4 Метка        – Manrope 800, var(--label) 12px, CAPS с разрядкой, магента: номер вопроса, шаг, рубрика
+   Курсива нет. Инлайн-стилей в разметке нет. Один левый край: выделяем плашкой, а не сдвигом. */
+:root{
+  --ink:#211829; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --wash:#FFF1F8; --wash-line:#F1D9EC;
+  --dark:#1B1420; --dark2:#0F0B14; --ondark:#E9E1EE;
+  --maxw:760px;
+  --h1:clamp(36px,5.6vw,66px); --h2:clamp(27px,3.4vw,40px);
+  --sub:19px; --text:17px; --label:12px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-wrap:break-word}
+[hidden]{display:none!important}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:40px;padding-right:40px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.32}
+h1:focus,h2:focus{outline:none}
+.it{color:var(--pink-soft)}
+.nw{white-space:nowrap}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none;border-bottom:1px solid rgba(230,25,140,.35)}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:14px}
+.label{font-size:var(--label);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);line-height:1.45}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* тёмная шапка: рубрика, полоса прогресса, заголовок шага */
+.top{background:var(--dark)}
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-top:26px;padding-bottom:12px}
+.rubric .label,.prog .label,.shead .label{color:var(--pink-soft)}
+.rubric .r2{text-align:right}
+.prog{position:sticky;top:0;z-index:20;background:var(--dark);border-top:1px solid rgba(255,255,255,.22)}
+.prog .wrap{display:flex;align-items:center;gap:18px;padding-top:14px;padding-bottom:14px}
+.prog .label{flex:none}
+.segs{flex:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.segs span{height:5px;background:rgba(255,255,255,.2);transition:background .25s}
+.segs span.on{background:var(--pink)}
+.shead{background:var(--dark);color:var(--ondark);padding-top:30px;padding-bottom:44px}
+.shead h1,.shead h2{color:#fff;margin-top:12px}
+.shead h1+p,.shead h2+p{margin-top:22px}
+.shead .time{margin-top:26px;padding-top:16px;border-top:1px solid rgba(255,255,255,.22)}
+
+/* тело шага */
+.sbody{padding-top:38px;padding-bottom:6px}
+.q{scroll-margin-top:72px}
+.q+.q,.q+.plate,.plate+.q{margin-top:34px}
+.qs .q+.q{padding-top:34px;border-top:1px solid var(--line)}
+.fld+.fld{margin-top:22px}
+.q h3{margin-top:8px;margin-bottom:16px}
+.plate{background:var(--wash);padding:16px 20px}
+.note{margin-top:12px}
+
+/* поля ввода */
+.fl{display:block;font-weight:700;margin-bottom:8px}
+input[type=text],input[type=email],textarea{display:block;width:100%;font-family:var(--sans);font-size:var(--text);font-weight:500;line-height:1.5;color:var(--ink);background:#fff;border:1px solid var(--faint);border-radius:0;padding:15px 16px;-webkit-appearance:none;appearance:none;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:132px;resize:vertical}
+input::placeholder,textarea::placeholder{color:var(--faint);opacity:1}
+input[type=text]:focus,input[type=email]:focus,textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 1px var(--pink)}
+
+/* варианты ответа: кликабельна вся строка */
+.opts{display:grid;gap:8px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;min-height:56px;padding:15px 16px;background:#fff;border:1px solid var(--line);cursor:pointer;transition:border-color .2s,background .2s;-webkit-tap-highlight-color:transparent}
+.opt:hover{border-color:var(--pink)}
+.opt input,.sc input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.opt:has(input:focus-visible),.sc:has(input:focus-visible){outline:2px solid var(--pink);outline-offset:2px}
+.mk{flex:none;position:relative;width:24px;height:24px;margin-top:2px;border:2px solid var(--faint);background:#fff;transition:background .2s,border-color .2s}
+.mk.r{border-radius:50%}
+.opt.on{background:var(--wash);border-color:var(--pink);box-shadow:inset 0 0 0 1px var(--pink)}
+.opt.on .mk{background:var(--pink);border-color:var(--pink)}
+.opt.on .mk::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.opt.on .mk.r::after{left:5px;top:5px;width:10px;height:10px;border:none;border-radius:50%;background:#fff;transform:none}
+.ot{flex:1;min-width:0}
+
+/* шкалы 1–10 и 0–10 */
+.scale{display:grid;gap:6px}
+.scale.n10{grid-template-columns:repeat(10,minmax(0,1fr))}
+.scale.n11{grid-template-columns:repeat(11,minmax(0,1fr))}
+.sc{position:relative;display:block;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sc span{display:flex;align-items:center;justify-content:center;min-height:56px;background:#fff;border:1px solid var(--line);font-weight:700;transition:border-color .2s,background .2s,color .2s}
+.sc:hover span{border-color:var(--pink)}
+.sc.on span{background:var(--pink);border-color:var(--pink);color:#fff}
+.ends{display:flex;justify-content:space-between;gap:8px 24px;margin-top:12px}
+.ends span:last-child{text-align:right}
+
+/* подсказки и ошибки – плашкой от того же левого края */
+.lim{background:var(--wash);color:var(--pink-strong);padding:12px 16px;font-weight:700}
+.msg{background:var(--wash);color:var(--pink-strong);font-weight:700;padding:12px 16px;margin-bottom:12px}
+.fld .msg{margin-top:8px;margin-bottom:0}
+.q.err .opt,.q.err .sc span,.q.err input[type=text],.q.err input[type=email],.q.err textarea{border-color:var(--pink)}
+.q.err .mk{border-color:var(--pink)}
+.agree a{font-weight:700}
+
+/* кнопки */
+.navwrap{padding-top:36px;padding-bottom:72px}
+.nav{display:flex;gap:12px}
+.btn{font-family:var(--sans);font-size:var(--text);font-weight:700;line-height:1.3;border:1px solid var(--ink);border-radius:0;min-height:58px;padding:16px 28px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:10px;text-align:center;transition:background .2s,border-color .2s,color .2s;-webkit-appearance:none;appearance:none}
+a.btn{color:#fff;border-bottom:1px solid var(--ink)}
+.btn.pink,a.btn.pink{background:var(--pink);border-color:var(--pink)}
+.btn.pink:hover,a.btn.pink:hover{background:var(--pink-strong);border-color:var(--pink-strong);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{border-color:var(--pink);color:var(--pink)}
+.btn.done,.btn.done:hover{background:#1FA24E;border-color:#1FA24E;color:#fff}
+.btn[disabled]{opacity:.6;cursor:default}
+.nav .btn.pink{flex:1}
+.fail{margin-bottom:22px}
+.fail .nav{margin-top:16px;flex-wrap:wrap}
+.fail .nav .btn{flex:1 1 240px}
+.fail textarea{margin-top:16px;min-height:220px}
+.big{width:100%;margin-top:26px}
+.sbody .big+p{margin-top:18px}
+
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+footer{background:var(--dark2);color:#B7A9BD;padding-top:30px;padding-bottom:40px}
+
+@media (max-width:760px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .rubric{flex-direction:column;align-items:flex-start;gap:2px;padding-top:20px}
+  .rubric .r2{text-align:left}
+  .shead{padding-top:24px;padding-bottom:36px}
+  .sbody{padding-top:30px}
+  .scale.n10{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .scale.n11{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .ends{flex-direction:column}
+  .ends span:last-child{text-align:left}
+  .navwrap{padding-bottom:56px}
+  .nav .btn.ghost{padding-left:20px;padding-right:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap rubric"><span class="label">Нейро-архитектор</span><span class="label r2">Финальная анкета</span></div>
+</div>
+
+<div class="prog" id="prog">
+  <div class="wrap">
+    <p class="label" id="progText" aria-live="polite">Шаг 1 из 5</p>
+    <div class="segs" id="segs" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<main>
+<form id="form" novalidate>
+
+  <section class="scr" data-step="1">
+    <div class="shead"><div class="wrap">
+      <p class="label">Знакомство</p>
+      <h1 tabindex="-1">Финальная анкета <span class="it">курса</span></h1>
+      <p>Вы прошли курс. В самом начале вы отметили, где были, – давайте посмотрим, где вы сейчас. Первые вопросы те же, что в начале курса. Отвечайте так, как есть сегодня, а не как хотелось бы: так вы сами увидите свой путь. Это займёт <span class="nw">7–9 минут</span>.</p>
+      <p>Сразу после анкеты откроется ссылка на «Библиотеку курса»: все конспекты, практики и бонусы модулей 1–3 в одном месте и поиск по ним.</p>
+      <p class="label time">7–9 минут · 17 вопросов</p>
+    </div></div>
+    <div class="wrap sbody">
+      <div class="q fld" id="f-name">
+        <label class="fl" for="name">Имя и фамилия</label>
+        <input type="text" id="name" name="name" autocomplete="name" maxlength="120">
+      </div>
+      <div class="q fld" id="f-telegram">
+        <label class="fl" for="telegram">Ник в Telegram</label>
+        <input type="text" id="telegram" name="telegram" placeholder="например, @ivanova" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="64">
+      </div>
+      <div class="q fld" id="f-email">
+        <label class="fl" for="email">Почта, с которой вы на платформе курса</label>
+        <input type="email" id="email" name="email" inputmode="email" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="120">
+      </div>
+      <p class="plate">Контакты нужны, чтобы сравнить ваши ответы с анкетой в начале курса и связаться, если вы разрешите использовать отзыв.</p>
+      <div class="q fld agree" id="f-consent">
+        <label class="opt"><input type="checkbox" id="consent" name="consent"><span class="mk"></span><span class="ot">Согласен(на) на обработку персональных данных: <a href="https://influencerexpert.ru/politika_sog_ii1" target="_blank" rel="noopener">Согласие</a> и <a href="https://influencerexpert.ru/politik_ii1" target="_blank" rel="noopener">Политика</a></span></label>
+      </div>
+      <div class="hp" aria-hidden="true"><label for="na-extra">Оставьте это поле пустым</label><input type="text" id="na-extra" name="na-extra" tabindex="-1" autocomplete="off"></div>
+    </div>
+  </section>
+
+  <section class="scr" data-step="2" hidden>
+    <div class="shead"><div class="wrap">
+      <p class="label">Вопросы 1–3 из 17</p>
+      <h2 tabindex="-1">Где вы сейчас</h2>
+    </div></div>
+    <div class="wrap sbody qs" data-qs="1,2,3"></div>
+  </section>
+
+  <section class="scr" data-step="3" hidden>
+    <div class="shead"><div class="wrap">
+      <p class="label">Вопросы 4–7 из 17</p>
+      <h2 tabindex="-1">Что уже умеете и&nbsp;что мешает</h2>
+    </div></div>
+    <div class="wrap sbody qs" data-qs="4,5,6,7"></div>
+  </section>
+
+  <section class="scr" data-step="4" hidden>
+    <div class="shead"><div class="wrap">
+      <p class="label">Вопросы 8–12 из 17</p>
+      <h2 tabindex="-1">Что получилось на&nbsp;курсе</h2>
+    </div></div>
+    <div class="wrap sbody qs" data-qs="8,9,10,11,12"></div>
+  </section>
+
+  <section class="scr" data-step="5" hidden>
+    <div class="shead"><div class="wrap">
+      <p class="label">Вопросы 13–17 из 17</p>
+      <h2 tabindex="-1">Ваш отзыв и&nbsp;что дальше</h2>
+    </div></div>
+    <div class="wrap sbody qs" data-qs="13,14,15,16,17"></div>
+  </section>
+
+  <div class="wrap navwrap" id="navwrap">
+    <div class="plate fail" id="fail" role="alert" hidden>
+      <p><b>Не получилось отправить.</b> Нажмите «Скопировать мои ответы» и пришлите их куратору в чат.</p>
+      <div class="nav">
+        <button type="button" class="btn" id="copyBtn">Скопировать мои ответы</button>
+        <button type="button" class="btn pink" id="retryBtn">Попробовать ещё раз</button>
+      </div>
+      <textarea id="copyOut" readonly aria-label="Ваши ответы текстом" hidden></textarea>
+    </div>
+    <div class="nav">
+      <button type="button" class="btn ghost" id="backBtn" hidden>Назад</button>
+      <button type="submit" class="btn pink" id="nextBtn">Далее</button>
+    </div>
+  </div>
+
+</form>
+
+<section id="thanks" hidden>
+  <div class="shead"><div class="wrap">
+    <p class="label">Анкета пройдена</p>
+    <h1 tabindex="-1">Спасибо! Ответы <span class="it">отправлены.</span></h1>
+  </div></div>
+  <div class="wrap sbody">
+    <p>Теперь вам открыта «Библиотека курса»: все конспекты, практики и бонусы модулей 1–3 в одном месте и поиск по ним.</p>
+    <a class="btn pink big" href="https://aiforlife.ru/ii-course/biblioteka/start/?k=ST26-8QXD-4KFM">Открыть библиотеку курса</a>
+    <p>Добавьте библиотеку в закладки – она доступна весь срок вашего доступа к курсу.</p>
+  </div>
+  <div class="wrap navwrap"></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · финальная анкета</p>
+  </div>
+</footer>
+
+<script>
+// Адрес веб-приложения Google Apps Script, куда уходят ответы. Вставьте его между кавычками.
+var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxKs-wX3MtNUIEm0JYlAa0uDgoi7IPOJaeGR9xW666qgt7cRk6mUCR5ttMfbQ6jHRCo/exec';
+
+(function(){
+  var KEY='na-anketa-start';
+  var STEPS=5;
+  var MSG='Ответьте, пожалуйста, на этот вопрос';
+  var Q=[{"n":1,"text":"Как вы сейчас работаете с нейросетями?","hint":"один вариант","req":true,"type":"one","opts":["Почти не пользуюсь","Задаю вопросы в чате, как поисковику","Веду диалог: уточняю, правлю, довожу ответ до нужного","У меня есть свои настройки, промпты или помощники, которые я использую снова и снова","ИИ делает для меня готовые материалы и регулярные задачи: документы, таблицы, отчёты, задачи по расписанию"]},{"n":2,"text":"Как часто вы пользуетесь нейросетями?","hint":"один вариант","req":true,"type":"one","opts":["Пока не пользуюсь","Реже раза в неделю","Несколько раз в неделю","Каждый день","Несколько раз в день, это часть моей работы"]},{"n":3,"text":"Насколько уверенно вы чувствуете себя, когда ставите задачу нейросети?","hint":"шкала от 1 до 10","req":true,"type":"scale","from":1,"to":10,"ends":["1 – не понимаю, с чего начать","10 – знаю, как получить нужный результат"]},{"n":4,"text":"Что из этого вы уже умеете делать?","hint":"отметьте всё, что подходит","req":true,"type":"many","opts":["Выбирать нейросеть под задачу","Ставить задачу так, чтобы ответ подходил с первого-второго раза","Доводить ответ до рабочего через уточнения и правки","Сохранять удачный промпт и пользоваться им снова","Настраивать ИИ под себя: инструкции, проекты, память","Собирать своего ИИ-помощника под повторяющуюся задачу","Добиваться, чтобы ИИ писал моим голосом, а не «пластиком»","Проверять ответ на ошибки и выдуманные факты","Делать с ИИ документы, таблицы или презентации","Ставить ИИ регулярные задачи, которые он выполняет сам","Пока ничего из этого"]},{"n":5,"text":"Сколько времени в неделю ИИ вам сейчас экономит?","hint":"один вариант","req":true,"type":"one","opts":["Не экономит","До 1 часа","1–3 часа","3–5 часов","Больше 5 часов"]},{"n":6,"text":"Как часто результат от ИИ можно использовать почти без переделок?","hint":"один вариант","req":true,"type":"one","opts":["Почти никогда","Иногда","Примерно в половине случаев","Чаще всего"]},{"n":7,"text":"С чем вы сталкиваетесь, когда работаете с ИИ?","hint":"до трёх вариантов","req":true,"type":"many","opts":["Не знаю, как сформулировать задачу","Ответы общие, «пластиковые», не звучат как я","ИИ выдумывает факты и ошибается","Долго переделываю – проще сделать самому","Каждый раз объясняю всё заново","Не понимаю, какую нейросеть выбрать","Сложно с доступом, регистрацией или оплатой","Опасаюсь за конфиденциальность данных","Ни с чем из этого, всё получается"],"max":3},{"n":8,"text":"Получилось ли передать ИИ задачу, которую вы называли в начале курса?","hint":"один вариант","req":true,"type":"one","opts":["Да, работает регулярно","Частично","Пока нет","Взял(а) другую задачу"]},{"n":9,"text":"Что из этого у вас есть на руках после курса?","hint":"отметьте всё, что подходит","req":false,"type":"many","opts":["Свой ИИ-помощник, которым пользуюсь","Навык «Мой голос» – ИИ пишет как я","Готовые документы или таблицы, сделанные с ИИ","Свой стиль и картинки в нём","Своя страница по ссылке: портфолио, квиз или лендинг","Нейрофотосессия или видеоаватар","Портфолио, которое не стыдно показать","Пока ничего из этого"]},{"n":10,"text":"Какие модули оказались для вас самыми полезными?","hint":"до двух вариантов","req":false,"type":"many","opts":["Модуль 1 · База работы с ИИ","Модуль 2 · Надёжные помощники","Модуль 3 · Кейсы применения"],"max":2},{"n":11,"text":"Какой урок, практику или бонус вы бы посоветовали другу в первую очередь – и почему?","hint":"свободный ответ, 1–2 предложения","req":false,"type":"text"},{"n":12,"text":"Что было сложно, непонятно или чего не хватило?","hint":"свободный ответ","req":false,"type":"text","note":"Здесь можно честно – мы читаем каждый ответ и дорабатываем курс ко второму потоку."},{"n":13,"text":"Что изменилось в вашей работе или жизни за время курса?","hint":"свободный ответ","req":true,"type":"text","note":"Что вы теперь делаете иначе, сколько времени освободилось, что получилось впервые."},{"n":14,"text":"Удалось ли уже заработать или сэкономить деньги благодаря навыкам курса?","hint":"один вариант","req":false,"type":"one","opts":["Да, взял(а) первый заказ на услугу с ИИ","Да, работаю быстрее и беру больше задач на текущей работе","Да, сэкономил(а) на подрядчиках: дизайнер, копирайтер, ассистент","Пока нет, но знаю, с чего начну","Пока нет и не планирую"]},{"n":15,"text":"Можно ли использовать ваш ответ на вопрос 13 как отзыв?","hint":"один вариант","req":false,"type":"one","opts":["Да, с моим именем","Да, без имени","Нет, только для команды курса","Хочу рассказать подробнее – готов(а) к короткому созвону или голосовому"]},{"n":16,"text":"Насколько вероятно, что вы порекомендуете курс знакомому?","hint":"шкала от 0 до 10","req":true,"type":"scale","from":0,"to":10},{"n":17,"text":"Что вам было бы интересно дальше?","hint":"отметьте всё, что подходит","req":false,"type":"many","opts":["Клуб: новые инструменты и разборы каждый месяц","Продвинутые агенты и автоматизации","Как упаковать навыки ИИ в услуги и продавать их","Личный разбор моей системы со Светланой","Пока ничего, буду применять то, что есть"]}];
+  var QN={};Q.forEach(function(q){QN[q.n]=q;});
+
+  var form=document.getElementById('form');
+  var prog=document.getElementById('prog');
+  var progText=document.getElementById('progText');
+  var segs=document.getElementById('segs').children;
+  var backBtn=document.getElementById('backBtn');
+  var nextBtn=document.getElementById('nextBtn');
+  var failBox=document.getElementById('fail');
+  var copyBtn=document.getElementById('copyBtn');
+  var retryBtn=document.getElementById('retryBtn');
+  var copyOut=document.getElementById('copyOut');
+  var thanks=document.getElementById('thanks');
+  var hp=document.getElementById('na-extra');
+  var F={name:document.getElementById('name'),telegram:document.getElementById('telegram'),email:document.getElementById('email')};
+  var consent=document.getElementById('consent');
+  var sending=false;
+
+  /* черновик */
+  var state={step:1,sent:false,c:{name:'',telegram:'',email:'',consent:false},a:{}};
+  try{
+    var raw=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(raw&&typeof raw==='object'){
+      state.step=Math.min(Math.max(parseInt(raw.step,10)||1,1),STEPS);
+      state.sent=!!raw.sent;
+      if(raw.c&&typeof raw.c==='object'){
+        ['name','telegram','email'].forEach(function(k){if(typeof raw.c[k]==='string')state.c[k]=raw.c[k];});
+        state.c.consent=!!raw.c.consent;
+      }
+      if(raw.a&&typeof raw.a==='object')state.a=raw.a;
+    }
+  }catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  /* разметка вопросов */
+  function qHtml(q){
+    var id='q'+q.n;
+    var meta='Вопрос '+q.n+' из '+Q.length+' · '+q.hint+(q.req?'':' · по желанию');
+    var h='<div class="q" id="'+id+'" data-q="'+q.n+'" role="group" aria-labelledby="'+id+'t">'+
+      '<p class="label">'+esc(meta)+'</p><h3 id="'+id+'t">'+esc(q.text)+'</h3>';
+    if(q.type==='one'||q.type==='many'){
+      var t=q.type==='one'?'radio':'checkbox';
+      h+='<div class="opts">';
+      q.opts.forEach(function(o,i){
+        h+='<label class="opt"><input type="'+t+'" name="'+id+'" value="'+i+'"><span class="mk'+(t==='radio'?' r':'')+'"></span><span class="ot">'+esc(o)+'</span></label>';
+      });
+      if(q.max)h+='<p class="lim" role="status" hidden>Можно выбрать до '+q.max+'</p>';
+      h+='</div>';
+    }else if(q.type==='scale'){
+      h+='<div class="scale n'+(q.to-q.from+1)+'">';
+      for(var v=q.from;v<=q.to;v++){
+        h+='<label class="sc"><input type="radio" name="'+id+'" value="'+v+'"><span>'+v+'</span></label>';
+      }
+      h+='</div>';
+      if(q.ends)h+='<div class="ends"><span>'+esc(q.ends[0])+'</span><span>'+esc(q.ends[1])+'</span></div>';
+    }else{
+      h+='<textarea name="'+id+'" rows="4" maxlength="4000" aria-labelledby="'+id+'t"></textarea>';
+      if(q.note)h+='<p class="note">'+esc(q.note)+'</p>';
+    }
+    return h+'</div>';
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.qs'),function(box){
+    box.innerHTML=box.getAttribute('data-qs').split(',').map(function(n){return qHtml(QN[n]);}).join('');
+  });
+
+  /* восстановление черновика */
+  function syncOn(root){
+    Array.prototype.forEach.call(root.querySelectorAll('.opt,.sc'),function(l){
+      l.classList.toggle('on',l.querySelector('input').checked);
+    });
+  }
+  function restore(){
+    F.name.value=state.c.name;F.telegram.value=state.c.telegram;F.email.value=state.c.email;
+    consent.checked=state.c.consent;
+    Q.forEach(function(q){
+      var box=document.getElementById('q'+q.n),v=state.a['q'+q.n];
+      if(v===undefined||v===null)return;
+      if(q.type==='text'){box.querySelector('textarea').value=typeof v==='string'?v:'';return;}
+      Array.prototype.forEach.call(box.querySelectorAll('input'),function(inp){
+        if(q.type==='scale')inp.checked=Number(inp.value)===v;
+        else if(q.type==='one')inp.checked=q.opts[inp.value]===v;
+        else inp.checked=Array.isArray(v)&&v.indexOf(q.opts[inp.value])>=0;
+      });
+    });
+    syncOn(form);
+  }
+
+  /* чтение ответа из формы в черновик */
+  function readQ(q){
+    var box=document.getElementById('q'+q.n),k='q'+q.n;
+    if(q.type==='text'){state.a[k]=box.querySelector('textarea').value;return;}
+    var on=Array.prototype.filter.call(box.querySelectorAll('input'),function(i){return i.checked;});
+    if(q.type==='scale')state.a[k]=on.length?Number(on[0].value):'';
+    else if(q.type==='one')state.a[k]=on.length?q.opts[on[0].value]:'';
+    else state.a[k]=on.map(function(i){return q.opts[i.value];});
+  }
+  function answered(q){
+    var v=state.a['q'+q.n];
+    if(q.type==='many')return Array.isArray(v)&&v.length>0;
+    if(q.type==='text')return typeof v==='string'&&v.trim()!=='';
+    return v!==undefined&&v!==null&&v!=='';
+  }
+
+  /* ошибки */
+  function setErr(box,text){
+    var m=box.querySelector('.msg');
+    if(!text){box.classList.remove('err');if(m)m.remove();return;}
+    box.classList.add('err');
+    if(!m){
+      m=document.createElement('p');m.className='msg';m.setAttribute('role','alert');
+      var h=box.querySelector('h3');
+      if(h)h.insertAdjacentElement('afterend',m);else box.appendChild(m);
+    }
+    m.textContent=text;
+  }
+
+  function checkContacts(mark){
+    var bad=[];
+    state.c.name=F.name.value;state.c.telegram=F.telegram.value;state.c.email=F.email.value;state.c.consent=consent.checked;
+    function t(id,ok,text){
+      var box=document.getElementById(id);
+      if(ok){if(mark)setErr(box,'');}else{bad.push(box);if(mark)setErr(box,text);}
+    }
+    t('f-name',state.c.name.trim()!=='','Напишите, пожалуйста, имя и фамилию');
+    t('f-telegram',state.c.telegram.trim()!=='','Напишите, пожалуйста, ваш ник в Telegram');
+    var em=state.c.email.trim();
+    t('f-email',/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em),em===''?'Напишите, пожалуйста, вашу почту':'Проверьте, пожалуйста, адрес почты');
+    t('f-consent',state.c.consent,'Отметьте, пожалуйста, согласие – без него мы не можем принять анкету');
+    return bad;
+  }
+  function checkStep(n,mark){
+    if(n===1)return checkContacts(mark);
+    var bad=[];
+    var box=document.querySelector('.scr[data-step="'+n+'"] .qs');
+    box.getAttribute('data-qs').split(',').forEach(function(num){
+      var q=QN[num],el=document.getElementById('q'+num);
+      if(q.req&&!answered(q)){bad.push(el);if(mark)setErr(el,MSG);}
+      else if(mark)setErr(el,'');
+    });
+    return bad;
+  }
+  function reveal(el){
+    try{el.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){el.scrollIntoView();}
+  }
+
+  /* шаги */
+  function show(n,keepScroll){
+    state.step=n;save();
+    Array.prototype.forEach.call(document.querySelectorAll('.scr'),function(s){
+      s.hidden=Number(s.getAttribute('data-step'))!==n;
+    });
+    progText.textContent='Шаг '+n+' из '+STEPS;
+    for(var i=0;i<segs.length;i++)segs[i].classList.toggle('on',i<n);
+    backBtn.hidden=n===1;
+    nextBtn.textContent=n===STEPS?'Отправить анкету':'Далее';
+    nextBtn.hidden=false;failBox.hidden=true;
+    if(!keepScroll){
+      window.scrollTo(0,0);
+      var h=document.querySelector('.scr[data-step="'+n+'"] h1,.scr[data-step="'+n+'"] h2');
+      if(h){try{h.focus({preventScroll:true});}catch(e){}}
+    }
+  }
+  function showThanks(){
+    form.hidden=true;prog.hidden=true;thanks.hidden=false;
+    window.scrollTo(0,0);
+    try{thanks.querySelector('h1').focus({preventScroll:true});}catch(e){}
+  }
+
+  /* ответы для отправки и для копирования */
+  function val(q){
+    var v=state.a['q'+q.n];
+    if(q.type==='many')return Array.isArray(v)?q.opts.filter(function(o){return v.indexOf(o)>=0;}).join('; '):'';
+    if(q.type==='text')return typeof v==='string'?v.trim():'';
+    return v===undefined||v===null?'':v;
+  }
+  function buildPayload(){
+    var p={token:'na-start-2026',tariff:'Старт',name:state.c.name.trim(),telegram:state.c.telegram.trim(),email:state.c.email.trim(),consent:'да'};
+    Q.forEach(function(q){p['q'+q.n]=val(q);});
+    p.page=location.pathname;
+    p.sentAt=new Date().toISOString();
+    return p;
+  }
+  function answersText(){
+    var L=['Финальная анкета курса «Нейро-архитектор», тариф «Старт»','',
+      'Имя и фамилия: '+state.c.name.trim(),
+      'Ник в Telegram: '+state.c.telegram.trim(),
+      'Почта: '+state.c.email.trim(),
+      'Согласие на обработку персональных данных: '+(state.c.consent?'да':'нет')];
+    Q.forEach(function(q){
+      var v=val(q);
+      L.push('',q.n+'. '+q.text,(v===''?'без ответа':String(v)));
+    });
+    return L.join('\n');
+  }
+
+  /* отправка */
+  function busy(on){
+    sending=on;
+    nextBtn.disabled=on;retryBtn.disabled=on;backBtn.disabled=on;
+    nextBtn.textContent=on?'Отправляем…':'Отправить анкету';
+    retryBtn.textContent=on?'Отправляем…':'Попробовать ещё раз';
+  }
+  function failed(){
+    busy(false);
+    failBox.hidden=false;nextBtn.hidden=true;
+    reveal(failBox);
+  }
+  function send(){
+    if(sending)return;
+    for(var n=1;n<=STEPS;n++){
+      if(checkStep(n,false).length){
+        show(n,true);
+        var bad=checkStep(n,true);
+        reveal(bad[0]);
+        return;
+      }
+    }
+    if(hp.value!==''||!ENDPOINT){failed();return;}
+    var payload=buildPayload();
+    busy(true);
+    var ctl=null,timer=null,opts={method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)};
+    if(window.AbortController){
+      ctl=new AbortController();opts.signal=ctl.signal;
+      timer=setTimeout(function(){ctl.abort();},30000);
+    }
+    var req;
+    try{req=fetch(ENDPOINT,opts);}catch(e){req=Promise.reject(e);}
+    req.then(function(){
+      clearTimeout(timer);
+      state.sent=true;state.sentAt=payload.sentAt;save();
+      busy(false);
+      showThanks();
+    }).catch(function(){
+      clearTimeout(timer);
+      failed();
+    });
+  }
+
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text).catch(function(){return copyOld(text);});
+    return copyOld(text);
+  }
+  function copyOld(text){
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='0';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,ta.value.length);
+      var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+      document.body.removeChild(ta);
+      ok?res():rej();
+    });
+  }
+
+  /* события */
+  form.addEventListener('input',function(ev){
+    var t=ev.target;
+    if(t===F.name||t===F.telegram||t===F.email){
+      state.c[t.name]=t.value;save();
+      var fb=t.closest('.q');if(fb.classList.contains('err'))setErr(fb,'');
+      return;
+    }
+    if(t.tagName==='TEXTAREA'&&t.name){
+      var box=t.closest('.q[data-q]');if(!box)return;
+      readQ(QN[box.getAttribute('data-q')]);save();
+      if(box.classList.contains('err')&&t.value.trim()!=='')setErr(box,'');
+    }
+  });
+  form.addEventListener('change',function(ev){
+    var t=ev.target;
+    if(t===consent){
+      state.c.consent=t.checked;save();
+      syncOn(t.closest('.q'));
+      if(t.checked)setErr(t.closest('.q'),'');
+      return;
+    }
+    if(t.tagName!=='INPUT'||(t.type!=='radio'&&t.type!=='checkbox'))return;
+    var box=t.closest('.q[data-q]');if(!box)return;
+    var q=QN[box.getAttribute('data-q')];
+    if(q.max){
+      var lim=box.querySelector('.lim');
+      var cnt=box.querySelectorAll('input:checked').length;
+      if(t.checked&&cnt>q.max){t.checked=false;t.closest('.opt').insertAdjacentElement('afterend',lim);lim.hidden=false;}
+      else lim.hidden=true;
+    }
+    readQ(q);save();syncOn(box);
+    if(answered(q))setErr(box,'');
+  });
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    if(sending)return;
+    var n=state.step;
+    if(n<STEPS){
+      var bad=checkStep(n,true);
+      if(bad.length){reveal(bad[0]);return;}
+      show(n+1);
+    }else send();
+  });
+  form.addEventListener('keydown',function(ev){
+    var t=ev.target;
+    if(ev.key!=='Enter'||t.tagName!=='INPUT')return;
+    ev.preventDefault();
+    if((t.type==='text'||t.type==='email')&&state.step<STEPS)nextBtn.click();
+  });
+  backBtn.addEventListener('click',function(){if(!sending&&state.step>1)show(state.step-1);});
+  retryBtn.addEventListener('click',send);
+  copyBtn.addEventListener('click',function(){
+    var text=answersText();
+    copy(text).then(function(){
+      copyBtn.textContent='Скопировано';copyBtn.classList.add('done');
+      setTimeout(function(){copyBtn.textContent='Скопировать мои ответы';copyBtn.classList.remove('done');},2400);
+    }).catch(function(){
+      copyOut.value=text;copyOut.hidden=false;
+      copyOut.focus();copyOut.select();copyOut.scrollTop=0;
+      copyBtn.textContent='Выделите текст ниже и скопируйте';
+    });
+  });
+
+  /* старт */
+  restore();
+  if(state.sent)showThanks();
+  else show(state.step,true);
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img class="sr" src="https://mc.yandex.ru/watch/112003701" alt=""></div></noscript>
+</body>
+</html>
