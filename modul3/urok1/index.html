@@ -268,6 +268,23 @@ section.wrap{padding-left:40px;padding-right:40px}
 .dark .qlabel{margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 .dark .qlist{margin-top:12px}
 .dark .nextstep{margin-top:26px}
+<style id="faq">
+/* Раздел «Частые вопросы про документы» (12.10.2026): раскрывающиеся вопросы на общих классах .task/.body.
+   Роли те же 4: вопрос – подзаголовок, ответ – основной текст, пояснение под вопросом и плашки – метка. */
+#voprosy,.faq .task{scroll-margin-top:16px}
+.faq{margin-top:30px}
+.faq .tsub{display:block;font-size:15px;font-weight:500;line-height:1.45;color:var(--muted);margin-top:4px}
+.faq .body>p:not(.subplate),.faq .body li{font-size:var(--text);color:var(--ink)}
+.faq .body ul{margin-top:14px}
+.faq .body .promptbox{margin-top:18px}
+.faq .body .promptbox+p,.faq .body .promptbox+ul{margin-top:22px}
+.faq .body .subplate{margin-top:30px!important;margin-bottom:16px}
+.faq .body .subplate:first-child{margin-top:4px!important}
+.faq .body .snote{margin-top:20px;background:#FFF1F8;padding:16px 20px}
+.tokl{color:var(--pink-strong);font-weight:700}
+.faqsrc{margin-top:26px;font-size:var(--fine);line-height:1.6;color:var(--muted)}
+.faqsrc a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:760px){.faq .tsub{font-size:14px}}
 </style>
 </head>
 <body>
@@ -336,10 +353,10 @@ section.wrap{padding-left:40px;padding-right:40px}
         <div class="def"><span class="dn">4</span><div><h3>Хранение в Google Диске</h3><p>Самый продвинутый сценарий: те же файлы живут в Google Диске. Нейросети, которые подключают плагины – эти разъёмы, вилочки для ваших помощников, – позволяют подключить именно Google Диск. Как подключить, по шагам – в гайде <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">«Плагины»</a>.</p></div></div>
       </div>
       <p class="after-defs">Если вы немножко хаотик и создаёте вокруг себя хаос документов – куча загрузок, рабочий стол завален непонятными файлами, – у меня для вас хорошая новость. Нейросеть может организовать вам конкретные папки, чтобы хаоса больше не было и всё аккуратно лежало на своих местах.</p>
-      <p class="plate">Что умеет каждая нейросеть с документами</p>
+      <p class="subplate">Что умеет каждая нейросеть с документами</p>
       <div class="defs">
-        <div class="def"><span class="dn">1</span><div><h3>ChatGPT</h3><p>Делает документы, таблицы и презентации файлами на скачивание, правит текст в режиме редактирования (Canvas). Подключает Google Диск. В программе на компьютере, в режиме Work, работает с вашими папками – на тарифах Plus и выше. В России – только с VPN и зарубежной картой.</p></div></div>
-        <div class="def"><span class="dn">2</span><div><h3>Claude</h3><p>Делает файлы Word, Excel, PowerPoint и PDF на платных тарифах, показывает результат в отдельном окне (артефакты). Умеет сохранять файлы в Google Диск. В России – только с VPN и зарубежной картой.</p></div></div>
+        <div class="def"><span class="dn">1</span><div><h3>ChatGPT</h3><p>Делает документы, таблицы и презентации файлами на скачивание, правит текст прямо в чате – в редактируемом блоке, который можно развернуть на весь экран. Подключает Google Диск. В программе на компьютере, в режиме Work, работает с вашими папками – на тарифах Plus и выше. В России – только с VPN и зарубежной картой.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Claude</h3><p>Делает файлы Word, Excel, PowerPoint и PDF, в том числе на бесплатном тарифе, показывает результат в отдельном окне (артефакты). Умеет сохранять файлы в Google Диск. В России – только с VPN и зарубежной картой.</p></div></div>
         <div class="def"><span class="dn">3</span><div><h3>Gemini</h3><p>Делает PDF, Word, Excel, Google Документы и Таблицы, есть режим редактирования (Canvas). Google Диск встроен – удобно, если вы и так в нём живёте. В России – только с VPN.</p></div></div>
         <div class="def"><span class="dn">4</span><div><h3>ГигаЧат</h3><p>Работает в России без VPN и с российской картой. Умеет собирать презентации и PDF. Обычные документы чаще отдаёт текстом – его переносите руками.</p></div></div>
         <div class="def"><span class="dn">5</span><div><h3>Алиса</h3><p>Работает в России без VPN. Читает ваши файлы – Word, PDF, текст, – но свой файл на скачивание не делает: ответ копируете руками.</p></div></div>
@@ -398,6 +415,174 @@ section.wrap{padding-left:40px;padding-right:40px}
   </div>
 </div>
 
+<section class="wrap blk reveal" id="voprosy">
+  <div class="lede flush"><div class="col">
+    <p class="label">Дополнение к уроку</p>
+    <h2>Частые вопросы про&nbsp;документы</h2>
+    <p>Короткие ответы на вопросы, которые возникают, когда вы повторяете урок на своём документе. Раскройте нужный: в каждом – что сделать и готовая фраза для нейросети. То, что в <span class="tokl">[квадратных скобках]</span>, замените на своё. Фразы написаны для ChatGPT, в других нейросетях они работают так же.</p>
+  </div></div>
+
+  <div class="group faq">
+
+    <details class="task" id="v-format">
+      <summary><span class="num">01</span><span class="tname">Как попросить документ сразу в нужном формате<span class="tsub">Word, PDF или Google Документ</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p>Назовите формат прямо в запросе. Без этого нейросеть выбирает сама и часто отвечает просто текстом в чате.</p>
+        <ul>
+          <li><b>Word (.docx)</b> – если будете править документ сами или отправлять файлом.</li>
+          <li><b>PDF</b> – если документ готов и его нужно только прочитать или распечатать: у получателя ничего не съедет.</li>
+          <li><b>Google Документ</b> – если правите с телефона или вместе с кем-то и удобнее отправить ссылку. Для этого к нейросети должен быть подключён Google Диск – по шагам в гайде <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">«Плагины»</a>.</li>
+        </ul>
+        <div class="promptbox stepprompt"><p class="plabel">Файл на скачивание</p><pre>Сделай из этого документ в формате <span class="tok">[Word (.docx) / PDF]</span> и дай файл на скачивание. Назови файл: <span class="tok">[название]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="promptbox stepprompt"><p class="plabel">Сразу в Google Диск</p><pre>Создай на моём Google Диске документ «<span class="tok">[название]</span>» в папке «<span class="tok">[папка]</span>» и перенеси туда этот текст с заголовками разделов. Пришли ссылку. Другие файлы и папки не трогай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="v-ne-tot">
+      <summary><span class="num">02</span><span class="tname">Нейросеть ответила текстом в чате или выдала не тот формат<span class="tsub">вместо Word пришёл текст, файл .md или страница HTML</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p>Это не ошибка: она выбрала формат за вас. Начинать заново не нужно – попросите в том же чате перевести результат в нужный файл.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Перевести ответ в файл</p><pre>Мне нужен не текст в чате, а файл. Собери этот текст в документ Word (.docx) и дай ссылку на скачивание. Содержание не меняй.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Файлы .md и .html – это тот же текст, просто в другом виде. Скажите: «Переведи это в .docx». Если нейросеть отвечает, что не умеет создавать файлы, – посмотрите <a class="inl" href="#v-ne-poluchilos">вопрос 12</a>.</p>
+      </div>
+    </details>
+
+    <details class="task" id="v-perevod">
+      <summary><span class="num">03</span><span class="tname">Как перевести документ из одного формата в другой<span class="tsub">Word в PDF, PDF в Word, Google Документ в файл, фото или скан в текст</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p class="subplate">Word в PDF</p>
+        <p>Прикрепите файл через значок скрепки и попросите. Без нейросети это тоже делается за минуту: в Word – «Файл» → «Сохранить как» и формат PDF, в Google Документах – «Файл» → «Скачать» и формат PDF.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Word в PDF</p><pre>Сохрани этот документ в PDF. Текст и оформление не меняй.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="subplate">PDF в Word</p>
+        <p>Простой текстовый PDF переводится хорошо. Сложная вёрстка – колонки, картинки, таблицы – может съехать, поэтому результат откройте и просмотрите.</p>
+        <div class="promptbox stepprompt"><p class="plabel">PDF в Word</p><pre>Переведи этот PDF в документ Word (.docx), чтобы я мог(ла) его редактировать. Текст не меняй, сохрани заголовки, списки и таблицы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="subplate">Google Документ в файл</p>
+        <p>Откройте документ, выберите «Файл» → «Скачать» и нужный формат: Word или PDF.</p>
+        <p class="subplate">Фото или скан в текст</p>
+        <p>Сфотографируйте страницу ровно и при хорошем свете, прикрепите фото в чат. Скан в PDF тоже лучше прикладывать как фото страниц: из PDF нейросеть часто берёт только текст, а картинки пропускает. После этого сверьте с оригиналом цифры, имена и даты – в них ошибки случаются чаще всего.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Фото в текст</p><pre>Перепечатай текст с этого фото в документ Word (.docx). Ничего не исправляй и не дописывай. Места, которые не можешь разобрать, отметь так: [неразборчиво].</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="v-oformlenie">
+      <summary><span class="num">04</span><span class="tname">Как поменять оформление<span class="tsub">шрифт, цвета, заголовки, оглавление, номера страниц</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p>Говорите так, как сказали бы живому помощнику: что поменять и где. Попросить можно всё, что вы можете назвать: шрифт и его размер, цвет заголовков, поля, расстояние между строками, титульный лист, оглавление, номера страниц.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Поменять оформление</p><pre>Поменяй оформление, текст не трогай. Шрифт – <span class="tok">[название]</span>, основной текст 12, заголовки крупнее и <span class="tok">[цвет]</span>. Добавь титульный лист, оглавление и номера страниц внизу.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <ul>
+          <li><b>Не знаете, как это назвать.</b> Приложите скриншот документа, который вам нравится, и скажите: «Сделай похоже».</li>
+          <li><b>Оглавление в Word пустое или без номеров страниц.</b> Нажмите на него правой кнопкой мыши и выберите «Обновить поле».</li>
+          <li><b>Мелочь быстрее поправить руками.</b> 1 запятую или размер 1 заголовка проще исправить в самом Word или Google Документе, чем объяснять в чате.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="task" id="v-obrazec">
+      <summary><span class="num">05</span><span class="tname">Как оформить «как в моём образце» или на своём бланке<span class="tsub">шаблон, фирменный бланк, документ, который вам нравится</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p>Приложите образец – документ, который вам нравится, или свой бланк с логотипом и реквизитами – и попросите сделать новый в том же виде. Точнее всего получается, когда образец – файл Word, а не PDF или картинка.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Оформить по образцу</p><pre>Прикладываю образец оформления. Сделай новый документ в том же виде: те же шрифты, цвета, поля, шапка и подвал. Текст возьми отсюда: <span class="tok">[текст или файл]</span>. Из образца бери только оформление, его текст в новый документ не переноси.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p>Совпадение бывает неполным, поэтому шапку и логотип проверьте глазами. Для бланка надёжнее попросить вписать текст прямо в ваш файл:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Вписать текст в свой бланк</p><pre>Прикладываю мой бланк. Впиши в него этот текст: <span class="tok">[текст или файл]</span>. Шапку, подвал, логотип и реквизиты не трогай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Делаете такие документы часто – положите образец в материалы проекта, как в <a class="inl" href="https://aiforlife.ru/ii-course/modul2/urok1/">уроке 1 модуля 2</a>, и прикладывать его каждый раз не придётся.</p>
+      </div>
+    </details>
+
+    <details class="task" id="v-vstavit">
+      <summary><span class="num">06</span><span class="tname">Как вставить таблицу, фото или логотип<span class="tsub">и что делать, если картинка встала не туда</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Таблица.</b> Скажите, что в неё собрать и какие нужны колонки.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Таблица в документе</p><pre>Этапы, сроки и цены оформи таблицей из 3 колонок: «Этап», «Срок», «Стоимость». Остальной текст не меняй.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p><b>Фото и логотип.</b> Прикрепите картинки в чат и скажите, куда какую поставить. Если нейросеть работает с вашей папкой, как в шаге 8 практики, – просто положите фото в эту папку.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Картинки в документе</p><pre>Вставь логотип в шапку первой страницы. Фото 1 поставь в раздел «<span class="tok">[название раздела]</span>» по ширине страницы, под ним подпись: «<span class="tok">[подпись]</span>».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Картинки нейросеть вставляет не всегда. Если она отказалась или поставила фото не туда – вставьте его руками в Word или Google Документе: «Вставка» → «Рисунок». Это быстрее, чем объяснять.</p>
+      </div>
+    </details>
+
+    <details class="task" id="v-tochechno">
+      <summary><span class="num">07</span><span class="tname">Как поправить 1 место, чтобы нейросеть не переписала всё<span class="tsub">точечная правка вместо «улучши текст»</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p>Если попросить «улучши текст», нейросеть перепишет документ целиком, и проверять его придётся заново. Называйте конкретное место и добавляйте «остальное не меняй».</p>
+        <div class="promptbox stepprompt"><p class="plabel">Точечная правка</p><pre>Исправь только <span class="tok">[раздел, абзац или фразу]</span>: <span class="tok">[что не так и как должно быть]</span>. Остальное не меняй: ни слова, ни порядок разделов, ни оформление. Покажи, что именно ты изменил(а).</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">В ChatGPT правки можно оставлять прямо в режиме просмотра документа – как в шаге 2 практики.</p>
+      </div>
+    </details>
+
+    <details class="task" id="v-sobrat">
+      <summary><span class="num">08</span><span class="tname">Как собрать несколько документов в 1<span class="tsub">общий файл с единым оформлением и оглавлением</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p>Прикрепите все файлы в 1 чат или положите их в папку проекта, как в шаге 6 практики, и назовите порядок.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Собрать в 1 документ</p><pre>Собери эти файлы в 1 документ Word в таком порядке: <span class="tok">[порядок]</span>. Тексты не сокращай и не переписывай. Приведи оформление к единому виду: одинаковые заголовки и шрифт. В начале сделай общее оглавление.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p>Потом проверьте, что ничего не потерялось:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Проверить, что всё на месте</p><pre>Перечисли, какие разделы из какого файла вошли в общий документ. Отдельно назови всё, что ты сократил(а) или не включил(а).</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">У каждой нейросети есть предел, сколько файлов можно приложить за раз, и на бесплатных тарифах он небольшой. Если файлов больше 10 или они большие, собирайте частями: сначала первые 5, потом «Добавь в этот документ ещё эти файлы, уже собранное не меняй».</p>
+      </div>
+    </details>
+
+    <details class="task" id="v-versii">
+      <summary><span class="num">09</span><span class="tname">Как не потерять прошлую версию и не утонуть в файлах<span class="tsub">копия перед правкой, история версий, понятные имена и папки</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Перед большой правкой</b> попросите сохранить новую версию рядом, а старую не трогать.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Новая версия отдельным файлом</p><pre>Сохрани новую версию отдельным файлом, старый файл не трогай. В название нового добавь сегодняшнюю дату.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <ul>
+          <li><b>Google Документ хранит историю сам.</b> Нажмите значок с часами «История версий» в правом верхнем углу: можно открыть документ таким, каким он был в любой день, и нажать «Восстановить эту версию».</li>
+          <li><b>Имя файла.</b> Дата, что это и для кого: «2026-10-12 КП для студии йоги». Так документ находится поиском за минуту.</li>
+          <li><b>Папки.</b> 1 папка для рабочих документов, внутри – по клиентам или по видам: «КП», «Встречи», «Памятки».</li>
+        </ul>
+        <p>Если файлов уже накопилась куча, а нейросеть подключена к папке, как в шаге 6 практики, – попросите её навести порядок:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Разложить файлы по папкам</p><pre>Разложи файлы в этой папке по подпапкам и назови их понятно: дата, что это, для кого. Ничего не удаляй и внутри файлов ничего не меняй. Сначала покажи план и жди моего «да».</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="v-otpravit">
+      <summary><span class="num">10</span><span class="tname">Как отправить документ<span class="tsub">ссылка и права доступа, Word или PDF, что проверить перед отправкой</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <ul>
+          <li><b>Ссылкой на Google Документ.</b> «Настройки доступа» → «Все, у кого есть ссылка» → роль. Клиенту – «Читатель» или «Комментатор», помощнице – «Редактор». Подробно – в шаге 4 практики.</li>
+          <li><b>Файлом PDF</b> – когда документ готов: у получателя ничего не съедет, и он ничего случайно не исправит.</li>
+          <li><b>Файлом Word</b> – когда получатель будет вносить свои правки.</li>
+        </ul>
+        <div class="promptbox stepprompt"><p class="plabel">Итоговая версия для отправки</p><pre>Сохрани итоговую версию в PDF для отправки клиенту. Назови файл: <span class="tok">[название]</span>. Проверь, что в документе не осталось пометок, комментариев и вопросов ко мне.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Перед отправкой откройте файл сами и проверьте имя клиента, суммы и даты. Реквизиты и личные данные вписывайте в готовый документ руками, а не через чат.</p>
+      </div>
+    </details>
+
+    <details class="task" id="v-bez-platnogo">
+      <summary><span class="num">11</span><span class="tname">Как быть без платного ChatGPT<span class="tsub">бесплатный тариф, ГигаЧат, Алиса</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p>Всё, что в уроке делается через файл на скачивание, можно сделать и без платного ChatGPT – просто часть шагов вы делаете руками.</p>
+        <ul>
+          <li><b>Бесплатный ChatGPT.</b> Возможности с файлами там ограничены и часто меняются. Проверьте за минуту: попросите «Сделай файл Word на скачивание». Получили файл – работайте как в уроке. Не получили – идите путём «текст в документ» ниже.</li>
+          <li><b>Claude и Gemini</b> создают файлы Word и PDF и на бесплатном тарифе, обе работают через VPN. В Gemini ответ можно сразу отправить в Google Документ: под ответом «Поделиться и экспортировать» → «Экспортировать в Документы».</li>
+          <li><b>ГигаЧат и Алиса</b> работают без VPN. Ответ они отдают текстом в чате – его копируют в Word или Google Документ. ГигаЧат ещё и бесплатно распознаёт текст с фото и сканов.</li>
+        </ul>
+        <p><b>Путь «текст в документ».</b> Попросите оформить ответ, скопируйте его и вставьте в Word или Google Документ: заголовки, списки и таблицы обычно переносятся. Шрифты, оглавление и сохранение в PDF доделайте уже там.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Текст, готовый к переносу</p><pre>Оформи этот текст как готовый документ: заголовки, подзаголовки, списки, а цифры и сроки – таблицей. Я скопирую его в Word, поэтому не добавляй ничего до и после текста документа.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Папка на компьютере и Google Диск, с которыми нейросеть работает сама, – это сценарии 3 и 4 из конспекта, они есть не на всех тарифах. Сценарии 1 и 2 доступны всем, и документ в итоге получится тот же.</p>
+      </div>
+    </details>
+
+    <details class="task" id="v-ne-poluchilos">
+      <summary><span class="num">12</span><span class="tname">Что делать, если не получилось<span class="tsub">«я так не умею», файл не скачивается, съехало оформление, текст оборвался</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <ul>
+          <li><b>«Я так не умею» или «не могу создать файл».</b> В ChatGPT это чаще всего не так – как в шаге 3 практики. Напишите: «Ты умеешь создавать файлы Word. Попробуй ещё раз». Не помогло – откройте новый чат и повторите запрос. Если вы в ГигаЧате или Алисе – посмотрите <a class="inl" href="#v-bez-platnogo">вопрос 11</a>.</li>
+          <li><b>Файл не скачивается или ссылка не открывается.</b> Ссылки на созданные файлы живут недолго. Попросите создать файл заново – фраза ниже.</li>
+          <li><b>В PDF вместо русских букв квадратики.</b> Попросите: «Пересобери PDF со шрифтом, который поддерживает русский язык». Или возьмите документ в Word и сохраните в PDF сами – <a class="inl" href="#v-perevod">вопрос 3</a>.</li>
+          <li><b>В Word документ выглядит не так, как в чате.</b> Сделайте скриншот и покажите: «Вот как это выглядит в Word. Исправь: <span class="tokl">[что не так]</span>».</li>
+          <li><b>Текст оборвался на середине.</b> Длинный документ просите частями: «Продолжи с раздела <span class="tokl">[название]</span>, начало не повторяй». Или собирайте его по главам, как книгу в практике.</li>
+          <li><b>Нейросеть переписала текст, хотя вы просили только оформить.</b> Вернитесь к прошлой версии – <a class="inl" href="#v-versii">вопрос 9</a> – и повторите запрос со словами «текст не меняй ни в одном слове».</li>
+          <li><b>Нейросеть не видит Google Диск.</b> Проверьте, что подключение включено, – по шагам в гайде <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">«Плагины»</a>.</li>
+          <li><b>Закончился лимит.</b> Подождите, пока он обновится, или продолжайте в обычном чате вместо режима «Работа»: он расходует лимит быстрее, об этом в шаге 1 практики.</li>
+        </ul>
+        <div class="promptbox stepprompt"><p class="plabel">Создать файл заново</p><pre>Создай этот файл заново и дай новую ссылку на скачивание. Содержание и оформление не меняй.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div>
+    </details>
+
+  </div>
+  <p class="faqsrc">Возможности нейросетей сверены на 12 октября 2026 по справке сервисов: <a href="https://help.openai.com/en/articles/20001278-creating-and-editing-documents-spreadsheets-and-presentations-with-chatgpt-work" target="_blank" rel="noopener">документы в ChatGPT</a>, <a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">создание файлов в Claude</a>, <a href="https://support.google.com/gemini/answer/14184041?hl=ru" target="_blank" rel="noopener">экспорт из Gemini в Документы</a>, <a href="https://support.google.com/docs/answer/190843?hl=ru" target="_blank" rel="noopener">история версий в Google Документах</a>, <a href="https://giga.chat/help/articles/work-with-docs" target="_blank" rel="noopener">документы в ГигаЧате</a>, <a href="https://alice.yandex.ru/support/ru/assistant/chat/text" target="_blank" rel="noopener">ответы Алисы</a>. Интерфейсы и тарифы меняются: если что-то выглядит иначе, спросите у самой нейросети.</p>
+</section>
+
 <section class="wrap">
 <div class="pfb" id="portfolio">
   <span class="pfb-tag">Задача для вашего портфолио</span>
@@ -419,8 +604,7 @@ section.wrap{padding-left:40px;padding-right:40px}
   <ul>
     <li><a href="https://aiforlife.ru/ii-course/modul3/itog/">Итог модуля 3</a><span>Выберите 1 работу модуля, соберите про неё «Задачу для портфолио 3» и сдайте документ «Моё портфолио».</span></li>
     <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-plaginy/">Плагины: какие подключения пригодятся вашему помощнику</a><span>Как подключить Google Диск и Документы – по шагам со скриншотами.</span></li>
-    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-navyki-materialy/">Навыки: от сырья до готового материала</a><span>План материала, сверка с источником, проверка глазами читателя.</span></li>
-    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-dokumenty/">Документы под любую задачу</a><span>КП, конспект встречи, небольшое исследование, письмо и памятка: общий маршрут, готовые запросы и чек-листы проверки.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul3/bonus-dokumenty/">Документы под любую задачу</a><span>Готовые запросы и чек-листы для 3 документов: КП, итоги встречи и памятка для клиента.</span></li>
   </ul>
 </div>
 </section>
