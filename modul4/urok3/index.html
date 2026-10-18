@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 3 · Регулярные задачи на потоке · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 3 модуля 4: как агент в Codex превращает расшифровки эфиров в пакет контента, раскладывает его по папкам, работает по расписанию и присылает готовое в Telegram и на почту.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Шкала – 4 текстовые роли (МЕТОД, раздел B2):
+   Р1 заголовок – Instrument Serif 400: h1 (--h1), h2 (--h2);
+   Р2 подзаголовок – Manrope 700: h3 карточек, плашки-подзаголовки;
+   Р3 текст – Manrope 500, 17px (--text), один цвет --ink (на тёмном – #CFC4D4);
+   Р4 метка – Manrope 700, 11px (--label) CAPS с разрядкой.
+   Декоративные цифры, кнопки, промпты (mono) и общий блок портфолио ролями не считаются.
+   Инлайн font-size / color / font-weight в разметке не используем. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* Дополнения конспектов (общие с М3) – вместо инлайн-стилей образца */
+.hero.hero-top{padding-top:34px}
+.mainbox-top{margin-top:44px}
+.blk .lede{padding-top:0}
+.practice .label{color:var(--pink-soft)}
+.dark-end{margin-top:64px}
+.dark .dcol p+p{margin-top:14px}
+.dark .qlabel{margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.dark .qlist{margin-top:12px}
+.dark .nextline{margin-top:26px}
+main .def p{font-size:var(--text);color:var(--ink)}
+main .rulebox{font-size:var(--text);margin-top:22px}
+main .defs+p{margin-top:22px}
+.stepprompt{margin-top:22px}
+/* Подзаголовок внутри блока – тёмная плашка */
+p.subplate{display:block;background:#1B1420;color:#fff;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;padding:10px 16px 10px 14px;border-left:3px solid var(--pink);margin-top:36px;margin-bottom:20px}
+p.subplate+p{margin-top:0}
+/* промпты внутри текста конспекта – с воздухом сверху и снизу */
+main .blk .promptbox{margin:22px 0}
+main .blk p.subplate+.promptbox{margin-top:0}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 4 · урок 3</span></div>
+  <div class="kmark"><span class="kn">3</span><span class="kt">Конспект урока</span></div>
+  <div class="hero hero-top">
+    <div class="hgrid">
+      <h1>Регулярные задачи на&nbsp;потоке: агент выполняет работу</h1>
+      <p class="hlead">Переходим от порядка в папках к процессной работе. На примере блога: агент берёт расшифровки эфиров, сам собирает команду помощников, готовит пакет контента, раскладывает его по папкам и раз в неделю присылает в Telegram и на почту.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Видео</span><span class="mv">около 35 минут</span></div>
+      <div><span class="mk">Практика</span><span class="mv">Своя регулярная задача: из расшифровок – в черновики по расписанию</span></div>
+      <div><span class="mk">Останется у вас</span><span class="mv">Агент, который сам готовит черновики из ваших расшифровок и приносит их туда, где вам удобно</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox mainbox-top">
+  <div class="wrap dgrid">
+    <h2>Главное<br>из урока</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Агентный ИИ – не обязательно какой-то внешний агент. Codex в приложении ChatGPT на компьютере уже работает как агент: ходит по папкам, наводит порядок, создаёт файлы. Сегодня переходим от отдельных файлов к процессу, который агент доводит до готового результата.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Сначала задача и опора. Скажите, что хотите получить, и проверьте, на какие ваши правила агент будет опираться: голос, дизайн-код, помощники и навыки из прошлых модулей. Чем точнее отработаны правила, тем лучше агент выполнит задачу.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Не нужно знать заранее, каким должен быть агент. Спросите ИИ, как он организовал бы работу и каких субагентов настроить, – и попросите пока ничего не делать, только предложить схему.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Каждое неудобство превращайте в правило. Сохранил не туда – пусть запишет, куда сохранять. Неудобный формат – пусть поменяет инструкции. А проверенный процесс ставим в расписание.</p></div>
+      <div class="mline"><span class="mn">5</span><p>Доставка – отдельная часть системы. Простой бот-курьер в Telegram и отправка на почту не потребовали у меня дополнительной подписки. Агент работает, пока включён компьютер. Круглосуточная работа – это сервер, время и дополнительные оплаты, и решать, нужно ли это сейчас, вам.</p></div>
+    </div>
+  </div>
+</div>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">С чего начинаем</p>
+      <h2>Из сырья – в&nbsp;контент</h2>
+      <p>Вы уже попробовали агентную работу: Codex ходил по вашим папкам, наводил порядок, что-то создавал. Сегодня мы поднимаемся с уровня отдельных файлов на уровень процесса.</p>
+      <p>Задача урока – собирать из сырья разные единицы контента для блога: посты для Telegram-канала, длинные статьи, сценарии коротких видео. Сырьё – это расшифровки эфиров или ваших встреч с клиентами. Я показываю на своём примере: у меня в системе папок есть папка с контентом для блога, и агент уже сложил туда расшифровки эфиров, в том числе тех, что мы проводили вместе с вами.</p>
+      <p>Знакомая история: на эфире или на встрече с клиентом вы говорили умные, классные вещи, но как превратить их в пост – непонятно, руки не доходят. Контент был, но как контент он не существовал. Агент помогает это переиспользовать: делиться наблюдениями и историями отдельными публикациями.</p>
+      <p class="rulebox">Агенту отдаём <b>расшифровку, а не аудиофайл</b>: аудио ChatGPT и Codex напрямую не обрабатывают. Как получить расшифровку – в бонусе модуля 2 <a class="inl" href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация»</a>.</p>
+      <p class="subplate">Компьютер или телефон</p>
+      <p>В приложении ChatGPT у меня выбран Codex – ровно для того, чтобы агент работал у меня на компьютере. Если вам удобнее по-другому, например чтобы всё созданное было доступно с телефона, спросите у ИИ, как собрать такого агента именно под ваш рабочий процесс. Промпты для этого – ниже, в разделе <a class="inl" href="#gde">«Где получать результат»</a>.</p>
+      <p>У меня сейчас такая рабочая привычка: за компьютером я работаю, а с телефона делаю мелкие срочные дела. Мне это важно для дисциплины. У вас может быть по-другому, и это абсолютно нормально.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 1</p>
+      <h2>Подключите папку и&nbsp;опишите задачу</h2>
+      <p>Папку прикрепляем к чату через плюсик – так агент чётко знает, где искать, и не ходит по всему компьютеру. Я подключила свою систему с ChatGPT, в ней больше тысячи файлов.</p>
+      <p>Дальше объясняю голосом, как объясняла бы человеку: где лежат расшифровки, о чём мой блог, что мне нужно на выходе. Мне нужны 3 поста, хорошая экспертная статья на сайт, 2 сценария коротких видео и картинка-гайд в моём дизайн-стиле. Важно сохранить мой голос, не придумывать факты и не повторять одно и то же в разных материалах.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Я подключила к чату папку [название]. Найди в ней [где лежат расшифровки] – там сейчас [сколько] файла. Возьми их все.
+Хочу сделать из них контент для своего блога. Он про [тема], моя аудитория – [кто].
+Мне нужны: [например, 3 поста для Telegram, экспертная статья на сайт, 2 сценария коротких видео и картинка-гайд в моём дизайн-стиле].
+Важно сохранить мой голос, не придумывать факты и не повторять одно и то же в разных материалах.
+Пока ничего не пиши. Скажи, как ты понял задачу и что тебе нужно для работы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Пока я ничего не прошу писать. Сначала пусть переспросит, как понял задачу. Агент сам ищет дополнительные материалы: описание блога, голос автора, дизайн-код, мои навыки работы с текстом.</p>
+      <p class="subplate">Проверьте, что агент нашёл</p>
+      <p>В первый раз полезно свериться: что конкретно он нашёл, где, о чём там правила. Он может что-то и придумать. Мой агент нашёл контекст блога, дизайн-кит, голос и стиль, но не нашёл редакторские правила. Тогда просто указываем ему ещё одну папку.</p>
+      <div class="promptbox"><p class="plabel">Сверка</p><pre>Покажи, какие конкретно файлы с правилами ты нашёл: голос, дизайн-код, редакторские правила. Где они лежат и о чём в них правила? Если чего-то нет, так и скажи.
+Используй ещё папку [название] – там мои [например, редакторские правила].</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Что мы сделали на этом шаге: сформулировали, что хотим получить, и проверили, что у агента достаточно материалов – исходников и правил, которые мы создавали 3 модуля. Недостаточно сказать «иди и сделай что-нибудь из расшифровок». Мы говорим: опирайся на мои правила. Их потом можно наращивать и дорабатывать.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 2</p>
+      <h2>Спросите ИИ, как разложить работу</h2>
+      <p>Чем агент отличается от обычного проекта: он делает работу поэтапно и доводит её до готового материала. Работает максимально независимо от нас, иногда даже когда мы его об этом не просили. Над одной задачей может работать целая команда: агент-смысловик ищет смыслы, редактор редактирует, копирайтер пишет, дизайнер оформляет.</p>
+      <p>Мы можем совсем не знать, из каких агентов или субагентов должна состоять наша задача. И не нужно. Используем свой суперинструмент – спрашиваем у ИИ.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Как бы ты организовал эту работу? Разложи её на этапы и скажи, какого агента или каких субагентов мне надо настроить.
+Пока ничего не делай – только предложи схему.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Настойчиво говорите «пока ничего не делай, предложи схему». Codex бежит выполнять задачу очень быстро и будет тратить ваши токены. Для этого есть и кнопка «Планировать» – режим планирования. Лучше сначала как следует спланировать, а потом уже делать.</p>
+      <p class="subplate">Какую схему предложил мой агент</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Ведущий контент-редактор</h3><p>Главный в команде. По сути, мы общаемся с главным Джарвисом из всех Джарвисов.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Аналитик источников</h3><p>Читает расшифровки и составляет карту: тезисы, опорные истории.</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Визуальный дизайнер</h3><p>Делает картинку-гайд в дизайн-стиле.</p></div></div>
+      </div>
+      <p>Этапы: прочитать расшифровки, составить тезисы, отдельно план, отдельно статьи, редактура, картинка-гайд, проверка на повторы и пакет на моё рассмотрение. Агент сам себя проверяет, а часть задач делает не по очереди, а параллельно. И важное: субагенты не принимают решений за нас. Спорные моменты и выдуманные примеры мы так или иначе решаем сами.</p>
+      <p>Схема мне нравится – я её уже тестировала. Запускаю максимально просто:</p>
+      <div class="promptbox"><p class="plabel">Запуск</p><pre>Запускай эту команду на моих расшифровках.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент сам создал субагента – Source Analyst, аналитика источников. Он сам создаёт их под задачу, вникать в это нам почти не нужно. Вот она, агентная работа, и для вас она пока может выглядеть именно так. Не обязательно разворачивать OpenClaw, поднимать серверы и покупать команду агентов, как многие советуют. Это может иметь смысл, только если ваш процесс похож на процесс тех, кто это советует. Иначе это как будто бы чересчур сложно.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 3</p>
+      <h2>Агент работает – вы занимаетесь своим</h2>
+      <p>Пока агент работает, он читает папки и навыки, заранее создаёт папку для результатов, запускает какие-то команды Python. Знать про это нам сейчас не нужно. Видно, что он работает, – и в этот момент можно спокойно переключиться на другую задачу.</p>
+      <p>Агенты работают чуть дольше, зато обрабатывают всё пакетом. Мой сначала сделал карту обеих расшифровок – а это суммарно около 4 часов эфиров – и выбрал для материалов разные опорные истории. Потом писал тексты по этой карте, а дизайнер параллельно делал гайд.</p>
+      <p class="subplate">Что получилось</p>
+      <p>Агент вернулся с пакетом: материалы разведены по темам и проверены по источникам. Ничего не опубликовано – такой задачи не было. Из одного и того же содержания он сделал по-разному: длинную умную статью, посты для Telegram, сценарии видео и картинку-гайд в двух форматах. Один из них – SVG, его, видимо, можно редактировать; как именно, можно спросить у самого агента. К картинке у меня пока вопросы: шрифты он не нашёл. Возможно, надо уточнить, чтобы он всё-таки установил нужные шрифты, – это можно выяснить отдельно, не проблема.</p>
+      <p>Тексты по умолчанию он сохранил в формате MD – я его не просила о другом. Если вам этот формат неудобен, попросите любой удобный: документ Word, Google Документ, обычный текстовый файл. Я люблю хранить в MD, а потом прошу точечно что-то соединить и куда-то отправить.</p>
+      <p class="rulebox">Эта схема особенно хорошо работает там, где у вас уже отработаны помощники и инструкции. Чем точнее сформированы ваши навыки и процессы, тем лучше агент выполнит задачу и разложит всё в нужные папки.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 4</p>
+      <h2>Каждое неудобство – в&nbsp;правило</h2>
+      <p>Мой агент сохранил всё в техническую папку Outputs. Ничего не потеряно, но мне нужно в папку блога. Отчасти это потому, что я подключила всю общую систему, а не только папку с блогом, и агент сложил результат к рабочим задачам. Может немного подтупливать он, можем мы – не страшно. Перенаправляем и сразу просим записать правило, чтобы больше не объяснять.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Перенеси черновики в папку [с блогом].
+Запиши это правилом, чтобы в следующий раз ты сохранял результаты туда сам и мне не приходилось объяснять.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент сам посмотрел вокруг и нашёл причину: мой общий навык для расшифровок направлял результаты в одну папку, а старые инструкции блога – в другую. Он сам переписал эти инструкции и исправил путь. А ещё сделал то, о чём я не просила: записал точные названия двух обработанных файлов, чтобы не брать их повторно, почистил лишние копии и проверил, что в черновиках всё на месте.</p>
+      <p class="rulebox">В этом прелесть агента: он часто думает на пару шагов вперёд за вас. Именно поэтому важно планировать этапы – иногда он убегает слишком далеко.</p>
+      <p>Теперь в папке блога рядом с расшифровками эфиров появилась отдельная папка с черновиками. Сценарий уже хороший, рабочий и агентный.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 5</p>
+      <h2>Поставьте на поток: задача по&nbsp;расписанию</h2>
+      <p>У такой агентной задачи триггер – то, что запускает агента, – это просто время и расписание. Это важно. Агент может регулярно сам приходить в папку с эфирами и забирать оттуда новые расшифровки. Например, раз в неделю, когда вы готовите контент-план, или раз в месяц, когда накопилось много материала с клиентами. С такими заготовками проще начать писать пост, и точно не будет ощущения «мне не о чем писать».</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Поставь регулярную задачу: готовить контент на неделю по понедельникам в 14:00 по московскому времени.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>А себе я ставлю в календарь работу над контентом блога на неделю вперёд: тоже по понедельникам в 14:00 или чуть позже, например в 16:00. Пока агент шуршит и готовит черновики, я занимаюсь другим, а когда сажусь за блог – заготовки уже ждут. Так удобно фокусироваться на задаче.</p>
+      <p>А дальше проверьте, что агент правда выполняет регулярную задачу: после первого запуска загляните в папку с черновиками.</p>
+      <p>Пока у вас идут эфиры и встречи, тоже можно просить агента: «Положи расшифровку этого эфира вот в такую папку, её обязательно нужно превратить в контент, я там много хорошего говорила». Ходить по папкам ручками не обязательно.</p>
+      <p class="subplate">Работает, пока включён компьютер</p>
+      <p>По умолчанию агент выполняет такую задачу только на включённом компьютере. Бывает, что агент работает удалённо и круглосуточно, без доступа к вашему компьютеру. Но это требует дополнительных технических настроек, иногда довольно сложных, вплоть до покупки сервера. Это не суперсложно, но нужны время и дополнительные оплаты.</p>
+      <p class="rulebox">Спросите себя: надо ли вам сейчас наращивать сумму ежемесячных подписок? Возможно, пока достаточно работать на компьютере – без бота и без сервера – и отправлять себе задачи на неделю вперёд на почту.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 6 · по желанию</p>
+      <h2>Доставка в&nbsp;Telegram: бот-курьер</h2>
+      <p>Telegram-бот бывает 2 видов. Бот-курьер только присылает: приходит, стучится и говорит «тут готово, забери, если надо», а от вас ничего не принимает. Двусторонний бот ещё и забирает что-то от вас в процессе. Двусторонний – это ещё полступеньки вперёд, промпт для него – в конце конспекта. Я предлагаю сначала создать максимально простого бота, а потом наращивать ему задачи.</p>
+      <p>Решите для себя, нужно ли вам, чтобы агент жил прямо в телефоне и сам к вам стучался. Я раньше думала, что за бота придётся доплачивать: обычно для этого нужны отдельные ключи. Но в моём случае простой бот-курьер подписки не потребовал – об этом ниже.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Хочу получать готовые материалы в Telegram. Скажи, что мне для этого сделать.
+Бот должен отправлять материалы только мне, каждый отдельным файлом, пояснение – в подписи.
+Создай для бота отдельную папку-проект [например, «Контент-бот»].
+Токен я не буду присылать в чат – покажи, куда его безопасно вставить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Отдельная папка нужна, потому что бот – это проект, который вы дальше сможете развивать, например до двусторонней связи. Пусть память о нём где-то хранится.</p>
+      <p class="subplate">Создаём бота в BotFather</p>
+      <ul>
+        <li>В Telegram найдите официальный бот <b>@BotFather</b> – «папа всех ботов». Здесь создаются любые Telegram-боты. Можно работать через мини-приложение, а можно командами. Самих ботов создавать очень быстро, дальше вопрос их настроек.</li>
+        <li>Отправьте команду <b>/newbot</b>.</li>
+        <li><b>Имя</b> – как угодно, хоть «мой котик по планированию».</li>
+        <li><b>Юзернейм</b> обязательно заканчивается на «bot». Секретные цифры, пин-коды карт и прочее в название не вставляем.</li>
+        <li>BotFather пришлёт <b>токен</b> – строку после слов «Token to access the HTTP API». Это секретный ключ.</li>
+      </ul>
+      <p class="rulebox"><b>Токен никому не показываем</b> и не присылаем в чат – ни ChatGPT, ни Codex. Это правило безопасности: если ключ перехватят, от имени вашего бота могут начать распространять что угодно, в том числе незаконное. Codex сам покажет, куда его вставить.</p>
+      <p class="subplate">Связываем бота с агентом</p>
+      <p>Пишем агенту «Готово, бот создан». Дальше он может попросить поработать с терминалом. Терминал – это чёрное окошко, через которое программисты подключаются к серверам, сайтам, программам и чинят что-то на компьютере. Выглядит страшно, но Codex умеет управлять вашим компьютером и может открыть его за вас. Это единственное место, куда вы вставите токен.</p>
+      <p>Бывает, что что-то не запускается. У меня терминал не открылся, и Codex придумал обход: открыл своё окошко, куда я и вставила токен. Агент написал, что ему не удалось получить доступ к сайту, но всё равно всё получилось – такие сообщения не всегда означают поломку. Потом он дал ссылку на бота – открываем её в своём Telegram, и привязка готова. Доступ к привязке агент сам ограничил только моим аккаунтом, больше никто эти материалы получать не будет.</p>
+      <p>После этого агент отправил мне 8 файлов с подписями. Судя по всему, эта отправка работает с компьютера: агент не спросил ключи OpenAI и не потребовал никакой внешней подписки, а использует ресурс Codex на компьютере. Раньше я всегда настраивала ботов с двусторонней связью: пишу боту, он анализирует и раскладывает у меня на компьютере. Здесь сценарий другой. Технически мне понадобилось только ввести 2 имени, чтобы создать бота, скопировать ключ и вставить его туда, куда предложил Codex. Всё сохранено на компьютере, даже если связь пропадёт, а Telegram – просто способ получать готовое.</p>
+      <p>Регулярная задача теперь тоже связана с ботом. Если компьютер в понедельник в 14:00 работает и в папке появились новые расшифровки, агент всё обработает и пришлёт в Telegram. Повторно уже обработанные он пропустит.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 7</p>
+      <h2>Доработайте формат под&nbsp;телефон</h2>
+      <p>Мне не понравилось, что в Telegram пришли файлы MD: много технических звёздочек и пометок, особенно в сценариях видео. TXT с телефона тоже читается не очень. Пожаловаться и сказать «мне неудобно, предложи варианты» – нормально. И признаться, что не понимаете, какие бывают форматы, – тоже нормально.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Мне не нравится, как материалы выглядят в Telegram: в MD много технических звёздочек и пометок, особенно в сценариях видео. Можем ли мы привести всё к единому формату, который удобно читать с телефона? Предложи варианты, и примем решение вместе.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент предложил PDF, но выделять и приближать PDF с телефона мне неудобно – я поспорила. Договорились так:</p>
+      <div class="promptbox"><p class="plabel">Моё решение</p><pre>Статью присылай документом DOCX. Сценарии коротких видео – тоже DOCX.
+Посты для Telegram присылай обычными текстовыми сообщениями, готовыми к публикации.
+Не смешивай сам пост и техническое пояснение – что это за пост, из какого он файла. Я хочу просто скопировать текст и отправить.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>После согласования агент сам поменял инструкции. В Telegram пришли посты текстом, а статья и сценарий – документами, как я просила.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Шаг 8</p>
+      <h2>Разные результаты – в&nbsp;разные места</h2>
+      <p>Можно развести результаты по разным каналам получения. Например, посты – в бота, а статью – на почту.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Можешь присылать результат не только в бота, но и статью – мне на почту?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент подключил почту, привязанную к моему аккаунту, и дополнительной интеграции тоже не понадобилось. Думаю, лучше всего это работает с Gmail. Так можно получать самые разные отчёты: например, агент регулярно пересматривает таблицы, делает отчёт и отправляет его вам.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal" id="gde">
+      <div class="lede"><div class="col">
+      <p class="label">Обещанные подсказки</p>
+      <h2>Где получать результат: компьютер, телефон, почта, Google&nbsp;Диск</h2>
+      <p>Не ограничивайте себя только компьютером. Если вам нужно, чтобы материалы были доступны с телефона или с разных компьютеров, можно держать рабочую систему не на локальном компьютере, а в Google Диске. Туда вы сохраняли бы таблицы, отчёты, расшифровки и просили бы агента ходить именно в эту папку. Тогда задачи можно было бы раздавать с любого компьютера и даже с телефона, а результаты получать на телефон, на рабочий компьютер или в Gmail.</p>
+      <p>Как именно это устроить, зависит от вашего процесса. Поэтому не ищите готовую схему – спросите ИИ под себя.</p>
+      <div class="promptbox"><p class="plabel">Подобрать схему под свой процесс</p><pre>Я хочу, чтобы мой агент [что делает – например, раз в неделю готовил черновики постов из расшифровок] и чтобы результаты были доступны мне с телефона.
+Я работаю так: [например, за компьютером – основная работа, с телефона – мелкие срочные дела].
+Предложи 2–3 варианта, как это устроить: где хранить материалы, как запускать задачи и куда присылать результат – в Telegram, на почту или в папку на Google Диске.
+Для каждого варианта скажи простыми словами: что нужно настроить, должен ли быть включён компьютер и будут ли дополнительные оплаты.
+Пока ничего не настраивай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="promptbox"><p class="plabel">Работать с папкой на Google Диске</p><pre>Хочу, чтобы ты брал расшифровки и сохранял черновики не в папке на компьютере, а в папке [название] на Google Диске – чтобы я могла работать с разных устройств и с телефона.
+Объясни, что для этого нужно сделать и как проверить, что всё работает. Пока ничего не переноси.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Что дальше</p>
+      <h2>Агент растёт вместе с&nbsp;вами</h2>
+      <p>Пока это просто сырьё, с которым мы немного поработали: нет ни дат публикации, ни контент-плана, ни триггеров, ни призывов к действию в конце. Можно остановиться и здесь. Агент раз в неделю перерабатывает расшифровки, складывает черновики, вы забираете их в телефон и сами публикуете в Telegram-канале, канале в MAX или ВКонтакте, ставите отложенные публикации. Как я говорила в первом уроке, от нас зависит, где мы отдаём контроль и работу.</p>
+      <p>А если хотите развивать контент-агента дальше, заготовкам нужно найти место в контент-плане и в стратегии блога. И здесь не обязательно ограничиваться одной папкой: агенту можно дать весь контекст, который у вас есть, и попросить состыковать материалы из разных папок. Смешать, но не взбалтывать – ради цели, к которой вы идёте вместе с агентами. Так раз за разом выстраивается цепочка агентов, где лишние со временем отсекаются.</p>
+      <div class="promptbox"><p class="plabel">Вплести черновики в стратегию</p><pre>Посмотри на эти черновики, на мой текущий контент-план, стратегию и цели блога на ближайшие 3 месяца.
+Как мы можем использовать эти черновики, как их подать, как скорректировать?
+Учти ещё [например, материал о триггерных заголовках для набора аудитории или новый формат].</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="promptbox"><p class="plabel">Добавить план публикаций на неделю</p><pre>Добавь в нашу регулярную задачу ещё один шаг: раз в неделю присылай мне план публикаций на неделю вперёд – какой материал, на какой площадке и в какой день выходит, и чем он заканчивается: какой призыв к действию.
+Опирайся на мой контент-план и цели блога. Сам ничего не публикуй.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="promptbox"><p class="plabel">Двусторонний бот – следующая ступенька</p><pre>Сейчас бот только присылает мне материалы. Хочу, чтобы он ещё и принимал от меня задачи: [например, я пишу ему идею поста, а он сохраняет её в папку блога].
+Объясни простыми словами, что для этого нужно настроить, нужен ли включённый компьютер или сервер и будут ли дополнительные оплаты.
+Пока ничего не настраивай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>С двусторонним ботом придётся поговорить с ChatGPT или Codex чуть подольше – помучайте его, как это сделать под вашу задачу.</p>
+      </div></div>
+    </section>
+
+<div class="practice" id="praktika">
+  <div class="wrap">
+    <p class="label">Теперь делаем</p>
+    <h2>Практика</h2>
+    <p class="pmeta">Своя регулярная задача · ChatGPT на компьютере, Codex</p>
+    <p class="pintro">Возьмите одну свою повторяющуюся задачу с сырьём – расшифровки эфиров или встреч с клиентами – и пройдите путь из урока: подключите папку, опишите результат, проверьте, на какие правила опирается агент, попросите схему работы и запустите её. Потом превратите неудобства в правила и поставьте задачу в расписание. Telegram-бот и почта – по желанию.</p>
+    <div class="btns">
+      <a class="btn btn-praktika" href="praktika/">Открыть инструкцию к практике<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
+  <p class="pfb-p">Когда закончите практику, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и опишет вашу работу так, чтобы её было интересно прочитать работодателю или клиенту. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 4», под «Урок 3».</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> какую задачу вы поставили на поток, как она запускается и что агент уже сделал.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+</div>
+<div class="matbox">
+  <p class="ml">Материалы к уроку</p>
+  <ul>
+    <li><a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">Транскрибация: из голоса и видео в текст</a><span>Бонус модуля 2: как получить расшифровку эфира или встречи, чтобы отдать её агенту.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul1/itog/assets/portfolio-neiro-arhitektor.docx">Шаблон портфолио</a><span>Если вы ещё не скачивали его: документ «Моё портфолио», в который собираются ваши работы курса.</span></li>
+  </ul>
+</div>
+</section>
+
+<div class="dark dark-end">
+  <div class="wrap dgrid">
+    <h2>Что забрать<br>из урока</h2>
+    <div class="dcol">
+      <p>Всё, что нам потребовалось, – придумать агента на тех процессах и идеях, которые у нас уже есть, и описать, что он будет делать. Дальше мы проверили, что он всё делает и сохраняет на компьютере, превратили неудобства в правила, поставили задачу в расписание и попросили присылать готовое в Telegram и на почту.</p>
+      <p>По такому сценарию можно настроить что угодно. Да, на настройку системы уходит время. Но потом, как обычно, она начинает работать на вас. Ищите задачи, которые можно так разгрузить, и форматы, удобные именно вам.</p>
+      <p class="qlabel">Вопросы к себе</p>
+      <ul class="qlist">
+        <li>Какое моё сырьё лежит без дела: эфиры, встречи с клиентами, другие записи?</li>
+        <li>Какой повторяющийся результат я хочу получать из него – и как часто?</li>
+        <li>Где мне удобно получать готовое: в папке, в Telegram, на почте?</li>
+        <li>Нужна ли мне сейчас круглосуточная работа агента – или хватит включённого компьютера?</li>
+      </ul>
+      <p class="nextline"><b>В следующем уроке – 5 применений агентного ИИ для работы и заработка.</b></p>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · конспект урока 3, модуль 4</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
+    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
+    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
+    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>
