@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 4 · 5 применений агентного ИИ для работы и заработка · Нейро-архитектор</title>
+<meta name="description" content="Конспект урока 4 модуля 4: 5 сценариев агентного ИИ из реальной работы – карточки участников, коммерческие предложения, документы и оплаты, исследование аудитории, анкета через браузер – и задание спроектировать свою рабочую неделю с агентами.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Шкала – 4 текстовые роли (МЕТОД, раздел B2):
+   Р1 заголовок – Instrument Serif 400: h1 (--h1), h2 (--h2);
+   Р2 подзаголовок – Manrope 700: h3 карточек, плашки-подзаголовки;
+   Р3 текст – Manrope 500, 17px (--text), один цвет --ink (на тёмном – #CFC4D4);
+   Р4 метка – Manrope 700, 11px (--label) CAPS с разрядкой.
+   Декоративные цифры, кнопки, промпты (mono) и общий блок портфолио ролями не считаются.
+   Инлайн font-size / color / font-weight в разметке не используем. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* Дополнения конспектов (общие с М3) – вместо инлайн-стилей образца */
+.hero.hero-top{padding-top:34px}
+.mainbox-top{margin-top:44px}
+.blk .lede{padding-top:0}
+.practice .label{color:var(--pink-soft)}
+.dark-end{margin-top:64px}
+.dark .dcol p+p{margin-top:14px}
+.dark .qlabel{margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.dark .qlist{margin-top:12px}
+.dark .nextline{margin-top:26px}
+main .def p{font-size:var(--text);color:var(--ink)}
+main .rulebox{font-size:var(--text);margin-top:22px}
+main .defs+p{margin-top:22px}
+.stepprompt{margin-top:22px}
+/* Подзаголовок внутри блока – тёмная плашка */
+p.subplate{display:block;background:#1B1420;color:#fff;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;padding:10px 16px 10px 14px;border-left:3px solid var(--pink);margin-top:36px;margin-bottom:20px}
+p.subplate+p{margin-top:0}
+/* промпты внутри текста конспекта – с воздухом сверху и снизу */
+main .blk .promptbox{margin:22px 0}
+main .blk p.subplate+.promptbox{margin-top:0}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 4 · урок 4</span></div>
+  <div class="kmark"><span class="kn">4</span><span class="kt">Конспект урока</span></div>
+  <div class="hero hero-top">
+    <div class="hgrid">
+      <h1>5 применений агентного ИИ для&nbsp;работы и&nbsp;заработка – с&nbsp;кейсами</h1>
+      <p class="hlead">Если тема блога вам не очень заходит, вот как перенести агентную работу на другие задачи. 5 сценариев из моей реальной работы: от расшифровок встреч до анкеты, которую агент собирает сам в браузере.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Видео</span><span class="mv">45–50 минут</span></div>
+      <div><span class="mk">Практика</span><span class="mv">Задание в конспекте: спроектировать свою идеальную рабочую неделю с агентами</span></div>
+      <div><span class="mk">Останется у вас</span><span class="mv">План вашей системы: какие агенты и помощники нужны и с какого начать</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox mainbox-top">
+  <div class="wrap dgrid">
+    <h2>Главное<br>из урока</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Не бежим за универсальным агентом с автонастройками. Той агентной работы, что уже есть, во многих случаях хватает, чтобы качественнее закрывать рабочие задачи. Наш агентный ИИ – это прежде всего Codex, который умеет создавать субагентов.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Самое важное – найти узкое место, на котором вы спотыкаетесь в работе. Дальше строится конвейер: из одного источника – несколько результатов, а из них – ещё что-то.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Агенту можно накидать сразу много задач. В обычном чате вы получили бы что-то одно или простыню текста, а агент всё подготовит, разложит и подключит нужные ресурсы.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Контроль оставляем за собой. Агент готовит черновики, а суммы, цитаты и решения вы проверяете глазами. Отправку клиентам – счета, акты, письма – оставляйте за собой.</p></div>
+      <div class="mline"><span class="mn">5</span><p>Деньги здесь – это время, которое вы не тратите, специалисты, которых не нужно нанимать, и ценность, которую вы приносите заказчику или работодателю за те же часы.</p></div>
+    </div>
+  </div>
+</div>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">С чего начинаем</p>
+      <h2>Не универсальный агент, а&nbsp;ваш конвейер</h2>
+      <p>Мы пока не бежим создавать универсального агента где-нибудь с автонастройками. Потихоньку разбираемся, чтобы правда получать хороший результат. Внешние сервисы, подключения и автоматизации – это уже дополнительные инструменты, навык можно наращивать и дальше.</p>
+      <p>Агентный ИИ у нас – это в первую очередь Codex, который умеет создавать других агентов, субагентов. Как это работает, мы разбирали в прошлом уроке. Сегодня – 5 подробных сценариев из моей реальной работы. Папки на видео я сделала учебными, чтобы не показывать конфиденциальные данные клиентов и людей, которые к ним приходят.</p>
+      <p class="rulebox">Всё строится как конвейер: я получаю один источник, как в прошлом уроке, создаю из него несколько результатов, а потом из этих результатов создаю ещё что-то. Самое важное – найти узкое место, на котором вы спотыкаетесь в работе сейчас.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Сценарий 1</p>
+      <h2>Встречи → карточки участников и&nbsp;подборка кейсов</h2>
+      <p>Если вы ведёте группы, много клиентов или команду, вы знаете, как сложно держать в голове разные контексты и статусы. На длинном курсе важно собирать кейсы и результаты. Но через 3–5 месяцев участники не помнят, с чем пришли и каких успехов добились по дороге: мы помним только последнее или очень плохое. Беда многих организаторов: в процессе участники довольны и приносят результаты, а в конце в анкету принести не могут.</p>
+      <p>Я подумала над этой задачей вместе с нейросетью, и она сказала: у тебя уже есть расшифровки, это золото. У меня было много расшифровок Zoom-встреч, а расшифровки Zoom в формате VTT ещё и разделены по спикерам – видно, кто что говорит.</p>
+      <p class="subplate">Какой процесс мы настроили</p>
+      <p>Триггер – появление новой расшифровки в папке. Агент отмечал посещаемость в таблице и сразу создавал или обновлял карточку участника: с чем пришёл, запросы, результаты, мысли и идеи, цитаты близко к тексту – с пометкой, на какой встрече это сказано. После каждой встречи в карточку складывались фрагменты речи человека.</p>
+      <div class="promptbox"><p class="plabel">Настроить такой процесс</p><pre>Когда в папке [название] появляется новая расшифровка встречи, отмечай посещаемость в таблице [название] и обновляй карточку каждого участника: с чем пришёл, запросы, результаты, мысли и идеи, цитаты близко к тексту – с пометкой, на какой встрече это сказано.
+Цитаты не перевирай, только слово в слово.
+Если сразу при появлении файла запускаться не получится, предложи, как часто проверять папку.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Вести 19 таких карточек параллельно руками я бы не смогла. Ведущая курса на выпускном читала эти карточки – агент перевёл их в удобный для чтения вид – и, рассказывая каждому, какой он молодец, помогала вспомнить все его результаты. Оказалось, 16 человек из 19 сделали твёрдые результаты, и ещё у троих результат хороший, просто менее яркий на фоне остальных.</p>
+      <p class="subplate">Подборка кейсов за несколько минут</p>
+      <p>Когда меня попросили подборку кейсов для сайта, мне не пришлось пересматривать кучу видео и вспоминать. Курс шёл 12 недель, а поиск и отбор заняли несколько минут вместо нескольких часов. Агент сохранил подборку в папку: было, стало, цитата и источник.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Открой папку [название]. Посмотри, у кого из участников есть твёрдые результаты, и сохрани подборку кейсов в ту же папку: было – стало – цитата – источник.
+Цитаты не перевирай, только слово в слово.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Подборку я перепроверила глазами – я примерно помнила, кто точно делал кейсы, – и согласовала с участниками. Мне было неважно, как именно агент это делает. Важно было снять с себя рутину и задать понятные критерии качества: например, цитаты не перевирать. Такие правила хранятся в карточке самого проекта.</p>
+      <p class="subplate">Где пригодится и&nbsp;при чём тут заработок</p>
+      <p>Везде, где есть клиенты, статусы и результаты, которые важно собирать и в нужный момент достать в нужном формате. Отзывы, благодарности, цитаты – когда вы сосредоточены на работе, собирать их сложно, нет ресурса, а потом кажется, что результатов нет. Это хороший способ присвоить себе результаты своей работы.</p>
+      <p>Мою ценность как методолога это сразу повысило: я получила приглашение на второй поток, и такая система понадобилась на других курсах. Без инструмента такая работа требовала бы больше моих часов и увеличила бы стоимость для заказчика, а у него свой бюджет. С агентом в рамках тех же часов я дала ценность, которую иначе дала бы только на полной ставке. Ещё один вывод: мы с самого начала поняли, что важно делать расшифровки в самом Zoom, а не через внешние сервисы транскрибации.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Сценарий 2</p>
+      <h2>Брифы → черновик коммерческого предложения и&nbsp;сметы</h2>
+      <p>Коммерческие предложения, сметы, расчёты – объёмный труд: учесть кучу параметров, внести всё в файл. Когда вы работаете с черновиком, построенным по вашим принципам, логике и стандартам оформления, работа знатно ускоряется. Вы уже не сидите над белым листом. Черновик вы дальше проверяете и пересчитываете руками.</p>
+      <p>Мой пример: пришёл запрос агентства, в папке 3 брифа от потенциального заказчика – он хочет кого-то обучить, провести тренинги. По брифам нужно хотя бы набросать коммерческое предложение.</p>
+      <p class="subplate">Сначала – своя инструкция</p>
+      <p>У меня есть оцифрованная инструкция по созданию коммерческих предложений. Я взяла несколько КП, которые мне когда-то нравились, и попросила выделить из них инструкцию. Лежит она не в папке этого проекта, а в папке с помощниками и навыками – так её можно использовать в разных проектах.</p>
+      <div class="promptbox"><p class="plabel">Собрать инструкцию из образцов</p><pre>Вот несколько коммерческих предложений, которые мне нравятся [приложите файлы].
+Выдели из них инструкцию, по которой ты будешь собирать мои КП: логика, структура, как считается стоимость, правила оформления.
+Сохрани её в папку [где хранятся ваши помощники и навыки].</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="subplate">Запуск</p>
+      <p>Создаю новый чат и подключаю 2 папки: с брифами и с навыками, где лежит инструкция по КП. Можно работать не только в Codex, но и в режиме «Работа» в ChatGPT – там нужно выбрать, что работаем локально, с папкой на компьютере. Прошу очень просто:</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Открой папку с брифами агентства. Там 3 брифа на программу. Собери по ним коммерческие предложения и смету по моей инструкции.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент сделал коммерческие предложения и заготовку сметы: часы, передача, итог – и прописал, как считать. Цен у него не было: я не подключила папку с источником расчёта цен. Ничего страшного: подключите её в проект, и КП будут считаться ещё лучше и качественнее, чем вручную. Останется решить, сколько стоит час.</p>
+      <p class="rulebox">Я для скорости часто выбираю общую папку своей системы и направляю агента словами. Но для постоянных задач заведите отдельный проект – например, «Коммерческие предложения для бизнеса» – и подключите к нему нужные папки заранее. Контекст часто выпадает, и его приходится повторять только потому, что мы не создали заранее то, что не нужно объяснять по 25 раз. Но даже если вы просто сделаете так в чате, это вас сильно ускорит.</p>
+      <p class="subplate">Поставить на поток</p>
+      <p>Если брифы приходят регулярно, особенно когда вы работаете с командой, можно раз в день проверять, появились ли новые, готовить черновики КП, перепроверять и отправлять. Сначала я поставила задачу не совсем корректно – проверять раз в день в 17:00, – удалила её и спросила так:</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Можем ли мы настроить, чтобы в течение рабочего дня с 9 до 17 часов при попадании нового брифа в эту папку ты готовил коммерческие предложения? Это реально или нет? Или мне нужно ставить задачу по времени?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент ответил: для локальной папки такого триггера нет, но он может проверять папку каждый час. Его можно расспросить и дальше: «а если не локально, а в облаке – что ты имеешь в виду?» Сверяйте свои фантазии с реальностью: сегодня фантазии, послезавтра реальность – OpenAI регулярно выпускает обновления.</p>
+      <p class="note">В зависимости от тарифа может быть ограничение на количество регулярных задач. Это решаемо: повысить тариф или пересмотреть, какие задачи действительно нужны.</p>
+      <p>Так же можно разгрузить любые задачи, где по шаблону нужно что-то готовить из входящих бумаг: например, справки по присланным документам. Я слышала, как в рекламе агент сам расставляет маркировку на картинках, как только приходит рекламная интеграция.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Сценарий 3</p>
+      <h2>Договоры и&nbsp;оплаты → статусы, счета, акты и&nbsp;напоминания</h2>
+      <p>Кто много работает с документами, сталкивается с тем, что непонятно, какие акты выставлены, какие нет, что мы, возможно, забыли. Обычно ведут таблички – их тоже можно обновлять через агента. Например, в конце дня голосом надиктовать статусы и попросить внести изменения по контрагентам. Или попросить проанализировать документы, появившиеся в папке, и разнести их в систему учёта.</p>
+      <p>Для урока я подготовила учебную папку: выписка, шаблоны документов, реквизиты, реестр договоров и оплат, заметки о том, что сдано в октябре. Это ровно тот хаос, когда садишься в конце дня – ух, разобраться бы со всем этим. И мы накидываем агенту много задач сразу.</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Открой папку [название]. Сверь таблицу оплат с выпиской и с заметками о сданных работах. Отметь, кто оплатил и где просрочка.
+Подготовь акты и счета там, где пора, по шаблонам из папки, номера – по порядку.
+Клиентам с просрочкой напиши короткие вежливые напоминания.
+Пока ничего не отправляй. Если непонятно, к кому относится поступление, не привязывай сам.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Суперсила агента в том, что он не выдаст что-то одно некачественное или простыню текста, как обычный чат, а всё подготовит, разложит и подключит всё необходимое. Мой агент подключил субагентов, нашёл перевод, который ни с чем не совпадает, и сразу начал готовить проекты актов. Человеку мы бы долго объясняли: подготовь этому акт, проверь вот это. А здесь коротко сказали – и пошёл. Из этого тоже можно сделать регулярный процесс.</p>
+      <div class="promptbox"><p class="plabel">Сделать регулярным</p><pre>Хочу повторять эту сверку регулярно: [например, каждую пятницу в 18:00]. Сверяй оплаты, готовь черновики актов и счетов и напоминания – и присылай мне сводку. Ничего не отправляй клиентам без меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">С документами не нужно, чтобы агент сам отправлял за вас акты и счета. Оставьте контроль за собой – на какую сумму выставлен счёт, ничего ли не упущено – и снимите с себя именно рутину: заполнить, перепроверить. Я сама в основном выставляю счета, а через агента веду реестр учёта для себя.</p>
+      <p class="note"><b>Доступ к таким данным давайте, только если позволяет ваша работа.</b> Мне как индивидуальному предпринимателю позволяет. Иногда я использую имена, которые потом заменяю.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Сценарий 4</p>
+      <h2>Агент «Аудитория»: живое понимание своих клиентов</h2>
+      <p>Это один из двух моих любимых сценариев – туда очень часто не доходят руки. Исследование аудитории или не делается («я и так всё про них знаю»), или делается один раз и дальше лежит мёртвым грузом.</p>
+      <p>Зачем оно нужно? Если вы в найме, ваша компания работает с клиентами, у них меняются запросы, а под запросы – продукты и решения, и компания реагирует гибче. Если у вас частная практика, важно замечать динамику: как меняются запросы, какие явные, неявные и смежные запросы вы можете дополнительно закрывать как консультант, эксперт или фрилансер. Если понимаем, что волнует людей, которые готовы нам платить, – это важно.</p>
+      <p class="rulebox">Инструмент должен быть не статичным, а динамичным: мир быстро меняется. Брать понимание можно снаружи – интернет, форумы, статьи, соцсети, – и изнутри: у нас копятся заявки, клиенты, расшифровки встреч и созвонов, переписки. Этот контекст мы часто даже не замечаем. Как часто пересматривать, зависит от сезонности вашего бизнеса.</p>
+      <p>Агент по анализу аудитории – хорошая идея: он собирает из разных источников, учитывает разные контексты и вносит всё в рабочие карты. Их можно взять на следующее совещание или сессию, где принимаются решения о новых продуктах, ценах, стратегии и тактике.</p>
+      <p class="subplate">Как устроен мой агент</p>
+      <p>Это демонстрационная версия агента, который у меня работает в Claude, – история абсолютно переносимая. В папке лежат: инструкция агента, карта аудитории – сегменты, их боли и интерпретации, – заявки клиентов, анкета и вопросы, которыми мы проверяем гипотезы. Агент держит в актуальном состоянии наше понимание клиентов. Чтобы не прикреплять папку каждый раз, сделайте отдельный проект, например «Исследование аудитории».</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Обнови карту аудитории: последнее исследование мы делали в [марте].
+Посмотри наши заявки и клиентов, сходи во внешние источники и скажи, что изменилось: какие запросы появились, какие сегменты стали заметнее или слабее, где наши представления расходятся с реальностью.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент посмотрел заявки – запросы были от небольших команд и специалистов, запроса на корпоративный тренинг нет – и подключил разведчика: это агент, созданный под внешнюю разведку. Таких агентов можно создавать со своими инструкциями, ещё дотошнее: задать критерии и источники – конкретные сайты, упоминания компаний, форумы.</p>
+      <div class="promptbox"><p class="plabel">Настроить своего разведчика</p><pre>Создай агента-разведчика для исследования моей аудитории. Ищи [что – например, упоминания запросов моих клиентов, кадровые сигналы, обсуждения] на [каких сайтах, форумах, в каких соцсетях].
+Каждый вывод подкрепляй ссылкой на источник. Если данных мало, так и скажи – не додумывай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>На выходе – обновлённая карта и выводы: какие запросы стали шире, где слабый сигнал. Например, запрос в аудитории вроде бы есть, а заявок нет. Это повод поисследовать, что мы делаем не так, почему эти люди к нам пока не приходят, и поработать с этим сегментом: ради чего им продукт, что мешает, что уже пробовали. Прошло полгода – и карта сдвигается: возможно, стоит делать ставку на другие продукты. Для компании знать это очень ценно.</p>
+      <p class="rulebox">Команда супермаркетологов для этого не нужна – по крайней мере для ключевых выводов, которые вас уже расширяют и подсказывают, что делать дальше лучше, чем если бы вы думали над задачей в одиночку. Если вы работаете с клиентами в компании, такой навык может вас сильно выделить. Если работаете на себя – это must-have.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Сценарий 5</p>
+      <h2>«Сделай за меня»: агент собирает анкету в&nbsp;браузере</h2>
+      <p>Гипотезы об аудитории хорошо проверить на живых людях: периодически спрашивать существующих клиентов или подписчиков, что их волнует, особенно если вы что-то продаёте или позиционируете себя как эксперт. И это пятый сценарий: анкету наконец-то можно собирать не руками.</p>
+      <p>В России анкеты часто делают в Яндекс Формах: персональные данные нужно обрабатывать в российских сервисах. Но собирать там формы неудобно, особенно в первый раз. Я при своём умении создавать анкеты в этом интерфейсе плыву.</p>
+      <p class="subplate">Как это выглядит</p>
+      <p>Текст анкеты уже лежал в папке агента «Аудитория» – его подготовил сам агент. Я копирую его и иду в Google Chrome: туда можно встроить расширение ChatGPT – его значок появляется в верхней строке браузера. Открываю Яндекс Формы, вызываю ChatGPT прямо там, начинаю новый чат в режиме «Работа» и отправляю:</p>
+      <div class="promptbox"><p class="plabel">Можно сказать так</p><pre>Помоги заполнить анкету в Яндекс Формах. Вот текст анкеты:
+[вставьте текст анкеты]
+Когда закончишь, проверь, как она выглядит, и пришли мне ссылку.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Агент пишет, что будет использовать навык управления браузером, и дальше по экрану ходит его курсор – я ничего не нажимаю. Он осваивается в интерфейсе и набирает скорость: название, вопросы, варианты ответов. Сам настроил то, о чём я даже не знала: в зависимости от ответа показывать разные следующие вопросы. Анкету продумали мы, а он её технически реализовал, настроил завершение, проверил оформление и прислал готовую ссылку. Чат сохранится в ChatGPT, и ссылку всегда можно найти.</p>
+      <p>Браузер можно свернуть и заниматься своими делами – смотреть, как он нажимает кнопки, не обязательно. Хотя посмотреть полезно: когда вам непонятно, как что-то делать, можно понаблюдать или попросить провести вас по шагам, чтобы потом повторить руками.</p>
+      <div class="promptbox"><p class="plabel">Если хотите научиться сами</p><pre>Проведи меня пошагово: что нажимать и где, чтобы я могла повторить это руками.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Это возможность не тратить деньги на технического специалиста и время на страдания с новым интерфейсом. Такая задача занимает минут 10, а вы платите только за подписку. Так мы, запуская лендинг, подключили Яндекс Метрику – инструмент статистики: куда на сайте нажимали, а куда нет. Я не умела её настраивать и до сих пор не умею, но настроила, и отдельный человек не понадобился. Такое агентное управление браузером подходит для чего угодно: разместить уроки на платформе, заполнить сложную форму, открывать и закрывать программы на компьютере.</p>
+      <p class="note"><b>Отдавайте в браузер то, что не жалко показать.</b> Заполнить форму или настроить статистику – это не супер конфиденциальные данные.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Ваши сценарии</p>
+      <h2>Как найти свои сценарии и&nbsp;собрать свой костюм</h2>
+      <p>Ищите то, от чего хотите разгрузиться, и то, где хотите получать черновики, чтобы начинать работу не с чистого листа. Это уже хорошая возможность создать свой агентный сценарий. Здесь нужно правда придумать свой сценарий. Узкое место в одной задаче мы искали в уроке 3, а здесь смотрим шире – на всю неделю.</p>
+      <p>Потом из сценариев может сложиться своя система агентов. Вы встаёте утром: агент номер 1 прислал расписание дня, агент номер 2 проверил и подготовил счета, третий подготовил контент на неделю, четвёртый задизайнил материалы, пятый подготовил сценарий эфира. Настроить можно что угодно. Вопрос – будете ли вы этим пользоваться. Меньше всего сопротивления вызывает то, что вы создали сами: вы понимаете, по каким критериям работает агент, где начинается и где заканчивается ваш контроль.</p>
+      <p class="rulebox">Можно развернуть себе OpenClaw или Hermes со всеми агентами. А зачем? Скорее всего, ничего хорошего не выйдет: он ничего не знает о вас. Универсальный костюм, который сядет на всех, спроектировать сложно. Ваша задача – собрать свой костюм: потихоньку строить свой город из агентов, свой офис, где всё работает под вас, и свой рабочий день практически мечты.</p>
+      <p class="subplate">Эргономика рабочего дня</p>
+      <p>Когда мы проектировали кухню, ящик для приборов поставили рядом с посудомойкой, чтобы не бегать с ними через всю кухню. Такая же эргономика есть и в работе: что агент делает в файлах, что в Google Диске, что присылает в Telegram, что на почту. Подумайте, как спроектировать свой рабочий день и неделю: навык управления собой, временем и фокусом внимания проявляется именно на дистанции недели.</p>
+      <p>Это и есть задание урока – <a class="inl" href="#praktika">ниже</a>.</p>
+      <p>Это интересная задача следующего уровня – для тех, кто освоил основы нейроархитектуры. Вы уже можете создавать помощников, работать локально и в облаке, подключить бота, отправлять результат на почту, создавать события в календаре, пользоваться плагинами и навыками. Осталось собрать это в красоту. Система будет собираться не один день, но вопрос точно хороший.</p>
+      </div></div>
+    </section>
+
+<div class="practice" id="praktika">
+  <div class="wrap">
+    <p class="label">Теперь делаем</p>
+    <h2>Задание</h2>
+    <p class="pmeta">Своя идеальная неделя с агентами · ChatGPT на компьютере</p>
+    <p class="pintro">Как я хочу начинать понедельник? Когда садиться за работу и чем заниматься? Что отдать агентам, чтобы оно делалось за меня, – так, чтобы вся неделя управлялась агентно, а смыслы и решения оставались за мной? Исследуем это вместе с ИИ. Агент изучит систему, которую вы уже собрали за курс, расспросит вас о рабочем ритме, найдёт, что можно отдать, и спроектирует вашу идеальную неделю: каких агентов и помощников создать, к какому моменту и куда они приносят результат и с какого начать.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Подключите свою систему</h3>
+        <p>Откройте приложение ChatGPT на компьютере – Codex или режим «Работа» с локальной папкой. Через плюсик подключите главную папку, где живёт ваша система: проекты, правила, помощники, навыки. У меня это папка «Моя система с ЧатГПТ». Если общей папки нет, подключите те, где лежат ваши проекты и помощники.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Попросите изучить систему и спроектировать неделю</h3>
+        <p>Агент сначала прочитает, что у вас уже есть, потом будет задавать вопросы. Отвечайте голосом, как есть: что-то вы знаете точно, что-то нет – так и говорите.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Промпт для задания</p><pre>Помоги мне спроектировать мой идеальный рабочий день и рабочую неделю, в которых агенты работают на меня.
+
+Сначала изучи, что у меня уже есть: подключённую папку [название – например, «Моя система с ЧатГПТ»] – мои проекты, правила, помощников и навыки, – а также мои проекты в ChatGPT и регулярные задачи, которые уже настроены. Ничего не меняй, только читай. Коротко перескажи, что нашёл. Если какие-то проекты или регулярные задачи тебе не видны, спроси меня – я перечислю.
+
+Потом задавай мне вопросы по одному, чтобы понять, как я работаю: в какие дни и часы я сажусь за работу и чем занимаюсь, что делаю регулярно, что постоянно упускаю, какие задачи вгоняют меня в тоску, где я начинаю с чистого листа, где мне удобно получать результат – в папке, в Telegram или на почте.
+
+Когда поймёшь картину, найди, что из моей недели можно отдать агентам, чтобы это делалось за меня, и предложи мою идеальную неделю:
+1. Мой рабочий день и неделя – по дням и времени: когда я чем занимаюсь.
+2. Что можно отдать агентам – и что остаётся за мной: смыслы, решения, общение с людьми агент не заменяет.
+3. Какие агенты и помощники мне нужны: что каждый берёт на вход, что делает, к какому моменту и куда приносит результат. Отметь, что можно собрать на том, что у меня уже есть, а что нужно создать заново.
+4. Где остаётся мой контроль: что агент делает сам, а что только готовит на мою проверку.
+5. С чего начать: 1–2 самых простых агента на ближайшую неделю.
+
+Опирайся только на то, что нашёл в моей системе и услышал от меня. Не придумывай задачи, которых у меня нет. Пока ничего не создавай и не настраивай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Если предложенная неделя кажется перегруженной, так и скажите: «Слишком много, оставь только то, что правда снимет с меня рутину». Меньше всего сопротивления вызывает то, что вы спроектировали сами и понимаете.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Сохраните план в свою систему</h3>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Сохрани мою идеальную неделю отдельным файлом «Моя идеальная неделя с агентами» в папку [название]. Так, чтобы к нему можно было вернуться и дорабатывать.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>По желанию: соберите первого агента</h3>
+        <p>Возьмите самого простого агента из плана и соберите его так, как в уроках 3 и 4: задача, папка, правила и ограничения, проверка результата, а если задача повторяется – расписание. Система будет собираться не один день, начните с одного.</p>
+      </div></div>
+  </div>
+
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>У вас есть файл «Моя идеальная неделя с агентами»: ваш день и неделя по времени, что вы отдаёте агентам и что оставляете за собой, какие агенты и помощники нужны, где ваш контроль и с какого агента вы начнёте.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+<div class="pfb" id="portfolio">
+  <span class="pfb-tag">Задача для вашего портфолио</span>
+  <h3 class="pfb-h">1 минута: добавьте этот урок в своё портфолио</h3>
+  <p class="pfb-p">Когда закончите задание, вставьте этот промпт в тот же чат, где работали. Нейросеть задаст 1–2 вопроса и опишет вашу работу так, чтобы её было интересно прочитать работодателю или клиенту. Скопируйте ответ в свой документ «Моё портфолио» – в раздел «Модуль 4», под «Урок 4».</p>
+  <p class="pfb-p pfb-what"><b>В этом уроке в описание попадёт:</b> ваша идеальная рабочая неделя с агентами: на что в своей системе вы опирались, каких агентов и помощников решили создать, где оставили свой контроль и с какого агента начнёте.</p>
+  <div class="pfb-box"><p class="pfb-lab">Промпт для портфолио</p><pre>Помоги оформить эту работу для моего портфолио – так, чтобы её было интересно прочитать работодателю или клиенту.
+Посмотри наш диалог и напиши пять коротких пунктов:
+1. Задача – какую проблему я решал(а) и для кого.
+2. Что я сделал(а) с помощью ИИ – 2–3 шага, без технических подробностей.
+3. Результат – что получилось и что это дало: время, качество, удобство.
+4. Где это ещё пригодится – в каких ситуациях и кому такой подход может помочь.
+5. Какой навык это показывает – одной фразой.
+Пиши просто и по делу, без похвалы и громких слов. Не придумывай цифры и факты: если чего-то не хватает, например сколько времени это занимало раньше, сначала задай мне 1–2 вопроса.</pre><button class="pfb-btn" type="button" data-pfcopy><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div>
+</div>
+<div class="matbox">
+  <p class="ml">Материалы к уроку</p>
+  <ul>
+    <li><a href="https://aiforlife.ru/ii-course/modul4/urok3/">Урок 3. Регулярные задачи на потоке – на примере блога</a><span>Как агент собирает команду субагентов, превращает неудобства в правила и работает по расписанию.</span></li>
+    <li><a href="https://aiforlife.ru/ii-course/modul1/itog/assets/portfolio-neiro-arhitektor.docx">Шаблон портфолио</a><span>Если вы ещё не скачивали его: документ «Моё портфолио», в который собираются ваши работы курса.</span></li>
+  </ul>
+</div>
+</section>
+
+<div class="dark dark-end">
+  <div class="wrap dgrid">
+    <h2>Что забрать<br>из урока</h2>
+    <div class="dcol">
+      <p>Возможности безграничны – вопроса «а что он умеет» уже нет. Осталось применить их сфокусированно: под то, что ведёт вас к вашим целям и приоритетам и правда облегчает жизнь. Начните с узкого места, дайте агенту понятные критерии качества и ограничения, оставьте контроль за собой – и стройте свою систему по одному сценарию.</p>
+      <p>Это потрясающая возможность наконец-то сделать свою работу и быт максимально классными и интересными.</p>
+      <p class="qlabel">Вопросы к себе</p>
+      <ul class="qlist">
+        <li>Как я хочу теперь начинать свой понедельник?</li>
+        <li>Какие задачи я постоянно упускаю?</li>
+        <li>Какие задачи вгоняют меня в тоску – и что из этого я могу отдать, чтобы оно делалось за меня?</li>
+        <li>Где в моей работе узкое место, на котором я спотыкаюсь?</li>
+      </ul>
+      <p class="nextline"><b>До встречи в финальном уроке – <a class="inl" href="https://aiforlife.ru/ii-course/modul4/urok5/">«Как развиваться дальше»</a>.</b></p>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · конспект урока 4, модуль 4</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
+    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
+    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
+    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>
