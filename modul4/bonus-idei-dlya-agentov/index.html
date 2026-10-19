@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как находить идеи для агентов · Бонус к уроку 4 · Нейро-архитектор</title>
+<meta name="description" content="Бонус к уроку 4 модуля 4: 4 способа найти свои сценарии для агентов – спросить самого агента, присмотреться к своей работе, галереи примеров и каталоги навыков – и как превратить идею в своего агента.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Шкала – 4 текстовые роли (МЕТОД, раздел B2):
+   Р1 заголовок – Instrument Serif 400: h1 (--h1), h2 (--h2);
+   Р2 подзаголовок – Manrope 700: h3 карточек, плашки-подзаголовки;
+   Р3 текст – Manrope 500, 17px (--text), один цвет --ink (на тёмном – #CFC4D4);
+   Р4 метка – Manrope 700, 11px (--label) CAPS с разрядкой.
+   Декоративные цифры, кнопки, промпты (mono) и общий блок портфолио ролями не считаются.
+   Инлайн font-size / color / font-weight в разметке не используем. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{font-style:italic;color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding:46px 0 0}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+
+/* Блок «Задача для вашего портфолио» – одинаковый во всех уроках */
+.pfb{margin:52px 0 8px;background:linear-gradient(135deg,#FFE6F3 0%,#F4E8FF 100%);border-left:6px solid #E6198C;padding:32px 32px 28px}
+.pfb .pfb-tag{display:inline-block;background:#E6198C;color:#fff;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;margin-bottom:16px}
+.pfb h3.pfb-h{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;line-height:1.3;color:#211829;margin:0 0 12px;letter-spacing:0}
+.pfb p.pfb-p{font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.6;color:#3B3143;margin:0 0 12px;max-width:none}
+.pfb p.pfb-what{background:#fff;border:1px solid #F2C6DE;padding:13px 16px;font-size:15.5px}
+.pfb a{color:#C0116E;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.pfb .pfb-box{background:#1B1420;padding:22px 24px;margin:18px 0 16px}
+.pfb p.pfb-lab{font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin:0 0 12px}
+.pfb .pfb-box pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;font-family:var(--mono,ui-monospace,Menlo,Consolas,monospace);font-size:13.5px;line-height:1.75;color:#DDD5E2;margin:0;background:none;border:0;padding:0}
+.pfb .pfb-btn{margin-top:18px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:0;padding:13px 22px;cursor:pointer;background:#fff;color:#211829;display:inline-flex;align-items:center;gap:10px}
+.pfb .pfb-btn:hover{background:#FF8FC6}
+.pfb .pfb-btn.done,.pfb .pfb-btn.done:hover{background:#1FA24E;color:#fff}
+@media (max-width:640px){.pfb{padding:26px 20px 22px;margin-left:-20px;margin-right:-20px}.pfb h3.pfb-h{font-size:20px}.pfb .pfb-box{padding:18px}.pfb .pfb-btn{width:100%;justify-content:center}}
+
+/* Ссылки на бонусы в тексте и блок «Материалы к уроку» */
+a.inl{color:var(--pink-strong);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a.inl:hover{color:var(--pink)}
+.dark a.inl{color:var(--pink-soft)}
+.matbox{margin:40px 0 8px;border:1px solid var(--line);background:#fff;padding:26px 28px 22px}
+.matbox .ml{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.matbox ul{list-style:none;margin:0;padding:0}
+.matbox li{border-top:1px solid var(--line);padding:13px 0}
+.matbox li:first-child{border-top:0;padding-top:0}
+.matbox li a{font-size:17px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--pink-light)}
+.matbox li a:hover{border-bottom-color:var(--pink)}
+.matbox li span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.lessnav{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:none;padding:22px 0 0;margin-top:0}
+@media (max-width:640px){.matbox{padding:22px 20px 18px;margin-left:-20px;margin-right:-20px}}
+/* кнопка «Открыть инструкцию к практике» – единая для всех конспектов */
+.btns a.btn.btn-praktika{border-radius:999px;padding:17px 32px;font-size:16px;color:#fff;text-decoration:none;
+  background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);
+  background-size:230% 100%;animation:btnflow 5s ease-in-out infinite;
+  box-shadow:0 16px 34px -16px rgba(230,25,140,.6);transition:transform .18s ease,box-shadow .18s ease}
+.btns a.btn.btn-praktika:hover{color:#fff;background:linear-gradient(100deg,#E6198C 0%,#B23AE0 22%,#FF6B57 42%,#B23AE0 62%,#E6198C 84%,#B23AE0 100%);background-size:230% 100%;transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(230,25,140,.7)}
+.btns a.btn.btn-praktika svg{transition:transform .18s ease}
+.btns a.btn.btn-praktika:hover svg{transform:translateX(4px)}
+@keyframes btnflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.btns a.btn.btn-praktika{animation:none}}
+@media (max-width:560px){.btns a.btn.btn-praktika{padding:15px 20px;font-size:15px;border-radius:22px;text-align:center}}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* Дополнения конспектов (общие с М3) – вместо инлайн-стилей образца */
+.hero.hero-top{padding-top:34px}
+.mainbox-top{margin-top:44px}
+.blk .lede{padding-top:0}
+.practice .label{color:var(--pink-soft)}
+.dark-end{margin-top:64px}
+.dark .dcol p+p{margin-top:14px}
+.dark .qlabel{margin-top:22px;color:#9C8AA6;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.dark .qlist{margin-top:12px}
+.dark .nextline{margin-top:26px}
+main .def p{font-size:var(--text);color:var(--ink)}
+main .rulebox{font-size:var(--text);margin-top:22px}
+main .defs+p{margin-top:22px}
+.stepprompt{margin-top:22px}
+/* Подзаголовок внутри блока – тёмная плашка */
+p.subplate{display:block;background:#1B1420;color:#fff;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;padding:10px 16px 10px 14px;border-left:3px solid var(--pink);margin-top:36px;margin-bottom:20px}
+p.subplate+p{margin-top:0}
+/* промпты внутри текста конспекта – с воздухом сверху и снизу */
+main .blk .promptbox{margin:22px 0}
+main .blk p.subplate+.promptbox{margin-top:0}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 4 · к уроку 4</span></div>
+  <div class="kmark"><span class="kn">✦</span><span class="kt">Бонус</span></div>
+  <div class="hero hero-top">
+    <div class="hgrid">
+      <h1>Как находить идеи для&nbsp;агентов</h1>
+      <p class="hlead">Агент может многое – вопрос в том, что отдать ему именно вам. 4 способа найти свои сценарии: спросить самого агента, присмотреться к своей работе, подсмотреть у других и в каталогах готовых навыков – и как превратить идею в своего агента.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Время</span><span class="mv">20–30 минут</span></div>
+      <div><span class="mk">Понадобится</span><span class="mv">ChatGPT или Claude с доступом к вашей системе</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Список из 3–5 сценариев и первый – в работе</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="dark mainbox mainbox-top">
+  <div class="wrap dgrid">
+    <h2>Главное</h2>
+    <div class="dcol">
+      <div class="mline"><span class="mn">1</span><p>Самый быстрый способ – спросить агента. Он видит ваши разговоры, проекты и папки и может сам найти, что у вас повторяется и где вы спотыкаетесь.</p></div>
+      <div class="mline"><span class="mn">2</span><p>Хорошая идея для агента – там, где вы спотыкаетесь, откладываете, начинаете с чистого листа или скучаете.</p></div>
+      <div class="mline"><span class="mn">3</span><p>Цель – чтобы к моменту, когда вы садитесь за задачу, исходники и черновики уже были готовы.</p></div>
+      <div class="mline"><span class="mn">4</span><p>Меньше всего сопротивления вызывает то, что вы спроектировали сами. Готовые чужие агенты – источник идей, а не замена вашей системы.</p></div>
+    </div>
+  </div>
+</div>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Способ 1 · начните с него</p>
+      <h2>Спросите самого агента</h2>
+      <p>За время курса агент накопил о вас много: разговоры, проекты, помощников, файлы в вашей системе. Попросите его изучить это и найти, что можно частично автоматизировать – превратить в регулярную задачу, чтобы исходники уже ждали вас к моменту, когда вы садитесь за работу.</p>
+      <p>Лучше всего запускать там, где агент видит больше: в Codex или Claude с подключённой «Моей системой», в ChatGPT – там, где накоплена история разговоров.</p>
+      <div class="promptbox"><p class="plabel">Найди, что отдать агенту</p><pre>Помоги мне найти задачи, которые можно частично автоматизировать и отдать агенту.
+Изучи, что тебе доступно обо мне: наши прошлые разговоры и проекты, память, подключённые папки [например, «Моя система с ЧатГПТ»] и опорные файлы, регулярные задачи, которые уже настроены. Ничего не меняй, только читай.
+Найди:
+– что я делаю повторно;
+– где я спотыкаюсь и что откладываю;
+– где я начинаю с чистого листа;
+– какие исходники и черновики мне нужны к моменту, когда я сажусь за задачу.
+Если чего-то не хватает, задай мне до 3 вопросов.
+Потом предложи 5 вариантов. Для каждого опиши:
+1. Что агент берёт на вход и откуда.
+2. Что он делает.
+3. Что, к какому моменту и куда приносит.
+4. Как запускается – по моей просьбе или по расписанию.
+5. Где остаётся мой контроль.
+6. Что нужно подключить или настроить.
+Отметь, с какого варианта начать – самого простого и полезного.
+Опирайся только на то, что нашёл и услышал от меня, не придумывай задачи, которых у меня нет. Пока ничего не настраивай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p>Выберите 1 вариант и попросите: «Давай настроим вариант [номер]. Проведи меня по шагам». Для больших систем – задание урока 4 <a class="inl" href="https://aiforlife.ru/ii-course/modul4/urok4/#praktika">«Моя идеальная неделя с агентами»</a>.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Способ 2 · присмотритесь к&nbsp;своей работе</p>
+      <h2>7 подсказок из урока 4</h2>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>Узкое место</h3><p>На чём вы спотыкаетесь прямо сейчас? Где сложно вытащить результаты работы, обратную связь клиентов, цифры? С этого и начинайте.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Сырьё, которое копится</h3><p>Расшифровки встреч, заявки, переписки, таблицы. «У тебя есть золото», – сказала мне нейросеть про мои расшифровки. Что у вас лежит без дела?</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Конвейер</h3><p>Из одного источника – несколько результатов, а из них – ещё что-то. Встреча → карточки участников → подборка кейсов для сайта.</p></div></div>
+        <div class="def"><span class="dn">4</span><div><h3>Черновик вместо чистого листа</h3><p>Коммерческое предложение, смета, план встречи, конспект. Где вам нужен черновик по вашим правилам, чтобы дальше только проверить и поправить?</p></div></div>
+        <div class="def"><span class="dn">5</span><div><h3>«Разобраться бы со всем этим»</h3><p>Хаос в конце дня – оплаты, акты, статусы. Агенту можно накидать много задач сразу: он разложит и подготовит, а отправку вы оставите за собой.</p></div></div>
+        <div class="def"><span class="dn">6</span><div><h3>«Сделай за меня, понажимай»</h3><p>Неудобные интерфейсы, в которых вы путаетесь: формы, статистика сайта, платформы. Агент с управлением браузером сделает это за вас, а вы посмотрите.</p></div></div>
+        <div class="def"><span class="dn">7</span><div><h3>Что вгоняет в тоску</h3><p>Задачи, которые вы постоянно упускаете или делаете через силу. Как вы хотите начинать понедельник? Что можно отдать, чтобы оно делалось за вас?</p></div></div>
+      </div>
+      <p class="rulebox">Каждую найденную задачу проверьте вопросом: это нужно один раз или регулярно? Если регулярно – это кандидат в задачу по расписанию: раз в день, раз в неделю или раз в час.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Способ 3 · подсмотрите у&nbsp;других</p>
+      <h2>Галереи готовых сценариев</h2>
+      <p>У OpenAI и Anthropic есть официальные подборки примеров – что люди поручают агентам в работе и жизни. Смотрите не «что бы такого настроить», а «что из этого похоже на мою задачу».</p>
+      <ul>
+        <li><a class="inl" href="https://learn.chatgpt.com/use-cases">Примеры использования ChatGPT</a> – подборки по темам: продуктивность, работа с клиентами, обучение, автоматизация. Например, «разобрать почту до нуля» или «еженедельный отчёт о работе».</li>
+        <li><a class="inl" href="https://academy.claude.com/use-cases">Примеры использования Claude</a> – подборки по сферам: маркетинг, обучение, личные задачи, отдельно – сценарии для работы с папками на компьютере.</li>
+      </ul>
+      <p>Сайты на английском – откройте страницу и попросите нейросеть перевести и подобрать 3 примера под вашу работу.</p>
+      <p class="rulebox">Ещё один источник – люди вокруг. Как мы говорили в уроке 5: учитесь у тех, кто в вашей сфере уже делает это качественно, и спрашивайте, как они это собирают.</p>
+      </div></div>
+    </section>
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Способ 4 · готовые навыки и&nbsp;плагины</p>
+      <h2>Каталоги внутри ChatGPT и&nbsp;Claude</h2>
+      <p>Готовые навыки и плагины ищите во встроенных каталогах – там они проверены лучше, чем на случайных сайтах.</p>
+      <div class="defs">
+        <div class="def"><span class="dn">1</span><div><h3>ChatGPT и Codex</h3><p>Раздел <b>Plugins</b> в боковой панели – общий каталог для ChatGPT и Codex. Вкладка OpenAI – официальные плагины, отдельно – вкладка навыков (Skills). Установка – кнопкой «+». Свой навык загружается через Create → Upload from your computer.</p></div></div>
+        <div class="def"><span class="dn">2</span><div><h3>Claude</h3><p>Раздел <b>Customize</b> в левой панели → вкладки Skills, Connectors или Plugins → вкладка <b>Discover</b>. Навык из каталога добавляется кнопкой Add, свой – через «+» → Create skill → Upload a skill (zip с папкой навыка).</p></div></div>
+        <div class="def"><span class="dn">3</span><div><h3>Образцы для своих агентов</h3><p>У Anthropic есть открытые наборы навыков и плагинов по профессиям – продажи, маркетинг, юристы, финансы. Каждый плагин – это просто текстовые файлы с инструкциями. Их удобно не ставить, а разбирать как образец: «Вот как устроен навык для продаж – собери похожий под мою работу».</p></div></div>
+      </div>
+      <p class="note">Названия кнопок и тарифы меняются каждые несколько месяцев – проверено на 19.10.2026. Не нашли раздел – спросите саму нейросеть или пришлите ей скриншот.</p>
+      <p class="subplate">Безопасность: навык – как программа</p>
+      <ul>
+        <li>Навык может запускать код и пользоваться вашими подключениями. Обе компании прямо советуют: ставьте только из официальных каталогов или от тех, кого знаете.</li>
+        <li>Чужой навык сначала откройте и прочитайте файл SKILL.md. Непонятно, что он делает, – не ставьте.</li>
+        <li>Если ChatGPT пометил навык «Needs Review» – сначала посмотрите подробности, «Blocked» – пользоваться нельзя.</li>
+        <li>На открытых сайтах-каталогах навыков исследователи находили вредоносные навыки. Надёжнее взять чужой навык как образец и собрать свой.</li>
+      </ul>
+      <div class="promptbox"><p class="plabel">Разобрать чужой навык как образец</p><pre>Вот навык [приложите файл или вставьте текст]. Объясни простыми словами, что он делает, к каким данным и сервисам обращается и нет ли в нём чего-то рискованного.
+Потом предложи, как сделать похожий навык под мою работу: [кто вы и какая у вас задача]. Пока ничего не устанавливай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="note">Свои GPT в ChatGPT закрываются: OpenAI планирует отключить их 11.12.2026, на смену приходят навыки и плагины. Искать идеи в магазине GPT уже не стоит.</p>
+      </div></div>
+    </section>
+
+
+    <section class="wrap blk reveal">
+      <div class="lede"><div class="col">
+      <p class="label">Из идеи – в&nbsp;агента</p>
+      <h2>Соберите агента под себя</h2>
+      <p>Нашли идею – не нужно сразу строить сложную систему. Сделайте задачу один раз вместе с агентом, превратите неудобства в правила и только потом упакуйте сценарий в навык и поставьте на расписание. Как это выглядит целиком, – в уроке 3 и в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul4/bonus-navyki-agenta/">«Навыки контент-агента»</a>.</p>
+      <div class="promptbox"><p class="plabel">Превратить идею в навык</p><pre>Мы с тобой только что сделали задачу: [что сделали]. Хочу, чтобы в следующий раз ты делал это сам, без долгих объяснений.
+Упакуй этот сценарий в навык: когда его подключать, что нужно на входе, как ты работаешь, как проверяешь результат, куда сохраняешь и чего никогда не делаешь без меня. Учти все правки, которые я давал(а) по ходу.
+Покажи навык, прежде чем сохранить. Сохрани его в «Помощники и навыки» отдельной папкой с понятным названием и скажи, как к нему обращаться.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Можно развернуть себе готовую «команду агентов» – но она ничего не знает о вас. Лучший агент – тот, что вырос из вашей реальной задачи, ваших правил и ваших правок.</p>
+      </div></div>
+    </section>
+
+<div class="dark dark-end">
+  <div class="wrap dgrid">
+    <h2>Коротко</h2>
+    <div class="dcol">
+      <p>Начните с вопроса агенту – он найдёт больше, чем вы вспомните сами. Добавьте свои наблюдения: узкие места, копящееся сырьё, нудные задачи. Подсмотрите идеи в каталогах. А потом выберите одну задачу и доведите её до работающего агента.</p>
+      <p class="nextline"><b><a class="inl" href="https://aiforlife.ru/ii-course/modul4/urok4/">← К уроку 4 «5 применений агентного ИИ»</a></b></p>
+    </div>
+  </div>
+</div>
+
+
+</main>
+
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус к уроку 4, модуль 4</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var bb=btn.closest('.btns'),prev=bb?bb.previousElementSibling:null,pre=null;
+    var pbx=btn.closest('.promptbox');if(pbx)pre=pbx.querySelector('pre');
+    if(!pre&&prev&&prev.classList.contains('promptbox'))pre=prev.querySelector('pre');
+    if(!pre){var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');pre=box?box.querySelector('.promptbox pre'):null;}
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='konspekt-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  try{var s=localStorage.getItem(KEY);if(s)setSvc(s);}catch(e){}
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+
+<script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(x){}document.body.removeChild(a);return ok;}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-pfcopy]');if(!b)return;
+    var t=b.closest('.pfb-box').querySelector('pre').innerText;
+    function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
+  });
+})();
+</script>
+</body>
+</html>
