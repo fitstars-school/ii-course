@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Как навыки модуля 4 помогут вам зарабатывать · Бонус модуля 4 · Нейро-архитектор</title>
+<meta name="description" content="Бонус модуля 4: как без обещаний «быстрых денег» превратить папку с правилами, 5 опорных файлов и регулярную задачу агента в услугу для другого человека или в аргумент для работодателя.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Типографическая шкала (МЕТОД.md, B2) – общий кит бонусов «Заработок» курса FitStars:
+   Р1 Заголовок   – Instrument Serif: h1 var(--h1), h2 var(--h2); декоративные цифры шагов и пунктов – serif, ролью не считаются
+   Р2 Подзаголовок – Manrope 600–700: .tname, .step h3, .def h3, .road h3, .msg h3
+   Р3 Текст       – Manrope 500, var(--text) 17px; на светлом фоне – var(--ink), в тёмных блоках – #CFC4D4
+   Р4 Метка       – Manrope 700, CAPS с разрядкой, var(--label) 11px
+   Курсива нет. Инлайн font-size / color / font-weight в разметке не используем. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --fine:13px; --label:11px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+p+p{margin-top:14px}
+
+.rubric{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:13px;padding-top:34px}
+.rubric span{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.rubric .r2{font-weight:500;color:var(--muted)}
+
+.hero{padding:60px 0 8px}
+.hgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:end}
+.hgrid h1{grid-column:span 8}
+.hlead{grid-column:span 4;font-size:17px;line-height:1.62;color:var(--muted)}
+
+section{padding:30px 0}
+.lede{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding-top:44px}
+.lede .col{grid-column:4 / span 9}
+
+.dark{background:var(--dark);color:#F3EDF5;padding:56px 0;margin-top:56px}
+.dark h2{color:#fff}
+.dark .glabel{color:var(--pink-soft)}.dark .plabel{color:#FFC2E0}
+.dark .dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dark .dgrid h2{grid-column:span 5}
+.dark .dgrid .dcol{grid-column:span 7;color:#CFC4D4}
+.dark ul li{color:#CFC4D4}
+.dark ul li::before{background:var(--pink-soft)}
+.dark b{color:#fff}
+
+ul{list-style:none;margin-top:16px}
+ul li{position:relative;padding-left:24px;margin-bottom:10px}
+ul li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:1.5px;background:var(--pink)}
+
+.label{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;padding-bottom:26px;border-bottom:1px solid var(--ink)}
+.navlink{font-size:16px;font-weight:600;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+.group{padding:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;margin:52px 0 4px}
+.glabel{font-size:var(--label);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pink)}
+.grange{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.note{border-left:2px solid var(--pink);padding:2px 0 2px 20px;margin:20px 0 8px;font-size:16px;color:var(--muted)}
+.note b{color:var(--ink)}
+
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:center;gap:14px;padding:24px 0;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:38px;line-height:1;color:var(--faint);transition:color .2s}
+.tname{font-size:var(--sub);font-weight:600;line-height:1.32}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding:0 0 34px 78px}
+
+.promptbox{background:var(--dark);padding:26px 28px;border-left:3px solid var(--pink)}
+.plabel,.promptbox p.plabel{font-family:var(--sans);font-size:13px;line-height:1.4;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;word-wrap:break-word;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:#DDD5E2}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--sans);font-weight:700;font-size:15px;border:none;border-radius:0;padding:14px 24px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink)}
+.btn.done{background:#1FA24E}
+.linkbtn{font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px}
+.linkbtn:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+.closing{padding:56px 0 10px}
+.closing .cgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px}
+.closing .cgrid .col{grid-column:4 / span 8}
+.pull{font-family:var(--serif);font-size:clamp(24px,3vw,34px);line-height:1.22;letter-spacing:-.01em}
+
+footer{background:var(--dark2);color:#8A7C90;padding:30px 0 40px;font-size:var(--fine);margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .hgrid h1,.hlead,.lede .col,.closing .cgrid .col,.dark .dgrid h2,.dark .dgrid .dcol{grid-column:1 / -1}
+  .hlead{margin-top:20px}
+  .task summary{grid-template-columns:44px 1fr 22px;gap:11px;padding:20px 0}
+  .num{font-size:29px}
+  .tname{font-size:17.5px}
+  .body{padding-left:0;padding-bottom:28px}
+  .promptbox{padding:20px;margin-left:-20px;margin-right:-20px;border-left-width:3px}
+  .promptbox pre{font-size:12.8px;overflow-wrap:anywhere}
+  .btns{gap:18px}
+  .btn{width:100%;justify-content:center}
+  .dark{padding:44px 0}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root{--h1:clamp(33px,4.6vw,60px)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:21px;line-height:1;color:var(--pink-soft)}
+.kmark .kt{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.meta{display:flex;flex-wrap:wrap;gap:0 34px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+.meta div{padding:2px 0}
+.meta .mk{display:block;font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta .mv{font-size:16px;font-weight:600}
+.mainbox .mline{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.mainbox .mline:last-child{border-bottom:none}
+.mainbox .mn{font-family:var(--serif);font-size:26px;line-height:1;color:var(--pink-soft)}
+.mainbox p{color:#CFC4D4;font-size:17px;line-height:1.55}
+.blk{padding-top:58px;padding-bottom:6px}
+.lede .col{max-width:68ch}
+.blk .col p{max-width:68ch}
+.blk h2{margin:14px 0 18px}
+.defs{margin-top:22px}
+.def{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
+.def .dn{font-family:var(--serif);font-size:34px;line-height:1;color:var(--pink)}
+.def h3{font-family:var(--sans);font-size:17.5px;font-weight:700;margin-bottom:5px}
+.def p{font-size:16px;color:var(--muted);line-height:1.55}
+.quote{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.3;border-left:3px solid var(--pink);padding:6px 0 6px 24px;margin:22px 0}
+.rulebox{border-left:2px solid var(--pink);padding:4px 0 4px 20px;margin-top:22px;font-size:16px}
+
+.practice{background:var(--dark);color:#F3EDF5;padding:60px 0 54px;margin-top:66px;position:relative}
+.practice h2{color:#fff;font-size:clamp(38px,5vw,62px);margin:12px 0 0}
+.practice .pmeta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-soft);margin-top:20px}
+.practice .pintro{color:#CFC4D4;max-width:58ch;margin-top:22px;font-size:17px}
+.svcbar{margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.svclab{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9C8AA6;margin-bottom:13px}
+.svcbtns{display:flex;flex-wrap:wrap;gap:8px}
+.svcbtn{font-family:var(--sans);font-size:15px;font-weight:600;color:#CFC4D4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);padding:10px 18px;cursor:pointer;transition:all .2s}
+.svcbtn:hover{border-color:var(--pink-soft);color:#fff}
+.svcbtn.on{background:var(--pink);border-color:var(--pink);color:#fff}
+
+.steps{padding:8px 0 0}
+.step{display:grid;grid-template-columns:78px 1fr;gap:20px;padding:32px 0;border-bottom:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.snum{font-family:var(--serif);font-size:52px;line-height:.9;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.step p{font-size:17px;color:#3B3143;line-height:1.6}
+.hint{margin-top:16px;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.hint .hs{display:none}
+.hint .hs.on{display:block}
+.hint .hlab{font-size:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:5px}
+.hint p{font-size:16px;color:var(--muted)}
+.snote{margin-top:14px;font-size:16px;color:var(--muted);font-weight:500}
+.stepprompt{margin-top:18px}
+.donebox{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;margin-top:44px}
+.donebox .dc{grid-column:3 / span 9;border-top:1px solid var(--ink);padding-top:22px}
+.donebox .dl{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
+.donebox p{font-size:18px;line-height:1.55}
+.keepbox{margin-top:26px;border-left:2px solid var(--pink);padding:4px 0 4px 20px}
+.keepbox .kl{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+@media (max-width:760px){
+  .step{grid-template-columns:48px 1fr;gap:14px;padding:26px 0}
+  .snum{font-size:36px}
+  .step h3{font-size:19px}
+  .def{grid-template-columns:40px 1fr;gap:14px}
+  .def .dn{font-size:27px}
+  .mainbox .mline{grid-template-columns:26px 1fr;gap:11px}
+  .donebox .dc{grid-column:1 / -1}
+  .meta{gap:0 22px}
+  .practice{padding:44px 0 40px}
+}
+
+/* Бонус «Заработок» – общий каркас для всех модулей */
+.nav{border-bottom:none;padding-bottom:0}
+.navwrap{margin-top:40px;border-top:1px solid var(--line);padding-top:18px}
+.roads{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+.road{border-top:1px solid var(--ink);padding-top:20px}
+.road .rl{font-family:var(--serif);font-size:40px;line-height:1;color:var(--pink)}
+.road h3{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.3;margin:10px 0 8px}
+.road p{font-size:16px;color:var(--muted);line-height:1.55}
+.road ul li{font-size:16px;color:#3B3143}
+.def .dtask{margin-top:8px;color:var(--ink)}
+.def .dtask b{color:var(--pink)}
+.qsign{font-size:var(--fine);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:-10px}
+.msg{margin-top:30px}
+.msg h3{font-family:var(--sans);font-size:19px;font-weight:700;margin-bottom:8px}
+.msg>p{font-size:16px;color:var(--muted);margin-bottom:16px}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:26px}
+.tier{border-top:1px solid var(--ink);padding-top:18px}
+.tier .tk{font-size:var(--label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}
+.tier .tv{font-family:var(--serif);font-size:clamp(26px,2.8vw,32px);line-height:1.1;margin:10px 0 8px}
+.tier p{font-size:15.5px;color:var(--muted);line-height:1.55}
+.handover{counter-reset:h}
+.handover li{padding-left:34px}
+.handover li::before{counter-increment:h;content:counter(h);background:none;width:auto;height:auto;top:0;left:0;font-family:var(--serif);font-size:24px;line-height:1.2;color:var(--pink)}
+.caseflds{margin-top:18px}
+.caseflds li b{color:var(--ink)}
+a.btn:hover{color:#fff}
+@media (max-width:760px){
+  .roads,.tiers{grid-template-columns:1fr;gap:18px}
+}
+.promptbox .btns{margin-top:18px}.promptbox .btn{background:#fff;color:var(--ink)}.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}.promptbox .btn.done,.promptbox .btn.done:hover{background:#1FA24E;color:#fff}
+.msg .def h3{font-size:17.5px;margin-bottom:5px}
+footer a{color:var(--pink-soft)}
+footer a:hover{color:#fff}
+</style>
+<style id="edge">
+/* Единый левый край и полная ширина (03.10.2026, правила Светланы):
+   блоки и цифры начинаются от левого края страницы; цифра шага или пункта – у края, текст после неё с отступом;
+   выделяем плашкой, цветом, стилем, а не сдвигом блока; текст и плашки – на всю ширину контента, без пустого поля справа. */
+.rulebox,.note,.keepbox,.jrule,.checked,.alt{border-left:none!important;background:#FFF1F8;padding:16px 20px!important}
+.dark .rulebox,.dark .note{background:rgba(255,143,198,.10)}
+.lede .col,.closing .cgrid .col,.donebox .dc{grid-column:1 / -1!important;max-width:none!important}
+main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
+section.wrap{padding-left:40px;padding-right:40px}
+@media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+</style>
+<style id="m3">
+/* Бонус «Заработок» М3: переключатель услуг на светлом фоне и ориентир рынка */
+.svcbar.light{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.svcbar.light .svclab{color:var(--muted)}
+.svcbar.light .svcbtn{color:var(--ink);background:#fff;border:1px solid var(--line)}
+.svcbar.light .svcbtn:hover{border-color:var(--pink);color:var(--ink)}
+.svcbar.light .svcbtn.on,.svcbar.light .svcbtn.on:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+.hint{border-left:none;background:#FFF1F8;padding:14px 18px}
+.market li{font-size:16px}
+.market li a{white-space:nowrap}
+.step ul{margin-top:12px}
+@media (max-width:760px){.svcbtn{padding:10px 14px}}
+</style>
+<style id="m4">
+/* Бонус «Заработок» М4: три дороги и служебные отступы вместо инлайн-стилей */
+.roads.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.hero.top{padding-top:34px}
+.dark.first{margin-top:44px}
+.dark.late{margin-top:64px}
+.dark a{color:var(--pink-soft)}
+.dark a:hover{color:#fff}
+.lede.flat{padding-top:0}
+.after{margin-top:22px}
+.closing h2{margin:14px 0 18px}
+.pull.end{margin-top:44px}
+@media (max-width:760px){.roads.three{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 4 · бонус</span></div>
+  <div class="kmark"><span class="kn">4</span><span class="kt">Бонус модуля 4 · Настройка агентной системы</span></div>
+  <div class="hero top">
+    <div class="hgrid">
+      <h1>Как&nbsp;навыки модуля&nbsp;4 помогут вам зарабатывать</h1>
+      <p class="hlead">Без обещаний миллионов и волшебной кнопки. Как превратить то, что вы собрали для себя в модуле 4, – папку с правилами, 5 опорных файлов и регулярную задачу – в услугу для другого человека или в аргумент для работодателя. От первого сообщения до первого запуска у заказчика и сопровождения.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mk">Опирается на</span><span class="mv">Уроки 1–5 модуля 4</span></div>
+      <div><span class="mk">Первая работа</span><span class="mv">Папка, 5 файлов и 1 регулярная задача</span></div>
+      <div><span class="mk">Останется</span><span class="mv">Система в портфолио и замер экономии</span></div>
+    </div>
+    <div class="navwrap">
+      <p class="label">На этой странице</p>
+      <nav class="nav" aria-label="Разделы">
+        <a class="navlink" href="#umeete">Что вы умеете</a>
+        <a class="navlink" href="#dorogi">3 дороги</a>
+        <a class="navlink" href="#komu">Что и кому</a>
+        <a class="navlink" href="#predlozhit">Как договориться</a>
+        <a class="navlink" href="#sdelat">Как сделать</a>
+        <a class="navlink" href="#sdat">Как сдать</a>
+        <a class="navlink" href="#soprovozhdenie">Сопровождение</a>
+        <a class="navlink" href="#skolko">Сколько просить</a>
+        <a class="navlink" href="#ne-obeshchat">Чего не обещать</a>
+        <a class="navlink" href="#portfolio">Портфолио</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. Что вы уже умеете -->
+<div class="dark first" id="umeete">
+  <div class="wrap dgrid">
+    <h2>Что&nbsp;вы&nbsp;уже&nbsp;умеете после модуля&nbsp;4</h2>
+    <div class="dcol">
+      <p>В этом модуле нейросеть начала работать с вашими файлами. Вы дали агенту доступ только к нужным папкам и поставили главное условие: ничего не удалять без вас, всё спорное складывать в «На разбор». Вместе с Хранителем порядка построили свою систему папок и карту проектов. Собрали «Мой рабочий контекст» и 5 опорных файлов, по которым агент понимает ваши цели, подход и голос без долгих объяснений. Поставили регулярную задачу: агент сам берёт новое сырьё, готовит черновики и приносит их в папку, в Telegram или на почту. А на 5 сценариях урока 4 увидели, где агент экономит время и деньги: карточки участников, КП и сметы, договоры и оплаты, исследование аудитории и анкета, которую агент собрал в браузере без техспециалиста. Новой теории здесь не будет: всё ниже – про то, как настроить такую же систему другому человеку.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Три дороги -->
+<section class="wrap blk reveal" id="dorogi">
+  <div class="lede flat"><div class="col">
+    <p class="label">Раздел 2 из 9</p>
+    <h2>3 дороги к&nbsp;деньгам</h2>
+    <p>После модуля 1 вы могли собрать человеку промпт, после модуля 2 – помощника, после модуля 3 – готовую вещь. Теперь вы умеете настроить систему, в которой агент сам выполняет часть работы по правилам человека. В уроке 5 мы назвали 3 направления, куда с этим идти. Можно выбрать одно или идти сразу по нескольким.</p>
+    <div class="roads three">
+      <div class="road">
+        <span class="rl">А</span>
+        <h3>Своя работа: больше ценности за те же часы</h3>
+        <p>Агент берёт на себя рутину в вашей работе, и вы успеваете дать клиенту или заказчику больше.</p>
+        <ul>
+          <li>Карточки участников из расшифровок встреч – если вы ведёте группы, курсы или команду.</li>
+          <li>Черновики КП и смет по брифам по вашей инструкции.</li>
+          <li>Сверка оплат, черновики актов и счетов по пятницам.</li>
+        </ul>
+      </div>
+      <div class="road">
+        <span class="rl">Б</span>
+        <h3>Работодатель: экспертиза остаётся в&nbsp;компании</h3>
+        <p>Опишите, что вы сделали, так же, как для портфолио, и покажите руководителю, как это улучшит работу отдела.</p>
+        <ul>
+          <li>Правила и подходы отдела записаны в файлах, и агент работает по ним.</li>
+          <li>Регулярные отчёты и сводки готовятся без ручной сборки.</li>
+          <li>Агент «Аудитория» держит понимание клиентов в актуальном состоянии.</li>
+        </ul>
+      </div>
+      <div class="road">
+        <span class="rl">В</span>
+        <h3>Услуга и обучение</h3>
+        <p>Настраивать такие системы другим людям или учить профессионалов своей сферы своему подходу.</p>
+        <ul>
+          <li>Система под ключ: папка, опорные файлы, регулярная задача.</li>
+          <li>Сопровождение: обновлять правила и добавлять новые сценарии.</li>
+          <li>Разбор «Идеальная неделя с агентами» или обучение своему методу.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="quote">С агентом в рамках тех же часов я дала ценность, которую иначе дала бы только на полной ставке.</p>
+    <p class="qsign">Светлана Цыро, урок 4 – о карточках участников</p>
+    <p class="after">Эти карточки подняли ценность методолога и принесли приглашение на второй поток. В уроке 4 мы так и сформулировали: деньги здесь – это время, которое вы не тратите, специалисты, которых не нужно нанимать, и ценность, которую вы приносите заказчику или работодателю за те же часы.</p>
+    <p>Дальше на странице – дорога В по шагам: что предложить, как договориться, настроить и сдать. Для дорог А и Б шаги те же: вместо заказчика – вы сами или ваш руководитель, вместо оплаты – сэкономленное время и ваша роль в команде.</p>
+  </div></div>
+</section>
+
+<!-- 3. Что и кому -->
+<section class="wrap blk reveal" id="komu">
+  <div class="lede flat"><div class="col">
+    <p class="label">Раздел 3 из 9</p>
+    <h2>Что предложить и&nbsp;кому</h2>
+    <p>Главная услуга модуля – настройка агентной системы под ключ. Её основа – 3 слоя из уроков 1–3: папка с правилами, 5 опорных файлов и одна регулярная задача. Сценарии урока 4 подсказывают, какую работу система будет делать. Ищите тех, у кого копится сырьё – расшифровки, брифы, выписки, заявки – и до него не доходят руки.</p>
+    <p class="rulebox"><b>Пакет «Система под ключ»:</b> папка с правилами безопасности и картой проектов, «Мой рабочий контекст» и 5 опорных файлов, одна регулярная задача, которая хотя бы раз отработала при заказчике, памятка и показ. Всё остальное – отдельные работы или следующие этапы.</p>
+    <div class="defs">
+      <div class="def"><span class="dn">1</span><div>
+        <h3>Порядок и система папок · урок 1</h3>
+        <p>Кому: экспертам и специалистам, у которых в загрузках тысячи файлов, клиентские материалы лежат вперемешку с личными и нужный документ не найти.</p>
+        <p class="dtask"><b>Что предложить:</b> Хранителя порядка под человека. Агент проводит интервью, предлагает структуру под его задачи, переносит только то, что уверенно распознал, складывает дубли и временные файлы в «На разбор», ведёт карту проектов и ссылок и наводит порядок по расписанию. Хороший первый шаг: результат видно сразу, а файлы никуда не пропадают.</p>
+      </div></div>
+      <div class="def"><span class="dn">2</span><div>
+        <h3>5 опорных файлов · урок 2</h3>
+        <p>Кому: тем, кто уже работает с нейросетью, но каждый раз объясняет ей, кто он и чего хочет, а инструкции разбросаны по разным проектам.</p>
+        <p class="dtask"><b>Что предложить:</b> «Мой рабочий контекст» из его ChatGPT и 5 опорных файлов – AGENTS.md, «Обо мне и моей работе», «Компас целей и приоритетов», «Правила работы и качества», «Мой голос и стиль» – с проверкой в новом чате. Сюда же – перенос его помощников и навыков в систему: сквозные отдельно, проектные – в папки проектов.</p>
+      </div></div>
+      <div class="def"><span class="dn">3</span><div>
+        <h3>Регулярная задача · урок 3</h3>
+        <p>Кому: экспертам и блогерам, у которых эфиры и встречи с клиентами так и не превращаются в посты.</p>
+        <p class="dtask"><b>Что предложить:</b> агента, который раз в неделю берёт новые расшифровки, готовит пакет – посты, статью, сценарии коротких видео – и присылает его в Telegram или на почту. Готовый сценарий навыками – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-navyki-agenta/">«Навыки контент-агента»</a>, другие каналы доставки – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-konnektory/">«Откуда агент берёт и куда приносит»</a>.</p>
+      </div></div>
+      <div class="def"><span class="dn">4</span><div>
+        <h3>Рабочие конвейеры · урок 4</h3>
+        <p>Кому: организаторам курсов и групп, специалистам, которые часто готовят предложения, предпринимателям и фрилансерам, у которых договоры и оплаты живут в разных файлах.</p>
+        <p class="dtask"><b>Что предложить:</b> карточки участников и подборку кейсов из расшифровок встреч; черновики КП и смет по брифам и инструкции, собранной из образцов заказчика; сверку оплат с выпиской, черновики актов, счетов и вежливых напоминаний. Агент готовит, человек проверяет и отправляет сам.</p>
+      </div></div>
+      <div class="def"><span class="dn">5</span><div>
+        <h3>Аудитория и «сделай за меня» · урок 4</h3>
+        <p>Кому: малому бизнесу и экспертам, у которых исследование аудитории делалось один раз и лежит мёртвым грузом; тем, кто мучается с интерфейсами форм и сервисов.</p>
+        <p class="dtask"><b>Что предложить:</b> агента «Аудитория» с картой сегментов и разведчиком, который ищет сигналы во внешних источниках со ссылками. Анкету для проверки гипотез агент соберёт сам в Яндекс Формах через управление браузером – так же можно подключить Яндекс Метрику на сайт. Заказчику не нужно платить техспециалисту. В браузер отдаём только то, что не жалко показать.</p>
+      </div></div>
+      <div class="def"><span class="dn">6</span><div>
+        <h3>Разбор и обучение · уроки 4 и 5</h3>
+        <p>Кому: тем, кто хочет работать с агентами сам, но не знает, с чего начать; профессионалам вашей сферы.</p>
+        <p class="dtask"><b>Что предложить:</b> разбор по заданию урока 4 – вместе с человеком спроектировать его идеальную неделю: что отдать агентам, что оставить за собой и с какого агента начать. Или обучение своему подходу: как вы делаете свою работу с агентом и не теряете в качестве. Идеи для разбора – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-idei-dlya-agentov/">«Как находить идеи для агентов»</a>.</p>
+      </div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 4. Как предложить и договориться -->
+<section class="wrap blk reveal" id="predlozhit">
+  <div class="lede flat"><div class="col">
+    <p class="label">Раздел 4 из 9</p>
+    <h2>Как&nbsp;предложить и&nbsp;договориться</h2>
+    <p>Первые настройки по-прежнему честно предлагать как практику: вы учитесь, вам нужны живые задачи. Новое в модуле 4 – доступ: агент будет работать с файлами человека. Поэтому о границах договариваемся до начала работы, и эта часть разговора здесь главная. К сообщению приложите обезличенный пример из своей системы: карту папок или черновики, которые агент принёс по расписанию.</p>
+
+    <div class="msg">
+      <h3>Знакомому эксперту или владельцу бизнеса</h3>
+      <p>Поправьте под себя: оставьте одну задачу, которая подходит именно этому человеку.</p>
+      <div class="promptbox"><p class="plabel">Сообщение знакомому</p><pre>Привет! Я прохожу курс по нейросетям и учусь настраивать ИИ-агента, который работает с файлами на компьютере: наводит порядок в папках, знает цели и правила человека и по расписанию сам готовит черновики. У себя я уже так настроил(а): <span class="tok">[что агент делает у вас – например, раз в неделю готовит посты из расшифровок эфиров]</span>.
+
+Мне кажется, тебе могло бы пригодиться <span class="tok">[одно конкретное: порядок в загрузках и папках / черновики постов из твоих эфиров / карточки участников группы из расшифровок встреч / черновики КП по брифам / сверка оплат и черновики актов]</span>.
+
+Агент работает только с теми папками, которые ты откроешь, ничего не удаляет и ничего не отправляет сам – всё приходит тебе на проверку.
+
+Мне для практики нужны живые задачи, поэтому первую настройку могу сделать бесплатно. От тебя – разговор о задаче, время на настройку вместе по видеосвязи и честный отзыв после. Если сейчас не актуально – просто скажи, всё нормально.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg">
+      <h3>Руководителю</h3>
+      <p>Подходит для дороги Б. Главный аргумент для работодателя – экспертиза, которая остаётся в компании.</p>
+      <div class="promptbox"><p class="plabel">Сообщение руководителю</p><pre><span class="tok">[Имя]</span>, я прохожу курс по нейросетям и научился(ась) настраивать ИИ-агента под рабочие процессы: он работает по нашим правилам и шаблонам и сам готовит черновики регулярной работы.
+
+Предлагаю попробовать на одном процессе нашего отдела: <span class="tok">[например, черновики КП по брифам / сверка оплат и черновики актов / еженедельный отчёт по таблице]</span>. Агент только готовит, проверяет и отправляет человек.
+
+Что это даст: правила и подход, которые сейчас живут в головах у людей, будут записаны в файлах. Результат станет предсказуемым, и если сотрудник уйдёт, его экспертиза не уйдёт вместе с ним.
+
+Прежде чем начать, хочу согласовать, к каким данным агенту можно дать доступ и в какой нейросети работать. Сможем обсудить <span class="tok">[когда]</span>?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Рабочие данные – только с разрешения: уточните, какие данные компании можно открывать агенту и в каком сервисе. Что можно и что нельзя давать агенту – в памятке <a href="https://aiforlife.ru/ii-course/modul4/bonus-bezopasno/">«Как устроены агенты и как задавать им правила»</a>.</p>
+    </div>
+
+    <div class="msg">
+      <h3>О чём договориться на берегу</h3>
+      <p>7 вопросов, которые лучше закрыть до того, как агент получит доступ к чужим файлам.</p>
+      <ul>
+        <li><b>Что входит в работу.</b> Папка с правилами, 5 опорных файлов, одна регулярная задача, памятка и показ. Вторая и третья задача, перенос помощников, Telegram-бот – отдельно.</li>
+        <li><b>Где живёт система.</b> На компьютере и в аккаунте заказчика. Настраиваете вместе на созвоне с показом экрана: нажимает заказчик, вы подсказываете. Пароли от чужих аккаунтов не берите. Токен бота и другие ключи заказчик вставляет сам туда, куда покажет агент, – в чат их не присылают.</li>
+        <li><b>К каким папкам агент получит доступ.</b> Только к нужным, и начать лучше с одной тестовой. Пароли и паспорта в эти папки не кладём.</li>
+        <li><b>Данные клиентов заказчика.</b> Только если это позволяет его работа и есть согласие людей, чьи данные там лежат. Где можно – обезличивайте или заменяйте имена.</li>
+        <li><b>Что агент не делает сам.</b> Не удаляет файлы, не отправляет письма, счета, акты и сообщения клиентам, ничего не публикует. Это правило записываем в инструкцию системы в первый же день.</li>
+        <li><b>Техника и подписка.</b> Регулярная задача работает, пока включён компьютер заказчика; круглосуточная работа – это облако или сервер, время и дополнительные оплаты. На некоторых тарифах есть ограничение на количество регулярных задач. Подписку оплачивает заказчик: система живёт в его аккаунте.</li>
+        <li><b>Что после сдачи и сколько стоит.</b> Кто обновляет систему – заказчик сам по памятке или вы на сопровождении. Цена, оплата и чек – в разделе <a href="#skolko">«Сколько просить»</a>.</li>
+      </ul>
+    </div>
+
+    <div class="msg">
+      <h3>Закрепите договорённость письменно</h3>
+      <p>Короткое сообщение после разговора избавит от «а я думал, агент и это будет делать». Расскажите заметки голосом и попросите нейросеть собрать текст.</p>
+      <div class="promptbox"><p class="plabel">Сообщение-договорённость</p><pre>Помоги составить короткое сообщение-договорённость для заказчика по итогам нашего разговора. Вот мои заметки: <span class="tok">[что заказчик хочет, какую задачу отдаём агенту, к каким папкам доступ, его компьютер и тариф, сроки, цена]</span>.
+
+В сообщении должно быть:
+– что я настраиваю: папку с правилами, 5 опорных файлов и регулярную задачу <span class="tok">[какую]</span>;
+– что входит в работу и что не входит;
+– к каким папкам агент получает доступ и к каким нет;
+– правила безопасности: агент ничего не удаляет и ничего не отправляет сам, данные клиентов – только <span class="tok">[как договорились]</span>;
+– где живёт система – на компьютере и в аккаунте заказчика – и кто оплачивает подписку;
+– что нужно от заказчика и к какому сроку: материалы, время на созвоны, согласия;
+– кто обновляет систему после сдачи и сколько дней я на связи;
+– цена, когда и как оплатить.
+
+Пиши просто и дружелюбно, без юридических формулировок, не длиннее 15 строк. Ничего не добавляй от себя: если в заметках чего-то не хватает, сначала спроси меня.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox">Сообщение-договорённость подходит для небольшой работы со знакомыми. Если заказ крупный, заказчик – компания или агент будет работать с данными клиентов, понадобится договор.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- 5. Как сделать -->
+<section class="wrap blk reveal" id="sdelat">
+  <div class="lede flat"><div class="col">
+    <p class="label">Раздел 5 из 9</p>
+    <h2>Как&nbsp;сделать: от интервью до&nbsp;первого запуска</h2>
+    <p>Маршрут тот же, что вы прошли в уроках 1–3: порядок, опорные файлы, регулярная задача. Только система теперь чужая: решения о целях, правилах и данных принимает заказчик, а вы ведёте его по шагам. Всё, что можно, делайте на его глазах.</p>
+    <div class="svcbar light">
+      <p class="svclab">Какую задачу настраиваете – подсказки в шагах поменяются</p>
+      <div class="svcbtns" role="group" aria-label="Выберите сценарий">
+        <button class="svcbtn" type="button" data-svcbtn="content">Контент</button>
+        <button class="svcbtn" type="button" data-svcbtn="people">Участники</button>
+        <button class="svcbtn" type="button" data-svcbtn="kp">КП и сметы</button>
+        <button class="svcbtn" type="button" data-svcbtn="pay">Оплаты</button>
+        <button class="svcbtn" type="button" data-svcbtn="aud">Аудитория</button>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step"><span class="snum">1</span><div>
+      <h3>Интервью: работа, файлы и границы</h3>
+      <p>Задаёте вопросы и собираете сырьё для будущей задачи. С разрешения человека запишите разговор и расшифруйте: эта расшифровка потом пригодится агенту как контекст. Самое важное в интервью – границы: куда агенту нельзя и что он не делает сам.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Вопросы для интервью</p><pre>Помоги подготовить вопросы для интервью с заказчиком. Я буду настраивать для него агентную систему: папку с правилами, 5 опорных файлов и одну регулярную задачу. Он <span class="tok">[кто он и чем занимается]</span>. Задача, которую он хочет отдать агенту: <span class="tok">[какая]</span>.
+
+Нужно 12–15 вопросов простыми словами, в пяти блоках:
+1) работа и цели – чем он занимается, куда идёт в ближайшие 3–6 месяцев, какие 2–3 приоритета к этому ведут;
+2) файлы – где лежат рабочие материалы: на компьютере, в Google Диске, в почте; что копится в загрузках; что особенно важно не потерять;
+3) повторяющаяся работа – какое сырьё копится (расшифровки, брифы, выписки, заявки), какой результат из него нужен, как часто и где он спотыкается;
+4) границы – к каким папкам агенту нельзя, чьи персональные данные лежат в нужных папках и есть ли согласие на их обработку, что агент не должен делать сам;
+5) техника и доставка – какой у него тариф ChatGPT, работает ли он в Codex, включён ли компьютер в нужное время, куда удобно получать результат: в папку, в Telegram или на почту.
+
+В конце добавь вопрос: как заказчик поймёт, что система работает.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="hint">
+        <div class="hs" data-svc="content"><p class="hlab">Контент</p><p>Попросите 2–3 расшифровки эфиров или встреч – именно текстом: аудио ChatGPT и Codex напрямую не обрабатывают. Как получить расшифровку – в бонусе <a href="https://aiforlife.ru/ii-course/modul2/bonus-transkribaciya/">«Транскрибация»</a>. Ещё нужны описание блога и несколько постов, которые заказчик считает удачными: по ним агент поймёт его голос.</p></div>
+        <div class="hs" data-svc="people"><p class="hlab">Участники</p><p>Попросите расшифровки встреч группы и таблицу посещаемости. Расшифровки Zoom в формате VTT разделены по спикерам – видно, кто что говорит. Сразу обсудите согласие участников и то, будут ли в карточках настоящие имена.</p></div>
+        <div class="hs" data-svc="kp"><p class="hlab">КП и сметы</p><p>Попросите 2–3 брифа и несколько коммерческих предложений, которые заказчику нравятся: из них агент выделит инструкцию. И источник расчёта цен: без него агент соберёт смету без стоимости.</p></div>
+        <div class="hs" data-svc="pay"><p class="hlab">Оплаты</p><p>Попросите реестр договоров и оплат, шаблоны счетов и актов, реквизиты и выписку. Сначала уточните, позволяет ли работа заказчика давать агенту доступ к таким данным.</p></div>
+        <div class="hs" data-svc="aud"><p class="hlab">Аудитория</p><p>Попросите заявки клиентов, анкеты, расшифровки созвонов и прошлую карту аудитории, если она есть. Уточните внешние источники: какие сайты, форумы и соцсети смотреть и как часто у заказчика меняется сезон.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">2</span><div>
+      <h3>Папка и правила безопасности</h3>
+      <p>На созвоне заказчик создаёт в Codex проект, например «Хранитель порядка», и даёт доступ только к нужным папкам. Начните с одной тестовой. Агент проводит интервью, заказчик отвечает голосом, агент изучает папки и предлагает структуру – пока ничего не перемещая. Структуру вы проверяете вместе. Полный промпт – в <a href="https://aiforlife.ru/ii-course/modul4/urok1/praktika/">инструкции к практике урока 1</a>. Но прежде чем агент начнёт раскладывать файлы, запишите правила безопасности.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Правила для системы заказчика</p><pre>Запиши в главный файл инструкций этой системы (в Codex это AGENTS.md в корне папки <span class="tok">[название]</span>) правила, по которым ты работаешь всегда:
+
+1) Работай только в папках, к которым тебе дали доступ: <span class="tok">[список]</span>. Если кажется, что нужное лежит в другой папке, – сначала спроси.
+2) Ничего не удаляй. Спорное, дубли и временные файлы складывай в папку «На разбор». Решение об удалении принимает <span class="tok">[имя заказчика]</span>.
+3) Ничего не отправляй и не публикуй сам: письма, счета, акты, посты, сообщения клиентам – только черновики на проверку.
+4) Данные клиентов и сотрудников используй только для задач, о которых мы договорились: <span class="tok">[каких]</span>. Не копируй их в другие папки и файлы без запроса.
+5) Пароли, токены и паспортные данные не записывай ни в чат, ни в файлы. Если они понадобятся, покажи, куда человек вставит их сам.
+6) Перед любым перемещением файлов сначала покажи план и дождись подтверждения.
+7) Если непонятно, что делать, – спроси и не решай сам. Не придумывай факты, цифры и цитаты.
+
+Покажи, что записал и где лежит файл. Больше пока ничего не делай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="hint">
+        <div class="hs" data-svc="content"><p class="hlab">Контент</p><p>Достаточно папки блога: в ней лежат расшифровки, туда же агент будет складывать черновики. Чем уже доступ, тем меньше агент блуждает по чужой системе.</p></div>
+        <div class="hs" data-svc="people"><p class="hlab">Участники</p><p>Откройте папку курса с расшифровками и таблицу посещаемости. Папки других клиентов и проектов заказчика агенту не нужны.</p></div>
+        <div class="hs" data-svc="kp"><p class="hlab">КП и сметы</p><p>Как в уроке 4, нужны 2 папки: с брифами и с помощниками и навыками, где будет лежать инструкция по КП. Так её можно будет использовать в разных проектах заказчика.</p></div>
+        <div class="hs" data-svc="pay"><p class="hlab">Оплаты</p><p>Начните с учебной папки: копия реестра и шаблонов, где имена заменены. В уроке 4 сценарий тоже показан на учебных данных. Когда задача отлажена, заказчик сам решает, открывать ли агенту настоящие документы.</p></div>
+        <div class="hs" data-svc="aud"><p class="hlab">Аудитория</p><p>Сделайте отдельный проект, например «Исследование аудитории», с папкой: инструкция агента, карта аудитории, заявки, анкета. Так папку не придётся прикреплять каждый раз.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">3</span><div>
+      <h3>Рабочий контекст и 5 опорных файлов</h3>
+      <p>«Мой рабочий контекст» заказчик собирает сам в своём ChatGPT – через экспорт чатов или запросом к памяти. Промпт – в <a href="https://aiforlife.ru/ii-course/modul4/urok2/praktika/">инструкции к практике урока 2</a>. Дальше агент уточняет с заказчиком цели и приоритеты, предлагает 5 файлов и создаёт их только после команды «Создавай». Цели, подход и голос – его, поэтому спорить с предложением агента должен он, а вы подсказываете вопросы. Файлы держите короткими. В конце проверьте систему в новом чате.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Проверка в новом чате</p><pre>Назови цель и текущие приоритеты <span class="tok">[имя заказчика]</span>.
+
+Ему нужно <span class="tok">[задача, которую мы ставим на регулярную основу – например, подготовить черновики постов из новой расшифровки]</span>. Какие опорные файлы, инструкции и помощников ты возьмёшь, на какие правила безопасности опираешься и куда сохранишь результат?
+
+Если какого-то файла или правила не нашёл, так и скажи. Пока ничего не делай.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="hint">
+        <div class="hs" data-svc="content"><p class="hlab">Контент</p><p>Главный файл здесь – «Мой голос и стиль»: от него зависит, похожи ли черновики на заказчика. Соберите его из постов и голосовых человека, как навык «Мой голос» в модуле 2.</p></div>
+        <div class="hs" data-svc="people"><p class="hlab">Участники</p><p>Запишите правила проекта: формат карточки – с чем пришёл, запросы, результаты, мысли и идеи, цитаты с пометкой, на какой встрече сказано, – и требование «цитаты не перевирай, только слово в слово».</p></div>
+        <div class="hs" data-svc="kp"><p class="hlab">КП и сметы</p><p>Соберите инструкцию из образцов заказчика: логика, структура, как считается стоимость, правила оформления. Попросите агента выделить её из присланных КП и сохранить в папку помощников и навыков.</p></div>
+        <div class="hs" data-svc="pay"><p class="hlab">Оплаты</p><p>В правилах проекта – шаблоны документов, нумерация по порядку и условие «если непонятно, к кому относится поступление, не привязывай сам».</p></div>
+        <div class="hs" data-svc="aud"><p class="hlab">Аудитория</p><p>Опора здесь – карта аудитории: сегменты, их боли и интерпретации. И правило для разведчика: каждый вывод подкреплять ссылкой на источник, а если данных мало, так и говорить.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">4</span><div>
+      <h3>Одна регулярная задача</h3>
+      <p>Ставьте ту задачу, ради которой заказчик пришёл. Опишите результат, попросите схему и запустите её на настоящем сырье заказчика. Каждое неудобство превращайте в правило. Когда результат устраивает, ставьте задачу в расписание и выбирайте, куда она приносит готовое.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Регулярная задача для заказчика</p><pre>Я настраиваю регулярную задачу для <span class="tok">[имя заказчика]</span>. Сырьё лежит в папке <span class="tok">[название]</span>: <span class="tok">[что там – расшифровки, брифы, выписки, заявки]</span>. На выходе нужно: <span class="tok">[какой результат и в каком формате]</span>. Опирайся на опорные файлы системы и на <span class="tok">[какие инструкции и навыки]</span>.
+
+Ограничения: ничего не удаляй, ничего не отправляй и не публикуй сам, спорное складывай в «На разбор», факты, цифры и цитаты не придумывай.
+
+1) Сначала скажи, как ты понял задачу и каких материалов тебе не хватает.
+2) Предложи схему: этапы и каких субагентов настроить.
+3) Предложи расписание: <span class="tok">[как часто]</span> – и куда приносить результат: <span class="tok">[папка / Telegram / почта]</span>. Скажи, должен ли быть включён компьютер и будут ли дополнительные оплаты.
+
+Пока ничего не делай – только предложи схему.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Схема устроила – напишите «Запускай на этих материалах». Агент сохранил не туда или в неудобном формате – попросите: «Перенеси в папку [название] и запиши это правилом, чтобы в следующий раз ты делал так сам».</p>
+      <div class="hint">
+        <div class="hs" data-svc="content"><p class="hlab">Контент · урок 3</p><p>Расписание, например, по понедельникам в 14:00. Черновики – в папку блога. Доставка – бот-курьер в Telegram и почта: бота заказчик создаёт сам в @BotFather, токен вставляет туда, куда покажет агент. Готовые навыки для этого сценария – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-navyki-agenta/">«Навыки контент-агента»</a>.</p></div>
+        <div class="hs" data-svc="people"><p class="hlab">Участники · урок 4</p><p>Триггер – новая расшифровка в папке: агент отмечает посещаемость и обновляет карточки. Если запускаться сразу при появлении файла не получится, попросите агента предложить, как часто проверять папку.</p></div>
+        <div class="hs" data-svc="kp"><p class="hlab">КП и сметы · урок 4</p><p>Для локальной папки триггера «появился новый бриф» нет, но агент может проверять папку каждый час в рабочее время. Для постоянной работы заведите отдельный проект с заранее подключёнными папками.</p></div>
+        <div class="hs" data-svc="pay"><p class="hlab">Оплаты · урок 4</p><p>Например, каждую пятницу в 18:00: сверка оплат, черновики актов, счетов и напоминаний и сводка заказчику. В задаче обязательно: «Ничего не отправляй клиентам без меня».</p></div>
+        <div class="hs" data-svc="aud"><p class="hlab">Аудитория · урок 4</p><p>Частота зависит от сезонности бизнеса заказчика. Задача – обновить карту: что изменилось в запросах, какие сегменты стали заметнее или слабее, где представления расходятся с реальностью.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">5</span><div>
+      <h3>Проверьте первый запуск</h3>
+      <p>После первого запуска по расписанию убедитесь, что задача правда сработала и результат пришёл туда, куда нужно. Ошибка в чужой системе бьёт по чужим клиентам и деньгам, поэтому цифры, суммы, цитаты и адресатов проверяете глазами – вы и заказчик.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Отчёт о запуске</p><pre>Расскажи, что ты сделал при последнем запуске задачи <span class="tok">[название]</span>:
+1) какие файлы прочитал и из каких папок;
+2) что создал или изменил и где это лежит;
+3) что отправил в «На разбор» и почему;
+4) что не получилось или в чём ты не уверен;
+5) где в результате есть цифры, суммы, цитаты, имена и адреса – перечисли их, чтобы мы проверили глазами.
+
+Ничего не исправляй, пока я не посмотрю.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <div class="hint">
+        <div class="hs" data-svc="content"><p class="hlab">Контент</p><p>Похоже ли на голос заказчика, нет ли повторов между материалами и выдуманных примеров. Посмотрите, как черновики читаются с телефона: если мешают технические звёздочки, договоритесь о формате – например, статьи документом DOCX, посты обычным текстом.</p></div>
+        <div class="hs" data-svc="people"><p class="hlab">Участники</p><p>Сверьте цитаты с расшифровкой. Подборку кейсов перед публикацией заказчик согласует с участниками.</p></div>
+        <div class="hs" data-svc="kp"><p class="hlab">КП и сметы</p><p>Часы и стоимость в смете пересчитайте руками. Если цен нет, значит, агенту не подключили источник расчёта.</p></div>
+        <div class="hs" data-svc="pay"><p class="hlab">Оплаты</p><p>Суммы, номера документов, адресаты напоминаний. Отдельно – поступления, которые агент не смог привязать: их разбирает заказчик.</p></div>
+        <div class="hs" data-svc="aud"><p class="hlab">Аудитория</p><p>У каждого вывода есть ссылка на источник. Слабый сигнал – например, запрос в аудитории есть, а заявок нет, – это гипотеза для проверки. Проверить её можно анкетой: агент соберёт её в Яндекс Формах через управление браузером.</p></div>
+      </div>
+    </div></div>
+
+    <div class="step"><span class="snum">6</span><div>
+      <h3>Соберите памятку для заказчика</h3>
+      <p>Заказчику нужно понимать, как жить с системой без вас: как дать агенту новую задачу, как поменять правило словами и что проверять каждый раз.</p>
+      <div class="promptbox stepprompt"><p class="plabel">Памятка для заказчика</p><pre>Сделай памятку к системе, которую мы настроили для <span class="tok">[имя заказчика]</span>. Для человека, который не разбирается в нейросетях. 5 частей:
+1) как устроена система – папки, 5 опорных файлов и зачем каждый, где лежит «На разбор»;
+2) что агент делает сам: <span class="tok">[регулярная задача]</span> – когда она запускается, куда приходит результат и должен ли в это время быть включён компьютер;
+3) как давать агенту задачи и менять правила словами – готовые фразы: «Пока ничего не делай – предложи план», «Ничего не удаляй без меня», «Пока ничего не отправляй», «Если непонятно – спроси», «Запиши это правилом», «Обнови мой компас: цели изменились – <span class="tok">[что]</span>»;
+4) что проверять глазами каждый раз: <span class="tok">[цифры, суммы, цитаты, адресаты]</span>;
+5) что делать, если результат не пришёл, и когда написать мне.
+
+Без терминов, не длиннее 2 страниц.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="snote">Копию памятки и правил безопасности без данных заказчика сохраните себе: из них получится образец для следующей настройки.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- 6. Как сдать -->
+<section class="wrap blk reveal" id="sdat">
+  <div class="lede flat"><div class="col">
+    <p class="label">Раздел 6 из 9</p>
+    <h2>Как&nbsp;сдать</h2>
+    <p>Работа сдана, когда агент хотя бы раз сам выполнил задачу у заказчика и заказчик при вас дал ему новое поручение. Поэтому отдаёте не только файлы.</p>
+    <ul class="handover">
+      <li><b>Система у заказчика:</b> папка с правилами безопасности и картой, 5 опорных файлов, которые он прочитал и поправил, и регулярная задача, которая отработала по расписанию. Всё лежит в его файлах, поэтому систему можно перенести и в другую нейросеть: приложить файлы как инструкцию.</li>
+      <li><b>Памятка:</b> как устроена система, готовые фразы для агента и что проверять глазами.</li>
+      <li><b>Показ:</b> заказчик при вас даёт агенту новую задачу и меняет одно правило словами.</li>
+      <li><b>Время на вопросы:</b> столько, сколько обговорили на берегу. В первые дни всплывают мелочи – их тоже превращайте в правила.</li>
+    </ul>
+
+    <div class="msg">
+      <h3>Сопроводительный текст</h3>
+      <p>Подставьте задачу, расписание и выберите вариант обновления.</p>
+      <div class="promptbox"><p class="plabel">Сопроводительное сообщение</p><pre>Привет! Система готова и уже работает: агент <span class="tok">[что делает]</span> <span class="tok">[когда – например, по понедельникам в 14:00]</span> и приносит результат <span class="tok">[куда]</span>.
+
+Что у тебя есть: папка с правилами, 5 опорных файлов о тебе и твоей работе и памятка – как давать агенту задачи, менять правила словами и что проверять каждый раз.
+
+Главные правила: агент ничего не удаляет без тебя, спорное складывает в «На разбор» и ничего не отправляет сам. Задача выполняется, пока включён компьютер.
+
+Важно: агент иногда ошибается или додумывает, поэтому <span class="tok">[цифры, суммы, цитаты, адресатов]</span> перечитывай перед тем, как отправлять дальше. Последнее слово – за тобой.
+
+<span class="tok">[Срок]</span> я на связи – если что-то не так, пиши, поправим. Дальше систему обновляем так: <span class="tok">[ты сам(а) по памятке / я раз в месяц на сопровождении]</span>.
+
+И просьба: напиши потом пару строк отзыва – сколько времени у тебя уходило на эту задачу раньше и сколько уходит теперь. Можно я покажу эту работу в своём портфолио без имени и деталей?</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg" id="soprovozhdenie">
+      <h3>Системе нужен уход: договоритесь о сопровождении</h3>
+      <p>Честно предупредите: система меняется вместе с человеком. Меняются цели и клиенты, опорные файлы агент обновляет не всегда сам, кнопки в нейросетях появляются и исчезают. А ещё у заказчика быстро появится желание отдать агенту вторую задачу. Договоритесь об одном из двух вариантов: заказчик обновляет систему сам по памятке или вы берёте сопровождение – например, раз в месяц проверяете запуски, обновляете опорные файлы и правила и добавляете следующий сценарий.</p>
+      <div class="promptbox"><p class="plabel">Обновление на сопровождении</p><pre>Это система <span class="tok">[имя заказчика]</span>. Проверь её и подготовь обновление.
+
+1) Прочитай опорные файлы и скажи, что в них устарело по сравнению с тем, что появилось в папках проектов за последний <span class="tok">[месяц]</span>.
+2) Посмотри результаты регулярной задачи <span class="tok">[название]</span> за этот период: все ли запуски прошли, где результат пришлось править руками.
+3) Вот что заказчик заметил и что у него поменялось: <span class="tok">[правки, новые цели, новые клиенты, неудобства]</span>.
+4) Предложи, что внести в опорные файлы, в правила и в инструкции задачи, и какой сценарий можно отдать агенту следующим.
+
+Ничего не меняй, пока я не подтвержу. В конце коротко перечисли изменения – этот список я отправлю заказчику.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      <p class="rulebox"><b>Вторую задачу ставьте после того, как первая работает стабильно.</b> Из сценариев постепенно складывается своя система агентов, и лишние со временем отсекаются. Меньше всего сопротивления у заказчика вызывает то, что он понимает: по каким правилам работает агент и где начинается его контроль.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- 7. Сколько просить -->
+<section class="wrap blk reveal" id="skolko">
+  <div class="lede flat"><div class="col">
+    <p class="label">Раздел 7 из 9</p>
+    <h2>Сколько просить</h2>
+    <p>Логика та же, что в модулях 1–3: сначала портфолио, потом деньги. Но система – это больше этапов, чем промпт или помощник: интервью, папка, опорные файлы, регулярная задача, проверка запуска, памятка, показ. Поэтому цену удобнее считать от своего часа, а аргументом для неё делать замер экономии у заказчика.</p>
+    <div class="tiers">
+      <div class="tier">
+        <p class="tk">Первые 2–3 системы</p>
+        <p class="tv">Бесплатно или символически</p>
+        <p>Взамен – отзыв с замером экономии и разрешение показать работу обезличенно. Засеките, сколько часов уходит у вас на каждый этап: это основа будущей цены.</p>
+      </div>
+      <div class="tier">
+        <p class="tk">Система под ключ</p>
+        <p class="tv">От вашего часа</p>
+        <p>Папка с правилами, 5 опорных файлов, одна регулярная задача, памятка и показ. Сложите часы и умножьте на свою ставку. Ориентир рынка на 19.10.2026: настройку ИИ-помощника без программирования исполнители предлагают от 3 000–5 000 ₽ до 40 000–50 000 ₽, чаще всего – 10 000–25 000 ₽. Например, на Профи.ру в категории «Внедрение ИИ» – примерно от 3 900 до 40 800 ₽ за услугу, на FL.ru «Настрою ИИ-помощника под вашу работу» – 10 400 ₽ за базовый вариант. Боты на коде и интеграции стоят дороже – это уже другая услуга. Это цены, которые исполнители ставят в объявлениях: сколько получится у вас, зависит от клиента и объёма.</p>
+      </div>
+      <div class="tier">
+        <p class="tk">Сопровождение</p>
+        <p class="tv">Помесячно или по часам</p>
+        <p>Проверить запуски, обновить опорные файлы и правила, добавить следующий сценарий. Помесячных предложений от частных исполнителей пока мало: компании, которые делают ботов, берут за поддержку от 7 000 ₽ в месяц. Для системы без программирования разумный ориентир – 5 000–15 000 ₽ в месяц или пакет часов по вашей ставке: обучение работе с нейросетями на Профи.ру стоит 2 000–6 000 ₽ в час. Цены на 19.10.2026.</p>
+      </div>
+    </div>
+
+    <div class="msg">
+      <h3>Ориентиры из прошлых бонусов</h3>
+      <p>Отдельного ориентира рынка для настройки агентной системы в курсе пока нет. Чтобы понимать порядок цифр, вот что уже стоит в бонусах модулей 1–3. Это нижняя планка для новичка, и обещанием заработка эти цифры не служат.</p>
+      <ul class="market">
+        <li><b>Разбор на 1 час</b> – карта задач, которые можно отдать ИИ, – ≈ 1&nbsp;500–3&nbsp;000&nbsp;₽. Ближе всего к разбору «Идеальная неделя с агентами». <a href="https://aiforlife.ru/ii-course/modul1/bonus-zarabotok/">Бонус модуля 1</a></li>
+        <li><b>Помощник под ключ</b> – от 10&nbsp;000&nbsp;₽, сопровождение помощника – от 3&nbsp;000&nbsp;₽ в месяц. Это один помощник под одну задачу; в системе модуля 4 этапов больше. <a href="https://aiforlife.ru/ii-course/modul2/bonus-zarabotok/">Бонус модуля 2</a></li>
+        <li><b>Создание Google-таблиц, работа в Excel</b> – от 1&nbsp;000&nbsp;₽ за час, <b>подготовка коммерческих предложений</b> – от 1&nbsp;500&nbsp;₽ за услугу. Стартовые цены «от» на Профи.ру для заказчиков из Москвы, сверено 4 октября 2026 года. Близко к отдельным сценариям урока 4. <a href="https://aiforlife.ru/ii-course/modul3/bonus-zarabotok/#skolko">Бонус модуля 3</a></li>
+      </ul>
+      <p class="rulebox"><b>Ваша цена зависит от задачи, ниши, объёма и работ в портфолио.</b> Проверьте, сколько берут за похожую работу именно в вашей нише, и спросите двух-трёх знакомых, сколько они были бы готовы заплатить. Подписку на нейросеть оплачивает заказчик: система живёт в его аккаунте.</p>
+    </div>
+
+    <div class="msg">
+      <h3>Как посчитать от своего часа</h3>
+      <p>Сложите часы на каждый этап и умножьте на ставку, которую готовы брать за час своей работы. Первые бесплатные настройки как раз покажут, сколько часов уходит у вас.</p>
+      <div class="promptbox"><p class="plabel">Посчитать цену</p><pre>Помоги посчитать цену настройки агентной системы под ключ. Не опирайся на рыночную статистику – считаем только от моих данных.
+
+Мои данные:
+– что входит: <span class="tok">[папка с правилами, 5 опорных файлов, регулярная задача – какая, памятка, показ]</span>;
+– сколько времени у меня ушло на этапы в прошлый раз: <span class="tok">[интервью, папка и правила, опорные файлы, регулярная задача, проверка первого запуска, памятка, показ]</span>;
+– ставка, которую я хочу получать за час: <span class="tok">[сумма]</span>;
+– сколько дней я на связи после сдачи: <span class="tok">[число]</span>.
+
+Посчитай итог, добавь запас на правки и неожиданности с техникой заказчика и предложи 2 цифры: «минимум, ниже которого мне невыгодно» и «нормальная цена». Отдельно посчитай сопровождение на месяц, если одно обновление занимает у меня <span class="tok">[время]</span>.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <div class="msg">
+      <h3>Посчитайте экономию – это ваш главный аргумент</h3>
+      <p>В уроке 4 вы видели, где агент экономит: подборка кейсов за 12 недель курса заняла несколько минут вместо нескольких часов, а анкету и Яндекс Метрику настроили без отдельного техспециалиста. Посчитайте то же у заказчика – по его цифрам и без обещаний. Такой замер пригодится и для цены следующей работы, и для разговора с работодателем.</p>
+      <div class="promptbox"><p class="plabel">Посчитать, что экономит система</p><pre>Помоги посчитать, что экономит система, которую я настроил(а) для <span class="tok">[имя заказчика]</span>. Считай только по данным, которые я дам, ничего не додумывай.
+
+– задача, которую делает агент: <span class="tok">[какая]</span>;
+– сколько времени она занимала у заказчика раньше: <span class="tok">[часы в неделю или в месяц – со слов заказчика]</span>;
+– сколько времени заказчик тратит теперь на проверку результата: <span class="tok">[часы]</span>;
+– кого раньше приходилось привлекать и за сколько: <span class="tok">[специалист и сумма – если было]</span>;
+– что заказчик стал успевать за освободившееся время: <span class="tok">[если он это назвал]</span>.
+
+Посчитай разницу в часах за месяц и в деньгах, если час заказчика стоит <span class="tok">[сумма]</span>. Если каких-то данных нет, так и напиши – не подставляй средние цифры. Итог оформи в 3–4 строки для отзыва или портфолио.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+    </div>
+
+    <p class="after">На чём держится цена:</p>
+    <ul>
+      <li><b>Ваша экспертиза в нише.</b> Методолог, который настраивает систему для методологов, понимает их сырьё и правила с полуслова – это стоит дороже, чем «просто настройка».</li>
+      <li><b>Сколько работы закрывает система.</b> Одна регулярная задача – стартовая цена. Несколько сценариев, доставка в Telegram и на почту, сопровождение – заметно выше.</li>
+      <li><b>Цена ошибки.</b> Сверка оплат и работа с данными клиентов требуют больше проверки и аккуратности, чем черновики постов.</li>
+      <li><b>Есть ли кейсы с замером.</b> Отзыв, в котором заказчик называет сэкономленные часы, – главный аргумент, чтобы поднять цену.</li>
+    </ul>
+    <p class="after">Как брать деньги официально – самозанятость, чек, налог – разобрано в <a href="https://aiforlife.ru/ii-course/modul3/bonus-zarabotok/#skolko">бонусе модуля 3</a>.</p>
+  </div></div>
+</section>
+
+<!-- 8. Чего не обещать -->
+<div class="dark late" id="ne-obeshchat">
+  <div class="wrap dgrid">
+    <h2>Чего не&nbsp;обещать</h2>
+    <div class="dcol">
+      <p>Честность здесь – защита вашей репутации. Тем более что агент работает с чужими файлами: одно несбывшееся обещание о безопасности стоит дороже нескольких удачных настроек.</p>
+      <ul>
+        <li><b>Круглосуточную работу.</b> По умолчанию регулярная задача выполняется, пока включён компьютер заказчика. Работа без компьютера – это облако или сервер, время на настройку и дополнительные оплаты. Как это устроено – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-oblachnye-agenty/">«Агент с телефона и в облаке»</a>.</li>
+        <li><b>Что агент всё делает сам и без ошибок.</b> Он готовит черновики. Суммы, цитаты, адресатов и решения проверяет человек, а отправку клиентам – счета, акты, письма – оставляем человеку.</li>
+        <li><b>Что система настроена раз и навсегда.</b> Цели и задачи меняются, опорные файлы обновляются не всегда сами, нейросети выпускают обновления. Обговорите сопровождение до сдачи.</li>
+        <li><b>Полную гарантию, что агент не заглянет, куда не просили.</b> Доступ только к нужным папкам снижает риск, но гарантии нет. Поэтому пароли, паспорта и токены не кладём ни в эти папки, ни в чат.</li>
+        <li><b>Работу с данными клиентов без согласия.</b> Данные клиентов и участников – только если это позволяет работа заказчика и люди согласны. Где можно, имена заменяем. Подробнее – в гайде <a href="https://aiforlife.ru/ii-course/modul0/bezopasnost/">«Безопасность и конфиденциальность»</a>.</li>
+        <li><b>Любое количество регулярных задач.</b> На разных тарифах есть ограничения. Решается повышением тарифа или пересмотром, какие задачи правда нужны.</li>
+        <li><b>Результат, за который вы не отвечаете.</b> На продажи и число клиентов влияет много всего за пределами системы. Вы отвечаете за систему: она работает по правилам заказчика, проверена и понятна ему.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 9. Портфолио -->
+<section class="wrap closing reveal" id="portfolio">
+  <div class="cgrid"><div class="col">
+    <p class="label">Раздел 9 из 9</p>
+    <h2>Каждая система – новая карточка в&nbsp;вашем портфолио</h2>
+    <p>После сдачи вставьте в чат, где настраивали систему, «Промпт для портфолио» из любого урока модуля 4 – нейросеть оформит работу. Добавьте её в документ «Моё портфолио», раздел «Модуль 4». Если заказчик разрешил, приложите замер экономии: цифры заказчика убеждают лучше описаний.</p>
+    <ul class="caseflds">
+      <li><b>Задача</b> – чья и какая, без имени: «организатору курса – карточки участников из расшифровок встреч».</li>
+      <li><b>Что я сделал(а) с помощью ИИ</b> – интервью, папка и правила, 5 опорных файлов, регулярная задача, проверка первого запуска, памятка.</li>
+      <li><b>Результат</b> – что агент делает сам, сколько времени это экономит по замеру и отзыв заказчика.</li>
+      <li><b>Где это ещё пригодится</b> – каким ещё людям и задачам подойдёт такая система.</li>
+      <li><b>Какой навык это показывает</b> – одной фразой.</li>
+      <li><b>Образец</b> – обезличенная карта системы и правила безопасности, без данных заказчика.</li>
+    </ul>
+    <div class="btns"><a class="btn" href="https://aiforlife.ru/ii-course/modul4/itog/">«Моё портфолио» и итог модуля 4</a></div>
+    <p class="pull end">Это последний модуль курса. Дальше ваша система растёт вместе с вами: каждый заказчик добавляет в неё новый сценарий, правило и карточку в портфолио.</p>
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонус модуля 4 «Заработок» · <a href="https://aiforlife.ru/ii-course/modul4/itog/" target="_top">к итогу модуля 4</a></div>
+</footer>
+
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.addEventListener('click',function(ev){
+    var btn=ev.target.closest('[data-copy]');
+    if(!btn)return;
+    var box=btn.closest('.step')||btn.closest('.col')||btn.closest('.dcol');
+    var near=btn.closest('.btns');near=near&&near.previousElementSibling;var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):(box?box.querySelector('.promptbox pre'):null);
+    copy(pre?pre.innerText:'').then(function(){
+      var old=btn.innerHTML;btn.textContent='Скопировано';btn.classList.add('done');
+      say('Скопировано. Вставьте в чат');
+      setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+    }).catch(function(){say('Не вышло скопировать – выделите текст вручную');});
+  });
+
+  var KEY='zarabotok-m4-svc';
+  function setSvc(k){
+    document.querySelectorAll('[data-svcbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.svcbtn===k);});
+    document.querySelectorAll('.hint').forEach(function(h){
+      var found=false;
+      h.querySelectorAll('.hs').forEach(function(s){
+        var m=s.dataset.svc===k;s.classList.toggle('on',m);if(m)found=true;
+      });
+      if(!found){var f=h.querySelector('.hs');if(f)f.classList.add('on');}
+    });
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-svcbtn]').forEach(function(b){
+    b.addEventListener('click',function(){setSvc(b.dataset.svcbtn);});
+  });
+  var s0=null;try{s0=localStorage.getItem(KEY);}catch(e){}
+  setSvc(s0&&document.querySelector('[data-svcbtn="'+s0+'"]')?s0:'content');
+
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>

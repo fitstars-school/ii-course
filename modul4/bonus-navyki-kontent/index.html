@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Лучшие навыки для контента: подборка с GitHub · Бонусный набор модуля 4 · Нейро-архитектор</title>
+<meta name="description" content="8 навыков для постов, рассылок и редактуры из официальных каталогов и с GitHub: что умеет каждый, как поставить, как проверить безопасность и как адаптировать под свой блог на русском.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ШКАЛА – 4 текстовые роли (МЕТОД.md, B2). Новых размеров, цветов и начертаний не вводить.
+   Р1 Заголовок   – Instrument Serif 400: h1 героя var(--h1), h2 разделов var(--h2)
+   Р2 Подзаголовок – Manrope 700, var(--sub) 20px: названия навыков и шагов
+   Р3 Текст       – Manrope 500, var(--text) 17px, цвет var(--ink); всё остальное, включая промпты, кнопки и подвал.
+                    В тёмных блоках тот же размер, светлый цвет var(--on-dark).
+   Р4 Метка       – Manrope 700, var(--label) 12px, CAPS, разрядка .2em, цвет var(--pink).
+                    Названия навыков латиницей (.skcode) – тот же размер 12px, моноширинный, без CAPS: регистр в названиях важен.
+   Декор, ролью не считается: цифры шагов и номера карточек var(--deco) 38px, Instrument Serif.
+   Выделение – только жирным. Курсива нет. Инлайн-стилей в разметке нет. */
+:root{
+  --ink:#211829; --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --dark:#1B1420; --dark2:#0F0B14; --on-dark:#EDE6F0; --faint:#9A8DA0;
+  --plate:#FFF1F8;
+  --maxw:1000px;
+  --h1:clamp(46px,7.4vw,94px); --h2:clamp(27px,3.4vw,40px);
+  --sub:20px; --text:17px; --label:12px; --deco:38px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-wrap:break-word}
+.wrap{max-width:var(--maxw);margin-left:auto;margin-right:auto;padding-left:40px;padding-right:40px}
+h1,h2,.num,.sn,.kn,.pull{font-family:var(--serif);font-weight:400}
+h1,h2{line-height:1.04;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2);margin-top:14px;margin-bottom:20px}
+.hl{color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none;border-bottom:1px solid rgba(230,25,140,.35)}
+a:hover{color:var(--pink-strong);border-bottom-color:var(--pink-strong)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:14px}
+
+/* Р4 – метки */
+.label,.glabel,.rubric span,.kmark .kt,.plabel,.badge{font-size:var(--label);font-weight:700;letter-spacing:.2em;text-transform:uppercase;line-height:1.4}
+.label,.glabel{color:var(--pink)}
+.skcode{font-family:var(--mono);font-size:var(--label);font-weight:500;color:var(--pink);white-space:nowrap;margin-left:8px}
+
+/* шапка */
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding-top:34px;padding-bottom:13px}
+.rubric span{color:var(--ink)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:var(--sub);line-height:1;color:var(--pink-soft)}
+.kmark .kt{color:#fff}
+.hero{padding-top:52px;padding-bottom:8px}
+.hero .lead{margin-top:24px}
+
+/* разделы */
+section{padding-top:56px;padding-bottom:8px}
+.nav{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:40px;padding-top:18px;padding-bottom:22px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.nav a{color:var(--ink);font-weight:600;border-bottom:2px solid transparent;padding-bottom:2px}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+ul.dash{list-style:none;margin-top:16px}
+ul.dash li{position:relative;padding-left:24px;margin-bottom:12px}
+ul.dash li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:1.5px;background:var(--pink)}
+
+/* шаги: цифра у левого края, текст после неё с отступом */
+.steps{margin-top:22px}
+.step{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;padding-top:20px;padding-bottom:20px;border-top:1px solid var(--line)}
+.step:first-child{border-top:1px solid var(--ink)}
+.step .sn{font-family:var(--serif);font-size:var(--deco);line-height:1;color:var(--pink)}
+.step h3{font-family:var(--sans);font-size:var(--sub);font-weight:700;line-height:1.3;margin-bottom:6px}
+
+/* плашки вместо сдвига */
+.rulebox{background:var(--plate);padding:16px 20px;margin-top:22px}
+
+/* метки риска */
+.badge{display:inline-block;padding:4px 10px;color:var(--ink);border:1px solid transparent;letter-spacing:.14em}
+.b-off{background:#F2EAFE;border-color:#E1D2F7}
+.b-txt{background:#EAF7EE;border-color:#CDEBD6}
+.b-part{background:#FFF3DC;border-color:#F3DDB0}
+.b-check{background:#FCE6F1;border-color:#F6CFE2}
+.legend{list-style:none;margin-top:14px}
+.legend li{display:grid;grid-template-columns:190px minmax(0,1fr);gap:14px;align-items:start;padding-top:8px;padding-bottom:8px}
+.legend .badge{justify-self:start}
+
+/* карточки навыков */
+.ghead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:44px;margin-bottom:6px}
+.grange{font-family:var(--mono);font-size:var(--label);color:var(--faint)}
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px minmax(0,1fr) 28px;align-items:start;gap:14px;padding-top:24px;padding-bottom:24px;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:var(--deco);line-height:1;color:var(--faint);transition:color .2s}
+.tname{display:block;font-size:var(--sub);font-weight:700;line-height:1.3}
+.twhen{display:block;margin-top:6px}
+.tbadges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;padding-top:8px;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding-left:78px;padding-bottom:30px}
+.body .promptbox{margin-top:18px}
+
+/* промпты */
+.promptbox{background:var(--dark);padding:24px 26px;margin-top:22px;border-left:3px solid var(--pink)}
+.plabel{color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--sans);font-size:var(--text);font-weight:500;line-height:1.65;color:var(--on-dark)}
+.promptbox pre.cmd{font-family:var(--mono)}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+
+.btns{display:flex;align-items:center;gap:12px 14px;flex-wrap:wrap;margin-top:18px}
+.btn{font-family:var(--sans);font-size:var(--text);font-weight:700;line-height:1.3;border:none;border-radius:0;padding:12px 22px;cursor:pointer;color:#fff;background:var(--ink);display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink);color:#fff}
+a.btn{border-bottom:none}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn.done,.btn.done:hover{background:#1FA24E;color:#fff}
+.promptbox .btn{background:#fff;color:var(--ink)}
+.promptbox .btn:hover{background:var(--pink-soft);color:var(--ink)}
+
+/* тёмная глава */
+.dark{background:var(--dark);color:var(--on-dark);padding-top:56px;padding-bottom:56px;margin-top:72px}
+.dark h2{color:#fff;margin-top:0}
+.dark .label{color:var(--pink-soft)}
+.dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dgrid .dh{grid-column:span 5}
+.dgrid .dcol{grid-column:span 7}
+.dark b{color:#fff}
+.dark a{color:var(--pink-soft);border-bottom-color:rgba(255,143,198,.45)}
+.dark ul.dash li::before{background:var(--pink-soft)}
+
+/* финал и подвал */
+.closing{padding-top:56px;padding-bottom:10px}
+.pull{font-family:var(--serif);font-size:var(--h2);line-height:1.18;letter-spacing:-.01em;text-wrap:balance}
+.backlink{display:inline-block;margin-top:28px;font-weight:600;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:2px}
+.backlink:hover{color:var(--pink)}
+footer{background:var(--dark2);color:var(--on-dark);padding-top:30px;padding-bottom:40px;margin-top:56px}
+footer a{color:var(--on-dark);border-bottom-color:rgba(255,255,255,.3)}
+footer a:hover{color:var(--pink-soft)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.reveal{opacity:1!important;transform:none!important}}
+
+@media (max-width:760px){
+  .wrap{padding-left:20px;padding-right:20px}
+  section{padding-top:44px}
+  .rubric{flex-direction:column;gap:4px}
+  .kmark{padding:8px 14px}
+  .step{grid-template-columns:44px minmax(0,1fr);gap:10px}
+  .task summary{grid-template-columns:44px minmax(0,1fr) 22px;gap:10px;padding-top:20px;padding-bottom:20px}
+  .body{padding-left:0;padding-bottom:26px}
+  .skcode{display:inline-block;margin-left:0;margin-top:4px}
+  .legend li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .promptbox{padding:20px 18px}
+  .btn{width:100%;justify-content:center}
+  .dgrid .dh,.dgrid .dcol{grid-column:1 / -1}
+  .dark{padding-top:44px;padding-bottom:44px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span>Модуль 4 · бонусный набор</span></div>
+  <div class="kmark"><span class="kn">2</span><span class="kt">Бонусный набор · Свой штат агентов</span></div>
+  <div class="hero">
+    <h1>Лучшие навыки <span class="hl">для&nbsp;контента:</span> подборка с&nbsp;GitHub</h1>
+    <p class="lead">8 навыков для постов, рассылок и редактуры из официальных каталогов и с GitHub: что умеет каждый, на каком языке написан, как его поставить и как переделать под свой блог на русском.</p>
+  </div>
+  <nav class="nav" aria-label="Разделы">
+    <a href="#zachem">Зачем</a>
+    <a href="#vybor">Как выбрать</a>
+    <a href="#navyki">8 навыков</a>
+    <a href="#ne-stavit">Не ставить</a>
+    <a href="#proverka">Проверка</a>
+    <a href="#adaptaciya">Сделать своим</a>
+    <a href="#postavit">Как поставить</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="wrap reveal" id="zachem">
+  <p class="label">Зачем эта подборка</p>
+  <h2>Готовый навык – быстрый старт для&nbsp;своего</h2>
+  <p>В уроке 3 вы собирали навыки контент-агента под свою задачу. Навык – это записанная инструкция: папка с файлом SKILL.md, где по шагам расписано, как делать работу и что проверить перед выдачей. Агент читает её и каждый раз работает по одним и тем же правилам.</p>
+  <p>Писать каждый навык с нуля долго. Навыков в открытом доступе уже тысячи, и для текстов среди них много готовых: их выкладывают маркетологи, редакторы и сами разработчики нейросетей. Удобнее взять проверенный, посмотреть, как он устроен, и переделать под себя – перевести, заменить примеры, добавить ваш голос.</p>
+  <p>С чужими навыками есть 2 сложности. Почти все они написаны на английском и под западный рынок. И не все безопасны: некоторые запускают скрипты или просят доступ к вашим аккаунтам. Поэтому в подборке 8 навыков, у каждого стоит метка риска, а ниже – как проверить любой навык самостоятельно и как одним запросом сделать его своим.</p>
+</section>
+
+<section class="wrap reveal" id="vybor">
+  <p class="label">Как выбрать</p>
+  <h2>3 вопроса, прежде чем ставить навык</h2>
+  <div class="steps">
+    <div class="step"><span class="sn">1</span><div><h3>Какую работу вы хотите отдать?</h3><p>Назовите одну задачу, которая повторяется каждую неделю: черновик поста, переупаковка эфира в серию постов, редактура, контент-план, рассылка. Под одну задачу проще найти навык и проще проверить, справляется ли он. Из большого набора «всё для маркетинга» вы всё равно будете пользоваться 2–3 навыками.</p></div></div>
+    <div class="step"><span class="sn">2</span><div><h3>На каком языке и для какого рынка он написан?</h3><p>Английский навык нейросеть понимает и отвечать будет по-русски. Но правила стиля, примеры и SEO в нём рассчитаны на англоязычных читателей, и тексты получаются похожими на перевод. Такой навык стоит адаптировать – промпт ниже.</p></div></div>
+    <div class="step"><span class="sn">3</span><div><h3>Что в нём, кроме текста?</h3><p>Если навык – только инструкции в файлах .md, риск небольшой: прочитайте их и пользуйтесь. Если в папке есть скрипты, установка командой из интернета или навык просит ключ API и доступ к вашим аккаунтам – остановитесь и сначала проверьте его по чек-листу ниже.</p></div></div>
+  </div>
+  <div class="rulebox">
+    <p><b>Метки в карточках</b></p>
+    <ul class="legend">
+      <li><span class="badge b-off">Официальный</span><span>выпущен Anthropic, разработчиком Claude, и лежит в его официальном репозитории.</span></li>
+      <li><span class="badge b-txt">Только текст</span><span>внутри только инструкции, без кода: прочитали – можно ставить.</span></li>
+      <li><span class="badge b-part">Берите частями</span><span>в наборе есть скрипты или подключения по ключам: берите отдельные текстовые навыки.</span></li>
+      <li><span class="badge b-check">Проверьте сами</span><span>популярный, но состав его файлов мы не разбирали: перед установкой пройдите проверку ниже.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap reveal" id="navyki">
+  <p class="label">Подборка</p>
+  <h2>8 навыков для постов, рассылок и&nbsp;редактуры</h2>
+  <p>Откройте карточку – там написано, что делает навык, кому подойдёт, на каком языке он написан и как его поставить. Данные проверены 19.10.2026. Звёзды на GitHub – это отметки пользователей: чем их больше, тем больше людей навыком пользуются и следят за ним.</p>
+
+  <div class="group">
+    <div class="ghead"><p class="glabel">Официальные · Anthropic</p><span class="grange">01 – 02</span></div>
+
+    <details class="task">
+      <summary><span class="num">01</span><span><span class="tname">Маркетинг для Claude <span class="skcode">marketing</span></span><span class="twhen">Плагин от Anthropic: черновики постов и рассылок, контент-план, проверка голоса, SEO-аудит и цепочки писем – отдельными командами.</span><span class="tbadges"><span class="badge b-off">Официальный</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> Команды вызываются через «/»: /draft-content – черновики постов и рассылок, /campaign-plan – контент-план, /brand-review – проверка текста на ваш голос, /seo-audit – SEO-аудит, /email-sequence – цепочка писем. На странице плагина стоит отметка «Anthropic verified».</p>
+        <p><b>Кому подойдёт.</b> Тем, кто работает в Claude и хочет получать черновики и контент-план из своего материала. Подключать сторонние сервисы можно, но необязательно: плагин работает и с текстом, который вы ему дали.</p>
+        <p><b>Язык.</b> Английский. SEO-аудит рассчитан на англоязычный рынок, для русского блога от него мало пользы.</p>
+        <p><b>Как поставить.</b> Откройте страницу плагина и нажмите «Install in Cowork».</p>
+        <div class="btns"><a class="btn" href="https://claude.com/plugins/marketing" target="_blank" rel="noopener">Страница плагина</a><a class="btn ghost" href="https://github.com/anthropics/knowledge-work-plugins/tree/main/marketing" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="task">
+      <summary><span class="num">02</span><span><span class="tname">Малый бизнес <span class="skcode">small-business</span></span><span class="twhen">Большой набор Anthropic: 44 навыка для малого бизнеса, среди них контент-стратегия и контент для соцсетей.</span><span class="tbadges"><span class="badge b-off">Официальный</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> В наборе 44 навыка, для блога полезны 2: content-strategy – контент-стратегия и social-content-engine – контент для соцсетей. Перед тем как что-то отправить или опубликовать, набор спрашивает ваше подтверждение.</p>
+        <p><b>Кому подойдёт.</b> Тем, кто ведёт своё дело целиком и хочет закрывать контент вместе с остальными задачами. Если нужен только блог, 44 навыка – это много: возьмите 2 нужных.</p>
+        <p><b>Язык.</b> Английский.</p>
+        <p><b>Как поставить.</b> В Claude откройте Customize → Plugins → Discover и поищите small-business в каталоге. Нет в каталоге – берите из папки на GitHub только нужные навыки. Отдельные навыки – общим способом из раздела <a href="#postavit">«Как поставить»</a>.</p>
+        <div class="btns"><a class="btn ghost" href="https://github.com/anthropics/knowledge-work-plugins/tree/main/small-business" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+
+    <p class="rulebox"><b>Ещё один официальный плагин – brand-voice</b> от партнёра Anthropic, компании Tribe AI. Он выводит правила голоса из ваших текстов, но рассчитан на компании и подключённые хранилища вроде Notion – соло-эксперту с ним громоздко. Правила голоса проще собрать в папке «Блог», об этом материал 1 набора. <a href="https://github.com/anthropics/knowledge-work-plugins/tree/main/partner-built/brand-voice" target="_blank" rel="noopener">Исходник brand-voice</a></p>
+  </div>
+
+  <div class="group">
+    <div class="ghead"><p class="glabel">Открытые · GitHub</p><span class="grange">03 – 08</span></div>
+
+    <details class="task">
+      <summary><span class="num">03</span><span><span class="tname">Маркетинговые навыки Корея Хейнса <span class="skcode">marketingskills</span></span><span class="twhen">Самый популярный открытый набор: 50 навыков, для блога пригодятся 5 – тексты, редактура, переупаковка в посты, письма, контент-стратегия.</span><span class="tbadges"><span class="badge b-part">Берите частями</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> copywriting пишет тексты, copy-editing редактирует, social переупаковывает один материал в серию постов, emails готовит письма и рассылки, content-strategy – контент-стратегию. Около 55 000 звёзд, последнее обновление 15.10.2026, лицензия MIT – свободная: навыки можно брать и переделывать.</p>
+        <p><b>Кому подойдёт.</b> Тем, кому нужна сильная основа для черновиков и переупаковки и кто готов адаптировать её под русский.</p>
+        <p><b>Язык.</b> Английский, примеры про американские IT-сервисы.</p>
+        <p><b>Как поставить.</b> В Claude – скачайте zip в разделе Releases на странице репозитория и загрузите его в Customize → Skills. В Codex – командой автора ниже: это команда для терминала, проще попросить сам Codex «выполни эту команду и покажи, что установилось». Оба способа ставят весь набор, вместе со скриптами и подключениями по ключам. Спокойнее взять 2–3 текстовых навыка из списка выше и адаптировать их промптом из раздела <a href="#adaptaciya">«Сделать своим»</a>.</p>
+        <div class="promptbox"><p class="plabel">Команда для Codex</p><pre class="cmd">codex plugin marketplace add coreyhaines31/marketingskills</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <div class="btns"><a class="btn ghost" href="https://github.com/coreyhaines31/marketingskills" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="task">
+      <summary><span class="num">04</span><span><span class="tname">Инфостиль <span class="skcode">infostyle-skill</span></span><span class="twhen">Редактура русского текста по книге «Пиши, сокращай»: показывает «до» и «после», работает в 3 режимах. Лучший кандидат для блога на русском.</span><span class="tbadges"><span class="badge b-txt">Только текст</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> Чистит текст по правилам книги «Пиши, сокращай» и показывает, что было и что стало, – видно каждую правку. Работает в 3 режимах.</p>
+        <p><b>Кому подойдёт.</b> Всем, кто пишет посты на русском и хочет убирать лишнее, не переписывая текст целиком.</p>
+        <p><b>Язык.</b> Русский.</p>
+        <p><b>Обратите внимание.</b> Сообщество маленькое – 33 звезды, то есть навыком пока пользовались немногие. Внутри только файлы Markdown, без кода, и прочитать их перед установкой несложно. Если правила книги спорят с вашим голосом, попросите агента их смягчить: промпт адаптации ниже это учитывает.</p>
+        <p><b>Как поставить.</b> Общим способом из раздела <a href="#postavit">«Как поставить»</a>.</p>
+        <div class="btns"><a class="btn ghost" href="https://github.com/artgas1/infostyle-skill" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="task">
+      <summary><span class="num">05</span><span><span class="tname">Стоп-штампы <span class="skcode">stop-slop</span></span><span class="twhen">Список запрещённых шаблонов ИИ-текста и оценка текста по 5 осям. Для русского блога – хороший образец того, как устроен такой навык.</span><span class="tbadges"><span class="badge b-txt">Только текст</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> Проверяет текст на запрещённые шаблоны и оценивает его по 5 осям. Около 18 000 звёзд, скриптов нет.</p>
+        <p><b>Кому подойдёт.</b> Тем, кто хочет свой навык «убери штампы» – по образцу этого, со своими русскими штампами.</p>
+        <p><b>Язык.</b> Английский, и шаблоны в нём английские. Поэтому полезнее всего он как образец устройства.</p>
+        <p><b>Как поставить.</b> Ставить его как есть необязательно. Дайте агенту прочитать навык и попросите собрать по его образцу русскую версию – промпт из раздела <a href="#adaptaciya">«Сделать своим»</a> подойдёт, если в строке «Что я хочу от навыка» написать «убирать штампы из моих постов».</p>
+        <div class="btns"><a class="btn ghost" href="https://github.com/hardikpandya/stop-slop" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="task">
+      <summary><span class="num">06</span><span><span class="tname">Очеловечиватель <span class="skcode">humanizer</span></span><span class="twhen">Убирает из текста 26 признаков ИИ-текста по списку из Википедии. Очень популярный, но признаки собраны для английского.</span><span class="tbadges"><span class="badge b-check">Проверьте сами</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> Находит и убирает 26 признаков текста, написанного нейросетью, – список взят из Википедии. Около 58 000 звёзд.</p>
+        <p><b>Кому подойдёт.</b> Тем, кто пишет и на английском, или как основа для своего списка признаков.</p>
+        <p><b>Язык.</b> Английский. Признаки собраны для английского, на русском тексте навык работает частично.</p>
+        <p><b>Как поставить.</b> Сначала пройдите <a href="#proverka">проверку</a>, затем – общим способом.</p>
+        <div class="btns"><a class="btn ghost" href="https://github.com/blader/humanizer" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="task">
+      <summary><span class="num">07</span><span><span class="tname">Исследователь и автор статей <span class="skcode">content-research-writer</span></span><span class="twhen">Помогает с большой статьёй: план, источники, сильное начало.</span><span class="tbadges"><span class="badge b-txt">Только текст</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> Составляет план статьи, подбирает источники и помогает написать сильное начало. Внутри только файл SKILL.md. Источники открывайте и проверяйте сами: нейросеть может ошибиться в ссылке или пересказе.</p>
+        <p><b>Кому подойдёт.</b> Тем, кто пишет длинные тексты – статьи для сайта, разборы, большие посты.</p>
+        <p><b>Язык.</b> Английский.</p>
+        <p><b>Обратите внимание.</b> Навык лежит в сборнике awesome-claude-skills от Composio. Остальные навыки этого сборника для соцсетей требуют ключ API – их не берите.</p>
+        <p><b>Как поставить.</b> Общим способом из раздела <a href="#postavit">«Как поставить»</a>.</p>
+        <div class="btns"><a class="btn ghost" href="https://github.com/ComposioHQ/awesome-claude-skills/tree/master/content-research-writer" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+
+    <details class="task">
+      <summary><span class="num">08</span><span><span class="tname">Навыки OpenClaudia <span class="skcode">openclaudia-skills</span></span><span class="twhen">Переупаковка материала, контент-календарь и редактура – набор под западные соцсети.</span><span class="tbadges"><span class="badge b-check">Проверьте сами</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <p><b>Что делает.</b> content-repurposing переупаковывает один материал в разные форматы, content-calendar ведёт контент-календарь, copy-editing редактирует.</p>
+        <p><b>Кому подойдёт.</b> Тем, кому нужна готовая схема переупаковки и календаря и кто переделает её под Telegram.</p>
+        <p><b>Язык.</b> Английский, рассчитан на западные соцсети.</p>
+        <p><b>Как поставить.</b> Сначала пройдите <a href="#proverka">проверку</a>, затем – общим способом.</p>
+        <div class="btns"><a class="btn ghost" href="https://github.com/OpenClaudia/openclaudia-skills" target="_blank" rel="noopener">Исходник на GitHub</a></div>
+      </div>
+    </details>
+  </div>
+
+  <p class="rulebox"><b>С чего начать, если блог на русском.</b> Возьмите infostyle-skill для редактуры и 1–2 текстовых навыка из marketingskills – например, social для переупаковки и copywriting для черновиков – и адаптируйте их промптом ниже. Остальное добавляйте, когда эти заработают.</p>
+</section>
+
+<section class="wrap reveal" id="ne-stavit">
+  <p class="label">Не ставить</p>
+  <h2>3 случая, когда лучше пройти мимо</h2>
+  <p>Даже если навык обещает много, вот что мы советуем обойти стороной:</p>
+  <ul class="dash">
+    <li><b>ai-marketing-claude.</b> Ставится командой вида curl | bash: она скачивает скрипт из интернета и сразу запускает его на вашем компьютере, не показав, что внутри. И в самом наборе есть скрипты.</li>
+    <li><b>Навыки автопостинга через Composio.</b> Чтобы публиковать за вас, им нужны ключ API и доступ стороннего сервиса к вашим аккаунтам в соцсетях. Ключ работает как пароль: у кого он есть, тот действует от вашего имени.</li>
+    <li><b>Навыки из неизвестных каталогов без исходника.</b> Если файлы нельзя открыть и прочитать, проверить навык невозможно.</li>
+  </ul>
+</section>
+
+<section class="wrap reveal" id="proverka">
+  <p class="label">Безопасность</p>
+  <h2>Как проверить навык перед&nbsp;установкой</h2>
+  <p>Навык может не только подсказывать нейросети, как писать, но и запускать программы и обращаться к сервисам. В феврале 2026 года компания Snyk, которая занимается безопасностью программ, проверила 3984 навыка: у 13,4% нашлись критические проблемы, 76 оказались вредоносными. В справке Claude совет простой: ставить навыки только из доверенных источников и сначала читать их файлы. Вот как это сделать за 10 минут.</p>
+  <div class="steps">
+    <div class="step"><span class="sn">1</span><div><h3>Источник</h3><p>Официальный каталог или репозиторий на GitHub, где файлы открыты. Исходника нет – не ставим.</p></div></div>
+    <div class="step"><span class="sn">2</span><div><h3>Оценки безопасности</h3><p>Найдите навык на сайте skills.sh: на его странице – оценки сервисов проверки Snyk, Socket и Gen.</p></div></div>
+    <div class="step"><span class="sn">3</span><div><h3>Состав папки</h3><p>Откройте навык на GitHub и посмотрите список файлов. Только файлы .md – хорошо. Папка со скриптами, файлы .py, .js, .sh, установка командой из интернета – повод разобраться подробнее.</p></div></div>
+    <div class="step"><span class="sn">4</span><div><h3>Ключи и доступы</h3><p>Навык просит ключ API, пароль или доступ к почте и соцсетям – не ставьте, пока не поймёте, зачем ему это и кто ещё получит доступ.</p></div></div>
+    <div class="step"><span class="sn">5</span><div><h3>Разбор нейросетью</h3><p>Откройте на GitHub файл SKILL.md, нажмите значок копирования над текстом и отправьте текст нейросети с промптом ниже. Если в папке есть другие файлы, приложите и их. Ничего при этом не устанавливайте.</p></div></div>
+    <div class="step"><span class="sn">6</span><div><h3>Первый запуск – на пробу</h3><p>Проверьте навык на тестовом тексте, без подключённых сервисов. Всё, что публикуется или отправляется, – только после вашего подтверждения.</p></div></div>
+  </div>
+  <div class="promptbox"><p class="plabel">Промпт · Разбери этот навык</p><pre>Разбери этот навык: что делает, к чему обращается, есть ли риск. Ничего не устанавливай и не запускай – только читай.
+
+Навык: <span class="tok">[ССЫЛКА НА СТРАНИЦУ НАВЫКА НА GITHUB]</span>
+Текст и файлы: <span class="tok">[ВСТАВЬТЕ ТЕКСТ SKILL.MD ИЛИ ПРИЛОЖИТЕ ФАЙЛЫ НАВЫКА]</span>
+
+Ответь по пунктам:
+1) Что делает навык и в каких случаях включается – простыми словами, 3–5 предложений.
+2) Из каких файлов состоит: только текстовые инструкции или есть скрипты (.py, .js, .sh и другие), команды установки, ссылки на скачивание.
+3) К чему обращается: сайты и сервисы, ключи API, пароли, доступ к почте, соцсетям, файлам на компьютере. Для каждого – зачем это навыку.
+4) Есть ли тревожные места: просьбы скрыть действия от пользователя, отправить данные на сторонний адрес, отключить проверки, скачать и запустить что-то из интернета, выполнить действие без подтверждения.
+5) Итог: риск низкий, средний или высокий – и почему.
+6) Что из навыка можно взять безопасно, если целиком он не подходит.
+
+Если каких-то файлов ты не видишь – так и скажи и перечисли, что нужно прислать. Не додумывай содержимое файлов, которых нет перед тобой.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+</section>
+
+<section class="wrap reveal" id="adaptaciya">
+  <p class="label">Главный промпт</p>
+  <h2>Как сделать чужой навык своим</h2>
+  <p>Навык, написанный для американского рынка, и по-русски пишет как перевод. Чтобы он заговорил вашим голосом, его нужно перевести, заменить примеры на ваши и привязать к вашим правилам из папки «Блог». Это делается одним запросом.</p>
+  <p>Где запускать: в Codex – в проекте «Хранитель порядка», у которого есть доступ к «Моей системе с ЧатГПТ»; в Claude – в чате с подключённой папкой «Моя система с Claude». Приложите файлы навыка – SKILL.md и всё, что лежит рядом, – или вставьте ссылку и текст. И сначала пройдите проверку выше.</p>
+  <div class="promptbox"><p class="plabel">Промпт · Адаптируй навык под мой блог</p><pre>Адаптируй навык под мой русскоязычный блог в Telegram.
+
+Исходный навык: <span class="tok">[НАЗВАНИЕ И ССЫЛКА НА GITHUB]</span> – файлы приложены <span class="tok">[ИЛИ: ТЕКСТ SKILL.MD НИЖЕ]</span>.
+Мой блог: <span class="tok">[О ЧЁМ КАНАЛ, ДЛЯ КОГО, КАКАЯ ЗАДАЧА У БЛОГА]</span>.
+Что я хочу от навыка: <span class="tok">[НАПРИМЕР, ЧЕРНОВИКИ ПОСТОВ ИЗ МОИХ ЗАМЕТОК / ПЕРЕУПАКОВКА ЭФИРА В СЕРИЮ ПОСТОВ / РЕДАКТУРА ГОТОВОГО ТЕКСТА]</span>.
+
+Как работаем:
+1) Сначала прочитай навык и коротко расскажи, что он делает. Если в нём есть скрипты, команды установки, ключи API или обращения к сторонним сервисам – остановись и спроси меня. В мою версию переносим только текстовые инструкции.
+2) Прочитай мою папку «Блог»: описание блога, рубрики, правила голоса и 5–10 моих постов. Покажи, какие файлы нашёл. Если правил голоса нет – выведи их из моих постов и покажи отдельным списком. Не придумывай мой голос.
+3) Переведи навык на русский. Сохрани его логику: шаги, порядок работы и проверки перед выдачей.
+4) Замени примеры про американские компании и IT-сервисы на примеры из моей темы и для Telegram: короткие абзацы, длина поста <span class="tok">[НАПРИМЕР, ДО 1500 ЗНАКОВ]</span>, эмодзи <span class="tok">[ДА / НЕТ / В МЕРУ]</span>.
+5) Убери то, что не подходит русскому блогу в Telegram: SEO под англоязычный поиск, западные площадки, требования, которых у меня нет. Покажи списком, что убрал и почему.
+6) Добавь правила: писать голосом из папки «Блог»; не придумывать факты, цифры, истории и цитаты – если чего-то не хватает, спрашивать меня; ничего не публиковать и не отправлять без моего подтверждения.
+7) В конце файла оставь строку: на основе какого навыка сделан, его автор и лицензия.
+8) Покажи новую версию целиком, прежде чем сохранить. После моего «да» сохрани её в «Помощники и навыки» отдельной папкой: название латиницей через дефис, внутри файл SKILL.md с полями name и description в начале. Исходные файлы не меняй и ничего не удаляй.
+
+В конце скажи, как обращаться к новому навыку.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+  <p class="rulebox"><b>Дальше навык дорастает в работе.</b> Если в первых постах что-то звучит не по-вашему, поправьте и попросите: «Запиши это в навык, чтобы в следующий раз ты делал так сам». С каждой такой правкой навык звучит ближе к вам.</p>
+</section>
+
+<section class="wrap reveal" id="postavit">
+  <p class="label">Как поставить</p>
+  <h2>Как поставить навык в&nbsp;Claude, ChatGPT и&nbsp;Codex</h2>
+  <p>Ставьте уже адаптированную версию – ту, что агент сохранил в «Помощники и навыки». Чтобы загрузить навык в настройки нейросети, нужен zip-архив: папка навыка с файлом SKILL.md внутри, сжатая в архив. На Mac – правый клик по папке → «Сжать». На Windows – правый клик → «Отправить» → «Сжатая ZIP-папка» или «Сжать в ZIP-файл», в зависимости от версии.</p>
+  <div class="steps">
+    <div class="step"><span class="sn">1</span><div><h3>Claude</h3><p>Навыки есть на всех тарифах, включая бесплатный. Откройте Settings → Capabilities и включите «Code execution and file creation». Затем Customize → Skills → «+» → Create skill → Upload a skill и выберите zip.</p></div></div>
+    <div class="step"><span class="sn">2</span><div><h3>ChatGPT</h3><p>Готовые плагины добавляются во вкладке Plugins кнопкой «+», а в чате вызываются через «@». Если раздел навыков в настройках есть – загрузите туда zip. Если раздела навыков нет – скопируйте текст SKILL.md в инструкцию проекта или попросите @skill-creator собрать навык по нему.</p></div></div>
+    <div class="step"><span class="sn">3</span><div><h3>Codex на компьютере</h3><p>Папка навыка уже лежит в «Моей системе с ЧатГПТ» → «Помощники и навыки», если её сохранил агент. Если вы скачали навык сами – перетащите папку туда, как в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-navyki-agenta/">«Навыки контент-агента»</a>. Затем напишите в чате: «Используй навык [название папки]».</p></div></div>
+  </div>
+  <p class="rulebox"><b>Названия кнопок у нейросетей меняются.</b> Пути на этой странице проверены 19.10.2026. Если что-то называется иначе, ищите по смыслу: «Навыки», Skills, Plugins.</p>
+</section>
+
+<div class="dark reveal" id="dalshe">
+  <div class="wrap dgrid">
+    <div class="dh"><p class="label">Связь с материалом 1</p><h2>Навык знает, как делать, а&nbsp;папка «Блог» – кто вы</h2></div>
+    <div class="dcol">
+      <p>Любой навык из подборки описывает способ работы. Чтобы результат звучал по-вашему, агенту нужно, на что опереться: кто вы и для кого пишете, рубрики, банк идей, контент-план, ваши тексты. Всё это собирается в папке «Блог» – её агент делает под вас в материале 1 набора.</p>
+      <ul class="dash">
+        <li><a href="https://aiforlife.ru/ii-course/modul4/bonus-kontent-sistema/"><b>«Контент-система для агента»</b></a> – папка «Блог», шаблон и помощники: поиск тем, пост из голосовой мысли, план на неделю. Сборка – 30 минут.</li>
+      </ul>
+      <p>Если папки ещё нет, начните с неё. Промпт адаптации из этой страницы опирается на неё в шагах 2 и 6.</p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap closing">
+  <p class="pull">Чужой навык даёт готовый порядок работы. Своим он становится, когда пишет вашим голосом для ваших читателей.</p>
+  <a class="backlink" href="https://aiforlife.ru/ii-course/modul4/shtat-agentov/" target="_top">← Ко всем материалам набора «Свой штат агентов»</a>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul4/shtat-agentov/" target="_top">«Свой штат агентов»</a>, модуль 4</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function textOf(btn){var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;return pre?pre.innerText:'';}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.setAttribute('readonly','');ta.className='sr';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      copy(textOf(btn)).then(function(){
+        var old=btn.innerHTML;
+        btn.textContent='Скопировано';btn.classList.add('done');
+        say('Промпт скопирован. Вставьте его в чат');
+        setTimeout(function(){btn.innerHTML=old;btn.classList.remove('done');},2400);
+      }).catch(function(){say('Не вышло скопировать – выделите текст промпта вручную');});
+    });
+  });
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" class="sr" alt=""></div></noscript>
+
+</body>
+</html>

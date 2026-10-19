@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="yandex" content="noindex, nofollow, noarchive">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>20 агентных сценариев для работы, блога и жизни · Модуль 4 · Нейро-архитектор</title>
+<meta name="description" content="20 сценариев, которые можно отдать агенту: бриф к встречам, разбор почты, сводка дня, КП по брифам, сверка оплат, неделя блога, темы из банка идей, меню, семейный календарь и подготовка к поездке. У каждого – схема и готовый промпт.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ШКАЛА – 4 текстовые роли (МЕТОД B2, дизайн-код FitStars)
+   Р1 Заголовок    – Instrument Serif 400: var(--h1) в шапке, var(--h2) в разделах и в финальной фразе.
+   Р2 Подзаголовок – Manrope 700, var(--sub): названия сценариев.
+   Р3 Текст        – Manrope 500, var(--text), цвет var(--ink): всё остальное – абзацы, схемы, плашки, промпты, кнопки, навигация.
+   Р4 Метка        – Manrope 700, var(--label), CAPS с разрядкой, цвет var(--pink): метки разделов, пометки сценариев, подвал.
+   Декоративные цифры (.num, .stepn) ролями не считаются. Курсива нет. Инлайн-стилей font-size/color/font-weight нет.
+   Вёрстка (МЕТОД B3): один левый край, цифра у края – текст после неё с отступом, выделяем плашкой, всё на полную ширину. */
+:root{
+  --ink:#211829; --muted:#6E6076; --faint:#9A8DA0;
+  --pink:#E6198C; --pink-strong:#C0116E; --pink-soft:#FF8FC6;
+  --paper:#FFFDFB; --line:#E3DAE6; --plate:#FFF1F8; --dark:#1B1420; --dark2:#0F0B14; --on-dark:#EDE6F0;
+  --maxw:1000px;
+  --h1:clamp(42px,6.6vw,84px); --h2:clamp(28px,3.4vw,40px);
+  --sub:20px; --text:17px; --label:12px; --num:36px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:var(--text);line-height:1.6;color:var(--ink);font-weight:500;background:var(--paper);-webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden}
+.wrap{max-width:var(--maxw);margin-left:auto;margin-right:auto;padding-left:40px;padding-right:40px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:var(--h1)}
+h2{font-size:var(--h2)}
+.it{color:var(--pink)}
+b,strong{font-weight:700}
+a{color:var(--pink);text-decoration:none}
+a:hover{color:var(--pink-strong)}
+p a,li a,dd a{border-bottom:1px solid rgba(230,25,140,.35)}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+p+p{margin-top:14px}
+[id]{scroll-margin-top:16px}
+
+/* Р4 – метка */
+.label,.glabel,.rubric span,.kmark .kt,.chip,.scheme dt,.plabel,footer{font-family:var(--sans);font-size:var(--label);line-height:1.4;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.label,.glabel,.scheme dt{color:var(--pink)}
+
+/* шапка */
+.rubric{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding-top:34px;padding-bottom:13px}
+.rubric .r2{color:var(--pink)}
+.kmark{display:inline-flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:9px 18px;margin-top:34px}
+.kmark .kn{font-family:var(--serif);font-size:var(--num);line-height:.7;color:var(--pink-soft)}
+.hero{padding-top:44px;padding-bottom:8px}
+.hlead{margin-top:22px}
+
+/* разделы */
+.lede{padding-top:40px}
+.block{padding-top:56px}
+.block h2{margin-top:12px;margin-bottom:18px}
+ul.dash{list-style:none;margin-top:16px}
+ul.dash li{position:relative;padding-left:24px;margin-bottom:10px}
+ul.dash li::before{content:"";position:absolute;left:2px;top:13px;width:9px;height:2px;background:var(--pink)}
+.plate{background:var(--plate);padding:16px 20px;margin-top:20px}
+.plate b{color:var(--ink)}
+
+/* тёмная глава */
+.dark{background:var(--dark);color:var(--on-dark);margin-top:56px;padding-top:56px;padding-bottom:56px}
+.dark h2{color:#fff}
+.dark .label{color:var(--pink-soft)}
+.dark b{color:#fff}
+.dark a{color:var(--pink-soft);border-bottom-color:rgba(255,143,198,.45)}
+.dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;align-items:start}
+.dgrid .dh{grid-column:span 5}
+.dgrid .dcol{grid-column:span 7}
+
+/* шаги: цифра у края, текст с отступом */
+.steps{list-style:none;margin-top:18px;counter-reset:st}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:0;margin-bottom:14px}
+.stepn{font-family:var(--serif);font-size:var(--num);font-weight:400;line-height:.95;color:var(--pink)}
+.dark .stepn{color:var(--pink-soft)}
+
+/* навигация */
+.nav{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:40px;padding-top:18px;padding-bottom:20px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.navlink{font-weight:700;color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--pink)}
+
+/* группы и сценарии */
+.group{padding-top:8px}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:56px;margin-bottom:6px}
+.grange{font-family:var(--sans);font-size:var(--label);font-weight:700;letter-spacing:.18em;color:var(--faint);white-space:nowrap}
+.group .plate{margin-top:14px;margin-bottom:10px}
+.task{border-top:1px solid var(--line)}
+.group .task:first-of-type{border-top:1px solid var(--ink)}
+.task summary{display:grid;grid-template-columns:64px 1fr 28px;align-items:start;gap:14px;padding-top:24px;padding-bottom:24px;cursor:pointer;list-style:none}
+.task summary::-webkit-details-marker{display:none}
+.num{font-family:var(--serif);font-size:var(--num);font-weight:400;line-height:1;color:var(--faint);transition:color .2s}
+.tname{display:block}
+.ttitle{display:block;font-size:var(--sub);font-weight:700;line-height:1.3}
+.twhen{display:block;margin-top:6px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{display:inline-block;letter-spacing:.12em;color:var(--pink);background:var(--plate);padding:5px 10px}
+.chip.cloud{background:var(--pink);color:#fff}
+.chip.pc{background:transparent;color:var(--pink);box-shadow:inset 0 0 0 1px var(--pink)}
+.chev{color:var(--faint);display:flex;justify-content:flex-end;padding-top:6px;transition:transform .25s,color .2s}
+.task summary:hover .num,.task[open] .num{color:var(--pink)}
+.task summary:hover .chev{color:var(--pink)}
+.task[open] .chev{transform:rotate(180deg);color:var(--pink)}
+.body{padding-bottom:36px}
+
+/* схема сценария */
+.scheme{display:grid;grid-template-columns:200px 1fr;border-top:1px solid var(--line);margin-bottom:22px}
+.scheme dt,.scheme dd{padding-top:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.scheme dt{padding-right:18px;padding-top:15px}
+
+/* промпт */
+.promptbox{background:var(--dark);padding:24px 28px;margin-top:16px}
+.plabel{color:#FFC2E0;margin-bottom:14px}
+.promptbox pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--sans);font-size:var(--text);line-height:1.65;font-weight:500;color:var(--on-dark)}
+.tok{color:#FFC2E1;border-bottom:1px dotted rgba(255,143,198,.6)}
+.btns{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px}
+.btn{font-family:var(--sans);font-size:var(--text);font-weight:700;border:none;border-radius:0;padding:12px 22px;cursor:pointer;color:var(--ink);background:#fff;display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.btn:hover{background:var(--pink-soft)}
+.btn.done,.btn.done:hover{background:#1FA24E;color:#fff}
+.tip{background:var(--plate);padding:16px 20px;margin-top:16px}
+.tip b{color:var(--ink)}
+
+/* правила */
+.rules{list-style:none;margin-top:22px;border-top:1px solid var(--ink)}
+.rules li{display:grid;grid-template-columns:64px 1fr;gap:14px;padding-top:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.rules .stepn{color:var(--pink)}
+
+/* финал */
+.closing{padding-top:64px;padding-bottom:10px}
+.pull{font-family:var(--serif);font-size:var(--h2);font-weight:400;line-height:1.15;letter-spacing:-.01em}
+.backlink{display:inline-block;margin-top:28px;font-weight:700;color:var(--ink);border-bottom:2px solid var(--pink);padding-bottom:2px}
+.backlink:hover{color:var(--pink)}
+footer{background:var(--dark2);color:#8A7C90;padding-top:30px;padding-bottom:40px;margin-top:56px;letter-spacing:.1em;line-height:1.8}
+footer a{color:#CFC4D4;border-bottom:1px solid rgba(255,255,255,.25)}
+footer a:hover{color:var(--pink-soft)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.reveal{opacity:1!important;transform:none!important}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:760px){
+  :root{--sub:18px;--num:28px}
+  .wrap{padding-left:20px;padding-right:20px}
+  .rubric{flex-direction:column;gap:6px}
+  .dgrid .dh,.dgrid .dcol{grid-column:1 / -1}
+  .dark{padding-top:44px;padding-bottom:44px}
+  .task summary{grid-template-columns:42px 1fr 22px;gap:10px;padding-top:20px;padding-bottom:20px}
+  .scheme{grid-template-columns:1fr}
+  .scheme dt{padding-bottom:2px;border-bottom:none;padding-top:14px}
+  .scheme dd{padding-top:0}
+  .promptbox{padding:20px}
+  .btn{width:100%;justify-content:center}
+  .rules li{grid-template-columns:42px 1fr;gap:10px}
+  .steps li{grid-template-columns:36px 1fr}
+}
+@media print{
+  .reveal{opacity:1;transform:none}
+  details .body{display:block}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="rubric"><span>Нейро-архитектор</span><span class="r2">Модуль 4 · бонусный набор</span></div>
+  <div class="kmark"><span class="kn">+</span><span class="kt">Свой штат агентов · 20 сценариев</span></div>
+  <div class="hero">
+    <h1>20 агентных сценариев для&nbsp;<span class="it">работы, блога и&nbsp;жизни</span></h1>
+    <p class="hlead">Выберите задачу, которая надоела больше всего, скопируйте промпт и подставьте своё в квадратные скобки.</p>
+  </div>
+</header>
+
+<main>
+<section class="wrap lede">
+  <p>В уроках модуля 4 вы дали агенту доступ к своим папкам, собрали опорные файлы и поставили первую задачу на поток. Дальше обычно возникает вопрос: что ещё ему можно поручить? Здесь 20 ответов в 3 группах – работа, блог и контент, жизнь и дом.</p>
+  <p>Рабочие и блоговые сценарии взяты из уроков модуля и из официальных примеров OpenAI и Anthropic, которые мы разбирали в бонусах. Домашние собраны на тех же простых возможностях – папке на компьютере, Google Диске и календаре, – новых подключений для них не нужно.</p>
+  <p>Каждый сценарий разложен по одной схеме: откуда агент берёт, что делает, куда и когда приносит, как запускается и где остаётся ваш контроль. Под схемой – готовый промпт. Замените всё в квадратных скобках на своё и вставьте в чат. Перед первым запуском загляните в <a href="#pravila">правила для любого сценария</a> в конце страницы – это 2 минуты.</p>
+</section>
+
+<div class="dark">
+  <div class="wrap dgrid">
+    <div class="dh">
+      <p class="label">С чего начать</p>
+      <h2>Как выбрать первый сценарий</h2>
+    </div>
+    <div class="dcol">
+      <p><b>Начните с одного сценария, который снимает самую нудную задачу.</b> Ту, что вы откладываете, делаете через силу или каждый раз начинаете с чистого листа. На ней быстрее всего видна польза, и на ней проще всего научиться.</p>
+      <ol class="steps">
+        <li><span class="stepn">1</span><span>Запустите сценарий один раз по просьбе и на черновиках: агент готовит, вы проверяете.</span></li>
+        <li><span class="stepn">2</span><span>Всё, что не понравилось, попросите записать правилом: куда сохранять, в каком формате, что не трогать.</span></li>
+        <li><span class="stepn">3</span><span>Когда результат устраивает, ставьте задачу на расписание. Следующий сценарий добавляйте, когда первый заработал.</span></li>
+      </ol>
+      <p>Своей задачи в списке не нашли – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-idei-dlya-agentov/" target="_top">«Как находить идеи для агентов»</a> есть промпт, который изучит вашу систему и предложит 5 сценариев под вас.</p>
+    </div>
+  </div>
+</div>
+
+<section class="wrap block">
+  <p class="label">Как пользоваться списком</p>
+  <h2>Что значат пометки у&nbsp;сценария</h2>
+  <p>Под названием каждого сценария стоят пометки: что нужно подключить, как он запускается и нужен ли включённый компьютер.</p>
+  <ul class="dash">
+    <li><b>Папка</b> – агент работает с папкой на компьютере: в Codex или в Claude на компьютере, как в уроках 1–4.</li>
+    <li><b>Google Диск, Gmail, Календарь</b> – нужно подключение: плагин в ChatGPT (на платных тарифах, начиная с Plus) или коннектор в Claude. Как подключить – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-konnektory/" target="_top">«Откуда агент берёт и куда приносит»</a>. В ChatGPT плагин зовут в запросе через «@», в Claude просто пишите словами: «посмотри мою почту в Gmail».</li>
+    <li><b>Браузер</b> – агент сам нажимает кнопки в Google Chrome через расширение ChatGPT, как в уроке 4.</li>
+    <li><b>По просьбе</b> или <b>по расписанию</b> – как запускается задача.</li>
+    <li><b>Компьютер включён</b> – задача выполняется, пока компьютер не спит и приложение запущено.</li>
+    <li><b>В облаке – без компьютера</b> – сценарий может работать, когда компьютер выключен. Для этого задачу создают в ChatGPT в облаке, а файлы держат на Google Диске. Как настроить – в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-oblachnye-agenty/" target="_top">«Агент с телефона и в облаке»</a>.</li>
+  </ul>
+  <p class="plate"><b>Telegram и сервисы Яндекса.</b> Официальных подключений к ним нет ни в ChatGPT, ни в Claude. Готовое в Telegram присылает только ваш бот-курьер из урока 3 – он работает с компьютера. Яндекс Формы в сценарии 16 агент заполняет в вашем браузере, как человек.</p>
+
+  <nav class="nav" aria-label="Разделы">
+    <a class="navlink" href="#rabota">Работа · 01–10</a>
+    <a class="navlink" href="#blog">Блог и контент · 11–16</a>
+    <a class="navlink" href="#zhizn">Жизнь и дом · 17–20</a>
+    <a class="navlink" href="#pravila">Правила для любого сценария</a>
+  </nav>
+
+  <!-- ============ РАБОТА ============ -->
+  <section class="group reveal" id="rabota">
+    <div class="ghead"><p class="glabel">Работа: встречи, почта, документы</p><span class="grange">01 – 10</span></div>
+    <p class="plate"><b>Про клиентские данные.</b> Договоры, суммы и данные клиентов отдавайте агенту, только если ваша работа это позволяет. Для первой пробы возьмите учебную или обезличенную копию папки: имена можно заменить, а потом вернуть.</p>
+
+    <details class="task" id="s01">
+      <summary><span class="num">01</span><span class="tname"><span class="ttitle">Порядок в «Загрузках» по расписанию</span><span class="twhen"><b>Что получите:</b> загрузки разбираются сами, файлы лежат в своих проектах, а всё спорное ждёт вас в одной папке «На разбор».</span><span class="chips"><span class="chip">Папка</span><span class="chip">По расписанию</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Папка «Загрузки» или любая другая, где копятся файлы, ваша «Моя система с ЧатГПТ» и инструкция разбора, которую агент написал себе в уроке 1.</dd>
+          <dt>Что делает</dt><dd>Раскладывает по проектам то, что уверенно распознал. Спорное оставляет в «На разбор» прямо в загрузках, а дубли и временные файлы собирает в отдельную папку на проверку.</dd>
+          <dt>Куда и когда приносит</dt><dd>Файлы – в папки вашей системы, короткий отчёт – в чат: что куда переложено и что ждёт вашего решения. Раз в неделю или раз в месяц – как договоритесь.</dd>
+          <dt>Как запускается</dt><dd>По расписанию. В любой момент можно и попросить: «Наведи порядок в загрузках».</dd>
+          <dt>Где ваш контроль</dt><dd>Агент ничего не удаляет. Папку «На разбор» и дубли разбираете вы и сами решаете, что удалить.</dd>
+          <dt>Что подключить</dt><dd>Проект «Хранитель порядка» в Codex с доступом к «Загрузкам» и вашей системе. Задача работает, пока компьютер включён и приложение ChatGPT запущено.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Настрой регулярную задачу: <span class="tok">[раз в неделю, по пятницам в 18:00]</span> наводи порядок в папке <span class="tok">[«Загрузки»]</span> по нашей инструкции разбора.
+
+При каждом запуске:
+1) файлы, которые уверенно относятся к проекту, перекладывай в нужную папку моей системы <span class="tok">[«Моя система с ЧатГПТ»]</span>;
+2) всё спорное оставляй в «На разбор» прямо в загрузках, в систему не переноси;
+3) точные дубли, установщики и временные файлы складывай в отдельную папку <span class="tok">[«На разбор / Можно удалить»]</span> – удалять буду я;
+4) в конце пришли короткий отчёт: что куда переложено и что ждёт моего решения.
+
+Ничего не удаляй без меня. Если доступа к папке нет – сообщи об ошибке, не говори, что всё сделано.
+Сначала расскажи, как это будет работать, и создай задачу только после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Подсказка.</b> Инструкции разбора ещё нет – начните с <a href="https://aiforlife.ru/ii-course/modul4/urok1/" target="_top">урока 1</a>: агент сам напишет её, когда построит вашу систему папок.</p>
+      </div>
+    </details>
+
+    <details class="task" id="s02">
+      <summary><span class="num">02</span><span class="tname"><span class="ttitle">Сводка дня: почта и встречи</span><span class="twhen"><b>Что получите:</b> каждое утро короткий список – важные письма за сутки, встречи на сегодня и к чему из этого нужно подготовиться.</span><span class="chips"><span class="chip">Gmail</span><span class="chip">Календарь</span><span class="chip">По расписанию</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Почта Gmail за последние сутки и Google Календарь на сегодня.</dd>
+          <dt>Что делает</dt><dd>Отбирает важные письма, собирает встречи дня и отмечает, что из этого требует вашей подготовки или ответа.</dd>
+          <dt>Куда и когда приносит</dt><dd>Сводку – в чат задачи по расписанию, каждое утро в названное вами время. В ChatGPT такие задачи лежат слева в разделе Scheduled («Запланировано»).</dd>
+          <dt>Как запускается</dt><dd>По расписанию, каждое утро.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент только читает: ничего не отправляет, не архивирует и не меняет в календаре.</dd>
+          <dt>Что подключить</dt><dd>Gmail и Google Calendar – плагины в ChatGPT или коннекторы в Claude. Чтобы сводка приходила при выключенном компьютере, создайте задачу в ChatGPT в облаке – на chatgpt.com в браузере.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Каждое утро в <span class="tok">[8:30]</span> присылай мне сводку дня. Используй @Gmail и @Google Calendar.
+
+В сводке:
+1) важные письма за последние сутки – от кого и о чём, одной строкой; важное для меня – <span class="tok">[письма клиентов, оплаты, договоры]</span>;
+2) встречи на сегодня – время, с кем, о чём;
+3) что из этого требует моей подготовки или ответа сегодня.
+Коротко, списком. Рассылки и уведомления не пересказывай.
+
+Ничего не отправляй, не архивируй, не удаляй и не меняй в календаре – только читай.
+Сделай это задачей по расписанию. Сначала покажи, как будет выглядеть задача, и создай её после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s03">
+      <summary><span class="num">03</span><span class="tname"><span class="ttitle">Бриф к встречам на день</span><span class="twhen"><b>Что получите:</b> к началу рабочего дня по каждой встрече – с кем, о чём, что обсуждали раньше и что подготовить.</span><span class="chips"><span class="chip">Календарь</span><span class="chip">Gmail</span><span class="chip">По расписанию</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Google Календарь – встречи на сегодня, Gmail – письма, связанные с этими встречами.</dd>
+          <dt>Что делает</dt><dd>Для каждой встречи собирает короткий бриф: с кем, о чём, что обсуждали раньше, какие вопросы остались открытыми, что вам подготовить.</dd>
+          <dt>Куда и когда приносит</dt><dd>В чат задачи, каждый будний день в 9:00. С таким черновиком удобно садиться за подготовку за час до встречи.</dd>
+          <dt>Как запускается</dt><dd>По расписанию, по будням.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент ничего не отправляет и не меняет. Что из брифа взять на встречу, решаете вы.</dd>
+          <dt>Что подключить</dt><dd>Google Calendar и Gmail. Задача в облаке ChatGPT выполняется и при выключенном компьютере.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Используя @Google Calendar, посмотри мои сегодняшние встречи и найди связанные с ними письма в @Gmail.
+
+Для каждой встречи подготовь короткий бриф:
+– с кем встреча и о чём;
+– что мы обсуждали раньше – по письмам;
+– какие вопросы остались открытыми;
+– что мне подготовить к встрече.
+Если по встрече писем нет – так и напиши, не додумывай. <span class="tok">[Личные события пропускай.]</span>
+
+Ничего не отправляй и не меняй.
+Сделай это задачей по расписанию: каждый будний день в 9:00. Сначала покажи, как будет выглядеть задача, и создай её после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s04">
+      <summary><span class="num">04</span><span class="tname"><span class="ttitle">Разбор почты с черновиками ответов</span><span class="twhen"><b>Что получите:</b> письма за сутки разложены на «ответить», «прочитать» и «можно архивировать», а для писем, где нужен ответ, уже готовы черновики.</span><span class="chips"><span class="chip">Gmail</span><span class="chip">По просьбе</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Gmail – письма за последние сутки.</dd>
+          <dt>Что делает</dt><dd>Делит письма на 3 группы и готовит черновики ответов там, где ответ нужен. Где требуется ваше решение – цена, срок, согласие, – ставит пометку и не отвечает за вас.</dd>
+          <dt>Куда и когда приносит</dt><dd>План разбора – в чат, черновики ответов – в вашу почту. Когда попросите.</dd>
+          <dt>Как запускается</dt><dd>По просьбе. Когда разбор вам понравится, его можно поставить на расписание, например на каждое утро.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент ничего не отправляет, не архивирует и не удаляет без вашего подтверждения. Каждый черновик вы читаете и отправляете сами.</dd>
+          <dt>Что подключить</dt><dd>Gmail. Outlook тоже есть в каталогах подключений. Яндекс Почты среди официальных подключений нет – выручает пересылка писем из Яндекса в Gmail.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Посмотри мою почту в @Gmail за последние сутки.
+
+Раздели письма на 3 группы:
+1) нужно ответить;
+2) нужно прочитать;
+3) можно архивировать.
+Для каждого письма – одна строка: от кого, о чём, почему в этой группе.
+
+Для писем из первой группы подготовь черновики ответов. Пиши <span class="tok">[коротко, тепло, на «вы»]</span> и опирайся только на то, что есть в переписке. Где нужно моё решение – цена, срок, согласие, – поставь пометку «нужно моё решение» и не отвечай за меня.
+
+Ничего не отправляй, не архивируй и не удаляй без моего подтверждения.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s05">
+      <summary><span class="num">05</span><span class="tname"><span class="ttitle">Из письма – в календарь</span><span class="twhen"><b>Что получите:</b> встречи, о которых договорились в переписке за неделю, – готовыми событиями, которые остаётся только подтвердить.</span><span class="chips"><span class="chip">Gmail</span><span class="chip">Календарь</span><span class="chip">По просьбе</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Gmail – письма за неделю, где договаривались о встречах.</dd>
+          <dt>Что делает</dt><dd>Находит договорённости и предлагает события: название, дата, время, участники и письмо, из которого это взято.</dd>
+          <dt>Куда и когда приносит</dt><dd>Сначала список – в чат. После вашего подтверждения – события в Google Календарь. Когда попросите, например в конце недели.</dd>
+          <dt>Как запускается</dt><dd>По просьбе.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент показывает каждое событие, прежде чем создать, а участников без вашего слова не приглашает – это записано в промпте.</dd>
+          <dt>Что подключить</dt><dd>Gmail и Google Calendar.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Найди в @Gmail письма за эту неделю, где договаривались о встречах и созвонах.
+
+Предложи события для @Google Calendar. Для каждого: название, дата, время, участники и письмо, из которого это взято. Если дата или время в переписке не согласованы окончательно – отметь «не подтверждено» и не выбирай сам. Мой часовой пояс: <span class="tok">[московское время]</span>.
+
+Покажи мне всё, прежде чем создавать событие. Создавай только те события, которые я подтвержу. Участников не приглашай и писем не отправляй без моего отдельного согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s06">
+      <summary><span class="num">06</span><span class="tname"><span class="ttitle">Еженедельный отчёт из таблицы</span><span class="twhen"><b>Что получите:</b> каждую пятницу документ – что изменилось в таблице за неделю, какие цифры выросли или упали и на что обратить внимание.</span><span class="chips"><span class="chip">Google Диск</span><span class="chip">По расписанию</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Таблица на Google Диске, которую вы ведёте: заявки, продажи, бюджет проекта, статистика.</dd>
+          <dt>Что делает</dt><dd>Пишет короткий отчёт за неделю: что изменилось, какие цифры выросли или упали, на что обратить внимание.</dd>
+          <dt>Куда и когда приносит</dt><dd>Документом в папку на Google Диске, каждую пятницу.</dd>
+          <dt>Как запускается</dt><dd>По расписанию.</dd>
+          <dt>Где ваш контроль</dt><dd>Таблицу агент не меняет. Цифры и выводы вы проверяете: в длинных подсчётах нейросеть может ошибиться, поэтому расчёты она показывает целиком.</dd>
+          <dt>Что подключить</dt><dd>Google Диск – плагин Google Drive в ChatGPT или коннектор в Claude. В облаке ChatGPT задача идёт и при выключенном компьютере.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Каждую пятницу в <span class="tok">[17:00]</span> открывай таблицу <span class="tok">[название]</span> на Google Диске и готовь короткий отчёт за неделю:
+1) что изменилось за неделю;
+2) какие цифры выросли или упали – с самими цифрами и разницей;
+3) на что мне обратить внимание: <span class="tok">[например, заявки без ответа, просроченные оплаты]</span>.
+Все расчёты показывай, чтобы я мог(ла) их проверить. Если данных за неделю нет или таблица не открывается – так и напиши, не додумывай.
+
+Сохрани отчёт документом «Отчёт за неделю – <span class="tok">[дата]</span>» в папку <span class="tok">[название]</span> на Google Диске и дай ссылку.
+Таблицу не меняй. Ничего не удаляй.
+Сделай это задачей по расписанию. Сначала покажи, как будет выглядеть задача, и создай её после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Подсказка.</b> Для этого сценария нужно именно подключение Google Диска. Агент на компьютере Google Таблицы не прочитает: в синхронизированной папке они лежат ярлыками без содержимого.</p>
+      </div>
+    </details>
+
+    <details class="task" id="s07">
+      <summary><span class="num">07</span><span class="tname"><span class="ttitle">Карточки участников и подборка кейсов из расшифровок встреч</span><span class="twhen"><b>Что получите:</b> живую карточку на каждого клиента или участника группы – с чем пришёл, что получилось, его слова – и подборку кейсов, когда она понадобится.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По расписанию</span><span class="chip">По просьбе</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Папка с расшифровками встреч и таблица посещаемости. Расшифровки Zoom в формате VTT особенно удобны: в них текст разделён по спикерам.</dd>
+          <dt>Что делает</dt><dd>После каждой новой встречи отмечает посещаемость и обновляет карточку каждого участника: с чем пришёл, запросы, результаты, мысли и идеи, цитаты с пометкой, на какой встрече это сказано. По просьбе собирает подборку кейсов: было – стало – цитата – источник.</dd>
+          <dt>Куда и когда приносит</dt><dd>Карточки и подборку – в папку проекта. Карточки обновляются после каждой встречи, подборка – когда вы её попросите.</dd>
+          <dt>Как запускается</dt><dd>По расписанию. Запуска «как только в папке появился файл» для папки на компьютере нет, поэтому агент проверяет её, например, раз в час или раз в день. Подборку кейсов – по просьбе.</dd>
+          <dt>Где ваш контроль</dt><dd>Цитаты только слово в слово. Подборку вы перепроверяете глазами и согласуете с участниками, прежде чем где-то показывать.</dd>
+          <dt>Что подключить</dt><dd>Папка на компьютере, удобнее – отдельный проект с доступом к ней. Работает, пока компьютер включён.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт · карточки после каждой встречи</p><pre>Когда в папке <span class="tok">[название]</span> появляется новая расшифровка встречи, делай так:
+1) отметь посещаемость в таблице <span class="tok">[название]</span>;
+2) создай или обнови карточку каждого участника в папке <span class="tok">[«Карточки»]</span>: с чем пришёл, запросы, результаты, мысли и идеи, цитаты – с пометкой, на какой встрече это сказано.
+
+Цитаты не перевирай, только слово в слово. Слова ведущего не приписывай участникам. Если не уверен, кто говорит, – отметь это и не угадывай.
+Ничего не удаляй из карточек: новое дописывай.
+Если сразу при появлении файла запускаться не получится, предложи, как часто проверять папку. Веди список обработанных расшифровок, чтобы не брать их повторно. Создай задачу только после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Промпт · подборка кейсов</p><pre>Открой папку <span class="tok">[«Карточки»]</span>. Посмотри, у кого из участников есть твёрдые результаты, и сохрани подборку кейсов в ту же папку: было – стало – цитата – источник.
+
+Цитаты не перевирай, только слово в слово. Ничего не публикуй и никому не отправляй: подборку я проверю и согласую с участниками сам(а).</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s08">
+      <summary><span class="num">08</span><span class="tname"><span class="ttitle">Коммерческое предложение и смета по брифам</span><span class="twhen"><b>Что получите:</b> черновик КП и заготовку сметы по каждому брифу – по вашей логике и оформлению, чтобы не садиться за белый лист.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По просьбе</span><span class="chip">По расписанию</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Папка с брифами и ваша инструкция по КП из «Помощников и навыков». Для расчёта цен – файл или папка с вашим прайсом.</dd>
+          <dt>Что делает</dt><dd>По каждому брифу собирает коммерческое предложение и смету по вашей инструкции и показывает, как считал.</dd>
+          <dt>Куда и когда приносит</dt><dd>Черновики – в папку проекта, каждое КП отдельным файлом. Когда попросите или когда пришёл новый бриф.</dd>
+          <dt>Как запускается</dt><dd>По просьбе. Если брифы приходят регулярно – по расписанию: триггера «появился новый бриф» для папки на компьютере нет, зато агент может проверять папку каждый час в рабочее время. На некоторых тарифах число регулярных задач ограничено.</dd>
+          <dt>Где ваш контроль</dt><dd>Цены, суммы и сроки вы пересчитываете руками. Клиенту отправляете сами.</dd>
+          <dt>Что подключить</dt><dd>Папки на компьютере – с брифами, инструкцией и ценами. Для постоянной работы заведите отдельный проект, например «Коммерческие предложения», и подключите к нему эти папки заранее. Работает, пока компьютер включён.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт · черновики КП</p><pre>Открой папку <span class="tok">[с брифами]</span>. Там <span class="tok">[сколько]</span> брифов от <span class="tok">[кого]</span>. Собери по каждому коммерческое предложение и смету по моей инструкции из папки <span class="tok">[«Помощники и навыки»]</span>.
+
+Цены бери только из <span class="tok">[файла или папки с моим прайсом]</span>. Если цены для какой-то позиции нет – оставь пустую ячейку с пометкой «цену указать» и не придумывай.
+Покажи расчёт сметы целиком, чтобы я мог(ла) его проверить.
+Сохрани черновики в папку <span class="tok">[название]</span> – каждое КП отдельным файлом <span class="tok">[в формате Word]</span>.
+
+Ничего не отправляй клиенту. Брифы не меняй и не удаляй.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Промпт · поставить на поток</p><pre>Хочу, чтобы в рабочее время с <span class="tok">[9:00]</span> до <span class="tok">[17:00]</span> ты раз в час проверял папку <span class="tok">[с брифами]</span> и по каждому новому брифу готовил черновик КП и сметы так же, как сейчас. Обработанные брифы записывай в список, чтобы не брать их повторно.
+Ничего не отправляй. Покажи, как будет настроена задача, и создай её только после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Инструкции по КП ещё нет?</b> Приложите 2–3 предложения, которые вам нравятся, и попросите: «Выдели из них инструкцию, по которой ты будешь собирать мои КП: логика, структура, как считается стоимость, правила оформления. Сохрани её в папку „Помощники и навыки“».</p>
+      </div>
+    </details>
+
+    <details class="task" id="s09">
+      <summary><span class="num">09</span><span class="tname"><span class="ttitle">Сверка оплат, черновики актов и напоминаний</span><span class="twhen"><b>Что получите:</b> сводку «кто оплатил, где просрочка», черновики актов и счетов по вашим шаблонам и вежливые напоминания тем, кто задержал оплату.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По расписанию</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Папка с выпиской, реестром договоров и оплат, шаблонами документов, реквизитами и заметками о сданных работах.</dd>
+          <dt>Что делает</dt><dd>Сверяет таблицу оплат с выпиской и заметками, отмечает, кто оплатил и где просрочка, готовит черновики актов и счетов по шаблонам с номерами по порядку и пишет короткие напоминания.</dd>
+          <dt>Куда и когда приносит</dt><dd>Черновики – в папку на проверку, сводку – в чат. Например, каждую пятницу в 18:00.</dd>
+          <dt>Как запускается</dt><dd>Первый раз – по просьбе, потом по расписанию.</dd>
+          <dt>Где ваш контроль</dt><dd>Клиентам без вас ничего не уходит. Суммы, номера и адресатов вы проверяете глазами. Поступления, которые непонятно к кому относятся, агент сам не привязывает и показывает вам.</dd>
+          <dt>Что подключить</dt><dd>Папка на компьютере. Работает, пока компьютер включён. Пароли от банка и данные карт в эту папку не кладите – для сверки хватит выписки.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт · сверка</p><pre>Открой папку <span class="tok">[название]</span>. Сверь таблицу оплат <span class="tok">[название]</span> с выпиской и с заметками о сданных работах. Отметь, кто оплатил и где просрочка.
+Подготовь акты и счета там, где пора, по шаблонам из папки, номера – по порядку.
+Клиентам с просрочкой напиши короткие вежливые напоминания <span class="tok">[на «вы», без давления]</span>.
+Все черновики сохрани в папку <span class="tok">[«Документы на проверку»]</span>, а мне пришли сводку: кто оплатил, где просрочка, какие документы готовы.
+
+Пока ничего не отправляй. Если непонятно, к кому относится поступление, не привязывай сам – покажи мне. Выписку не меняй, ничего не удаляй.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <div class="promptbox"><p class="plabel">Промпт · сделать регулярным</p><pre>Хочу повторять эту сверку регулярно: <span class="tok">[каждую пятницу в 18:00]</span>. Сверяй оплаты, готовь черновики актов, счетов и напоминаний – и присылай мне сводку.
+Ничего не отправляй клиентам без меня. Покажи, как будет настроена задача, и создай её только после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s10">
+      <summary><span class="num">10</span><span class="tname"><span class="ttitle">Агент «Аудитория»: обновлённая карта клиентов</span><span class="twhen"><b>Что получите:</b> свежую карту аудитории – какие запросы появились, какие сегменты стали заметнее или слабее и где ваши представления расходятся с реальностью.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По просьбе</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Изнутри – из папки проекта: заявки, клиенты, расшифровки встреч, анкеты и текущая карта аудитории. Снаружи – из интернета: сайты, форумы и соцсети, которые вы назовёте.</dd>
+          <dt>Что делает</dt><dd>Сравнивает свежие заявки и внешние сигналы с прошлым исследованием, обновляет карту – сегменты, боли, запросы – и пишет выводы. Для внешнего поиска может подключить отдельного агента-разведчика.</dd>
+          <dt>Куда и когда приносит</dt><dd>Обновлённую карту и выводы – в папку проекта. Их удобно взять на встречу, где вы решаете про продукты, цены и стратегию.</dd>
+          <dt>Как запускается</dt><dd>По просьбе. Как часто обновлять, зависит от сезонности вашего дела.</dd>
+          <dt>Где ваш контроль</dt><dd>Каждый вывод из внешних источников – со ссылкой. Если данных мало, агент так и говорит. Решения о продуктах и ценах принимаете вы.</dd>
+          <dt>Что подключить</dt><dd>Папка на компьютере – удобно сделать отдельный проект «Исследование аудитории» – и разрешение агенту выходить в интернет. В уроке 4 такой агент работает в Claude, в Codex всё устроено так же.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Обнови карту аудитории в папке <span class="tok">[«Исследование аудитории»]</span>: последнее исследование мы делали в <span class="tok">[марте]</span>.
+1) Посмотри наши заявки и клиентов за это время: <span class="tok">[папка или файл]</span>.
+2) Сходи во внешние источники: <span class="tok">[какие сайты, форумы, соцсети]</span>.
+3) Скажи, что изменилось: какие запросы появились, какие сегменты стали заметнее или слабее, где наши представления расходятся с реальностью, где запрос в аудитории есть, а заявок нет.
+
+Каждый вывод из внешних источников подкрепляй ссылкой. Если данных мало, так и скажи – не додумывай.
+Сохрани обновлённую карту новым файлом с датой, прежнюю не трогай. Ничего не удаляй.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Дальше.</b> Гипотезы из карты удобно проверить на живых людях. Анкету агент подготовит сам, а собрать её в Яндекс Формах поможет <a href="#s16">сценарий 16</a>.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ БЛОГ ============ -->
+  <section class="group reveal" id="blog">
+    <div class="ghead"><p class="glabel">Блог и контент</p><span class="grange">11 – 16</span></div>
+    <p class="plate"><b>Само ничего не публикуется.</b> Во всех сценариях агент готовит черновики, а публикуете вы. Правила блога – голос, описание, рубрики, банк идей – агент берёт из папки «Блог». Если её ещё нет, начните с материала набора <a href="https://aiforlife.ru/ii-course/modul4/shtat-agentov/#sistema" target="_top">«Контент-система для агента»</a>.</p>
+
+    <details class="task" id="s11">
+      <summary><span class="num">11</span><span class="tname"><span class="ttitle">Неделя блога из расшифровок – с доставкой в Telegram или на почту</span><span class="twhen"><b>Что получите:</b> по понедельникам пакет черновиков из новых эфиров и встреч – посты, статья, сценарии видео – и план публикаций на неделю.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По расписанию</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Папка «Блог / Расшифровки» – расшифровки эфиров и встреч текстом – и правила блога: голос, описание, дизайн-код.</dd>
+          <dt>Что делает</dt><dd>Берёт только новые расшифровки, раскладывает работу на роли – аналитик источников, редакторы, дизайнер – и готовит пакет и план публикаций: что, где, в какой день и с каким призывом к действию. Проверяет факты и повторы.</dd>
+          <dt>Куда и когда приносит</dt><dd>В папку «Блог / Черновики», по понедельникам в 14:00 – к моменту, когда вы садитесь за блог. По желанию посты приходят в Telegram через бота-курьера, а статья – на почту.</dd>
+          <dt>Как запускается</dt><dd>По расписанию. Если новых расшифровок нет, агент ничего не создаёт и коротко сообщает об этом.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент ничего не публикует. Факты, цитаты и истории сверены с расшифровками, а всё, что требует вашего решения, вынесено отдельным списком.</dd>
+          <dt>Что подключить</dt><dd>Папка на компьютере и 3 навыка из бонуса «Навыки контент-агента». Telegram – только через своего бота-курьера из урока 3. Задача работает, пока компьютер включён.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Используй навык nedelya-bloga. Хочу получать контент на неделю по <span class="tok">[понедельникам]</span> в <span class="tok">[14:00]</span> по московскому времени.
+
+Расшифровки – в папке <span class="tok">[«Блог / Расшифровки»]</span>, черновики – в папку <span class="tok">[«Блог / Черновики»]</span>.
+Мне нужны: <span class="tok">[3 поста для Telegram, экспертная статья на сайт и 2 сценария коротких видео]</span> и план публикаций на неделю.
+Бери только новые расшифровки. Сохраняй мой голос, не придумывай факты и не повторяй одно и то же в разных материалах.
+Доставка: <span class="tok">[результат оставляй в папке / посты присылай через моего бота-курьера в Telegram / статью – на почту]</span>.
+
+Ничего не публикуй и не удаляй. Покажи, как будет настроена задача, и создай её только после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Подсказка.</b> Навыков ещё нет – скачайте их в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-navyki-agenta/" target="_top">«Навыки контент-агента»</a>. Токен бота в чат не пишите: агент сам покажет, куда его безопасно вставить.</p>
+      </div>
+    </details>
+
+    <details class="task" id="s12">
+      <summary><span class="num">12</span><span class="tname"><span class="ttitle">Переупаковка длинного материала в посты</span><span class="twhen"><b>Что получите:</b> из одной статьи, гайда или лекции – серию постов с разными опорными мыслями, чтобы материал жил дольше одного дня.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По просьбе</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Длинный материал текстом – статья, гайд, конспект урока, расшифровка вебинара – и правила блога из папки «Блог».</dd>
+          <dt>Что делает</dt><dd>Делит материал на самостоятельные мысли, для каждого поста берёт свою опорную историю или пример, пишет вашим голосом и проверяет, что посты не повторяют друг друга.</dd>
+          <dt>Куда и когда приносит</dt><dd>Сначала план постов – в чат. После вашего согласия каждый пост – отдельным файлом в «Блог / Черновики».</dd>
+          <dt>Как запускается</dt><dd>По просьбе, когда вышел или накопился длинный материал.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент берёт только то, что есть в материале, и новых фактов не добавляет. Что и когда публиковать, решаете вы.</dd>
+          <dt>Что подключить</dt><dd>Папка «Блог» на компьютере. Если держите её на Google Диске, сценарий работает и в ChatGPT в облаке.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Возьми материал <span class="tok">[название файла]</span> из папки <span class="tok">[«Блог / Длинные материалы»]</span> и переупакуй его в <span class="tok">[5]</span> постов для <span class="tok">[Telegram-канала]</span>. Опирайся на мои правила блога из папки <span class="tok">[«Блог»]</span>: голос, описание, рубрики.
+
+Для каждого поста:
+– одна самостоятельная мысль из материала;
+– своя опорная история или пример, без повторов между постами;
+– мой голос и длина <span class="tok">[до 1500 знаков]</span>;
+– в конце <span class="tok">[вопрос к читателю / ссылка на полный материал]</span>.
+Бери только то, что есть в материале, ничего не добавляй ради красоты.
+
+Сначала покажи план: какие мысли пойдут в какие посты. После моего согласия сохрани каждый пост отдельным файлом в <span class="tok">[«Блог / Черновики»]</span>. Ничего не публикуй и не удаляй.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s13">
+      <summary><span class="num">13</span><span class="tname"><span class="ttitle">Темы на неделю из банка идей</span><span class="twhen"><b>Что получите:</b> 5–7 тем на неделю из вашего же банка идей – с подачей, площадкой и днём выхода, – чтобы не начинать с вопроса «о чём писать».</span><span class="chips"><span class="chip">Папка</span><span class="chip">По расписанию</span><span class="chip">По просьбе</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Банк идей, рубрики, цели и контент-план из папки «Блог» и то, что уже вышло.</dd>
+          <dt>Что делает</dt><dd>Подбирает темы под цели и рубрики, следит, чтобы они не повторяли вышедшее, и предлагает для каждой подачу, формат, площадку и день.</dd>
+          <dt>Куда и когда приносит</dt><dd>Файлом в «Блог / Контент-план» – накануне дня, когда вы планируете блог.</dd>
+          <dt>Как запускается</dt><dd>По просьбе, а когда подборка вас устроит, – по расписанию раз в неделю.</dd>
+          <dt>Где ваш контроль</dt><dd>Темы выбираете вы. Банк идей агент не меняет: устаревшие идеи только отмечает, а решение за вами.</dd>
+          <dt>Что подключить</dt><dd>Папка «Блог» на компьютере. Если она на Google Диске, задачу можно поставить в облаке ChatGPT.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Открой банк идей и контент-план в папке <span class="tok">[«Блог»]</span>. Посмотри цели блога и рубрики, а ещё то, что уже вышло за последние <span class="tok">[4 недели]</span>.
+
+Подбери <span class="tok">[5–7]</span> тем на следующую неделю:
+– по каждой рубрике хотя бы одну, если в банке есть подходящие идеи;
+– без повторов того, что уже выходило;
+– для каждой темы: подача одной фразой, формат <span class="tok">[пост, карусель, видео]</span>, площадка и день.
+Отдельно отметь идеи, которые лежат в банке давно и, возможно, потеряли актуальность, – решу я.
+
+Сохрани подборку файлом «Темы на неделю – <span class="tok">[дата]</span>» в папку <span class="tok">[«Блог / Контент-план»]</span>. Банк идей не меняй и ничего из него не удаляй.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Поставить на поток.</b> Подборка понравилась – допишите: «Делай это каждую [пятницу] в [16:00]. Покажи, как будет настроена задача, и создай её после моего согласия».</p>
+      </div>
+    </details>
+
+    <details class="task" id="s14">
+      <summary><span class="num">14</span><span class="tname"><span class="ttitle">Ответы на частые вопросы подписчиков</span><span class="twhen"><b>Что получите:</b> вопросы из комментариев, собранные в группы, черновики ответов вашим голосом и темы, которые просятся в отдельный пост.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По просьбе</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Комментарии и вопросы, которые вы сами скопировали в файл «Блог / Вопросы подписчиков», и ваши материалы: посты, статьи, описание продуктов.</dd>
+          <dt>Что делает</dt><dd>Группирует похожие вопросы, показывает, какие повторяются чаще, и готовит черновики ответов только по вашим материалам. Где ответа в материалах нет – отмечает.</dd>
+          <dt>Куда и когда приносит</dt><dd>Файлом в «Блог / Черновики» – когда накопились вопросы, например раз в неделю.</dd>
+          <dt>Как запускается</dt><dd>По просьбе. Комментарии в файл копируете вы: подключения к соцсетям и Telegram в этом сценарии нет.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент никому не отвечает и ничего не публикует. Ответы вы проверяете и публикуете сами.</dd>
+          <dt>Что подключить</dt><dd>Папка «Блог» на компьютере или на Google Диске. Имена и ники подписчиков при копировании уберите.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Открой файл <span class="tok">[«Блог / Вопросы подписчиков»]</span> – там комментарии и вопросы из моего блога за <span class="tok">[период]</span>.
+
+1) Сгруппируй похожие вопросы и посчитай, сколько раз встречается каждая группа. Начни с самых частых.
+2) Для каждой группы подготовь черновик ответа моим голосом по правилам из папки <span class="tok">[«Блог»]</span>. Опирайся только на мои материалы: <span class="tok">[посты, статьи, описание продуктов – где лежат]</span>. Если ответа в материалах нет, напиши «нужен мой ответ» и не придумывай.
+3) Отметь 2–3 вопроса, из которых получится отдельный пост.
+
+Сохрани всё файлом «Ответы на частые вопросы – <span class="tok">[дата]</span>» в <span class="tok">[«Блог / Черновики»]</span>. Никому не отвечай и ничего не публикуй. Имена и ники людей в файл не переноси.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s15">
+      <summary><span class="num">15</span><span class="tname"><span class="ttitle">Конспекты из исходных материалов на Google Диске</span><span class="twhen"><b>Что получите:</b> по каждому новому материалу в папке – конспект с главной идеей, тезисами, примерами и практическим заданием, даже когда компьютер выключен.</span><span class="chips"><span class="chip">Google Диск</span><span class="chip">По расписанию</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Папка «Исходные материалы» на Google Диске: лекции, статьи, расшифровки – всё, что вы изучаете или из чего делаете свои материалы.</dd>
+          <dt>Что делает</dt><dd>Находит файлы, которые ещё не обрабатывал, и для каждого готовит краткий конспект: главная идея, ключевые тезисы, примеры применения и практическое задание. Ведёт список обработанных файлов.</dd>
+          <dt>Куда и когда приносит</dt><dd>В папку «Конспекты» на Google Диске, каждый будний день. В конце – сообщение со ссылками.</dd>
+          <dt>Как запускается</dt><dd>По расписанию. Запуска «как только на Диске появился файл» нет, поэтому папку агент проверяет по расписанию.</dd>
+          <dt>Где ваш контроль</dt><dd>Исходные файлы агент не меняет. Если доступа нет или сохранить не получилось, он сообщает об ошибке и не пишет «готово».</dd>
+          <dt>Что подключить</dt><dd>ChatGPT в режиме «Работа» (Work) с выполнением в облаке и плагин Google Drive. Задачу создавайте на chatgpt.com в браузере – тогда компьютер можно выключать.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Каждый будний день в <span class="tok">[10:00]</span> проверяй папку <span class="tok">[«Курс по ИИ / 01_Исходные материалы»]</span> на Google Диске.
+
+Найди файлы, которые ещё не обрабатывал. Для каждого нового файла подготовь краткий конспект: главная идея, ключевые тезисы, примеры применения и практическое задание. Конспект для <span class="tok">[меня / моих учеников]</span>.
+
+Сохрани результаты в папку <span class="tok">[«02_Конспекты»]</span>. Исходные файлы не изменяй и не удаляй. Веди список обработанных файлов, чтобы не брать их повторно.
+В конце сообщи, какие материалы обработаны, и приложи ссылки. Если доступа к папке или сохранения нет, сообщи об ошибке – не говори, что работа выполнена.
+Сделай это задачей по расписанию. Сначала покажи, как будет выглядеть задача, и создай её после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Подсказка.</b> Сначала проверьте подключение на тестовой папке с 1–2 неважными документами – как в бонусе <a href="https://aiforlife.ru/ii-course/modul4/bonus-oblachnye-agenty/" target="_top">«Агент с телефона и в облаке»</a>.</p>
+      </div>
+    </details>
+
+    <details class="task" id="s16">
+      <summary><span class="num">16</span><span class="tname"><span class="ttitle">Анкета для подписчиков и клиентов в Яндекс Формах</span><span class="twhen"><b>Что получите:</b> готовую анкету со ссылкой – агент сам собирает её в браузере, пока вы занимаетесь своими делами.</span><span class="chips"><span class="chip">Браузер</span><span class="chip">По просьбе</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Текст анкеты – ваш или подготовленный агентом «Аудитория» из сценария 10.</dd>
+          <dt>Что делает</dt><dd>Сам заполняет конструктор Яндекс Форм: название, вопросы, варианты ответов. Может настроить, чтобы следующий вопрос зависел от ответа, оформляет завершение и проверяет, как выглядит анкета.</dd>
+          <dt>Куда и когда приносит</dt><dd>Ссылку на готовую анкету – в чат, в уроке на это ушло около 10 минут. Чат сохраняется в ChatGPT, и ссылку всегда можно найти.</dd>
+          <dt>Как запускается</dt><dd>По просьбе: в Google Chrome через расширение ChatGPT, в режиме «Работа».</dd>
+          <dt>Где ваш контроль</dt><dd>Вы проверяете анкету, прежде чем разослать, и рассылаете ссылку сами. В аккаунт Яндекса входите сами, пароль в чат не пишите.</dd>
+          <dt>Что подключить</dt><dd>Google Chrome и расширение ChatGPT. Подключения к Яндексу здесь нет: агент работает в вашем браузере и нажимает кнопки, как человек. Работает, пока компьютер включён.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги заполнить анкету в Яндекс Формах. Вот текст анкеты:
+<span class="tok">[вставьте текст анкеты]</span>
+
+Название анкеты: <span class="tok">[название]</span>. Обязательные вопросы: <span class="tok">[какие]</span>.
+Когда закончишь, проверь, как она выглядит, и пришли мне ссылку.
+Ссылку никому не рассылай – это сделаю я. Если нужно войти в аккаунт, ввести пароль или что-то подтвердить – остановись и спроси меня.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Хотите научиться сами</b> – допишите: «Проведи меня пошагово: что нажимать и где, чтобы я мог(ла) повторить это руками». В браузер отдавайте задачи без конфиденциальных данных: собрать анкету можно, а ответы людей с личными данными при агенте лучше не открывать.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ ЖИЗНЬ ============ -->
+  <section class="group reveal" id="zhizn">
+    <div class="ghead"><p class="glabel">Жизнь и дом</p><span class="grange">17 – 20</span></div>
+    <p class="plate"><b>Дома – только то, что не жалко показать.</b> Эти сценарии работают на тех же возможностях, что и рабочие: папка «Дом» в вашей системе, Google Диск и календарь. Паспорта, полисы, медицинские документы, пароли и данные карт в папки агента не кладём. Детей и родных называйте ролями и возрастом: «младшая, 6 лет», «бабушка».</p>
+
+    <details class="task" id="s17">
+      <summary><span class="num">17</span><span class="tname"><span class="ttitle">Меню и список покупок на неделю</span><span class="twhen"><b>Что получите:</b> меню на неделю под вашу семью и бюджет и список покупок по отделам магазина – к выходным, когда вы планируете закупку.</span><span class="chips"><span class="chip">Папка или Google Диск</span><span class="chip">По расписанию</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Файл «Дом / Наша кухня»: кто что ест и не ест, сколько времени на готовку в будни, бюджет на продукты, любимые блюда. Плюс заметка «Что осталось», если вы её оставили.</dd>
+          <dt>Что делает</dt><dd>Составляет меню на неделю, где часть блюд готовится заранее или из остатков, и собирает список покупок по отделам.</dd>
+          <dt>Куда и когда приносит</dt><dd>Файлом в «Дом / Меню», раз в неделю в назначенное время. Если папка на Google Диске, список открывается с телефона прямо в магазине.</dd>
+          <dt>Как запускается</dt><dd>По расписанию раз в неделю или по просьбе.</dd>
+          <dt>Где ваш контроль</dt><dd>Агент ничего не заказывает и не покупает. Меню вы правите сами, а удачные правки просите записать в «Нашу кухню» – в следующий раз меню будет точнее.</dd>
+          <dt>Что подключить</dt><dd>Папка «Дом» на компьютере или на Google Диске. С Google Диском и задачей в облаке ChatGPT меню готовится и при выключенном компьютере.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Каждую <span class="tok">[пятницу в 19:00]</span> составляй меню на следующую неделю для нашей семьи.
+Опирайся на файл <span class="tok">[«Дом / Наша кухня»]</span>: кто что ест и не ест, сколько времени на готовку в будни, бюджет на продукты, любимые блюда. Если в папке есть свежая заметка <span class="tok">[«Что осталось»]</span>, используй эти продукты в первую очередь.
+
+Нужно:
+1) меню на 7 дней – <span class="tok">[завтрак, обед, ужин]</span>; в будни блюда не дольше <span class="tok">[40 минут]</span>, часть можно приготовить заранее в выходные;
+2) список покупок по отделам магазина с количеством на неделю;
+3) что приготовить заранее и когда.
+Цены не придумывай.
+
+Сохрани всё одним файлом «Меню – <span class="tok">[дата]</span>» в папку <span class="tok">[«Дом / Меню»]</span>. Ничего не заказывай и не удаляй.
+Покажи, как будет настроена задача, и создай её после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s18">
+      <summary><span class="num">18</span><span class="tname"><span class="ttitle">Семейный календарь на неделю</span><span class="twhen"><b>Что получите:</b> одну таблицу на неделю – кто где и во сколько, кто отводит и забирает, где накладки и кто подстрахует.</span><span class="chips"><span class="chip">Папка или Google Диск</span><span class="chip">Календарь</span><span class="chip">По расписанию</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Расписания, которые вы сложили в «Дом / Расписания»: школа, сад, кружки, рабочие смены – текстом или скриншотом. По желанию – ваш Google Календарь.</dd>
+          <dt>Что делает</dt><dd>Сводит всё в таблицу по дням и часам, находит накладки и предлагает, кто отводит, забирает и подстраховывает.</dd>
+          <dt>Куда и когда приносит</dt><dd>Файлом в «Дом / Неделя», например в воскресенье вечером. После вашего подтверждения – события в Google Календарь.</dd>
+          <dt>Как запускается</dt><dd>По расписанию раз в неделю. Если неделя поехала – по просьбе: «Пересобери неделю, у младшей отменили кружок».</dd>
+          <dt>Где ваш контроль</dt><dd>События в календаре агент создаёт только после того, как вы посмотрите список. Договариваетесь с домашними вы.</dd>
+          <dt>Что подключить</dt><dd>Папка «Дом» на компьютере или на Google Диске. Google Calendar – если хотите, чтобы агент видел и добавлял события.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Каждое <span class="tok">[воскресенье в 18:00]</span> собирай семейный календарь на следующую неделю.
+Возьми расписания из папки <span class="tok">[«Дом / Расписания»]</span>: <span class="tok">[школа, сад, кружки, рабочие смены]</span>. <span class="tok">[Посмотри ещё мои встречи на неделю в @Google Calendar.]</span>
+Кто в семье: <span class="tok">[роли и возраст – например, я, партнёр, старший 11 лет, младшая 6 лет]</span>.
+
+Сделай таблицу по дням и часам: кто где, кто отводит, кто забирает, кто везёт на кружок. Отметь накладки и предложи, кто подстрахует.
+Если в расписаниях чего-то не хватает – отметь «уточнить», не додумывай.
+
+Сохрани таблицу файлом «Неделя – <span class="tok">[дата]</span>» в папку <span class="tok">[«Дом / Неделя»]</span>. События в календарь не добавляй, пока я не посмотрю список и не подтвержу. Ничего не удаляй.
+Покажи, как будет настроена задача, и создай её после моего согласия.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+      </div>
+    </details>
+
+    <details class="task" id="s19">
+      <summary><span class="num">19</span><span class="tname"><span class="ttitle">Порядок в папке «Дом»: фото и документы</span><span class="twhen"><b>Что получите:</b> инструкции, гарантии, чеки, квитанции и фото разложены по понятным папкам, а в табличке видно, что где лежит и до какого числа действует гарантия.</span><span class="chips"><span class="chip">Папка</span><span class="chip">По просьбе</span><span class="chip">По расписанию</span><span class="chip pc">Компьютер включён</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Папка «Дом» на компьютере – туда вы сбрасываете фото чеков, инструкции к технике, гарантийные талоны, квитанции, фото ремонта.</dd>
+          <dt>Что делает</dt><dd>Предлагает простую структуру подпапок, раскладывает файлы, называет их понятно – дата и что это – и ведёт табличку: что где лежит и до какого числа гарантия. Спорное – в «На разбор».</dd>
+          <dt>Куда и когда приносит</dt><dd>Файлы – в подпапки «Дома», табличку – туда же. Первый раз по просьбе, потом раз в месяц.</dd>
+          <dt>Как запускается</dt><dd>По просьбе, затем по расписанию – так же, как уборка загрузок в сценарии 01.</dd>
+          <dt>Где ваш контроль</dt><dd>Структуру агент сначала согласует с вами. Ничего не удаляет. Документ с личными данными, если он случайно попался, агент откладывает в «На разбор» без пересказа и говорит вам.</dd>
+          <dt>Что подключить</dt><dd>Папка на компьютере, доступ только к «Дому». Работает, пока компьютер включён.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги навести порядок в папке <span class="tok">[«Дом»]</span>. Там фото и документы по дому: <span class="tok">[чеки, инструкции к технике, гарантийные талоны, квитанции, фото ремонта]</span>.
+
+1) Сначала изучи папку, ничего не перемещая, и предложи простую структуру подпапок – не больше <span class="tok">[6]</span>. Объясни, почему так.
+2) После моего согласия разложи файлы и назови их понятно: дата и что это, например «2026-10-15 – чек на холодильник».
+3) Сделай табличку «Что где лежит»: вещь, документ, где лежит, до какого числа гарантия.
+4) Всё, что не узнал уверенно, сложи в «На разбор».
+
+Ничего не удаляй. Если попадётся документ с личными данными – паспорт, полис, медицинский документ, данные карты, – не пересказывай его, переложи в «На разбор» и скажи мне.
+Запиши правила этой папки в инструкцию, чтобы в следующий раз раскладывать так же.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Поставить на поток.</b> Когда структура устроит, попросите: «Настрой регулярную задачу: [раз в месяц] наводи порядок в папке „Дом“ по этой инструкции. Ничего не удаляй – спорное складывай в „На разбор“. Расскажи, как это будет работать».</p>
+      </div>
+    </details>
+
+    <details class="task" id="s20">
+      <summary><span class="num">20</span><span class="tname"><span class="ttitle">Подготовка к поездке: дела и вещи</span><span class="twhen"><b>Что получите:</b> план подготовки по неделям, чек-лист вещей на каждого и список дел дома перед отъездом – в одном файле, который открывается с телефона.</span><span class="chips"><span class="chip">Папка или Google Диск</span><span class="chip">По просьбе</span><span class="chip cloud">В облаке – без компьютера</span></span></span><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></summary>
+      <div class="body">
+        <dl class="scheme">
+          <dt>Откуда берёт</dt><dd>Ваши вводные – куда, когда, кто едет и на чём – и чек-листы прошлых поездок из «Дом / Поездки», если они есть.</dd>
+          <dt>Что делает</dt><dd>Составляет план подготовки: за месяц, за 2 недели, за неделю и накануне; чек-листы вещей на каждого и общий; дела дома перед отъездом; список того, что проверить на официальных сайтах.</dd>
+          <dt>Куда и когда приносит</dt><dd>Одним файлом в «Дом / Поездки». На Google Диске его удобно открыть с телефона и отмечать сделанное в дороге.</dd>
+          <dt>Как запускается</dt><dd>По просьбе. Напоминание к нужной дате можно поставить задачей по расписанию – попросите агента предложить, как это сделать.</dd>
+          <dt>Где ваш контроль</dt><dd>Про визы, документы и правила перевозчика агент ничего не утверждает – только список того, что проверить. Билеты и брони – за вами.</dd>
+          <dt>Что подключить</dt><dd>Папка «Дом» на компьютере или на Google Диске. С Google Диском сценарий работает и в ChatGPT в облаке.</dd>
+        </dl>
+        <div class="promptbox"><p class="plabel">Промпт</p><pre>Помоги подготовиться к поездке. Куда: <span class="tok">[куда]</span>, когда: <span class="tok">[даты]</span>, на сколько дней: <span class="tok">[сколько]</span>. Едем: <span class="tok">[кто – роли и возраст]</span>. Добираемся: <span class="tok">[на поезде / самолёте / машине]</span>. Отдых: <span class="tok">[море, город, дача, поход]</span>.
+Если в папке <span class="tok">[«Дом / Поездки»]</span> есть чек-листы прошлых поездок – возьми их за основу.
+
+Составь один файл:
+1) план подготовки: что сделать за месяц, за 2 недели, за неделю и накануне;
+2) чек-лист вещей на каждого и общий – отдельными списками с квадратиками для отметок;
+3) что сделать дома перед отъездом: цветы, холодильник, техника, ключи;
+4) что проверить на официальных сайтах: документы, визы, правила перевозчика. Здесь ничего не утверждай, только список.
+
+Сохрани файл «Поездка – <span class="tok">[куда, даты]</span>» в папку <span class="tok">[«Дом / Поездки»]</span>. Ничего не бронируй, не покупай и не удаляй.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+        <p class="tip"><b>Напоминание.</b> Допишите: «За [7] дней до отъезда напомни, что из плана ещё не сделано. Покажи, как это настроишь, и создай задачу после моего согласия».</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ ПРАВИЛА ============ -->
+  <section class="block" id="pravila">
+    <p class="label">Важно</p>
+    <h2>Правила для&nbsp;любого сценария</h2>
+    <p>Эти правила мы повторяли весь модуль. Держите их перед глазами, когда настраиваете сценарий с этой страницы или свой собственный.</p>
+    <ol class="rules">
+      <li><span class="stepn">1</span><span><b>Доступ только к нужному.</b> Агенту – конкретная папка проекта, весь компьютер ему не нужен. Почту и календарь подключайте под конкретную задачу. Плагины и коннекторы берите из встроенных каталогов ChatGPT и Claude, со случайных сайтов не ставьте.</span></li>
+      <li><span class="stepn">2</span><span><b>Сначала черновики.</b> Агент готовит, вы проверяете цифры, суммы, цитаты и адресатов. В каждую задачу пишите: «Ничего не удаляй, не отправляй и не публикуй без меня».</span></li>
+      <li><span class="stepn">3</span><span><b>Подтверждение не выключайте.</b> Кнопку «разрешать всегда» нажимайте только для инструментов, которым полностью доверяете. Регулярную задачу агент создаёт после того, как покажет её вам.</span></li>
+      <li><span class="stepn">4</span><span><b>Пароли и ключи – не в чат.</b> Ни пароли, ни коды из СМС, ни токен бота. Куда войти – входите сами, токен вставляйте туда, куда покажет агент. Паспорта и данные карт не кладём в папки, к которым у агента есть доступ.</span></li>
+      <li><span class="stepn">5</span><span><b>Помните, где работает задача.</b> Задача с папками на компьютере выполняется, пока компьютер включён, не спит и приложение запущено. Чтобы агент работал при выключенном компьютере, нужно облако: задача в ChatGPT в облаке и файлы на Google Диске. Запуска «как только появился файл» нет – папку агент проверяет по расписанию. На некоторых тарифах число регулярных задач ограничено: оставьте те, которыми правда пользуетесь.</span></li>
+      <li><span class="stepn">6</span><span><b>Проверьте первый запуск.</b> После первого запуска загляните туда, куда агент должен был принести результат. «Всё готово» на слово не принимаем: работает – значит, файл на месте и вы его открыли.</span></li>
+      <li><span class="stepn">7</span><span><b>Неудобство – в правило.</b> Поправили агента 2–3 раза одним и тем же – попросите: «Запиши это правилом, чтобы в следующий раз ты делал так сам».</span></li>
+    </ol>
+    <div class="promptbox"><p class="plabel">Добавка к любому сценарию</p><pre>Правила для этой задачи:
+– работай только с <span class="tok">[папкой или подключением]</span>, которое я назвал(а);
+– ничего не удаляй, не отправляй и не публикуй без моего подтверждения;
+– если непонятно – спроси, не решай сам;
+– не придумывай факты, цифры и цитаты: если чего-то нет в источниках, так и скажи;
+– сохраняй результат в <span class="tok">[папку]</span>;
+– если доступа нет или сохранить не получилось – сообщи об ошибке, не говори, что работа выполнена;
+– никогда не проси у меня пароли, коды и секретные ключи.
+Сначала покажи план, потом делай.</pre><div class="btns"><button class="btn" data-copy type="button">Скопировать</button></div></div>
+    <p class="tip">Подробнее – в памятке <a href="https://aiforlife.ru/ii-course/modul4/bonus-bezopasno/" target="_top">«Как устроены агенты и как задавать им правила»</a>.</p>
+  </section>
+</section>
+
+<section class="wrap closing">
+  <p class="pull">Лучший агент вырастает из одной вашей реальной задачи, ваших правил и ваших правок. Начните с одного сценария и добавляйте следующий, когда первый заработает.</p>
+  <a class="backlink" href="https://aiforlife.ru/ii-course/modul4/shtat-agentov/" target="_top">← Ко всем материалам набора «Свой штат агентов»</a>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Курс «Нейро-архитектор» · «ИИ для жизни и дела: от первого промпта до автономного помощника» · бонусный набор <a href="https://aiforlife.ru/ii-course/modul4/shtat-agentov/" target="_top">«Свой штат агентов»</a>, модуль 4</div>
+</footer>
+
+<div class="sr" role="status" aria-live="polite" id="say"></div>
+
+<script>
+(function(){
+  var ICON='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+  function say(t){var s=document.getElementById('say');if(s){s.textContent=t;setTimeout(function(){s.textContent='';},2600);}}
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);
+    return new Promise(function(res,rej){
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.setAttribute('readonly','');ta.className='sr';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.innerHTML=ICON+'Скопировать';
+    btn.addEventListener('click',function(){
+      var pb=btn.closest('.promptbox');var pre=pb?pb.querySelector('pre'):null;
+      copy(pre?pre.innerText:'').then(function(){
+        btn.textContent='Скопировано';btn.classList.add('done');
+        say('Промпт скопирован. Вставьте его в чат');
+        setTimeout(function(){btn.innerHTML=ICON+'Скопировать';btn.classList.remove('done');},2400);
+      }).catch(function(){say('Не вышло скопировать – выделите текст промпта вручную');});
+    });
+  });
+  // ссылка на сценарий (#s16) раскрывает его
+  function openFromHash(){
+    var id=location.hash.slice(1);if(!/^s\d\d$/.test(id))return;
+    var d=document.getElementById(id);if(d&&d.tagName==='DETAILS'){d.open=true;}
+  }
+  openFromHash();window.addEventListener('hashchange',openFromHash);
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -6% 0px'}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+})();
+</script>
+
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112003701" style="position:absolute;left:-9999px" alt=""></div></noscript>
+
+</body>
+</html>
