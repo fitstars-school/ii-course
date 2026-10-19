@@ -269,6 +269,9 @@ p.plate+p{margin-top:0}
 main p:not(.label):not(.glabel):not(.kicker):not(.gl),main ul,main ol,main .defs,main .tiers,main .roads,main .promptbox,main .rulebox,main .note,main .keepbox,main .col>div:not(.shot):not(.shots):not(.btns),main .pgroup>div{max-width:none!important}
 section.wrap{padding-left:40px;padding-right:40px}
 @media (max-width:760px){section.wrap{padding-left:20px;padding-right:20px}}
+/* варианты выполнения практики */
+.variant{display:none}.variant.on{display:block}
+p.pintro-light{margin-top:30px;font-size:16px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -279,7 +282,7 @@ section.wrap{padding-left:40px;padding-right:40px}
   <div class="hero hero-pr">
     <div class="hgrid">
       <h1>Хранитель порядка</h1>
-      <p class="hlead">Создаём в Codex проект, который наводит порядок в загрузках и строит под вас папку «Моя система с ЧатГПТ». Без вас он ничего не удаляет: всё спорное складывает в папку «На разбор».</p>
+      <p class="hlead">Агент наводит порядок в ваших файлах и строит под вас свою систему папок – в Codex на компьютере, на Google Диске через ChatGPT или в Claude на компьютере. Без вас он ничего не удаляет: всё спорное складывает в папку «На разбор».</p>
     </div>
     <div class="meta">
       <div><span class="mk">Практика</span><span class="mv">Повторяйте за видео, ставьте его на паузу, пока агент работает</span></div>
@@ -292,11 +295,21 @@ section.wrap{padding-left:40px;padding-right:40px}
   <div class="wrap">
     <p class="label">Теперь делаем</p>
     <h2>Практика</h2>
-    <p class="pmeta">ChatGPT на компьютере · Codex · ставьте видео на паузу</p>
-    <p class="pintro">Понадобится программа ChatGPT на компьютере. Я показываю на папке «Загрузки» – вместо неё можно взять любую другую папку, где у вас хаос. Шаги 1–8 – основная практика. Шаги 9 и 10 – по желанию.</p>
+    <p class="pmeta">3 варианта выполнения · ставьте видео на паузу</p>
+    <p class="pintro">На видео я показываю в Codex на компьютере, на папке «Загрузки». То же задание можно выполнить на Google Диске через ChatGPT или в Claude на компьютере – выберите свой вариант, и шаги ниже поменяются. Главное правило везде одно: ничего не удалять без вас.</p>
+    <div class="svcbar">
+      <p class="svclab">Как выполнить задание</p>
+      <div class="svcbtns">
+          <button class="svcbtn on" type="button" data-varbtn="codex">Codex на компьютере</button>
+          <button class="svcbtn" type="button" data-varbtn="drive">Google Диск через ChatGPT</button>
+          <button class="svcbtn" type="button" data-varbtn="claude">Claude на компьютере</button>
+      </div>
+    </div>
   </div>
 </div>
 <section class="wrap">
+  <div class="variant on" data-variant="codex">
+  <p class="pintro-light">Понадобится программа ChatGPT на компьютере. Вместо «Загрузок» можно взять любую другую папку, где у вас хаос. Шаги 1–8 – основная практика, 9 и 10 – по желанию.</p>
   <div class="steps">
       <div class="step"><span class="snum">1</span><div>
         <h3>Создайте пустую папку для своей системы</h3>
@@ -367,6 +380,124 @@ section.wrap{padding-left:40px;padding-right:40px}
         <p>Проект «Хранитель порядка» в Codex – к нему вы будете возвращаться. В следующем уроке на этой системе соберём ключевые файлы для работы нейросети.</p>
       </div>
     </div>
+  </div>
+  </div>
+  <div class="variant" data-variant="drive">
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Подключите Google Диск к ChatGPT</h3>
+        <p>В ChatGPT откройте вкладку <b>Plugins</b> («Плагины»), найдите в поиске <b>Google Drive</b> и нажмите «+». Войдите в свой аккаунт Google и разрешите плагину читать и создавать файлы – без этого он не сможет раскладывать их по папкам.</p>
+        <p class="snote">Подробно, с проверкой подключения, – в бонусе <a class="inl" href="https://aiforlife.ru/ii-course/modul4/bonus-oblachnye-agenty/">«Агент с телефона и в облаке»</a>, маршрут 2.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Выберите, где наводим порядок</h3>
+        <p>Решите, с какой частью Диска работаем: со всем «Моим диском» или с одной папкой, где больше всего хаоса. Для первого раза лучше одна папка. Создайте на Диске пустую папку «Моя система с ЧатГПТ» – туда агент будет раскладывать ваши проекты.</p>
+        <p class="snote">Если на Диске есть папки с чужими или конфиденциальными данными, скажите агенту, что их трогать нельзя.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Начните задачу в режиме «Работа» в облаке</h3>
+        <p>Начните в ChatGPT новую задачу в режиме «Работа» (Work) и выберите выполнение в облаке (Cloud). Тогда агенту не нужен ваш компьютер: он работает с Диском напрямую, а разговор можно продолжить с телефона.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>Вставьте промпт хранителя порядка</h3>
+        <div class="promptbox stepprompt"><p class="plabel">Промпт хранителя порядка · Google Диск</p><pre>Используй подключённый Google Диск. Помоги мне создать и поддерживать понятную систему хранения файлов на Google Диске.
+Работаем в [«Моём диске» / папке «название»]. Систему собираем в папке «Моя система с ЧатГПТ».
+Проведи небольшое интервью и узнай, кто я, чем занимаюсь, какие у меня направления жизни и работы, что у меня обычно копится на Диске, как я ищу нужные файлы и что мне особенно важно не потерять.
+Потом изучи, что лежит на Диске. Пока ничего не перемещай и не удаляй.
+Предложи простую структуру папок, которая подходит именно под мои задачи, и объясни, почему так.
+План изменений согласуй со мной. Без меня ничего не удаляй – спорное складывай в папку «На разбор».
+Папки [названия] не трогай.
+Правила, по которым ты наводишь порядок, сохрани документом «Карта системы» в папке «Моя система с ЧатГПТ», чтобы потом работать по ним.
+Главное требование: система должна быть простой, понятной, неперегруженной и удобной лично для меня.
+Сначала задавай вопросы – не создавай структуру без учёта моей жизни и работы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <h3>Ответьте на вопросы голосом</h3>
+        <p>Надиктуйте ответы подряд: чем занимаетесь, какие у вас проекты и клиенты, что вас беспокоит в файлах, что важно не потерять. Можно длинно – агент разберётся.</p>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+        <h3>Проверьте план и дайте обратную связь</h3>
+        <p>Агент покажет, что нашёл, и предложит структуру. Проверьте названия проектов и клиентов – он мог что-то не расслышать. Добавьте правила:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно добавить</p><pre>Если увидишь дубли, отложи их в отдельную папку – я проверю и удалю сам(а). Ничего не удаляй без меня.
+Сделай для каждого проекта карту: таблицу с важными документами и ссылками на них и датой обновления.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Когда план устраивает, напишите «Согласовано, раскладывай». Пока агент работает, можно заниматься своими делами и заглядывать в разговор с телефона.</p>
+      </div></div>
+      <div class="step"><span class="snum">7</span><div>
+        <h3>Проверьте результат на Диске</h3>
+        <p>Откройте Google Диск – на компьютере или в приложении на телефоне. В «Моей системе с ЧатГПТ» должны появиться папки по вашим проектам и документ «Карта системы», а спорное – лежать в «На разбор». Попросите изменить то, что неудобно, и записать это в «Карту системы».</p>
+        <p class="snote">Удаляйте сами, после проверки. Пользователи сообщали, что файлы, удалённые на Диске через ChatGPT, не всегда можно восстановить, – поэтому правило «ничего не удаляй» здесь обязательно, а для первого раза лучше взять одну папку.</p>
+      </div></div>
+      <div class="step"><span class="snum">8</span><div>
+        <h3>По желанию: поставьте уборку на расписание</h3>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Сделай это задачей по расписанию: [раз в неделю] наводи порядок на моём Google Диске по «Карте системы». Ничего не удаляй – спорное складывай в «На разбор». В конце пришли коротко, что разложил.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Задача в облаке работает без вашего компьютера. Найти её потом можно слева в разделе Scheduled («Запланировано»).</p>
+      </div></div>
+  </div>
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>На Google Диске в «Моей системе с ЧатГПТ» есть папки под ваши проекты и документ «Карта системы», спорное лежит в «На разбор», и ничего не удалено без вашего решения.</p>
+    </div>
+  </div>
+  </div>
+  <div class="variant" data-variant="claude">
+  <p class="pintro-light">Понадобится приложение Claude для компьютера (Mac или Windows) и платный тариф – Pro, Max, Team или Enterprise: работа с папками на компьютере (режим Cowork) на бесплатном тарифе недоступна.</p>
+  <div class="steps">
+      <div class="step"><span class="snum">1</span><div>
+        <h3>Создайте пустую папку для своей системы</h3>
+        <p>На компьютере создайте новую папку «Моя система с Claude» – например, в «Документах». Здесь будут жить ваши проекты, помощники и правила.</p>
+      </div></div>
+      <div class="step"><span class="snum">2</span><div>
+        <h3>Откройте Claude и дайте доступ к папкам</h3>
+        <p>Откройте приложение Claude на компьютере. Если в поле ввода есть выбор «Chat» и «Cowork», выберите <b>Cowork</b>. Если такого выбора нет, у вас уже новая версия приложения, где всё работает в одном разговоре, – просто пропустите это.</p>
+        <p>Дайте Claude доступ к папкам: добавьте папку под полем ввода – «Загрузки» и новую «Моя система с Claude». Пока вы не подключили папку, Claude не видит ни одного файла на компьютере. Подключённые папки потом видны в настройках, в разделе Trusted folders.</p>
+        <p class="snote">Anthropic советует давать доступ к отдельной рабочей папке, а не ко всему компьютеру. Пароли и паспорта в эти папки не кладите.</p>
+      </div></div>
+      <div class="step"><span class="snum">3</span><div>
+        <h3>Выберите, как Claude спрашивает разрешение</h3>
+        <p>В Claude есть режимы подтверждения: подтверждать каждое действие вручную, подтверждать автоматически или пропускать подтверждения. Для первого раза оставьте ручное подтверждение. Перед удалением файлов Claude спрашивает в любом режиме, но запретить удаление настройкой нельзя – поэтому правило «ничего не удаляй» обязательно пишем в промпт.</p>
+      </div></div>
+      <div class="step"><span class="snum">4</span><div>
+        <h3>Вставьте промпт хранителя порядка</h3>
+        <div class="promptbox stepprompt"><p class="plabel">Промпт хранителя порядка · Claude</p><pre>Помоги мне создать и поддерживать понятную систему хранения файлов.
+Я подключил(а) папки «Загрузки» и «Моя система с Claude». Систему собираем в «Моей системе с Claude».
+Проведи небольшое интервью и узнай, кто я, чем занимаюсь, какие у меня направления жизни и работы, что попадает в загрузки, как я обычно ищу нужные файлы и что мне особенно важно не потерять.
+Потом изучи, что лежит в моих папках. Пока ничего не перемещай и не удаляй.
+Предложи простую структуру папок, которая подходит именно под мои задачи, и объясни, почему так.
+План изменений согласуй со мной. Без меня ничего не удаляй – только складывай в папку «На разбор».
+Правила, по которым ты наводишь порядок, запиши в инструкции этой папки, чтобы потом работать по ним.
+Главное требование: система должна быть простой, понятной, неперегруженной и удобной лично для меня.
+Сначала задавай вопросы – не создавай структуру без учёта моей жизни и работы.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+      </div></div>
+      <div class="step"><span class="snum">5</span><div>
+        <h3>Ответьте на вопросы голосом</h3>
+        <p>Надиктуйте ответы подряд: чем занимаетесь, какие у вас проекты и клиенты, что вас беспокоит в файлах, что важно не потерять.</p>
+      </div></div>
+      <div class="step"><span class="snum">6</span><div>
+        <h3>Проверьте план и дайте обратную связь</h3>
+        <p>Claude покажет, что нашёл, и предложит структуру. Проверьте названия проектов и клиентов, поправьте то, что не так. Добавьте правила:</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно добавить</p><pre>Если увидишь дубли, отложи их в отдельную папку – я проверю и удалю сам(а). Ничего не удаляй без меня.
+То, что на разбор, оставляй в загрузках, не переноси в папку системы.
+Сделай для каждого проекта карту: табличку с важными документами и ссылками – где файл лежит, дата обновления.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Когда план устраивает, разрешите раскладывать. Подтверждайте действия, которые Claude показывает, – так вы видите, что он делает.</p>
+      </div></div>
+      <div class="step"><span class="snum">7</span><div>
+        <h3>Проверьте результат в папках</h3>
+        <p>Откройте «Мою систему с Claude»: там должны появиться папки по вашим проектам, а в «Загрузках» – папка «На разбор». Попросите изменить то, что неудобно, и записать это в инструкции папки – Claude умеет сам их обновлять. Посмотреть инструкции можно в разделе Customize.</p>
+      </div></div>
+      <div class="step"><span class="snum">8</span><div>
+        <h3>По желанию: поставьте уборку на расписание</h3>
+        <p>В левой панели откройте <b>Scheduled</b> → <b>New task</b> → <b>Create with Claude</b> и опишите задачу. Или прямо в разговоре попросите сделать её регулярной.</p>
+        <div class="promptbox stepprompt"><p class="plabel">Можно сказать так</p><pre>Сделай это задачей по расписанию: [раз в неделю] наводи порядок в папке «Загрузки» по инструкциям этой папки. Ничего не удаляй – спорное складывай в «На разбор». В конце коротко напиши, что разложил.</pre><div class="btns"><button class="btn" data-copy type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="1"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Скопировать</button></div></div>
+        <p class="snote">Задача с папками на компьютере запускается, только пока компьютер включён и приложение Claude открыто.</p>
+      </div></div>
+  </div>
+  <div class="donebox">
+    <div class="dc">
+      <p class="dl">Готово, когда</p>
+      <p>В «Моей системе с Claude» есть папки под ваши проекты, в инструкциях папки записаны правила, в «Загрузках» порядок и одна папка «На разбор». Ничего не удалено без вашего решения.</p>
+    </div>
+  </div>
   </div>
 <div class="pfb" id="portfolio">
   <span class="pfb-tag">Задача для вашего портфолио</span>
@@ -461,6 +592,21 @@ ym(112003701,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
     function done(){var o=b.innerHTML;b.textContent='Скопировано';b.classList.add('done');setTimeout(function(){b.innerHTML=o;b.classList.remove('done');},2400);}
     if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){if(fb(t))done();});}else if(fb(t)){done();}
   });
+})();
+</script>
+<script>
+(function(){
+  var KEY='m4u1-variant';
+  function setVar(k){
+    var ok=false;
+    document.querySelectorAll('[data-variant]').forEach(function(v){var m=v.dataset.variant===k;v.classList.toggle('on',m);if(m)ok=true;});
+    if(!ok)return;
+    document.querySelectorAll('[data-varbtn]').forEach(function(b){b.classList.toggle('on',b.dataset.varbtn===k);});
+    try{localStorage.setItem(KEY,k);}catch(e){}
+  }
+  document.querySelectorAll('[data-varbtn]').forEach(function(b){b.addEventListener('click',function(){setVar(b.dataset.varbtn);});});
+  var h=(location.hash||'').replace('#','');
+  if(h==='codex'||h==='drive'||h==='claude'){setVar(h);}else{try{var v=localStorage.getItem(KEY);if(v)setVar(v);}catch(e){}}
 })();
 </script>
 </body>
