@@ -593,19 +593,6 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 
 /* правки 11.11: отзывы и кейсы, бонус за скорость, оплата */
 .t-dep{display:block;margin-top:6px;font-size:14px;font-weight:600;color:var(--pink-strong)}
-.rv-quote p{font-size:16.5px;line-height:1.6;opacity:1}
-.rv-who{margin-top:14px;font-size:14px;opacity:.75}
-.rv-who b{opacity:1}
-.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
-.case{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column}
-.case-n{font-size:var(--label);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)}
-.case h3{font-size:var(--sub);font-weight:700;margin-top:8px}
-.case-role{font-size:14px;opacity:.7;margin-top:2px}
-.case-tag{margin-top:12px;align-self:flex-start;font-size:13px;font-weight:700;color:var(--pink-strong);background:#FCE6F1;border-radius:10px;padding:5px 10px}
-.case-lab{margin-top:16px;margin-bottom:8px;font-size:var(--label);font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.55}
-.case-was{font-size:15px;opacity:.8}
-.case .t-feats li{font-size:15px}
-.case-q{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;font-style:italic;opacity:.85}
 .speed{margin-top:40px;border-radius:var(--radius-lg);padding:32px;background:var(--dark);color:#fff}
 .speed .label{color:#FF8FC0;display:block;margin-bottom:12px}
 .speed h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);line-height:1.3}
@@ -623,9 +610,46 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 .pay-help{margin-top:18px;text-align:center;font-size:15px;opacity:.8}
 .pay-help a{color:var(--pink-strong);font-weight:700}
 @media(max-width:900px){
-  .cases,.pay-grid{grid-template-columns:1fr}
+  .pay-grid{grid-template-columns:1fr}
   .speed{padding:24px 20px}
   .speed-list{grid-template-columns:1fr}
+}
+/* отзывы и кейсы – вид 11.11 */
+.rv-rating{display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:10px 18px;border-radius:999px;background:#fff;border:1px solid #F3D3E8;font-size:15px;box-shadow:var(--shadow)}
+.rv-rating b{font-family:'Unbounded',sans-serif;font-weight:700;color:var(--pink-strong)}
+.rv-star{color:#FFB400;font-size:18px;line-height:1}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.cs{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;display:flex;flex-direction:column;gap:16px;overflow:hidden;box-shadow:var(--shadow)}
+.cs::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--grad)}
+.cs-hl{background:var(--dark);color:#fff;border-color:var(--dark)}
+.cs-who{display:flex;align-items:center;gap:12px}
+.cs-who b,.rv figcaption b{display:block;font-size:17px;font-weight:800}
+.cs-who span:not(.cs-ava),.rv figcaption span:not(.cs-ava){display:block;font-size:13.5px;opacity:.65;line-height:1.35}
+.cs-ava{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px}
+.cs-big{padding:16px 18px;border-radius:16px;background:linear-gradient(160deg,#FFF3FA,#F6EDFE)}
+.cs-hl .cs-big{background:rgba(255,255,255,.07)}
+.cs-big b{display:block;font-family:'Unbounded',sans-serif;font-weight:700;font-size:30px;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cs-hl .cs-big b{background:linear-gradient(100deg,#FF6FB8,#C98BFF);-webkit-background-clip:text;background-clip:text}
+.cs-big span{display:block;margin-top:6px;font-size:14.5px;line-height:1.45;opacity:.85}
+.cs-lab{display:block;margin-bottom:6px;font-size:var(--label);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)}
+.cs-hl .cs-lab{color:#FF8FC0}
+.cs-hl .cs-who b{color:#fff}
+.cs-hl .cs-was,.cs-hl .cs-big span,.cs-hl li{color:#E6DEEE}
+.cs-was{font-size:14.5px;line-height:1.5;opacity:.75}
+.cs-now ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.cs-now li{position:relative;padding-left:24px;font-size:15px;line-height:1.45}
+.cs-now li::before{content:"✓";position:absolute;left:0;top:0;color:var(--pink);font-weight:800}
+.cs-hl .cs-now li::before{color:#FF8FC0}
+.rv-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.rv{margin:0;position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:30px 28px 24px 28px}
+.rv::before{content:"\201C";position:absolute;top:6px;right:22px;font-family:Georgia,serif;font-size:96px;line-height:1;color:#F6CFE2}
+.rv blockquote{position:relative;font-size:16.5px;line-height:1.6}
+.rv figcaption{display:flex;align-items:center;gap:12px;margin-top:20px}
+.rv .cs-ava{width:38px;height:38px;font-size:15px}
+@media(max-width:900px){
+  .cs-grid,.rv-grid{grid-template-columns:1fr}
+  .cs{padding:22px}
+  .rv{padding:26px 22px 22px}
 }
 </style>
 
@@ -910,64 +934,65 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 
 
 
-<!-- ===== ОТЗЫВЫ И КЕЙСЫ (правки 11.11; источник – слайды 20, 41–43 презентации 12.11) ===== -->
+<!-- ===== ОТЗЫВЫ И КЕЙСЫ (правки 11.11; источник – слайды 20, 41–43 презентации 12.11; только имена, без фамилий) ===== -->
 <section class="sec band-tint">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head sec-head-center reveal">
       <span class="label">Результаты первого потока</span>
-      <h2>Что уже говорят <span class="accent">ученики</span></h2>
-      <p>Средняя оценка курса в итоговой анкете – <b>9,9 из 10</b>.</p>
+      <h2>Что получилось <span class="accent">у учеников</span></h2>
+      <div class="rv-rating"><span class="rv-star">★</span><b>9,9 из 10</b> – средняя оценка курса в итоговой анкете</div>
     </div>
-    <div class="cards reveal">
-      <div class="card rv-quote"><p>«Я ещё в начале пути, но уже наметила полный пересмотр своей работы. Благодаря личному рабочему контексту и карте применения ИИ я уже начинаю реорганизовывать всю деятельность».</p><div class="rv-who"><b>Анастасия Аммар</b> · стилист, блогер</div></div>
-      <div class="card rv-quote"><p>«Стало уходить меньше времени и нервов на работу с текстами. Очень часто стала пользоваться ИИ для проверки и создания документов, а также для краткого содержания».</p><div class="rv-who"><b>Анастасия Мироводина</b> · замзаведующего детским садом</div></div>
+
+    <div class="cs-grid">
+      <article class="cs reveal">
+        <div class="cs-who"><span class="cs-ava">О</span><div><b>Оксана</b><span>инженер-сметчик, в найме</span></div></div>
+        <div class="cs-big"><b>356</b><span>позиций сметы сверил ИИ – и нашёл единственное расхождение</span></div>
+        <div class="cs-was"><span class="cs-lab">Было</span>«Честно, не знаю, чем мне может помочь ИИ… но внутренний голос кричит, что надо с ним познакомиться»</div>
+        <div class="cs-now"><span class="cs-lab">Стало · за 4 недели</span>
+          <ul>
+            <li>Помощник сам раскладывает рабочие файлы по проектам</li>
+            <li>Методика проверки смет на 5 реальных закупках</li>
+            <li>Свой цифровой продукт – «Нейросметчик»</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="cs cs-hl reveal">
+        <div class="cs-who"><span class="cs-ava">Е</span><div><b>Елена</b><span>руководитель продаж бухгалтерских услуг</span></div></div>
+        <div class="cs-big"><b>1 модуль</b><span>хватило, чтобы собрать систему работы со звонками</span></div>
+        <div class="cs-was"><span class="cs-lab">Было</span>Каждый разбор звонков и возражений – заново, без единой структуры</div>
+        <div class="cs-now"><span class="cs-lab">Стало</span>
+          <ul>
+            <li>Скрипт холодного звонка в Excel со шпаргалкой для менеджеров</li>
+            <li>Единая система: ветки диалога, возражения, контроль</li>
+            <li>Из учебного видео 1С – инструкция со скриншотами для сотрудников</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="cs reveal">
+        <div class="cs-who"><span class="cs-ava">Н</span><div><b>Наталья</b><span>педагог, обучение детей и взрослых</span></div></div>
+        <div class="cs-big"><b>3–5 часов</b><span>в неделю экономит ИИ – всё в российских нейросетях</span></div>
+        <div class="cs-was"><span class="cs-lab">Было</span>«Хотела научиться использовать ИИ в своей работе»</div>
+        <div class="cs-now"><span class="cs-lab">Стало · тариф «Нейро-Масштаб»</span>
+          <ul>
+            <li>Свои ИИ-помощники: для блога и для работы с учениками</li>
+            <li>Своя мини-платформа с помощниками</li>
+            <li>Свободное время на отдых и новые идеи</li>
+          </ul>
+        </div>
+      </article>
     </div>
-    <div class="cases">
-      <div class="case reveal">
-        <span class="case-n">Кейс 1</span>
-        <h3>Оксана Гагарина</h3>
-        <div class="case-role">инженер-сметчик, в найме</div>
-        <div class="case-lab">Было</div>
-        <p class="case-was">«Честно, не знаю, чем мне может помочь ИИ по виду деятельности, но внутренний голос кричит, что надо с ним познакомиться».</p>
-        <div class="case-lab">Стало · за 4 недели курса</div>
-        <ul class="t-feats">
-          <li>Свой помощник на компьютере сам раскладывает рабочие файлы по проектам</li>
-          <li>Сверка сметы на 356 позиций – ИИ нашёл единственное расхождение</li>
-          <li>Методика проверки смет, отработанная на 5 реальных закупках</li>
-          <li>Свой цифровой продукт для строительной сферы – «Нейросметчик»</li>
-        </ul>
-        <p class="case-q">«Раньше я использовала ИИ для отдельных вопросов и подсказок. Сейчас мы выстроили постоянную совместную работу».</p>
-      </div>
-      <div class="case reveal">
-        <span class="case-n">Кейс 2</span>
-        <h3>Елена Мандражиева</h3>
-        <div class="case-role">руководитель продаж бухгалтерских услуг</div>
-        <div class="case-lab">Было</div>
-        <p class="case-was">Каждый разбор звонков и возражений – заново, без единой структуры.</p>
-        <div class="case-lab">Стало · за первый модуль</div>
-        <ul class="t-feats">
-          <li>Скрипт холодного звонка в Excel со шпаргалкой для менеджеров</li>
-          <li>Единая система: ветки диалога, возражения, контроль звонков</li>
-          <li>Из учебного видео 1С – инструкция со скриншотами для обучения сотрудников</li>
-          <li>Свой рабочий промпт и карта применения ИИ</li>
-        </ul>
-        <p class="case-q">«Шире смотрю на свою работу, возникают новые идеи, с которыми иду к ИИ».</p>
-      </div>
-      <div class="case reveal">
-        <span class="case-n">Кейс 3</span>
-        <h3>Наталья Конова</h3>
-        <div class="case-role">педагог, обучение детей и взрослых</div>
-        <div class="case-tag">✦ Всё сделано только в российских нейросетях</div>
-        <div class="case-lab">Было</div>
-        <p class="case-was">«Хотела научиться использовать ИИ в своей работе».</p>
-        <div class="case-lab">Стало · тариф «Нейро-Масштаб»</div>
-        <ul class="t-feats">
-          <li>Свои ИИ-помощники: для блога и для работы с учениками</li>
-          <li>Своя мини-платформа с помощниками – собрали на личных встречах</li>
-          <li>ИИ экономит 3–5 часов в неделю</li>
-        </ul>
-        <p class="case-q">«Появилось свободное время на отдых, и ИИ помогает воплощать мои новые идеи».</p>
-      </div>
+
+    <div class="rv-grid">
+      <figure class="rv reveal">
+        <blockquote>Я ещё в начале пути, но уже наметила полный пересмотр своей работы. Благодаря личному рабочему контексту и карте применения ИИ я уже начинаю реорганизовывать всю деятельность.</blockquote>
+        <figcaption><span class="cs-ava">А</span><div><b>Анастасия</b><span>стилист и блогер</span></div></figcaption>
+      </figure>
+      <figure class="rv reveal">
+        <blockquote>Стало уходить меньше времени и нервов на работу с текстами. Очень часто стала пользоваться ИИ для проверки и создания документов, а также для краткого содержания.</blockquote>
+        <figcaption><span class="cs-ava">А</span><div><b>Анастасия</b><span>замзаведующего детским садом</span></div></figcaption>
+      </figure>
     </div>
   </div>
 </section>
