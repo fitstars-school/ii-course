@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Курс Нейро-архитектор «ИИ для жизни и дела: от первого промпта до автономного помощника»</title>
-<meta name="description" content="Курс Нейро-архитектор «ИИ для жизни и дела: от первого промпта до автономного помощника». 4 недели, 4 модуля: от первого запроса без страха до агентного ИИ, который ведёт твою рутину на потоке. Старт 28 сентября.">
+<meta name="description" content="Курс Нейро-архитектор «ИИ для жизни и дела: от первого промпта до автономного помощника». 4 недели, 4 модуля: от первого запроса без страха до агентного ИИ, который ведёт твою рутину на потоке. Старт 23 ноября.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
@@ -590,6 +590,43 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 .mod .kit2.pfolio{margin-top:18px}
 /* 23.09 вечер, Татьяна: модуль 4 по высоте модуля 3, плашка портфолио по центру свободного места */
 .mod .kit2.pfolio{margin-top:auto;margin-bottom:auto}
+
+/* правки 11.11: отзывы и кейсы, бонус за скорость, оплата */
+.t-dep{display:block;margin-top:6px;font-size:14px;font-weight:600;color:var(--pink-strong)}
+.rv-quote p{font-size:16.5px;line-height:1.6;opacity:1}
+.rv-who{margin-top:14px;font-size:14px;opacity:.75}
+.rv-who b{opacity:1}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column}
+.case-n{font-size:var(--label);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)}
+.case h3{font-size:var(--sub);font-weight:700;margin-top:8px}
+.case-role{font-size:14px;opacity:.7;margin-top:2px}
+.case-tag{margin-top:12px;align-self:flex-start;font-size:13px;font-weight:700;color:var(--pink-strong);background:#FCE6F1;border-radius:10px;padding:5px 10px}
+.case-lab{margin-top:16px;margin-bottom:8px;font-size:var(--label);font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.55}
+.case-was{font-size:15px;opacity:.8}
+.case .t-feats li{font-size:15px}
+.case-q{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;font-style:italic;opacity:.85}
+.speed{margin-top:40px;border-radius:var(--radius-lg);padding:32px;background:var(--dark);color:#fff}
+.speed .label{color:#FF8FC0;display:block;margin-bottom:12px}
+.speed h3{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);line-height:1.3}
+.speed-head p{margin-top:12px;color:#D8D0E2}
+.speed-head p b{color:#fff}
+.speed-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 22px;margin-top:24px}
+.speed-list li{display:flex;gap:12px;align-items:flex-start;color:#D8D0E2;font-size:15.5px}
+.speed-list li b{color:#fff}
+.sp-ic{flex-shrink:0;width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:16px}
+.pay{margin-top:56px}
+.pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pay-grid .col{padding:26px}
+.pay-grid .t-feats li{font-size:15px}
+.pay-fine{margin-top:14px;font-size:14px;font-weight:600;opacity:.7}
+.pay-help{margin-top:18px;text-align:center;font-size:15px;opacity:.8}
+.pay-help a{color:var(--pink-strong);font-weight:700}
+@media(max-width:900px){
+  .cases,.pay-grid{grid-template-columns:1fr}
+  .speed{padding:24px 20px}
+  .speed-list{grid-template-columns:1fr}
+}
 </style>
 
 <!-- Yandex.Metrika counter -->
@@ -611,7 +648,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   <div class="wrap hdr-in">
     <img class="brand-logo" src="data:image/png;base64,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" alt="FitStars">
     <div class="hdr-cta">
-      <span class="when">Старт – <b>28 сентября</b></span>
+      <span class="when">Старт – <b>23 ноября</b></span>
       <a href="#tariffs" class="btn btn-sm">Забронировать место</a>
     </div>
   </div>
@@ -621,7 +658,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="date-pill hero-pill"><span class="dot"></span>Старт курса: <b>28 сентября</b> ·&nbsp;4&nbsp;недели погружения</span>
+      <span class="date-pill hero-pill"><span class="dot"></span>Старт курса: <b>23 ноября</b> ·&nbsp;4&nbsp;недели погружения</span>
       <div class="course-plate">
         <div class="course-name">Нейро-<span class="accent">архитектор</span></div>
         <p class="course-sub">Понятная система ИИ для жизни и дела</p>
@@ -718,11 +755,11 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
     <div class="ctaband reveal">
       <div>
         <h3>Готов начать?</h3>
-        <p>Первый поток камерный: количество мест ограничено – 50 на «Нейро-Системе» и всего 3 на «Нейро-Масштабе».</p>
+        <p>Места ограничены: 44 на «Нейро-Системе» и всего 2 на «Нейро-Масштабе».</p>
       </div>
       <div class="side">
         <a href="#tariffs" class="btn">Забронировать место <span class="arw">→</span></a>
-        <span class="fine">Старт – 28 сентября</span>
+        <span class="fine">Старт – 23 ноября</span>
       </div>
     </div>
   </div>
@@ -734,7 +771,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
     <div class="sec-head reveal">
       <span class="label">Программа курса</span>
       <h2>4 модуля&nbsp;– <span class="accent">от страха до своей системы</span>:</h2>
-      <p>Курс ведёт по ступеням: уверенный старт без страха → доверие к результату «в своём голосе» → практика на реальных кейсах → своя рабочая система с агентным ИИ → <b>первое портфолио</b> к концу курса.</p>
+      <p>В начале курса формулируем твою цель: чего хочешь добиться к концу 4 недель. Под неё собираем <b>индивидуальный трек</b>: какие уроки и кейсы в приоритете, а что можно пройти позже. Курс подстраивается под твой темп и задачи.</p>
     </div>
 
     <div class="mods">
@@ -774,13 +811,13 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 
       <div class="mod reveal">
         <span class="mod-n">Модуль 03 · неделя 3</span>
-        <h3>Кейсы применения</h3>
-        <div class="res">Довёл минимум один кейс: визуал, посты, документы, таблицы или мини-сайт</div>
+        <h3>Кейсы применения ИИ</h3>
+        <div class="res">Довёл минимум один кейс: документы, таблицы, заметки, мини-сайт или визуал</div>
         <ul class="lessons">
-          <li>Документы, исследования, коммерческие предложения, конспекты</li>
-          <li>Таблицы и данные: расчёты, автоматизация, поиск ошибок</li>
-          <li>Визуал и карусели для не-дизайнеров в фирменном стиле</li>
-          <li>Фото и видео-аватары, мини-сайты за вечер</li>
+          <li>Документы под задачу – в том числе работа сразу с несколькими файлами</li>
+          <li>Заметки, конспекты и свои книги – собираешь с ИИ</li>
+          <li>Таблицы и данные: расчёты, заполнение, поиск ошибок</li>
+          <li>Мини-сайты, интерактивы, визуал и нейрофотосессия</li>
         </ul>
         <div class="wpill">🎙 <b>Живой воркшоп · неделя 3</b> – разбираем и решаем реальные задачи участников · тарифы «Система» и «Масштаб»</div>
         <div class="kit2">
@@ -795,13 +832,13 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 
       <div class="mod reveal">
         <span class="mod-n">Модуль 04 · неделя 4 <span class="mod-lock">тарифы «Система» и «Масштаб»</span></span>
-        <h3>Своя система (агентный ИИ)</h3>
+        <h3>Удобная система работы и делегирование</h3>
         <div class="res">Понимаешь агентный ИИ, ставишь рутину на поток, видишь систему целиком</div>
         <ul class="lessons">
-          <li>Агентный ИИ с нуля: доступ к папкам памяти</li>
-          <li>Порядок в делах: 5 ключевых файлов системы</li>
-          <li>Регулярные задачи на потоке – на примере блога или проекта</li>
-          <li>5 реальных кейсов использования агентного ИИ</li>
+          <li>Агентный ИИ с нуля: доступ к твоим папкам и файлам</li>
+          <li>Порядок под твои цели: структура папок и 5 базовых файлов</li>
+          <li>Регулярные задачи на потоке: агент работает за тебя</li>
+          <li>5 применений агентного ИИ для работы и заработка</li>
         </ul>
         <div class="kit2 pfolio">
           <div class="kit2-h">🏆 По итогу курса – <span>своё первое портфолио</span></div>
@@ -873,6 +910,68 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 
 
 
+<!-- ===== ОТЗЫВЫ И КЕЙСЫ (правки 11.11; источник – слайды 20, 41–43 презентации 12.11) ===== -->
+<section class="sec band-tint">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="label">Результаты первого потока</span>
+      <h2>Что уже говорят <span class="accent">ученики</span></h2>
+      <p>Средняя оценка курса в итоговой анкете – <b>9,9 из 10</b>.</p>
+    </div>
+    <div class="cards reveal">
+      <div class="card rv-quote"><p>«Я ещё в начале пути, но уже наметила полный пересмотр своей работы. Благодаря личному рабочему контексту и карте применения ИИ я уже начинаю реорганизовывать всю деятельность».</p><div class="rv-who"><b>Анастасия Аммар</b> · стилист, блогер</div></div>
+      <div class="card rv-quote"><p>«Стало уходить меньше времени и нервов на работу с текстами. Очень часто стала пользоваться ИИ для проверки и создания документов, а также для краткого содержания».</p><div class="rv-who"><b>Анастасия Мироводина</b> · замзаведующего детским садом</div></div>
+    </div>
+    <div class="cases">
+      <div class="case reveal">
+        <span class="case-n">Кейс 1</span>
+        <h3>Оксана Гагарина</h3>
+        <div class="case-role">инженер-сметчик, в найме</div>
+        <div class="case-lab">Было</div>
+        <p class="case-was">«Честно, не знаю, чем мне может помочь ИИ по виду деятельности, но внутренний голос кричит, что надо с ним познакомиться».</p>
+        <div class="case-lab">Стало · за 4 недели курса</div>
+        <ul class="t-feats">
+          <li>Свой помощник на компьютере сам раскладывает рабочие файлы по проектам</li>
+          <li>Сверка сметы на 356 позиций – ИИ нашёл единственное расхождение</li>
+          <li>Методика проверки смет, отработанная на 5 реальных закупках</li>
+          <li>Свой цифровой продукт для строительной сферы – «Нейросметчик»</li>
+        </ul>
+        <p class="case-q">«Раньше я использовала ИИ для отдельных вопросов и подсказок. Сейчас мы выстроили постоянную совместную работу».</p>
+      </div>
+      <div class="case reveal">
+        <span class="case-n">Кейс 2</span>
+        <h3>Елена Мандражиева</h3>
+        <div class="case-role">руководитель продаж бухгалтерских услуг</div>
+        <div class="case-lab">Было</div>
+        <p class="case-was">Каждый разбор звонков и возражений – заново, без единой структуры.</p>
+        <div class="case-lab">Стало · за первый модуль</div>
+        <ul class="t-feats">
+          <li>Скрипт холодного звонка в Excel со шпаргалкой для менеджеров</li>
+          <li>Единая система: ветки диалога, возражения, контроль звонков</li>
+          <li>Из учебного видео 1С – инструкция со скриншотами для обучения сотрудников</li>
+          <li>Свой рабочий промпт и карта применения ИИ</li>
+        </ul>
+        <p class="case-q">«Шире смотрю на свою работу, возникают новые идеи, с которыми иду к ИИ».</p>
+      </div>
+      <div class="case reveal">
+        <span class="case-n">Кейс 3</span>
+        <h3>Наталья Конова</h3>
+        <div class="case-role">педагог, обучение детей и взрослых</div>
+        <div class="case-tag">✦ Всё сделано только в российских нейросетях</div>
+        <div class="case-lab">Было</div>
+        <p class="case-was">«Хотела научиться использовать ИИ в своей работе».</p>
+        <div class="case-lab">Стало · тариф «Нейро-Масштаб»</div>
+        <ul class="t-feats">
+          <li>Свои ИИ-помощники: для блога и для работы с учениками</li>
+          <li>Своя мини-платформа с помощниками – собрали на личных встречах</li>
+          <li>ИИ экономит 3–5 часов в неделю</li>
+        </ul>
+        <p class="case-q">«Появилось свободное время на отдых, и ИИ помогает воплощать мои новые идеи».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== 5 ТАРИФЫ (ТЗ 9.09, блок 5) ===== -->
 <section class="sec">
   <div class="wrap">
@@ -880,10 +979,10 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
     <div class="sec-head sec-head-center reveal">
       <span class="label">Тарифы</span>
       <h2>Выбери <span class="accent">свой формат</span></h2>
-      <p>Первый поток – камерный. Количество мест ограничено.</p>
+      <p>Второй поток стартует 23 ноября. Места на «Нейро-Системе» и «Нейро-Масштабе» ограничены.</p>
     </div>
 
-    <p class="deposit-note reveal">Для участников практикума на улучшенном тарифе: твои 490 ₽ уже на бонусном счёте в GetCourse и автоматически спишутся в корзине при оформлении любого тарифа.</p>
+    <p class="deposit-note reveal">Для участников практикума на улучшенном тарифе: твои 590 ₽ уже на бонусном счёте в GetCourse и автоматически спишутся в корзине при оформлении любого тарифа.</p>
 
     <div class="tariffs">
       <div class="tcard reveal">
@@ -895,44 +994,99 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
           <li>Обучение в собственном темпе (без чата и куратора)</li>
           <li>Доступ к материалам: <b>2 месяца</b> с даты старта</li>
         </ul>
-        <div class="t-monthly">от 1 150 ₽<span>/мес</span></div>
+        <div class="t-monthly">от 992 ₽<span>/мес</span></div>
         <button type="button" class="btn btn-ghost tbtn" data-modal="m-start">Выбрать Старт</button>
-        <div class="t-full"><s>12 750 ₽</s><b>6 900 ₽</b></div>
+        <div class="t-full"><b>11 900 ₽</b><span class="t-dep">с депозитом – 11 310 ₽</span></div>
       </div>
 
       <div class="tcard best reveal">
         <span class="ribbon">⭐ Хит продаж</span>
         <div class="t-name">Нейро-Система</div>
         <div class="t-posyl">Полноценная сборка личной системы с проверкой и живой практикой</div>
-        <div class="t-seats">Количество мест ограничено · 50</div>
+        <div class="t-seats">Количество мест ограничено · 44</div>
         <ul class="t-feats">
           <li><b>Все 4 модуля программы</b> (включая агентный ИИ и систему)</li>
           <li><b>2 живых интерактивных онлайн-воркшопа</b> со Светланой Цыро</li>
           <li><b>Общий чат учеников</b> и поддержка куратора</li>
           <li>Доступ к материалам: <b>6 месяцев</b> с даты старта</li>
-          <li>Обновления второго потока, если они будут (без доступа в чат)</li>
+          <li>Обновления курса в следующих потоках, если они будут (без доступа в чат)</li>
         </ul>
-        <div class="t-monthly">от 1 325 ₽<span>/мес</span></div>
+        <div class="t-monthly">от 1 825 ₽<span>/мес</span></div>
         <button type="button" class="btn tbtn" data-modal="m-sistema">Забрать Систему <span class="arw">→</span></button>
-        <div class="t-full"><s>27 000 ₽</s><b>15 900 ₽</b></div>
+        <div class="t-full"><b>21 900 ₽</b><span class="t-dep">с депозитом – 21 310 ₽</span></div>
       </div>
 
       <div class="tcard reveal">
         <div class="t-name">Нейро-Масштаб</div>
         <div class="t-posyl">Максимальное погружение с личным сопровождением спикера</div>
-        <div class="t-seats">Всего 3 места</div>
+        <div class="t-seats">Всего 2 места</div>
         <ul class="t-feats">
           <li>Все 4 модуля + 2 воркшопа + чат</li>
           <li class="crown"><b>2 личные индивидуальные встречи</b> со Светланой Цыро</li>
           <li class="crown"><b>Индивидуальный чат</b> со спикером</li>
           <li>Доступ к материалам: <b>6 месяцев</b> с даты старта</li>
-          <li>Обновления второго потока, если они будут (без доступа в чат)</li>
+          <li>Обновления курса в следующих потоках, если они будут (без доступа в чат)</li>
           <li class="gift"><b>Подарок:</b> курс «Блогер с нуля» (тариф Самостоятельный)</li>
         </ul>
-        <div class="t-monthly">от 4 325 ₽<span>/мес</span></div>
+        <div class="t-monthly">от 4 825 ₽<span>/мес</span></div>
         <button type="button" class="btn btn-ghost tbtn" data-modal="m-masshtab">Забронировать Масштаб</button>
-        <div class="t-full"><s>71 300 ₽</s><b>51 900 ₽</b></div>
+        <div class="t-full"><b>57 900 ₽</b><span class="t-dep">с депозитом – 57 310 ₽</span></div>
       </div>
+    </div>
+
+    <!-- бонус за скорость (правки 11.11; состав – слайд 23; 24 часа – с конца эфира 12.11, 15:00 + 90 мин) -->
+    <div class="speed reveal">
+      <div class="speed-head">
+        <span class="label">⚡ Бонус за скорость</span>
+        <h3>Оплати до <span class="accent">13 ноября, 16:30 мск</span> – и забери пакет из 5 бонусов</h3>
+        <p>Ценность пакета – <b>15 000 ₽</b>, для тебя бесплатно. 24 часа считаются с конца эфира 12 ноября: всё, что оплачено до 13 ноября 16:30 по Москве, получает пакет. Подходит любой тариф.</p>
+      </div>
+      <ul class="speed-list">
+        <li><span class="sp-ic">🔍</span><span><b>Сценарии исследования аудитории</b> – для глубокого понимания болей клиентов</span></li>
+        <li><span class="sp-ic">✍️</span><span><b>Умный ИИ-редактор и критик</b> – экспертная проверка и доработка твоих текстов</span></li>
+        <li><span class="sp-ic">🎨</span><span><b>10 готовых дизайн-стилей</b> для твоего визуала</span></li>
+        <li><span class="sp-ic">📚</span><span><b>Каталог форматов мини-продуктов</b> и алгоритмы выбора темы</span></li>
+        <li><span class="sp-ic">⚙️</span><span><b>Интерактивный конструктор</b> «Расхламление дня и расстановка фокуса»</span></li>
+      </ul>
+    </div>
+
+    <!-- оплата и рассрочка (правки 11.11; слайды 24–26) -->
+    <div class="pay reveal" id="oplata">
+      <div class="sec-head sec-head-center">
+        <span class="label">Оплата и рассрочка</span>
+        <h2>Учись сейчас – <span class="accent">плати через 30 дней</span></h2>
+        <p>Беспроцентная рассрочка: проценты берём на себя, первый платёж – через месяц.</p>
+      </div>
+      <div class="pay-grid">
+        <div class="col good">
+          <h3>Рассрочка от банков</h3>
+          <ul class="t-feats">
+            <li>0% переплат – проценты берём на себя</li>
+            <li>Одобрение за 2 минуты, без первого взноса</li>
+            <li>Первый платёж – через месяц</li>
+            <li>На любой тариф</li>
+          </ul>
+          <p class="pay-fine">Т-Банк · МТС · Сбер · Яндекс Сплит</p>
+        </div>
+        <div class="col">
+          <h3>Внутренняя рассрочка</h3>
+          <ul class="t-feats">
+            <li>Без банков и проверки кредитной истории</li>
+            <li>Делим сумму на равные платежи</li>
+            <li>Оформляет отдел заботы</li>
+            <li>Только для «Нейро-Системы» и «Нейро-Масштаба»</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Разовая оплата</h3>
+          <ul class="t-feats">
+            <li>Карты МИР, Visa, Mastercard</li>
+            <li>СБП и Яндекс Пэй</li>
+            <li>Карты иностранных банков – ссылку даст отдел заботы</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pay-help">Не проходит платёж? Напиши в <a href="https://t.me/zabota_kurs" target="_blank" rel="noopener">отдел заботы</a> – подберём удобный способ.</p>
     </div>
 
     <div class="guarantee reveal">
@@ -953,14 +1107,15 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
       <h2>Частые вопросы <span class="accent">новичков</span></h2>
     </div>
     <div class="faq reveal">
-      <details><summary>Я совсем не технарь, я справлюсь?</summary><div class="ans">Конечно! Курс создавался гуманитарием для гуманитариев. <b>Первый навык для жизни ты получишь уже на первом уроке.</b></div></details>
-      <details><summary>Нужен ли VPN* или зарубежная карта?</summary><div class="ans">Нет, мы покажем, как комфортно работать с нейросетями из России без VPN и сторонних карт.<p class="ans-note">* Рекомендация приведена исключительно в целях обеспечения технической доступности веб-интерфейса и корректной маршрутизации сетевых пакетов. Напоминаем о необходимости соблюдения действующего законодательства и внутренних правил информационной безопасности вашей организации при настройке сетевых соединений.</p></div></details>
+      <details><summary>Я совсем не технарь, я справлюсь?</summary><div class="ans">Конечно! Курс создавался гуманитарием для гуманитариев. Видеоуроки идут по 15 минут, все действия показаны на экране: смотришь и повторяешь. <b>Первый навык для жизни получишь уже на первом уроке.</b></div></details>
+      <details><summary>Нужен ли VPN* или зарубежная карта?</summary><div class="ans">Нет. Российские нейросети работают без дополнительной настройки. Для остальных дадим пошаговые инструкции, а если что-то не получится, кураторы помогут настроить доступ вместе с тобой.<p class="ans-note">* Рекомендация приведена исключительно в целях обеспечения технической доступности веб-интерфейса и корректной маршрутизации сетевых пакетов. Напоминаем о необходимости соблюдения действующего законодательства и внутренних правил информационной безопасности вашей организации при настройке сетевых соединений.</p></div></details>
+      <details><summary>У меня мало времени – я успею?</summary><div class="ans">Да. Уроки идут по 15 минут, а экономия времени начинается уже с первой недели: первые же навыки разгружают рутину. В начале курса формулируем твою цель и собираем <b>индивидуальный трек</b>, чтобы ты шла в своём темпе и делала в первую очередь то, что важно именно тебе.</div></details>
       <details><summary>Я уже пробовал ИИ для постов – почему тут будет иначе?</summary><div class="ans">Потому что мы настраиваем ИИ под <b>твой уникальный голос и контекст</b>, а не даём шаблонные промпты из интернета.</div></details>
-      <details><summary>Как сработает мой депозит 490 ₽ с практикума?</summary><div class="ans">Сумма 490 ₽ уже начислена на твой баланс в GetCourse и <b>автоматически вычтется при оформлении заказа</b>.</div></details>
+      <details><summary>Как сработает мой депозит 590 ₽ с практикума?</summary><div class="ans">Сумма 590 ₽ уже начислена на твой баланс в GetCourse и <b>автоматически вычтется при оформлении заказа</b>.</div></details>
       <!-- ниже – вопросы из прежней версии, в новом ТЗ их нет; оставлены до решения -->
       <details><summary>Это подходит не только для блогинга?</summary><div class="ans">Да. Модуль 3 закрывает документы, таблицы, расчёты и данные – то, что нужно специалистам в найме и помогающим практикам, а не только блогерам.</div></details>
       <details><summary>Какие живые воркшопы и когда?</summary><div class="ans">Два живых воркшопа для тарифов «Нейро-Система» и «Нейро-Масштаб»: на <b>первой неделе</b> – вводный, по работе с нейросетями, на <b>третьей</b> – живая отработка реальных задач участников.</div></details>
-      <details><summary>Что в самом дорогом тарифе?</summary><div class="ans">«Нейро-Масштаб» – это всё из «Нейро-Системы» плюс <b>2 личные встречи со Светланой Цыро</b>, индивидуальный чат, доступ 6 месяцев с даты старта и <b>курс «Блогер с нуля» в подарок</b> (тариф Самостоятельный). Мест всего 3.</div></details>
+      <details><summary>Что в самом дорогом тарифе?</summary><div class="ans">«Нейро-Масштаб» – это всё из «Нейро-Системы» плюс <b>2 личные встречи со Светланой Цыро</b>, индивидуальный чат, доступ 6 месяцев с даты старта и <b>курс «Блогер с нуля» в подарок</b> (тариф Самостоятельный). Мест всего 2.</div></details>
       <details><summary>Будут домашние задания?</summary><div class="ans">Фокус на реальных задачах: ты работаешь со своим проектом, а не сдаёшь учебные упражнения. В тарифах <b>«Система»</b> и <b>«Масштаб»</b> есть общий чат и поддержка куратора: задавай вопросы, присылай, что получается, и обсуждай это на воркшопах вместе с коллегами.</div></details>
     </div>
   </div>
@@ -970,9 +1125,9 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 <section class="sec">
   <div class="wrap">
     <div class="final reveal">
-      <span class="date-pill"><span class="dot"></span>Старт курса: <b>28 сентября</b> ·&nbsp;4&nbsp;недели погружения</span>
+      <span class="date-pill"><span class="dot"></span>Старт курса: <b>23 ноября</b> ·&nbsp;4&nbsp;недели погружения</span>
       <h2>Через 4 недели ИИ перестанет быть болталкой – и станет <span class="accent">рабочим инструментом</span>, которому доверяешь</h2>
-      <p>Первый поток камерный: количество мест ограничено – 50 на тарифе «Нейро-Система» и всего 3 на «Нейро-Масштаб».</p>
+      <p>Во втором потоке – 44 места на тарифе «Нейро-Система» и всего 2 на «Нейро-Масштаб». Успей занять своё.</p>
       <a href="#tariffs" class="btn">Забронировать место <span class="arw">→</span></a>
     </div>
   </div>
@@ -1020,8 +1175,8 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 <div class="sticky-bar" id="stickyBar" role="region" aria-label="Дедлайн цены">
   <span class="sb-dot"></span>
   <div class="sb-txt">
-    <div class="sb-h">Бонусы сгорят и цена изменится 28.08 в 23:59</div>
-    <div class="sb-p">Успей выбрать свой уровень доступа</div>
+    <div class="sb-h">Бонус за скорость сгорит 13.11 в 16:30 мск</div>
+    <div class="sb-p">Оплати тариф – и забери 5 бонусов на 15 000 ₽</div>
   </div>
   <div class="sb-time">
     <div class="sb-u"><b id="sb-d">00</b><span>дн</span></div>
@@ -1105,8 +1260,8 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 // липкая полоса дедлайна с обратным отсчётом
 (function(){
   var bar=document.getElementById('stickyBar'); if(!bar) return;
-  var target=new Date('2026-08-28T23:59:00+03:00').getTime();
-  var start=new Date('2026-08-18T00:00:00+03:00').getTime();
+  var target=new Date('2026-11-13T16:30:00+03:00').getTime();
+  var start=new Date('2026-11-12T16:30:00+03:00').getTime();
   var d=document.getElementById('sb-d'),h=document.getElementById('sb-h'),
       m=document.getElementById('sb-m'),sec=document.getElementById('sb-s');
   function p(n){return String(n).padStart(2,'0')}
