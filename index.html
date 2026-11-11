@@ -652,6 +652,12 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
   .rv{padding:26px 22px 22px}
 }
 .mod-intro{margin:0 0 18px}
+.out-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.out{position:relative;border-radius:var(--radius-lg);padding:30px 26px 28px;background:linear-gradient(160deg,#FFF3FA,#F6EDFE);border:1px solid #F3D3E8;box-shadow:var(--shadow)}
+.out-n{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:var(--grad);color:#fff;font-family:'Unbounded',sans-serif;font-weight:700;font-size:20px;margin-bottom:18px}
+.out h3{font-size:var(--sub);font-weight:700;line-height:1.3;margin-bottom:10px}
+.out p{opacity:.82;font-size:16px}
+@media(max-width:900px){.out-grid{grid-template-columns:1fr}.out{padding:24px 22px}}
 </style>
 
 <!-- Yandex.Metrika counter -->
@@ -942,6 +948,33 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ===== С ЧЕМ ТЫ ВЫЙДЕШЬ (правки 11.11, три результата курса) ===== -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head sec-head-center reveal">
+      <span class="label">Результат курса</span>
+      <h2>С чем ты выйдешь <span class="accent">через 4 недели</span></h2>
+    </div>
+    <div class="out-grid">
+      <div class="out reveal">
+        <span class="out-n">1</span>
+        <h3>Свои ИИ-помощники под твои задачи</h3>
+        <p>Настроены на твою работу, твой голос и твои методы – и берут на себя рутину каждый день, а не один раз.</p>
+      </div>
+      <div class="out reveal">
+        <span class="out-n">2</span>
+        <h3>Портфолио, с которым можно выходить к клиентам</h3>
+        <p>Готовые кейсы показывают, что ты умеешь. С ними можно предлагать свои услуги другим людям и поднимать чек.</p>
+      </div>
+      <div class="out reveal">
+        <span class="out-n">3</span>
+        <h3>Навык, который работает в любой нейросети</h3>
+        <p>Ты понимаешь принцип, а не заучиваешь кнопки. Поэтому легко переносишь навык на любую нейросеть – российскую, зарубежную или ту, что выйдет завтра.</p>
+      </div>
+    </div>
   </div>
 </section>
 
