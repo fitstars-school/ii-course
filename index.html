@@ -1172,12 +1172,12 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
       </div>
     </div>
 
-    <!-- бонус за скорость (правки 11.11; состав – слайд 23; 24 часа – с конца эфира 12.11, 15:00 + 90 мин) -->
+    <!-- бонус за скорость (правки 11.11; состав – слайд 23; 24 часа – с конца эфира 18.11, 19:00 + 90 мин (эфир перенесён с 12.11)) -->
     <div class="speed reveal">
       <div class="speed-head">
         <span class="label">⚡ Бонус за скорость</span>
-        <h3>Оплати до <span class="accent">13 ноября, 16:30 мск</span> – и забери пакет из 5 бонусов</h3>
-        <p>Ценность пакета – <b>15 000 ₽</b>, для тебя бесплатно. 24 часа считаются с конца эфира 12 ноября: всё, что оплачено до 13 ноября 16:30 по Москве, получает пакет. Подходит любой тариф.</p>
+        <h3>Оплати до <span class="accent">19 ноября, 20:30 мск</span> – и забери пакет из 5 бонусов</h3>
+        <p>Ценность пакета – <b>15 000 ₽</b>, для тебя бесплатно. 24 часа считаются с конца эфира 18 ноября: всё, что оплачено до 19 ноября 20:30 по Москве, получает пакет. Подходит любой тариф.</p>
       </div>
       <ul class="speed-list">
         <li><span class="sp-ic">🔍</span><span><b>Сценарии исследования аудитории</b> – для глубокого понимания болей клиентов</span></li>
@@ -1313,7 +1313,7 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 <div class="sticky-bar" id="stickyBar" role="region" aria-label="Дедлайн цены">
   <span class="sb-dot"></span>
   <div class="sb-txt">
-    <div class="sb-h">Бонус за скорость сгорит 13.11 в 16:30 мск</div>
+    <div class="sb-h">Бонус за скорость сгорит 19.11 в 20:30 мск</div>
     <div class="sb-p">Оплати тариф – и забери 5 бонусов на 15 000 ₽</div>
   </div>
   <div class="sb-time">
@@ -1398,8 +1398,8 @@ footer{background:var(--dark);color:#CFC7D7;padding:56px 0 34px}
 // липкая полоса дедлайна с обратным отсчётом
 (function(){
   var bar=document.getElementById('stickyBar'); if(!bar) return;
-  var target=new Date('2026-11-13T16:30:00+03:00').getTime();
-  var start=new Date('2026-11-12T16:30:00+03:00').getTime();
+  var target=new Date('2026-11-19T20:30:00+03:00').getTime();
+  var start=new Date('2026-11-18T20:30:00+03:00').getTime();
   var d=document.getElementById('sb-d'),h=document.getElementById('sb-h'),
       m=document.getElementById('sb-m'),sec=document.getElementById('sb-s');
   function p(n){return String(n).padStart(2,'0')}
